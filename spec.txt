@@ -3351,7 +3351,9 @@ display it, then add a `{type: code, format: latex}` attribute list.
 
 * `asciimath` - AsciiMath math - `.asciimath`
 * `latexmath` - LaTeX math - `.tex`
-* `mathml` - MathML math - `.mathml`
+
+Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the `.asciimath` file extension is deliberately verbose.
 
 #### Table resource formats
 
@@ -14856,18 +14858,15 @@ The full version of the talk is here:
 Math can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
 
-Markua does not specify how math is output in HTML. It is perfectly acceptable
-for a Markua Processor to output any math block as an image or as the LaTeX or
-MathML text of the math equation itself.
+Markua does not specify how math is output in HTML. It can be an image, or it
+can use something like MathJax. If MathJax is available, it is recommended for a
+Markua Processor to convert AsciiMath into MathML, and then use MathJax to
+format it.
 
-There are three formats of math resources supported by Markua:
+There are two formats of math resources supported by Markua:
 
 1. LaTeX math (`latexmath` or `$`)
 2. AsciiMath (`asciimath` or `@`)
-3. MathML (`mathml`)
-
-If MathJax is available, it is recommended for a Markua Processor to convert
-AsciiMath into MathML, and then use MathJax to format it.
 
 ### Supported Attributes for Math
 
@@ -14885,7 +14884,9 @@ compatibility.)
 
 Note that for math, the `format` is the name of the syntax used to write the
 mathematical equations. There are two special types of `format` for math baked
-into Markua: `latex` for LaTeX math and `mathml` for MathML math.
+into Markua: `latexmath` for LaTeX math and `asciimath` for AsciiMath. If a
+Markua Processor encounters one of these formats, it must assume the `type` of
+the resource is `math`, not `code`.
 
 ### Local Math Resources
 
@@ -14894,7 +14895,8 @@ Local math resources can be inserted as a figure.
 ~~~
 Here's a paragraph before the figure.
 
-![too large to fit in the alt text](fermat-proof.mathml "Proof of Fermat's Last Theorem")
+{format: latexmath}
+![too large to fit in the alt text](fermat-proof.tex "Proof of Fermat's Last Theorem")
 
 Here's a paragraph after the figure.
 ~~~
@@ -14904,8 +14906,8 @@ The alt text can also be set with an attribute list:
 ~~~
 Here's a paragraph before the figure.
 
-{alt: "too large to fit in the alt text"}
-![](fermat-proof.mathml "Proof of Fermat's Last Theorem")
+{format: latexmath, alt: "too large to fit in the alt text"}
+![](fermat-proof.tex "Proof of Fermat's Last Theorem")
 
 Here's a paragraph after the figure.
 ~~~
@@ -14918,6 +14920,7 @@ of file extensions. The only difference is that the files are on the web.
 ~~~
 Here's a paragraph before the figure.
 
+{format: latexmath}
 ![too large to fit in the alt text](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
 
 Here's a paragraph after the figure.
@@ -14928,7 +14931,7 @@ The alt text can also be set with an attribute list:
 ~~~
 Here's a paragraph before the figure.
 
-{alt: "too large to fit in the alt text"}
+{format: latexmath}{alt: "too large to fit in the alt text"}
 ![](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
 
 Here's a paragraph after the figure.
@@ -14938,20 +14941,19 @@ Here's a paragraph after the figure.
 
 Inline math resources are the most flexible way to insert math. They are the only
 way to insert math as a span resource, and the most straightforward way to add
-short math examples as figures. LaTeX math, AsciiMath and MathML can be inserted
-inline as a span or figure.
+short math examples as figures. LaTeX math and AsciiMath can be inserted inline
+as a span or figure.
 
 #### Span
 
 Being able to insert a math resource as a span is important, as it lets you write
 things like one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside
-sentences. This can be done with LaTeX math, AsciiMath, or (in theory) MathML.
+sentences. This can be done with LaTeX math or AsciiMath.
 
 To insert math as inline math, use a `$` after closing backtick for LaTeX math,
 an `@` after the closing backtick for AsciiMath, or an attribute list specifying
-a `format` of `latex`, `asciimath` or `mathml`. If none of these is done, the
-content of the backticks is treated as code and is output verbatim as monospaced
-text.
+a `format` of `latexmath` or `asciimath`. If none of these is done, the content
+of the backticks is treated as code and is output verbatim as monospaced text.
 
 ##### LaTeX math span
 
@@ -14965,11 +14967,12 @@ sentence.
 
 The `$` character indicates the inline resource is LaTeX math.
 
-If you don't like syntactic sugar, you can also use {format: latexmath} after
-the inline span resource:
+If you don't like syntactic sugar, you can also use `{format: latexmath}` or
+`{type: math, format: latexmath}` after the inline span resource:
 
 ~~~
-Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`{format: latexmath}
+Here's one of the kinematic equations
+`d = v_i t + \frac{1}{2} a t^2`{format: latexmath}
 inside a sentence.
 ~~~
 
@@ -14987,49 +14990,24 @@ Here's one of the kinematic equations `d = v_i t + 1/2 at^2`@ inside a sentence.
 
 The `@` character indicates the inline resource is AsciiMath.
 
-If you don't like syntactic sugar, you can also use {format: asciimath} after the
-inline span resource:
+If you don't like syntactic sugar, you can also use `{format: asciimath}` or
+`{type: math, format: asciimath}` after the inline span resource:
 
 ~~~
 Here's one of the kinematic equations `d = v_i t + 1/2 at^2`{format: asciimath}
 inside a sentence.
 ~~~
 
-##### MathML span
-
-Technically you can insert MathML as an inline span resource, as long as you
-remove all the newlines. There is no syntactic sugar for this, since it is almost
-always a bad idea:
-
-~~~
-Yada yada `<some><mathml><here></here></mathml></some>`{format: mathml} yada yada.
-~~~
-
-Yes, you can actually insert a math resource of `mathml` format as a span
-(assuming you remove all newlines from your MathML), but it's so verbose that
-it's typically bad idea. You're much better off using AsciiMath or LaTeX math
-for spans.
-
-No, that's not really MathML syntax. For an example of some, see below.
-
-While it would almost always be a bad idea to insert MathML as a span resource, it
-would also be a bad idea to forbid it in the Markua spec.
-
-If you're going to insert MathML, it should be inserted as a figure, with newlines
-used inside the MathML to format it in a somewhat readable way.
-
 #### Figure
 
-Both LaTeX math, AsciiMath and MathML can be inserted inline as a figure.
+LaTeX math and AsciiMath can be inserted inline as a figure.
 
-* LaTeX math can be inserted by specifying either `latex` or `$` after three
+* LaTeX math can be inserted by specifying either `latexmath` or `$` after three
   backticks, or by specifying an attribute list of `{format: latexmath}`.
 * AsciiMath can be inserted by specifying either `asciimath` or `@` after three
   backticks, or by specifying an attribute list of `{format: asciimath}`.
-* MathML math can be inserted by specifying `mathml` after three backticks, or by
-  specifying an attribute list of `{format: mathml}`.
 
-All three let you produce mathematical equations like this:
+Both let you produce mathematical equations like this:
 
 ```$
 \left|\sum_{i=1}^n a_ib_i\right|
@@ -15137,138 +15115,6 @@ text, what you are really doing is creating a code resource. This is essentially
 identical to what was shown earlier in writing about SVG images. It's also shown
 below.
 
-##### MathML figures
-
-There is no syntactic sugar for MathML.
-
-Here's the MathML version, with the full format after the backticks:
-
-~~~
-Here's a paragraph before the figure.
-
-```mathml
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true">
-    <mrow>
-      <mo>|</mo>
-      <mrow>
-        <mrow>
-          <munderover>
-            <mo>&#x2211;</mo>
-            <mrow>
-              <mi>i</mi>
-              <mo>=</mo>
-              <mn>1</mn>
-            </mrow>
-            <mi>n</mi>
-          </munderover>
-        </mrow>
-        <msub>
-          <mi>a</mi>
-          <mi>i</mi>
-        </msub>
-        <msub>
-          <mi>b</mi>
-          <mi>i</mi>
-        </msub>
-      </mrow>
-      <mo>|</mo>
-    </mrow>
-    <mo>&#x2264;</mo>
-    <msup>
-      <mrow>
-        <mo>(</mo>
-        <mrow>
-          <munderover>
-            <mo>&#x2211;</mo>
-            <mrow>
-              <mi>i</mi>
-              <mo>=</mo>
-              <mn>1</mn>
-            </mrow>
-            <mi>n</mi>
-          </munderover>
-        </mrow>
-        <mrow>
-          <msubsup>
-            <mi>a</mi>
-            <mi>i</mi>
-            <mn>2</mn>
-          </msubsup>
-        </mrow>
-        <mo>)</mo>
-      </mrow>
-      <mrow>
-        <mfrac>
-          <mn>1</mn>
-          <mn>2</mn>
-        </mfrac>
-      </mrow>
-    </msup>
-    <msup>
-      <mrow>
-        <mo>(</mo>
-        <mrow>
-          <munderover>
-            <mo>&#x2211;</mo>
-            <mrow>
-              <mi>i</mi>
-              <mo>=</mo>
-              <mn>1</mn>
-            </mrow>
-            <mi>n</mi>
-          </munderover>
-        </mrow>
-        <mrow>
-          <msubsup>
-            <mi>b</mi>
-            <mi>i</mi>
-            <mn>2</mn>
-          </msubsup>
-        </mrow>
-        <mo>)</mo>
-      </mrow>
-      <mrow>
-        <mfrac>
-          <mn>1</mn>
-          <mn>2</mn>
-        </mfrac>
-      </mrow>
-    </msup>
-  </mstyle>
-</math>
-```
-
-Here's a paragraph after the figure.
-~~~
-
-In case you're wondering: no, I didn't type this in. Instead, I did this:
-
-1. I wrote the AsciiMath in the previous section, i.e.
-   `abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)`.
-2. I went to the [AsciiMath](http://asciimath.org/) website and pasted it in the
-   Input field.
-3. I chose Show Math As > MathML Code for the Rendering field.
-
-MathML is excellent as an output format for AsciiMath.
-
-Here's the same thing again, with a full attribute list:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: mathml}
-```
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true">
-    (...identical code omitted for brevity...)
-  </mstyle>
-</math>
-```
-
-Here's a paragraph after the figure.
-~~~
-
 ### Writing about Math
 
 If you want to write about math, and show the actual code (instead of the
@@ -15336,18 +15182,7 @@ abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
 ~~~
 
 Now, chances are a Markua Processor will not be doing syntax highlighting on
-AsciiMath. It may, however, format MathML as XML when it is of type code.
-
-~~~
-{type: code, format: mathml}
-```
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true">
-    (...identical code omitted for brevity...)
-  </mstyle>
-</math>
-```
-~~~
+AsciiMath.
 
 If you want to ensure that no syntax highlighting is done, you can just specify
 `text`:

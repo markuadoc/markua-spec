@@ -1403,20 +1403,30 @@ heading (like a paragraph, figure, etc.).
 
 ### Extension attributes
 
-Markua Processors may encounter attributes which they do not understand. If the
-Markua Processor is being used to output HTML or EPUB, it must output these
-attributes unchanged. If the Markua Processor is being used to output a different
-format, it must just ignore and discard the unrecognized attribute. This is true
-whether the attributes are inserted in an attribute list attached to a span,
-block or even in free-floating directives.
+Markua Processors may encounter attributes which they do not understand.
+
+Whenever this happens, these attributes must be filtered from the output. A
+Markua Processor should function as though there is a whitelist of attributes
+which it permits for each element, and filter everything else.
 
 Because of this, Markua attribute lists can contain any number of extension
 attributes. An extension attribute is an attribute which is not defined in the
-Markua specification.
+Markua specification. This is true whether the attributes are inserted in an
+attribute list attached to a span, block or even in free-floating directives.
 
-This encourages competition in the Markua ecosystem, while ensuring that Markua
-implementations do not choke on Markua input which goes beyond their
+Because of the fact that all unrecognized attributes are filtered, it is
+possible for a Markua Processor to add extension attributes that only it
+understands. This encourages competition in the Markua ecosystem, while ensuring
+that Markua implementations do not choke on Markua input which goes beyond their
 capabilities.
+
+To be clear, Markua does not understand "HTML attributes". It understands Markua
+attributes. Some Markua attributes, like `class`, happen to correspond to
+attributes in HTML. This is just coincidence, and many others do not.
+
+For example, Leanpub supports an `icon` attribute on blurbs. If a different
+Markua processor does not support this attribute, there is no harm done: the
+attribute just has no effect.
 
 Extension attributes go far beyond adding icons to blurbs: they allow for
 specialized uses of Markua. Since CSS is so powerful, with creative uses of

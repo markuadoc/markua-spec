@@ -2,7 +2,7 @@
 title: Markua Spec
 author: '*This formal specification of Markua is written by Peter Armstrong and is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
 version: 0.29
-date: '2019-05-31'
+date: '2019-06-04'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 

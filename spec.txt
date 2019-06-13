@@ -726,13 +726,8 @@ complex lists) is no longer supported.
 So, what Markua does instead is the following:
 
 1. Use Markdown's list support as specified by CommonMark.
-2. Provides a `default-list-numbering` document setting which defines how
-   nested ordered lists are output.
-3. Provides a `numbering` attribute which can be set on ordered list to
-   override this document setting for the particular list.
-
-Markua also restricts the number of levels of nesting to 4 levels, to simplify
-things for Markua Processors.
+2. Adds attributes to ordered lists, to support numbering lists in ascending or
+   descending order, and with letters and Roman numerals.
 
 Finally, the Markua beta called lists either "numbered" or "bulleted", since
 all lists have an order. (Otherwise, they wouldn't be lists!) However, Markua
@@ -1477,7 +1472,6 @@ soft-breaks: space
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
-default-list-numbering: 1,a,i,1
 }
 
 # Chapter One
@@ -1532,11 +1526,6 @@ as. The default is `text`. If you set this to `ruby`, it is the equivalent of
 setting `{format: ruby}` as an inline attribute list on every code span resource
 by default, e.g. `` `puts "hi"`{format: ruby} ``. If you need to override a
 specific resource to not be ruby, you would set `{format: text}`.
-
-`default-list-numbering`
-: The default way to number nested ordered lists. The default is `1,1,1,1`.
-This setting and its legal values is described
-[here](#configurable-list-numbering-markua-extension-).
 
 `italicize-underlines`
 : `true` or `false`. The default value is `true`. If `italicize-underlines` is
@@ -8964,266 +8953,291 @@ Here the outer list is loose, the inner list tight:
 
 <div class="extension">
 
-## Configurable maximum number of levels of list nesting (Markua extension)
+## List attributes (Markua extension)
 
-Markua documents support a configurable maximum number of levels of list
-nesting, with a default of 4 levels, to simplify things for Markua Processors.
+Lists in Markdown (as described by John Gruber and specified by CommonMark) have
+some pretty major issues. Here are two of the biggest ones:
 
-If a Markua Processor encounters a list with more than levels of nesting than
-the maximum number, it should log an error and output all lists under the
-maximum level as being part of the maximum level.
+* You can't make descending order lists.
+* You can't use letters or Roman numerals for labels.
 
-The way that the number of levels is defined is by specifiying the document
-setting `max-list-levels`. The same number of maximum levels are used for
-unordered and ordered lists.
-
-By default, four levels of an unordered list are supported:
+This list gets rendered as 3,4,5, since Markdown does not have a way of
+specifying that a list is descending, and it does not infer it from the
+order by default:
 
 ```````````````````````````````` example
-- a
-  - b
-    - c
-      - d1
-      - d2
+before
+
+3. foo
+2. bar
+1. baz
+
+after
 .
-<ul>
-<li>a
-<ul>
-<li>b
-<ul>
-<li>c
-<ul>
-<li>d1</li>
-<li>d2</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>before</p>
+<ol start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
 ````````````````````````````````
 
-By default, five levels of an unordered list become four, and an error is
-logged:
+This looks like a list, but it is in fact a paragraph. There are no break tags
+after the foo, bar and baz, just soft breaks:
 
 ```````````````````````````````` example
-- a
-  - b
-    - c
-      - d
-        - e
+before
+
+a. foo
+b. bar
+c. baz
+
+after
 .
-<ul>
-<li>a
-<ul>
-<li>b
-<ul>
-<li>c
-<ul>
-<li>d</li>
-<li>e</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>before</p>
+<p>a. foo
+b. bar
+c. baz</p>
+<p>after</p>
 ````````````````````````````````
 
-If the `max-list-levels` is at least 5, then a five level of an unordered list
-is just fine:
+Again, both of these behaviours are as defined in the CommonMark spec.
+
+Now, Markua can't change this by default, without being incompatibile with
+Markdown.
+
+So what to do?
+
+Markua adds the list attributes extension, to support being able to output all
+the needed types of list from the limited list support in Markdown. The way this
+is done is by giving lists an attribute list, much like how resources can have
+an attribute list. (Lists are not resources, however.)
+
+### Supported Attributes for Lists
+
+The following are the supported attributes for lists.
+
+`reversed`
+: This determines whether the list is in ascending or descending order. Legal
+values are `true` or `false`. The default value is `false`, for ascending.
+Any value other than `true` is interpreted as `false`.
+
+`type`
+: The type of the list marker to use. Valid choices are `1`, `A`, `a`, `I` or
+`i`. `A` and `a` mean uppercase or lowercase letters; `I` or `i` mean uppercase
+or lowercase Roman numerals.
+
+The use of these attributes are shown in the following examples.
+
+### Lists with Attributes: Good Style
+
+This list will be numbered a, b, c:
 
 ```````````````````````````````` example
-{
-max-list-levels: 6
-}
+before
 
-- a
-  - b
-    - c
-      - d
-        - e
+{type: a}
+1. foo
+2. bar
+3. baz
+
+after
 .
-<ul>
-<li>a
-<ul>
-<li>b
-<ul>
-<li>c
-<ul>
-<li>d
-<ul>
-<li>e</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
 ````````````````````````````````
 
-By default, four levels of an ordered list are supported:
+This list will be numbered A, B, C:
 
 ```````````````````````````````` example
-1. a
-   1. b
-      1. c
-         1. d
-         2. e
+before
+
+{type: A}
+1. foo
+2. bar
+3. baz
+
+after
 .
-<ol>
-<li>a
-<ol>
-<li>b
-<ol>
-<li>c
-<ol>
-<li>d</li>
-<li>e</li>
+<p>before</p>
+<ol type="A">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
 </ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
+<p>after</p>
 ````````````````````````````````
 
-By default, five levels of an ordered list become four, and an error is
-logged:
+This list will be numbered c, d, e:
 
 ```````````````````````````````` example
-1. a
-   1. b
-      1. c
-         1. d
-            1. e
+before
+
+{type: a}
+3. foo
+4. bar
+5. baz
+
+after
 .
-<ol>
-<li>a
-<ol>
-<li>b
-<ol>
-<li>c
-<ol>
-<li>d</li>
-<li>e</li>
+<p>before</p>
+<ol type="a" start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
 </ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
+<p>after</p>
 ````````````````````````````````
 
-If the `max-list-levels` is at least 5, then a five level of an unordered list
-is just fine:
+This list will be numbered i, ii, iii:
 
 ```````````````````````````````` example
-{
-max-list-levels: 5
-}
+before
 
-1. a
-   1. b
-      1. c
-         1. d
-            1. e
+{type: i}
+1. foo
+2. bar
+3. baz
+
+after
 .
-<ol>
-<li>a
-<ol>
-<li>b
-<ol>
-<li>c
-<ol>
-<li>d
-<ol>
-<li>e</li>
+<p>before</p>
+<ol type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
 </ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
+<p>after</p>
 ````````````````````````````````
 
-</div>
+This list will be numbered I, II, III:
 
-<div class="extension">
+```````````````````````````````` example
+before
 
-## Configurable list numbering (Markua extension)
+{type: I}
+1. foo
+2. bar
+3. baz
 
-As discussed, ordered and unordered lists support a configurable maximum number
-of levels of nesting (`max-list-levels`), which has a default of four levels.
+after
+.
+<p>before</p>
+<ol type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
 
-If a `default-list-numbering` is defined, it must define the number of levels
-that is specified by the `max-list-levels`.
+This list will be numbered iii, iv, v:
 
-The default ordering of list numbering is `1,1,1,1`. This means to use a number
-for each level, which is the default.
+```````````````````````````````` example
+before
 
-The format of each level is one of `1`, `A`, `a`, `I` or `i`.
+{type: i}
+3. foo
+4. bar
+5. baz
 
-Here's what they mean:
+after
+.
+<p>before</p>
+<ol type="i" start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
 
-* `1` means ascending or descending numbers
-* `A` means ascending or descending uppercase letters A - Z, followed by AA, AB, ...
-* `a` means ascending or descending lowercase letters a - z, followed by aa, ab, ...
-* `I` means ascending or descending uppercase Roman numerals
-* `i` means ascending or descending lowercase Roman numerals
+This list will be numbered 3, 2, 1:
 
-Whether the list is ascending or descending is inferred from the list numbers
-themselves, as is the starting number.
+```````````````````````````````` example
+before
 
-All levels in the `max-list-levels` must be specified, regardless if they are
-used.
+{reversed: true}
+3. foo
+2. bar
+1. baz
 
-To override the `default-list-numbering` you just set `numbering` on a
-particular list. It also must have the number of levels of `max-list-levels`.
+after
+.
+<p>before</p>
+<ol start="3" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
 
-Some other useful values of `default-list-numbering` or of a `numbering`
-override are: `1,a,i,1`, `A,I,a,i` and `I,A,1,a`.
+This list will be numbered c, b, a:
 
-If you looked at the `1,a,i,1` list and thought you'd rather use a `-` or `*`
-for the fourth level, so would I. However, to do this, you just type `-` or `*`
-characters in your Markua for that fourth level; you don't write a fourth level
-ordered list that you then coerce into acting like a unordered list.
+```````````````````````````````` example
+before
+
+{type: a, reversed: true}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="a" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered iii, ii, i:
+
+```````````````````````````````` example
+before
+
+{type: i, reversed: true}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="i" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Nested Lists with Attributes
+
+Everything which has been said about attribute lists on lists applies to nested
+lists as well. This example shows a nested list of the form 1, a, i, * (the
+final nested list is an unordered list, not an ordered list):
 
 ```````````````````````````````` example
 before
 
 1. lorem
+   {type: a}
    1. foo
+      {type: i}
       1. apple
-         1. Gala
-         2. Spartan
-         3. McIntosh
-      2. orange
-      3. banana
-   2. bar
-   3. baz
-2. ipsum
-3. dolor
-
-***
-
-{numbering: "1,a,i,1"}
-1. lorem
-   1. foo
-      1. apple
-         1. Gala
-         2. Spartan
-         3. McIntosh
+         * Gala
+         * Spartan
+         * McIntosh
       2. orange
       3. banana
    2. bar
@@ -9236,15 +9250,15 @@ after
 <p>before</p>
 <ol>
 <li>lorem
-<ol>
+<ol type="a">
 <li>foo
-<ol>
+<ol type="i">
 <li>apple
-<ol>
+<ul>
 <li>Gala</li>
 <li>Spartan</li>
 <li>McIntosh</li>
-</ol>
+</ul>
 </li>
 <li>orange</li>
 <li>banana</li>
@@ -9257,29 +9271,266 @@ after
 <li>ipsum</li>
 <li>dolor</li>
 </ol>
-<hr />
+<p>after</p>
+````````````````````````````````
+
+This nested list will be rendered somewhat like this:
+
+~~~
+before
+
+1. lorem
+   a. foo
+        i. apple
+           * Gala
+           * Spartan
+           * McIntosh
+       ii. orange
+      iii. banana
+   b. bar
+   c. baz
+2. ipsum
+3. dolor
+
+after
+~~~
+
+### Lists with Attributes: Lazy Style
+
+It is acceptable to just use the number of the first label, and rely on list
+behaviour.
+
+This list will be numbered 1, 2, 3:
+
+```````````````````````````````` example
+before
+
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
 <ol>
-<li>lorem
-<ol>
-<li type="a">foo
-<ol>
-<li type="i">apple
-<ol>
-<li>Gala</li>
-<li>Spartan</li>
-<li>McIntosh</li>
-</ol>
-</li>
-<li>orange</li>
-<li>banana</li>
-</ol>
-</li>
+<li>foo</li>
 <li>bar</li>
 <li>baz</li>
 </ol>
-</li>
-<li>ipsum</li>
-<li>dolor</li>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 3, 4, 5:
+
+```````````````````````````````` example
+before
+
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered c, d, e:
+
+```````````````````````````````` example
+before
+
+{type: a}
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered iii, iv, v:
+
+```````````````````````````````` example
+before
+
+{type: i}
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 3, 2, 1:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Lists with Attributes: Redundant Style
+
+This list will be numbered 1, 2, 3. This is just the default behaviour made
+explicit:
+
+```````````````````````````````` example
+before
+
+{type: 1, reversed: false}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol>
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Lists with Attributes: Bad Style
+
+This list will be numbered 3, 2, 1, regardless of the order of the numbers:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered c, d, e, regardless of the order of the numbers:
+
+```````````````````````````````` example
+before
+
+{type: a}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="a">
+<li>three</li>
+<li>bar</li>
+<li>one</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 1, 0, -1:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true" start="1" type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered i, 0, -1, since the Romans didn't have the concept of
+zero or negative numbers (and thus neither do Roman numerals):
+
+```````````````````````````````` example
+before
+
+{type: i, reversed: true}
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true" start="1" type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered a, 0, -1, since there are no negative letters either:
+
+```````````````````````````````` example
+before
+
+{type: a, reversed: true}
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true" start="1" type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
 </ol>
 <p>after</p>
 ````````````````````````````````

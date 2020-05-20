@@ -1,4 +1,4 @@
-# A Note for Leanpub authors
+# A Note for Leanpub Authors
 
 If you're a Leanpub author writing in Markua, this is **NOT** what you should be
 reading. Leanpub's current Markua implementation (of Markua 0.10) is documented

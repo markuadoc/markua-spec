@@ -26,9 +26,6 @@ To learn what this all means, read on.
 
 ## About Leanpub's Markdown Support and Specifications
 
-*(WARNING: The following contains forward-looking statements! No estimates
-should be provided, and if they are, you should not believe any of them.)*
-
 Leanpub Flavoured Markdown (LFM) was started in 2011, and Markua 0.10 was
 started in 2014. Both of these dates are before the CommonMark specication was
 created, so obviously neither LFM nor Markua 0.10 were historically based on

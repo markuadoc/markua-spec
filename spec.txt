@@ -1443,25 +1443,29 @@ version of Markua without needing to specify anything special.
 ## Document settings (Markua extension)
 
 The HTML which is output by a Markua Processor can be affected by certain global
-settings. These can be overridden by a document settings hash.
+settings. These can be overridden by one or more document settings hashes.
 
-The document settings hash can occur only once, and must be at the start of a
-Markua document. The settings are newline-separated key-value pairs
-(`key: value`) which contain information about the document and about the
-desired behaviour of the Markua Processor.
+The document settings hash or hashes must be at the start of a Markua document.
+Once something other than a document settings hash is encountered, no more
+document settings hashes can be defined.
+
+The settings are newline-separated key-value pairs (`key: value`) which contain
+information about the document and about the desired behaviour of the Markua
+Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
 `authors`, etc. Markua Processor behaviour includes things like
 `italicize-underlines`, `smart-punctuation`, etc.
 
-The format of the document settings hash is as follows: Every non-blank line
+The format of a document settings hash is as follows: Every non-blank line
 in the document settings hash must contain a key, a colon `:`, and a value.
 Any whitespace at the beginning or end of the keys and values will be stripped.
 Only the first colon is important; subsequent colons on a line will just be
 part of the value.
 
 There must be at least one blank line between the end of the settings block and
-the start of any other document content.
+the start of any other document content other than another document settings
+hash.
 
 Here's an example of a settings block at the start of a book:
 
@@ -1479,13 +1483,46 @@ authors: Peter Armstrong and John MacFarlane
 Lorem ipsum dolor...
 ~~~
 
-Note that a Markua Processor may also get settings from elsewhere, like a web
-interface. In the case of a conflict between settings defined in a document
-and settings defined, say, in a web interface, it is up to the Markua Processor
-to decide which setting to use. Also, a Markua Processor may override settings
-whose values are unsupported or illegal.
+The reason that more than one document settings hash is permitted is that a
+Markua Processor may also get settings from elsewhere, like a web interface.
+The most straightforward thing to do in such a case is to just add another
+document settings hash at the beginning of the file, and then let the Markua
+Processor sort out any conflicts.
 
-Each document setting either applies to books and courses, or to courses only.
+In the case of a conflict between settings defined in a document and settings
+defined, say, in a web interface, the last setting definition should win.
+However, a Markua Processor may override settings whose values are unsupported
+or illegal. Also, a Markua processor should provide a warning if there are
+conflicts.
+
+Here's an example of a Markua document which could be generated if there is a
+settings block produced by a web interface, and then a settings block manually
+added at the start of a book:
+
+~~~
+{
+italicize-underlines: false
+soft-breaks: space
+smart-punctuation: true
+title: Markua Spec
+authors: Peter Armstrong and John MacFarlane
+}
+{
+italicize-underlines: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+~~~
+
+Thankfully, the only thing that would see this would be a Markua Processor,
+since it's gross. To the author, they would just see their (second) settings
+block, and the first one would have been created from the values stored in a
+database somewhere.
+
+Note that each document setting either applies to books and courses, or to
+courses only.
 
 Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.

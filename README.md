@@ -16,7 +16,7 @@ There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
 
 1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
-2. [Markua 0.10](https://leanpub.com/markua/read)
+2. [Markua](https://leanpub.com/markua/read)
 
 ### Leanpub's Current Markua Implementation
 
@@ -81,19 +81,20 @@ to make a choice:
    automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
    manuscript.
 
-There is **no Quirks Mode for Markua 0.29**, since we do not have an existing
-implementation that we need to support.
+There is no Quirks Mode for Markua 0.29, since we do not have an existing
+Markua 0.29 implementation that we need to support. Authors will be able to
+automatically migrate their books or courses into Markua 0.29 with a converter.
 
 ### At Least Five Markdown Writing Modes
 
 With the launch of Quirks Mode and Spec Mode, there will be five writing modes
-on Leanpub, documented at these locations:
+on Leanpub:
 
-1. [LFM (Quirks Mode)](https://leanpub.com/lfm/read)
-2. [LFM (Spec Mode)](http://markua.com/lfm)
-3. [Markua 0.10 (Quirks Mode)](https://leanpub.com/markua/read)
-4. [Markua 0.10 (Spec Mode)](http://markua.com/0.10)
-5. [Markua 0.29](http://markua.com/0.29)
+1. LFM (Quirks Mode)
+2. LFM (Spec Mode)
+3. Markua 0.10 (Quirks Mode)
+4. Markua 0.10 (Spec Mode)
+5. Markua 0.29
 
 Now, it is expected that Markua will continue to evolve, especially in its
 support of courses. (For example, we have received reasonable requests for

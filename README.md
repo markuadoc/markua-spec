@@ -44,7 +44,7 @@ As such, there are separate specifications for the following, and they are
 
 1. [LFM spec](http://markua.com/spec/lfm)
 2. [Markua 0.10 spec](http://markua.com/spec/markua010)
-3. [Markua 0.29 spec](http://markua.com/spec/markua029
+3. [Markua 0.29 spec](http://markua.com/spec/markua029)
 
 These specifications will not exactly match Leanpub's current behaviour when
 parsing LFM or Markua 0.10. However, they will be really close, and this will

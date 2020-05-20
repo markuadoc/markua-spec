@@ -1,3 +1,4 @@
 *~
 *.bak
 spec.html
+test/__pycache__

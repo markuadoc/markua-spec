@@ -169,3 +169,14 @@ our plans as of 2020-05-20.
 
 However, there is no promise that any of the above will actually happen, and we
 are not providing any estimates for release dates. Software estimation is hard.
+
+# Building the Spec
+
+To build the spec on a Mac, do the following:
+
+```
+brew install lua
+brew install luarocks
+luarocks install lcmark
+make spec.html
+```

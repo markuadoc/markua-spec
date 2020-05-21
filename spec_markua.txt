@@ -12927,6 +12927,9 @@ __a<http://foo.bar/?q=__>
 
 </div>
 
+
+<div class="extension">
+
 ## Underline (Markua extension)
 
 In Markdown as defined by John Gruber, and in CommonMark and GFM,

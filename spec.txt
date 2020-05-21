@@ -1462,6 +1462,81 @@ bar</p>
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Entity and numeric character references (Markua extension)
+
+In PDF and other non-HTML-based output formats, a Markua Processor may choose
+to do the following for HTML entity and numeric character references:
+
+1. Convert it to the correct character in the font which it is using for body
+   text.
+2. Convert it to a character for missing character, typically which is a box
+   which looks like tofu.
+3. Convert it into an image and insert the image. For example, when encountering
+   `&#x1F602;` (the HTML entity reference to the Unicode code point in
+   hexadecimal of the "face with tears of joy" emoji), a Markua processor can
+   just insert an image of a smiling face with tears of joy.
+
+In HTML and in HTML-based output formats such as EPUB, the entity or numeric
+character reference must be output instead.
+
+In output formats such as MOBI which are typically derived from EPUB, a Markua
+Processor may either output the entity or numeric character reference or it may
+choose to use one of the approaches used for non-HTML output formats.
+
+</div>
+
+
+<div class="extension">
+
+## Emoji (Markua extension)
+
+In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year
+[was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/),
+in fact, the Face with Tears of Joy emoji. You may think of it as a smiling face
+with tears of joy, but you can also can think of it as `&#x1F602;`, which is the
+HTML entity reference to its Unicode code point (in hexadecimal). 
+
+However, Unicode characters aren't the only way to do emoji. Another popular
+syntax for emoji is `:emoji_name:` -- that is a colon (`:`), followed by the
+underscore-separated name of the emoji, followed by a colon.
+
+Markua supports both the HTML character reference approach for emoji as well as
+the `:emoji_name:` syntax.
+
+Which emoji are supported is up to the Markua Processor.
+
+One recommended list of emoji names is at
+<http://www.webpagefx.com/tools/emoji-cheat-sheet/>.
+
+The preferred thing to do when a Markua Processor recognizes an emoji is to
+replace it with the Unicode code point HTML entity reference, assuming that
+those are also handled correctly:
+
+```````````````````````````````` example
+This makes me &#x1F602;.
+
+This makes me :joy:.
+```
+.
+<p>This makes me &#x1F602;.</p>
+<p>This makes me &#x1F602;.</p>
+````````````````````````````````
+
+However, it is also acceptable for a Markua Processor to just output the "tofu"
+characters for the HTML entity references while still supporting the
+`:emoji_name:` style emoji. Presumably with this approach, either a set of
+images or an emoji font will be used for the supported emoji.
+
+Finally, if Font Awesome icons are going to be supported by a Markua Processor,
+using the `:emoji_name:` syntax, they must have their `:fa-` prefix which they
+always come with. So, the [Leanpub logo in Font
+Awesome](https://fontawesome.com/icons/leanpub?style=brands) would be output as
+`:fa-leanpub:`.
+
+</div>
+
 
 # Blocks and inlines
 
@@ -7028,6 +7103,559 @@ the `>`:
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Block quotes with curly braces (Markua extension)
+
+Block quotes in Markua are created in one of two ways:
+
+1. By prefacing lines with `> `, i.e. a greater than character followed by a
+space. This was shown above.
+2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
+
+Option #1 is preferable for short quotes; option #2 is easier on authors for
+really long quotes.
+
+Like figures and tables, blockquotes can be inserted in the middle of a
+paragraph or as a sibling of it.
+
+These are the two ways to make block quotes in Markua:
+
+```````````````````````````````` example
+This is the first paragraph.
+
+> This is a blockquote.
+>
+> You saw this above.
+
+This is the second paragraph.
+
+{blockquote}
+This is also a blockquote.
+
+It is good for longer quotes.
+{/blockquote}
+
+This is the third paragraph.
+.
+<p>This is the first paragraph.</p>
+<blockquote>
+<p>This is a blockquote.</p>
+<p>You saw this above.</p>
+</blockquote>
+<p>This is the second paragraph.</p>
+<blockquote>
+<p>This is also a blockquote.</p>
+<p>It is good for longer quotes.</p>
+</blockquote>
+<p>This is the third paragraph.</p>
+````````````````````````````````
+
+If a blockquote contains headings, these headings may be formatted by a Markua
+Processor differently than normal headings. Finally, if a Markua Processor is
+automatically generating a [Table of Contents](#toc) from chapter and section
+headings, any headings inside blockquotes should be ignored.
+
+</div>
+
+
+<div class="extension">
+
+## Asides (Markua extension)
+
+Since Markua is for writing books and courses, including technical books and
+courses, it needs not just a syntax for blockquotes--it also needs a syntax for
+asides and for blurbs.
+
+These syntaxes are very similar to the Markua syntax for blockquotes. Like
+blockquotes, any headings inside asides or blurbs do not show up in a Table of
+Contents (if one is present), and they can also be formatted differently by
+Markua Processors.
+
+We will consider asides first.
+
+Asides are typically short or long notes in books which are tangential to the
+main idea--sort of like footnotes, but in the body text itself. In technical
+books, quite often they are formatted in a box. Asides can span multiple pages.
+
+The syntaxes for asides are very similar to blockquotes:
+
+1. By prefacing lines with `A> `, i.e. an `A`, then a greater than character
+   (`>`), then a space.
+2. By wrapping the aside in `{aside}` ... `{/aside}`
+
+Option #1 is preferable for short asides; option #2 is easier on authors for
+really long asides.
+
+For consistency with blockquotes, asides can be siblings of paragraphs or nested
+in them.
+
+Here's a short aside:
+
+```````````````````````````````` example
+A> This is a short aside.
+.
+<aside>
+<p>This is a short aside.</p>
+</aside>
+````````````````````````````````
+
+Here's a longer aside, which also contains a heading:
+
+```````````````````````````````` example
+A> # A Longer Aside
+A>
+A> This is a longer aside.
+A>
+A> It can have multiple paragraphs.
+.
+<aside>
+<h1>A Longer Aside</h1>
+<p>This is a longer aside.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+Here's the same longer aside using the `{aside}` syntax:
+
+```````````````````````````````` example
+{aside}
+# A Longer Aside
+
+This is a longer aside.
+
+It can have multiple paragraphs.
+{/aside}
+.
+<aside>
+<h1>A Longer Aside</h1>
+<p>This is a longer aside.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Blurbs (Markua extension)
+
+Blurbs are like asides, but shorter. A blurb is not intended to span multiple
+pages of output.
+
+The syntaxes for blurbs are very similar to asides:
+
+1. By prefacing lines with `B> `, i.e. a `B`, then a greater than character
+   (`>`), then a space.
+2. By wrapping the blurb in `{blurb}` ... `{/blurb}`
+
+Here's a short blurb:
+
+```````````````````````````````` example
+B> This is a short blurb.
+.
+<aside class="blurb">
+<p>This is a short blurb.</p>
+</aside>
+````````````````````````````````
+
+Here's a longer blurb, which also contains a heading:
+
+```````````````````````````````` example
+B> # A Longer Blurb
+B>
+B> This is a longer blurb.
+B>
+B> It can have multiple paragraphs.
+.
+<aside class="blurb">
+<h1>A Longer Blurb</h1>
+<p>This is a longer blurb.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+Here's the same longer blurb using the `{blurb}` syntax:
+
+```````````````````````````````` example
+{blurb}
+# A Longer Blurb
+
+This is a longer blurb.
+
+It can have multiple paragraphs.
+{/blurb}
+.
+<aside class="blurb">
+<h1>A Longer Blurb</h1>
+<p>This is a longer blurb.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Blurb classes (Markua extension)
+
+Blurbs also have support for an attribute list, which can contain a `class`
+attribute.
+
+Markua has its origin in authoring computer programming books. In computer
+programming books, there are a number of blurb types which are a
+de facto standard:
+
+* `center`
+* `discussion`
+* `error`
+* `information`
+* `tip`
+* `warning`
+
+These blurb types can be set on a blurb as its `class` attribute. A Markua
+Processor can optionally style these blurbs appropriately based on the class,
+for example by adding custom icons for each class of blurb.
+
+Here's how this looks with the `B> ` syntax:
+
+```````````````````````````````` example
+{class: warning}
+B> This is a warning!
+.
+<aside class="blurb warning">
+<p>This is a warning!</p>
+</aside>
+````````````````````````````````
+
+Here's how this looks with the `{blurb}` syntax:
+
+```````````````````````````````` example
+{blurb, class: warning}
+This is a warning!
+{/blurb}
+.
+<aside class="blurb warning">
+<p>This is a warning!</p>
+</aside>
+````````````````````````````````
+
+The attribute list must either directly precede the `B>` with no blank line
+between it and the `B>`, or it must be combined with the `{blurb}` block
+opening. It is **NOT** legal Markua syntax to have an attribute list preceding a
+`{blurb}` block opening like this:
+
+~~~
+{class: warning}
+{blurb}
+That is not legal Markua...
+~~~
+
+
+</div>
+
+
+<div class="extension">
+
+## Syntactic sugar for blurb classes (Markua extension)
+
+Having to constantly type `{class: warning}` in a computer programming book with
+a number of warnings would get tedious, as would any of the other blurb classes
+listed above.
+
+So, Markua defines a standard shorthand syntax for these classes of blurbs. With
+this syntax, you use a different letter than `B` in the `B>`, to create a blurb
+with the appropriate `class`.
+
+These are the syntactic sugar values you can use which have a heritage in
+computer programming books:
+
+`D>`
+: `{class: discussion}`
+
+`E>`
+: `{class: error}`
+
+`I>`
+: `{class: information}`
+
+`Q>`
+: `{class: question}`
+
+`T>`
+: `{class: tip}`
+
+`W>`
+: `{class: warning}`
+
+`X>`
+: `{class: exercise}`
+
+```````````````````````````````` example
+D> This is a discussion blurb.
+
+{class: discussion}
+B> This is a discussion blurb.
+
+{blurb, class: discussion}
+This is a discussion blurb.
+{/blurb}
+.
+<aside class="blurb discussion">
+<p>This is a discussion blurb.</p>
+</aside>
+
+<aside class="blurb discussion">
+<p>This is a discussion blurb.</p>
+</aside>
+
+<aside class="blurb discussion">
+<p>This is a discussion blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+E> This is an error blurb.
+
+{class: error}
+B> This is an error blurb.
+
+{blurb, class: error}
+This is an error blurb.
+{/blurb}
+.
+<aside class="blurb error">
+<p>This is an error blurb.</p>
+</aside>
+
+<aside class="blurb error">
+<p>This is an error blurb.</p>
+</aside>
+
+<aside class="blurb error">
+<p>This is an error blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+X> This is an exercise blurb.
+
+{class: exercise}
+B> This is an exercise blurb.
+
+{blurb, class: exercise}
+This is an exercise blurb.
+{/blurb}
+.
+<aside class="blurb exercise">
+<p>This is an exercise blurb.</p>
+</aside>
+
+<aside class="blurb exercise">
+<p>This is an exercise blurb.</p>
+</aside>
+
+<aside class="blurb exercise">
+<p>This is an exercise blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+I> This is an information blurb.
+
+{class: information}
+B> This is an information blurb.
+
+{blurb, class: information}
+This is an information blurb.
+{/blurb}
+.
+<aside class="blurb information">
+<p>This is an information blurb.</p>
+</aside>
+
+<aside class="blurb information">
+<p>This is an information blurb.</p>
+</aside>
+
+<aside class="blurb information">
+<p>This is an information blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+Q> This is a question blurb.
+
+{class: question}
+B> This is a question blurb.
+
+{blurb, class: question}
+This is a question blurb.
+{/blurb}
+.
+<aside class="blurb question">
+<p>This is a question blurb.</p>
+</aside>
+
+<aside class="blurb question">
+<p>This is a question blurb.</p>
+</aside>
+
+<aside class="blurb question">
+<p>This is a question blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+T> This is a tip blurb.
+
+{class: tip}
+B> This is a tip blurb.
+
+{blurb, class: tip}
+This is a tip blurb.
+{/blurb}
+.
+<aside class="blurb tip">
+<p>This is a tip blurb.</p>
+</aside>
+
+<aside class="blurb tip">
+<p>This is a tip blurb.</p>
+</aside>
+
+<aside class="blurb tip">
+<p>This is a tip blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+W> This is a warning blurb.
+
+{class: warning}
+B> This is a warning blurb.
+
+{blurb, class: warning}
+This is a warning blurb.
+{/blurb}
+.
+<aside class="blurb warning">
+<p>This is a warning blurb.</p>
+</aside>
+
+<aside class="blurb warning">
+<p>This is a warning blurb.</p>
+</aside>
+
+<aside class="blurb warning">
+<p>This is a warning blurb.</p>
+</aside>
+````````````````````````````````
+
+Note that `Q>` and `X>` are a bit confusing:
+
+* `Q>` defines a blurb which is formatted like a question, but `{quiz}`
+(discussed later) defines a quiz, and quizzes have actual numbered questions in
+them. It is unfortunate that the words `quiz` and `question` both start with the
+letter `Q`. Also, please note that the `question` blurb is not the same thing as
+a question in a quiz.
+* `X>` defines a blurb which is formatted like an exercise, but `{exercise}`
+(discussed later) defines a structured exercise similar to a quiz. It is
+unfortunate that the term "exercise" is used for both. However, picking a worse
+word (such as, say, example) just to avoid any ambiguity would be worse.
+
+Also note that nothing in this section defines what a Markua Processor must *do*
+with the given class of blurb, in terms of formatting. Leanpub, for example, uses
+it to add an appropriate icon from
+[Font Awesome](https://fortawesome.github.io/Font-Awesome/)
+at the left of the blurb, but other Markua Processors are free to do something
+different.
+
+Finally, note that specifying a class in metadata overrides what the syntactic
+sugar does, and is also an error:
+
+```````````````````````````````` example
+{class: tip}
+W> This is a tip blurb, not a warning blurb.
+.
+<aside class="blurb tip">
+<p>This is a tip blurb, not a warning blurb.</p>
+</aside>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Using blurbs to center text (Markua extension)
+
+You can also use a blurb to center text.
+
+The following two ways to do this are equivalent:
+
+```````````````````````````````` example
+C> This is a centered blurb.
+
+{class: center}
+B> This is a centered blurb.
+.
+<aside class="blurb center">
+<p>This is a centered blurb.</p>
+</aside>
+<aside class="blurb center">
+<p>This is a centered blurb.</p>
+</aside>
+````````````````````````````````
+
+This is the only way to center text in Markua.
+
+Unlike other blurb types which have their origin in technical books, centering
+text has a wide range of uses. So, it could have been thought of as something
+different than a blurb. However, in terms of its behaviour and the way it's
+inserted, centered text is a blurb--whether it's inserted via syntactic sugar or
+via a class attribute on a normal blurb element.
+
+</div>
+
+
+<div class="extension">
+
+## Blurb icons with extension attributes (Markua extension)
+
+Markua Processors must ignore any attributes which they do not understand.
+
+Because of this, Markua attribute lists can contain any number of extension
+attributes. An extension attribute is an attribute which is not defined in the
+Markua specification, but which is understood by some specific Markua Processor.
+
+As an example of an extension attribute, Leanpub adds an `icon` attribute to
+blurbs. Markua does not specify that a blurb must support an `icon` attribute,
+or what it would mean if it did. However, Leanpub understands an `icon`
+attribute to reference an icon from Font Awesome. The value of this attribute
+is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.
+So, in any Markua Processor, you can do this:
+
+~~~
+{icon: car}
+B> You can't spell carbon without it!
+
+{icon: leanpub}
+B> Yes, we're in Font Awesome!
+
+{icon: github}
+B> So is GitHub, of course. Unicorns.
+~~~
+
+In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon.
+In a Markua implementation that does not understand the icon attribute, nothing
+will be generated for that attribute--it will be functionally equivalent to the
+attribute not being present.
+
+</div>
+
 
 ## List items
 
@@ -8779,6 +9407,1764 @@ Here the outer list is loose, the inner list tight:
 </ul>
 ````````````````````````````````
 
+<div class="extension">
+
+## List attributes (Markua extension)
+
+Lists in Markdown (as described by John Gruber and specified by CommonMark) have
+some pretty major issues. Here are two of the biggest ones:
+
+* You can't make descending order lists.
+* You can't use letters or Roman numerals for labels.
+
+This list gets rendered as 3,4,5, since Markdown does not have a way of
+specifying that a list is descending, and it does not infer it from the
+order by default:
+
+```````````````````````````````` example
+before
+
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This looks like a list, but it is in fact a paragraph. There are no break tags
+after the foo, bar and baz, just soft breaks:
+
+```````````````````````````````` example
+before
+
+a. foo
+b. bar
+c. baz
+
+after
+.
+<p>before</p>
+<p>a. foo
+b. bar
+c. baz</p>
+<p>after</p>
+````````````````````````````````
+
+Again, both of these behaviours are as defined in the CommonMark spec.
+
+Now, Markua can't change this by default, without being incompatibile with
+Markdown.
+
+So what to do?
+
+Markua adds the list attributes extension, to support being able to output all
+the needed types of list from the limited list support in Markdown. The way this
+is done is by giving lists an attribute list, much like how resources can have
+an attribute list. (Lists are not resources, however.)
+
+### Supported Attributes for Lists
+
+The following are the supported attributes for lists.
+
+`reversed`
+: This determines whether the list is in ascending or descending order. Legal
+values are `true` or `false`. The default value is `false`, for ascending.
+Any value other than `true` is interpreted as `false`.
+
+`type`
+: The type of the list marker to use. Valid choices are `1`, `A`, `a`, `I` or
+`i`. `A` and `a` mean uppercase or lowercase letters; `I` or `i` mean uppercase
+or lowercase Roman numerals.
+
+The use of these attributes are shown in the following examples.
+
+### Lists with Attributes: Good Style
+
+This list will be numbered a, b, c:
+
+```````````````````````````````` example
+before
+
+{type: a}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered A, B, C:
+
+```````````````````````````````` example
+before
+
+{type: A}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol type="A">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered c, d, e:
+
+```````````````````````````````` example
+before
+
+{type: a}
+3. foo
+4. bar
+5. baz
+
+after
+.
+<p>before</p>
+<ol type="a" start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered i, ii, iii:
+
+```````````````````````````````` example
+before
+
+{type: i}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered I, II, III:
+
+```````````````````````````````` example
+before
+
+{type: I}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered iii, iv, v:
+
+```````````````````````````````` example
+before
+
+{type: i}
+3. foo
+4. bar
+5. baz
+
+after
+.
+<p>before</p>
+<ol type="i" start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 3, 2, 1:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered c, b, a:
+
+```````````````````````````````` example
+before
+
+{type: a, reversed: true}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="a" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered iii, ii, i:
+
+```````````````````````````````` example
+before
+
+{type: i, reversed: true}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="i" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Nested Lists with Attributes
+
+Everything which has been said about attribute lists on lists applies to nested
+lists as well. This example shows a nested list of the form 1, a, i, * (the
+final nested list is an unordered list, not an ordered list):
+
+```````````````````````````````` example
+before
+
+1. lorem
+   {type: a}
+   1. foo
+      {type: i}
+      1. apple
+         * Gala
+         * Spartan
+         * McIntosh
+      2. orange
+      3. banana
+   2. bar
+   3. baz
+2. ipsum
+3. dolor
+
+after
+.
+<p>before</p>
+<ol>
+<li>lorem
+<ol type="a">
+<li>foo
+<ol type="i">
+<li>apple
+<ul>
+<li>Gala</li>
+<li>Spartan</li>
+<li>McIntosh</li>
+</ul>
+</li>
+<li>orange</li>
+<li>banana</li>
+</ol>
+</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+</li>
+<li>ipsum</li>
+<li>dolor</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This nested list will be rendered somewhat like this:
+
+~~~
+before
+
+1. lorem
+   a. foo
+        i. apple
+           * Gala
+           * Spartan
+           * McIntosh
+       ii. orange
+      iii. banana
+   b. bar
+   c. baz
+2. ipsum
+3. dolor
+
+after
+~~~
+
+### Lists with Attributes: Lazy Style
+
+It is acceptable to just use the number of the first label, and rely on list
+behaviour.
+
+This list will be numbered 1, 2, 3:
+
+```````````````````````````````` example
+before
+
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol>
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 3, 4, 5:
+
+```````````````````````````````` example
+before
+
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered c, d, e:
+
+```````````````````````````````` example
+before
+
+{type: a}
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered iii, iv, v:
+
+```````````````````````````````` example
+before
+
+{type: i}
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 3, 2, 1:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+3. foo
+3. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol start="3" reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Lists with Attributes: Redundant Style
+
+This list will be numbered 1, 2, 3. This is just the default behaviour made
+explicit:
+
+```````````````````````````````` example
+before
+
+{type: 1, reversed: false}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol>
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Lists with Attributes: Bad Style
+
+This list will be numbered 3, 2, 1, regardless of the order of the numbers:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered c, d, e, regardless of the order of the numbers:
+
+```````````````````````````````` example
+before
+
+{type: a}
+3. foo
+2. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol start="3" type="a">
+<li>three</li>
+<li>bar</li>
+<li>one</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 1, 0, -1:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true" start="1" type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered i, 0, -1, since the Romans didn't have the concept of
+zero or negative numbers (and thus neither do Roman numerals):
+
+```````````````````````````````` example
+before
+
+{type: i, reversed: true}
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true" start="1" type="i">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered a, 0, -1, since there are no negative letters either:
+
+```````````````````````````````` example
+before
+
+{type: a, reversed: true}
+1. foo
+1. bar
+1. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true" start="1" type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Definition lists (Markua extension)
+
+Definition lists are also supported in Markua. To define a definition list, use
+the following syntax:
+
+```````````````````````````````` example
+term 1
+: definition 1
+
+term 2
+: definition 2
+.
+<dl>
+  <dt>term 1</dt>
+  <dd>definition 1</dd>
+
+  <dt>term 1</dt>
+  <dd>definition 1</dd>
+</dl>
+````````````````````````````````
+
+There can be one to three spaces after the colon, or one tab.
+
+Note that in HTML the terms produce `<dt>` elements (for "description term")
+and the definitions produce `<dd>` elements (for "description details"). Since
+it is not certain that the definition list contains definitions, and since it
+is desirable for the syntax to remain simple, the `<dd>` element does not
+contain a `<dfn>` element.
+
+There can only be one term per definition, but there can be multiple definitions
+for a term:
+
+```````````````````````````````` example
+term 1
+: definition 1a
+: definition 1b
+
+term 2
+: definition 2
+.
+<dl>
+  <dt>term 1</dt>
+  <dd>definition 1a</dd>
+  <dd>definition 1b</dd>
+
+  <dt>term 2</dt>
+  <dd>definition 2</dd>
+</dl>
+````````````````````````````````
+
+A single term definition list is a definition list, regardless of how many
+definitions for the term exist:
+
+```````````````````````````````` example
+term
+: definition
+.
+<dl>
+  <dt>term</dt>
+  <dd>definition</dd>
+</dl>
+````````````````````````````````
+
+Finally, each definition list item can contain newlines and multiple paragraphs.
+What you do here is indent the subsequent lines by the same amount of space as
+the initial line.
+
+(If you do not indent the subsequent lines, then you're ending the definition
+list and just starting a new paragraph.)
+
+```````````````````````````````` example
+before
+
+one
+: foo
+: bar
+
+  baz
+
+two
+: foo
+
+after
+.
+<p>before</p>
+<dl>
+  <dt>one</dt>
+  <dd>foo</dd>
+  <dd>
+    <p>bar</p>
+    <p>baz</p>
+  </dd>
+
+  <dt>two</dt>
+  <dd>foo</dd>
+</dl>
+<p>after</p>
+````````````````````````````````
+
+Note that single line breaks within the definitions (the `<dd>` not `<dt>`)
+are handled the same way as single line breaks within paragraphs, and are
+subject to the `soft-breaks` global setting which defaults to `source` for
+compatibility with Markdown.
+
+```````````````````````````````` example
+before
+
+one
+: lorem
+  ipsum
+
+  dolor
+
+  sit amet
+
+two
+: foo
+
+after
+.
+<p>before</p>
+<dl>
+  <dt>one</dt>
+  <dd>
+    <p>lorem
+    ipsum</p>
+    <p>dolor</p>
+    <p>sit amet</p>
+  </dd>
+
+  <dt>two</dt>
+  <dd>foo</dd>
+</dl>
+<p>after</p>
+````````````````````````````````
+
+Finally, with definition lists, one thing you often want to do is link to a
+specific definition, not just to the list itself. This is useful to do, since
+in a document with many definitions, it's helpful if the reader scrolls to the
+right spot or opens to the right page.
+
+To do this, just define a span id on the element itself, and then link to it.
+
+```````````````````````````````` example
+foo{#foo}
+: This is foo.
+
+bar{#bar}
+: This is bar.
+.
+<dl>
+  <dt><span id="foo">foo</span></dt>
+  <dd>This is foo.</dd>
+
+  <dt><span id="bar">bar</span></dt>
+  <dd>This is bar.</dd>
+</dl>
+````````````````````````````````
+
+Note that if you define an id attribute above the first definition list item,
+what you are doing is defining an id on the entire definition list. As such,
+this does not work on any subsequent list item: in the following definition
+list, the `{#definitions}` is the id of the definition list. It is not the id
+of foo.
+
+```````````````````````````````` example
+{#definitions}
+foo{#foo}
+: This is foo.
+
+bar{#bar}
+: This is bar.
+.
+<dl id="definitions">
+  <dt><span id="foo">foo</span></dt>
+  <dd>This is foo.</dd>
+
+  <dt><span id="bar">bar</span></dt>
+  <dd>This is bar.</dd>
+</dl>
+````````````````````````````````
+
+To be clear, the following is not legal in Markua:
+
+```````````````````````````````` example
+{#foo}
+foo
+: This is foo.
+
+{#bar}
+bar
+: This is bar.
+.
+<dl id="foo">
+  <dt>foo</dt>
+  <dd>This is foo.</dd>
+
+  <dt>bar</dt>
+  <dd>This is bar.</dd>
+</dl>
+````````````````````````````````
+
+Here, the id above foo is actually the id of the entire definition list, and the
+id above bar is not legal. A Markua Processor should ignore this id, and add an
+error to the list of errors.
+
+</div>
+
+
+<div class="extension">
+
+# Quizzes and exercises (Markua extension)
+
+Markua was initially designed for the writing of books, but it has been extended
+to support creating courses. For example, Leanpub authors can click a button to
+create a massive open online course (MOOC), complete with automated marking,
+entirely from a Markua document.
+
+**To convert a Markua document from a book into a course, all you need to do is
+add quizzes and exercises.**
+
+Over the past decade, there has been a steady growth of interest in courses
+delivered over the internet at massive scale. These Massive Open Online Courses,
+or MOOCs, consist of essentially four things:
+
+1. Reading material
+2. Video or audio lectures
+3. Exercises, with answers provided to the student
+4. Quizzes, with answers used to automatically mark the quiz
+
+It turns out the four things in this list all work perfectly in a Markua
+document. So, not only can Markua be used to easily create a textbook which
+includes video, audio, images and quizzes, it is also an amazingly simple and
+flexible way of creating a MOOC. A MOOC is essentially just a textbook which is
+executable, plus discussion forums and credentials. For example,
+[Leanpub](https://leanpub.com) authors can click one button to create a massive
+open online course (MOOC), complete with automated marking for all the quizzes
+in the course, entirely from one Markua document.
+
+Quizzes and exercises are essentially the same. The only difference is that
+quizzes are intended to be marked, and exercises are not. Because of their
+similarities, they are discussed here together.
+
+Quizzes or exercises in a textbook consist of two things:
+
+1. Questions, typically in the chapter itself.
+2. Answers, typically at the back of the book.
+
+The questions in the chapter essentially are placed there like any other block
+element, such as an aside or blurb. The answers are positioned at the back of
+the book, along with other elements like the index and appendices. The specific
+location that they are positioned can be controlled by the author using insert
+directives, discussed earlier.
+
+There is only one syntax to create a quiz or exercise. For a quiz, it's by
+wrapping the quiz in `{quiz}` ... `{/quiz}`; for an exercise, it's by wrapping
+the exercise in `{exercise}` ... `{/exercise}`.
+
+Here is a brief example of a quiz:
+
+~~~
+{quiz, id: quiz1}
+? How many letters are in the word Markua?
+
+a) 5
+B) 6
+c) 7
+
+? How many unique letters are in the word Markua?
+
+! 5
+{/quiz}
+~~~
+
+This quiz contains two questions: a multiple-choice question where the correct
+answer is b, and a fill-in-the-blank question where the correct answer is 5.
+Quizzes and exercises have the same question types, discussed later.
+
+With a quiz, the `id` attribute is **required**. This is so the identity of a
+quiz can be preserved across generations of a course.
+
+Here is the same example, but as an exercise:
+
+~~~
+{exercise, id: exercise1}
+? How many letters are in the word Markua?
+
+a) 5
+B) 6
+c) 7
+
+? How many unique letters are in the word Markua?
+
+! 5
+{/exercise}
+~~~
+
+Just like with quiz, with an exercise the `id` attribute is **required**. This
+is so the identity of an exercise can be preserved across generations of a
+course.
+
+
+
+A quiz or exercise can contain any Markua content, not just questions and
+answers. This is true regardless of whether the quiz or exercise is in a MOOC,
+an ebook or on paper. Note that video and audio resources don't work so well on
+paper, however.
+
+If a quiz or exercise starts with any type of heading immediately after the
+`{quiz}` or `{exercise}` line, this heading's content should be considered the
+name of the quiz or exercise. This can be used in a list of quizzes or exercises
+produced by the Markua Processor. Typically the heading will be a chapter
+heading (`# `), but section headings (`## `) and lower headings also are
+supported. (The reason for this is that quizzes are sometimes top-level things,
+and other times are nested inside chapters, sections or sub-sections. Some
+course authors would correctly feel that the quiz should have the appropriate
+level of heading given their position in the document.
+
+Example:
+
+~~~
+{quiz, id: quiz2}
+# Markua Quiz
+
+Watch this [video](https://www.youtube.com/watch?time_continue=1&v=VOCYL-FNbr0)
+of Peter explaining Markua.
+
+? What year was that video from?
+
+What year? Really? Did it really take that long? What was going on???
+
+a) 2012
+b) 2013
+C) 2014
+d) 2015
+
+{words: 500}
+? Why do you think the first version of the Markua spec took so long?
+
+Look at the Leanpub website and read the [pricing
+essay](https://leanpub.com/pricing).
+
+! Answers could include "bootstrapped startup", the spec evolving, etc.
+
+That's it for this quiz, and this MOOC!
+
+**Thanks for taking my course!**
+{/quiz}
+~~~
+
+There are four types of questions supported by Markua.
+
+1. Multiple Choice
+2. Multiple Selection
+3. Fill In The Blank
+4. Written
+
+These types are not specified by a `{type}` attribute. Instead, they are
+inferred from properties of the answers or from other attributes of the
+question.
+
+The exact way to create these types of questions is discussed further below.
+
+## Quiz and exercise output (Markua extension)
+
+A Markua Processor has many degrees of freedom in terms of whether, and how,
+to output quizzes and exercises. As such, no HTML mapping is shown here.
+
+For example, when outputting an online course or MOOC, the Markua Processor
+can basically do whatever it wants. It can choose to output an ebook of the
+course material only, and put all quizzes and exercises only in the online
+version. Or it can choose to put all the quizzes only in the online version,
+and include the exercises in the ebook version as well. Or it can include the
+quizzes and exercises in the ebook version, but only include the answers for
+the exercises in the ebook version.
+
+If, on the other hand, a Markua Processor is outputting a textbook, it may
+choose to output the quizzes in an entirely separate ebook or print-ready PDF,
+for use in physical classrooms.
+
+If a Markua Processor does output a quiz or exercise, it needs to do so in a
+medium-appropriate way. This includes outputting multiple-choice questions
+without showing their answers, of course. The display of fill in the blank
+and essay questions varies greatly based on whether the question is in an
+online quiz or exercise, in an ebook or on paper.
+
+Markua Processors are encouraged to be creative here.
+
+However, there are some rules. If a given quiz or exercise is output by a
+Markua Processor in an ebook or a physical book, the following things must
+occur:
+
+1. The quiz or exercise must be output as questions-only, in the place in the
+   document where the quiz was defined.
+2. The questions must be numbered sequentially, incrementing by 1 for each
+   question.
+3. The questions must be numbered starting from the number specified by the
+   `start-at` attribute if specified, or 1 if no `start-at` attribute is
+   specified.
+4. The multiple choice options in any question must be converted into a set of
+   choices which all look the same, so that the correct answer is not indicated.
+   Converting all choice letters to lowercase is sufficient here.
+5. The answers, if provided, must be positioned somewhere separate from the
+   questions, typically at the back of the book. This position can be controlled
+   by the author using insert directives, discussed earlier.
+
+## Quiz and exercise validation (Markua extension)
+
+### An empty quiz or exercise is not an error
+
+A quiz or exercise which contains no questions is not an error. Instead, a if a
+Markua Processor encounters a quiz or exercise with no questions it must filter
+the quiz or exercise from the output, optionally providing a warning to the
+author.
+
+This lets authors create placeholders for quizzes or exercises in their courses
+before the quizzes or exercises are ready, which is potentially very useful in
+an in-progress course.
+
+### A malformed quiz or exercise is an error
+
+If a Markua Processor encounters a malformed quiz or exercise it must treat this
+as an error and not generate the output from the Markua document. Quizzes and
+exercises are not something that should ever be produced in a broken state.
+
+However, it is also an error to parse quiz syntax outside a quiz or exercise
+block. A Markua Processor must not parse lines starting with ? or ! as
+representing questions or answers unless those are contained in a quiz or
+exercise block.
+
+## Quiz and exercise attributes (Markua extension)
+
+These are the supported attributes on quizzes and/or exercises:
+
+`attempts`
+: The number of allowed attempts on a quiz. The default is defined by the value
+of `default-quiz-attempts` on the containing course, or `1` if this is not
+present. A value of `0` means the quiz cannot be taken (yet). A value of `-1`
+means the quiz has an unlimited number of attempts. Since an exercise does not
+count toward the mark on a course, an exercise always has an unlimited number
+of attempts.
+
+`auto-submit`
+: `true` or `false`. The default is `true`. If true, an incomplete quiz is
+submitted when the `time-limit` is expired. If false, it is not. Either way, an
+incomplete quiz counts as an attempt.
+
+`case-sensitive`
+: `true` or `false`. The default is `true`. This sets the default behaviour of
+fill in the blank questions. If `true`, the fill in the blank question answers
+are case-sensitive. If false, they are not.
+
+`id`
+: All Markua elements support an `id` attribute. The reason the `id` attribute
+is explicitly listed here is to emphasize that a Markua Processor may require
+an `id` attribute on a quiz or exercise. For example, Leanpub requires the `id`
+attribute on all quizzes, in order to determine the identity of quizzes when a
+course is being published in-progress. (As a student, you'd be pretty unhappy
+if you had to re-take an unchanged quiz simply because a professor published a
+new course version.)
+
+`mark-request-url`
+: If omitted, all the quiz or exercise answers are defined in the Markua
+document. If present, some or all of the quiz or exercise questions are
+externally marked via an API defined at the URL specified in this attribute.
+When the quiz or exercise is completed, the entire quiz or exercise should be
+sent to the endpoint at the `mark-request-url`. Here's how this works in
+Leanpub; other Markua Processors should presumably do something similar. When a
+quiz or exercise with this attribute defined is completed, its state is set to
+"pending". Leanpub then sends the quiz or exercise data as a JSON payload to the
+marking endpoint. This JSON contains the following attributes:
+`mark-response-url` (which defines where responses are sent), `quiz_id`,
+`quiz_version`, `quiz_hash` (an SHA hash, for an automated quiz versioning
+approach which does not rely on the course author updating a version attribute),
+`quiz_results` (an array of question data structures containing the question,
+the possible answers, the correct answer according to the Markua document, the
+answer provided by the student, and (if the question is markable) the mark
+determined automatically). The API endpoint should send results to the
+`mark-response-url`. (Even though exercises are not worth points in a course,
+they can be marked, for the benefit of the student. However, the expectation is
+that this attribute will be used primarily by quizzes.) The `mark-response-url`
+in the payload contains URL to respond to with the results of the marking the
+quiz or exercise. The format of the expected payload should be defined by the
+Markua Processor. For Leanpub this is a JSON payload containing the question ids
+and the marks for each question. The mark is a decimal number of points between
+0 and the maximum number of points for the question, inclusive. The decimal
+supports two decimal places, so you can get 3.75 out of 4, for example. The
+mark response must include marks for all questions that are unmarked. It may
+also include marks for questions that Leanpub marked, and those will override
+Leanpub’s marks. Finally, note that even though exercises are not worth points
+in a course, they can be marked, for the benefit of the student. So, since
+they can be marked, they can also be externally-marked via a
+`mark-request-url`. However, the expectation is that this attribute will be
+used primarily by quizzes.
+
+`points`
+: If present, this is the total number of points the quiz or exercise is worth.
+(This really only matters for quizzes, but is supported for exercises as well,
+in case a Markua Processor wishes to display the points on exercises to make
+them feel more real.) If `points` is not present, the worth of the quiz is
+determined by summing the points of the questions. (Questions are worth 1 point
+each if they have no `points` attribute.) If the quiz has a `points` attribute
+and its questions also have `points` attributes, the worth of each question in
+a larger course context is determined as follows: its `points` are the
+numerator, and the total `points` in the quiz or exercise is the denominator.
+
+`random-choice-order`
+: `true` or `false`. The default is `false`. This sets the default behaviour of
+multiple choice questions. If `true`, the choices in the multiple choice
+question are randomly arranged; if `false`, they are presented in the order
+written.
+
+`random-question-order`
+: `true` or `false`. The default is `false`. This sets the default behaviour
+of the quiz or exercise. If `true`, the questions are randomly arranged; if
+`false`, they are presented in the order written.
+
+`start-at`
+: The `start-at` is the number of the first question. The default is 1. Any
+integer is permitted. Subsequent questions will have a number which is 1 higher
+than the previous question.
+
+`show-answers`
+: This can be `all`, `incorrect` or `none`. It affects how answers are shown
+after a quiz or exercise is completed, say in a MOOC. For exercises, the
+default value is determined by the value of the `default-exercise-show-answers`
+global setting, with `all` being the default value of that attribute. For
+quizzes, the default value is determined by the value of the
+`default-quiz-show-answers` global setting, with `incorrect` being the default
+value of that attribute. Global settings are discussed later.
+
+`time-limit`
+: The time limit to finish the quiz, once started. The format is `XdYhZm`. For
+example, 3 days, 6 hours and 45 minutes is expressed as `3d6h45m`; 7 days is
+expressed as `7d`. The default is `7d`.
+
+`use-result`
+: `best` or `latest`. Whether the best result on the quiz is used, or the latest
+one. The default is the value of `default-quiz-use-result` on the course.
+
+`version`
+: The version of the quiz. This does not replace the function of the `id`; it's
+more for use in analytics by the instructor. The default is `1`.
+
+As discussed above, there is no `title` or `title` attribute for a quiz--you can
+just add a heading inside the quiz or exercise itself, using the normal Markua
+formatting for a chapter heading.
+
+## Multiple choice questions (Markua extension)
+
+A multiple choice question has 2 or more answer choices, and 1 correct answer
+choice.
+
+The correct answer choice is in capital letters before the parentheses;
+incorrect answer choices have lowercase letters before the parentheses.
+
+Example:
+
+~~~
+? How many letters are in the word Markua?
+
+a) 5
+B) 6
+c) 7
+~~~
+
+Obviously, when generating the question in the actual quiz or exercise, a
+Markua Processor must make all answer choices have the same type of letter.
+This is usually a lowercase letter, although either all lowercase or all
+uppercase letters would be fine.
+
+Unless a `choose-answers` attribute is used, the multiple choice answers all
+must start from a or A, and must use a right-parenthesis after the a or A. Any
+line starting with a) ar A) in a quiz is considered a set of multiple choice
+quiz answers, not an ordered list using a) or A) as a delimiter. If you want to
+put an ordered list in a quiz body, use periods for the delimiter.
+
+A multiple choice question may also have a dynamic number of answer choices,
+including for the correct answer. This done with the special `choose-answers`
+attribute, shown and explained below.
+
+~~~
+{choose-answers: 4}
+? How many grams are in a pound?
+
+C) 454
+C) 453
+m) 451
+m) 1000
+o) 100
+o) 150
+o) 200
+o) 250
+o) 300
+o) 500
+~~~
+
+The `choose-answers` attribute specifies how many answer choices should be
+shown. This includes exactly one of the correct answers (indicated with `C`),
+all of the mandatory incorrect answers (indicated with `m`) and as many of the
+optional incorrect answers (indicated with `o`) as are needed for the question
+to have the total number of answers as indicated by the `choose-answers`
+attribute.
+
+So, in the above example, either `453` or `454` will be shown, along with the
+mandatory incorrect answer choices `451` (a literary joke) and `1000` (a
+kilogram, not a pound) and one of the optional incorrect answers (`100`,
+`150`, `200`, `250`, `300` or `500`).
+
+When a `choose-answers` attribute is used, the question will always have
+`random-choice-order`.
+
+The following are errors in a question where a `choose-answers` attribute is
+used:
+- 0 correct (`C`) answers
+- not enough mandatory (`m`) incorrect or optional (`o`) incorrect answers for
+the question to have the `choose-answers` number of answers
+- if `choose-answers` is n, a number of mandatory (`m`) incorrect answers >= n
+(since there needs to be one correct answer shown)
+- if `choose-answers` is n and the number of mandatory (`m`) answers is n - 1,
+then any optional (`o`) incorrect answers existing
+- answers starting with something other than `C`, `m` or `o`
+
+### Supported attributes on multiple choice questions
+
+`choose-answers`
+: This is described above. If `choose-answers` is used, `random-choice-order`
+is forced to true.
+
+`points`
+: The number of points the question is worth. This number can be 0 or higher.
+The default is 1.
+
+`random-choice-order`
+: `true` or `false`. The default is `false`, unless `choose-answers` is used.
+This sets the behaviour of the specific multiple choice question. If `true`,
+the choices in the multiple choice question are randomly arranged; if `false`,
+they are presented in the order written. If this attribute is omitted, its
+value is determined by the `random-choice-order` attribute on the quiz itself,
+which defaults to `false` if absent.
+
+## Multiple selection questions (Markua extension)
+
+A multiple selection question has 2 or more answer choices, and 1 or more `true`
+answer choices.
+
+(Leanpub authors: This question type is not yet supported in Leanpub.)
+
+The `true` answer choices are specified with `T`; `false` answer choices are
+specified with `F`.
+
+To get the question 100% correct, you must select **ALL** answers which are
+`true` (not just one of them) and **NONE** of the answers which are `false`.
+As discussed later, the `mark` attribute determines whether the marking is
+all-or-nothing (with the `binary` value) or whether a partial credit can be
+earned (with the `ratio`) value.
+
+Regardless of the value of the `mark` attribute, to get any score for a
+multiple selection question, at least one answer choice must be selected.
+Leaving a multiple selection question blank always gets zero points, even if
+the `mark` attribute is `ratio`. Otherwise, if a test had nothing but multiple
+selection questions with `ratio`-marked questions, with half the answers `true`
+and half the answers `false`, you could get 50% on the test by just handing it
+in blank!
+
+### Supported attributes on multiple selection questions
+
+`mark`
+: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour
+of the specific multiple selection question. If `binary`, the question is all
+or nothing: you either get full points for the question, or a 0 on the question.
+To get full points, you must select every `true` choice and none of the `false`
+choices. If `ratio`, you get a fractional score defined as `(number of true
+choices selected + number of false choices not selected) / (total number of
+choices)`. This fraction is then multiplied by the `points` that the question
+is worth to compute the `points` that you received on the question. Note that
+regardless of whether the `mark` is `binary` or `ratio`, a question which is
+left blank is always completely wrong, earning no credit for the
+correctly-not-selected `false` choices.
+
+`points`
+: The number of points the question is worth. This number can be 0 or higher.
+The default is 1. The `mark` attribute is used to determine how the points are
+computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a
+question which is left blank always earns 0 points.
+
+`random-choice-order`
+: `true` or `false`. The default is `false`. This sets the behaviour of the
+specific multiple selection question. If `true`, the choices in the multiple
+choice question are randomly arranged; if `false`, they are presented in the
+order written. If this attribute is omitted, its value is determined by the
+`random-choice-order` attribute on the quiz itself, which defaults to `false`
+if absent.
+
+### Examples of multiple selection questions
+
+~~~
+? Which of these are animals?
+
+F) apple
+T) cow
+F) lettuce
+
+{mark: ratio, points: 2}
+? Which of these are fruits?
+
+T) apple
+F) cow
+F) lettuce
+T) peach
+T) pear
+F) rice
+~~~
+
+Here the first question defaults to `binary` and 1 point; the second question
+is `ratio` and 2 points.
+
+To get the first question correct, you must select `cow`, and neither of
+`apple` or `lettuce`.
+
+To get this second question 100% correct, you must select all of `apple`,
+`peach` and `pear`, and none of `cow`, `lettuce` or `rice`. For this question,
+if the `mark` attribute had been `binary`, the only way to get any points for it
+would be to select `apple`, `peach` and `pear`, and to leave `cow`, `lettuce`
+and `rice` all unselected. However, the `mark` is not `binary`; it is `ratio`.
+So, if you selected `apple`, `peach` and `rice`, then the score would be
+computed as follows: ((2 correctly-selected true choices + 2
+correctly-not-selected false choices) / 6 choices) * 2 points = (4/6) * 2
+points = 1.5 points. Since at least one choice was selected, you get just as
+much credit for correctly not selecting `cow` and `lettuce` as you do for
+correctly selecting `apple` and `peach`. If an instructor thinks this is too
+lenient, then `binary` is the choice for them!
+
+## Fill in the blank questions (Markua extension)
+
+A fill in the blank question consists of a question and a set of answers. Each
+answer is specified by `!`, an optional points value, a space, and then a
+semicolon-separated list of the acceptable values of that answer. Each answer
+value can be a text string (quoted or not) or a regular expression (regex).
+If a points value is not specified for an answer, the answer is worth full
+points.
+
+Support for regular expression answer values is optional. However, a Markua
+Processor which supports regular expression marking must interpret any answer
+which starts with a forward slash (`/`) and ends with a forward slash followed
+by some word characters (e.g. `i`) as being a regular expression. Note that the
+particular format of the regular expression used is implementation-specific.
+For example, Leanpub uses Ruby regular expressions. Other Markua Processors
+could, for example, use Perl or JavaScript regular expressions.
+
+Finally, note that you can separate regular expressions with semicolons, just
+like any other answer value. There's no reason not to support this, and it may
+lead to simpler regular expressions. However, if you're good at regular
+expressions, you can also combine them into one regular expression, of course.
+
+Note that since a semicolon is used to separate answer values, to provide an
+actual semicolon as part of an answer value you must either put the answer
+value in quotes, use a backslash-escape `\;` or make the semicolon part of a
+regular expression.
+
+Examples:
+
+~~~
+? How many unique letters are in the word Markua?
+
+! 5
+
+? What's the global capital of investment banking?
+
+! New York ; London
+
+? What's the global capital of investment banking?
+
+! "New York" ; "London"
+
+? What's the global capital of investment banking?
+
+! New York
+! London
+
+? What's the global capital of investment banking?
+
+! "New York"
+! "London"
+
+{case-sensitive: false}
+? What's pi?
+
+! "The ratio of a circle's circumference to its diameter" ; 3.14 ... 3.1416 ;
+an irrational number
+
+{case-sensitive: false}
+? What's pi?
+
+! "The ratio of a circle's circumference to its diameter"
+! 3.14 ... 3.1416
+! an irrational number
+
+? Where's the Eiffel Tower?
+
+! /(Paris|France)/i
+
+? Where's the Eiffel Tower?
+
+! /Paris/i ; /France/i
+
+{points: 2}
+? Where's the Eiffel Tower?
+
+! /Paris/i
+! /France/i
+
+{points: 2}
+? Where's the Eiffel Tower?
+
+!2 /Paris/
+!1 /paris/i
+!.5 /France/i
+
+{points: 2}
+? Where's the Eiffel Tower?
+
+! /Paris/
+!1 /paris/i
+!.5 /France/i
+
+{points: 2}
+? Where's the global capital of investment banking?
+
+!2 New York ; London
+!1 USA ; UK
+~~~
+
+As shown by the answer (`"The ratio of a circle's circumference to its diameter"
+; 3.14 ... 3.1416; an irrational number`), acceptable answer values in a fill
+in the blank question can be of completely different types, and numeric answer
+values can be expressed as ranges (min <= x <= max), expressed as `min ... max`.
+Also, this answer shows that quotes are optional around text strings. The reason
+to use quotes is for clarity, or to ensure that any semicolons used are treated
+as semicolons instead of as answer choice delimiters. Semicolons inside quotes
+are just semicolons and do not need to be backslash-escaped. You do, however,
+need to backslash-escape a quote if you want it to be treated as a literal
+quote, instead of the start or end of a string.
+
+If there are multiple answers to a fill in the blank question and an answer key
+is being output by the Markua Processor for use by human markers, the acceptable
+values should be clearly distinguished from each other. The recommendation is to
+use an unordered list of acceptable values, one per line, but there are no
+requirements here.
+
+If you're a programmer, you may wonder what number types and formats are
+supported. Are they integers? Floating point numbers? Can you use scientific
+notation? And how are the numbers formatted? Are they US or Canadian numbers
+(`123,456.78`) or EU numbers (`123 456,78`)?  What if there's a number that
+means something different in the US and EU--does `123,456` mean `123456` or
+`123.456`?
+
+These questions are made worse by the fact that Markua can be used to create
+human-marked paper quizzes as well as automatically-marked MOOCs. So,
+specifying rules which made the syntax unambiguous for MOOCs would mean that
+the answers for human-marked paper quizzes could not be specified with a
+tolerable amount of ambiguity. So, the format of the answer values in a fill
+in the blank question is out of scope of the Markua Spec.
+
+### Supported attributes on fill in the blank questions
+
+`points`
+: The number of points the question is worth. This number can be 0 or higher.
+The default is the 1. The answers must either not specify points (in which case
+they are worth the full value of points that the question is worth), or they
+must specify points between 0 and the `points` value.
+
+`case-sensitive`
+: `true` or `false`. The default is `true`. This sets the behaviour of the
+specific fill in the blank question. If `true`, the fill in the blank question
+answer is case-sensitive. If false, it is not. In the case of multiple
+acceptable answer values, this attribute applies to all of them. Note that this
+only applies to text string answers, not to regular expressions. For a regular
+expression to be case-insensitive, you must end it with an `i` after the
+closing backtick.
+
+## Written questions (Markua extension)
+
+A written question corresponds to short answer, long answer or essay questions
+in traditional tests. It looks the same as a fill in the blank question, except
+the answer is optional.
+
+A question is interpreted as a written question if either the `words`, `lines`
+or `pages` attribute is specified, if there is no answer provided, or if an
+answer is provided using the `{answer}` syntax discussed shortly.
+
+Note that an answer may be provided in a written question. If this is done, the
+answer is not split into answer choices and values like a fill in the blank
+answer. Instead, the answer is essentially a "note to markers", whether those
+markers are underpaid graduate students or unpaid AIs. Markua does not specify
+any microformat for this note to markers: it is just Markua text, kind of like
+a blockquote (but with each line starting with `!` not `>`).
+
+A Markua Processor generating a MOOC may handle written questions at its own
+discretion, including not including them or giving them a `points` value of 0.
+
+Examples:
+
+~~~
+{quiz, id: "quiz3"}
+
+{pages: 2, points: 10}
+? Why is 2019 like *1984*?
+
+! If the student mentions Newspeak, give them an extra mark.
+
+{words: 100, points: 2}
+? Why is doubleplusungood the worst?
+
+{lines: 10}
+? Can you have multiple line answers in a written question?
+
+! You bet you can!
+!
+! You can separate them with blank lines,
+! and without blank lines.
+!
+! This is like a blockquote, which uses `>` characters.
+~~~
+
+Since a written question can have long answers, this increases the likelihood
+that typing these answers after a bunch of `! ` delimiters will be a pain. So,
+written questions (and **only** written questions) also support answers in the
+form of `{answer} ... {/answer}`, like this:
+
+~~~
+{quiz, points: 0, id: "quiz3"}
+
+{lines: 10}
+? Write a function in Ruby that takes an argument and returns three times that
+argument.
+
+{answer}
+The most straightforward way to do this is like this, since the last value
+evaluated in the function is returned:
+
+```ruby
+def triple(y)
+  y*3
+end
+```
+
+However, you can also explicitly say `return` if you like:
+
+```ruby
+def triple(y)
+  return y*3
+end
+```
+{/answer}
+{/quiz}
+~~~
+
+### Supported attributes on written questions
+
+Note that only one of `words`, `lines` or `pages` may be provided. Providing
+more than one is an error. Providing none of them means that the question is a
+fill in the blank question, not a written question.
+
+`points`
+: The number of points the question is worth. This number can be 0 or higher.
+The default is 1. A Markua Processor generating a MOOC may override this. For
+example, when generating a MOOC, Leanpub overrides all written questions to
+have a points attribute of 0, regardless of what (if anything) is specified for
+this attribute by the author.
+
+`words`
+: The maximum number of words the answer can be. Obviously this is more useful
+for online quizzes than paper ones.
+
+`lines`
+: The maximum number of lines the answer can be. Obviously this is more useful
+for paper quizzes than online ones. On paper, this is most useful for a short
+or long answer question.
+
+`pages`
+: The maximum number of pages the answer can be. Obviously this is more useful
+for paper quizzes than online ones. On paper, this is most useful for an essay
+question.
+
+## Hints on questions (Markua extension)
+
+Any question can contain a hint, regardless of question type or whether an
+answer is provided.
+
+The hint starts on a line with a percent sign (`%`) followed by a single space.
+It must follow the question, but it can come either before or after the answer
+choices.
+
+Hints can span multiple lines, if each line starts with a `%` sign. This is
+similar to Markdown handles block quotes with `>`.
+
+The hint can be used by a Markua processor to show to students at appropriate
+times, such as when they get the answer wrong or leave it blank. The exact
+specifics are implementation-dependent. Hint support is optional in a Markua
+Processor. However, if it's not supported, it must be ignored.
+
+~~~
+? What's 1 + 2?
+
+% In a multiple choice question, if you're not sure, `c` is usually a good guess.
+
+a) 1
+b) 2
+C) 3
+d) 4
+
+? Explain the meaning of *The Myth of Sisyphus*.
+
+% Not the actual myth, the essay by Camus.
+%
+% For bonus points, speculate about Camus' life, death, and what he would have
+% thought about autonomous cars.
+
+? Where's the Eiffel Tower?
+
+! /(Paris|France)/i
+
+% The answer must contain the city and/or country.
+~~~
+
+The hint can be a useful feature for a Markua Processor. There is a lot of
+discretion here for Markua Processors to compete on features.
+
+For example, here's how Leanpub handles hints:
+
+1. We will show the hint as a popup next to the question in the web and mobile
+   quiz views.
+2. We will track if the student looked at the hint.
+3. We will not subtract points for looking at hints for Leanpub-marked questions.
+4. Whether the hint was used will be provided in the analytics, such as a CSV
+   download that we make available to professors.
+5. We will also output the hints for exercises in the "material book" for a
+   course, in a section near the end of the book. This will be linked to via
+   crosslinks from each exercise.
+6. The answers page for a quiz or exercise will show the question, hint and
+   answers for each question.
+
+## Question alternates (Markua extension)
+
+The fact that a Markua document can be used to create an online course or MOOC
+means that certain aspects of the syntax for quizzes and exercises are more
+robust than they would otherwise. One example of this is question alternates.
+
+In an online course or MOOC, some professors might not want every question the
+same, despite the fact that question order and answer order can be randomized.
+So, Markua supports question alternates, using a simple (if slightly ugly)
+syntax. Question alternates are only supported in quizzes, since they make no
+sense to include in exercises.
+
+To create question alternates, every question in the quiz (not just those with
+alternates) must be numbered sequentially, starting from 1, using a `?#` syntax.
+This is a question mark followed by the number of the question, e.g.
+`?1, ?2, ?3`. The questions in a quiz are numbered using sequential positive
+integers starting from 1: 1, 2, 3, etc.
+
+The alternates are specified by providing the same number for multiple
+questions, e.g. `?1, ?1, ?1, ?2, ?3, ?4, ?4, ?5`. When the actual quiz is given,
+only one of the questions for the given question number is used.
+
+Note that only the first question with a given number may have a `points`
+attribute--since all other alternates must use the same points value, specifying
+it would be pointless.
+
+The following is an example of a quiz which uses question alternates. This
+ensures that to ensure that students get randomly selected versions of
+questions 1 and 4. Also, since `random-question-order: true` is used, the actual
+position of the questions is randomized after the specific questions are
+selected from the alternates.
+
+~~~
+{quiz, id: "midterm", random-question-order: true}
+?1 What's 2 + 2?
+
+! 4
+
+?1 What's 2.2 + 2.2?
+
+! 4.4
+
+?2 what's 3 + 3?
+
+! 6
+
+?3 What's 4 + 4?
+
+! 8
+
+{points: 2}
+?4 What's 5 + 5?
+
+! 10
+
+?4 What's 6 + 6?
+
+! 12
+
+?5 What's 7 + 7?
+
+! 14
+{/quiz}
+~~~
+
+Note that the syntax for question alternates is very strict. Every question
+must have a number, and these numbers must be in ascending order (except for
+the alternates, which have the same number as each other).
+
+Question alternates can also be grouped by a `choose-questions` attribute
+attached to the first question alternate. In this case, the Markua Processor
+must choose the number of questions `m` specified from the given alternates
+with that number `n`, or `n choose m`. Note that in this scenario, the numbering
+after the alternates increases by `m`: for example, if a quiz starts with a
+`choose: 3`, the next question is numbered 4, not 2. This ensures that the
+person constructing the quiz knows what they are doing, and saves them from
+having to keep track in a scenario where there are multiple questions with a
+`choose-questions` attribute.
+
+~~~
+{quiz, id: "midterm", random-question-order: true}
+
+{choose-questions: 3}
+?1 What's 2 + 2?
+
+! 4
+
+?1 What's 2.2 + 2.2?
+
+! 4.4
+
+?1 what's 3 + 3?
+
+! 6
+
+?1 What's 4 + 4?
+
+! 8
+
+?1 What's 5 + 5?
+
+! 10
+
+{points: 2}
+?4 What's 6 + 6?
+
+! 12
+
+?5 What's 7 + 7?
+
+! 14
+{/quiz}
+~~~
+
+A Markua Processor must treat any error in the numbering of question
+alternates (and the questions which follow) as an error, and not generate the
+quiz if there is any error. This is preferable to a Markua Processor of trying
+to guess at what the author meant, and trying to do the right thing. Fixing a
+syntax error takes a couple minutes of editing and a few minutes to publish the
+book or course again. However, fixing the consequences of a quiz being
+administered to hundreds--or thousands, or tens of thousands--of people with an
+incorrect number of questions, or with questions incorrectly used as alternates
+for each other, would be much more difficult.
+
+</div>
+
 
 # Inlines
 
@@ -8795,6 +11181,173 @@ Thus, for example, in
 `hi` is parsed as code, leaving the backtick at the end as a literal
 backtick.
 
+
+<div class="extension">
+
+## Character substitutions (Markua extension)
+
+Markua documents can be written in UTF-8, so to produce any Unicode character, it
+is possible to just use the proper Unicode characters. However, in certain cases,
+it's desirable for Markua to specify automatic replacement of certain
+combinations of characters with a Unicode replacement. If a Markua Processor
+encounters one of these combinations of characters outside of a code block, the
+Markua Processor must replace the combination of characters with the appropriate
+Unicode character in the output.
+
+`--`
+: To produce an em dash (—), what is thought of by non-typography people as a
+"dash" or a "long dash", you can just type two hyphens (`--`) directly after a
+non-space character. You can also use the proper Unicode character, U+2014, of
+course. The following all produce em dashes: `foo--bar, foo-- bar, foo--`.
+
+` --`
+: To produce a space followed by an en dash (–), or the kind of dash that's wider
+than a hyphen but narrower than an em dash, you can just type a space, followed
+by two hyphens (` --`). You can also use the proper Unicode character, U+2013,
+of course. The following both produce en dashes preceded by spaces:
+`foo -- bar`, `foo --`. (With `foo -- bar`, there's a space before and after the
+en dash; with `foo --`, there's no space after it (e.g. at the end of a
+paragraph).
+
+`...`
+: To produce a horizontal ellipsis (…), you can just type `...`. You can also use
+the proper Unicode character, U+2026, of course.
+
+### Optional Automatic Curly Quotes Outside of Code Blocks and Spans
+
+A Markua Processor may replace the `"` character with the appropriate "curly
+quote" at its discretion. This lets `"typography"` become `“typography”`, and
+`it's` become `it’s` as appropriate.
+
+Note that this is an optional behaviour: a Markua Processor may support this
+fully, only in some output formats, or not at all.
+
+Also, note that it is **NEVER** acceptable for a Markua Processor to do this,
+or *any* character substitution, to text inside a code block or code span. In
+almost all instances this would completely break the code. (If you wonder how I
+got curly quotes into the code spans for `“typography”` and `it’s` above, it's
+because I pasted them into the manuscript that way. Just as a Markua Processor
+doesn't make straight quotes curly in a code span, it doesn't make curly quotes
+straight in a code span either.)
+
+</div>
+
+
+<div class="extension">
+
+## Footnotes and endnotes (Markua extension)
+
+Books often have footnotes and endnotes. So, Markua has them too.
+
+### Footnotes
+
+To add a footnote, you insert a footnote tag using square brackets, a caret and
+the tag, like this:
+
+~~~
+This has a footnote[^thenote].
+~~~
+
+Then, you define the footnote later in the document, using the same square
+brackets, caret and tag, followed by a colon, a space and the footnote
+definition:
+
+~~~
+[^thenote]: This is the footnote content.
+~~~
+
+If you wish to write multiple paragraphs in the footnote, you must indent the
+subsequent paragraphs by four spaces or one tab:
+
+~~~
+This has a footnote[^thenote].
+
+Here is some unrelated text.
+
+[^thenote]: This is the first paragraph of footnote content.
+
+    This is the second paragraph of footnote content.
+
+Here is some more unrelated text.
+~~~
+
+Whether the numbering of footnotes restarts every chapter is something that can
+be specified by the `restart-footnote-numbering` setting.
+
+Markua does not specify how footnotes are output in HTML. A Markua Processor
+should output them *somewhere*, but the details are not specified. This is
+deliberate, in order to maximize implementation flexibility for Markua
+Processors.
+
+</div>
+
+<div class="extension">
+
+### Endnotes
+
+Sometimes endnotes are used instead of footnotes, but other times, these are in
+addition to footnotes. So, it makes sense for Markua to define separate syntaxes
+for both, rather than just defining one "footnote or endnote" syntax and letting
+the author pick whether the notes are footnotes or endnotes via a global setting.
+
+To add an endnote, you insert an endnote tag using square brackets, two carets
+and the tag, like this:
+
+~~~
+This has an endnote[^^thenote].
+~~~
+
+Endnotes are like footnotes, but happier (`^^`).
+
+Then, you define the endnote later in the document, using the same square
+brackets, two carets and tag, followed by a colon, a space and the endnote
+definition:
+
+~~~
+[^^thenote]: This is the endnote content.
+~~~
+
+Just as with footnotes, if you wish to write multiple paragraphs in an endnote,
+you must indent the subsequent paragraphs by four spaces or one tab.
+
+Whether the numbering of endnotes restarts every chapter is something that can
+be specified by the `restart-endnote-numbering` setting.
+
+Markua does not specify how endnotes are output in HTML. A Markua Processor
+should output them *somewhere*, but the details are not specified. This is
+deliberate, in order to maximize implementation flexibility for Markua
+Processors.
+
+### Single reference to footnotes and endnotes
+
+You can only refer to a footnote or endnote once. You can't define a footnote or
+endnote in one place and refer to it multiple times in the same Markua document.
+If you wish to refer to a parenthetical piece of text from multiple places in a
+Markua document, the best approach is to put it in a section (or sub-section,
+sub-sub-section, etc.) or aside and refer to it from multiple places using a
+[crosslink](#crosslinks).
+
+### Footnote and endnote support required for paragraphs only
+
+A Markua Processor must support footnote and endnote references inserted in
+normal paragraph content. However, that's it.
+
+However, sometimes authors want to get creative with their footnotes and
+endnotes. Sometimes they want to add them in headings, or in footnotes or
+endnotes themselves. This latter style has been used on rare occasions, most
+notably by David Foster Wallace.
+
+However, supporting inserting footnotes and endnotes in places other than normal
+paragraph content puts a hugely increased burden on implementors of Markua
+Processors. As such, there is no requirement for a Markua Processor to support
+inserting a footnote or endnote anywhere other than in normal paragraph content.
+
+Authors should **not** assume that a particular Markua Processor supports
+inserting a footnote or endnote anywhere other than in normal paragraph content
+unless its documentation specifically states that it does. For example, Leanpub
+only supports inserting footnotes or endnotes in normal paragraph content.
+
+</div>
 
 
 ## Code spans
@@ -10375,6 +12928,169 @@ __a<http://foo.bar/?q=__>
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Underline (Markua extension)
+
+In Markdown as defined by John Gruber, and in CommonMark and GFM,
+`*one asterisk*` and `_one underscore_` both produce *italics*, and there is no
+way to produce an underline in Markdown except using inline HTML.
+
+This is unfortunate, since underline is not always just a typewriter version of
+italics. In some languages and in some contexts, underlining serves a distinct,
+legitimate purpose.
+
+Worse, Markua bans all inline HTML except HTML comments. So even the gross
+Markdown workaround to produce underlines with HTML does not work.
+
+So, how to produce underline?
+
+In Markua, `*one asterisk*` produces italics, and `_one underscore_` can
+produce either italics or an underline based on the `italicize-underlines`
+global setting.
+
+The global setting `italicize-underlines` can be `true` or `false`. The default
+is `true`, so that Markua functions the same way as Markdown by default.
+
+This will be a bit surprising for new authors who are discovering Markua and
+have never heard of Markdown, such as people writing novels in Markua. However,
+it is my expectation that for the foreseeable future, the proportion of authors
+who discover Markdown first and then learn about Markua will be far greater.
+For these people, it would be a lot more surprising if all their text which they
+had italicized like `_this_` suddenly became underlined instead!
+
+Furthermore, if you've written in a certain way (like `_this_` for italic) for
+years, your fingers essentially just do the right thing. I want this to still
+feel right for these people, not something that makes them think they need to go
+change a global setting. Almost nobody has spent years writing in Markua, so
+this is much less of an issue for them!
+
+(Also, frankly, most novels just need italic, not underline, so this isn't a big
+issue. While underline does have legitimate uses, they are more niche than
+italic.)
+
+So, by default, `italicize-underlines` is `true`:
+
+```````````````````````````````` example
+# Chapter One
+
+stuff
+
+foo _bar_ baz
+
+lorem *ipsum* dolor
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<p>foo <em>bar</em> baz</p>
+<p>lorem <em>ipsum</em> dolor</p>
+<p>stuff</p>
+````````````````````````````````
+
+This can be made explicit by setting the `italicize-underlines` global setting
+to `true`:
+
+```````````````````````````````` example
+{
+italicize-underlines: true
+}
+
+# Chapter One
+
+stuff
+
+foo _bar_ baz
+
+lorem *ipsum* dolor
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<p>foo <em>bar</em> baz</p>
+<p>lorem <em>ipsum</em> dolor</p>
+<p>stuff</p>
+````````````````````````````````
+
+Set the `italicize-underlines` global setting to `false` to produce underline:
+
+```````````````````````````````` example
+{
+italicize-underlines: false
+}
+
+# Chapter One
+
+stuff
+
+foo _bar_ baz
+
+lorem *ipsum* dolor
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<p>foo <u>bar</u> baz</p>
+<p>lorem <em>ipsum</em> dolor</p>
+<p>stuff</p>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Superscript and subscript (Markua extension)
+
+To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
+
+```````````````````````````````` example
+Superscript: 5^3^ = 125
+.
+<p>Superscript: 5<sup>3</sup> = 125</p>
+````````````````````````````````
+
+To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
+
+```````````````````````````````` example
+Subscript: H~2~O
+.
+<p>Subscript: H<sub>2</sub>O</p>
+````````````````````````````````
+
+</div>
+
+
+## Strikethrough (GFM extension, identical)
+
+Markua enables the `strikethrough` extension, where an additional emphasis type is
+available.
+
+Strikethrough text is any text wrapped in two tildes (`~`).
+
+```````````````````````````````` example
+~~Hi~~ Hello, world!
+.
+<p><del>Hi</del> Hello, world!</p>
+````````````````````````````````
+
+As with regular emphasis delimiters, a new paragraph will cause strikethrough
+parsing to cease:
+
+```````````````````````````````` example
+This ~~has a
+
+new paragraph~~.
+.
+<p>This ~~has a</p>
+<p>new paragraph~~.</p>
+````````````````````````````````
+
+</div>
+
 
 ## Links
 
@@ -11437,6 +14153,243 @@ is followed by a link label (even though `[bar]` is not defined):
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Crosslinks and ids (Markua extension)
+
+There are two parts to making a crosslink.
+
+1. Define an id.
+2. Reference that id with a crosslink.
+
+### Defining an id
+
+There are two ways to define an id:
+
+1. Using an id attribute `{id: some-id}`
+2. Using a shorter "syntactic sugar" approach: `{#some-id}`
+
+The shorter "syntactic sugar" approach is usually preferred. However, it can
+look a bit odd in an attribute list with other attributes in it. So, when other
+attributes are present in an attribute list, the `{id: some-id}` syntax is
+preferred.
+
+In terms of the value of an `id`, it has some special restrictions:
+
+1. The first character in the `id` has to be a lowercase or uppercase letter,
+   i.e. `[a-zA-Z]` if you think in regular expressions.
+2. The remaining characters in the `id` have to be a lowercase or uppercase
+   letter or a digit or a hyphen (-) or an underscore (_).
+3. You can only define an `id` value once in an entire Markua document, even
+   one that is split over multiple files.
+
+These restrictions ensure that your `id`s can then be linked to by a crosslink
+from anywhere in the Markua document.
+
+Also, note that id attributes need to be defined on either a block or span
+element. Finally, if an id is defined with an invalid name, the Markua Processor
+must ignore it and log an error.
+
+#### Defining an id on a block element
+
+To define an id on a block element like a paragraph, figure, heading or even a
+definition list item, you simply stick the id definition on a line above the
+start of the block element. Note that exactly one newline must separate the
+attribute list from the block element--if two newlines are used, the attribute
+list will be interpreted as a directive, and the id won't be correctly applied.
+
+Here's how to use the attribute list syntax to define an id attribute:
+
+~~~
+{id: some-id}
+This is a paragraph with the id of `some-id`.
+~~~
+
+Here's how to use the shorter "syntactic sugar" approach to define an id
+attribute:
+
+~~~
+{#some-id}
+This is a paragraph with the id of `some-id`.
+~~~
+
+#### Defining an id on a span element
+
+To define an id on a span element you simply add the id definition immediately
+after the span element.
+
+Here's how to use the attribute list syntax to define an id attribute on a span
+element:
+
+~~~
+The word Markua{id: markua} has an id.
+
+Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
+~~~
+
+Here's how to use the shorter "syntactic sugar" approach to define an id
+attribute:
+
+~~~
+The word Markua{#markua} has an id.
+
+Leanpub is based in **Victoria, BC, Canada**{#victoria}.
+~~~
+
+Here's how to define an id on a custom span:
+
+~~~
+The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
+~~~
+
+If you want to define an id on a span while also defining other attributes like
+index entries, the `id:` syntax must be used in a full attribute list:
+
+~~~
+The [quick sly fox]{id: quick_sly, i: "Fox, Sly and Quick"} jumped over the lazy
+dogs.
+~~~
+
+### Referencing an `id` With a Crosslink
+
+Regardless of how you defined the id, you then link to it to create a crosslink.
+To do this, you use the `#` character and the id in a link:
+
+~~~
+[link text](#some-id)
+~~~
+
+This syntax is intended to be reminiscent of HTML anchor tags.
+
+Note that order of definition and use does not matter: crosslinks will work
+regardless of whether the `id` is defined before or after the use of it.
+
+
+```````````````````````````````` example
+{id: id1}
+This is a paragraph with an id of `id1`.
+
+{#id2}
+This is a paragraph with an id of `id2`.
+
+This link to [Markua](#markua) is before the id definition.
+
+The word Markua{id: markua} has an id of `markua`.
+
+This link to [Markua](#markua) is after the id definition.
+
+Leanpub is based in **Victoria, BC, Canada**{#victoria}.
+
+The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
+.
+<p id="id1">This is a paragraph with an id of <code>id1</code>.</p>
+<p id="id2">This is a paragraph with an id of <code>id2</code>.</p>
+<p>This link to <a href="#markua">Markua</a> is before the id definition.</p>
+<p>The word <span id="markua">Markua</span> has an id of <code>markua</code>.</p>
+<p>This link to <a href="#markua">Markua</a> is after the id definition.</p>
+<p>Leanpub is based in <strong id="victoria">Victoria, BC, Canada</strong>.
+<p>The <span id="quick_sly">quick sly fox</span> jumped over the lazy dogs.</p>
+````````````````````````````````
+
+### Rules for `id`s and Crosslinks
+
+* If a Markua document contains duplicate `id` attribute values, the **first**
+one is used and the subsequent ones are ignored. A Markua Processor should log
+an error about duplicate `id`s.
+* Crosslinks that reference an unused `id` may either be created as a (broken,
+non-functional) link or be created as normal text (not a link) by a Markua
+Processor. The Markua Processor should also log an error.
+
+</div>
+
+
+<div class="extension">
+
+## Smart crosslinks (Markua extension)
+
+Chapters, sections and figures with titles often have two useful properties for
+writers:
+
+1. A name which is often short and useful to reference.
+2. A number, if numbering is turned on.
+
+Whether the numbers exist is determined by the `number-chapters`, `number-parts`
+and `number-figures` attributes .
+
+In your writing, it's often desirable to refer to these figures from elsewhere
+in your book. When creating such a reference, it's helpful to be able to
+reference the title and number of the chapter, section or figure.
+
+A> Adding a reference to the page number would also be helpful in print, but it
+is obviously problematic in an ebook, since certain ebook formats have resizable
+text and since the page displayed by PDF readers is often different than the
+printed page number, because of front matter Roman numerals. So, Markua doesn't
+provide any special magical syntax to refer to a page number, in order to
+discourage it--if Markua did support a reference to a page number, then the next
+logical step would be to only do so in certain output formats, and then writing
+Markua text would feel like programming. Instead of this nightmare, a really
+smart Markua Processor could hypothetically (and with the author's permission)
+automatically add page number references to these references when producing a
+print-ready PDF.
+
+Here's how these references to titles and numbers work:
+
+* `#t` is for "title"
+* `#n` is for "number"
+* `#d` is for "description" (e.g. "Figure", "Chapter", "Section")
+* `#f` is for "full title"
+
+So, for "Figure 8.2: Anatomy of a Squirrel", these are:
+
+* `#t` is "Anatomy of a Squirrel"
+* `#n` is "8.2"
+* `#d` is "Figure"
+* `#f` is "Figure 8.2: Anatomy of a Squirrel"
+
+Note that in this example, "Anatomy of a Squirrel" was typed by the author,
+whereas "Figure 8.2: " was generated by the Markua Processor. It does not
+matter; both can be referenced.
+
+Also, note that regardless of section level, sections referenced in `#d` or `#f`
+are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
+
+The expectation is that `#f` will be used by authors who don't mind verbosity,
+and #t and #n will be used by authors who prefer control and brevity. The #d is
+for very lazy authors who like saving keystrokes and/or who don't know whether
+their publisher will call the code samples "Listing", "Example" or some other
+word and want to protect themselves against extra work.
+
+The `code-sample-names`, `figure-names` and `table-names` settings control the
+words used to name things.
+
+Examples:
+
+~~~
+This is discussed in [section #n, #t](#crosslinks).
+
+This is discussed in [#f](#crosslinks).
+
+This is discussed in a [#d](#crosslinks) above.
+
+See [chapter #n](#span-elements), which is the best chapter in this book.
+
+This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this
+document.
+~~~
+
+The only way to reference the title and numbers is in crosslinks. There's no
+syntax to do so without creating a crosslink--a crosslink is more helpful, since
+it is clickable, and adding another syntax simply to be less helpful to the
+reader is a bad idea. Markua has enough syntax as it is.
+
+Note that resources, chapters and sections all have implicit numbering. So, #n
+always works even if numbering is off. However, you will confuse readers if you
+refer to numbering they cannot see. Also, if numbering is off, the `#f` must not
+include either the `#d` or `#n` parts: it will be "Anatomy of a Squirrel" not
+"Figure 8.2: Anatomy of a Squirrel".
+
+</div>
+
 
 ## Images
 
@@ -11665,6 +14618,901 @@ If you want a link after a literal `!`, backslash-escape the
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Image resource attributes (Markua extension)
+
+As shown in the Images section, the syntax to insert an image in Markua is
+the identical to that used by CommonMark and GFM. (That section is unchanged
+from the CommonMark spec.) It is, however, also consistent with the syntax that
+is used for other resource types.
+
+As discussed in the Resources section, Markua uses the image syntax for all
+resource types. Markua also reinterprets images as being a resource. This is
+important for the following reason:
+
+Resources can have attribute lists.
+
+Therefore, since images are resources in Markua, images can have attribute
+lists. These attributes are used to do basic image formatting.
+
+Most formatting in Markua is semantic--things like bold and italic, superscript,
+etc. This formatting is part of the manuscript and should not be changed by any
+publisher. The formatting for images, however, is some of the most non-semantic
+formatting in Markua. It's stuff which can absolutely be changed with no effect
+on the meaning of the Markua document. Specifically, images can have `width`,
+`height`, `align` or `float` attributes, or can even be `fullbleed`.
+
+These settings are so universal when applied to images that it would be too
+dogmatic for Markua to insist that the only way to format images was to add a
+`class` element, and then style the `class` of the image elsewhere. Markua is
+pragmatic: by providing a few basic ways to format images, it enables authors
+to make in-progress books look good enough to actually publish in-progress.
+
+The following are the supported attributes for image resources, in
+addition to the `class`, `format`, `title` and `type` attributes which all
+resources support:
+
+`align`
+: The `align` can be `left`, `right` or `middle`. The default is `middle`.
+Combined with `width` and `height`, this provides basic image formatting. When
+`align` is specified, text goes above and below the image, but the image and
+its surrounding whitespace occupies the entire width of the page. If you want
+the text to actually wrap around the image, use `float` instead. In terms of
+the specific values of `align`, a Markua Processor must interpret `left` as
+"on the left side of the page", `right` as "on the right side of the page" and
+`middle` as "in the middle of the content area of the page, respecting margins"
+in all cases. Finally, note that `inside` and `outside` are not supported for
+`align`.
+
+`alt`
+: The `alt` is the alt text, to be displayed when the image cannot be shown.
+This is provided in the figure attribute list or in the square brackets before
+the image, for local and web images. (Inline images don't have the square
+brackets, so for an inline image, the alt text can only be provided via an
+attribute.) If it is provided in both places, the one in the attribute list wins.
+
+`float`
+: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and
+`right` attribute values mean the same thing as they do with `align`. When
+`float` is specified, text flows around the image. It is an error to specify
+both `align` and `float`. Note that `middle` is not supported for `float`,
+since Markua is not a good choice for the types of advanced layouts which flow
+text on both sides of an image. For that, you should use something like
+InDesign; this is why Markua Processors such as Leanpub can export InDesign
+files. Also, note that `float` supports `inside` or `outside`, but `align`
+does not. What a Markua Processor does with `inside` and `outside` is more
+complex. A Markua Processor must interpret `inside` as "near the spine" and
+`outside` as "away from the spine" in a print book. In an ebook, however, a
+Markua Processor has some flexibility in terms of the meaning of `inside` and
+`outside`: it can either interpret `inside` as "left" or it can interpret
+`inside` as "left if the language is left-to-right, and right if the language
+is right-to-left". Similarly, a Markua Processor can either interpret `outside`
+as "right" or it can interpret `outside` as "right if the language is
+left-to-right, and left if the language is right-to-left".
+
+`fullbleed`
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor
+should ensure that the image is the full size of the page, with no margins on
+the page. If `false`, the `width`, `height` and `align` attributes are used
+instead and margins are respected. A Markua Processor should do something
+fancy and tasteful with the `title` attribute for a `fullbleed` image.
+
+`height`
+: The height of the image, in percentage of page content area height (respecting
+margins). This is specified as a number (integer or float) between 1 and 100
+followed by a percentage sign (%).
+
+`width`
+: The width of the image, in percentage of page content area width (respecting
+margins). This is specified as an number (integer or float) between 1 and 100
+followed by a percentage sign (%).
+
+Note that if only one of `width` and `height` are specified, the Markua
+Processor should scale the image proportionally if possible (again, respecting
+margins). If both `width` and `height` are specified, the Markua Processor
+should scale the image accordingly, ignoring the aspect ratio. (So, it's almost
+always a bad idea to specify both `width` and `height`.)
+
+```````````````````````````````` example
+![foo](pie.jpg)
+
+{alt: "foo"}
+![](pie.jpg)
+
+{alt: "foo"}
+![clobbered by alt foo](pie.jpg)
+.
+<p><img src="pie.jpg" alt="foo" /></p>
+<p><img src="pie.jpg" alt="foo" /></p>
+<p><img src="pie.jpg" alt="foo" /></p>
+````````````````````````````````
+ 
+```````````````````````````````` example
+![foo](pie.jpg "bar")
+
+{alt: "foo"}
+![](pie.jpg "bar")
+
+{alt: "foo"}
+![clobbered by alt foo](pie.jpg "bar")
+.
+<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+````````````````````````````````
+
+Since the other attributes are all presentational, there is no formal
+specification of the HTML which must result. So, here are some examples of usage
+instead, involving a very real and very delicious apple pie:
+
+```
+{fullbleed: true}
+![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
+
+{width: 100%}
+![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
+
+{width: "100%", height: '30%'}
+![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
+
+{width: 50%, float: left}
+![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
+
+{width: 50%, align: middle}
+![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
+```
+
+</div>
+
+
+<div class="extension">
+
+## Inline SVG images (Markua extension)
+
+Local and web resource locations are supported for any type of image; inline
+resource locations are supported for SVG images only.
+
+To add an inline SVG image, you create a fenced code block, and then you
+indicate that instead of code, you are inserting a resource of type image
+and of format SVG.
+
+There are two ways to do this.  Here's the verbose way:
+
+~~~
+{type: image, format: svg}
+```
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+Here's the syntactic sugar way:
+
+~~~
+```!
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+The `!` after the opening code fence means that what follows is an SVG image,
+and that it should be rendered as an image, not displayed as the XML source of
+the SVG image.
+
+Inline SVG images support all the normal image resource attributes:
+
+~~~
+{alt: "a blue circle", title: "Earth From Space (Simplified)"}
+```!
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+You can use them with the verbose way as well:
+
+~~~
+{type: image, format: svg, alt: "foo", title: "bar"}
+```
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+Note that when you are writing about SVG and want to display the SVG text, what
+you are really doing is creating a code resource. This is discussed below.
+
+### Writing about SVG
+
+If you want to write about the SVG format, and show the actual SVG source
+(instead of the image produced), it needs to be of a `format` of `code`, not
+`image`.
+
+Now, you can just be lazy and not provide `format` or `type` attributes at all,
+since guessing when neither is present always produces a type of `code`.
+
+~~~
+```
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+However, you can also just specify both, either this way...
+
+~~~
+{type: code}
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+...or this way:
+
+~~~
+{type: code, format: svg}
+```
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+...or this way:
+
+~~~
+
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+Or you can just specify xml, since SVG is xml:
+
+~~~
+```xml
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+Or you can just specify text, if you don't want syntax highlighting:
+
+~~~
+```text
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+Heck, you can even use tildes to do that:
+
+```
+~~~
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+~~~
+```
+
+</div>
+
+
+<div class="extension">
+
+## Image locations and embedding (Markua extension)
+
+Note that regardless of the image location, a Markua Processor can handle images
+in the following ways:
+
+1. Embed the image in the output format (such as a PDF or EPUB file)
+2. Place the image at some URL on the web, and load it from a URL in all cases
+
+This is true regardless of the location of the source image (local, web or
+inline). The location of the image source has no effect on the location of the
+image in the output.
+
+For example, a web image does not need to be loaded from the web every time; it
+can be inlined in the output by the Markua Processor.
+
+This is also true for all of the types of images which are supported in Markua:
+GIF, PNG, JPEG, SVG and zipped SVG.
+
+</div>
+
+
+<div class="extension">
+
+## Video resources (Markua extension)
+
+The syntax to insert a video is the same compact and consistent syntax that is
+used for any resource. Local and web resource locations are supported for both
+video formats; inline resource locations for video are obviously not supported.
+
+Unlike images where many images will accompany the manuscript itself, with
+video it's expected that authors will be uploading their videos to sites such
+as YouTube first, and then reusing these videos in the contents of their Markua
+books. So, while video can be local or web video, web video will be much more
+prominent than web images in a Markua book.
+
+Furthermore, unlike with web images where the format (and thus the type) are
+typically discoverable from the file extension in the URL, with web video it's
+usually not. So, for web videos, there will typically be a `{type: video}`
+attribute list at a minimum. That said, if the type and format are not
+specified and the resource is a web resource, the Markua Processor may use the
+domain to decide what type of resource to assume. So YouTube videos may just
+work in some Markua Processors, like Leanpub, without specifying either the
+`type` or `format`.
+
+The following types of videos are supported in Markua: MP4 and WebM.
+
+We will discuss the supported and the default attributes for videos, and then
+show examples of videos being inserted for both local and web videos.
+
+### Supported Attributes for Video
+
+The following are the supported attributes for video resources, in addition to
+the `class`, `format`, `title` and `type` attributes which all resources
+support. Note that the `class`, `height`, `title` and `width` attributes apply
+to the `poster` image for the video--not to the video itself during playback.
+
+`align`
+: The `align` can be `left`, `right` or `middle`. This applies to the `poster`
+image for the video, and works just like it does with images.
+
+`embed`
+: true or false. If true, then you can actually embed the video file or
+reference it and play it. If false, then it's from a site like YouTube which
+disallows this. In this case, this should function like a link to external web
+page, but open an appropriate app (e.g. the YouTube app) instead of a browser.
+A Markua Processor can be smart about defaults, and parse the URL to set the
+value of the `embed` attribute.
+
+`float`
+: The `float` can be `left`, `right`, `inside` or `outside`.  This applies to
+the `poster` image for the video, and works just like it does with images. It is
+an error to specify both `align` and `float`.
+
+`height`
+: This applies to the `poster` image for the video, and works just like it does
+with images.
+
+`poster`
+: The `poster` is the URL or path to an image which should be shown instead of
+the video before the video is played. If a Markua Processor is outputting some
+format where it is known that video resources are not supported, it must choose
+the poster to use as a replacement for the video. Books are not just
+ebooks--books can also be printed on the fibers of trees that have been chopped
+down ("paper"), producing something called a "book". These "books", whether
+they are bound in a sturdy fashion ("hardcover books") or a flimsy fashion
+("paperback books"), have one thing in common with respect to embedded video:
+they do not support it. Finally, if a Markua Processor is embedding a web video
+from a web video service (e.g. YouTube) which has a known algorithm for the
+location of the poster images for its videos, the Markua Processor may choose
+to use that poster image if a `poster` attribute is not explicitly specified.
+However, if a poster attribute is specified, then it must be used by the Markua
+Processor.
+
+`poster-format`
+: The format of the `poster` image, if it exists. If this attribute is not
+specified, the format of the `poster` is inferred from the `poster` image file
+extension. This attribute needs to exist only to support `poster` images which
+do not have file extensions.
+
+`transcript`
+: The URL or path to a transcript of the video, which should be shown or
+dictated to people who cannot view video. This helps people with visual
+disabilities view course material, and helps with ADA compliance. For example,
+what Leanpub does with a `transcript` is as follows: a URL is linked to in the
+title (but in a way which does not affect the Table of Contents), and a path is
+assumed to be a path to a Markua file which is then used to produce a web page
+at a public URL, which then is also linked to in the title in a way which does
+not affect the Table of Contents. With the Markua files for transcripts, Leanpub
+only supports certain resource types to be included in the transcript files
+themselves. Specifically, images, video, audio are not supported, but code,
+poetry, math and tables are supported. When Leanpub generates a transcript, the
+URLs are publicly accessible but obscure. Identical transcripts should not make
+duplicate transcript files on the web, and using a new UUID every time would
+violate this. However, not changing the transcript URL when its content changed
+could lead to bad outcomes. So, the URL of a transcript on the web should be
+scoped to the book and affected both by its filename and its content. What
+Leanpub does is: (filename minus extension minus period plus hyphen plus the
+SHA hash).html. Including the filename eliminates collisions if filenames are
+unique but the hashes are not.
+
+`width`
+: This applies to the `poster` image for the video, and works just like it does
+with images.
+
+In the following sections, please note that while the examples are shown with
+an HTML mapping, please note that a Markua Processor has complete flexibility
+over how it handles the location of video resources and their display.
+
+### Local Video
+
+```````````````````````````````` example
+Here's a paragraph before the figure.
+
+![](pie_eating_contest.webm "A Piece of Pie")
+
+Here's a paragraph after the figure.
+.
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+<video src="pie_eating_contest.webm"/>
+<p class="title">A Piece of Pie</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+````````````````````````````````
+
+### Web Video
+
+```````````````````````````````` example
+Here's a paragraph before the figure.
+
+{type: video, poster: http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+![](https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0 "Introducing Markua")
+
+Here's a paragraph after the figure.
+.
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+<video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
+poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
+<p class="title">Introducing Markua</p>
+</div>
+<p>Here's a paragraph after the figure.</p>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Audio resources (Markua extension)
+
+The syntax to insert an audio resource is the same compact and consistent syntax
+that is used for any resource. Local and web resource locations are supported
+for both audio formats; inline resource locations for audio are obviously not
+supported.
+
+Just as with video, the audio support in ebooks and on the web is more varied
+than for images. With audio, there are MP3, AAC, Ogg and WAV formats all in
+widespread use, and there are a number of other formats with supporters. It's
+entirely likely that many ebook readers won't support any of them.
+
+Unlike images where many images will accompany the manuscript itself, with
+audio it's expected that authors will be uploading their audio files to various
+sites first, and then reusing these files in the contents of their Markua
+books. So, while audio can be local or web audio, web audio will be much more
+prominent than web images in a Markua book.
+
+Furthermore, unlike with web images where the format (and thus the type) are
+typically discoverable from the file extension in the URL, with web audio it's
+usually not. So, for web audio files, there will typically be a `{type: audio}`
+attribute list at a minimum. That said, if the type and format are not
+specified and the resource is a web resource, the Markua Processor may use the
+domain to decide what type of resource to assume. So YouTube audios may just
+work in some Markua Processors, like Leanpub, without specifying either the
+`type` or `format`.
+
+The following types of audio resources are supported in Markua: MP3, AAC, WAV
+and Ogg Vorbis.
+
+We will discuss the supported and the default attributes for audio files, and
+then show examples of audio being inserted for both local and web audio files.
+
+### Supported Attributes for Audio
+
+The following are the supported attributes for audio resources, in addition to the `class`, `format`, `title` and `type` attributes which all resources support.
+
+`transcript`
+: The URL or path to a transcript of the audio, which should be shown to people
+who cannot hear audio. This helps people with auditory disabilities view course
+material, and helps with ADA compliance. Transcripts should be produced and
+handled in an identical way to `video` resources. For example, Leanpub does
+this. See the Video resources section above for more information.
+
+In the following sections, please note that while the examples are shown with
+an HTML mapping, please note that a Markua Processor has complete flexibility
+over how it handles the location of video resources and their display.
+
+
+### Local Audio
+
+```````````````````````````````` example
+The full version of the talk is here:
+
+![](talk.mp3 "Full Talk")
+.
+<p>The full version of the talk is here:</p>
+<div class="figure">
+<audio src="resources/talk.mp3"/>
+<p class="title">Full Talk</p>
+</div>
+````````````````````````````````
+
+### Web Audio
+
+```````````````````````````````` example
+The full version of the talk is here:
+
+![](http://markua.com/talk.mp3 "Full Talk")
+.
+<p>The full version of the talk is here:</p>
+<div class="figure">
+<audio src="http://markua.com/talk.mp3"/>
+<p class="title">Full Talk</p>
+</div>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## Math (Markua extension)
+
+Math can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.
+
+Markua does not specify how math is output in HTML. It can be an image, or it
+can use something like MathJax. If MathJax is available, it is recommended for a
+Markua Processor to convert AsciiMath into MathML, and then use MathJax to
+format it.
+
+There are two formats of math resources supported by Markua:
+
+1. LaTeX math (`latexmath` or `$`)
+2. AsciiMath (`asciimath` or `@`)
+
+### Supported Attributes for Math
+
+The following is the supported attribute for math resources, in addition to the
+`class`, `format`, `title` and `type` attributes which all resources support:
+
+`alt`
+: The `alt` is the alt text, to be displayed when the mathematical equations
+cannot be shown. The default alt text for math is "math". This can be provided
+in the figure attribute list. This is primarily intended for Markua Processors
+that output math as images; there are no output requirements for the alt text.
+This attribute functions as it does for images. (In fact, a Markua Processor may
+choose to transform the math into an image, for maximum ebook reader
+compatibility.)
+
+Note that for math, the `format` is the name of the syntax used to write the
+mathematical equations. There are two special types of `format` for math baked
+into Markua: `latexmath` for LaTeX math and `asciimath` for AsciiMath. If a
+Markua Processor encounters one of these formats, it must assume the `type` of
+the resource is `math`, not `code`.
+
+### Local Math Resources
+
+Local math resources can be inserted as a figure.
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}
+![too large to fit in the alt text](fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+The alt text can also be set with an attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath, alt: "too large to fit in the alt text"}
+![](fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+### Web Math Resources
+
+This is identical to how local math resources work, including the significance
+of file extensions. The only difference is that the files are on the web.
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}
+![too large to fit in the alt text](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+The alt text can also be set with an attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}{alt: "too large to fit in the alt text"}
+![](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+### Inline Math Resources
+
+Inline math resources are the most flexible way to insert math. They are the only
+way to insert math as a span resource, and the most straightforward way to add
+short math examples as figures. LaTeX math and AsciiMath can be inserted inline
+as a span or figure.
+
+#### Span
+
+Being able to insert a math resource as a span is important, as it lets you write
+things like one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside
+sentences. This can be done with LaTeX math or AsciiMath.
+
+To insert math as inline math, use a `$` after closing backtick for LaTeX math,
+an `@` after the closing backtick for AsciiMath, or an attribute list specifying
+a `format` of `latexmath` or `asciimath`. If none of these is done, the content
+of the backticks is treated as code and is output verbatim as monospaced text.
+
+##### LaTeX math span
+
+There is syntactic sugar for LaTeX math which is inserted as a span, using the
+`$` character after the closing backtick:
+
+~~~
+Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside a
+sentence.
+~~~
+
+The `$` character indicates the inline resource is LaTeX math.
+
+If you don't like syntactic sugar, you can also use `{format: latexmath}` or
+`{type: math, format: latexmath}` after the inline span resource:
+
+~~~
+Here's one of the kinematic equations
+`d = v_i t + \frac{1}{2} a t^2`{format: latexmath}
+inside a sentence.
+~~~
+
+##### AsciiMath span
+
+[AsciiMath](http://asciimath.org/) is a way of producing simple MathML equations,
+using about 1% of the typing. It's more terse than LaTeX math.
+
+There is syntactic sugar for AsciiMath which is inserted as a span, using the `@`
+character after the closing backtick:
+
+~~~
+Here's one of the kinematic equations `d = v_i t + 1/2 at^2`@ inside a sentence.
+~~~
+
+The `@` character indicates the inline resource is AsciiMath.
+
+If you don't like syntactic sugar, you can also use `{format: asciimath}` or
+`{type: math, format: asciimath}` after the inline span resource:
+
+~~~
+Here's one of the kinematic equations `d = v_i t + 1/2 at^2`{format: asciimath}
+inside a sentence.
+~~~
+
+#### Figure
+
+LaTeX math and AsciiMath can be inserted inline as a figure.
+
+* LaTeX math can be inserted by specifying either `latexmath` or `$` after three
+  backticks, or by specifying an attribute list of `{format: latexmath}`.
+* AsciiMath can be inserted by specifying either `asciimath` or `@` after three
+  backticks, or by specifying an attribute list of `{format: asciimath}`.
+
+Both let you produce mathematical equations like this:
+
+```$
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+##### LaTeX math figures
+
+Here's how you do this using LaTeX math...
+
+Here's the version with the syntactic sugar for the format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```$
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing, with the full format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```latexmath
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+##### AsciiMath figures
+
+Here's how you do this using AsciiMath...
+
+Here's the version with the syntactic sugar for the format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```@
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing, with the full format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```asciimath
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+If you wonder why I'm a fan of AsciiMath: I actually got that right on the first
+try at the [AsciiMath website](http://asciimath.org/).
+
+Note that when you are writing about AsciiMath and want to display the AsciiMath
+text, what you are really doing is creating a code resource. This is essentially
+identical to what was shown earlier in writing about SVG images. It's also shown
+below.
+
+### Writing about Math
+
+If you want to write about math, and show the actual code (instead of the
+formatted output), it needs to be of a `format` of `code`, not `math`.
+
+Now, you can just be lazy and not provide `format` or `type` attributes at all,
+since guessing when neither is present always produces a type of `code`.
+
+This will be output as code:
+
+~~~
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+This isn't just true for AsciiMath code; it's true for any math. For example,
+this will be output as code, since there's no `$` or `latexmath` format specifier
+to indicate that it is LaTeX math:
+
+~~~
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+~~~
+
+However, you can also specify the type of `code`, to be explicit:
+
+~~~
+{type: code}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+Since specifying a type overrides the type inferred by the format, you can even
+specify the format of the math being used, while still keeping it code:
+
+~~~
+{type: code, format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+This also works with the syntactic sugar with the full format name:
+
+~~~
+{type: code}
+```asciimath
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+This also works with the syntactic sugar with the format shortcut:
+
+~~~
+{type: code}
+```@
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+Now, chances are a Markua Processor will not be doing syntax highlighting on
+AsciiMath.
+
+If you want to ensure that no syntax highlighting is done, you can just specify
+`text`:
+
+~~~
+```text
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+Heck, you can even use tildes, since this defaults to `text` not `guess`:
+
+```
+~~~
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+~~~
+```
+
+</div>
+
 ## Autolinks
 
 [Autolink](@)s are absolute URIs and email addresses inside
@@ -11851,6 +15699,176 @@ foo@bar.example.com
 <p>foo@bar.example.com</p>
 ````````````````````````````````
 
+
+<div class="extension">
+
+## Autolinks (GFM extension, identical)
+
+Markua enables the `autolink` extension, where autolinks will be recognised in a
+greater number of conditions.
+
+[Autolink]s can also be constructed without requiring the use of `<` and to `>`
+to delimit them, although they will be recognized under a smaller set of
+circumstances.  All such recognized autolinks can only come at the beginning of
+a line, after whitespace, or any of the delimiting characters `*`, `_`, `~`,
+and `(`.
+
+An [extended www autolink](@) will be recognized
+when the text `www.` is found followed by a [valid domain].
+A [valid domain](@) consists of segments
+of alphanumeric characters, underscores (`_`) and hyphens (`-`)
+separated by periods (`.`).
+There must be at least one period,
+and no underscores may be present in the last two segments of the domain.
+
+The scheme `http` will be inserted automatically:
+
+```````````````````````````````` example autolink
+www.commonmark.org
+.
+<p><a href="http://www.commonmark.org">www.commonmark.org</a></p>
+````````````````````````````````
+
+After a [valid domain], zero or more non-space non-`<` characters may follow:
+
+```````````````````````````````` example autolink
+Visit www.commonmark.org/help for more information.
+.
+<p>Visit <a href="http://www.commonmark.org/help">www.commonmark.org/help</a> for more information.</p>
+````````````````````````````````
+
+We then apply [extended autolink path validation](@) as follows:
+
+Trailing punctuation (specifically, `?`, `!`, `.`, `,`, `:`, `*`, `_`, and `~`)
+will not be considered part of the autolink, though they may be included in the
+interior of the link:
+
+```````````````````````````````` example autolink
+Visit www.commonmark.org.
+
+Visit www.commonmark.org/a.b.
+.
+<p>Visit <a href="http://www.commonmark.org">www.commonmark.org</a>.</p>
+<p>Visit <a href="http://www.commonmark.org/a.b">www.commonmark.org/a.b</a>.</p>
+````````````````````````````````
+
+When an autolink ends in `)`, we scan the entire autolink for the total number
+of parentheses.  If there is a greater number of closing parentheses than
+opening ones, we don't consider the unmatched trailing parentheses part of the
+autolink, in order to facilitate including an autolink inside a parenthesis:
+
+```````````````````````````````` example autolink
+www.google.com/search?q=Markup+(business)
+
+www.google.com/search?q=Markup+(business)))
+
+(www.google.com/search?q=Markup+(business))
+
+(www.google.com/search?q=Markup+(business)
+.
+<p><a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a></p>
+<p><a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a>))</p>
+<p>(<a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a>)</p>
+<p>(<a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a></p>
+````````````````````````````````
+
+This check is only done when the link ends in a closing parentheses `)`, so if
+the only parentheses are in the interior of the autolink, no special rules are
+applied:
+
+```````````````````````````````` example autolink
+www.google.com/search?q=(business))+ok
+.
+<p><a href="http://www.google.com/search?q=(business))+ok">www.google.com/search?q=(business))+ok</a></p>
+````````````````````````````````
+
+If an autolink ends in a semicolon (`;`), we check to see if it appears to
+resemble an [entity reference][entity references]; if the preceding text is `&`
+followed by one or more alphanumeric characters.  If so, it is excluded from
+the autolink:
+
+```````````````````````````````` example autolink
+www.google.com/search?q=commonmark&hl=en
+
+www.google.com/search?q=commonmark&hl;
+.
+<p><a href="http://www.google.com/search?q=commonmark&amp;hl=en">www.google.com/search?q=commonmark&amp;hl=en</a></p>
+<p><a href="http://www.google.com/search?q=commonmark">www.google.com/search?q=commonmark</a>&amp;hl;</p>
+````````````````````````````````
+
+`<` immediately ends an autolink.
+
+```````````````````````````````` example autolink
+www.commonmark.org/he<lp
+.
+<p><a href="http://www.commonmark.org/he">www.commonmark.org/he</a>&lt;lp</p>
+````````````````````````````````
+
+An [extended url autolink](@) will be recognised when one of the schemes
+`http://`, `https://`, or `ftp://`, followed by a [valid domain], then zero or
+more non-space non-`<` characters according to
+[extended autolink path validation]:
+
+```````````````````````````````` example autolink
+http://commonmark.org
+
+(Visit https://encrypted.google.com/search?q=Markup+(business))
+
+Anonymous FTP is available at ftp://foo.bar.baz.
+.
+<p><a href="http://commonmark.org">http://commonmark.org</a></p>
+<p>(Visit <a href="https://encrypted.google.com/search?q=Markup+(business)">https://encrypted.google.com/search?q=Markup+(business)</a>)</p>
+<p>Anonymous FTP is available at <a href="ftp://foo.bar.baz">ftp://foo.bar.baz</a>.</p>
+````````````````````````````````
+
+
+An [extended email autolink](@) will be recognised when an email address is
+recognised within any text node.  Email addresses are recognised according to
+the following rules:
+
+* One ore more characters which are alphanumeric, or `.`, `-`, `_`, or `+`.
+* An `@` symbol.
+* One or more characters which are alphanumeric, or `-` or `_`,
+  separated by periods (`.`).
+  There must be at least one period.
+  The last character must not be one of `-` or `_`.
+
+The scheme `mailto:` will automatically be added to the generated link:
+
+```````````````````````````````` example autolink
+foo@bar.baz
+.
+<p><a href="mailto:foo@bar.baz">foo@bar.baz</a></p>
+````````````````````````````````
+
+`+` can occur before the `@`, but not after.
+
+```````````````````````````````` example autolink
+hello@mail+xyz.example isn't valid, but hello+xyz@mail.example is.
+.
+<p>hello@mail+xyz.example isn't valid, but <a href="mailto:hello+xyz@mail.example">hello+xyz@mail.example</a> is.</p>
+````````````````````````````````
+
+`.`, `-`, and `_` can occur on both sides of the `@`, but only `.` may occur at
+the end of the email address, in which case it will not be considered part of
+the address:
+
+```````````````````````````````` example autolink
+a.b-c_d@a.b
+
+a.b-c_d@a.b.
+
+a.b-c_d@a.b-
+
+a.b-c_d@a.b_
+.
+<p><a href="mailto:a.b-c_d@a.b">a.b-c_d@a.b</a></p>
+<p><a href="mailto:a.b-c_d@a.b">a.b-c_d@a.b</a>.</p>
+<p>a.b-c_d@a.b-</p>
+<p>a.b-c_d@a.b_</p>
+````````````````````````````````
+
+</div>
 
 ## Raw HTML
 
@@ -12124,6 +16142,151 @@ foo <a href="\*">
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Disallowed Raw HTML (GFM extension, extended)
+
+Markua enables the `tagfilter` extension, and modifies it to filter **ALL HTML
+TAGS EXCEPT HTML COMMENTS** when rendering HTML output.
+
+To be clear, the only type of HTML block which is not filtered is an HTML
+comment, which matches the following:
+
+**Start condition:** line begins with the string `<!--`.\
+**End condition:**  line contains the string `-->`.
+
+All other types of HTML blocks are filtered.
+
+Filtering is done by replacing the leading `<` with the entity `&lt;`.
+
+```````````````````````````````` example
+<strong> <title> <style> <em>
+
+<blockquote>
+  <xmp> is disallowed.  <XMP> is also disallowed.
+</blockquote>
+.
+<p>&lt;strong> &lt;title> &lt;style> &lt;em></p>
+&lt;blockquote>
+  &lt;xmp> is disallowed.  &lt;XMP> is also disallowed.
+&lt;/blockquote>
+````````````````````````````````
+
+HTML is just one possible output format of Markua, and other possible Markua
+output formats (such as PDF) are not based on HTML. If inline HTML was
+supported, a Markua Processor would have to support parsing and meaningfully
+outputting all of HTML syntax as well as all of Markua syntax.
+
+Markua and Markdown have different use cases. Markdown is a better way to write
+HTML; Markua is a better way to write a book. Since Markdown's only output
+format target is HTML, it might as well support inline HTML: generating HTML
+from HTML is as simple as passing the HTML through. From an implementation
+perspective, Markdown gets inline HTML support for free.
+
+By not supporting inline HTML other than HTML comments, Markua imposes more
+constraints on writers who would be tempted to use inline HTML for layout
+purposes. Since Markua does not support inline HTML, attempting to do complex
+layout in Markua using HTML is just not possible. And since it's not possible,
+the temptation to procrastinate by doing formatting is reduced.
+
+Now, one design benefit of the support for inline HTML in Markdown is that
+Markdown's syntax can stay artificially small--since Markdown authors can always
+fall back to using HTML directly, Markdown does not need to be able to produce
+all of HTML. Since Markua does not support inline HTML, Markua must contain all
+concepts that it supports directly expressed using Markua syntax. For example,
+there is no official table syntax in Markdown, and Markdown authors can just use
+inline HTML tables. Since Markua does not support inline HTML, and since books
+often require tables, Markua needs to add a table syntax. Thankfully, GFM has
+already done that.
+
+</div>
+
+
+<div class="extension">
+
+## Remove comments (Markua extension)
+
+As discussed previously, Markua filters all HTML tags except HTML comments. Now,
+in terms of HTML comments, sometimes it is beneficial to have them included in
+the output, and sometimes it is not (if, say, an author wants to remove sections
+of manuscript text from the output.)
+
+This is controlled with the `remove-comments` global setting. The default value
+of `remove-comments` is false, for compatibility with Markdown by default.
+
+So, by default, `remove-comments` is `false`:
+
+```````````````````````````````` example
+# Chapter One
+
+stuff
+
+<!-- This paragraph sucks; don't include yet.
+lorem *ipsum* dolor
+-->
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<!-- This paragraph sucks; don't include yet.
+lorem *ipsum* dolor
+-->
+<p>stuff</p>
+````````````````````````````````
+
+This can be made explicit by setting the `remove-comments` global setting
+to `false`:
+
+```````````````````````````````` example
+{
+remove-comments: false
+}
+
+# Chapter One
+
+stuff
+
+<!-- This paragraph sucks; don't include yet.
+lorem *ipsum* dolor
+-->
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<!-- This paragraph sucks; don't include yet.
+lorem *ipsum* dolor
+-->
+<p>stuff</p>
+````````````````````````````````
+
+Set the `remove-comments` global setting to `true` to remove comments from the
+output:
+
+```````````````````````````````` example
+{
+remove-comments: true
+}
+
+# Chapter One
+
+stuff
+
+<!-- This paragraph sucks; don't include yet.
+lorem *ipsum* dolor
+-->
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<p>stuff</p>
+````````````````````````````````
+
+</div>
+
+
 ## Hard line breaks
 
 A line break (not in a code span or HTML tag) that is preceded
@@ -12308,6 +16471,630 @@ line break or as a space.
 
 A renderer may also provide an option to render soft line breaks
 as hard line breaks.
+
+<div class="extension">
+
+## Configurable soft line breaks (Markua extension)
+
+There is a good argument to be made that single newlines at the end of a line
+should always be treated as a hard line break, not as a soft line break.
+
+In ancient history, some text editors did not automatically wrap lines of text,
+so manual wrapping of plain text files was a good thing to do. However, for
+writing, automatic wrapping of paragraphs is essential for staying in the flow
+while writing, and for being able to edit your text without needing to re-wrap
+every line in a paragraph. This is one decision that even Microsoft Word gets
+right.
+
+So, Markua used to treat single newlines at the end of a line as a hard line
+break, not as a soft line break.
+
+However, compatibility with Markdown by default is more than fixing things such
+as this which I consider to be mistakes, even though the Markdown two-space hack
+to force a hard line break makes me die a little inside every time I (don't) see
+it. As I've grown older, I've become more willing to compromise.
+
+So, Markua has a document setting called `soft-breaks`:
+
+* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
+  Markua produce single newlines in the HTML source. This will pretend to
+  break the line: while it does break the line in the HTML source, it does
+  not break the line when the HTML is rendered. So, this type of line break
+  only is a line break in the HTML source. In the output, it actually functions
+  like a space. (It should be rendered as a space in non-HTML-based output
+  formats like PDF.)
+* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
+  Markua document produce single spaces in the HTML output. This functions
+  identically to single newlines when rendered as HTML. (It should be rendered
+  as a space in non-HTML-based output formats like PDF.)
+* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
+  Markua document produce break tags in the HTML output. The reason this value
+  is `break` is to indicate that when you hit a newline to get a line break, you
+  get a real line break. In HTML, this means a break tag. (It should be rendered
+  as a newline in non-HTML-based output formats like PDF.)
+
+The default value of `soft-breaks` is `source`, for compatibility with Markdown.
+However, most authors will want to set the value of `soft-breaks` to `break`,
+for compatibility with truth and beauty.
+
+The default value of `soft-breaks` is `soft`:
+
+```````````````````````````````` example
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo
+bar</p>
+````````````````````````````````
+
+This can be made explicit by setting the `soft-breaks` global setting to `source`:
+
+```````````````````````````````` example
+{
+soft-breaks: source
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo
+bar</p>
+````````````````````````````````
+
+This can be made shorter by setting the `soft-breaks` global setting to `space`:
+
+```````````````````````````````` example
+{
+soft-breaks: space
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo bar</p>
+````````````````````````````````
+
+If you want your line breaks to actually, well, produce line breaks, you need to
+set the `soft-breaks` global setting to `break`:
+
+```````````````````````````````` example
+{
+soft-breaks: break
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo<br />
+bar</p>
+````````````````````````````````
+
+Finally, note that the `soft-breaks` global setting also applies to other
+paragraph-like contexts, such as definition list items.
+
+</div>
+
+
+<div class="extension">
+
+## Span attribute lists (Markua extension)
+
+Surrounding text in square brackets can be useful not just for giving it a URL
+to link to. If you wish to add attributes to an arbitrary span of text, you can
+create an arbitrary span of text using square brackets and then add an attribute
+list immediately afterward. You can use any attribute list on this span, and you
+can also just use the id syntactic sugar `{#theid}` on this span. The most
+common uses of this are to add `id` attributes or index entries. (Index entries
+are discussed later.)
+
+```````````````````````````````` example
+Some text [then a span]{foo: lorem, bar: ipsum} and more text.
+
+This [span has an id]{#hello}, so hooray!
+
+This span [also has an id]{id: world}. 
+.
+<p>Some text <span foo="lorem" bar="ipsum">then a span</span> and more text.</p>
+<p>This <span id="hello">span has an id</span>, so hooray!</p>
+<p>This span <span id="world">also has an id</span>.</p>
+````````````````````````````````
+
+Note, however, that you cannot start a normal span with a caret (`^`): this
+creates a `[^footnote]` instead. (Footnotes are discussed below.)
+
+</div>
+
+
+<div class="extension">
+
+## Index entries (Markua extension)
+
+Markua supports adding index entries via the attribute list syntax. Index
+entries let authors or indexers produce professional-looking indexes in
+Markua books.
+
+Index entries can either be attached to block or span elements using the same
+attribute list syntax. In fact, index entries can just be added as part of a
+larger attribute list.
+
+The actual syntax of what the value of an index entry looks like is [inspired
+by LaTeX](https://en.wikibooks.org/wiki/LaTeX/Indexing).
+
+The key of an index entry is `i`, for index.
+
+In its simplest form, an index entry is simply `{i: "hello"}`. Like any
+attribute list, you don't need a space between the colon and the quote--you can
+also do `{i:"hello"}`.
+
+These are the various formats of an index entry:
+
+~~~
+{i: hello}
+{i: "hello"}
+{i: "Armstrong, Peter"}
+{i: "Yahoo\!"}
+{i: "*hello*"}
+{i: "**hello**"}
+{i: "hello!Peter"}
+{i: "hello!*Peter*"}
+{i: "hello!**Peter**"}
+{i: "Peter|see{i:'hello'}"}
+{i: "Jen|seealso{i:'Jenny'}"}
+~~~
+
+Here's what they do:
+
+`{i: hello}`
+: Adds an index entry for `hello`. If an index entry has no punctuation or
+formatting then it does not need quotes.
+
+`{i: "hello"}`
+: Adds an index entry for `hello`. Quotes are always fine to use, even when not
+required.
+
+`{i: "Armstrong, Peter"}`
+: Adds an index entry for `Armstrong, Peter`. The quotes are always omitted.
+Their function is to allow things like exclamation marks and other punctuation
+to be added without fear, in case you don't feel like learning which punctuation
+is safe.
+
+`{i: "Yahoo\!"}`
+: Adds an index entry for `Yahoo!`. Note that the exclamation mark must be
+backslash-escaped because `!` is a delimiter otherwise. The `|`, `{`, `}` and
+`\` characters also must be backslash-escaped.
+
+`{i: "*hello*"}`
+: Adds an index entry for `hello`, with `hello` in italics.
+
+`{i: "**hello**"}`
+: Adds an index entry for `hello`, with `hello` in bold.
+
+`{i: "hello!Peter"}`
+: Adds an index entry for `Peter` which is a sub-entry of `hello`.
+
+`{i: "hello!*Peter*"}`
+: Adds an index entry for `Peter` (with *Peter* in emphasis) which is a
+sub-entry of `hello`. Note that this cannot be combined with a see or
+seealso (the | syntax).
+
+`{i: "hello!**Peter**"}`
+: Adds an index entry for `Peter` (with **Peter** in strong emphasis) which is a
+sub-entry of `hello`. Note that this cannot be combined with a see or seealso
+(the | syntax).
+
+`{i: "Peter|see{i:'hello'}"}`
+: Adds an index entry for `Peter`, which references the index entry `hello` with
+the equivalent of "see" in the language of the book. Note that this cannot be
+combined with a sub-entry (the ! syntax).
+
+`{i: "Jen|seealso{i:'Jenny'}"}`
+: Adds an index entry for `Jen`, which references the index entry `Jenny` with
+the equivalent of "see also" in the language of the book. Note that this cannot
+be combined with a sub-entry (the ! syntax).
+
+Index entries are case sensitive. For example, `{i: "mark"}` and `{i: "Mark"}`
+are distinct entries. (The first is for a result or a smudge, the second is a
+person's name.)
+
+To attach an index entry to the start of a block, put it on its own line above
+a block:
+
+~~~
+{i: "hello"}
+I just came to say hello, hello, hello, hello
+~~~
+
+To attach an index entry to a word, just add the index entry after the word:
+
+~~~
+I just came to say hello{i: "hello"}, hello, hello, hello
+~~~
+
+To attach an index entry to a span element, just add the index entry after the
+span element:
+
+~~~
+The first program that a programmer writes in a language is usually
+*Hello World*{i: "Hello World"}
+~~~
+
+Index entries can have commas and other punctuation (except colons) in their
+definition:
+
+~~~
+My wife read some book about a whale by Herman Melville{i: "Melville, Herman"}.
+~~~
+
+Multiple index entries can exist in a block, or even a sentence:
+
+~~~
+Supposedly the great-great-great-granduncle of the musician Moby{i: "Moby"} was
+Herman Melville{i: "Melville, Herman"}, the author of a book about a
+whale{i: "Moby-Dick; or, The Whale"}.
+~~~
+
+Note that adding index entries is best left until the author is done writing the
+book. At that time, ids like {#myid} can be converted to {id: #myid, i: "blah"}
+if index entries are being added where ids already are.
+
+Markua does not specify the HTML output of index entries, to maximize
+implementation flexibility.
+
+</div>
+
+
+<div class="extension">
+
+## Placeholders (Markua extension)
+
+Placeholders are a simple text-replace templating system which allow you to
+define boilerplate in one place, and easily insert it in other places. For books
+like novels, these obviously have no place. However, for books, courses and
+other types of documents produced by large organizations, there is an absolute
+need for placeholders.
+
+Since this is a fairly niche requirement, the syntax is designed in a way that
+authors should never inadvertently trigger it unless they intend to. It is
+similar to the footnote syntax.
+
+Placeholder definitions can occur before or after the placeholder insertions.
+Implementors of Markua Processors are encouraged to deal with placeholders in a
+pre-processing step.
+
+Placeholders can be defined and inserted as span or block elements.
+
+### Placeholder identifiers
+
+The identifier for a placeholder must conform to `/[a-zA-Z][a-zA-Z0-9_-]*/`.
+That is, it starts with a lowercase or uppercase letter `[a-zA-Z]`, followed by
+0 or more letters, numbers, underscores or hyphens `[a-zA-Z0-9_-]*`.
+
+### Span placeholders
+
+#### Span placeholder definition
+
+To define a span placeholder, you create a block element consisting of two
+opening curly braces (`{{`), followed by the placeholder identifier, followed
+by two closing curly braces (`}}`), followed by a colon (`:`), followed by
+one space, followed by the span placeholder definition:
+
+~~~
+other stuff
+
+{{a_span_placeholder}}: This is the span placeholder definition which can have
+**Markua formatting** and reference {{other_span_placeholders}} but not block
+placeholders.
+
+other stuff
+~~~
+
+A span placeholder definition can have Markua formatting and can reference other
+span placeholders.
+
+However, block placeholder references and circular placeholder references are
+obviously forbidden as content of span placeholder definitions.
+
+#### Span placeholder usage
+
+A span placeholder can then be used either in a span context or in a block
+context.
+
+Specifically, to insert a span placeholder, you use two opening curly braces
+(`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-`
+characters), followed by two closing curly braces (`}}`).
+
+~~~
+Here's a span placeholder as the only content of a block:
+
+{{a_span_placeholder}}
+
+Here's the same span placeholder {{a_span_placeholder}} being used in a span
+context.
+~~~
+
+#### Span placeholder example
+
+You can define a block placeholder once and use it multiple times:
+
+```````````````````````````````` example
+{{copyright}}: copyright (c) 2014-2019 Peter Armstrong.
+
+This is {{copyright}}.
+
+Blah.
+
+This is still {{copyright}}.
+.
+<p>This is copyright (c) 2014-2019 Peter Armstrong.</p>
+<p>Blah.</p>
+<p>This is still copyright (c) 2014-2019 Peter Armstrong.</p>
+````````````````````````````````
+
+### Block placeholders
+
+#### Block placeholder definition
+
+To define a block placeholder, you create a block element consisting of two
+opening curly braces (`{{`), followed by the placeholder identifier, followed
+by two closing curly braces (`}}`), followed by a colon (`:`), followed by a
+newline, the block placeholder content, followed by a newline, followed by two
+opening curly braces (`{{`), followed by a forward slash (`/`), followed by
+the placeholder identifier, followed by two closing curly braces (`}}`):
+
+~~~
+other stuff
+
+{{a_block_placeholder}}:
+This is the placeholder content.
+
+It can include *any type of Markua formatting* and can **even** include
+{{span_placeholder_references}}.
+
+It can also include block placeholder references:
+
+{{some_other_block_placeholder}}
+
+Note that circular placeholder references are obviously forbidden.
+{{/a_block_placeholder}}
+
+other stuff
+~~~
+
+#### Block placeholder usage
+
+A block placeholder can then be used only in a block context. It cannot be used
+in a span context.
+
+Specifically, to insert a block placeholder, you use two opening curly braces
+(`{{`), followed by the placeholder identifier (composed of `a-zA-Z_-`
+characters), followed by two closing curly braces (`}}`). The only difference is
+that this must be in a block context by itself, with at least one blank line
+above or below it.
+
+~~~
+Here's a block placeholder as the only content of a block:
+
+{{a_block_placeholder}}
+
+You cannot insert that block placeholder in a span context like in this paragraph.
+~~~
+
+#### Block placeholder examples
+
+You can define a block placeholder once and use it multiple times:
+
+```````````````````````````````` example
+{{lorem_ipsum}}:
+lorem
+
+ipsum
+
+dolor sit amet
+{{/lorem_ipsum}}
+
+foo
+
+{{lorem_ipsum}}
+
+bar
+
+{{lorem_ipsum}}
+
+baz
+.
+<p>foo</p>
+<p>lorem</p>
+<p>ipsum</p>
+<p>dolor sit amet</p>
+<p>bar</p>
+<p>lorem</p>
+<p>ipsum</p>
+<p>dolor sit amet</p>
+<p>baz</p>
+````````````````````````````````
+
+You can reference other placeholders inside placeholders:
+
+```````````````````````````````` example
+{{copyright}}: Copyright (c) 2014-2019 Peter Armstrong.
+
+{{sit}}:
+sit
+
+amet
+{{/sit}}
+
+{{lorem_ipsum}}:
+lorem
+
+ipsum
+
+dolor
+
+{{sit}}
+
+{{copyright}}
+{{/lorem_ipsum}}
+
+foo
+
+{{lorem_ipsum}}
+
+bar
+
+{{lorem_ipsum}}
+
+baz
+.
+<p>foo</p>
+<p>lorem</p>
+<p>ipsum</p>
+<p>dolor</p>
+<p>sit</p>
+<p>amet</p>
+<p>Copyright (c) 2014-2019 Peter Armstrong.</p>
+<p>bar</p>
+<p>lorem</p>
+<p>ipsum</p>
+<p>dolor</p>
+<p>sit</p>
+<p>amet</p>
+<p>Copyright (c) 2014-2019 Peter Armstrong.</p>
+<p>baz</p>
+````````````````````````````````
+
+</div>
+
+## Concatenating files and blank lines (Markua extension)
+
+A Markua document can be written in one file or multiple manuscript files. If a
+manuscript is written in multiple files, these files are concatenated together by
+the Markua Processor to produce one temporary manuscript file, and that one file
+is used as the input.
+
+Importantly, in order to avoid a number of bugs, the files are not just
+concatenated together unchanged--they **must** be concatenated together by Markua
+Processors in the following way:
+
+1. All newlines at the beginning and the end of each file are removed.
+2. Two newlines are added between the end of each file and the beginning of the
+next file.
+
+So, after this process, exactly one blank line separates the contents of each
+manuscript file. Note that because of this rule, a paragraph (or any other block
+element) cannot span multiple manuscript files.
+
+To see why this approach is so important, consider the following single-file
+Markua document:
+
+```````````````````````````````` example
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+.
+<h1 class="chapter">Chapter One</h1>
+<p>Lorem ipsum dolor.</p>
+<h1 class="chapter">Chapter Two</h1>
+<p>Yada yada yada.</p>
+````````````````````````````````
+
+Suppose instead a multiple-file approach was used, in which there were two files,
+ch1.txt and ch2.txt, with the following content.
+
+ch1.txt:
+
+```````````````````````````````` example
+# Chapter One
+
+Lorem ipsum dolor.
+.
+<h1 class="chapter">Chapter One</h1>
+<p>Lorem ipsum dolor.</p>
+````````````````````````````````
+
+ch2.txt:
+
+```````````````````````````````` example
+# Chapter Two
+
+Yada yada yada.
+.
+<h1 class="chapter">Chapter Two</h1>
+<p>Yada yada yada.</p>
+````````````````````````````````
+
+If Markua did not add any newlines between files, then these files would produce
+the following incorrect manuscript:
+
+```````````````````````````````` example
+# Chapter One
+
+Lorem ipsum dolor.# Chapter Two
+
+Yada yada yada.
+.
+<h1 class="chapter">Chapter One</h1>
+<p>Lorem ipsum dolor.#Chapter Two</p>
+<p>Yada yada yada.</p>
+````````````````````````````````
+
+If Markua only added one newline when concatenating, this would produce a correct
+manuscript (since headings end paragraphs), but one with possible bugs:
+
+```````````````````````````````` example
+# Chapter One
+
+Lorem ipsum dolor.
+# Chapter Two
+
+Yada yada yada.
+.
+<h1 class="chapter">Chapter One</h1>
+<p>Lorem ipsum dolor.</p>
+<h1 class="chapter">Chapter Two</h1>
+<p>Yada yada yada.</p>
+````````````````````````````````
+
+Worse, since a number of text editors such as Emacs have a "strip blank lines at
+the end of files" setting, it would be possible to introduce such a bug if Markua
+simply relied on blank lines being added to the end of a file by the author.
+
+So, because of the blank line rule, concatenating the files produces the same
+manuscript as the single-file manuscript above:
+
+```````````````````````````````` example
+# Chapter One
+
+Lorem ipsum dolor.
+
+# Chapter Two
+
+Yada yada yada.
+.
+<h1 class="chapter">Chapter One</h1>
+<p>Lorem ipsum dolor.</p>
+<h1 class="chapter">Chapter Two</h1>
+<p>Yada yada yada.</p>
+````````````````````````````````
+
+</div>
+
 
 ## Textual content
 

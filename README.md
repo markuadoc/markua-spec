@@ -54,7 +54,8 @@ migrate to the latest version of Markua.
 
 ## Three Supported Markdown Dialects
 
-As such, there will eventually be three supported Markdown dialects on Leanpub:
+As such, there will eventually be at least three supported Markdown dialects on
+Leanpub:
 
 1. LFM
 2. Markua 0.10
@@ -86,14 +87,16 @@ automatically migrate their books or courses into Markua 0.29 with a converter.
 
 ### At Least Five Markdown Writing Modes
 
-With the launch of Quirks Mode and Spec Mode, there will be five writing modes
-on Leanpub:
+With the launch of Quirks Mode and Spec Mode, there will be five Markdown-based
+writing modes on Leanpub:
 
 1. LFM (Quirks Mode)
 2. LFM (Spec Mode)
 3. Markua 0.10 (Quirks Mode)
 4. Markua 0.10 (Spec Mode)
 5. Markua 0.29
+
+Again, there is no Quirks Mode for Markua 0.29.
 
 Now, it is expected that Markua will continue to evolve, especially in its
 support of courses. (For example, we have received reasonable requests for
@@ -116,18 +119,19 @@ This is the roadmap for the default Markua version:
 2. Markua 0.10 Spec Mode
 3. Markua 0.29
 
-There are no dates on this roadmap, because estimates are hard.
-
 ### Markua 0.10 Quirks Mode vs. Markua 0.10 Spec Mode
 
-To repeat, Leanpub's current Markua implementation is **Markua 0.10 Quirks
-Mode**.
+To repeat, Leanpub's current Markua implementation is Markua 0.10 Quirks Mode.
 
 The most notable difference between Spec Mode and Quirks Mode in Markua 0.10
-is Setext headers.
+is Setext header support. Quirks Mode (i.e. current Leanpub) does **NOT**
+support Setext headers, whereas Spec Mode of Markua 0.10 spec DOES support
+Setext headers.
 
-Quirks Mode (i.e. current Leanpub) does **NOT** support Setext headers, whereas
-Spec Mode of Markua 0.10 spec does support Setext headers.
+So, if you try to use a Setext header in Markua 0.10 Quirks Mode it won't do
+what you want. However, it will do what you want in Markua 0.10 Spec Mode, and
+it will be converted as a Setext header when using a converter to upgrade your
+book or course to Markua 0.29.
 
 ### Leanpub's Markdown Converter Roadmap
 

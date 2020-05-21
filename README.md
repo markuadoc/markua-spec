@@ -3,7 +3,7 @@
 This is the specification of **Markua 0.29**. It is based on the CommonMark 0.29
 specification.
 
-Markua evolved at Leanpub, and is being specified as an open specification by
+Markua evolved at Leanpub, and is being developed as an open specification by
 Peter Armstrong. Anyone is free to implement any version of the Markua spec
 or of the LFM spec.
 

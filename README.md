@@ -47,10 +47,11 @@ As such, there are separate specifications for the following, and they are
 3. [Markua 0.29 spec](http://markua.com/spec/markua029)
 
 These specifications will not exactly match Leanpub's current behaviour when
-parsing LFM or Markua 0.10. However, they will be really close, and this will
+parsing LFM or Markua 0.10. However, they will be reasonably close, and will
 enable the development of converters between LFM, Markua 0.10 and Markua 0.29.
-This will help us support authors with existing Leanpub books who want to
-migrate to the latest version of Markua.
+
+The difference between the current behaviour of Leanpub when parsing LFM or
+Markua 0.10 is discussed in the "Quirks Mode vs Spec Mode" section below.
 
 ## Three Supported Markdown Dialects
 
@@ -64,28 +65,11 @@ Leanpub:
 We will launch our Markua 0.29 support in beta, and iterate until we have a
 completed version.
 
-## Quirks Mode
+## Quirks Mode vs. Spec Mode
 
 Furthermore, roughly when we launch the Markua beta, Leanpub will also launch
 LFM and Markua 0.10 "Spec Mode" support. When we do this, the existing LFM and
 Markua 0.10 modes will be rebranded as the "Quirks Mode" of LFM and Markua 0.10.
-
-This will enable authors of existing LFM books and Markua 0.10 books and courses
-to make a choice:
-
-1. Leave their book or course in Quirks Mode, for unchanged behaviour and
-   performance.
-2. Switch their book or course to Spec Mode, for faster book or course
-   generation and better compliance with the LFM or Markua 0.10 specs.
-3. Click a button to save a version of their existing manuscript and then
-   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
-   manuscript.
-
-There is no Quirks Mode for Markua 0.29, since we do not have an existing
-Markua 0.29 implementation that we need to support. Authors will be able to
-automatically migrate their books or courses into Markua 0.29 with a converter.
-
-### At Least Five Markdown Writing Modes
 
 With the launch of Quirks Mode and Spec Mode, there will be five Markdown-based
 writing modes on Leanpub:
@@ -96,22 +80,41 @@ writing modes on Leanpub:
 4. Markua 0.10 (Spec Mode)
 5. Markua 0.29
 
-Again, there is no Quirks Mode for Markua 0.29.
+Again, there is no Quirks Mode for Markua 0.29, since we do not have an existing
+Markua 0.29 implementation that we need to support.
 
-Now, it is expected that Markua will continue to evolve, especially in its
-support of courses. (For example, we have received reasonable requests for
-additional question types to be added to Markua.) However, any new Markua
-features such as this will require a version bump in the Markua spec.
+## Switching to Spec Mode and Automatic Converting to Markua 0.29
+
+The launch of Quirks Mode and Spec Mode will give authors of existing LFM books
+and Markua 0.10 books and courses on Leanpub the following choice for each of
+their books or courses:
+
+1. Leave their book or course in Quirks Mode, for unchanged behaviour and
+   performance.
+2. Switch their book or course to Spec Mode, for faster book or course
+   generation and better compliance with the LFM or Markua 0.10 specs.
+3. Click a button to save a version of their existing manuscript and then
+   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
+   manuscript.
+
+## Future Markua Versions and Complexity
+
+It is expected that Markua will continue to evolve, especially in its support of
+courses. (For example, we have received reasonable requests for additional
+question types to be added to Markua.) However, any new Markua features such as
+this will require a version bump in the Markua spec.
 
 So, we expect that in future there will be at least 6 writing modes on Leanpub,
 as Markua continues to evolve.
 
 This is admittedly complex. Given that Leanpub has existed for over a decade,
 and has actively worked on improving its book and course generation engine,
-this complexity is inevitable.
+some complexity is inevitable.
 
 However, we will try to make things simpler for new authors, by defaulting
 new books and courses to the latest stable version of Markua.
+
+## Planned Default Markua Version
 
 This is the roadmap for the default Markua version:
 
@@ -119,7 +122,7 @@ This is the roadmap for the default Markua version:
 2. Markua 0.10 Spec Mode
 3. Markua 0.29
 
-### Markua 0.10 Quirks Mode vs. Markua 0.10 Spec Mode
+## Markua 0.10 Quirks Mode vs. Markua 0.10 Spec Mode
 
 To repeat, Leanpub's current Markua implementation is Markua 0.10 Quirks Mode.
 
@@ -133,7 +136,7 @@ what you want. However, it will do what you want in Markua 0.10 Spec Mode, and
 it will be converted as a Setext header when using a converter to upgrade your
 book or course to Markua 0.29.
 
-### Leanpub's Markdown Converter Roadmap
+## Leanpub's Markdown Converter Roadmap
 
 Leanpub is planning to build converters based on the **Spec Mode** (NOT the
 Quirks Mode) of the different Markdown dialects it has supported over the years.
@@ -148,16 +151,18 @@ Specifically, Leanpub is planning to develop the following:
 6. A Pandoc writer for Markua 0.29
 
 Now, the Pandoc writer for LFM and Markua 0.10 are not as high a priority as the
-Pandoc writer for Markua 0.29. However, these writers should help the development
-of their readers, so we're planning to build them all. Also, they will help
-authors downgrade if needed.
+Pandoc writer for Markua 0.29. (After all, the goal is for authors to upgrade,
+not downgrade.)
+
+However, the LFM and Markua 0.10 writers should help the development of their
+readers, so we're planning to build them all. Also, they will help authors
+downgrade if needed.
 
 Again, the Pandoc readers and writers for LFM and Markua will be based on their
-Spec Mode variants, not their Quirks Mode variants. It is not a high priority
-us to develop deliberately buggy Pandoc readers and writers to support Quirks
-Mode in Pandoc.
+Spec Mode variants, not their Quirks Mode variants. We have no plans to develop
+Pandoc readers and writers to support the Quirks Mode of LFM or Markua 0.10.
 
-### Forward-Looking Statements
+## Forward-Looking Statements
 
 The above is a collection of forward-looking statements which accurately reflect
 our plans as of 2020-05-20.

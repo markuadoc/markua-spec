@@ -5,7 +5,7 @@ specification.
 
 Markua evolved at Leanpub, and is being developed as an open specification by
 Peter Armstrong. Anyone is free to implement any version of the Markua spec
-or of the LFM spec.
+or of the Leanpub Flavoured Markdown spec.
 
 # For Leanpub Authors
 

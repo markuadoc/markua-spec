@@ -8,6 +8,34 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Introduction
 
+## About This Document
+
+This is the specification of **Markua 0.29**. It is based on the CommonMark 0.29
+specification. 
+
+Markua evolved at Leanpub, and is being developed as an open specification by
+Peter Armstrong. Anyone is free to implement any version of the Markua spec
+or of the Leanpub Flavoured Markdown spec.
+
+This document is a strange hybrid: there are new sections about Markua, the
+CommonMark spec is preserved unchanged except for its Introduction, and the
+sections describing the GitHub Flavored Markdown (GFM) extensions are preserved
+unchanged.
+
+John MacFarlane is the author of the CommonMark spec. As such, he is the
+author of the sections of this document that are not in the Introduction and are
+not labeled with "(Markua extension)", "(GFM extension, identical)" or "(GFM
+extension, extended)".
+
+If you already know Markdown and GFM, the only sections of this document you
+need to read to understand Markua are:
+
+1. this Introduction
+2. the "(Markua extension)" sections
+3. the "Disallowed Raw HTML (GFM extension, extended)" section
+
+Everything else is preserved unchanged from the CommonMark and GFM specs.
+
 ## A note for Leanpub authors
 
 If you're a Leanpub author writing in Markua, this is **NOT** what you should be
@@ -455,9 +483,10 @@ and spellable, for branding purposes. The Markua name had all these properties.
 The Markua Spec contains a brief introduction to Markua syntax and philosophy
 and a formal specification of Markua.
 
-The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is
-based on the CommonMark Spec. The author of the CommonMark Spec is John
-MacFarlane.
+The Markua Spec is based on the CommonMark Spec, with the GitHub Flavored
+Markdown (GFM) sections based on the GFM Spec.
+
+The author of the CommonMark Spec is John MacFarlane.
 
 This Introduction chapter contains a number of introductory sections about
 Markua and its relationship to Markdown, CommonMark and GFM.

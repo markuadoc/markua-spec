@@ -2,59 +2,298 @@
 title: Markua Spec
 author: '*This formal specification of Markua is written by Peter Armstrong and is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
 version: 0.29
-date: '2019-06-05'
+date: '2020-05-24'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-# Introduction
+# Preface
 
-## About This Document
+## Origin and structure of this document
 
 This is the specification of **Markua 0.29**. It is based on the CommonMark 0.29
-specification. 
+specification, written by John MacFarlane.
+
+The Markua Spec contains a brief introduction to Markua syntax and philosophy
+and a formal specification of Markua. It also contains a note for Leanpub
+authors about our development plans for Markua support, since Leanpub is the
+main place that Markua is currently used.
 
 Markua evolved at Leanpub, and is being developed as an open specification by
-Peter Armstrong. Anyone is free to implement any version of the Markua spec
-or of the Leanpub Flavoured Markdown spec.
+([Peter Armstrong](https://twitter.com/peterarmstrong)). Anyone is free to
+implement any version of the Markua Spec or of the Leanpub Flavoured Markdown
+spec.
 
-This document is a strange hybrid: there are new sections about Markua, the
-CommonMark spec is preserved unchanged except for its Introduction, and the
-sections describing the GitHub Flavored Markdown (GFM) extensions are preserved
-unchanged.
+The Markua Spec is based on the CommonMark Spec, with the GitHub Flavored
+Markdown (GFM) sections based on the GFM Spec.
 
-John MacFarlane is the author of the CommonMark spec. As such, he is the
-author of the sections of this document that are not in the Introduction and are
-not labeled with "(Markua extension)", "(GFM extension, identical)" or "(GFM
+This document is a strange hybrid:
+* the Introduction of the CommonMark spec was deleted
+* a new Introduction was added, and is about Markua
+* there are many new sections about Markua, all labeled "(Markua extension)"
+* there are sections describing the GitHub Flavored Markdown (GFM) extensions
+* all other sections are preserved unchanged from the CommonMark spec
+
+Since John MacFarlane is the author of the CommonMark Spec, he is the author of
+all sections of this document that are not in the Introduction and are not
+labeled with "(Markua extension)", "(GFM extension, identical)" or "(GFM
 extension, extended)".
 
-If you already know Markdown and GFM, the only sections of this document you
-need to read to understand Markua are:
+## Structure of this document
 
-1. this Introduction
-2. the "(Markua extension)" sections
-3. the "Disallowed Raw HTML (GFM extension, extended)" section
+This document is divided into an Introduction and a formal specification.
 
-Everything else is preserved unchanged from the CommonMark and GFM specs.
+The Introduction contains a number of introductory sections about Markua and its
+relationship to Markdown, CommonMark and GFM. It also contains a section about
+Leanpub's plans for Markua, to minimize confusion for Leanpub authors.
 
-## A note for Leanpub authors
+The remainder of the document is the formal specification of Markua. These
+sections are intended to serve as a reference for authors with advanced
+questions about Markua syntax and for people implementing Markua processors.
+
+Like GFM, Markua is a strict superset of CommonMark. All the features which are
+supported in Markua that are not specified in the original CommonMark Spec are
+hence known as **extensions**, and highlighted as such.
+
+The Markua Spec is written in a bit of a strange fashion. Everything after
+the Introduction is technically about Markua, but there are three types of
+sections:
+
+1. A section written by John MacFarlane about CommonMark
+2. A section written by GitHub employees about GFM extensions
+3. A section written by Peter Armstrong about Markua
+
+Together, these sections combine to define Markua, since Markua is CommonMark
+plus (identical or modified) GFM extensions plus Markua extensions.
+
+To be clear:
+
+* The Introduction sections about CommonMark and GFM were all deleted, except
+the "About this document" section, which was heavily modified. The reason for
+this approach was that it was too confusing to have introductions to
+CommonMark, GFM and Markua in the same document.
+* Many of the sections in the Introduction are heavily based on sections in
+[The Markua Manual](https://leanpub.com/markua), which is the user guide on how
+to write in Markua on Leanpub. (I'm also the author of *The Markua Manual*, so
+I'm reusing my own work in this chapter. *The Markua Manual* began life as the
+standalone book *The Markua Specification*, and it had its scope reduced when I
+decided to base the Markua Spec on the CommonMark Spec.)
+* Every section about CommonMark after the Introduction is preserved verbatim.
+These sections were written by John MacFarlane.
+* The sections about GFM, which are about GFM extensions to CommonMark, are
+either preserved verbatim or are modified to reflect the changes made by Markua.
+GFM sections which are preserved verbatim have "(GFM extension, identical)" in
+their titles. GFM sections which have been modified have "(GFM extension,
+modified)" in their titles.
+* The sections about Markua in subsequent chapters are organized into
+extensions, just as the GFM sections are. These sections all have "(Markua
+extension)" in their titles. There are a lot of them!
+* The Appendices about Markua are grouped together as Markua Appendices.
+* The "A parsing strategy" appendix was written by John MacFarlane about
+CommonMark, and like everything after the introduction by John MacFarlane, it is
+preserved verbatim.
+
+There are two main benefits of this approach to writing this document.
+
+1. It is abundantly clear whether something that Markua does originates in
+   Markdown (as specified by CommonMark), or whether it was added by GFM or
+   Markua. This is important for authors, since it will show them what will
+   work in other Markdown dialects, and what won't.
+2. It means that updating this document as the CommonMark and GFM specs are
+   updated will be very easy.
+
+There three main drawbacks, however:
+
+1. It would be nice to see "Markua" everywhere, instead of a combination of
+   "Markua" and "CommonMark". For example, the [Characters and lines](#characters-and-lines)
+   section starts with a sentence ending "...is a valid CommonMark document."
+   It would be less jarring to read "...is a valid Markua document." However,
+   this would not preserve what John MacFarlane wrote verbatim, and my judgment
+   is that it's more important to keep those sections unchanged than it is to
+   make everything say "Markua".
+2. Sometimes, what Markua does is not specified fully in one section. So,
+   occasionally there are two consecutive sections about essentially the same
+   feature, such as "Autolinks" and "Autolinks (GFM extension, identical)".
+3. In one case, there is contradictory information. This case is the handling
+   of raw HTML tags. CommonMark supports raw HTML, and this is explained in the
+   [Raw HTML](#raw-html) section. So, readers who only read that section would
+   (incorrectly) think that Markua supported raw HTML. However, GFM then
+   disallows some raw HTML tags. Furthermore, Markua then cheekily extends this
+   to disallow **ALL** raw HTML except for HTML comments, and explains this in
+   the [Disallowed Raw HTML (GFM extension, extended)](#disallowed-raw-html-gfm-extension-extended-)
+   section. Thankfully, this is the worst case, and most of the extensions of
+   both GFM and Markua to CommonMark are purely additive in nature.
+
+
+
+## For Leanpub authors
 
 If you're a Leanpub author writing in Markua, this is **NOT** what you should be
 reading.
 
-Leanpub's current Markua implementation was based on an earlier beta of the
-Markua spec. Leanpub authors should read
+There are currently two ways to write in plain text on Leanpub. These are their
+user manuals:
+
+1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
+2. [Markua](https://leanpub.com/markua/read)
+
+### Leanpub's current Markua implementation
+
+Leanpub's current Markua implementation is closest to version 0.10 of the Markua
+spec. Leanpub authors should read
 [The Markua Manual](https://leanpub.com/markua/read) to learn how to write in
 Markua on Leanpub today.
 
-The Markua Manual recommends the way to write using Leanpub's current Markua
-support which is also the most compatible with the version of Markua that is
-specified here.
+Leanpub's current Markua implementation is **Markua 0.10 Quirks Mode**. To learn
+what this means, read on.
 
-Leanpub is working on supporting the version of Markua that is specified here.
-Once we have done this, we will also provide tooling to help convert books and
-courses that were written in the Markua beta into this version of Markua.
-After that is done, we will also provide tooling to help convert books that were
-written in Leanpub Flavoured Markdown into this version of Markua.
+### About Leanpub's Markdown support and specifications
+
+Leanpub Flavoured Markdown (LFM) was started in 2011, and Markua 0.10 was
+started in 2014. Both of these dates are before the CommonMark specication was
+created, so obviously neither LFM nor Markua 0.10 were historically based on
+the CommonMark spec.
+
+However, the CommonMark spec is the best specification of a Markdown dialect,
+and we expect that it will become the defacto standard.
+
+So, Leanpub needs to redefine LFM and Markua 0.10 from a starting point of the
+CommonMark 0.29 spec, instead of starting with Markdown as originally described
+by John Gruber.
+
+### Three specifications
+
+As such, there are separate specifications for the following, and they are
+**ALL** based on the **CommonMark 0.29** spec:
+
+1. [LFM spec](http://markua.com/spec/lfm)
+2. [Markua 0.10 spec](http://markua.com/spec/markua010)
+3. [Markua 0.29 spec](http://markua.com/spec/markua029)
+
+These specifications will not exactly match Leanpub's current behaviour when
+parsing LFM or Markua 0.10. However, they will be reasonably close, and will
+enable the development of converters between LFM, Markua 0.10 and Markua 0.29.
+
+The difference between the current behaviour of Leanpub when parsing LFM or
+Markua 0.10 is discussed in the "Quirks Mode vs Spec Mode" section below.
+
+Leanpub currently supports LFM and Markua 0.10. However, there are some quirks.
+There are a few places where Leanpub's LFM and Markua 0.10 support does not
+match their specs. So, again, if you are a Leanpub author, you should not be
+reading the specs currently. Instead, you should be reading the user manuals.
+
+The user manuals accurately depict Leanpub's current support of
+[LFM](https://leanpub.com/lfm/read) and
+[Markua 0.10](https://leanpub.com/markua/read).
+
+### Quirks Mode vs. Spec Mode
+
+Roughly when we launch the Markua 0.29 beta, Leanpub will also launch LFM and
+Markua 0.10 "Spec Mode" support. When we do this, the existing LFM and Markua
+0.10 modes will be rebranded as the "Quirks Mode" of LFM and Markua 0.10.
+
+The "Spec Mode" support will implement LFM and Markua 0.10 without any intended
+differences between the implementation and their specifications. The "Quirks
+Mode" support will be the current implementations of LFM and Markua 0.10 which
+have been in use on Leanpub for years.
+
+With the launch of Quirks Mode and Spec Mode, there will be five Markdown-based
+writing modes on Leanpub:
+
+1. LFM (Quirks Mode)
+2. LFM (Spec Mode)
+3. Markua 0.10 (Quirks Mode)
+4. Markua 0.10 (Spec Mode)
+5. Markua 0.29
+
+Again, there is no Quirks Mode for Markua 0.29, since we do not have an existing
+Markua 0.29 implementation that we need to support.
+
+### Switching to Spec Mode and automatic converting to Markua 0.29
+
+The launch of Quirks Mode and Spec Mode will give authors of existing LFM books
+and Markua 0.10 books and courses on Leanpub the following choice for each of
+their books or courses:
+
+1. Leave their book or course in Quirks Mode, for unchanged behaviour and
+   performance.
+2. Switch their book or course to Spec Mode, for faster book or course
+   generation and better compliance with the LFM or Markua 0.10 specs.
+3. Click a button to save a version of their existing manuscript and then
+   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
+   manuscript.
+
+### Future Markua versions and complexity
+
+It is expected that Markua will continue to evolve, especially in its support of
+courses. (For example, we have received reasonable requests for additional
+question types to be added to Markua.) However, any new Markua features such as
+this will require a version bump in the Markua spec.
+
+So, we expect that in future there will be at least 6 writing modes on Leanpub,
+as Markua continues to evolve.
+
+This is admittedly complex. Given that Leanpub has existed for over a decade,
+and has actively worked on improving its book and course generation engine,
+some complexity is inevitable.
+
+However, we will try to make things simpler for new authors, by defaulting
+new books and courses to the latest stable version of Markua.
+
+### Planned default Markua version
+
+This is the roadmap for the default Markua version on Leanpub:
+
+1. Markua 0.10 Quirks Mode (current)
+2. Markua 0.10 Spec Mode
+3. Markua 0.29
+
+### Markua 0.10 Quirks Mode vs. Markua 0.10 Spec Mode
+
+To repeat, Leanpub's current Markua implementation is Markua 0.10 Quirks Mode.
+
+The most notable difference between Spec Mode and Quirks Mode in Markua 0.10
+is Setext header support. Quirks Mode (i.e. current Leanpub) does **NOT**
+support Setext headers, whereas Spec Mode of Markua 0.10 spec DOES support
+Setext headers.
+
+So, if you try to use a Setext header in Markua 0.10 Quirks Mode it won't do
+what you want. However, it will do what you want in Markua 0.10 Spec Mode, and
+it will be converted as a Setext header when using a converter to upgrade your
+book or course to Markua 0.29.
+
+### Leanpub's Markdown converter roadmap
+
+Leanpub is planning to build converters based on the **Spec Mode** (NOT the
+Quirks Mode) of the different Markdown dialects it has supported over the years.
+
+Specifically, Leanpub is planning to develop the following:
+
+1. A Pandoc reader for LFM (Spec Mode)
+2. A Pandoc reader for Markua 0.10 (Spec Mode)
+3. A Pandoc reader for Markua 0.29
+4. A Pandoc writer for LFM (Spec Mode)
+5. A Pandoc writer for Markua 0.10 (Spec Mode)
+6. A Pandoc writer for Markua 0.29
+
+Now, the Pandoc writer for LFM and Markua 0.10 are not as high a priority as the
+Pandoc writer for Markua 0.29. (After all, the goal is for authors to upgrade,
+not downgrade.)
+
+However, the LFM and Markua 0.10 writers should help the development of their
+readers, so we're planning to build them all. Also, they will help authors
+downgrade if needed.
+
+Again, the Pandoc readers and writers for LFM and Markua will be based on their
+Spec Mode variants, not their Quirks Mode variants. We have no plans to develop
+Pandoc readers and writers to support the Quirks Mode of LFM or Markua 0.10.
+
+### Forward-looking statements
+
+The above is a collection of forward-looking statements which accurately reflect
+our plans for Leanpub as of 2020-05-24.
+
+However, there is no promise that any of the above will actually happen, and we
+are not providing any estimates for release dates. Software estimation is hard.
 
 ## The magical typewriter
 
@@ -478,97 +717,6 @@ friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
 
-## Purpose, structure and attribution of the Markua Spec
-
-The Markua Spec contains a brief introduction to Markua syntax and philosophy
-and a formal specification of Markua.
-
-The Markua Spec is based on the CommonMark Spec, with the GitHub Flavored
-Markdown (GFM) sections based on the GFM Spec.
-
-The author of the CommonMark Spec is John MacFarlane.
-
-This Introduction chapter contains a number of introductory sections about
-Markua and its relationship to Markdown, CommonMark and GFM.
-
-The remainder of the document is the formal specification of Markua. These
-sections are intended to serve as a reference for authors with advanced
-questions about Markua syntax and for people implementing Markua processors.
-
-Like GFM, Markua is a strict superset of CommonMark. All the features which are
-supported in Markua that are not specified in the original CommonMark Spec are
-hence known as **extensions**, and highlighted as such.
-
-The Markua Spec is written in a bit of a strange fashion. Everything after
-the Introduction is technically about Markua, but there are three types of
-sections:
-
-1. A section written by John MacFarlane about CommonMark
-2. A section written by GitHub employees about GFM extensions, modified if
-   necessary
-3. A section written by Peter Armstrong about Markua
-
-Together, these sections combine to define Markua, since Markua is CommonMark
-plus (identical or modified) GFM extensions plus Markua extensions.
-
-To be clear:
-
-* The Introduction sections about CommonMark and GFM were all deleted, except
-the "About this document" section, which was heavily modified. The reason for
-this approach was that it was too confusing to have introductions to
-CommonMark, GFM and Markua in the same document.
-* Many of the sections in the Introduction are heavily based on sections in
-[The Markua Manual](https://leanpub.com/markua), which is the user guide on how
-to write in Markua on Leanpub. (I'm also the author of *The Markua Manual*, so
-I'm reusing my own work in this chapter. *The Markua Manual* began life as the
-standalone book *The Markua Specification*, and it had its scope reduced when I
-decided to base the Markua Spec on the CommonMark Spec.)
-* Every section about CommonMark after the Introduction is preserved verbatim.
-These sections were written by John MacFarlane.
-* The sections about GFM, which are about GFM extensions to CommonMark, are
-either preserved verbatim or are modified to reflect the changes made by Markua.
-GFM sections which are preserved verbatim have "(GFM extension, identical)" in
-their titles. GFM sections which have been modified have "(GFM extension,
-modified)" in their titles.
-* The sections about Markua in subsequent chapters are organized into
-extensions, just as the GFM sections are. These sections all have "(Markua
-extension)" in their titles. There are a lot of them!
-* The Appendices about Markua are grouped together as Markua Appendices.
-* The "A parsing strategy" appendix was written by John MacFarlane about
-CommonMark, and like everything after the introduction by John MacFarlane, it is
-preserved verbatim.
-
-There are two main benefits of this approach to writing this document.
-
-1. It is abundantly clear whether something that Markua does originates in
-   Markdown (as specified by CommonMark), or whether it was added by GFM or
-   Markua. This is important for authors, since it will show them what will
-   work in other Markdown dialects, and what won't.
-2. It means that updating this document as the CommonMark and GFM specs are
-   updated will be very easy.
-
-There three main drawbacks, however:
-
-1. It would be nice to see "Markua" everywhere, instead of a combination of
-   "Markua" and "CommonMark". For example, the [Characters and lines](#characters-and-lines)
-   section starts with a sentence ending "...is a valid CommonMark document."
-   It would be less jarring to read "...is a valid Markua document." However,
-   this would not preserve what John MacFarlane wrote verbatim, and my judgment
-   is that it's more important to keep those sections unchanged than it is to
-   make everything say "Markua".
-2. Sometimes, what Markua does is not specified fully in one section. So,
-   occasionally there are two consecutive sections about essentially the same
-   feature, such as "Autolinks" and "Autolinks (GFM extension, identical)".
-3. In one case, there is contradictory information. This case is the handling
-   of raw HTML tags. CommonMark supports raw HTML, and this is explained in the
-   [Raw HTML](#raw-html) section. So, readers who only read that section would
-   (incorrectly) think that Markua supported raw HTML. However, GFM then
-   disallows some raw HTML tags. Furthermore, Markua then cheekily extends this
-   to disallow **ALL** raw HTML except for HTML comments, and explains this in
-   the [Disallowed Raw HTML (GFM extension, extended)](#disallowed-raw-html-gfm-extension-extended-)
-   section. Thankfully, this is the worst case, and most of the extensions of
-   both GFM and Markua to CommonMark are purely additive in nature.
-
 ## Modifications to GFM extensions
 
 Note that while Markua is a strict superset of CommonMark, it is not a strict
@@ -603,56 +751,21 @@ part of a feature an "extension" was a bit of a stretch in GFM (it's more of a
 reduction), and in this instance, Markua takes this approach and turns it up to
 11. `¯\_(ツ)_/¯`
 
-## About this document
+## About the Try It buttons
 
-A Markua Processor must be able to properly parse a Markua document and output
-HTML, as well as any other suitable output formats. For example, the output
-formats which Leanpub produces from a single Markua document are: PDF, EPUB,
-MOBI, HTML, InDesign and (if applicable) a course with quizzes, exercises and
-automated marking.
+The web interface "Try It" buttons do not work. At some point they will be fixed
+or removed.
 
-This document attempts to specify Markua syntax unambiguously. It does not,
-however, precisely define all output formats or the content of those output
-formats. Instead, the only required output format of a Markua Processor is HTML.
-Also, HTML is the only output format where any specification is provided.
-The reason that HTML is a required output format for a Markua
-Processor to be able to help ensure conformance to the Markua Spec.
+## About the HTML output
 
-This document contains many examples with side-by-side Markua and
-HTML.  These are intended to double as conformance tests.  An
-accompanying script `spec_tests.py` can be used to run the tests
-against any Markua program:
-
-    python test/spec_tests.py --spec spec.txt --program PROGRAM
-
-**NOTE: The web interface "Try It" buttons do not work yet on markua.com, and
-will not work for a number of months, since the C-based and JS-based Markua
-implementations are currently no more than their CommonMark and GFM
-counterparts. So, since this is the case, the interactive "dingus" is not
-hooked up yet, since there's no point in doing so yet.**
-
-Since this document describes how Markua is to be parsed into
-an abstract syntax tree, it would have made sense to use an abstract
-representation of the syntax tree instead of HTML.  But HTML is capable
-of representing the structural distinctions we need to make, and the
-choice of HTML for the tests makes it possible to run the tests against
-an implementation without writing an abstract syntax tree renderer.
-
-Please note that this is not a complete specification of the HTML documents
-produced by Markua Processors. It is only a specification of the parts of the
-HTML mapping where there is no need to have flexibility on the part of the
-Markua Processor. The HTML mapping should be thought of specifying HTML
-fragments, not documents. In all of the examples, a Markua Processor may add
-more HTML before and after the relevant content. The test is that the HTML
-produced contains the specified output, not that it is identical to the
-specified output.
-
-This document is generated from a text file, `spec.txt`, written
-in Markdown with a small extension for the side-by-side tests. The script
-`tools/makespec.py` can be used to convert `spec.txt` into HTML or CommonMark
-(which can then be converted into other formats).
-
-In the examples, the `→` character is used to represent tabs.
+The HTML mapping defined in this specification is NOT a complete specification
+of the HTML documents produced by Markua Processors. It is only a specification
+of the parts of the HTML mapping where there is no need to have flexibility on
+the part of the Markua Processor. The HTML mapping should be thought of
+specifying HTML fragments, not documents. In all of the examples, a Markua
+Processor may add more HTML before and after the relevant content. The test is
+that the HTML produced contains the specified output, not that it is identical
+to the specified output.
 
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
@@ -919,33 +1032,276 @@ Besides these differences, there are a number of smaller ones, which you will
 discover if you compare the Markua Spec to the
 [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
 
-## Acknowledgments
+# Introduction
 
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of
-Markua, but I'm getting lots of help, especially from my Leanpub cofounders
-[Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp)
-and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead
-developer of Leanpub's book generation engine (both the LFM and Markua versions),
-and he has given me both the most and the best feedback about Markua over the
-years that I've been working on it.
+## What is Markdown?
 
-Perhaps most important, Markua is built on Markdown. So, Markua literally would
-not exist without John Gruber and Aaron Swartz. Markua is now also using the
-CommonMark spec as its starting point, so I am really grateful to John MacFarlane
-(the author of the CommonMark spec) and the team behind CommonMark and `cmark`.
-I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub
-Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
+Markdown is a plain text format for writing structured documents,
+based on conventions for indicating formatting in email
+and usenet posts.  It was developed by John Gruber (with
+help from Aaron Swartz) and released in 2004 in the form of a
+[syntax description](http://daringfireball.net/projects/markdown/syntax)
+and a Perl script (`Markdown.pl`) for converting Markdown to
+HTML.  In the next decade, dozens of implementations were
+developed in many languages.  Some extended the original
+Markdown syntax with conventions for footnotes, tables, and
+other document elements.  Some allowed Markdown documents to be
+rendered in formats other than HTML.  Websites like Reddit,
+StackOverflow, and GitHub had millions of people using Markdown.
+And Markdown started to be used beyond the web, to author books,
+articles, slide shows, letters, and lecture notes.
 
-Markua is also benefitting from years of feedback about Leanpub Flavoured
-Markdown and Markua, from many incredibly helpful and patient Leanpub authors.
-If it wasn't for these authors, there would be no Leanpub, and no Markua.
+What distinguishes Markdown from many other lightweight markup
+syntaxes, which are often easier to write, is its readability.
+As Gruber writes:
 
-I'd also like to thank my father, who read some of the very early manuscripts
-when this was a standalone spec and gave me feedback.
+> The overriding design goal for Markdown's formatting syntax is
+> to make it as readable as possible. The idea is that a
+> Markdown-formatted document should be publishable as-is, as
+> plain text, without looking like it's been marked up with tags
+> or formatting instructions.
+> (<http://daringfireball.net/projects/markdown/>)
 
-Finally, I would like to thank my wife Caroline and my son Evan: while this is
-not as long as my other books, a lot of thought and effort went into it, and a
-lot of sacrifice. Thanks very much.
+The point can be illustrated by comparing a sample of
+[AsciiDoc](http://www.methods.co.nz/asciidoc/) with
+an equivalent sample of Markdown.  Here is a sample of
+AsciiDoc from the AsciiDoc manual:
+
+```
+1. List item one.
++
+List item one continued with a second paragraph followed by an
+Indented block.
++
+.................
+$ ls *.sh
+$ mv *.sh ~/tmp
+.................
++
+List item continued with a third paragraph.
+
+2. List item two continued with an open block.
++
+--
+This paragraph is part of the preceding list item.
+
+a. This list is nested and does not require explicit item
+continuation.
++
+This paragraph is part of the preceding list item.
+
+b. List item b.
+
+This paragraph belongs to item two of the outer list.
+--
+```
+
+And here is the equivalent in Markdown:
+```
+1.  List item one.
+
+    List item one continued with a second paragraph followed by an
+    Indented block.
+
+        $ ls *.sh
+        $ mv *.sh ~/tmp
+
+    List item continued with a third paragraph.
+
+2.  List item two continued with an open block.
+
+    This paragraph is part of the preceding list item.
+
+    1. This list is nested and does not require explicit item continuation.
+
+       This paragraph is part of the preceding list item.
+
+    2. List item b.
+
+    This paragraph belongs to item two of the outer list.
+```
+
+The AsciiDoc version is, arguably, easier to write. You don't need
+to worry about indentation.  But the Markdown version is much easier
+to read.  The nesting of list items is apparent to the eye in the
+source, not just in the processed document.
+
+## Why is a spec needed?
+
+John Gruber's [canonical description of Markdown's
+syntax](http://daringfireball.net/projects/markdown/syntax)
+does not specify the syntax unambiguously.  Here are some examples of
+questions it does not answer:
+
+1.  How much indentation is needed for a sublist?  The spec says that
+    continuation paragraphs need to be indented four spaces, but is
+    not fully explicit about sublists.  It is natural to think that
+    they, too, must be indented four spaces, but `Markdown.pl` does
+    not require that.  This is hardly a "corner case," and divergences
+    between implementations on this issue often lead to surprises for
+    users in real documents. (See [this comment by John
+    Gruber](http://article.gmane.org/gmane.text.markdown.general/1997).)
+
+2.  Is a blank line needed before a block quote or heading?
+    Most implementations do not require the blank line.  However,
+    this can lead to unexpected results in hard-wrapped text, and
+    also to ambiguities in parsing (note that some implementations
+    put the heading inside the blockquote, while others do not).
+    (John Gruber has also spoken [in favor of requiring the blank
+    lines](http://article.gmane.org/gmane.text.markdown.general/2146).)
+
+3.  Is a blank line needed before an indented code block?
+    (`Markdown.pl` requires it, but this is not mentioned in the
+    documentation, and some implementations do not require it.)
+
+    ``` markdown
+    paragraph
+        code?
+    ```
+
+4.  What is the exact rule for determining when list items get
+    wrapped in `<p>` tags?  Can a list be partially "loose" and partially
+    "tight"?  What should we do with a list like this?
+
+    ``` markdown
+    1. one
+
+    2. two
+    3. three
+    ```
+
+    Or this?
+
+    ``` markdown
+    1.  one
+        - a
+
+        - b
+    2.  two
+    ```
+
+    (There are some relevant comments by John Gruber
+    [here](http://article.gmane.org/gmane.text.markdown.general/2554).)
+
+5.  Can list markers be indented?  Can ordered list markers be right-aligned?
+
+    ``` markdown
+     8. item 1
+     9. item 2
+    10. item 2a
+    ```
+
+6.  Is this one list with a thematic break in its second item,
+    or two lists separated by a thematic break?
+
+    ``` markdown
+    * a
+    * * * * *
+    * b
+    ```
+
+7.  When list markers change from numbers to bullets, do we have
+    two lists or one?  (The Markdown syntax description suggests two,
+    but the perl scripts and many other implementations produce one.)
+
+    ``` markdown
+    1. fee
+    2. fie
+    -  foe
+    -  fum
+    ```
+
+8.  What are the precedence rules for the markers of inline structure?
+    For example, is the following a valid link, or does the code span
+    take precedence ?
+
+    ``` markdown
+    [a backtick (`)](/url) and [another backtick (`)](/url).
+    ```
+
+9.  What are the precedence rules for markers of emphasis and strong
+    emphasis?  For example, how should the following be parsed?
+
+    ``` markdown
+    *foo *bar* baz*
+    ```
+
+10. What are the precedence rules between block-level and inline-level
+    structure?  For example, how should the following be parsed?
+
+    ``` markdown
+    - `a long code span can contain a hyphen like this
+      - and it can screw things up`
+    ```
+
+11. Can list items include section headings?  (`Markdown.pl` does not
+    allow this, but does allow blockquotes to include headings.)
+
+    ``` markdown
+    - # Heading
+    ```
+
+12. Can list items be empty?
+
+    ``` markdown
+    * a
+    *
+    * b
+    ```
+
+13. Can link references be defined inside block quotes or list items?
+
+    ``` markdown
+    > Blockquote [foo].
+    >
+    > [foo]: /url
+    ```
+
+14. If there are multiple definitions for the same reference, which takes
+    precedence?
+
+    ``` markdown
+    [foo]: /url1
+    [foo]: /url2
+
+    [foo][]
+    ```
+
+In the absence of a spec, early implementers consulted `Markdown.pl`
+to resolve these ambiguities.  But `Markdown.pl` was quite buggy, and
+gave manifestly bad results in many cases, so it was not a
+satisfactory replacement for a spec.
+
+Because there is no unambiguous spec, implementations have diverged
+considerably.  As a result, users are often surprised to find that
+a document that renders one way on one system (say, a GitHub wiki)
+renders differently on another (say, converting to docbook using
+pandoc).  To make matters worse, because nothing in Markdown counts
+as a "syntax error," the divergence often isn't discovered right away.
+
+## About this document
+
+This document attempts to specify Markdown syntax unambiguously.
+It contains many examples with side-by-side Markdown and
+HTML.  These are intended to double as conformance tests.  An
+accompanying script `spec_tests.py` can be used to run the tests
+against any Markdown program:
+
+    python test/spec_tests.py --spec spec.txt --program PROGRAM
+
+Since this document describes how Markdown is to be parsed into
+an abstract syntax tree, it would have made sense to use an abstract
+representation of the syntax tree instead of HTML.  But HTML is capable
+of representing the structural distinctions we need to make, and the
+choice of HTML for the tests makes it possible to run the tests against
+an implementation without writing an abstract syntax tree renderer.
+
+This document is generated from a text file, `spec.txt`, written
+in Markdown with a small extension for the side-by-side tests.
+The script `tools/makespec.py` can be used to convert `spec.txt` into
+HTML or CommonMark (which can then be converted into other formats).
+
+In the examples, the `→` character is used to represent tabs.
 
 # Preliminaries
 

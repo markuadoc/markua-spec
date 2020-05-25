@@ -8,6 +8,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Preface
 
+This Preface contains a number of introductory sections about Markua and its
+relationship to Markdown, CommonMark and GFM. It also contains sections which
+discuss [Leanpub](https://leanpub.com), to minimize confusion for Leanpub
+authors who encounter this document.
+
 ## What is this document?
 
 This is the specification of **Markua 0.29**, written by
@@ -23,6 +28,11 @@ Markdown (GFM) extensions from the
 Like the CommonMark Spec and the GitHub Flavored Markdown Spec, the Markua Spec
 is licensed under the Creative Commons license
 [CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+
+This document has two types of intended readers:
+
+1. authors with advanced questions about Markua 0.29 syntax
+2. developers implementing Markua Processors
 
 ## For Leanpub authors
 
@@ -136,95 +146,49 @@ following choice for each of their books or courses:
 
 To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
 
-
-
-
-
-
 ## Structure of this document
 
-The Markua Spec contains a brief introduction to Markua syntax and philosophy
-and a formal specification of Markua. It also contains a note for Leanpub
-authors about our development plans for Markua support, since Leanpub is the
-main place that Markua is currently used.
-
-The Markua Spec is based on the CommonMark Spec, with the
-
-
 This document is a strange hybrid:
-* the Introduction of the CommonMark spec was deleted
-* a new Introduction was added, and is about Markua
-* there are many new sections about Markua, all labeled "(Markua extension)"
-* there are sections describing the GitHub Flavored Markdown (GFM) extensions
-* all other sections are preserved unchanged from the CommonMark spec
 
-Since John MacFarlane is the author of the CommonMark Spec, he is the author of
-all sections of this document that are not in the Introduction and are not
-labeled with "(Markua extension)", "(GFM extension, identical)" or "(GFM
-extension, extended)".
+* A new Preface was added, which you are reading now.
+* There are many new sections about Markua, all labeled "(Markua extension)".
+* There are sections describing the GitHub Flavored Markdown (GFM) extensions.
+* All other sections are preserved unchanged from the CommonMark spec.
 
+So, for any given section of this document, it is either:
 
-
-This document is divided into an Introduction and a formal specification.
-
-The Introduction contains a number of introductory sections about Markua and its
-relationship to Markdown, CommonMark and GFM. It also contains a section about
-Leanpub's plans for Markua, to minimize confusion for Leanpub authors.
-
-The remainder of the document is the formal specification of Markua. These
-sections are intended to serve as a reference for authors with advanced
-questions about Markua syntax and for people implementing Markua processors.
-
-Like GFM, Markua is a strict superset of CommonMark. All the features which are
-supported in Markua that are not specified in the original CommonMark Spec are
-hence known as **extensions**, and highlighted as such.
-
-The Markua Spec is written in a bit of a strange fashion. Everything after
-the Introduction is technically about Markua, but there are three types of
-sections:
-
-1. A section written by John MacFarlane about CommonMark
-2. A section written by GitHub employees about GFM extensions
-3. A section written by Peter Armstrong about Markua
+1. written by John MacFarlane about CommonMark
+2. written by GitHub employees about GitHub Flavored Markdown
+3. written by Peter Armstrong about Markua
 
 Together, these sections combine to define Markua, since Markua is CommonMark
-plus (identical or modified) GFM extensions plus Markua extensions.
+plus (identical or modified) GFM extensions plus (many!) Markua extensions.
 
-To be clear:
+Since John MacFarlane is the author of the CommonMark Spec, he is the author of
+all sections of this document that are not in the Preface and are not
+labeled with "(Markua extension)", "(GFM extension, identical)" or "(GFM
+extension, extended)". Please note that this is just a statement of fact, not an
+implied endorsement of Markua!
 
-* The Introduction sections about CommonMark and GFM were all deleted, except
-the "About this document" section, which was heavily modified. The reason for
-this approach was that it was too confusing to have introductions to
-CommonMark, GFM and Markua in the same document.
-* Many of the sections in the Introduction are heavily based on sections in
-[The Markua Manual](https://leanpub.com/markua), which is the user guide on how
-to write in Markua on Leanpub. (I'm also the author of *The Markua Manual*, so
-I'm reusing my own work in this chapter. *The Markua Manual* began life as the
-standalone book *The Markua Specification*, and it had its scope reduced when I
-decided to base the Markua Spec on the CommonMark Spec.)
-* Every section about CommonMark after the Introduction is preserved verbatim.
-These sections were written by John MacFarlane.
-* The sections about GFM, which are about GFM extensions to CommonMark, are
-either preserved verbatim or are modified to reflect the changes made by Markua.
-GFM sections which are preserved verbatim have "(GFM extension, identical)" in
-their titles. GFM sections which have been modified have "(GFM extension,
-modified)" in their titles.
-* The sections about Markua in subsequent chapters are organized into
-extensions, just as the GFM sections are. These sections all have "(Markua
-extension)" in their titles. There are a lot of them!
-* The Appendices about Markua are grouped together as Markua Appendices.
-* The "A parsing strategy" appendix was written by John MacFarlane about
-CommonMark, and like everything after the introduction by John MacFarlane, it is
-preserved verbatim.
+While this hybrid approach of creating the Markua specification is somewhat odd,
+it has a number of significant benefits:
 
-There are two main benefits of this approach to writing this document.
-
-1. It is abundantly clear whether something that Markua does originates in
-   Markdown (as specified by CommonMark), or whether it was added by GFM or
-   Markua. This is important for authors, since it will show them what will
-   work in other Markdown dialects, and what won't.
-2. It means that updating this document as the CommonMark and GFM specs are
-   updated will be very easy.
+1. The CommonMark Spec is very good, and is licensed under the Creative Commons
+   license CC-BY-SA 4.0. Not starting with CommonMark would be an exercise in
+   vanity.
+2. The CommonMark Spec is the defacto standard for a Markdown specification.
+   Any specification not based on CommonMark will need to be compared to
+   CommonMark, so the most helpful thing to do is to just start with CommonMark.
+3. Writing this specification as a series of extensions to CommonMark will
+   enable people who are implementing it to just start with a compliant
+   CommonMark implementation and modify it appropriately.
+4. Defining all Markua changes as extensions to CommonMark makes it abundantly
+   clear whether something that Markua does originates in CommonMark, or whether
+   it was added by GFM or by Markua. This is potentially helpful for authors,
+   since it will show them what will work in other Markdown dialects, and what
+   won't.
+5. It means that updating this document to keep it current with the CommonMark
+   and GFM specs will be very easy.
 
 There three main drawbacks, however:
 
@@ -249,78 +213,6 @@ There three main drawbacks, however:
    both GFM and Markua to CommonMark are purely additive in nature.
 
 
-### Future Markua versions and complexity
-
-It is expected that Markua will continue to evolve, especially in its support of
-courses. (For example, we have received reasonable requests for additional
-question types to be added to Markua.) However, any new Markua features such as
-this will require a version bump in the Markua spec.
-
-So, we expect that in future there will be at least 6 writing modes on Leanpub,
-as Markua continues to evolve.
-
-This is admittedly complex. Given that Leanpub has existed for over a decade,
-and has actively worked on improving its book and course generation engine,
-some complexity is inevitable.
-
-However, we will try to make things simpler for new authors, by defaulting
-new books and courses to the latest stable version of Markua.
-
-### Planned default Markua version
-
-This is the roadmap for the default Markua version on Leanpub:
-
-1. Markua 0.10 Quirks Mode (current)
-2. Markua 0.10 Spec Mode
-3. Markua 0.29
-
-### Markua 0.10 Quirks Mode vs. Markua 0.10 Spec Mode
-
-To repeat, Leanpub's current Markua implementation is Markua 0.10 Quirks Mode.
-
-The most notable difference between Spec Mode and Quirks Mode in Markua 0.10
-is Setext header support. Quirks Mode (i.e. current Leanpub) does **NOT**
-support Setext headers, whereas Spec Mode of Markua 0.10 spec DOES support
-Setext headers.
-
-So, if you try to use a Setext header in Markua 0.10 Quirks Mode it won't do
-what you want. However, it will do what you want in Markua 0.10 Spec Mode, and
-it will be converted as a Setext header when using a converter to upgrade your
-book or course to Markua 0.29.
-
-### Leanpub's Markdown converter roadmap
-
-Leanpub is planning to build converters based on the **Spec Mode** (NOT the
-Quirks Mode) of the different Markdown dialects it has supported over the years.
-
-Specifically, Leanpub is planning to develop the following:
-
-1. A Pandoc reader for LFM (Spec Mode)
-2. A Pandoc reader for Markua 0.10 (Spec Mode)
-3. A Pandoc reader for Markua 0.29
-4. A Pandoc writer for LFM (Spec Mode)
-5. A Pandoc writer for Markua 0.10 (Spec Mode)
-6. A Pandoc writer for Markua 0.29
-
-Now, the Pandoc writer for LFM and Markua 0.10 are not as high a priority as the
-Pandoc writer for Markua 0.29. (After all, the goal is for authors to upgrade,
-not downgrade.)
-
-However, the LFM and Markua 0.10 writers should help the development of their
-readers, so we're planning to build them all. Also, they will help authors
-downgrade if needed.
-
-Again, the Pandoc readers and writers for LFM and Markua will be based on their
-Spec Mode variants, not their Quirks Mode variants. We have no plans to develop
-Pandoc readers and writers to support the Quirks Mode of LFM or Markua 0.10.
-
-### Forward-looking statements
-
-The above is a collection of forward-looking statements which accurately reflect
-our plans for Leanpub as of 2020-05-24.
-
-However, there is no promise that any of the above will actually happen, and we
-are not providing any estimates for release dates. Software estimation is hard.
 
 ## The magical typewriter
 
@@ -729,8 +621,7 @@ somehow grew an understanding of book and course concepts. This goal has also
 informed the structure of this specification: instead of writing a separate spec
 from scratch, the Markua spec is a fork of the CommonMark spec with the GitHub
 Flavored Markdown (GFM) extensions. Everything new in Markua is written as a set
-of extensions to CommonMark, and everything in the CommonMark spec after the
-introduction is preserved verbatim.
+of extensions to CommonMark.
 
 ## Why the name "Markua"?
 

@@ -160,6 +160,7 @@ This document is a strange hybrid:
   extension)". There are so many of these extensions that using (Markua
   extension) everywhere added too much clutter.
 * There are sections describing the GitHub Flavored Markdown (GFM) extensions.
+  These are labeled either "(GFM extension, identical)" or "(GFM extension, extended)"
 * All other sections are preserved unchanged from the CommonMark spec.
 
 So, for any given section of this document, it is either:
@@ -395,7 +396,7 @@ Specifically, these are the rules:
 
 That's it!
 
-## How to write a computer programming book in Markua
+## How to write a computer programming book in Markua (M)
 
 The following example shows basically everything you need to know to write a
 computer programming book in Markua:
@@ -754,7 +755,7 @@ Finally, a Markua Processor is NOT allowed to output the list of errors and
 warnings in the output format(s) (such as PDF, EPUB, MOBI or HTML) which it is
 producing.
 
-## Differences with Markua beta
+## Differences with Markua beta (M)
 
 Markua originated in 2014 (!) as a standalone specification, and evolved for a
 number of years in beta before being rewritten in its current form.

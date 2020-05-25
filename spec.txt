@@ -6,14 +6,14 @@ date: '2020-05-24'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-# Preface (Markua extension)
+# Preface (ME)
 
 This Preface contains a number of introductory sections about Markua and its
 relationship to Markdown, CommonMark and GFM. It also contains sections which
 discuss [Leanpub](https://leanpub.com), to minimize confusion for Leanpub
 authors who encounter this document.
 
-## What is this document? (Markua extension)
+## What is this document? (ME)
 
 This is the specification of **Markua 0.29**, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
@@ -34,7 +34,7 @@ This document has two types of intended readers:
 1. authors with advanced questions about Markua 0.29 syntax
 2. developers implementing Markua Processors
 
-## For Leanpub authors (Markua extension)
+## For Leanpub authors (ME)
 
 If you're a Leanpub author writing in Markua, this is **NOT** what you should be
 reading.
@@ -47,7 +47,7 @@ user manuals:
 
 You should probably go read one of those manuals instead of this document.
 
-## Three specifications (Markua extension)
+## Three specifications (ME)
 
 Leanpub has developed three separate but related specifications, all of which
 are based on the **CommonMark 0.29** spec:
@@ -56,7 +56,7 @@ are based on the **CommonMark 0.29** spec:
 2. [Markua 0.10 Spec](http://markua.com/spec/markua010)
 3. [Markua 0.29 Spec](http://markua.com/spec/markua029)
 
-## What is Leanpub Flavoured Markdown (LFM)? (Markua extension)
+## What is Leanpub Flavoured Markdown (LFM)? (ME)
 
 Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
 Markdown to support book authoring. It started in 2011 and evolved with
@@ -78,7 +78,7 @@ based on CommonMark. When this is complete, Leanpub's existing LFM Support will
 continue to be supported unchanged for many years, and will be rebranded as
 "LFM Quirks Mode".
 
-## What is Markua? (Markua extension)
+## What is Markua? (ME)
 
 Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
 
@@ -92,7 +92,7 @@ There are two versions of Markua specified: Markua 0.10 and Markua 0.29.
 
 A more detailed introduction to Markua is contained in the Introduction below.
 
-## Markua 0.10 (Markua extension)
+## Markua 0.10 (ME)
 
 Markua 0.10 is the version of Markua which started in 2014 and evolved until
 October 2019.
@@ -112,7 +112,7 @@ will be based on CommonMark. When this is complete, Leanpub's existing Markua
 0.10 Support will continue to be supported unchanged for many years, and will be
 rebranded as "Markua 0.10 Quirks Mode".
 
-## Markua 0.29 (Markua extension)
+## Markua 0.29 (ME)
 
 Markua 0.29 is the version of Markua which is based on the CommonMark Spec.
 Work on the Markua 0.29 Spec started in 2019 and continues today.
@@ -131,7 +131,7 @@ Markua 0.29 Spec is being created first, there will only be one Markua 0.29 mode
 This mode will evolve in beta, and it will eventually match the Markua 0.29
 Spec.
 
-## Converting Between LFM, Markua 0.10 and Markua 0.29 (Markua extension)
+## Converting Between LFM, Markua 0.10 and Markua 0.29 (ME)
 
 Leanpub books can currently be written in LFM or Markua 0.10. Leanpub courses
 can currently only be written in Markua 0.10.
@@ -150,12 +150,12 @@ following choice for each of their books or courses:
 
 To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
 
-## Structure of this document (Markua extension)
+## Structure of this document (ME)
 
 This document is a strange hybrid:
 
 * A new Preface was added, which you are reading now.
-* There are many new sections about Markua, all labeled "(Markua extension)".
+* There are many new sections about Markua, all labeled "(ME)".
 * There are sections describing the GitHub Flavored Markdown (GFM) extensions.
 * All other sections are preserved unchanged from the CommonMark spec.
 
@@ -170,7 +170,7 @@ plus (identical or modified) GFM extensions plus (many!) Markua extensions.
 
 Since John MacFarlane is the author of the CommonMark Spec, he is the author of
 all sections of this document that are not in the Preface and are not
-labeled with "(Markua extension)", "(GFM extension, identical)" or "(GFM
+labeled with "(ME)", "(GFM extension, identical)" or "(GFM
 extension, extended)". Please note that this is just a statement of fact, not an
 implied endorsement of Markua!
 
@@ -1771,7 +1771,7 @@ bar</p>
 
 <div class="extension">
 
-## Entity and numeric character references (Markua extension)
+## Entity and numeric character references (ME)
 
 In PDF and other non-HTML-based output formats, a Markua Processor may choose
 to do the following for HTML entity and numeric character references:
@@ -1797,7 +1797,7 @@ choose to use one of the approaches used for non-HTML output formats.
 
 <div class="extension">
 
-## Emoji (Markua extension)
+## Emoji (ME)
 
 In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year
 [was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/),
@@ -1888,7 +1888,7 @@ which can contain other blocks, and [leaf blocks](@),
 which cannot.
 
 
-# Metadata (Markua extension)
+# Metadata (ME)
 
 Markua adds a number of extensions to support metadata in a consistent way.
 These include attributes (on everything), settings (at the beginning of a
@@ -1901,7 +1901,7 @@ changes the behaviour of the Markua Processor, sometimes dramatically.
 
 <div class="extension">
 
-## Attributes (Markua extension)
+## Attributes (ME)
 
 Attributes are used to do everything from specify the language of code blocks,
 add ids for crosslinking and even support extensions to Markua.
@@ -2167,7 +2167,7 @@ version of Markua without needing to specify anything special.
 
 <div class="extension">
 
-## Document settings (Markua extension)
+## Document settings (ME)
 
 The HTML which is output by a Markua Processor can be affected by certain global
 settings. These can be overridden by one or more document settings hashes.
@@ -2406,7 +2406,7 @@ the quiz or exercise. If `true`, the questions are randomly arranged; if
 
 <div class="extension">
 
-## Directives (Markua extension)
+## Directives (ME)
 
 Directives are switches which affect the future behaviour of a Markua Processor.
 
@@ -2494,7 +2494,7 @@ Its use is discouraged. Authors should spend their time writing, not formatting.
 
 <div class="extension">
 
-## Book section directives (Markua extension)
+## Book section directives (ME)
 
 Most published books have three types of material in them: the front matter,
 the text (or "main matter") and the back matter. (Yes, this applies to courses
@@ -2572,7 +2572,7 @@ appropriate.
 
 <div class="extension">
 
-## Insert directives (Markua extension)
+## Insert directives (ME)
 
 With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be
@@ -2891,7 +2891,7 @@ If you want a thematic break in a list item, use a different bullet:
 </ul>
 ````````````````````````````````
 
-## Thematic break semantics (Markua extension)
+## Thematic break semantics (ME)
 
 Thematic breaks, as shown above, produce an `<hr />` in HTML.
 
@@ -3552,7 +3552,7 @@ baz</p>
 
 <div class="extension">
 
-## Part headings (Markua extension)
+## Part headings (ME)
 
 As [discussed](#markua-heading-mapping-to-book-and-course-structures),
 Markua uses a `{class: part}` attribute on an `h1` heading to make a part
@@ -3626,7 +3626,7 @@ Foo
 
 <div class="extension">
 
-## Resources (Markua extension)
+## Resources (ME)
 
 Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
@@ -4774,7 +4774,7 @@ Closing code fences cannot have [info strings]:
 
 <div class="extension">
 
-## Code resources (Markua extension)
+## Code resources (ME)
 
 Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
@@ -5142,7 +5142,7 @@ requirement, nor is the choice of which continuation character is used.
 
 <div class="extension">
 
-## Poetry (Markua extension)
+## Poetry (ME)
 
 Poetry can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to poetry as to all other resources.
@@ -6594,7 +6594,7 @@ bbb</p>
 
 <div class="extension">
 
-## Paragraph continuations (Markua extension)
+## Paragraph continuations (ME)
 
 In books, you can insert things like lists in the middle of paragraphs.
 
@@ -7412,7 +7412,7 @@ the `>`:
 
 <div class="extension">
 
-## Block quotes with curly braces (Markua extension)
+## Block quotes with curly braces (ME)
 
 Block quotes in Markua are created in one of two ways:
 
@@ -7468,7 +7468,7 @@ headings, any headings inside blockquotes should be ignored.
 
 <div class="extension">
 
-## Asides (Markua extension)
+## Asides (ME)
 
 Since Markua is for writing books and courses, including technical books and
 courses, it needs not just a syntax for blockquotes--it also needs a syntax for
@@ -7546,7 +7546,7 @@ It can have multiple paragraphs.
 
 <div class="extension">
 
-## Blurbs (Markua extension)
+## Blurbs (ME)
 
 Blurbs are like asides, but shorter. A blurb is not intended to span multiple
 pages of output.
@@ -7606,7 +7606,7 @@ It can have multiple paragraphs.
 
 <div class="extension">
 
-## Blurb classes (Markua extension)
+## Blurb classes (ME)
 
 Blurbs also have support for an attribute list, which can contain a `class`
 attribute.
@@ -7666,7 +7666,7 @@ That is not legal Markua...
 
 <div class="extension">
 
-## Syntactic sugar for blurb classes (Markua extension)
+## Syntactic sugar for blurb classes (ME)
 
 Having to constantly type `{class: warning}` in a computer programming book with
 a number of warnings would get tedious, as would any of the other blurb classes
@@ -7897,7 +7897,7 @@ W> This is a tip blurb, not a warning blurb.
 
 <div class="extension">
 
-## Using blurbs to center text (Markua extension)
+## Using blurbs to center text (ME)
 
 You can also use a blurb to center text.
 
@@ -7930,7 +7930,7 @@ via a class attribute on a normal blurb element.
 
 <div class="extension">
 
-## Blurb icons with extension attributes (Markua extension)
+## Blurb icons with extension attributes (ME)
 
 Markua Processors must ignore any attributes which they do not understand.
 
@@ -9716,7 +9716,7 @@ Here the outer list is loose, the inner list tight:
 
 <div class="extension">
 
-## List attributes (Markua extension)
+## List attributes (ME)
 
 Lists in Markdown (as described by John Gruber and specified by CommonMark) have
 some pretty major issues. Here are two of the biggest ones:
@@ -10303,7 +10303,7 @@ after
 
 <div class="extension">
 
-## Definition lists (Markua extension)
+## Definition lists (ME)
 
 Definition lists are also supported in Markua. To define a definition list, use
 the following syntax:
@@ -10514,7 +10514,7 @@ error to the list of errors.
 
 <div class="extension">
 
-# Quizzes and exercises (Markua extension)
+# Quizzes and exercises (ME)
 
 Markua was initially designed for the writing of books, but it has been extended
 to support creating courses. For example, Leanpub authors can click a button to
@@ -10666,7 +10666,7 @@ question.
 
 The exact way to create these types of questions is discussed further below.
 
-## Quiz and exercise output (Markua extension)
+## Quiz and exercise output (ME)
 
 A Markua Processor has many degrees of freedom in terms of whether, and how,
 to output quizzes and exercises. As such, no HTML mapping is shown here.
@@ -10709,7 +10709,7 @@ occur:
    questions, typically at the back of the book. This position can be controlled
    by the author using insert directives, discussed earlier.
 
-## Quiz and exercise validation (Markua extension)
+## Quiz and exercise validation (ME)
 
 ### An empty quiz or exercise is not an error
 
@@ -10733,7 +10733,7 @@ block. A Markua Processor must not parse lines starting with ? or ! as
 representing questions or answers unless those are contained in a quiz or
 exercise block.
 
-## Quiz and exercise attributes (Markua extension)
+## Quiz and exercise attributes (ME)
 
 These are the supported attributes on quizzes and/or exercises:
 
@@ -10851,7 +10851,7 @@ As discussed above, there is no `title` or `title` attribute for a quiz--you can
 just add a heading inside the quiz or exercise itself, using the normal Markua
 formatting for a chapter heading.
 
-## Multiple choice questions (Markua extension)
+## Multiple choice questions (ME)
 
 A multiple choice question has 2 or more answer choices, and 1 correct answer
 choice.
@@ -10944,7 +10944,7 @@ they are presented in the order written. If this attribute is omitted, its
 value is determined by the `random-choice-order` attribute on the quiz itself,
 which defaults to `false` if absent.
 
-## Multiple selection questions (Markua extension)
+## Multiple selection questions (ME)
 
 A multiple selection question has 2 or more answer choices, and 1 or more `true`
 answer choices.
@@ -11036,7 +11036,7 @@ much credit for correctly not selecting `cow` and `lettuce` as you do for
 correctly selecting `apple` and `peach`. If an instructor thinks this is too
 lenient, then `binary` is the choice for them!
 
-## Fill in the blank questions (Markua extension)
+## Fill in the blank questions (ME)
 
 A fill in the blank question consists of a question and a set of answers. Each
 answer is specified by `!`, an optional points value, a space, and then a
@@ -11184,7 +11184,7 @@ only applies to text string answers, not to regular expressions. For a regular
 expression to be case-insensitive, you must end it with an `i` after the
 closing backtick.
 
-## Written questions (Markua extension)
+## Written questions (ME)
 
 A written question corresponds to short answer, long answer or essay questions
 in traditional tests. It looks the same as a fill in the blank question, except
@@ -11288,7 +11288,7 @@ or long answer question.
 for paper quizzes than online ones. On paper, this is most useful for an essay
 question.
 
-## Hints on questions (Markua extension)
+## Hints on questions (ME)
 
 Any question can contain a hint, regardless of question type or whether an
 answer is provided.
@@ -11346,7 +11346,7 @@ For example, here's how Leanpub handles hints:
 6. The answers page for a quiz or exercise will show the question, hint and
    answers for each question.
 
-## Question alternates (Markua extension)
+## Question alternates (ME)
 
 The fact that a Markua document can be used to create an online course or MOOC
 means that certain aspects of the syntax for quizzes and exercises are more
@@ -11491,7 +11491,7 @@ backtick.
 
 <div class="extension">
 
-## Character substitutions (Markua extension)
+## Character substitutions (ME)
 
 Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -11542,7 +11542,7 @@ straight in a code span either.)
 
 <div class="extension">
 
-## Footnotes and endnotes (Markua extension)
+## Footnotes and endnotes (ME)
 
 Books often have footnotes and endnotes. So, Markua has them too.
 
@@ -13237,7 +13237,7 @@ __a<http://foo.bar/?q=__>
 
 <div class="extension">
 
-## Underline (Markua extension)
+## Underline (ME)
 
 In Markdown as defined by John Gruber, and in CommonMark and GFM,
 `*one asterisk*` and `_one underscore_` both produce *italics*, and there is no
@@ -13350,7 +13350,7 @@ stuff
 
 <div class="extension">
 
-## Superscript and subscript (Markua extension)
+## Superscript and subscript (ME)
 
 To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 
@@ -14462,7 +14462,7 @@ is followed by a link label (even though `[bar]` is not defined):
 
 <div class="extension">
 
-## Crosslinks and ids (Markua extension)
+## Crosslinks and ids (ME)
 
 There are two parts to making a crosslink.
 
@@ -14612,7 +14612,7 @@ Processor. The Markua Processor should also log an error.
 
 <div class="extension">
 
-## Smart crosslinks (Markua extension)
+## Smart crosslinks (ME)
 
 Chapters, sections and figures with titles often have two useful properties for
 writers:
@@ -14927,7 +14927,7 @@ If you want a link after a literal `!`, backslash-escape the
 
 <div class="extension">
 
-## Image resource attributes (Markua extension)
+## Image resource attributes (ME)
 
 As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
@@ -15075,7 +15075,7 @@ instead, involving a very real and very delicious apple pie:
 
 <div class="extension">
 
-## Inline SVG images (Markua extension)
+## Inline SVG images (ME)
 
 Local and web resource locations are supported for any type of image; inline
 resource locations are supported for SVG images only.
@@ -15219,7 +15219,7 @@ Heck, you can even use tildes to do that:
 
 <div class="extension">
 
-## Image locations and embedding (Markua extension)
+## Image locations and embedding (ME)
 
 Note that regardless of the image location, a Markua Processor can handle images
 in the following ways:
@@ -15242,7 +15242,7 @@ GIF, PNG, JPEG, SVG and zipped SVG.
 
 <div class="extension">
 
-## Video resources (Markua extension)
+## Video resources (ME)
 
 The syntax to insert a video is the same compact and consistent syntax that is
 used for any resource. Local and web resource locations are supported for both
@@ -15388,7 +15388,7 @@ poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 
 <div class="extension">
 
-## Audio resources (Markua extension)
+## Audio resources (ME)
 
 The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
@@ -15470,7 +15470,7 @@ The full version of the talk is here:
 
 <div class="extension">
 
-## Math (Markua extension)
+## Math (ME)
 
 Math can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
@@ -16511,7 +16511,7 @@ already done that.
 
 <div class="extension">
 
-## Remove comments (Markua extension)
+## Remove comments (ME)
 
 As discussed previously, Markua filters all HTML tags except HTML comments. Now,
 in terms of HTML comments, sometimes it is beneficial to have them included in
@@ -16781,7 +16781,7 @@ as hard line breaks.
 
 <div class="extension">
 
-## Configurable soft line breaks (Markua extension)
+## Configurable soft line breaks (ME)
 
 There is a good argument to be made that single newlines at the end of a line
 should always be treated as a hard line break, not as a soft line break.
@@ -16896,7 +16896,7 @@ paragraph-like contexts, such as definition list items.
 
 <div class="extension">
 
-## Span attribute lists (Markua extension)
+## Span attribute lists (ME)
 
 Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -16926,7 +16926,7 @@ creates a `[^footnote]` instead. (Footnotes are discussed below.)
 
 <div class="extension">
 
-## Index entries (Markua extension)
+## Index entries (ME)
 
 Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -17064,7 +17064,7 @@ implementation flexibility.
 
 <div class="extension">
 
-## Placeholders (Markua extension)
+## Placeholders (ME)
 
 Placeholders are a simple text-replace templating system which allow you to
 define boilerplate in one place, and easily insert it in other places. For books
@@ -17284,7 +17284,7 @@ baz
 
 </div>
 
-## Concatenating files and blank lines (Markua extension)
+## Concatenating files and blank lines (ME)
 
 A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by

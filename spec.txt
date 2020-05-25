@@ -272,8 +272,8 @@ In GFM, the `tagfilter` extension removes nine HTML tags, replacing their openin
 In Markua, all inline HTML tags are output verbatim. The only HTML feature which
 is allowed in Markua is HTML comments (`<!-- a comment -->`).
 
-I had considered modifying the `Disallowed Raw HTML (extension)` section, but
-instead added a `No Raw HTML (M)` section instead. This way, the Markua Spec
+I had considered modifying the **Disallowed Raw HTML (extension)** section, but
+instead added a **No Raw HTML (M)** section instead. This way, the Markua Spec
 only adds certain GFM extensions and does not edit them.
 
 Also, it is basically legitimate for GFM to consider their usage of `tagfilter`
@@ -16483,10 +16483,10 @@ foo <a href="\*">
 
 <div class="extension">
 
-## Disallowed Raw HTML (GFM extension, extended)
+## No Raw HTML (M)
 
-Markua enables the `tagfilter` extension, and modifies it to filter **ALL HTML
-TAGS EXCEPT HTML COMMENTS** when rendering HTML output.
+Markua filters **ALL HTML TAGS EXCEPT HTML COMMENTS** when rendering HTML
+output.
 
 To be clear, the only type of HTML block which is not filtered is an HTML
 comment, which matches the following:
@@ -16499,16 +16499,13 @@ All other types of HTML blocks are filtered.
 Filtering is done by replacing the leading `<` with the entity `&lt;`.
 
 ```````````````````````````````` example
-<strong> <title> <style> <em>
+<h1>Hello</h1>
 
-<blockquote>
-  <xmp> is disallowed.  <XMP> is also disallowed.
-</blockquote>
+<p>Hello world!</p>
 .
-<p>&lt;strong> &lt;title> &lt;style> &lt;em></p>
-&lt;blockquote>
-  &lt;xmp> is disallowed.  &lt;XMP> is also disallowed.
-&lt;/blockquote>
+<p>&lt;h1>Hello&lt;/h1>
+
+<p>&lt;p>Hello world!&lt;/p></p>
 ````````````````````````````````
 
 HTML is just one possible output format of Markua, and other possible Markua
@@ -16536,7 +16533,7 @@ concepts that it supports directly expressed using Markua syntax. For example,
 there is no official table syntax in Markdown, and Markdown authors can just use
 inline HTML tables. Since Markua does not support inline HTML, and since books
 often require tables, Markua needs to add a table syntax. Thankfully, GFM has
-already done that.
+already done that, and Markua just adds the GFM [Tables (extension)](#foo).
 
 </div>
 

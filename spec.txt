@@ -6,14 +6,14 @@ date: '2020-05-24'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-# Preface
+# Preface (Markua extension)
 
 This Preface contains a number of introductory sections about Markua and its
 relationship to Markdown, CommonMark and GFM. It also contains sections which
 discuss [Leanpub](https://leanpub.com), to minimize confusion for Leanpub
 authors who encounter this document.
 
-## What is this document?
+## What is this document? (Markua extension)
 
 This is the specification of **Markua 0.29**, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
@@ -34,7 +34,7 @@ This document has two types of intended readers:
 1. authors with advanced questions about Markua 0.29 syntax
 2. developers implementing Markua Processors
 
-## For Leanpub authors
+## For Leanpub authors (Markua extension)
 
 If you're a Leanpub author writing in Markua, this is **NOT** what you should be
 reading.
@@ -47,7 +47,7 @@ user manuals:
 
 You should probably go read one of those manuals instead of this document.
 
-## Three specifications
+## Three specifications (Markua extension)
 
 Leanpub has developed three separate but related specifications, all of which
 are based on the **CommonMark 0.29** spec:
@@ -56,7 +56,7 @@ are based on the **CommonMark 0.29** spec:
 2. [Markua 0.10 Spec](http://markua.com/spec/markua010)
 3. [Markua 0.29 Spec](http://markua.com/spec/markua029)
 
-## What is Leanpub Flavoured Markdown (LFM)?
+## What is Leanpub Flavoured Markdown (LFM)? (Markua extension)
 
 Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
 Markdown to support book authoring. It started in 2011 and evolved with
@@ -78,7 +78,9 @@ based on CommonMark. When this is complete, Leanpub's existing LFM Support will
 continue to be supported unchanged for many years, and will be rebranded as
 "LFM Quirks Mode".
 
-## What is Markua?
+## What is Markua? (Markua extension)
+
+Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
 
 Markua is the successor to Leanpub Flavoured Markdown.
 
@@ -88,7 +90,9 @@ years, and reached a stable version of Markua 0.10 in October 2019.
 
 There are two versions of Markua specified: Markua 0.10 and Markua 0.29.
 
-## Markua 0.10
+A more detailed introduction to Markua is contained in the Introduction below.
+
+## Markua 0.10 (Markua extension)
 
 Markua 0.10 is the version of Markua which started in 2014 and evolved until
 October 2019.
@@ -108,7 +112,7 @@ will be based on CommonMark. When this is complete, Leanpub's existing Markua
 0.10 Support will continue to be supported unchanged for many years, and will be
 rebranded as "Markua 0.10 Quirks Mode".
 
-## Markua 0.29
+## Markua 0.29 (Markua extension)
 
 Markua 0.29 is the version of Markua which is based on the CommonMark Spec.
 Work on the Markua 0.29 Spec started in 2019 and continues today.
@@ -127,7 +131,7 @@ Markua 0.29 Spec is being created first, there will only be one Markua 0.29 mode
 This mode will evolve in beta, and it will eventually match the Markua 0.29
 Spec.
 
-## Converting Between LFM, Markua 0.10 and Markua 0.29
+## Converting Between LFM, Markua 0.10 and Markua 0.29 (Markua extension)
 
 Leanpub books can currently be written in LFM or Markua 0.10. Leanpub courses
 can currently only be written in Markua 0.10.
@@ -146,7 +150,7 @@ following choice for each of their books or courses:
 
 To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
 
-## Structure of this document
+## Structure of this document (Markua extension)
 
 This document is a strange hybrid:
 

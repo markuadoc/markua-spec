@@ -24,32 +24,54 @@ Like the CommonMark Spec and the GitHub Flavored Markdown Spec, the Markua Spec
 is licensed under the Creative Commons license
 [CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
 
+## Three specifications
+
+Leanpub has developed three separate but related specifications, all of which
+are based on the **CommonMark 0.29** spec:
+
+1. [Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm)
+2. [Markua 0.10 Spec](http://markua.com/spec/markua010)
+3. [Markua 0.29 Spec](http://markua.com/spec/markua029)
+
 ## What is Leanpub Flavoured Markdown (LFM)?
 
 Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
 Markdown to support book authoring. It started in 2011 and evolved with
 feedback from Leanpub authors until 2014, when Markua was launched.
 
-LFM is specified in the [LFM Spec](http://markua.com/spec/lfm).
+Leanpub Flavoured Markdown is specified in the
+[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm).
 
 Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
 instead of the LFM Spec, since it provides a more accurate description of
 Leanpub's LFM support.
 
-## What is Markua 0.10?
+## What is Markua?
 
-Markua 0.10 is the version of Markua which started in 2014 and evolved
+Markua is the successor to Leanpub Flavoured Markdown.
+
+Markua was started at Leanpub in 2014, and benefited from many years of lessons
+that Leanpub had learned from LFM. We iterated on our Markua support for many
+years, and reached a stable version of Markua 0.10 in October 2019.
+
+There are two versions of Markua specified: Markua 0.10 and Markua 0.29.
+
+### Markua 0.10
+
+Markua 0.10 is the version of Markua which started in 2014 and evolved until
+October 2019.
 
 
 
+### Markua 0.29
+
+TODO
 
 
 
-
-
-
-
-
+These specifications do not exactly match Leanpub's current behaviour when
+parsing LFM or Markua 0.10. However, they will be reasonably close, and will
+enable the development of converters between LFM, Markua 0.10 and Markua 0.29.
 
 
 
@@ -88,18 +110,9 @@ So, Leanpub needs to redefine LFM and Markua 0.10 from a starting point of the
 CommonMark 0.29 spec, instead of starting with Markdown as originally described
 by John Gruber.
 
-### Three specifications
 
-As such, there are separate specifications for the following, and they are
-**ALL** based on the **CommonMark 0.29** spec:
 
-1. [LFM spec](http://markua.com/spec/lfm)
-2. [Markua 0.10 spec](http://markua.com/spec/markua010)
-3. [Markua 0.29 spec](http://markua.com/spec/markua029)
-
-These specifications will not exactly match Leanpub's current behaviour when
-parsing LFM or Markua 0.10. However, they will be reasonably close, and will
-enable the development of converters between LFM, Markua 0.10 and Markua 0.29.
+## TODO
 
 The difference between the current behaviour of Leanpub when parsing LFM or
 Markua 0.10 is discussed in the "Quirks Mode vs Spec Mode" section below.

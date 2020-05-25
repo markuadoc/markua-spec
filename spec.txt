@@ -198,27 +198,90 @@ it has a number of significant benefits:
 5. It means that updating this document to keep it current with the CommonMark
    and GFM specs will be very easy.
 
-There three main drawbacks, however:
+There are three main drawbacks, however:
 
 1. It would be nice to see "Markua" everywhere, instead of a combination of
-   "Markua" and "CommonMark". For example, the [Characters and lines](#characters-and-lines)
-   section starts with a sentence ending "...is a valid CommonMark document."
-   It would be less jarring to read "...is a valid Markua document." However,
-   this would not preserve what John MacFarlane wrote verbatim, and my judgment
-   is that it's more important to keep those sections unchanged than it is to
-   make everything say "Markua".
+   "Markua" and "CommonMark". For example, the
+   [Characters and lines](#characters-and-lines) section starts with a sentence
+   ending "...is a valid CommonMark document." It would be less jarring to read
+   "...is a valid Markua document." However, this would not preserve what John
+   MacFarlane wrote verbatim, and my judgment is that it's more important to
+   keep those sections unchanged than it is to make everything say "Markua".
 2. Sometimes, what Markua does is not specified fully in one section. So,
    occasionally there are two consecutive sections about essentially the same
-   feature, such as "Autolinks" and "Autolinks (GFM extension, identical)".
+   feature, such as "Autolinks" and "Autolinks (GFM)".
 3. In one case, there is contradictory information. This case is the handling
    of raw HTML tags. CommonMark supports raw HTML, and this is explained in the
    [Raw HTML](#raw-html) section. So, readers who only read that section would
-   (incorrectly) think that Markua supported raw HTML. However, GFM then
-   disallows some raw HTML tags. Furthermore, Markua then cheekily extends this
-   to disallow **ALL** raw HTML except for HTML comments, and explains this in
-   the [Disallowed Raw HTML (GFM extension, extended)](#disallowed-raw-html-gfm-extension-extended-)
-   section. Thankfully, this is the worst case, and most of the extensions of
-   both GFM and Markua to CommonMark are purely additive in nature.
+   (incorrectly) think that Markua supported raw HTML. However, Markua then
+   removes support for **ALL** raw HTML except for HTML comments, and explains
+   this in the [No Raw HTML (M)](#no-raw-html-) section. Thankfully, this is the
+   worst case, and most of the extensions of both GFM and Markua to CommonMark
+   are purely additive in nature.
+
+## GitHub Flavored Markdown (GFM) Extension Status (M)
+
+Note that while Markua is a strict superset of CommonMark, it is not a strict
+superset of the GitHub Flavored Markdown (GFM) Spec.
+
+Version 0.29 of the [GitHub Flavored Markdown
+Spec](https://github.github.com/gfm/) defines **five** extensions to CommonMark.
+Three of these are preserved verbatim, and two are deleted.
+
+The ones which are identical have "(extension)" in their title; the ones which
+are deleted are, well, deleted.
+
+Specifically, with respect to the GFM extensions, this is what Markua does, and
+why it does it.:
+
+### Tables (extension) - IDENTICAL
+
+This GFM extension is preserved verbatim.
+
+I considered requiring leading and trailing pipes (`|`), but since GFM tables
+require a delimiter line, this is enough to prevent false positives. Also, any
+divergence from GFM tables, even as an improvement, would not be worth the
+incompatibility.
+
+### Task list items (extension) - REMOVED
+
+This [GFM extension](https://github.github.com/gfm/#task-list-items-extension-)
+is not added to the Markua Spec.
+
+Markua is for books and courses, not todo lists.
+
+### Strikethrough (extension) - IDENTICAL
+
+This GFM extension is preserved verbatim.
+
+### Autolinks (extension) - IDENTICAL
+
+This GFM extension is preserved verbatim.
+
+While this extension is neutral for paper books, ebooks and courses do stand to
+benefit from this.
+
+### Disallowed Raw HTML (extension) - REMOVED
+
+This [GFM extension](https://github.github.com/gfm/#disallowed-raw-html-extension-)
+is not added to the Markua Spec.
+
+In GFM, the `tagfilter` extension removes nine HTML tags, replacing their opening
+`<` character with the entity `&lt;`.
+
+In Markua, all inline HTML tags are output verbatim. The only HTML feature which
+is allowed in Markua is HTML comments (`<!-- a comment -->`).
+
+I had considered modifying the `Disallowed Raw HTML (extension)` section, but
+instead added a `No Raw HTML (M)` section instead. This way, the Markua Spec
+only adds certain GFM extensions and does not edit them.
+
+Also, it is basically legitimate for GFM to consider their usage of `tagfilter`
+to be an extension, since almost all HTML is left untouched, and their extension
+just ensures sanity. However, Markua's removal of all HTML except HTML comments
+is a breaking change, not an extension. However, as far as books and courses are
+concerned, it's a win--and since the Markua Spec phrases all its changes as
+extensions, this is too. `¯\_(ツ)_/¯`
 
 # Introduction
 
@@ -642,40 +705,6 @@ in Hawaii when I named Markua, and I wanted something that sounded happy,
 friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
-
-## Modifications to GFM extensions (M)
-
-Note that while Markua is a strict superset of CommonMark, it is not a strict
-superset of GFM. Specifically, with respect to the GFM extensions, this is
-what Markua does:
-
-### Tables GFM extension
-
-This GFM extension is preserved verbatim. I considered requiring leading and
-trailing pipes (`|`), but since GFM tables require a delimiter line, this is
-enough to prevent false positives.
-
-### Task list items GFM extension
-
-This GFM extension is removed. Markua is for books and courses, not todo lists.
-
-### Strikethrough GFM extension
-
-This GFM extension is preserved verbatim.
-
-### Autolinks GFM extension
-
-This GFM extension is preserved verbatim. While this extension is neutral for
-paper books, ebooks and courses do stand to benefit from this.
-
-### Disallowed Raw HTML GFM extension
-
-As discussed above, this GFM extension originally disallowed a handful of HTML
-tags, primarily for security reasons. In Markua, it is extended to disallow
-**all** HTML tags except HTML comments. Yes, calling something which removes
-part of a feature an "extension" was a bit of a stretch in GFM (it's more of a
-reduction), and in this instance, Markua takes this approach and turns it up to
-11. `¯\_(ツ)_/¯`
 
 ## About the Try It buttons (M)
 

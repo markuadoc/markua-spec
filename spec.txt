@@ -65,7 +65,8 @@ CommonMark Spec did not even exist when LFM was completed.)
 
 Leanpub is working on a version ("Spec Mode") of its LFM support which will be
 based on CommonMark. When this is complete, Leanpub's existing LFM Support will
-continue to be supported unchanged, and will be rebranded as "Quirks Mode".
+continue to be supported unchanged for many years, and will be rebranded as
+"LFM Quirks Mode".
 
 ## What is Markua?
 
@@ -94,8 +95,8 @@ started.)
 
 Leanpub is working on a version ("Spec Mode") of our Markua 0.10 support which
 will be based on CommonMark. When this is complete, Leanpub's existing Markua
-0.10 Support will continue to be supported unchanged, and will be rebranded as
-"Quirks Mode".
+0.10 Support will continue to be supported unchanged for many years, and will be
+rebranded as "Markua 0.10 Quirks Mode".
 
 ## Markua 0.29
 
@@ -118,9 +119,27 @@ Spec.
 
 ## Converting Between LFM, Markua 0.10 and Markua 0.29
 
-Leanpub will develop converters to convert between LFM, Markua 0.10 and Markua
-0.29. The conversions to and from LFM and Markua 0.10 will be done in Spec Mode
-only, not Quirks Mode.
+Leanpub books can currently be written in LFM or Markua 0.10. Leanpub courses
+can currently only be written in Markua 0.10.
+
+The launch of Spec Mode for LFM and Markua 0.10 and the launch of the Markua
+0.29 beta will give authors of existing books and courses on Leanpub the
+following choice for each of their books or courses:
+
+1. Leave their book or course in Quirks Mode, for unchanged behaviour and
+   performance.
+2. Switch their book or course to Spec Mode, for faster book or course
+   generation and better compliance with the LFM or Markua 0.10 specs.
+3. Click a button to save a version of their existing manuscript and then
+   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
+   manuscript.
+
+To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
+
+
+
+
+
 
 ## Structure of this document
 
@@ -229,44 +248,6 @@ There three main drawbacks, however:
    section. Thankfully, this is the worst case, and most of the extensions of
    both GFM and Markua to CommonMark are purely additive in nature.
 
-
-
-### Quirks Mode vs. Spec Mode
-
-Roughly when we launch the Markua 0.29 beta, Leanpub will also launch LFM and
-Markua 0.10 "Spec Mode" support. When we do this, the existing LFM and Markua
-0.10 modes will be rebranded as the "Quirks Mode" of LFM and Markua 0.10.
-
-The "Spec Mode" support will implement LFM and Markua 0.10 without any intended
-differences between the implementation and their specifications. The "Quirks
-Mode" support will be the current implementations of LFM and Markua 0.10 which
-have been in use on Leanpub for years.
-
-With the launch of Quirks Mode and Spec Mode, there will be five Markdown-based
-writing modes on Leanpub:
-
-1. LFM (Quirks Mode)
-2. LFM (Spec Mode)
-3. Markua 0.10 (Quirks Mode)
-4. Markua 0.10 (Spec Mode)
-5. Markua 0.29
-
-Again, there is no Quirks Mode for Markua 0.29, since we do not have an existing
-Markua 0.29 implementation that we need to support.
-
-### Switching to Spec Mode and automatic converting to Markua 0.29
-
-The launch of Quirks Mode and Spec Mode will give authors of existing LFM books
-and Markua 0.10 books and courses on Leanpub the following choice for each of
-their books or courses:
-
-1. Leave their book or course in Quirks Mode, for unchanged behaviour and
-   performance.
-2. Switch their book or course to Spec Mode, for faster book or course
-   generation and better compliance with the LFM or Markua 0.10 specs.
-3. Click a button to save a version of their existing manuscript and then
-   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
-   manuscript.
 
 ### Future Markua versions and complexity
 

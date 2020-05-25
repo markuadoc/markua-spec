@@ -46,6 +46,14 @@ Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
 instead of the LFM Spec, since it provides a more accurate description of
 Leanpub's LFM support.
 
+The reason for this divergence is simple: the LFM Spec is based on the
+CommonMark Spec, but LFM is not based on CommonMark. (CommonMark and the
+CommonMark Spec did not exist when LFM was created.)
+
+Leanpub is working on a version ("Spec Mode") of LFM which will be based on
+CommonMark. When this is complete, Leanpub's existing LFM Support will continue
+to be supported unchanged, and will be rebranded as "Quirks Mode".
+
 ## What is Markua?
 
 Markua is the successor to Leanpub Flavoured Markdown.
@@ -60,6 +68,18 @@ There are two versions of Markua specified: Markua 0.10 and Markua 0.29.
 
 Markua 0.10 is the version of Markua which started in 2014 and evolved until
 October 2019.
+
+Leanpub authors should consult the [Markua manual](https://leanpub.com/lfm/read)
+instead of the LFM Spec, since it provides a more accurate description of
+Leanpub's LFM support.
+
+The reason for this divergence is simple: the LFM Spec is based on the
+CommonMark Spec, but LFM is not based on CommonMark. (CommonMark and the
+CommonMark Spec did not exist when LFM was created.)
+
+Leanpub is working on a version ("Spec Mode") of LFM which will be based on
+CommonMark. When this is complete, Leanpub's existing LFM Support will continue
+to be supported unchanged, and will be rebranded as "Quirks Mode".
 
 
 
@@ -130,15 +150,6 @@ The user manuals accurately depict Leanpub's current support of
 
 ## TODO
 
-Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
-Markdown to support book authoring. It started in 2011 and evolved with
-feedback from Leanpub authors until 2014, when Markua was launched.
-
-LFM is specified in the [LFM Spec](http://markua.com/spec/lfm).
-
-Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
-instead of the LFM Spec, since it provides a more accurate description of
-Leanpub's LFM support.
 
 
 
@@ -146,13 +157,6 @@ Leanpub's LFM support.
 
 
 
-The reason that Leanpub's LFM support is closer to the LFM manual than the
-LFM Spec is this: LFM was started in 2011, and placed into Long-Term Support
-(LTS) in 2014. This was before the CommonMark Spec was created. However, the LFM
-Spec is based on the CommonMark Spec, and it makes sense to specify LFM as a
-series of additions to CommonMark. This will cause some divergence between the
-actual behaviour of Leanpub and the LFM Spec, which is why the LFM Manual is so
-important.
 
 
 

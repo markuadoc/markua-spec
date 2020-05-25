@@ -276,6 +276,84 @@ This simple format is called Markua.
 
 This is its specification.
 
+## Markua: Markdown for books and courses (M)
+
+Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
+
+Markua is simple and powerful. When you are writing using Markua, you are
+writing, not programming. Once you understand Markua's syntax, it fades into the
+background.
+
+Markua is based on [Markdown](http://daringfireball.net/projects/markdown/).
+Markdown is a plain text format for writing text which can be transformed by
+Markdown processors into HTML. Markdown was created by John Gruber, with help
+from Aaron Swartz. Markdown was described by John Gruber as follows:
+
+> Markdown is a text-to-HTML conversion tool for web writers. Markdown allows
+you to write using an easy-to-read, easy-to-write plain text format, then
+convert it to structurally valid XHTML (or HTML).
+
+The primary reason that Markdown is a great way to write is that it was designed
+to be this way:
+
+> The overriding design goal for Markdown's formatting syntax is to make it as
+readable as possible. The idea is that a Markdown-formatted document should be
+publishable as-is, as plain text, without looking like it's been marked up with
+tags or formatting instructions. While Markdown's syntax has been influenced by
+several existing text-to-HTML filters, the single biggest source of inspiration
+for Markdown's syntax is the format of plain text email.
+
+Markua is a plain text format. Markua is basically Markdown, minus all inline
+HTML except comments, plus a number of extensions to support everything you need
+to write a book or create a course.
+
+Markua manuscripts, called Markua documents, can be written however you want. On
+a computer, you can use any text editor you want. Beginning authors can use
+simple programs like Notepad or TextEdit or "distraction-free" programs like
+iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or
+VSCode. Since Markua is essentially a superset of Markdown, many programs which
+support Markdown should already do a decent job of supporting Markua by default.
+
+Markua maps Markdown syntax to book concepts, and then adds some new syntax and
+concepts of its own.
+
+Markua documents can be automatically transformed into every popular type of ebook
+format. The computer programs which do this transformation are called Markua
+Processors. These programs understand both Markua syntax and how to generate the
+various output formats. An example Markua Processor is Leanpub: Leanpub can
+output PDF, EPUB, MOBI and HTML from the same Markua document, and can even
+output print-ready PDFs and InDesign files from them as well.
+
+Markua has been developed with extensive real-world testing and feedback. Markua
+has been used by Leanpub authors for years, both to create books and massive
+open online courses (MOOCs).
+
+Markua's three main contributions are the following:
+
+1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
+   (parts, chapters, sections, sub-sections, etc.), which provides the ability
+   for Markua Processors like Leanpub to produce an ebook from a Markua
+   manuscript with one click.
+2. The unified resource and attribute list syntax, which lets Markua handle
+   audio, code, math and video in the same way that it does images, and which
+   supports inline, local and web resource locations.
+3. The mapping of book structures to courses, and the creation of a plain-text
+   based microformat for course quizzes and exercises, which supports automated
+   marking and automated production of everything which is required for a MOOC.
+
+If you have written something (say blog posts or lecture notes) in Markdown, you
+can use a Markua Processor, such as Leanpub, to turn them into an ebook or
+course with one click. Then, as you go down the path of enhancing the manuscript
+and adding things which only make sense in books or courses, this process will
+feel like decorating, not converting.
+
+The goal is for writers who are familiar with Markdown to feel that Markdown
+somehow grew an understanding of book and course concepts. This goal has also
+informed the structure of this specification: instead of writing a separate spec
+from scratch, the Markua spec is a fork of the CommonMark spec with the GitHub
+Flavored Markdown (GFM) extensions. Everything new in Markua is written as a set
+of extensions to CommonMark.
+
 ## How to write a novel in Markua (M)
 
 The Markua specification is long. However, the amount you need to learn to get
@@ -551,84 +629,6 @@ If you are using Setext headings and you realize you need sub-sections and lower
 you can need to use atx headings for them. It's up to you, however, whether you
 convert the Setext headings for parts, chapters and sections. Mixing and
 matching heading styles is ugly, but it is permitted.
-
-## Markua: Markdown for books and courses (M)
-
-Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
-
-Markua is simple and powerful. When you are writing using Markua, you are
-writing, not programming. Once you understand Markua's syntax, it fades into the
-background.
-
-Markua is based on [Markdown](http://daringfireball.net/projects/markdown/).
-Markdown is a plain text format for writing text which can be transformed by
-Markdown processors into HTML. Markdown was created by John Gruber, with help
-from Aaron Swartz. Markdown was described by John Gruber as follows:
-
-> Markdown is a text-to-HTML conversion tool for web writers. Markdown allows
-you to write using an easy-to-read, easy-to-write plain text format, then
-convert it to structurally valid XHTML (or HTML).
-
-The primary reason that Markdown is a great way to write is that it was designed
-to be this way:
-
-> The overriding design goal for Markdown's formatting syntax is to make it as
-readable as possible. The idea is that a Markdown-formatted document should be
-publishable as-is, as plain text, without looking like it's been marked up with
-tags or formatting instructions. While Markdown's syntax has been influenced by
-several existing text-to-HTML filters, the single biggest source of inspiration
-for Markdown's syntax is the format of plain text email.
-
-Markua is a plain text format. Markua is basically Markdown, minus all inline
-HTML except comments, plus a number of extensions to support everything you need
-to write a book or create a course.
-
-Markua manuscripts, called Markua documents, can be written however you want. On
-a computer, you can use any text editor you want. Beginning authors can use
-simple programs like Notepad or TextEdit or "distraction-free" programs like
-iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or
-VSCode. Since Markua is essentially a superset of Markdown, many programs which
-support Markdown should already do a decent job of supporting Markua by default.
-
-Markua maps Markdown syntax to book concepts, and then adds some new syntax and
-concepts of its own.
-
-Markua documents can be automatically transformed into every popular type of ebook
-format. The computer programs which do this transformation are called Markua
-Processors. These programs understand both Markua syntax and how to generate the
-various output formats. An example Markua Processor is Leanpub: Leanpub can
-output PDF, EPUB, MOBI and HTML from the same Markua document, and can even
-output print-ready PDFs and InDesign files from them as well.
-
-Markua has been developed with extensive real-world testing and feedback. Markua
-has been used by Leanpub authors for years, both to create books and massive
-open online courses (MOOCs).
-
-Markua's three main contributions are the following:
-
-1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-   (parts, chapters, sections, sub-sections, etc.), which provides the ability
-   for Markua Processors like Leanpub to produce an ebook from a Markua
-   manuscript with one click.
-2. The unified resource and attribute list syntax, which lets Markua handle
-   audio, code, math and video in the same way that it does images, and which
-   supports inline, local and web resource locations.
-3. The mapping of book structures to courses, and the creation of a plain-text
-   based microformat for course quizzes and exercises, which supports automated
-   marking and automated production of everything which is required for a MOOC.
-
-If you have written something (say blog posts or lecture notes) in Markdown, you
-can use a Markua Processor, such as Leanpub, to turn them into an ebook or
-course with one click. Then, as you go down the path of enhancing the manuscript
-and adding things which only make sense in books or courses, this process will
-feel like decorating, not converting.
-
-The goal is for writers who are familiar with Markdown to feel that Markdown
-somehow grew an understanding of book and course concepts. This goal has also
-informed the structure of this specification: instead of writing a separate spec
-from scratch, the Markua spec is a fork of the CommonMark spec with the GitHub
-Flavored Markdown (GFM) extensions. Everything new in Markua is written as a set
-of extensions to CommonMark.
 
 ## Why the name "Markua"? (M)
 

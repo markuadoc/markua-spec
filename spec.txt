@@ -156,10 +156,10 @@ To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
 The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
 specification of the Markua extensions.
 
-The starting point is the CommonMark Spec.
+The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
+preserved unchanged.
 
-Almost the entire CommonMark Spec is preserved unchanged. The following are the
-changes to the CommonMark Spec:
+The following are the changes to the CommonMark Spec:
 
 1. The "HTML blocks" section is removed from the Leaf blocks chapter.
 2. The "Raw HTML" section is removed from the Inlines chapter.
@@ -167,8 +167,11 @@ changes to the CommonMark Spec:
    exercises), the numbering of all chapters is changed.
 4. The metadata at the top is changed.
 
+The reason that HTML tags are not treated as HTML is discussed
+[here](#no-raw-html-m-).
+
 Next, three of the five GitHub Flavored Markdown (GFM) extensions are added.
-These are discussed in the next section.
+These are discussed [below](#github-flavored-markdown-gfm-extension-status-m-).
 
 Finally, many new sections about Markua are added. These are all labeled
 "(M)" for "(Markua extension)". There are so many of these extensions that

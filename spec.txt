@@ -1,6 +1,6 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua is written by Peter Armstrong and is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
+author: '*This formal specification of Markua 0.29 was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
 version: 0.29
 date: '2020-05-24'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
@@ -283,6 +283,24 @@ is a breaking change, not an extension. However, as far as books and courses are
 concerned, it's a win--and since the Markua Spec phrases all its changes as
 extensions, this is too. `¯\_(ツ)_/¯`
 
+## About the HTML output (M)
+
+The HTML mapping defined in this specification is NOT a complete specification
+of the HTML documents produced by Markua Processors. It is only a specification
+of the parts of the HTML mapping where there is no need to have flexibility on
+the part of the Markua Processor. The HTML mapping should be thought of
+specifying HTML fragments, not documents. In all of the examples, a Markua
+Processor may add more HTML before and after the relevant content. The test is
+that the HTML produced contains the specified output, not that it is identical
+to the specified output.
+
+Every example uses the default Markua document settings, unless otherwise
+specified. Any custom settings are specified in a document settings list in the
+top of the example.
+
+Finally, Markua does not specify any CSS. However, advice will sometimes be
+offered in "CSS Note" sections. This is because certain semantically meaningful
+formatting (like strikethrough) is only done in HTML via CSS.
 
 # Introduction
 
@@ -706,30 +724,6 @@ in Hawaii when I named Markua, and I wanted something that sounded happy,
 friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
-
-## About the Try It buttons (M)
-
-The web interface "Try It" buttons do not work. At some point they will be fixed
-or removed.
-
-## About the HTML output (M)
-
-The HTML mapping defined in this specification is NOT a complete specification
-of the HTML documents produced by Markua Processors. It is only a specification
-of the parts of the HTML mapping where there is no need to have flexibility on
-the part of the Markua Processor. The HTML mapping should be thought of
-specifying HTML fragments, not documents. In all of the examples, a Markua
-Processor may add more HTML before and after the relevant content. The test is
-that the HTML produced contains the specified output, not that it is identical
-to the specified output.
-
-Every example uses the default Markua document settings, unless otherwise
-specified. Any custom settings are specified in a document settings list in the
-top of the example.
-
-Finally, Markua does not specify any CSS. However, advice will sometimes be
-offered in "CSS Note" sections. This is because certain semantically meaningful
-formatting (like strikethrough) is only done in HTML via CSS.
 
 ## Handling errors and warnings (M)
 

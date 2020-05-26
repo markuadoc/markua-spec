@@ -221,17 +221,11 @@ local create_anchors = function(doc, meta, to)
         cmark.node_append_child(leftcol_div, markdown_code)
         cmark.node_append_child(rightcol_div, html_code)
         local examplenum_div = make_html_block('div', {{'class', 'examplenum'}})
-        local interact_link = make_html_inline('a', {{'class', 'dingus'},
-                    {'title', 'open in interactive dingus'}})
-        cmark.node_append_child(interact_link, make_text("Try It"))
         local examplenum_link = cmark.node_new(cmark.NODE_LINK)
         cmark.node_set_url(examplenum_link, '#example-' .. tostring(example))
         cmark.node_append_child(examplenum_link,
                                 make_text("Example " .. tostring(example)))
         cmark.node_append_child(examplenum_div, examplenum_link)
-        if format == 'html' then
-          cmark.node_append_child(examplenum_div, interact_link)
-        end
         example_div = make_html_block('div', {{'class', 'example'},
                                  {'id','example-' .. tostring(example)}})
         cmark.node_append_child(example_div, examplenum_div)

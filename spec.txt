@@ -225,22 +225,26 @@ Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
 
 Version 0.29 of the [GitHub Flavored Markdown
-Spec](https://github.github.com/gfm/) defines **five** extensions to CommonMark.
-The GFM extensions have "(GFM)" in their title. (In the GFM Spec, they have
-"(extension)" in their title, but in the Markua Spec it is more clear to specify
-their provenance with (GFM) instead of just saying (extension).
+Spec](https://github.github.com/gfm/) defines five extensions to CommonMark.
+In the GFM Spec, these extensions have "(extension)" in their title.
 
-Three GFM extensions are included unchanged (except for replacing "(extension)"
-with "(GFM)" in their titles), and two are removed completely.
+Three of these five GFM extensions are included in the Markua Spec. Their
+content is unchanged, but their titles are renamed to say "(GFM)" instead of
+"(extension)", to more clearly specify their provenance. The other two GFM
+extensions are omitted.
+
+The reasoning for including or omitting these extensions is below.
 
 ### Tables (GFM) - included unchanged
 
 This GFM extension is included unchanged.
 
 I considered requiring leading and trailing pipes (`|`), but since GFM tables
-require a delimiter line, this is enough to prevent false positives. Also, any
-divergence from GFM tables, even as an improvement, would not be worth the
-incompatibility.
+require a delimiter line, this is enough to prevent false positives (of a
+parser deciding some text was a table when it was not).
+
+Also, any divergence from GFM tables, even as an improvement, would not be worth
+the incompatibility.
 
 ### Strikethrough (GFM) - included unchanged
 

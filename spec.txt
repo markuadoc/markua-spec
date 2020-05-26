@@ -153,30 +153,32 @@ To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
 
 ## Structure of this document (M)
 
-This document is a strange hybrid:
+The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
+specification of the Markua extensions:
 
-* A new Preface was added, which you are reading now.
-* There are many new sections about Markua, all labeled "(M)" for "(Markua
-  extension)". There are so many of these extensions that using (Markua
-  extension) everywhere added too much clutter.
-* There are sections describing the GitHub Flavored Markdown (GFM) extensions.
-  These are labeled either "(GFM extension, identical)" or "(GFM extension, extended)"
-* All other sections are preserved unchanged from the CommonMark spec.
+1. The entire CommonMark spec is preserved unchanged, except for the metadata
+   at the top.
+2. Three of the five GitHub Flavored Markdown (GFM) extensions are preserved.
+   These are discussed in the next section.
+3. There are many new sections about Markua, all labeled "(M)" for "(Markua
+   extension)". There are so many of these extensions that using (Markua
+   extension) everywhere added too much clutter.
 
 So, for any given section of this document, it is either:
 
 1. written by John MacFarlane about CommonMark
-2. written by GitHub employees about GitHub Flavored Markdown
-3. written by Peter Armstrong about Markua
+2. written by GitHub employees about GitHub Flavored Markdown, and ending with
+   "(extension)"
+3. written by Peter Armstrong about Markua, and ending with "(M)"
 
-Together, these sections combine to define Markua, since Markua is CommonMark
-plus (identical or modified) GFM extensions plus (many!) Markua extensions.
+Together, these sections combine to specify Markua, since Markua is CommonMark
+plus some GFM extensions plus (many!) Markua extensions.
 
 Since John MacFarlane is the author of the CommonMark Spec, he is the author of
 all sections of this document that are not in the Preface and are not
-labeled with "(M)", "(GFM extension, identical)" or "(GFM
-extension, extended)". Please note that this is just a statement of fact, not an
-implied endorsement of Markua!
+labeled with "(M)" or "(extension)". Please note that this is just a statement
+of fact, giving credit where credit is due, not an implied endorsement of
+Markua!
 
 While this hybrid approach of creating the Markua specification is somewhat odd,
 it has a number of significant benefits:
@@ -184,9 +186,9 @@ it has a number of significant benefits:
 1. The CommonMark Spec is very good, and is licensed under the Creative Commons
    license CC-BY-SA 4.0. Not starting with CommonMark would be an exercise in
    vanity.
-2. The CommonMark Spec is the defacto standard for a Markdown specification.
-   Any specification not based on CommonMark will need to be compared to
-   CommonMark, so the most helpful thing to do is to just start with CommonMark.
+2. The CommonMark Spec is the defacto standard specification of Markdown. Any
+   specification not based on CommonMark will need to be compared to CommonMark,
+   so the most helpful thing to do is to just start with CommonMark.
 3. Writing this specification as a series of extensions to CommonMark will
    enable people who are implementing it to just start with a compliant
    CommonMark implementation and modify it appropriately.
@@ -201,7 +203,7 @@ it has a number of significant benefits:
 There are three main drawbacks, however:
 
 1. It would be nice to see "Markua" everywhere, instead of a combination of
-   "Markua" and "CommonMark". For example, the
+   "Markua", "CommonMark" and "GFM". For example, the
    [Characters and lines](#characters-and-lines) section starts with a sentence
    ending "...is a valid CommonMark document." It would be less jarring to read
    "...is a valid Markua document." However, this would not preserve what John
@@ -209,7 +211,7 @@ There are three main drawbacks, however:
    keep those sections unchanged than it is to make everything say "Markua".
 2. Sometimes, what Markua does is not specified fully in one section. So,
    occasionally there are two consecutive sections about essentially the same
-   feature, such as "Autolinks" and "Autolinks (GFM)".
+   feature, such as "Autolinks" and "Autolinks (extension)".
 3. In one case, there is contradictory information. This case is the handling
    of raw HTML tags. CommonMark supports raw HTML, and this is explained in the
    [Raw HTML](#raw-html) section. So, readers who only read that section would
@@ -219,49 +221,48 @@ There are three main drawbacks, however:
    worst case, and most of the extensions of both GFM and Markua to CommonMark
    are purely additive in nature.
 
-## GitHub Flavored Markdown (GFM) Extension Status (M)
+## GitHub Flavored Markdown (GFM) extension status (M)
 
 Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
 
 Version 0.29 of the [GitHub Flavored Markdown
 Spec](https://github.github.com/gfm/) defines **five** extensions to CommonMark.
-Three of these are preserved verbatim, and two are deleted.
+The GFM extensions have "(extension)" in their title; this was included
+unchanged.
 
-The ones which are identical have "(extension)" in their title; the ones which
-are deleted are, well, deleted.
+Three GFM extensions are included unchanged, and two are removed completely.
 
-Specifically, with respect to the GFM extensions, this is what Markua does, and
-why it does it.:
+### Tables (extension) - included unchanged
 
-### Tables (extension) - IDENTICAL
-
-This GFM extension is preserved verbatim.
+This GFM extension is included unchanged.
 
 I considered requiring leading and trailing pipes (`|`), but since GFM tables
 require a delimiter line, this is enough to prevent false positives. Also, any
 divergence from GFM tables, even as an improvement, would not be worth the
 incompatibility.
 
-### Task list items (extension) - REMOVED
+### Strikethrough (extension) - included unchanged
+
+This GFM extension is included unchanged.
+
+Why? It's useful.
+
+### Autolinks (extension) - included unchanged
+
+This GFM extension is included unchanged.
+
+While this extension is neutral for paper books, ebooks and courses do stand to
+benefit from this.
+
+### Task list items (extension) - removed
 
 This [GFM extension](https://github.github.com/gfm/#task-list-items-extension-)
 is not added to the Markua Spec.
 
 Markua is for books and courses, not todo lists.
 
-### Strikethrough (extension) - IDENTICAL
-
-This GFM extension is preserved verbatim.
-
-### Autolinks (extension) - IDENTICAL
-
-This GFM extension is preserved verbatim.
-
-While this extension is neutral for paper books, ebooks and courses do stand to
-benefit from this.
-
-### Disallowed Raw HTML (extension) - REMOVED
+### Disallowed Raw HTML (extension) - removed
 
 This [GFM extension](https://github.github.com/gfm/#disallowed-raw-html-extension-)
 is not added to the Markua Spec.
@@ -274,7 +275,8 @@ is allowed in Markua is HTML comments (`<!-- a comment -->`).
 
 I had considered modifying the **Disallowed Raw HTML (extension)** section, but
 instead added a **No Raw HTML (M)** section instead. This way, the Markua Spec
-only adds certain GFM extensions and does not edit them.
+either preserves GFM extensions verbatim or removes them entirely, instead of
+editing them.
 
 Also, it is basically legitimate for GFM to consider their usage of `tagfilter`
 to be an extension, since almost all HTML is left untouched, and their extension
@@ -282,6 +284,7 @@ just ensures sanity. However, Markua's removal of all HTML except HTML comments
 is a breaking change, not an extension. However, as far as books and courses are
 concerned, it's a win--and since the Markua Spec phrases all its changes as
 extensions, this is too. `¯\_(ツ)_/¯`
+
 
 # Introduction
 
@@ -6788,7 +6791,7 @@ aaa
 
 <div class="extension">
 
-## Tables (GFM extension, identical)
+## Tables (GFM extension)
 
 GFM enables the `table` extension, where an additional leaf block type is
 available.
@@ -13403,7 +13406,7 @@ Subscript: H~2~O
 </div>
 
 
-## Strikethrough (GFM extension, identical)
+## Strikethrough (GFM extension)
 
 Markua enables the `strikethrough` extension, where an additional emphasis type is
 available.
@@ -16041,7 +16044,7 @@ foo@bar.example.com
 
 <div class="extension">
 
-## Autolinks (GFM extension, identical)
+## Autolinks (GFM extension)
 
 Markua enables the `autolink` extension, where autolinks will be recognised in a
 greater number of conditions.

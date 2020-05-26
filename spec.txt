@@ -161,10 +161,10 @@ The starting point is the CommonMark Spec.
 Almost the entire CommonMark Spec is preserved unchanged. The following are the
 changes to the CommonMark Spec:
 
-1. The "HTML blocks" chapter is removed from the Leaf blocks chapter.
+1. The "HTML blocks" section is removed from the Leaf blocks chapter.
 2. The "Raw HTML" section is removed from the Inlines chapter.
 3. Since there are three chapters added (Preface, Metadata, Quizzes and
-   exercises), the numbering is changed.
+   exercises), the numbering of all chapters is changed.
 4. The metadata at the top is changed.
 
 Next, three of the five GitHub Flavored Markdown (GFM) extensions are added.

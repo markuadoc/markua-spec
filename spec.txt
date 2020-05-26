@@ -271,28 +271,10 @@ Markua is for books and courses, not todo lists.
 This [GFM extension](https://github.github.com/gfm/#disallowed-raw-html-extension-)
 is not added to the Markua Spec.
 
-In GFM, the `tagfilter` extension removes nine HTML tags, replacing their opening
-`<` character with the entity `&lt;`.
-
-In Markua, all inline HTML tags are output verbatim. The only HTML feature which
-is allowed in Markua is HTML comments (`<!-- a comment -->`).
-
-I had considered modifying the **Disallowed Raw HTML (GFM)** section, but
-instead added a **No Raw HTML (M)** section instead. This way, the Markua Spec
-either preserves GFM extensions verbatim or removes them entirely, instead of
-editing them.
-
-Also, while it is legitimate for GFM to consider their usage of `tagfilter` to
-be an extension, it would not be legitimate for TODO
-
-it is basically legitimate for 
-to be an extension, since almost all HTML is left untouched, and their extension
-just ensures sanity.
-
-However, Markua's removal of all HTML except HTML comments
-is a breaking change, not an extension. However, as far as books and courses are
-concerned, it's a win--and since the Markua Spec phrases all its changes as
-extensions, this is too. `¯\_(ツ)_/¯`
+Instead, the following is done:
+1. The "HTML blocks" chapter is removed from the Leaf blocks chapter.
+2. The "Raw HTML" section is removed from the Inlines chapter.
+3. A [No Raw HTML](#no-raw-html-m-) extension is added.
 
 ## About the HTML output (M)
 
@@ -796,7 +778,7 @@ Markua originated in 2014 (!) as a standalone specification, and evolved for a
 number of years in beta before being rewritten in its current form.
 
 As such, there are a number of differences with various versions of the Markua
-spec. Frankly, there were a number of cases where the original Markua decision
+spec. Frankly, there were a handful of cases where the original Markua decision
 was better, in isolation. However, at a big picture level, the tradeoff of being
 incompatible with CommonMark and GFM was not worth these improvements.
 
@@ -15713,18 +15695,10 @@ foo <a href="\*">
 
 ## No Raw HTML (M)
 
-Markua filters **ALL HTML TAGS EXCEPT HTML COMMENTS** when rendering HTML
-output.
+Markua does not treat HTML tags as HTML. Instead it treats them as text to be
+rendered.
 
-To be clear, the only type of HTML block which is not filtered is an HTML
-comment, which matches the following:
-
-**Start condition:** line begins with the string `<!--`.\
-**End condition:**  line contains the string `-->`.
-
-All other types of HTML blocks are filtered.
-
-Filtering is done by replacing the leading `<` with the entity `&lt;`.
+The way it does this is by replacing a leading `<` with the entity `&lt;`.
 
 ```````````````````````````````` example
 <h1>Hello</h1>
@@ -15737,7 +15711,7 @@ Filtering is done by replacing the leading `<` with the entity `&lt;`.
 ````````````````````````````````
 
 HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as PDF) are not based on HTML. If inline HTML was
+output formats (such as LaTeX and PDF) are not based on HTML. If inline HTML was
 supported, a Markua Processor would have to support parsing and meaningfully
 outputting all of HTML syntax as well as all of Markua syntax.
 
@@ -15765,91 +15739,6 @@ inline HTML tables. Since Markua does not support inline HTML, and since books
 often require tables, Markua needs to add a table syntax. Thankfully, GFM has
 already done that, and Markua just adds their [Tables (GFM)](#tables-gfm-)
 extension.
-
-</div>
-
-
-<div class="extension">
-
-## Remove comments (M)
-
-As discussed previously, Markua filters all HTML tags except HTML comments. Now,
-in terms of HTML comments, sometimes it is beneficial to have them included in
-the output, and sometimes it is not (if, say, an author wants to remove sections
-of manuscript text from the output.)
-
-This is controlled with the `remove-comments` global setting. The default value
-of `remove-comments` is false, for compatibility with Markdown by default.
-
-So, by default, `remove-comments` is `false`:
-
-```````````````````````````````` example
-# Chapter One
-
-stuff
-
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-
-stuff
-.
-<h1>Chapter One</h1>
-<p>stuff</p>
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-<p>stuff</p>
-````````````````````````````````
-
-This can be made explicit by setting the `remove-comments` global setting
-to `false`:
-
-```````````````````````````````` example
-{
-remove-comments: false
-}
-
-# Chapter One
-
-stuff
-
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-
-stuff
-.
-<h1>Chapter One</h1>
-<p>stuff</p>
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-<p>stuff</p>
-````````````````````````````````
-
-Set the `remove-comments` global setting to `true` to remove comments from the
-output:
-
-```````````````````````````````` example
-{
-remove-comments: true
-}
-
-# Chapter One
-
-stuff
-
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-
-stuff
-.
-<h1>Chapter One</h1>
-<p>stuff</p>
-<p>stuff</p>
-````````````````````````````````
 
 </div>
 

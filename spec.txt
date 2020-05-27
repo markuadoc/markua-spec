@@ -545,12 +545,14 @@ specification of the Markua extensions.
 The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
 preserved unchanged.
 
-The following are the changes to the CommonMark Spec:
+Besides the numerous extensions which were added, the following are the changes
+to the CommonMark Spec:
 
 1. The "HTML blocks" section is removed from the Leaf blocks chapter.
 2. The "Raw HTML" section is removed from the Inlines chapter.
-3. Since there are three chapters added (Preface, Metadata, Quizzes and
-   exercises), the numbering of all chapters is changed.
+3. Since the [Metadata](#metadata-m-) and
+   [Quizzes and exercises](#quizzes-and-exercises-m-) chapters are new, the
+   numbering of some chapters is changed.
 4. The metadata at the top is changed.
 
 The reason that HTML tags are not treated as HTML is discussed

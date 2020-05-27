@@ -1,34 +1,14 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua is written by Peter Armstrong and is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
+author: '*This formal specification of Markua 0.29 was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
 version: 0.29
-date: '2020-05-20'
+date: '2020-05-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 # Introduction
 
-## A note for Leanpub authors
-
-If you're a Leanpub author writing in Markua, this is **NOT** what you should be
-reading.
-
-Leanpub's current Markua implementation was based on an earlier beta of the
-Markua spec. Leanpub authors should read
-[The Markua Manual](https://leanpub.com/markua/read) to learn how to write in
-Markua on Leanpub today.
-
-The Markua Manual recommends the way to write using Leanpub's current Markua
-support which is also the most compatible with the version of Markua that is
-specified here.
-
-Leanpub is working on supporting the version of Markua that is specified here.
-Once we have done this, we will also provide tooling to help convert books and
-courses that were written in the Markua beta into this version of Markua.
-After that is done, we will also provide tooling to help convert books that were
-written in Leanpub Flavoured Markdown into this version of Markua.
-
-## The magical typewriter
+## The magical typewriter (M)
 
 Imagine you owned a magical typewriter.
 
@@ -55,9 +35,13 @@ to any other version of your manuscript that had ever existed.
 
 If you decided to make a print book, you could press a key on your magical
 typewriter to get a print-ready PDF. All you would need to do is add a cover.
-Or, if you wanted to work with a designer or publisher, you could press a
-different key to generate InDesign. They could then use this as a starting point
-for producing a beautiful print book.
+
+If you wanted to work with a designer, you could press a different key to
+generate InDesign. They could then use this as a starting point for producing a
+beautiful print book.
+
+Or, if you wanted to work with a publisher, you could press a different key to
+get a Word document.
 
 Your magical typewriter could even transform your completed book manuscript into
 a course that anyone in the world could take. All you'd need to do is to
@@ -75,7 +59,7 @@ Wouldn't it be great if such a magical typewriter existed?
 It does. At [Leanpub](https://leanpub.com), we're building it.
 
 But there's one requirement for this magical typewriter to exist: a simple,
-coherent, open source, free, plain text format for a book or course manuscript.
+coherent, open, free, plain text format for a book or course manuscript.
 
 This simple format will be the basis for the magical typewriter.
 
@@ -83,12 +67,56 @@ This simple format is called Markua.
 
 This is its specification.
 
-## How to write a novel in Markua
+## For Leanpub authors (M)
 
-The Markua specification is long. However, the amount you need to learn to get
-started is actually very short.
+There are currently two ways to write in plain text on Leanpub. These are their
+user manuals:
+
+1. [Markua 0.10](https://leanpub.com/markua/read) (preferred)
+2. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
+
+If you're a Leanpub author, you should probably go read one of those manuals
+instead of this specification.
+
+Specifically, Markua 0.29 is NOT yet supported on Leanpub.
+
+## What is this document? (M)
+
+This is version 0.29 of the Markua Spec, written by
+[Peter Armstrong](https://twitter.com/peterarmstrong).
+
+Version 0.29 of the Markua Spec is based on version 0.29 of the CommonMark Spec,
+whose author is [John MacFarlane](https://johnmacfarlane.net/).
+
+This document also incorporates the specification of the GitHub Flavored
+Markdown (GFM) extensions from the
+[GitHub Flavored Markdown Spec](https://github.github.com/gfm/).
+
+Like the CommonMark Spec and the GitHub Flavored Markdown Spec, the Markua Spec
+is licensed under the Creative Commons license
+[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+
+This document has two types of intended readers:
+
+1. authors with advanced questions about Markua 0.29 syntax
+2. developers implementing Markua Processors
+
+This Introduction contains a number of introductory sections about Markua and its
+relationship to Markdown, CommonMark and GFM. It also contains sections which
+discuss Leanpub, to minimize confusion for Leanpub authors who encounter this
+document.
+
+If you're going to read this document, you really should read the Introduction,
+even if you normally skip them.
+
+## How to write a novel in Markua (M)
+
+The Markua specification is long. However, if you're an author, the amount you
+need to learn to write in Markua is actually very short.
 
 This example shows everything you need to know to write a novel in Markua:
+
+* * *
 
 ~~~
 # Chapter One
@@ -96,6 +124,10 @@ This example shows everything you need to know to write a novel in Markua:
 This is a paragraph. You just write.
 
 Blank lines separate paragraphs. This is *italic* and **bold**.
+
+This is another paragraph. You can manually wrap your paragraphs
+however you want. Single newlines function like single spaces by
+default.
 
 * * *
 
@@ -106,51 +138,45 @@ That was a thematic break. "This is in quotes."
 This is a paragraph in a new chapter.
 ~~~
 
-Specifically, these are the rules:
+* * *
 
-1. Paragraphs are separated from other paragraphs by blank lines.
-   (To add a blank line, add two consecutive newlines.)
-2. To make a chapter heading, start a line with a pound sign (`#`), followed by
-   a space and the name of the chapter.
-3. To add a thematic break (also known as a scene break), put three asterisks
-   (`* * *`) on a line with only whitespace.
-4. Chapter headings and thematic breaks are separated from paragraphs by single
-   newlines or blank lines. Blank lines are preferred for readability.
-5. By default, single newlines in paragraphs turn into single spaces in the
-   output, so you can manually wrap your paragraphs with newlines if you want.
-   It's optional, however, and typically a waste of time.
-6. Use `*one asterisk*` for italic and `**two asterisks**` for bold.
-7. All other text and punctuation is typed normally.
+I also showed **bold text**, even though *you only need italics* for novels!
 
-That's it!
+## How to write almost any book in Markua (M)
 
-## How to write a computer programming book in Markua
-
-The following example shows basically everything you need to know to write a
-computer programming book in Markua:
+This longer example shows everything you need to know to write almost any type
+of book, such as a computer programming book, in Markua. It also explains most
+of Markua's important syntax while it's at it:
 
 ~~~
-# Chapter One
+# Paragraphs
 
-This is *italic* and **bold**.
+This is a paragraph. You just write.
 
-Here's an image:
+Blank lines separate paragraphs. This is *italic* and **bold**.
 
-![a red apple](mac.jpg "The Original Mac")
+This is another paragraph. You can manually wrap your paragraphs
+however you want. Single newlines function like single spaces by
+default.
 
-## Section One
+* * *
 
-You can have ordered and unordered lists, including nested lists:
+That was a thematic break. "This is in quotes."
+
+# Lists
+
+Here's a numbered list (called an "ordered list", even though all lists are
+ordered):
 
 1. foo
-   a) lorem
-   b) ipsum
 2. bar
-   * stuff
-   * more stuff
 3. baz
 
-### A Sub-Section
+Here's a bulleted list (called an "unordered list", for irony):
+
+* foo
+* bar
+* baz
 
 You can even have definition lists!
 
@@ -161,262 +187,213 @@ term 1
 term 2
 : definition 2
 
-## Another Section
+# Tables
 
-Tables work too:
+You can also use tables, which work best for numeric tabular data
+involving a small number of columns containing small numbers:
 
-| Header 1  | Header 2  |
-| --------- | --------- |
-| Content 1 | Content 2 |
-| Content 3 | Content 4 |
+| Central Bank | Rate      |
+|--------------|-----------|
+| JPY          | -0.10%    |
+| EUR          |  0.00%    |
+| USD          |  0.00%    |
+| CAD          |  0.25%    |
 
-You can have external code samples:
+Note that definition lists are preferred to tables for most use cases,
+since typing text in a table quickly gets annoying.
+
+# Headings
+
+Markua supports both of Markdown's heading styles.
+
+The preferred style, called atx headers, has the following meaning in Markua:
+
+```
+{class: part}
+# Part
+
+This is a paragraph.
+
+# Chapter
+
+This is a paragraph.
+
+## Section
+
+This is a paragraph.
+
+### Sub-section
+
+This is a paragraph.
+
+#### Sub-sub-section
+
+This is a paragraph.
+
+##### Sub-sub-sub-section
+
+This is a paragraph.
+
+###### Sub-sub-sub-sub-section
+
+This is a paragraph.
+```
+
+Note the use of three backticks in the above example, to treat the Markua like
+inline code.
+
+The other style of headers, called Setext headers, has the following headings:
+
+```
+Chapter
+=======
+
+This is a paragraph.
+
+Section
+-------
+
+This is a paragraph.
+```
+
+Setext headers look nice, but only if you're only using chapters and sections.
+If you want to add sub-sections or parts, you'll be using atx headers for at
+least some of your headers. My advice is to just use atx headers all the time.
+
+Finally, note that while it is confusing and ugly to mix and match using Setext
+and atx headers for chapters and sections in the same document, you can do it.
+However, please don't.
+
+# Images
+
+You can add images like this:
+
+![](mac.jpg)
+
+You can specify the alt text and figure caption like this:
+
+![alt text for accessibility](image.png "Figure Caption")
+
+An example of the difference between alt text and a figure caption is:
+
+![a red apple](mac.jpg "The Original Mac")
+
+You can also set the alt text and/or the figure caption in an attribute list:
+
+{alt: "a red apple", caption: "The Original Mac"}
+![](mac.jpg)
+
+If you omit the figure caption, the alt text is used as the figure caption by
+default:
+
+![The Original Mac, a Red McIntosh Apple](mac.jpg)
+
+If you are writing a descriptive figure caption which serves as perfectly good
+alt text, this is not terrible. However, it does mean that the alt text and
+figure caption are redundant, which is far from ideal.
+
+If, however, you are writing a humorous or ironic figure caption which does not
+describe the figure accurately, it is really important that you provide the
+appropriate alt text for accessibility.
+
+# Global Settings
+
+Various global settings can be specified at the start of a Markua document to
+affect the behaviour of the Markua Processor.
+
+For example, the global setting which controls whether alt text is used as the
+figure caption if there is no figure caption explicitly set is called `caption`.
+It can have the value of `alt` (the default, which uses the alt text as the
+figure caption if no figure caption is set) or `none` (which omits the figure
+caption if no figure caption is set).
+
+Here's an example of a complete Markua document showing the use of global
+settings:
+
+```
+{
+caption: none
+}
+
+# Chapter One
+
+This is an apple. This image will have alt text but no figure caption.
+
+![a red apple](mac.jpg)
+
+No figure caption? Go figure.
+```
+
+# Code Samples
+
+The image syntax is the inspiration for the syntax for external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
-You can also inline code samples:
+Note that you can also specify the figure caption as the alt text, as long as
+the global setting of `caption` is set to its default value of `alt`:
 
-{title: "Hello World in Ruby"}
+![Hello World in Ruby](hello.rb)
+
+Just like with images, you can also use an attribute list for the caption:
+
+{caption: "Hello World in Ruby"}
+![](hello.rb)
+
+You can also have inline code samples, which can only have a caption using an
+attribute list:
+
+{caption: "Hello World in Ruby"}
 ```ruby
 puts "hello"
 ```
 
-You can also include single lines of code like `puts "hello"` in paragraphs.
+You can also include single lines of code like `puts "hello"` in paragraphs
+using backticks.
+
+# Other Stuff
+
+Note that you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well,
+either inline in a paragraph or as a figure, using LaTeX math as the format.
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *Markua Spec*
 
-Finally, you can do that with math `d = v_i t + \frac{1}{2} a t^2`$ too.
+Markua has lots of features not discussed in this example. Read the manual or
+the rest of the spec!
 ~~~
 
-As you can see, there is more syntax, including ordered and unordered lists,
-definition lists, tables, block quotes, external and inline code samples,
-inline math, etc. However, even with all this, the Markua document remains
-readable. Exactly how all of this syntax works is explained in the spec.
-
-## How to write a course (MOOC) in Markua
-
-To write a course in Markua, you can start from scratch or from a book
-manuscript already formatted in Markua. Literally, all you need to do to turn a
-book written in Markua into a course is to add some quizzes.
-
-The following is a complete course, written in Markua:
-
-```
-# Lesson One: Markua
-
-## Section One
-
-Lessons can have sections (and sub-sections, etc.) just like book chapters.
-You can use the same headings as you do for book chapters and sections.
-
-This exercise shows two multiple choice questions.
-
-{exercise, id: exercise1}
-? How many letters are in the word Markdown?
-
-a) 6
-b) 7
-C) 8
-
-? How many unique letters are in the word CommonMark?
-
-a) 6
-B) 7
-c) 8
-{/exercise}
-
-## Section Two
-
-This quiz shows a multiple choice question and a fill in the blank question.
-
-{quiz, id: quiz1}
-? How many letters are in the word Markua?
-
-a) 5
-B) 6
-c) 7
-
-? How many unique letters are in the word Markua?
-
-! 5
-{/quiz}
-
-# Lesson Two: Geography
-
-This quiz shows two fill in the blank questions, with multiple answers and with
-a regex answer.
-
-{quiz, id: quiz2}
-? What's the global capital of investment banking?
-
-! New York
-! London
-
-? Where's the Eiffel Tower?
-
-! /(Paris|France)/i
-{/quiz}
-
-# Lesson Three: Biology
-
-This one-question quiz shows a multiple selection question.
-
-{quiz, id: quiz3}
-? Which of these are fruits?
-
-T) apple
-F) cow
-F) lettuce
-T) peach
-T) pear
-F) rice
-{/quiz}
-```
-
-As this example shows, the syntax for writing normal content is the same as for
-books. All that's different is the addition of quizzes and exercises.
-
-Quizzes and exercises have the same type of content. However, with quizzes the
-marks count toward your mark in the course, and with exercises they don't count.
-For MOOCs, Markua supports multiple choice, fill in the blank and multiple
-selection questions.
-
-A multiple choice question has 2 or more answer choices, and 1 correct answer
-choice. The correct answer choice is in a capital letter; incorrect answer
-choices have lowercase letters.
-
-A fill in the blank question consists of a question and a set of answers.
-You can even use regular expressions for the answers.
-
-A multiple selection question makes learners select every true answer, and leave
-every false answer not selected.
-
-As explained in the spec, there are more types of questions, and more options
-with these types of questions. However, what is shown above is enough to create
-a full MOOC out of a Markua book.
-
-## Markua heading mapping to book and course structures
-
-Markua is a way of writing books and courses. Books have things like chapters
-and sections. Sometimes books have parts. Courses have lessons, which can be
-organized in parts and grouped into sections.
-
-In Markua, you make the appropriate headings using the standard atx or Setext
-headings of Markdown, and these produce the appropriate level of heading.
-
-* `h1` (with a `{class: part}` attribute list) produces a part heading
-* `h1` (without a `{class: part}` attribute list) produces a chapter heading
-* `h2` produces a section heading
-* `h3` produces a sub-section heading
-* `h4` produces a sub-sub-section heading
-* `h5` produces a sub-sub-sub-section heading
-* `h6` produces a sub-sub-sub-sub-section heading
-
-With the Markdown atx headers, this is all really straightforward:
-
-```
-{class: part}
-# A Part Heading (h1)
-
-# A Chapter Heading (h1)
-
-## A Section Heading (h2)
-
-### A Sub-Section Heading (h3)
-
-#### A Sub-Sub-Section Heading (h4)
-
-##### A Sub-Sub-Sub-Section Heading (h5)
-
-###### A Sub-Sub-Sub-Sub-Section Heading (h6)
-```
-
-With the Markdown Setext headers, you can only go to h2, so you can only make
-part, chapter and section headings using Setext headers:
-
-```
-{class: part}
-A Part Heading (h1)
-===================
-
-A Chapter Heading (h1)
-======================
-
-A Section Heading (h2)
-----------------------
-```
-
-Both produce identical HTML for the part, chapter and section headings.
-The `{class: part}` gets passed into the HTML as a `class="part"`, as is shown
-in the [Part Headings](#part-headings-markua-extension-) extension. The other
-headings all look identical to the Markdown headings as specified by CommonMark.
-So, they are just discussed in the [ATX headings](#atx-headings) and
-[Setext headings](#setext-headings) sections.
-
-If you are using Setext headings and you realize you need sub-sections and lower,
-you can need to use atx headings for them. It's up to you, however, whether you
-convert the Setext headings for parts, chapters and sections. Mixing and
-matching heading styles is ugly, but it is permitted.
-
-## Markua: Markdown for books and courses
+## Markua: Markdown for books and courses (M)
 
 Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
-
-Markua is simple and powerful. When you are writing using Markua, you are
-writing, not programming. Once you understand Markua's syntax, it fades into the
-background.
-
-Markua is based on [Markdown](http://daringfireball.net/projects/markdown/).
-Markdown is a plain text format for writing text which can be transformed by
-Markdown processors into HTML. Markdown was created by John Gruber, with help
-from Aaron Swartz. Markdown was described by John Gruber as follows:
-
-> Markdown is a text-to-HTML conversion tool for web writers. Markdown allows
-you to write using an easy-to-read, easy-to-write plain text format, then
-convert it to structurally valid XHTML (or HTML).
-
-The primary reason that Markdown is a great way to write is that it was designed
-to be this way:
-
-> The overriding design goal for Markdown's formatting syntax is to make it as
-readable as possible. The idea is that a Markdown-formatted document should be
-publishable as-is, as plain text, without looking like it's been marked up with
-tags or formatting instructions. While Markdown's syntax has been influenced by
-several existing text-to-HTML filters, the single biggest source of inspiration
-for Markdown's syntax is the format of plain text email.
-
-Markua is a plain text format. Markua is basically Markdown, minus all inline
-HTML except comments, plus a number of extensions to support everything you need
-to write a book or create a course.
-
-Markua manuscripts, called Markua documents, can be written however you want. On
-a computer, you can use any text editor you want. Beginning authors can use
-simple programs like Notepad or TextEdit or "distraction-free" programs like
-iA Writer; authors who are programmers can use editors like Emacs, Vim, Atom or
-VSCode. Since Markua is essentially a superset of Markdown, many programs which
-support Markdown should already do a decent job of supporting Markua by default.
 
 Markua maps Markdown syntax to book concepts, and then adds some new syntax and
 concepts of its own.
 
-Markua documents can be automatically transformed into every popular type of ebook
-format. The computer programs which do this transformation are called Markua
-Processors. These programs understand both Markua syntax and how to generate the
-various output formats. An example Markua Processor is Leanpub: Leanpub can
-output PDF, EPUB, MOBI and HTML from the same Markua document, and can even
-output print-ready PDFs and InDesign files from them as well.
+Markua documents can be automatically transformed into every popular type of
+ebook format. The computer programs which do this transformation are called
+Markua Processors. These programs understand both Markua syntax and how to
+generate the various output formats. An example Markua Processor is Leanpub:
+Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
+and can even output print-ready PDFs and InDesign files from them as well.
 
-Markua has been developed with extensive real-world testing and feedback. Markua
-has been used by Leanpub authors for years, both to create books and massive
-open online courses (MOOCs).
+Markua has been developed with extensive real-world testing and feedback.
+Markua has been used by Leanpub authors for years, both to create books and
+online courses.
+
+Markua was started at Leanpub in 2014, and benefited from the years of lessons
+that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
+successor to LFM. We iterated on our Markua support for many years, and reached
+a stable version of Markua 0.10 in October 2019.
+
+There are two versions of Markua specified: Markua 0.10 and Markua 0.29.
 
 Markua's three main contributions are the following:
 
 1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
    (parts, chapters, sections, sub-sections, etc.), which provides the ability
-   for Markua Processors like Leanpub to produce an ebook from a Markua
-   manuscript with one click.
+   for Markua Processors like Leanpub to produce an ebook or online course from
+   a Markua manuscript with one click.
 2. The unified resource and attribute list syntax, which lets Markua handle
    audio, code, math and video in the same way that it does images, and which
    supports inline, local and web resource locations.
@@ -430,15 +407,10 @@ course with one click. Then, as you go down the path of enhancing the manuscript
 and adding things which only make sense in books or courses, this process will
 feel like decorating, not converting.
 
-The goal is for writers who are familiar with Markdown to feel that Markdown
-somehow grew an understanding of book and course concepts. This goal has also
-informed the structure of this specification: instead of writing a separate spec
-from scratch, the Markua spec is a fork of the CommonMark spec with the GitHub
-Flavored Markdown (GFM) extensions. Everything new in Markua is written as a set
-of extensions to CommonMark, and everything in the CommonMark spec after the
-introduction is preserved verbatim.
+The goal is for writers who are familiar with Markdown to feel that with Markua,
+Markdown just grew an understanding of book and course concepts.
 
-## Why the name "Markua"?
+## Why the name "Markua"? (M)
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name
 that conveyed the love that I have for Markdown while not implying endorsement
@@ -450,180 +422,198 @@ friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
 
-## Purpose, structure and attribution of the Markua Spec
+## Markua 0.29 (M)
 
-The Markua Spec contains a brief introduction to Markua syntax and philosophy
-and a formal specification of Markua.
+Markua 0.29 is the most recent version of Markua.
 
-The Markua Spec is based on the GitHub Flavored Markdown (GFM) Spec, which is
-based on the CommonMark Spec. The author of the CommonMark Spec is John
-MacFarlane.
+The Markua 0.29 Spec is based on the CommonMark Spec. Work on the Markua 0.29
+Spec started in 2019 and continues today.
 
-This Introduction chapter contains a number of introductory sections about
-Markua and its relationship to Markdown, CommonMark and GFM.
+Markua 0.29 is not yet supported in Leanpub. (Leanpub currently supports
+Markua 0.10.)
 
-The remainder of the document is the formal specification of Markua. These
-sections are intended to serve as a reference for authors with advanced
-questions about Markua syntax and for people implementing Markua processors.
+When Markua 0.29 support is launched in beta on Leanpub, the [Markua 0.29
+Manual](https://leanpub.com/markua029) will document what works in Leanpub's
+Markua 0.29 support. This manual will evolve as Leanpub's Markua 0.29 support
+evolves.
 
-Like GFM, Markua is a strict superset of CommonMark. All the features which are
-supported in Markua that are not specified in the original CommonMark Spec are
-hence known as **extensions**, and highlighted as such.
+Unlike LFM and Markua 0.10 which will have a "Quirks Mode" and a "Spec Mode" on
+Leanpub, Leanpub's Markua 0.29 support will not have different modes. Since the
+Markua 0.29 Spec is being created first, there will only be one Markua 0.29
+mode. This mode will evolve in beta, and it will eventually match the Markua
+0.29 Spec.
 
-The Markua Spec is written in a bit of a strange fashion. Everything after
-the Introduction is technically about Markua, but there are three types of
-sections:
+## Markua 0.10 (M)
 
-1. A section written by John MacFarlane about CommonMark
-2. A section written by GitHub employees about GFM extensions, modified if
-   necessary
-3. A section written by Peter Armstrong about Markua
+Markua 0.10 is the version of Markua which started in 2014 and evolved until
+October 2019.
 
-Together, these sections combine to define Markua, since Markua is CommonMark
-plus (identical or modified) GFM extensions plus Markua extensions.
+Leanpub authors should consult the
+[Markua 0.10 manual](https://leanpub.com/markua/read) instead of the Markua 0.10
+Spec, since it provides a more accurate description of Leanpub's Markua 0.10
+support.
 
-To be clear:
+The reason for this divergence is simple: the Markua 0.10 Spec is based on the
+CommonMark 0.29 Spec, but Leanpub's Markua support is not currently based on
+CommonMark at all. (CommonMark and the CommonMark Spec did not exist when the
+Markua project was started.)
 
-* The Introduction sections about CommonMark and GFM were all deleted, except
-the "About this document" section, which was heavily modified. The reason for
-this approach was that it was too confusing to have introductions to
-CommonMark, GFM and Markua in the same document.
-* Many of the sections in the Introduction are heavily based on sections in
-[The Markua Manual](https://leanpub.com/markua), which is the user guide on how
-to write in Markua on Leanpub. (I'm also the author of *The Markua Manual*, so
-I'm reusing my own work in this chapter. *The Markua Manual* began life as the
-standalone book *The Markua Specification*, and it had its scope reduced when I
-decided to base the Markua Spec on the CommonMark Spec.)
-* Every section about CommonMark after the Introduction is preserved verbatim.
-These sections were written by John MacFarlane.
-* The sections about GFM, which are about GFM extensions to CommonMark, are
-either preserved verbatim or are modified to reflect the changes made by Markua.
-GFM sections which are preserved verbatim have "(GFM extension, identical)" in
-their titles. GFM sections which have been modified have "(GFM extension,
-modified)" in their titles.
-* The sections about Markua in subsequent chapters are organized into
-extensions, just as the GFM sections are. These sections all have "(Markua
-extension)" in their titles. There are a lot of them!
-* The Appendices about Markua are grouped together as Markua Appendices.
-* The "A parsing strategy" appendix was written by John MacFarlane about
-CommonMark, and like everything after the introduction by John MacFarlane, it is
-preserved verbatim.
+Leanpub is working on a version ("Spec Mode") of our Markua 0.10 support which
+will be based on CommonMark. When this is complete, Leanpub's existing Markua
+0.10 Support will continue to be supported unchanged for many years, and will be
+rebranded as "Markua 0.10 Quirks Mode".
 
-There are two main benefits of this approach to writing this document.
+## What is Leanpub Flavoured Markdown (LFM)? (M)
 
-1. It is abundantly clear whether something that Markua does originates in
-   Markdown (as specified by CommonMark), or whether it was added by GFM or
-   Markua. This is important for authors, since it will show them what will
-   work in other Markdown dialects, and what won't.
-2. It means that updating this document as the CommonMark and GFM specs are
-   updated will be very easy.
+Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
+Markdown to support book authoring. It started in 2011 and evolved with
+feedback from Leanpub authors until 2014, when Markua was launched.
 
-There three main drawbacks, however:
+LFM is the predecessor of Markua. LFM is specified in the
+[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm).
+
+Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
+instead of the LFM Spec, since it provides a more accurate description of
+Leanpub's LFM support.
+
+The reason for this divergence is simple: the LFM Spec is based on the
+CommonMark Spec, but LFM is not based on CommonMark. (CommonMark and the
+CommonMark Spec did not even exist when LFM was completed.)
+
+Leanpub is working on a version ("Spec Mode") of its LFM support which will be
+based on CommonMark. When this is complete, Leanpub's existing LFM Support will
+continue to be supported unchanged for many years, and will be rebranded as
+"LFM Quirks Mode".
+
+## Converting Between LFM, Markua 0.10 and Markua 0.29 (M)
+
+Leanpub **books** can currently be written in **LFM or Markua 0.10**.
+Leanpub **courses** can currently only be written in **Markua 0.10**.
+
+The launch of Spec Mode for LFM and Markua 0.10 and the launch of the Markua
+0.29 beta will give authors of existing books and courses on Leanpub the
+following choice for each of their books or courses:
+
+1. Leave their book or course in Quirks Mode, for unchanged behaviour and
+   performance.
+2. Switch their book or course to Spec Mode, for faster book or course
+   generation and better compliance with the LFM or Markua 0.10 specs.
+3. Click a button to save a version of their existing manuscript and then
+   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
+   manuscript.
+
+To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
+
+## Structure of this document (M)
+
+The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
+specification of the Markua extensions.
+
+The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
+preserved unchanged.
+
+Besides the numerous extensions which were added, the following are the changes
+to the CommonMark Spec:
+
+1. The "HTML blocks" section is removed from the Leaf blocks chapter.
+2. The "Raw HTML" section is removed from the Inlines chapter.
+3. Since the [Metadata](#metadata-m-) and
+   [Quizzes and exercises](#quizzes-and-exercises-m-) chapters are new, the
+   numbering of some chapters is changed.
+4. The metadata at the top is changed.
+
+The reason that HTML tags are not treated as HTML is discussed
+[here](#no-raw-html-m-).
+
+Next, three of the five GitHub Flavored Markdown (GFM) extensions are added.
+These are discussed [below](#github-flavored-markdown-gfm-extension-status-m-).
+
+Finally, many new sections about Markua are added. These are all labeled
+"(M)" for "(Markua extension)". There are so many of these extensions that
+using (Markua extension) everywhere added too much clutter.
+
+So, for any given chapter or section of this document, it is either:
+
+1. written by John MacFarlane about CommonMark
+2. written by GitHub employees about GitHub Flavored Markdown, and ending with
+   "(GFM)"
+3. written by Peter Armstrong about Markua, and ending with "(M)"
+
+To be clear, every section which does not end with (M) or (GFM) is from the
+original CommonMark Spec, and was written by John MacFarlane.
+
+Together, these sections combine to specify Markua, since Markua is CommonMark,
+minus HTML blocks and Raw HTML, plus some GFM extensions, plus (many!) Markua
+extensions.
+
+While this hybrid approach of creating the Markua specification is somewhat odd,
+it has a number of significant benefits:
+
+1. The CommonMark Spec is very good, and is licensed under the Creative Commons
+   license CC-BY-SA 4.0. Not starting with the CommonMark Spec would be an
+   exercise in vanity.
+2. The CommonMark Spec is the defacto standard specification of Markdown. Any
+   specification not based on CommonMark will need to be compared to CommonMark,
+   so the most helpful thing to do is to just start with CommonMark.
+3. Writing this specification as a series of extensions to CommonMark will
+   enable people who are implementing it to just start with a compliant
+   CommonMark implementation and modify it appropriately.
+4. Defining all Markua changes as extensions to CommonMark makes it abundantly
+   clear whether something that Markua does originates in CommonMark, or whether
+   it was added by GFM or by Markua. This is potentially helpful for authors,
+   since it will show them what will work in other Markdown dialects, and what
+   won't.
+5. It means that updating this document to keep it current with the CommonMark
+   and GFM specs will be very easy.
+
+There are two main drawbacks, however:
 
 1. It would be nice to see "Markua" everywhere, instead of a combination of
-   "Markua" and "CommonMark". For example, the [Characters and lines](#characters-and-lines)
-   section starts with a sentence ending "...is a valid CommonMark document."
-   It would be less jarring to read "...is a valid Markua document." However,
-   this would not preserve what John MacFarlane wrote verbatim, and my judgment
-   is that it's more important to keep those sections unchanged than it is to
-   make everything say "Markua".
+   "Markua", "CommonMark" and "GFM". For example, the
+   [Characters and lines](#characters-and-lines) section starts with a sentence
+   ending "...is a valid CommonMark document." It would be less jarring to read
+   "...is a valid Markua document." However, this would not preserve what John
+   MacFarlane wrote verbatim, and my judgment is that it's more important to
+   keep those sections unchanged than it is to make everything say "Markua".
 2. Sometimes, what Markua does is not specified fully in one section. So,
    occasionally there are two consecutive sections about essentially the same
-   feature, such as "Autolinks" and "Autolinks (GFM extension, identical)".
-3. In one case, there is contradictory information. This case is the handling
-   of raw HTML tags. CommonMark supports raw HTML, and this is explained in the
-   [Raw HTML](#raw-html) section. So, readers who only read that section would
-   (incorrectly) think that Markua supported raw HTML. However, GFM then
-   disallows some raw HTML tags. Furthermore, Markua then cheekily extends this
-   to disallow **ALL** raw HTML except for HTML comments, and explains this in
-   the [Disallowed Raw HTML (GFM extension, extended)](#disallowed-raw-html-gfm-extension-extended-)
-   section. Thankfully, this is the worst case, and most of the extensions of
-   both GFM and Markua to CommonMark are purely additive in nature.
+   feature, such as "Autolinks" and "Autolinks (GFM)".
 
-## Modifications to GFM extensions
+## GitHub Flavored Markdown (GFM) extension status (M)
 
 Note that while Markua is a strict superset of CommonMark, it is not a strict
-superset of GFM. Specifically, with respect to the GFM extensions, this is
-what Markua does:
+superset of the GitHub Flavored Markdown (GFM) Spec.
 
-### Tables GFM extension
+Version 0.29 of the [GitHub Flavored Markdown
+Spec](https://github.github.com/gfm/) defines five extensions to CommonMark.
+In the GFM Spec, these extensions have "(extension)" in their title.
 
-This GFM extension is preserved verbatim. I considered requiring leading and
-trailing pipes (`|`), but since GFM tables require a delimiter line, this is
-enough to prevent false positives.
+Three of these five GFM extensions are included in the Markua Spec:
 
-### Task list items GFM extension
+1. [Tables (GFM)](#tables-gfm-)
+2. [Strikethrough (GFM)](#strikethrough-gfm-)
+3. [Autolinks (GFM)](#autolinks-gfm-)
 
-This GFM extension is removed. Markua is for books and courses, not todo lists.
+Their content is unchanged, but their titles are renamed to say "(GFM)" instead of
+"(extension)", to more clearly specify their provenance.
 
-### Strikethrough GFM extension
+The other two GFM extensions are omitted:
 
-This GFM extension is preserved verbatim.
+1. [Task list items](https://github.github.com/gfm/#task-list-items-extension-)
+   is omitted since Markua is for books and courses, not todo lists.
+2. [Disallowed Raw HTML](https://github.github.com/gfm/#disallowed-raw-html-extension-)
+   is omitted since Markua goes farther and converts all raw HTML into text.
 
-### Autolinks GFM extension
+## About the HTML output (M)
 
-This GFM extension is preserved verbatim. While this extension is neutral for
-paper books, ebooks and courses do stand to benefit from this.
-
-### Disallowed Raw HTML GFM extension
-
-As discussed above, this GFM extension originally disallowed a handful of HTML
-tags, primarily for security reasons. In Markua, it is extended to disallow
-**all** HTML tags except HTML comments. Yes, calling something which removes
-part of a feature an "extension" was a bit of a stretch in GFM (it's more of a
-reduction), and in this instance, Markua takes this approach and turns it up to
-11. `¯\_(ツ)_/¯`
-
-## About this document
-
-A Markua Processor must be able to properly parse a Markua document and output
-HTML, as well as any other suitable output formats. For example, the output
-formats which Leanpub produces from a single Markua document are: PDF, EPUB,
-MOBI, HTML, InDesign and (if applicable) a course with quizzes, exercises and
-automated marking.
-
-This document attempts to specify Markua syntax unambiguously. It does not,
-however, precisely define all output formats or the content of those output
-formats. Instead, the only required output format of a Markua Processor is HTML.
-Also, HTML is the only output format where any specification is provided.
-The reason that HTML is a required output format for a Markua
-Processor to be able to help ensure conformance to the Markua Spec.
-
-This document contains many examples with side-by-side Markua and
-HTML.  These are intended to double as conformance tests.  An
-accompanying script `spec_tests.py` can be used to run the tests
-against any Markua program:
-
-    python test/spec_tests.py --spec spec.txt --program PROGRAM
-
-**NOTE: The web interface "Try It" buttons do not work yet on markua.com, and
-will not work for a number of months, since the C-based and JS-based Markua
-implementations are currently no more than their CommonMark and GFM
-counterparts. So, since this is the case, the interactive "dingus" is not
-hooked up yet, since there's no point in doing so yet.**
-
-Since this document describes how Markua is to be parsed into
-an abstract syntax tree, it would have made sense to use an abstract
-representation of the syntax tree instead of HTML.  But HTML is capable
-of representing the structural distinctions we need to make, and the
-choice of HTML for the tests makes it possible to run the tests against
-an implementation without writing an abstract syntax tree renderer.
-
-Please note that this is not a complete specification of the HTML documents
-produced by Markua Processors. It is only a specification of the parts of the
-HTML mapping where there is no need to have flexibility on the part of the
-Markua Processor. The HTML mapping should be thought of specifying HTML
-fragments, not documents. In all of the examples, a Markua Processor may add
-more HTML before and after the relevant content. The test is that the HTML
-produced contains the specified output, not that it is identical to the
-specified output.
-
-This document is generated from a text file, `spec.txt`, written
-in Markdown with a small extension for the side-by-side tests. The script
-`tools/makespec.py` can be used to convert `spec.txt` into HTML or CommonMark
-(which can then be converted into other formats).
-
-In the examples, the `→` character is used to represent tabs.
+The HTML mapping defined in this specification is NOT a complete specification
+of the HTML documents produced by Markua Processors. It is only a specification
+of the parts of the HTML mapping where there is no need to have flexibility on
+the part of the Markua Processor. The HTML mapping should be thought of
+specifying HTML fragments, not documents. In all of the examples, a Markua
+Processor may add more HTML before and after the relevant content. The test is
+that the HTML produced contains the specified output, not that it is identical
+to the specified output.
 
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
@@ -633,67 +623,13 @@ Finally, Markua does not specify any CSS. However, advice will sometimes be
 offered in "CSS Note" sections. This is because certain semantically meaningful
 formatting (like strikethrough) is only done in HTML via CSS.
 
-## Handling errors and warnings
-
-Markua is very easy to write in. However, it is possible (especially when
-creating a course) to make mistakes.
-
-There are three types of issues which can occur:
-
-1. **Warning:** This is a situation where the author is not making a mistake
-   according to the Markua Spec, but the Markua Processor may not be able to do
-   what is intended. This includes things like unrecognized or unsupported
-   attributes, or Markua features which have not been implemented by the Markua
-   Processor. When a Markua Processor encounters content which produces a
-   warning, it should format the text block which contains the
-   warning-producing content as well as possible.
-2. **Error:** This is an error made by the author which should not prevent the
-   book or course from being produced. This describes almost every error that
-   can be made by an author. This can be as simple as too many consecutive
-   asterisks in formatting text, to as complex as bugs with list indentation or
-   table formatting. When a Markua Processor encounters an error, it should
-   format the text block which contains the error as plain paragraph text.
-3. **Fatal Error:** This is an error made by the author which should prevent the
-   book or course from being produced. This basically never happens when
-   creating a book in Markua, but it can happen when creating a course, if a
-   quiz or exercise is invalid. (Since quizzes and exercises can be used by
-   Markua Processors such as Leanpub to create MOOCs which students take for
-   marks, it's crucial for them to be valid. It would do an author a disservice
-   to publish a course with invalid quizzes or exercises.) When a Markua
-   Processor encounters a fatal error, it should not generate a book or course
-   from the Markua document.
-
-Throughout the Markua Spec, you will encounter the phrases "is a fatal error",
-"is an error" or "should produce a warning" to describe these cases.
-
-Whenever a Markua Processor encounters something which is an error (fatal or not)
-or should produce a warning, it should also add an error or warning message to a
-list of error and warning messages. The content of this message should ideally be
-helpful, and indicate the position of the error or warning in the Markua
-document, whether it is an error or a warning, and as much information about the
-error or warning as is helpful.
-
-The Markua Processor should keep going whenever possible, to continue processing
-the remainder of the Markua document. It would be really annoying for authors to
-only get one error or warning at a time from a Markua Processor. You want to
-find as many errors and warnings as possible.
-
-When a Markua Processor is done processing a Markua document, it should provide
-the list of errors and warnings to the author via the appropriate channels. For
-a web-based tool, this can be a web page and/or an email message. For a
-command-line tool, this can be command-line output and/or an error log file.
-
-Finally, a Markua Processor is NOT allowed to output the list of errors and
-warnings in the output format(s) (such as PDF, EPUB, MOBI or HTML) which it is
-producing.
-
-## Differences with Markua beta
+## Differences with Markua beta (M)
 
 Markua originated in 2014 (!) as a standalone specification, and evolved for a
 number of years in beta before being rewritten in its current form.
 
 As such, there are a number of differences with various versions of the Markua
-spec. Frankly, there were a number of cases where the original Markua decision
+spec. Frankly, there were a handful of cases where the original Markua decision
 was better, in isolation. However, at a big picture level, the tradeoff of being
 incompatible with CommonMark and GFM was not worth these improvements.
 
@@ -745,19 +681,24 @@ Images in the Markua beta were:
 ![The Figure Caption](url)
 ```
 
-Images in Markua are now:
+Images in Markua are now by default:
 
 ```
-![Some alt text](url "The Figure Title")
+![Some alt text](url "The Figure Caption")
 ```
 
 This is to bring Markua into compatibility with Markdown and CommonMark.
+
+
+
+(It's also why we need converters.)
 
 Also, in the Markua beta, there was support for both a `caption` and a `title`
 attribute. The `caption` was typically what was specified, and it was used as
 the `title` if no `title` was present. (The caption was the text shown near
 the figure; the title was its name in a table of tables or list of figures.)
 So, in the Markua beta, you could do this:
+
 
 ```
 {alt: "Some alt text", caption: "The Caption", title: "The Title"}
@@ -770,6 +711,8 @@ This was equivalent to this in the Markua beta:
 {alt: "Some alt text", title: "The Title"}
 ![The Caption](url)
 ```
+
+TODO - revisit this
 
 In Markua, there is no more `caption` attribute. The `title` attribute is used
 for both the figure caption and the figure name in any table of tables or list
@@ -840,7 +783,7 @@ The other breaking changes with the early Markua beta include the following:
 * Using `===` for page break is no longer supported, since Setext headings were
   restored. Use `{break: page}` instead.
 
-## Differences with Leanpub Flavoured Markdown (LFM)
+## Differences with Leanpub Flavoured Markdown (M)
 
 Besides differences with Markdown in general, Markua also has a number of
 specific differences with Leanpub Flavoured Markdown (LFM).
@@ -890,33 +833,274 @@ Besides these differences, there are a number of smaller ones, which you will
 discover if you compare the Markua Spec to the
 [Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
 
-## Acknowledgments
+## What is Markdown?
 
-I ([Peter Armstrong](https://twitter.com/peterarmstrong)) am the creator of
-Markua, but I'm getting lots of help, especially from my Leanpub cofounders
-[Scott Patten](https://twitter.com/scott_patten), [Len Epp](https://twitter.com/lenepp)
-and [Braden Simpson](https://twitter.com/bradensimpson). Scott is the lead
-developer of Leanpub's book generation engine (both the LFM and Markua versions),
-and he has given me both the most and the best feedback about Markua over the
-years that I've been working on it.
+Markdown is a plain text format for writing structured documents,
+based on conventions for indicating formatting in email
+and usenet posts.  It was developed by John Gruber (with
+help from Aaron Swartz) and released in 2004 in the form of a
+[syntax description](http://daringfireball.net/projects/markdown/syntax)
+and a Perl script (`Markdown.pl`) for converting Markdown to
+HTML.  In the next decade, dozens of implementations were
+developed in many languages.  Some extended the original
+Markdown syntax with conventions for footnotes, tables, and
+other document elements.  Some allowed Markdown documents to be
+rendered in formats other than HTML.  Websites like Reddit,
+StackOverflow, and GitHub had millions of people using Markdown.
+And Markdown started to be used beyond the web, to author books,
+articles, slide shows, letters, and lecture notes.
 
-Perhaps most important, Markua is built on Markdown. So, Markua literally would
-not exist without John Gruber and Aaron Swartz. Markua is now also using the
-CommonMark spec as its starting point, so I am really grateful to John MacFarlane
-(the author of the CommonMark spec) and the team behind CommonMark and `cmark`.
-I'm also really grateful to GitHub for adopting Markdown, for basing the GitHub
-Flavored Markdown spec on the CommonMark spec, and for their work on `cmark-gfm`.
+What distinguishes Markdown from many other lightweight markup
+syntaxes, which are often easier to write, is its readability.
+As Gruber writes:
 
-Markua is also benefitting from years of feedback about Leanpub Flavoured
-Markdown and Markua, from many incredibly helpful and patient Leanpub authors.
-If it wasn't for these authors, there would be no Leanpub, and no Markua.
+> The overriding design goal for Markdown's formatting syntax is
+> to make it as readable as possible. The idea is that a
+> Markdown-formatted document should be publishable as-is, as
+> plain text, without looking like it's been marked up with tags
+> or formatting instructions.
+> (<http://daringfireball.net/projects/markdown/>)
 
-I'd also like to thank my father, who read some of the very early manuscripts
-when this was a standalone spec and gave me feedback.
+The point can be illustrated by comparing a sample of
+[AsciiDoc](http://www.methods.co.nz/asciidoc/) with
+an equivalent sample of Markdown.  Here is a sample of
+AsciiDoc from the AsciiDoc manual:
 
-Finally, I would like to thank my wife Caroline and my son Evan: while this is
-not as long as my other books, a lot of thought and effort went into it, and a
-lot of sacrifice. Thanks very much.
+```
+1. List item one.
++
+List item one continued with a second paragraph followed by an
+Indented block.
++
+.................
+$ ls *.sh
+$ mv *.sh ~/tmp
+.................
++
+List item continued with a third paragraph.
+
+2. List item two continued with an open block.
++
+--
+This paragraph is part of the preceding list item.
+
+a. This list is nested and does not require explicit item
+continuation.
++
+This paragraph is part of the preceding list item.
+
+b. List item b.
+
+This paragraph belongs to item two of the outer list.
+--
+```
+
+And here is the equivalent in Markdown:
+```
+1.  List item one.
+
+    List item one continued with a second paragraph followed by an
+    Indented block.
+
+        $ ls *.sh
+        $ mv *.sh ~/tmp
+
+    List item continued with a third paragraph.
+
+2.  List item two continued with an open block.
+
+    This paragraph is part of the preceding list item.
+
+    1. This list is nested and does not require explicit item continuation.
+
+       This paragraph is part of the preceding list item.
+
+    2. List item b.
+
+    This paragraph belongs to item two of the outer list.
+```
+
+The AsciiDoc version is, arguably, easier to write. You don't need
+to worry about indentation.  But the Markdown version is much easier
+to read.  The nesting of list items is apparent to the eye in the
+source, not just in the processed document.
+
+## Why is a spec needed?
+
+John Gruber's [canonical description of Markdown's
+syntax](http://daringfireball.net/projects/markdown/syntax)
+does not specify the syntax unambiguously.  Here are some examples of
+questions it does not answer:
+
+1.  How much indentation is needed for a sublist?  The spec says that
+    continuation paragraphs need to be indented four spaces, but is
+    not fully explicit about sublists.  It is natural to think that
+    they, too, must be indented four spaces, but `Markdown.pl` does
+    not require that.  This is hardly a "corner case," and divergences
+    between implementations on this issue often lead to surprises for
+    users in real documents. (See [this comment by John
+    Gruber](http://article.gmane.org/gmane.text.markdown.general/1997).)
+
+2.  Is a blank line needed before a block quote or heading?
+    Most implementations do not require the blank line.  However,
+    this can lead to unexpected results in hard-wrapped text, and
+    also to ambiguities in parsing (note that some implementations
+    put the heading inside the blockquote, while others do not).
+    (John Gruber has also spoken [in favor of requiring the blank
+    lines](http://article.gmane.org/gmane.text.markdown.general/2146).)
+
+3.  Is a blank line needed before an indented code block?
+    (`Markdown.pl` requires it, but this is not mentioned in the
+    documentation, and some implementations do not require it.)
+
+    ``` markdown
+    paragraph
+        code?
+    ```
+
+4.  What is the exact rule for determining when list items get
+    wrapped in `<p>` tags?  Can a list be partially "loose" and partially
+    "tight"?  What should we do with a list like this?
+
+    ``` markdown
+    1. one
+
+    2. two
+    3. three
+    ```
+
+    Or this?
+
+    ``` markdown
+    1.  one
+        - a
+
+        - b
+    2.  two
+    ```
+
+    (There are some relevant comments by John Gruber
+    [here](http://article.gmane.org/gmane.text.markdown.general/2554).)
+
+5.  Can list markers be indented?  Can ordered list markers be right-aligned?
+
+    ``` markdown
+     8. item 1
+     9. item 2
+    10. item 2a
+    ```
+
+6.  Is this one list with a thematic break in its second item,
+    or two lists separated by a thematic break?
+
+    ``` markdown
+    * a
+    * * * * *
+    * b
+    ```
+
+7.  When list markers change from numbers to bullets, do we have
+    two lists or one?  (The Markdown syntax description suggests two,
+    but the perl scripts and many other implementations produce one.)
+
+    ``` markdown
+    1. fee
+    2. fie
+    -  foe
+    -  fum
+    ```
+
+8.  What are the precedence rules for the markers of inline structure?
+    For example, is the following a valid link, or does the code span
+    take precedence ?
+
+    ``` markdown
+    [a backtick (`)](/url) and [another backtick (`)](/url).
+    ```
+
+9.  What are the precedence rules for markers of emphasis and strong
+    emphasis?  For example, how should the following be parsed?
+
+    ``` markdown
+    *foo *bar* baz*
+    ```
+
+10. What are the precedence rules between block-level and inline-level
+    structure?  For example, how should the following be parsed?
+
+    ``` markdown
+    - `a long code span can contain a hyphen like this
+      - and it can screw things up`
+    ```
+
+11. Can list items include section headings?  (`Markdown.pl` does not
+    allow this, but does allow blockquotes to include headings.)
+
+    ``` markdown
+    - # Heading
+    ```
+
+12. Can list items be empty?
+
+    ``` markdown
+    * a
+    *
+    * b
+    ```
+
+13. Can link references be defined inside block quotes or list items?
+
+    ``` markdown
+    > Blockquote [foo].
+    >
+    > [foo]: /url
+    ```
+
+14. If there are multiple definitions for the same reference, which takes
+    precedence?
+
+    ``` markdown
+    [foo]: /url1
+    [foo]: /url2
+
+    [foo][]
+    ```
+
+In the absence of a spec, early implementers consulted `Markdown.pl`
+to resolve these ambiguities.  But `Markdown.pl` was quite buggy, and
+gave manifestly bad results in many cases, so it was not a
+satisfactory replacement for a spec.
+
+Because there is no unambiguous spec, implementations have diverged
+considerably.  As a result, users are often surprised to find that
+a document that renders one way on one system (say, a GitHub wiki)
+renders differently on another (say, converting to docbook using
+pandoc).  To make matters worse, because nothing in Markdown counts
+as a "syntax error," the divergence often isn't discovered right away.
+
+## About this document
+
+This document attempts to specify Markdown syntax unambiguously.
+It contains many examples with side-by-side Markdown and
+HTML.  These are intended to double as conformance tests.  An
+accompanying script `spec_tests.py` can be used to run the tests
+against any Markdown program:
+
+    python test/spec_tests.py --spec spec.txt --program PROGRAM
+
+Since this document describes how Markdown is to be parsed into
+an abstract syntax tree, it would have made sense to use an abstract
+representation of the syntax tree instead of HTML.  But HTML is capable
+of representing the structural distinctions we need to make, and the
+choice of HTML for the tests makes it possible to run the tests against
+an implementation without writing an abstract syntax tree renderer.
+
+This document is generated from a text file, `spec.txt`, written
+in Markdown with a small extension for the side-by-side tests.
+The script `tools/makespec.py` can be used to convert `spec.txt` into
+HTML or CommonMark (which can then be converted into other formats).
+
+In the examples, the `→` character is used to represent tabs.
 
 # Preliminaries
 
@@ -966,6 +1150,9 @@ A [space](@) is `U+0020`.
 
 A [non-whitespace character](@) is any character
 that is not a [whitespace character].
+
+An [ASCII control character](@) is a character between `U+0000–1F` (both
+including) or `U+007F`.
 
 An [ASCII punctuation character](@)
 is `!`, `"`, `#`, `$`, `%`, `&`, `'`, `(`, `)`,
@@ -1119,6 +1306,422 @@ bar
 For security reasons, the Unicode character `U+0000` must be replaced
 with the REPLACEMENT CHARACTER (`U+FFFD`).
 
+
+## Backslash escapes
+
+Any ASCII punctuation character may be backslash-escaped:
+
+```````````````````````````````` example
+\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~
+.
+<p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</p>
+````````````````````````````````
+
+
+Backslashes before other characters are treated as literal
+backslashes:
+
+```````````````````````````````` example
+\→\A\a\ \3\φ\«
+.
+<p>\→\A\a\ \3\φ\«</p>
+````````````````````````````````
+
+
+Escaped characters are treated as regular characters and do
+not have their usual Markdown meanings:
+
+```````````````````````````````` example
+\*not emphasized*
+\<br/> not a tag
+\[not a link](/foo)
+\`not code`
+1\. not a list
+\* not a list
+\# not a heading
+\[foo]: /url "not a reference"
+\&ouml; not a character entity
+.
+<p>*not emphasized*
+&lt;br/&gt; not a tag
+[not a link](/foo)
+`not code`
+1. not a list
+* not a list
+# not a heading
+[foo]: /url &quot;not a reference&quot;
+&amp;ouml; not a character entity</p>
+````````````````````````````````
+
+
+If a backslash is itself escaped, the following character is not:
+
+```````````````````````````````` example
+\\*emphasis*
+.
+<p>\<em>emphasis</em></p>
+````````````````````````````````
+
+
+A backslash at the end of the line is a [hard line break]:
+
+```````````````````````````````` example
+foo\
+bar
+.
+<p>foo<br />
+bar</p>
+````````````````````````````````
+
+
+Backslash escapes do not work in code blocks, code spans, autolinks, or
+raw HTML:
+
+```````````````````````````````` example
+`` \[\` ``
+.
+<p><code>\[\`</code></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+    \[\]
+.
+<pre><code>\[\]
+</code></pre>
+````````````````````````````````
+
+
+```````````````````````````````` example
+~~~
+\[\]
+~~~
+.
+<pre><code>\[\]
+</code></pre>
+````````````````````````````````
+
+
+```````````````````````````````` example
+<http://example.com?find=\*>
+.
+<p><a href="http://example.com?find=%5C*">http://example.com?find=\*</a></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+<a href="/bar\/)">
+.
+<a href="/bar\/)">
+````````````````````````````````
+
+
+But they work in all other contexts, including URLs and link titles,
+link references, and [info strings] in [fenced code blocks]:
+
+```````````````````````````````` example
+[foo](/bar\* "ti\*tle")
+.
+<p><a href="/bar*" title="ti*tle">foo</a></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+[foo]
+
+[foo]: /bar\* "ti\*tle"
+.
+<p><a href="/bar*" title="ti*tle">foo</a></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+``` foo\+bar
+foo
+```
+.
+<pre><code class="language-foo+bar">foo
+</code></pre>
+````````````````````````````````
+
+
+## Entity and numeric character references
+
+Valid HTML entity references and numeric character references
+can be used in place of the corresponding Unicode character,
+with the following exceptions:
+
+- Entity and character references are not recognized in code
+  blocks and code spans.
+
+- Entity and character references cannot stand in place of
+  special characters that define structural elements in
+  CommonMark.  For example, although `&#42;` can be used
+  in place of a literal `*` character, `&#42;` cannot replace
+  `*` in emphasis delimiters, bullet list markers, or thematic
+  breaks.
+
+Conforming CommonMark parsers need not store information about
+whether a particular character was represented in the source
+using a Unicode character or an entity reference.
+
+[Entity references](@) consist of `&` + any of the valid
+HTML5 entity names + `;`. The
+document <https://html.spec.whatwg.org/entities.json>
+is used as an authoritative source for the valid entity
+references and their corresponding code points.
+
+```````````````````````````````` example
+&nbsp; &amp; &copy; &AElig; &Dcaron;
+&frac34; &HilbertSpace; &DifferentialD;
+&ClockwiseContourIntegral; &ngE;
+.
+<p>  &amp; © Æ Ď
+¾ ℋ ⅆ
+∲ ≧̸</p>
+````````````````````````````````
+
+
+[Decimal numeric character
+references](@)
+consist of `&#` + a string of 1--7 arabic digits + `;`. A
+numeric character reference is parsed as the corresponding
+Unicode character. Invalid Unicode code points will be replaced by
+the REPLACEMENT CHARACTER (`U+FFFD`).  For security reasons,
+the code point `U+0000` will also be replaced by `U+FFFD`.
+
+```````````````````````````````` example
+&#35; &#1234; &#992; &#0;
+.
+<p># Ӓ Ϡ �</p>
+````````````````````````````````
+
+
+[Hexadecimal numeric character
+references](@) consist of `&#` +
+either `X` or `x` + a string of 1-6 hexadecimal digits + `;`.
+They too are parsed as the corresponding Unicode character (this
+time specified with a hexadecimal numeral instead of decimal).
+
+```````````````````````````````` example
+&#X22; &#XD06; &#xcab;
+.
+<p>&quot; ആ ಫ</p>
+````````````````````````````````
+
+
+Here are some nonentities:
+
+```````````````````````````````` example
+&nbsp &x; &#; &#x;
+&#87654321;
+&#abcdef0;
+&ThisIsNotDefined; &hi?;
+.
+<p>&amp;nbsp &amp;x; &amp;#; &amp;#x;
+&amp;#87654321;
+&amp;#abcdef0;
+&amp;ThisIsNotDefined; &amp;hi?;</p>
+````````````````````````````````
+
+
+Although HTML5 does accept some entity references
+without a trailing semicolon (such as `&copy`), these are not
+recognized here, because it makes the grammar too ambiguous:
+
+```````````````````````````````` example
+&copy
+.
+<p>&amp;copy</p>
+````````````````````````````````
+
+
+Strings that are not on the list of HTML5 named entities are not
+recognized as entity references either:
+
+```````````````````````````````` example
+&MadeUpEntity;
+.
+<p>&amp;MadeUpEntity;</p>
+````````````````````````````````
+
+
+Entity and numeric character references are recognized in any
+context besides code spans or code blocks, including
+URLs, [link titles], and [fenced code block][] [info strings]:
+
+```````````````````````````````` example
+<a href="&ouml;&ouml;.html">
+.
+<a href="&ouml;&ouml;.html">
+````````````````````````````````
+
+
+```````````````````````````````` example
+[foo](/f&ouml;&ouml; "f&ouml;&ouml;")
+.
+<p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+[foo]
+
+[foo]: /f&ouml;&ouml; "f&ouml;&ouml;"
+.
+<p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+``` f&ouml;&ouml;
+foo
+```
+.
+<pre><code class="language-föö">foo
+</code></pre>
+````````````````````````````````
+
+
+Entity and numeric character references are treated as literal
+text in code spans and code blocks:
+
+```````````````````````````````` example
+`f&ouml;&ouml;`
+.
+<p><code>f&amp;ouml;&amp;ouml;</code></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+    f&ouml;f&ouml;
+.
+<pre><code>f&amp;ouml;f&amp;ouml;
+</code></pre>
+````````````````````````````````
+
+
+Entity and numeric character references cannot be used
+in place of symbols indicating structure in CommonMark
+documents.
+
+```````````````````````````````` example
+&#42;foo&#42;
+*foo*
+.
+<p>*foo*
+<em>foo</em></p>
+````````````````````````````````
+
+```````````````````````````````` example
+&#42; foo
+
+* foo
+.
+<p>* foo</p>
+<ul>
+<li>foo</li>
+</ul>
+````````````````````````````````
+
+```````````````````````````````` example
+foo&#10;&#10;bar
+.
+<p>foo
+
+bar</p>
+````````````````````````````````
+
+```````````````````````````````` example
+&#9;foo
+.
+<p>→foo</p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+[a](url &quot;tit&quot;)
+.
+<p>[a](url &quot;tit&quot;)</p>
+````````````````````````````````
+
+
+<div class="extension">
+
+## Entity and numeric character references (M)
+
+In PDF and other non-HTML-based output formats, a Markua Processor may choose
+to do the following for HTML entity and numeric character references:
+
+1. Convert it to the correct character in the font which it is using for body
+   text.
+2. Convert it to a character for missing character, typically which is a box
+   which looks like tofu.
+3. Convert it into an image and insert the image. For example, when encountering
+   `&#x1F602;` (the HTML entity reference to the Unicode code point in
+   hexadecimal of the "face with tears of joy" emoji), a Markua processor can
+   just insert an image of a smiling face with tears of joy.
+
+In HTML and in HTML-based output formats such as EPUB, the entity or numeric
+character reference must be output instead.
+
+In output formats such as MOBI which are typically derived from EPUB, a Markua
+Processor may either output the entity or numeric character reference or it may
+choose to use one of the approaches used for non-HTML output formats.
+
+</div>
+
+
+<div class="extension">
+
+## Emoji (M)
+
+In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year
+[was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/),
+in fact, the Face with Tears of Joy emoji. You may think of it as a smiling face
+with tears of joy, but you can also can think of it as `&#x1F602;`, which is the
+HTML entity reference to its Unicode code point (in hexadecimal). 
+
+However, Unicode characters aren't the only way to do emoji. Another popular
+syntax for emoji is `:emoji_name:` -- that is a colon (`:`), followed by the
+underscore-separated name of the emoji, followed by a colon.
+
+Markua supports both the HTML character reference approach for emoji as well as
+the `:emoji_name:` syntax.
+
+Which emoji are supported is up to the Markua Processor.
+
+One recommended list of emoji names is at
+<http://www.webpagefx.com/tools/emoji-cheat-sheet/>.
+
+The preferred thing to do when a Markua Processor recognizes an emoji is to
+replace it with the Unicode code point HTML entity reference, assuming that
+those are also handled correctly:
+
+```````````````````````````````` example
+This makes me &#x1F602;.
+
+This makes me :joy:.
+```
+.
+<p>This makes me &#x1F602;.</p>
+<p>This makes me &#x1F602;.</p>
+````````````````````````````````
+
+However, it is also acceptable for a Markua Processor to just output the "tofu"
+characters for the HTML entity references while still supporting the
+`:emoji_name:` style emoji. Presumably with this approach, either a set of
+images or an emoji font will be used for the supported emoji.
+
+Finally, if Font Awesome icons are going to be supported by a Markua Processor,
+using the `:emoji_name:` syntax, they must have their `:fa-` prefix which they
+always come with. So, the [Leanpub logo in Font
+Awesome](https://fontawesome.com/icons/leanpub?style=brands) would be output as
+`:fa-leanpub:`.
+
+</div>
+
+
 # Blocks and inlines
 
 We can think of a document as a sequence of
@@ -1161,7 +1764,8 @@ We can divide blocks into two types:
 which can contain other blocks, and [leaf blocks](@),
 which cannot.
 
-# Metadata (Markua extension)
+
+# Metadata (M)
 
 Markua adds a number of extensions to support metadata in a consistent way.
 These include attributes (on everything), settings (at the beginning of a
@@ -1174,7 +1778,7 @@ changes the behaviour of the Markua Processor, sometimes dramatically.
 
 <div class="extension">
 
-## Attributes (Markua extension)
+## Attributes (M)
 
 Attributes are used to do everything from specify the language of code blocks,
 add ids for crosslinking and even support extensions to Markua.
@@ -1440,7 +2044,7 @@ version of Markua without needing to specify anything special.
 
 <div class="extension">
 
-## Document settings (Markua extension)
+## Document settings (M)
 
 The HTML which is output by a Markua Processor can be affected by certain global
 settings. These can be overridden by one or more document settings hashes.
@@ -1679,7 +2283,7 @@ the quiz or exercise. If `true`, the questions are randomly arranged; if
 
 <div class="extension">
 
-## Directives (Markua extension)
+## Directives (M)
 
 Directives are switches which affect the future behaviour of a Markua Processor.
 
@@ -1767,7 +2371,7 @@ Its use is discouraged. Authors should spend their time writing, not formatting.
 
 <div class="extension">
 
-## Book section directives (Markua extension)
+## Book section directives (M)
 
 Most published books have three types of material in them: the front matter,
 the text (or "main matter") and the back matter. (Yes, this applies to courses
@@ -1845,7 +2449,7 @@ appropriate.
 
 <div class="extension">
 
-## Insert directives (Markua extension)
+## Insert directives (M)
 
 With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be
@@ -2164,7 +2768,7 @@ If you want a thematic break in a list item, use a different bullet:
 </ul>
 ````````````````````````````````
 
-## Thematic break semantics (Markua extension)
+## Thematic break semantics (M)
 
 Thematic breaks, as shown above, produce an `<hr />` in HTML.
 
@@ -2460,7 +3064,7 @@ baz*
 baz</em></h1>
 ````````````````````````````````
 
-The contents are the result of parsing the heading's raw
+The contents are the result of parsing the headings's raw
 content as inlines.  The heading's raw content is formed by
 concatenating the lines and removing initial and final
 [whitespace].
@@ -2825,7 +3429,7 @@ baz</p>
 
 <div class="extension">
 
-## Part headings (Markua extension)
+## Part headings (M)
 
 As [discussed](#markua-heading-mapping-to-book-and-course-structures),
 Markua uses a `{class: part}` attribute on an `h1` heading to make a part
@@ -2899,7 +3503,7 @@ Foo
 
 <div class="extension">
 
-## Resources (Markua extension)
+## Resources (M)
 
 Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
@@ -4047,7 +4651,7 @@ Closing code fences cannot have [info strings]:
 
 <div class="extension">
 
-## Code resources (Markua extension)
+## Code resources (M)
 
 Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
@@ -4415,7 +5019,7 @@ requirement, nor is the choice of which continuation character is used.
 
 <div class="extension">
 
-## Poetry (Markua extension)
+## Poetry (M)
 
 Poetry can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to poetry as to all other resources.
@@ -4614,783 +5218,43 @@ and **this** is not bold
 </div>
 
 
-## HTML blocks
+<div class="extension">
 
-An [HTML block](@) is a group of lines that is treated
-as raw HTML (and will not be escaped in HTML output).
+## No HTML Blocks (M)
 
-There are seven kinds of [HTML block], which can be defined by their
-start and end conditions.  The block begins with a line that meets a
-[start condition](@) (after up to three spaces optional indentation).
-It ends with the first subsequent line that meets a matching [end
-condition](@), or the last line of the document, or the last line of
-the [container block](#container-blocks) containing the current HTML
-block, if no line is encountered that meets the [end condition].  If
-the first line meets both the [start condition] and the [end
-condition], the block will contain just that line.
+Markdown and CommonMark support HTML blocks, which are groups of lines that are
+treated as raw HTML (and will not be escaped in HTML output).
 
-1.  **Start condition:**  line begins with the string `<script`,
-`<pre`, or `<style` (case-insensitive), followed by whitespace,
-the string `>`, or the end of the line.\
-**End condition:**  line contains an end tag
-`</script>`, `</pre>`, or `</style>` (case-insensitive; it
-need not match the start tag).
+Markua does not support HTML blocks. Instead it treats HTML as text to be
+rendered.
 
-2.  **Start condition:** line begins with the string `<!--`.\
-**End condition:**  line contains the string `-->`.
-
-3.  **Start condition:** line begins with the string `<?`.\
-**End condition:** line contains the string `?>`.
-
-4.  **Start condition:** line begins with the string `<!`
-followed by an uppercase ASCII letter.\
-**End condition:** line contains the character `>`.
-
-5.  **Start condition:**  line begins with the string
-`<![CDATA[`.\
-**End condition:** line contains the string `]]>`.
-
-6.  **Start condition:** line begins the string `<` or `</`
-followed by one of the strings (case-insensitive) `address`,
-`article`, `aside`, `base`, `basefont`, `blockquote`, `body`,
-`caption`, `center`, `col`, `colgroup`, `dd`, `details`, `dialog`,
-`dir`, `div`, `dl`, `dt`, `fieldset`, `figcaption`, `figure`,
-`footer`, `form`, `frame`, `frameset`,
-`h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `head`, `header`, `hr`,
-`html`, `iframe`, `legend`, `li`, `link`, `main`, `menu`, `menuitem`,
-`nav`, `noframes`, `ol`, `optgroup`, `option`, `p`, `param`,
-`section`, `source`, `summary`, `table`, `tbody`, `td`,
-`tfoot`, `th`, `thead`, `title`, `tr`, `track`, `ul`, followed
-by [whitespace], the end of the line, the string `>`, or
-the string `/>`.\
-**End condition:** line is followed by a [blank line].
-
-7.  **Start condition:**  line begins with a complete [open tag]
-(with any [tag name] other than `script`,
-`style`, or `pre`) or a complete [closing tag],
-followed only by [whitespace] or the end of the line.\
-**End condition:** line is followed by a [blank line].
-
-HTML blocks continue until they are closed by their appropriate
-[end condition], or the last line of the document or other [container
-block](#container-blocks).  This means any HTML **within an HTML
-block** that might otherwise be recognised as a start condition will
-be ignored by the parser and passed through as-is, without changing
-the parser's state.
-
-For instance, `<pre>` within a HTML block started by `<table>` will not affect
-the parser state; as the HTML block was started in by start condition 6, it
-will end at any blank line. This can be surprising:
+The way it does this is by replacing a leading `<` with the entity `&lt;`.
 
 ```````````````````````````````` example
-<table><tr><td>
-<pre>
-**Hello**,
+<h1>Hello</h1>
 
-_world_.
-</pre>
-</td></tr></table>
+<p>Hello world!</p>
 .
-<table><tr><td>
-<pre>
-**Hello**,
-<p><em>world</em>.
-</pre></p>
-</td></tr></table>
+<p>&lt;h1>Hello&lt;/h1>
+
+<p>&lt;p>Hello world!&lt;/p></p>
 ````````````````````````````````
 
-In this case, the HTML block is terminated by the newline — the `**Hello**`
-text remains verbatim — and regular parsing resumes, with a paragraph,
-emphasised `world` and inline and block HTML following.
-
-All types of [HTML blocks] except type 7 may interrupt
-a paragraph.  Blocks of type 7 may not interrupt a paragraph.
-(This restriction is intended to prevent unwanted interpretation
-of long tags inside a wrapped paragraph as starting HTML blocks.)
-
-Some simple examples follow.  Here are some basic HTML blocks
-of type 6:
-
-```````````````````````````````` example
-<table>
-  <tr>
-    <td>
-           hi
-    </td>
-  </tr>
-</table>
-
-okay.
-.
-<table>
-  <tr>
-    <td>
-           hi
-    </td>
-  </tr>
-</table>
-<p>okay.</p>
-````````````````````````````````
-
-
-```````````````````````````````` example
- <div>
-  *hello*
-         <foo><a>
-.
- <div>
-  *hello*
-         <foo><a>
-````````````````````````````````
-
-
-A block can also start with a closing tag:
-
-```````````````````````````````` example
-</div>
-*foo*
-.
-</div>
-*foo*
-````````````````````````````````
-
-
-Here we have two HTML blocks with a Markdown paragraph between them:
-
-```````````````````````````````` example
-<DIV CLASS="foo">
-
-*Markdown*
-
-</DIV>
-.
-<DIV CLASS="foo">
-<p><em>Markdown</em></p>
-</DIV>
-````````````````````````````````
-
-
-The tag on the first line can be partial, as long
-as it is split where there would be whitespace:
-
-```````````````````````````````` example
-<div id="foo"
-  class="bar">
-</div>
-.
-<div id="foo"
-  class="bar">
-</div>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<div id="foo" class="bar
-  baz">
-</div>
-.
-<div id="foo" class="bar
-  baz">
-</div>
-````````````````````````````````
-
-
-An open tag need not be closed:
-```````````````````````````````` example
-<div>
-*foo*
-
-*bar*
-.
-<div>
-*foo*
-<p><em>bar</em></p>
-````````````````````````````````
-
-
-
-A partial tag need not even be completed (garbage
-in, garbage out):
-
-```````````````````````````````` example
-<div id="foo"
-*hi*
-.
-<div id="foo"
-*hi*
-````````````````````````````````
-
-
-```````````````````````````````` example
-<div class
-foo
-.
-<div class
-foo
-````````````````````````````````
-
-
-The initial tag doesn't even need to be a valid
-tag, as long as it starts like one:
-
-```````````````````````````````` example
-<div *???-&&&-<---
-*foo*
-.
-<div *???-&&&-<---
-*foo*
-````````````````````````````````
-
-
-In type 6 blocks, the initial tag need not be on a line by
-itself:
-
-```````````````````````````````` example
-<div><a href="bar">*foo*</a></div>
-.
-<div><a href="bar">*foo*</a></div>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<table><tr><td>
-foo
-</td></tr></table>
-.
-<table><tr><td>
-foo
-</td></tr></table>
-````````````````````````````````
-
-
-Everything until the next blank line or end of document
-gets included in the HTML block.  So, in the following
-example, what looks like a Markdown code block
-is actually part of the HTML block, which continues until a blank
-line or the end of the document is reached:
-
-```````````````````````````````` example
-<div></div>
-``` c
-int x = 33;
-```
-.
-<div></div>
-``` c
-int x = 33;
-```
-````````````````````````````````
-
-
-To start an [HTML block] with a tag that is *not* in the
-list of block-level tags in (6), you must put the tag by
-itself on the first line (and it must be complete):
-
-```````````````````````````````` example
-<a href="foo">
-*bar*
-</a>
-.
-<a href="foo">
-*bar*
-</a>
-````````````````````````````````
-
-
-In type 7 blocks, the [tag name] can be anything:
-
-```````````````````````````````` example
-<Warning>
-*bar*
-</Warning>
-.
-<Warning>
-*bar*
-</Warning>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<i class="foo">
-*bar*
-</i>
-.
-<i class="foo">
-*bar*
-</i>
-````````````````````````````````
-
-
-```````````````````````````````` example
-</ins>
-*bar*
-.
-</ins>
-*bar*
-````````````````````````````````
-
-
-These rules are designed to allow us to work with tags that
-can function as either block-level or inline-level tags.
-The `<del>` tag is a nice example.  We can surround content with
-`<del>` tags in three different ways.  In this case, we get a raw
-HTML block, because the `<del>` tag is on a line by itself:
-
-```````````````````````````````` example
-<del>
-*foo*
-</del>
-.
-<del>
-*foo*
-</del>
-````````````````````````````````
-
-
-In this case, we get a raw HTML block that just includes
-the `<del>` tag (because it ends with the following blank
-line).  So the contents get interpreted as CommonMark:
-
-```````````````````````````````` example
-<del>
-
-*foo*
-
-</del>
-.
-<del>
-<p><em>foo</em></p>
-</del>
-````````````````````````````````
-
-
-Finally, in this case, the `<del>` tags are interpreted
-as [raw HTML] *inside* the CommonMark paragraph.  (Because
-the tag is not on a line by itself, we get inline HTML
-rather than an [HTML block].)
-
-```````````````````````````````` example
-<del>*foo*</del>
-.
-<p><del><em>foo</em></del></p>
-````````````````````````````````
-
-
-HTML tags designed to contain literal content
-(`script`, `style`, `pre`), comments, processing instructions,
-and declarations are treated somewhat differently.
-Instead of ending at the first blank line, these blocks
-end at the first line containing a corresponding end tag.
-As a result, these blocks can contain blank lines:
-
-A pre tag (type 1):
-
-```````````````````````````````` example
-<pre language="haskell"><code>
-import Text.HTML.TagSoup
-
-main :: IO ()
-main = print $ parseTags tags
-</code></pre>
-okay
-.
-<pre language="haskell"><code>
-import Text.HTML.TagSoup
-
-main :: IO ()
-main = print $ parseTags tags
-</code></pre>
-<p>okay</p>
-````````````````````````````````
-
-
-A script tag (type 1):
-
-```````````````````````````````` example
-<script type="text/javascript">
-// JavaScript example
-
-document.getElementById("demo").innerHTML = "Hello JavaScript!";
-</script>
-okay
-.
-<script type="text/javascript">
-// JavaScript example
-
-document.getElementById("demo").innerHTML = "Hello JavaScript!";
-</script>
-<p>okay</p>
-````````````````````````````````
-
-
-A style tag (type 1):
-
-```````````````````````````````` example
-<style
-  type="text/css">
-h1 {color:red;}
-
-p {color:blue;}
-</style>
-okay
-.
-<style
-  type="text/css">
-h1 {color:red;}
-
-p {color:blue;}
-</style>
-<p>okay</p>
-````````````````````````````````
-
-
-If there is no matching end tag, the block will end at the
-end of the document (or the enclosing [block quote][block quotes]
-or [list item][list items]):
-
-```````````````````````````````` example
-<style
-  type="text/css">
-
-foo
-.
-<style
-  type="text/css">
-
-foo
-````````````````````````````````
-
-
-```````````````````````````````` example
-> <div>
-> foo
-
-bar
-.
-<blockquote>
-<div>
-foo
-</blockquote>
-<p>bar</p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-- <div>
-- foo
-.
-<ul>
-<li>
-<div>
-</li>
-<li>foo</li>
-</ul>
-````````````````````````````````
-
-
-The end tag can occur on the same line as the start tag:
-
-```````````````````````````````` example
-<style>p{color:red;}</style>
-*foo*
-.
-<style>p{color:red;}</style>
-<p><em>foo</em></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<!-- foo -->*bar*
-*baz*
-.
-<!-- foo -->*bar*
-<p><em>baz</em></p>
-````````````````````````````````
-
-
-Note that anything on the last line after the
-end tag will be included in the [HTML block]:
-
-```````````````````````````````` example
-<script>
-foo
-</script>1. *bar*
-.
-<script>
-foo
-</script>1. *bar*
-````````````````````````````````
-
-
-A comment (type 2):
-
-```````````````````````````````` example
-<!-- Foo
-
-bar
-   baz -->
-okay
-.
-<!-- Foo
-
-bar
-   baz -->
-<p>okay</p>
-````````````````````````````````
-
-
-
-A processing instruction (type 3):
-
-```````````````````````````````` example
-<?php
-
-  echo '>';
-
-?>
-okay
-.
-<?php
-
-  echo '>';
-
-?>
-<p>okay</p>
-````````````````````````````````
-
-
-A declaration (type 4):
-
-```````````````````````````````` example
-<!DOCTYPE html>
-.
-<!DOCTYPE html>
-````````````````````````````````
-
-
-CDATA (type 5):
-
-```````````````````````````````` example
-<![CDATA[
-function matchwo(a,b)
-{
-  if (a < b && a < 0) then {
-    return 1;
-
-  } else {
-
-    return 0;
-  }
-}
-]]>
-okay
-.
-<![CDATA[
-function matchwo(a,b)
-{
-  if (a < b && a < 0) then {
-    return 1;
-
-  } else {
-
-    return 0;
-  }
-}
-]]>
-<p>okay</p>
-````````````````````````````````
-
-
-The opening tag can be indented 1-3 spaces, but not 4:
-
-```````````````````````````````` example
-  <!-- foo -->
-
-    <!-- foo -->
-.
-  <!-- foo -->
-<pre><code>&lt;!-- foo --&gt;
-</code></pre>
-````````````````````````````````
-
-
-```````````````````````````````` example
-  <div>
-
-    <div>
-.
-  <div>
-<pre><code>&lt;div&gt;
-</code></pre>
-````````````````````````````````
-
-
-An HTML block of types 1--6 can interrupt a paragraph, and need not be
-preceded by a blank line.
-
-```````````````````````````````` example
-Foo
-<div>
-bar
-</div>
-.
-<p>Foo</p>
-<div>
-bar
-</div>
-````````````````````````````````
-
-
-However, a following blank line is needed, except at the end of
-a document, and except for blocks of types 1--5, [above][HTML
-block]:
-
-```````````````````````````````` example
-<div>
-bar
-</div>
-*foo*
-.
-<div>
-bar
-</div>
-*foo*
-````````````````````````````````
-
-
-HTML blocks of type 7 cannot interrupt a paragraph:
-
-```````````````````````````````` example
-Foo
-<a href="bar">
-baz
-.
-<p>Foo
-<a href="bar">
-baz</p>
-````````````````````````````````
-
-
-This rule differs from John Gruber's original Markdown syntax
-specification, which says:
-
-> The only restrictions are that block-level HTML elements —
-> e.g. `<div>`, `<table>`, `<pre>`, `<p>`, etc. — must be separated from
-> surrounding content by blank lines, and the start and end tags of the
-> block should not be indented with tabs or spaces.
-
-In some ways Gruber's rule is more restrictive than the one given
-here:
-
-- It requires that an HTML block be preceded by a blank line.
-- It does not allow the start tag to be indented.
-- It requires a matching end tag, which it also does not allow to
-  be indented.
-
-Most Markdown implementations (including some of Gruber's own) do not
-respect all of these restrictions.
-
-There is one respect, however, in which Gruber's rule is more liberal
-than the one given here, since it allows blank lines to occur inside
-an HTML block.  There are two reasons for disallowing them here.
-First, it removes the need to parse balanced tags, which is
-expensive and can require backtracking from the end of the document
-if no matching end tag is found. Second, it provides a very simple
-and flexible way of including Markdown content inside HTML tags:
-simply separate the Markdown from the HTML using blank lines:
-
-Compare:
-
-```````````````````````````````` example
-<div>
-
-*Emphasized* text.
+Markua and Markdown have different use cases. Markdown is a better way to write
+HTML; Markua is a better way to write a book or course.
+
+HTML is just one possible output format of Markua, and other possible Markua
+output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
+were supported, a Markua Processor would have to support parsing and
+meaningfully outputting all of HTML syntax as well as all of Markua syntax.
+
+Since Markdown's only output format target is HTML, it might as well support
+HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
+From an implementation perspective, Markdown gets inline HTML support for free.
+This is not true in the case of Markua.
 
 </div>
-.
-<div>
-<p><em>Emphasized</em> text.</p>
-</div>
-````````````````````````````````
 
-
-```````````````````````````````` example
-<div>
-*Emphasized* text.
-</div>
-.
-<div>
-*Emphasized* text.
-</div>
-````````````````````````````````
-
-
-Some Markdown implementations have adopted a convention of
-interpreting content inside tags as text if the open tag has
-the attribute `markdown=1`.  The rule given above seems a simpler and
-more elegant way of achieving the same expressive power, which is also
-much simpler to parse.
-
-The main potential drawback is that one can no longer paste HTML
-blocks into Markdown documents with 100% reliability.  However,
-*in most cases* this will work fine, because the blank lines in
-HTML are usually followed by HTML block tags.  For example:
-
-```````````````````````````````` example
-<table>
-
-<tr>
-
-<td>
-Hi
-</td>
-
-</tr>
-
-</table>
-.
-<table>
-<tr>
-<td>
-Hi
-</td>
-</tr>
-</table>
-````````````````````````````````
-
-
-There are problems, however, if the inner tags are indented
-*and* separated by spaces, as then they will be interpreted as
-an indented code block:
-
-```````````````````````````````` example
-<table>
-
-  <tr>
-
-    <td>
-      Hi
-    </td>
-
-  </tr>
-
-</table>
-.
-<table>
-  <tr>
-<pre><code>&lt;td&gt;
-  Hi
-&lt;/td&gt;
-</code></pre>
-  </tr>
-</table>
-````````````````````````````````
-
-
-Fortunately, blank lines are usually not necessary and can be
-deleted.  The exception is inside `<pre>` tags, but as described
-[above][HTML blocks], raw HTML blocks starting with `<pre>`
-*can* contain blank lines.
 
 ## Link reference definitions
 
@@ -5792,7 +5656,7 @@ ddd</p>
 ````````````````````````````````
 
 
-Multiple blank lines between paragraph have no effect:
+Multiple blank lines between paragraphs have no effect:
 
 ```````````````````````````````` example
 aaa
@@ -5867,7 +5731,7 @@ bbb</p>
 
 <div class="extension">
 
-## Paragraph continuations (Markua extension)
+## Paragraph continuations (M)
 
 In books, you can insert things like lists in the middle of paragraphs.
 
@@ -6029,7 +5893,7 @@ aaa
 
 <div class="extension">
 
-## Tables (GFM extension, identical)
+## Tables (GFM)
 
 GFM enables the `table` extension, where an additional leaf block type is
 available.
@@ -6685,7 +6549,7 @@ the `>`:
 
 <div class="extension">
 
-## Block quotes with curly braces (Markua extension)
+## Block quotes with curly braces (M)
 
 Block quotes in Markua are created in one of two ways:
 
@@ -6741,7 +6605,7 @@ headings, any headings inside blockquotes should be ignored.
 
 <div class="extension">
 
-## Asides (Markua extension)
+## Asides (M)
 
 Since Markua is for writing books and courses, including technical books and
 courses, it needs not just a syntax for blockquotes--it also needs a syntax for
@@ -6819,7 +6683,7 @@ It can have multiple paragraphs.
 
 <div class="extension">
 
-## Blurbs (Markua extension)
+## Blurbs (M)
 
 Blurbs are like asides, but shorter. A blurb is not intended to span multiple
 pages of output.
@@ -6879,7 +6743,7 @@ It can have multiple paragraphs.
 
 <div class="extension">
 
-## Blurb classes (Markua extension)
+## Blurb classes (M)
 
 Blurbs also have support for an attribute list, which can contain a `class`
 attribute.
@@ -6939,7 +6803,7 @@ That is not legal Markua...
 
 <div class="extension">
 
-## Syntactic sugar for blurb classes (Markua extension)
+## Syntactic sugar for blurb classes (M)
 
 Having to constantly type `{class: warning}` in a computer programming book with
 a number of warnings would get tedious, as would any of the other blurb classes
@@ -7170,7 +7034,7 @@ W> This is a tip blurb, not a warning blurb.
 
 <div class="extension">
 
-## Using blurbs to center text (Markua extension)
+## Using blurbs to center text (M)
 
 You can also use a blurb to center text.
 
@@ -7203,7 +7067,7 @@ via a class attribute on a normal blurb element.
 
 <div class="extension">
 
-## Blurb icons with extension attributes (Markua extension)
+## Blurb icons with extension attributes (M)
 
 Markua Processors must ignore any attributes which they do not understand.
 
@@ -7266,10 +7130,10 @@ The following rules define [list items]:
     Exceptions:
 
     1. When the first list item in a [list] interrupts
-    a paragraph---that is, when it starts on a line that would
-    otherwise count as [paragraph continuation text]---then (a)
-    the lines *Ls* must not begin with a blank line, and (b) if
-    the list item is ordered, the start number must be 1.
+       a paragraph---that is, when it starts on a line that would
+       otherwise count as [paragraph continuation text]---then (a)
+       the lines *Ls* must not begin with a blank line, and (b) if
+       the list item is ordered, the start number must be 1.
     2. If any line is a [thematic break][thematic breaks] then
        that line is not a list item.
 
@@ -7721,8 +7585,7 @@ the above case:
 
 3.  **Item starting with a blank line.**  If a sequence of lines *Ls*
     starting with a single [blank line] constitute a (possibly empty)
-    sequence of blocks *Bs*, not separated from each other by more than
-    one blank line, and *M* is a list marker of width *W*,
+    sequence of blocks *Bs*, and *M* is a list marker of width *W*,
     then the result of prepending *M* to the first line of *Ls*, and
     indenting subsequent lines of *Ls* by *W + 1* spaces, is a list
     item with *Bs* as its contents.
@@ -8990,7 +8853,7 @@ Here the outer list is loose, the inner list tight:
 
 <div class="extension">
 
-## List attributes (Markua extension)
+## List attributes (M)
 
 Lists in Markdown (as described by John Gruber and specified by CommonMark) have
 some pretty major issues. Here are two of the biggest ones:
@@ -9577,7 +9440,7 @@ after
 
 <div class="extension">
 
-## Definition lists (Markua extension)
+## Definition lists (M)
 
 Definition lists are also supported in Markua. To define a definition list, use
 the following syntax:
@@ -9788,7 +9651,7 @@ error to the list of errors.
 
 <div class="extension">
 
-# Quizzes and exercises (Markua extension)
+# Quizzes and exercises (M)
 
 Markua was initially designed for the writing of books, but it has been extended
 to support creating courses. For example, Leanpub authors can click a button to
@@ -9940,7 +9803,7 @@ question.
 
 The exact way to create these types of questions is discussed further below.
 
-## Quiz and exercise output (Markua extension)
+## Quiz and exercise output (M)
 
 A Markua Processor has many degrees of freedom in terms of whether, and how,
 to output quizzes and exercises. As such, no HTML mapping is shown here.
@@ -9983,7 +9846,7 @@ occur:
    questions, typically at the back of the book. This position can be controlled
    by the author using insert directives, discussed earlier.
 
-## Quiz and exercise validation (Markua extension)
+## Quiz and exercise validation (M)
 
 ### An empty quiz or exercise is not an error
 
@@ -10007,7 +9870,7 @@ block. A Markua Processor must not parse lines starting with ? or ! as
 representing questions or answers unless those are contained in a quiz or
 exercise block.
 
-## Quiz and exercise attributes (Markua extension)
+## Quiz and exercise attributes (M)
 
 These are the supported attributes on quizzes and/or exercises:
 
@@ -10125,7 +9988,7 @@ As discussed above, there is no `title` or `title` attribute for a quiz--you can
 just add a heading inside the quiz or exercise itself, using the normal Markua
 formatting for a chapter heading.
 
-## Multiple choice questions (Markua extension)
+## Multiple choice questions (M)
 
 A multiple choice question has 2 or more answer choices, and 1 correct answer
 choice.
@@ -10218,7 +10081,7 @@ they are presented in the order written. If this attribute is omitted, its
 value is determined by the `random-choice-order` attribute on the quiz itself,
 which defaults to `false` if absent.
 
-## Multiple selection questions (Markua extension)
+## Multiple selection questions (M)
 
 A multiple selection question has 2 or more answer choices, and 1 or more `true`
 answer choices.
@@ -10310,7 +10173,7 @@ much credit for correctly not selecting `cow` and `lettuce` as you do for
 correctly selecting `apple` and `peach`. If an instructor thinks this is too
 lenient, then `binary` is the choice for them!
 
-## Fill in the blank questions (Markua extension)
+## Fill in the blank questions (M)
 
 A fill in the blank question consists of a question and a set of answers. Each
 answer is specified by `!`, an optional points value, a space, and then a
@@ -10458,7 +10321,7 @@ only applies to text string answers, not to regular expressions. For a regular
 expression to be case-insensitive, you must end it with an `i` after the
 closing backtick.
 
-## Written questions (Markua extension)
+## Written questions (M)
 
 A written question corresponds to short answer, long answer or essay questions
 in traditional tests. It looks the same as a fill in the blank question, except
@@ -10562,7 +10425,7 @@ or long answer question.
 for paper quizzes than online ones. On paper, this is most useful for an essay
 question.
 
-## Hints on questions (Markua extension)
+## Hints on questions (M)
 
 Any question can contain a hint, regardless of question type or whether an
 answer is provided.
@@ -10620,7 +10483,7 @@ For example, here's how Leanpub handles hints:
 6. The answers page for a quiz or exercise will show the question, hint and
    answers for each question.
 
-## Question alternates (Markua extension)
+## Question alternates (M)
 
 The fact that a Markua document can be used to create an online course or MOOC
 means that certain aspects of the syntax for quizzes and exercises are more
@@ -10763,149 +10626,9 @@ Thus, for example, in
 backtick.
 
 
-## Backslash escapes
-
-Any ASCII punctuation character may be backslash-escaped:
-
-```````````````````````````````` example
-\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~
-.
-<p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</p>
-````````````````````````````````
-
-
-Backslashes before other characters are treated as literal
-backslashes:
-
-```````````````````````````````` example
-\→\A\a\ \3\φ\«
-.
-<p>\→\A\a\ \3\φ\«</p>
-````````````````````````````````
-
-
-Escaped characters are treated as regular characters and do
-not have their usual Markdown meanings:
-
-```````````````````````````````` example
-\*not emphasized*
-\<br/> not a tag
-\[not a link](/foo)
-\`not code`
-1\. not a list
-\* not a list
-\# not a heading
-\[foo]: /url "not a reference"
-\&ouml; not a character entity
-.
-<p>*not emphasized*
-&lt;br/&gt; not a tag
-[not a link](/foo)
-`not code`
-1. not a list
-* not a list
-# not a heading
-[foo]: /url &quot;not a reference&quot;
-&amp;ouml; not a character entity</p>
-````````````````````````````````
-
-
-If a backslash is itself escaped, the following character is not:
-
-```````````````````````````````` example
-\\*emphasis*
-.
-<p>\<em>emphasis</em></p>
-````````````````````````````````
-
-
-A backslash at the end of the line is a [hard line break]:
-
-```````````````````````````````` example
-foo\
-bar
-.
-<p>foo<br />
-bar</p>
-````````````````````````````````
-
-
-Backslash escapes do not work in code blocks, code spans, autolinks, or
-raw HTML:
-
-```````````````````````````````` example
-`` \[\` ``
-.
-<p><code>\[\`</code></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-    \[\]
-.
-<pre><code>\[\]
-</code></pre>
-````````````````````````````````
-
-
-```````````````````````````````` example
-~~~
-\[\]
-~~~
-.
-<pre><code>\[\]
-</code></pre>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<http://example.com?find=\*>
-.
-<p><a href="http://example.com?find=%5C*">http://example.com?find=\*</a></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<a href="/bar\/)">
-.
-<a href="/bar\/)">
-````````````````````````````````
-
-
-But they work in all other contexts, including URLs and link titles,
-link references, and [info strings] in [fenced code blocks]:
-
-```````````````````````````````` example
-[foo](/bar\* "ti\*tle")
-.
-<p><a href="/bar*" title="ti*tle">foo</a></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-[foo]
-
-[foo]: /bar\* "ti\*tle"
-.
-<p><a href="/bar*" title="ti*tle">foo</a></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-``` foo\+bar
-foo
-```
-.
-<pre><code class="language-foo+bar">foo
-</code></pre>
-````````````````````````````````
-
-</div>
-
-
 <div class="extension">
 
-## Character substitutions (Markua extension)
+## Character substitutions (M)
 
 Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -10956,7 +10679,7 @@ straight in a code span either.)
 
 <div class="extension">
 
-## Footnotes and endnotes (Markua extension)
+## Footnotes and endnotes (M)
 
 Books often have footnotes and endnotes. So, Markua has them too.
 
@@ -11071,283 +10794,6 @@ only supports inserting footnotes or endnotes in normal paragraph content.
 </div>
 
 
-## Entity and numeric character references
-
-Valid HTML entity references and numeric character references
-can be used in place of the corresponding Unicode character,
-with the following exceptions:
-
-- Entity and character references are not recognized in code
-  blocks and code spans.
-
-- Entity and character references cannot stand in place of
-  special characters that define structural elements in
-  CommonMark.  For example, although `&#42;` can be used
-  in place of a literal `*` character, `&#42;` cannot replace
-  `*` in emphasis delimiters, bullet list markers, or thematic
-  breaks.
-
-Conforming CommonMark parsers need not store information about
-whether a particular character was represented in the source
-using a Unicode character or an entity reference.
-
-[Entity references](@) consist of `&` + any of the valid
-HTML5 entity names + `;`. The
-document <https://html.spec.whatwg.org/multipage/entities.json>
-is used as an authoritative source for the valid entity
-references and their corresponding code points.
-
-```````````````````````````````` example
-&nbsp; &amp; &copy; &AElig; &Dcaron;
-&frac34; &HilbertSpace; &DifferentialD;
-&ClockwiseContourIntegral; &ngE;
-.
-<p>  &amp; © Æ Ď
-¾ ℋ ⅆ
-∲ ≧̸</p>
-````````````````````````````````
-
-
-[Decimal numeric character
-references](@)
-consist of `&#` + a string of 1--7 arabic digits + `;`. A
-numeric character reference is parsed as the corresponding
-Unicode character. Invalid Unicode code points will be replaced by
-the REPLACEMENT CHARACTER (`U+FFFD`).  For security reasons,
-the code point `U+0000` will also be replaced by `U+FFFD`.
-
-```````````````````````````````` example
-&#35; &#1234; &#992; &#0;
-.
-<p># Ӓ Ϡ �</p>
-````````````````````````````````
-
-
-[Hexadecimal numeric character
-references](@) consist of `&#` +
-either `X` or `x` + a string of 1-6 hexadecimal digits + `;`.
-They too are parsed as the corresponding Unicode character (this
-time specified with a hexadecimal numeral instead of decimal).
-
-```````````````````````````````` example
-&#X22; &#XD06; &#xcab;
-.
-<p>&quot; ആ ಫ</p>
-````````````````````````````````
-
-
-Here are some nonentities:
-
-```````````````````````````````` example
-&nbsp &x; &#; &#x;
-&#987654321;
-&#abcdef0;
-&ThisIsNotDefined; &hi?;
-.
-<p>&amp;nbsp &amp;x; &amp;#; &amp;#x;
-&amp;#987654321;
-&amp;#abcdef0;
-&amp;ThisIsNotDefined; &amp;hi?;</p>
-````````````````````````````````
-
-
-Although HTML5 does accept some entity references
-without a trailing semicolon (such as `&copy`), these are not
-recognized here, because it makes the grammar too ambiguous:
-
-```````````````````````````````` example
-&copy
-.
-<p>&amp;copy</p>
-````````````````````````````````
-
-
-Strings that are not on the list of HTML5 named entities are not
-recognized as entity references either:
-
-```````````````````````````````` example
-&MadeUpEntity;
-.
-<p>&amp;MadeUpEntity;</p>
-````````````````````````````````
-
-
-Entity and numeric character references are recognized in any
-context besides code spans or code blocks, including
-URLs, [link titles], and [fenced code block][] [info strings]:
-
-```````````````````````````````` example
-<a href="&ouml;&ouml;.html">
-.
-<a href="&ouml;&ouml;.html">
-````````````````````````````````
-
-
-```````````````````````````````` example
-[foo](/f&ouml;&ouml; "f&ouml;&ouml;")
-.
-<p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-[foo]
-
-[foo]: /f&ouml;&ouml; "f&ouml;&ouml;"
-.
-<p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-``` f&ouml;&ouml;
-foo
-```
-.
-<pre><code class="language-föö">foo
-</code></pre>
-````````````````````````````````
-
-
-Entity and numeric character references are treated as literal
-text in code spans and code blocks:
-
-```````````````````````````````` example
-`f&ouml;&ouml;`
-.
-<p><code>f&amp;ouml;&amp;ouml;</code></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-    f&ouml;f&ouml;
-.
-<pre><code>f&amp;ouml;f&amp;ouml;
-</code></pre>
-````````````````````````````````
-
-
-Entity and numeric character references cannot be used
-in place of symbols indicating structure in CommonMark
-documents.
-
-```````````````````````````````` example
-&#42;foo&#42;
-*foo*
-.
-<p>*foo*
-<em>foo</em></p>
-````````````````````````````````
-
-```````````````````````````````` example
-&#42; foo
-
-* foo
-.
-<p>* foo</p>
-<ul>
-<li>foo</li>
-</ul>
-````````````````````````````````
-
-```````````````````````````````` example
-foo&#10;&#10;bar
-.
-<p>foo
-
-bar</p>
-````````````````````````````````
-
-```````````````````````````````` example
-&#9;foo
-.
-<p>→foo</p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-[a](url &quot;tit&quot;)
-.
-<p>[a](url &quot;tit&quot;)</p>
-````````````````````````````````
-
-
-<div class="extension">
-
-## Entity and numeric character references (Markua extension)
-
-In PDF and other non-HTML-based output formats, a Markua Processor may choose
-to do the following for HTML entity and numeric character references:
-
-1. Convert it to the correct character in the font which it is using for body
-   text.
-2. Convert it to a character for missing character, typically which is a box
-   which looks like tofu.
-3. Convert it into an image and insert the image. For example, when encountering
-   `&#x1F602;` (the HTML entity reference to the Unicode code point in
-   hexadecimal of the "face with tears of joy" emoji), a Markua processor can
-   just insert an image of a smiling face with tears of joy.
-
-In HTML and in HTML-based output formats such as EPUB, the entity or numeric
-character reference must be output instead.
-
-In output formats such as MOBI which are typically derived from EPUB, a Markua
-Processor may either output the entity or numeric character reference or it may
-choose to use one of the approaches used for non-HTML output formats.
-
-</div>
-
-
-<div class="extension">
-
-## Emoji (Markua extension)
-
-In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year
-[was](http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/),
-in fact, the Face with Tears of Joy emoji. You may think of it as a smiling face
-with tears of joy, but you can also can think of it as `&#x1F602;`, which is the
-HTML entity reference to its Unicode code point (in hexadecimal). 
-
-However, Unicode characters aren't the only way to do emoji. Another popular
-syntax for emoji is `:emoji_name:` -- that is a colon (`:`), followed by the
-underscore-separated name of the emoji, followed by a colon.
-
-Markua supports both the HTML character reference approach for emoji as well as
-the `:emoji_name:` syntax.
-
-Which emoji are supported is up to the Markua Processor.
-
-One recommended list of emoji names is at
-<http://www.webpagefx.com/tools/emoji-cheat-sheet/>.
-
-The preferred thing to do when a Markua Processor recognizes an emoji is to
-replace it with the Unicode code point HTML entity reference, assuming that
-those are also handled correctly:
-
-```````````````````````````````` example
-This makes me &#x1F602;.
-
-This makes me :joy:.
-```
-.
-<p>This makes me &#x1F602;.</p>
-<p>This makes me &#x1F602;.</p>
-````````````````````````````````
-
-However, it is also acceptable for a Markua Processor to just output the "tofu"
-characters for the HTML entity references while still supporting the
-`:emoji_name:` style emoji. Presumably with this approach, either a set of
-images or an emoji font will be used for the supported emoji.
-
-Finally, if Font Awesome icons are going to be supported by a Markua Processor,
-using the `:emoji_name:` syntax, they must have their `:fa-` prefix which they
-always come with. So, the [Leanpub logo in Font
-Awesome](https://fontawesome.com/icons/leanpub?style=brands) would be output as
-`:fa-leanpub:`.
-
-</div>
-
-
 ## Code spans
 
 A [backtick string](@)
@@ -11356,7 +10802,7 @@ preceded nor followed by a backtick.
 
 A [code span](@) begins with a backtick string and ends with
 a backtick string of equal length.  The contents of the code span are
-the characters between the two backtick strings, normalized in the
+the characters between these two backtick strings, normalized in the
 following ways:
 
 - First, [line endings] are converted to [spaces].
@@ -12925,9 +12371,10 @@ __a<http://foo.bar/?q=__>
 <p>__a<a href="http://foo.bar/?q=__">http://foo.bar/?q=__</a></p>
 ````````````````````````````````
 
-</div>
 
-## Underline (Markua extension)
+<div class="extension">
+
+## Underline (M)
 
 In Markdown as defined by John Gruber, and in CommonMark and GFM,
 `*one asterisk*` and `_one underscore_` both produce *italics*, and there is no
@@ -13040,7 +12487,7 @@ stuff
 
 <div class="extension">
 
-## Superscript and subscript (Markua extension)
+## Superscript and subscript (M)
 
 To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
 
@@ -13061,7 +12508,7 @@ Subscript: H~2~O
 </div>
 
 
-## Strikethrough (GFM extension, identical)
+## Strikethrough (GFM)
 
 Markua enables the `strikethrough` extension, where an additional emphasis type is
 available.
@@ -13125,10 +12572,11 @@ A [link destination](@) consists of either
   closing `>` that contains no line breaks or unescaped
   `<` or `>` characters, or
 
-- a nonempty sequence of characters that does not start with
-  `<`, does not include ASCII space or control characters, and
-  includes parentheses only if (a) they are backslash-escaped or
-  (b) they are part of a balanced pair of unescaped parentheses.
+- a nonempty sequence of characters that does not start with `<`,
+  does not include [ASCII control characters][ASCII control character]
+  or [whitespace][], and includes parentheses only if (a) they are
+  backslash-escaped or (b) they are part of a balanced pair of
+  unescaped parentheses.
   (Implementations may impose limits on parentheses nesting to
   avoid performance issues, but at least three levels of nesting
   should be supported.)
@@ -13171,7 +12619,8 @@ Here is a simple inline link:
 ````````````````````````````````
 
 
-The title may be omitted:
+The title, the link text and even 
+the destination may be omitted:
 
 ```````````````````````````````` example
 [link](/uri)
@@ -13179,8 +12628,12 @@ The title may be omitted:
 <p><a href="/uri">link</a></p>
 ````````````````````````````````
 
+```````````````````````````````` example
+[](./target.md)
+.
+<p><a href="./target.md"></a></p>
+````````````````````````````````
 
-Both the title and the destination may be omitted:
 
 ```````````````````````````````` example
 [link]()
@@ -13193,6 +12646,13 @@ Both the title and the destination may be omitted:
 [link](<>)
 .
 <p><a href="">link</a></p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+[]()
+.
+<p><a href=""></a></p>
 ````````````````````````````````
 
 The destination can only contain spaces if it is
@@ -13278,6 +12738,13 @@ balanced:
 
 However, if you have unbalanced parentheses, you need to escape or use the
 `<...>` form:
+
+```````````````````````````````` example
+[link](foo(and(bar))
+.
+<p>[link](foo(and(bar))</p>
+````````````````````````````````
+
 
 ```````````````````````````````` example
 [link](foo\(and\(bar\))
@@ -13587,9 +13054,8 @@ perform the *Unicode case fold*, strip leading and trailing
 matching reference link definitions, the one that comes first in the
 document is used.  (It is desirable in such cases to emit a warning.)
 
-The contents of the first link label are parsed as inlines, which are
-used as the link's text.  The link's URI and title are provided by the
-matching [link reference definition].
+The link's URI and title are provided by the matching [link
+reference definition].
 
 Here is a simple example:
 
@@ -13682,11 +13148,11 @@ emphasis grouping:
 
 
 ```````````````````````````````` example
-[foo *bar][ref]
+[foo *bar][ref]*
 
 [ref]: /uri
 .
-<p><a href="/uri">foo *bar</a></p>
+<p><a href="/uri">foo *bar</a>*</p>
 ````````````````````````````````
 
 
@@ -13734,11 +13200,11 @@ Matching is case-insensitive:
 Unicode case fold is used:
 
 ```````````````````````````````` example
-[Толпой][Толпой] is a Russian word.
+[ẞ]
 
-[ТОЛПОЙ]: /url
+[SS]: /url
 .
-<p><a href="/url">Толпой</a> is a Russian word.</p>
+<p><a href="/url">ẞ</a></p>
 ````````````````````````````````
 
 
@@ -14133,7 +13599,7 @@ is followed by a link label (even though `[bar]` is not defined):
 
 <div class="extension">
 
-## Crosslinks and ids (Markua extension)
+## Crosslinks and ids (M)
 
 There are two parts to making a crosslink.
 
@@ -14283,7 +13749,7 @@ Processor. The Markua Processor should also log an error.
 
 <div class="extension">
 
-## Smart crosslinks (Markua extension)
+## Smart crosslinks (M)
 
 Chapters, sections and figures with titles often have two useful properties for
 writers:
@@ -14598,7 +14064,7 @@ If you want a link after a literal `!`, backslash-escape the
 
 <div class="extension">
 
-## Image resource attributes (Markua extension)
+## Image resource attributes (M)
 
 As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
@@ -14746,7 +14212,7 @@ instead, involving a very real and very delicious apple pie:
 
 <div class="extension">
 
-## Inline SVG images (Markua extension)
+## Inline SVG images (M)
 
 Local and web resource locations are supported for any type of image; inline
 resource locations are supported for SVG images only.
@@ -14890,7 +14356,7 @@ Heck, you can even use tildes to do that:
 
 <div class="extension">
 
-## Image locations and embedding (Markua extension)
+## Image locations and embedding (M)
 
 Note that regardless of the image location, a Markua Processor can handle images
 in the following ways:
@@ -14913,7 +14379,7 @@ GIF, PNG, JPEG, SVG and zipped SVG.
 
 <div class="extension">
 
-## Video resources (Markua extension)
+## Video resources (M)
 
 The syntax to insert a video is the same compact and consistent syntax that is
 used for any resource. Local and web resource locations are supported for both
@@ -15059,7 +14525,7 @@ poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 
 <div class="extension">
 
-## Audio resources (Markua extension)
+## Audio resources (M)
 
 The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
@@ -15141,7 +14607,7 @@ The full version of the talk is here:
 
 <div class="extension">
 
-## Math (Markua extension)
+## Math (M)
 
 Math can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
@@ -15503,9 +14969,9 @@ a link to the URI, with the URI as the link's label.
 
 An [absolute URI](@),
 for these purposes, consists of a [scheme] followed by a colon (`:`)
-followed by zero or more characters other than ASCII
-[whitespace] and control characters, `<`, and `>`.  If
-the URI includes these characters, they must be percent-encoded
+followed by zero or more characters other [ASCII control
+characters][ASCII control character] or [whitespace][] , `<`, and `>`.
+If the URI includes these characters, they must be percent-encoded
 (e.g. `%20` for a space).
 
 For purposes of this spec, a [scheme](@) is any sequence
@@ -15677,9 +15143,10 @@ foo@bar.example.com
 <p>foo@bar.example.com</p>
 ````````````````````````````````
 
+
 <div class="extension">
 
-## Autolinks (GFM extension, identical)
+## Autolinks (GFM)
 
 Markua enables the `autolink` extension, where autolinks will be recognised in a
 greater number of conditions.
@@ -15847,424 +15314,20 @@ a.b-c_d@a.b_
 
 </div>
 
-## Raw HTML
-
-Text between `<` and `>` that looks like an HTML tag is parsed as a
-raw HTML tag and will be rendered in HTML without escaping.
-Tag and attribute names are not limited to current HTML tags,
-so custom tags (and even, say, DocBook tags) may be used.
-
-Here is the grammar for tags:
-
-A [tag name](@) consists of an ASCII letter
-followed by zero or more ASCII letters, digits, or
-hyphens (`-`).
-
-An [attribute](@) consists of [whitespace],
-an [attribute name], and an optional
-[attribute value specification].
-
-An [attribute name](@)
-consists of an ASCII letter, `_`, or `:`, followed by zero or more ASCII
-letters, digits, `_`, `.`, `:`, or `-`.  (Note:  This is the XML
-specification restricted to ASCII.  HTML5 is laxer.)
-
-An [attribute value specification](@)
-consists of optional [whitespace],
-a `=` character, optional [whitespace], and an [attribute
-value].
-
-An [attribute value](@)
-consists of an [unquoted attribute value],
-a [single-quoted attribute value], or a [double-quoted attribute value].
-
-An [unquoted attribute value](@)
-is a nonempty string of characters not
-including [whitespace], `"`, `'`, `=`, `<`, `>`, or `` ` ``.
-
-A [single-quoted attribute value](@)
-consists of `'`, zero or more
-characters not including `'`, and a final `'`.
-
-A [double-quoted attribute value](@)
-consists of `"`, zero or more
-characters not including `"`, and a final `"`.
-
-An [open tag](@) consists of a `<` character, a [tag name],
-zero or more [attributes], optional [whitespace], an optional `/`
-character, and a `>` character.
-
-A [closing tag](@) consists of the string `</`, a
-[tag name], optional [whitespace], and the character `>`.
-
-An [HTML comment](@) consists of `<!--` + *text* + `-->`,
-where *text* does not start with `>` or `->`, does not end with `-`,
-and does not contain `--`.  (See the
-[HTML5 spec](http://www.w3.org/TR/html5/syntax.html#comments).)
-
-A [processing instruction](@)
-consists of the string `<?`, a string
-of characters not including the string `?>`, and the string
-`?>`.
-
-A [declaration](@) consists of the
-string `<!`, a name consisting of one or more uppercase ASCII letters,
-[whitespace], a string of characters not including the
-character `>`, and the character `>`.
-
-A [CDATA section](@) consists of
-the string `<![CDATA[`, a string of characters not including the string
-`]]>`, and the string `]]>`.
-
-An [HTML tag](@) consists of an [open tag], a [closing tag],
-an [HTML comment], a [processing instruction], a [declaration],
-or a [CDATA section].
-
-Here are some simple open tags:
-
-```````````````````````````````` example
-<a><bab><c2c>
-.
-<p><a><bab><c2c></p>
-````````````````````````````````
-
-
-Empty elements:
-
-```````````````````````````````` example
-<a/><b2/>
-.
-<p><a/><b2/></p>
-````````````````````````````````
-
-
-[Whitespace] is allowed:
-
-```````````````````````````````` example
-<a  /><b2
-data="foo" >
-.
-<p><a  /><b2
-data="foo" ></p>
-````````````````````````````````
-
-
-With attributes:
-
-```````````````````````````````` example
-<a foo="bar" bam = 'baz <em>"</em>'
-_boolean zoop:33=zoop:33 />
-.
-<p><a foo="bar" bam = 'baz <em>"</em>'
-_boolean zoop:33=zoop:33 /></p>
-````````````````````````````````
-
-
-Custom tag names can be used:
-
-```````````````````````````````` example
-Foo <responsive-image src="foo.jpg" />
-.
-<p>Foo <responsive-image src="foo.jpg" /></p>
-````````````````````````````````
-
-
-Illegal tag names, not parsed as HTML:
-
-```````````````````````````````` example
-<33> <__>
-.
-<p>&lt;33&gt; &lt;__&gt;</p>
-````````````````````````````````
-
-
-Illegal attribute names:
-
-```````````````````````````````` example
-<a h*#ref="hi">
-.
-<p>&lt;a h*#ref=&quot;hi&quot;&gt;</p>
-````````````````````````````````
-
-
-Illegal attribute values:
-
-```````````````````````````````` example
-<a href="hi'> <a href=hi'>
-.
-<p>&lt;a href=&quot;hi'&gt; &lt;a href=hi'&gt;</p>
-````````````````````````````````
-
-
-Illegal [whitespace]:
-
-```````````````````````````````` example
-< a><
-foo><bar/ >
-<foo bar=baz
-bim!bop />
-.
-<p>&lt; a&gt;&lt;
-foo&gt;&lt;bar/ &gt;
-&lt;foo bar=baz
-bim!bop /&gt;</p>
-````````````````````````````````
-
-
-Missing [whitespace]:
-
-```````````````````````````````` example
-<a href='bar'title=title>
-.
-<p>&lt;a href='bar'title=title&gt;</p>
-````````````````````````````````
-
-
-Closing tags:
-
-```````````````````````````````` example
-</a></foo >
-.
-<p></a></foo ></p>
-````````````````````````````````
-
-
-Illegal attributes in closing tag:
-
-```````````````````````````````` example
-</a href="foo">
-.
-<p>&lt;/a href=&quot;foo&quot;&gt;</p>
-````````````````````````````````
-
-
-Comments:
-
-```````````````````````````````` example
-foo <!-- this is a
-comment - with hyphen -->
-.
-<p>foo <!-- this is a
-comment - with hyphen --></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-foo <!-- not a comment -- two hyphens -->
-.
-<p>foo &lt;!-- not a comment -- two hyphens --&gt;</p>
-````````````````````````````````
-
-
-Not comments:
-
-```````````````````````````````` example
-foo <!--> foo -->
-
-foo <!-- foo--->
-.
-<p>foo &lt;!--&gt; foo --&gt;</p>
-<p>foo &lt;!-- foo---&gt;</p>
-````````````````````````````````
-
-
-Processing instructions:
-
-```````````````````````````````` example
-foo <?php echo $a; ?>
-.
-<p>foo <?php echo $a; ?></p>
-````````````````````````````````
-
-
-Declarations:
-
-```````````````````````````````` example
-foo <!ELEMENT br EMPTY>
-.
-<p>foo <!ELEMENT br EMPTY></p>
-````````````````````````````````
-
-
-CDATA sections:
-
-```````````````````````````````` example
-foo <![CDATA[>&<]]>
-.
-<p>foo <![CDATA[>&<]]></p>
-````````````````````````````````
-
-
-Entity and numeric character references are preserved in HTML
-attributes:
-
-```````````````````````````````` example
-foo <a href="&ouml;">
-.
-<p>foo <a href="&ouml;"></p>
-````````````````````````````````
-
-
-Backslash escapes do not work in HTML attributes:
-
-```````````````````````````````` example
-foo <a href="\*">
-.
-<p>foo <a href="\*"></p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-<a href="\"">
-.
-<p>&lt;a href=&quot;&quot;&quot;&gt;</p>
-````````````````````````````````
-
 
 <div class="extension">
 
-## Disallowed Raw HTML (GFM extension, extended)
+## No Raw HTML (M)
 
-Markua enables the `tagfilter` extension, and modifies it to filter **ALL HTML
-TAGS EXCEPT HTML COMMENTS** when rendering HTML output.
+Besides supporting HTML blocks, Markdown and CommonMark also support raw HTML as
+inlines, in which HTML tags inserted in a leaf block such as a paragraph will be
+rendered without escaping.
 
-To be clear, the only type of HTML block which is not filtered is an HTML
-comment, which matches the following:
-
-**Start condition:** line begins with the string `<!--`.\
-**End condition:**  line contains the string `-->`.
-
-All other types of HTML blocks are filtered.
-
-Filtering is done by replacing the leading `<` with the entity `&lt;`.
-
-```````````````````````````````` example
-<strong> <title> <style> <em>
-
-<blockquote>
-  <xmp> is disallowed.  <XMP> is also disallowed.
-</blockquote>
-.
-<p>&lt;strong> &lt;title> &lt;style> &lt;em></p>
-&lt;blockquote>
-  &lt;xmp> is disallowed.  &lt;XMP> is also disallowed.
-&lt;/blockquote>
-````````````````````````````````
-
-HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as PDF) are not based on HTML. If inline HTML was
-supported, a Markua Processor would have to support parsing and meaningfully
-outputting all of HTML syntax as well as all of Markua syntax.
-
-Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book. Since Markdown's only output
-format target is HTML, it might as well support inline HTML: generating HTML
-from HTML is as simple as passing the HTML through. From an implementation
-perspective, Markdown gets inline HTML support for free.
-
-By not supporting inline HTML other than HTML comments, Markua imposes more
-constraints on writers who would be tempted to use inline HTML for layout
-purposes. Since Markua does not support inline HTML, attempting to do complex
-layout in Markua using HTML is just not possible. And since it's not possible,
-the temptation to procrastinate by doing formatting is reduced.
-
-Now, one design benefit of the support for inline HTML in Markdown is that
-Markdown's syntax can stay artificially small--since Markdown authors can always
-fall back to using HTML directly, Markdown does not need to be able to produce
-all of HTML. Since Markua does not support inline HTML, Markua must contain all
-concepts that it supports directly expressed using Markua syntax. For example,
-there is no official table syntax in Markdown, and Markdown authors can just use
-inline HTML tables. Since Markua does not support inline HTML, and since books
-often require tables, Markua needs to add a table syntax. Thankfully, GFM has
-already done that.
+Just as Markua does [not support HTML blocks](#no-html-blocks-m-), Markua also
+does not support raw HTML as inlines. The logic is the same, so the conclusion
+is the same.
 
 </div>
-
-
-<div class="extension">
-
-## Remove comments (Markua extension)
-
-As discussed previously, Markua filters all HTML tags except HTML comments. Now,
-in terms of HTML comments, sometimes it is beneficial to have them included in
-the output, and sometimes it is not (if, say, an author wants to remove sections
-of manuscript text from the output.)
-
-This is controlled with the `remove-comments` global setting. The default value
-of `remove-comments` is false, for compatibility with Markdown by default.
-
-So, by default, `remove-comments` is `false`:
-
-```````````````````````````````` example
-# Chapter One
-
-stuff
-
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-
-stuff
-.
-<h1>Chapter One</h1>
-<p>stuff</p>
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-<p>stuff</p>
-````````````````````````````````
-
-This can be made explicit by setting the `remove-comments` global setting
-to `false`:
-
-```````````````````````````````` example
-{
-remove-comments: false
-}
-
-# Chapter One
-
-stuff
-
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-
-stuff
-.
-<h1>Chapter One</h1>
-<p>stuff</p>
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-<p>stuff</p>
-````````````````````````````````
-
-Set the `remove-comments` global setting to `true` to remove comments from the
-output:
-
-```````````````````````````````` example
-{
-remove-comments: true
-}
-
-# Chapter One
-
-stuff
-
-<!-- This paragraph sucks; don't include yet.
-lorem *ipsum* dolor
--->
-
-stuff
-.
-<h1>Chapter One</h1>
-<p>stuff</p>
-<p>stuff</p>
-````````````````````````````````
-
-</div>
-
 
 ## Hard line breaks
 
@@ -16349,10 +15412,10 @@ bar</em></p>
 Line breaks do not occur inside code spans
 
 ```````````````````````````````` example
-`code  
+`code 
 span`
 .
-<p><code>code   span</code></p>
+<p><code>code  span</code></p>
 ````````````````````````````````
 
 
@@ -16451,12 +15514,9 @@ line break or as a space.
 A renderer may also provide an option to render soft line breaks
 as hard line breaks.
 
-</div>
-
-
 <div class="extension">
 
-## Configurable soft line breaks (Markua extension)
+## Configurable soft line breaks (M)
 
 There is a good argument to be made that single newlines at the end of a line
 should always be treated as a hard line break, not as a soft line break.
@@ -16571,7 +15631,7 @@ paragraph-like contexts, such as definition list items.
 
 <div class="extension">
 
-## Span attribute lists (Markua extension)
+## Span attribute lists (M)
 
 Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -16601,7 +15661,7 @@ creates a `[^footnote]` instead. (Footnotes are discussed below.)
 
 <div class="extension">
 
-## Index entries (Markua extension)
+## Index entries (M)
 
 Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -16739,7 +15799,7 @@ implementation flexibility.
 
 <div class="extension">
 
-## Placeholders (Markua extension)
+## Placeholders (M)
 
 Placeholders are a simple text-replace templating system which allow you to
 define boilerplate in one place, and easily insert it in other places. For books
@@ -16959,7 +16019,7 @@ baz
 
 </div>
 
-## Concatenating files and blank lines (Markua extension)
+## Concatenating files and blank lines (M)
 
 A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by
@@ -17077,6 +16137,7 @@ Yada yada yada.
 
 </div>
 
+
 ## Textual content
 
 Any characters not given an interpretation by the above rules will
@@ -17106,7 +16167,6 @@ Multiple     spaces
 
 
 <!-- END TESTS -->
-
 
 # Appendix: A parsing strategy
 
@@ -17181,7 +16241,7 @@ blocks.  But we cannot close unmatched blocks yet, because we may have a
 blocks, we look for new block starts (e.g. `>` for a block quote).
 If we encounter a new block start, we close any blocks unmatched
 in step 1 before creating the new block as a child of the last
-matched block.
+matched container block.
 
 3.  Finally, we look at the remainder of the line (after block
 markers like `>`, list markers, and indentation have been consumed).
@@ -17444,3 +16504,4 @@ closers:
 
 After we're done, we remove all delimiters above `stack_bottom` from the
 delimiter stack.
+

@@ -168,8 +168,7 @@ ordered):
 2. bar
 3. baz
 
-Here's a bulleted list (called an "unordered list", which doesn't make any
-sense:
+Here's a bulleted list (called an "unordered list", for irony):
 
 * foo
 * bar

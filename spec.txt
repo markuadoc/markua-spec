@@ -38,7 +38,7 @@ really should read the Preface, even if you normally skip them.
 ## For Leanpub authors (M)
 
 If you're a Leanpub author writing in Markua, this is **NOT** what you should be
-reading.
+reading: **the 0.29 version of Markua is NOT yet supported on Leanpub.**
 
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
@@ -46,16 +46,7 @@ user manuals:
 1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
 2. [Markua 0.10](https://leanpub.com/markua/read)
 
-You should probably go read one of those manuals instead of this document.
-
-## Three specifications (M)
-
-Leanpub has developed three separate but related specifications, all of which
-are based on the **CommonMark 0.29** spec:
-
-1. [Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm)
-2. [Markua 0.10 Spec](http://markua.com/spec/markua010)
-3. [Markua 0.29 Spec](http://markua.com/spec/markua029)
+You should probably go read one of those manuals instead of this specification.
 
 ## How to write a book in Markua (M)
 

@@ -178,31 +178,31 @@ The preferred style, called atx headers, has the following headings:
 {class: part}
 # Part
 
-A paragraph.
+This is a paragraph.
 
 # Chapter
 
-A paragraph.
+This is a paragraph.
 
 ## Section
 
-A paragraph.
+This is a paragraph.
 
 ### Sub-section
 
-A paragraph.
+This is a paragraph.
 
 #### Sub-sub-section
 
-A paragraph.
+This is a paragraph.
 
 ##### Sub-sub-sub-section
 
-A paragraph.
+This is a paragraph.
 
 ###### Sub-sub-sub-sub-section
 
-A paragraph.
+This is a paragraph.
 
 ```
 
@@ -212,12 +212,12 @@ The other style, called Setext headers, has the following headings:
 Chapter
 =======
 
-A paragraph.
+This is a paragraph.
 
 Section
 -------
 
-A paragraph.
+This is a paragraph.
 
 ```
 

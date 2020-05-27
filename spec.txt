@@ -142,7 +142,7 @@ This is a paragraph in a new chapter.
 
 This longer example shows everything you need to know to write almost any type
 of book, such as a computer programming book, in Markua. It also explains most
-of the important syntax while it's at it:
+of Markua's important syntax while it's at it:
 
 ~~~
 # Paragraphs
@@ -161,13 +161,15 @@ That was a thematic break. "This is in quotes."
 
 # Lists
 
-Here's a numbered list (called "ordered"):
+Here's a numbered list (called an "ordered list", even though all lists are
+ordered):
 
 1. foo
 2. bar
 3. baz
 
-Here's a bulleted list (called "unordered", even though lists are in order):
+Here's a bulleted list (called an "unordered list", which doesn't make any
+sense:
 
 * foo
 * bar

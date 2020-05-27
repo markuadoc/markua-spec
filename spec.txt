@@ -192,7 +192,7 @@ term 2
 # Tables
 
 You can also use tables, which work best for numeric tabular data
-involving a small number of columns:
+involving a small number of columns containing small numbers:
 
 | Central Bank | Rate      |
 |--------------|-----------|

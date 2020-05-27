@@ -35,10 +35,13 @@ to any other version of your manuscript that had ever existed.
 
 If you decided to make a print book, you could press a key on your magical
 typewriter to get a print-ready PDF. All you would need to do is add a cover.
+
 If you wanted to work with a designer, you could press a different key to
 generate InDesign. They could then use this as a starting point for producing a
-beautiful print book. Or, if you wanted to work with a publisher, you could
-press a different key to get a Word document.
+beautiful print book.
+
+Or, if you wanted to work with a publisher, you could press a different key to
+get a Word document.
 
 Your magical typewriter could even transform your completed book manuscript into
 a course that anyone in the world could take. All you'd need to do is to

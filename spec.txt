@@ -98,7 +98,6 @@ These work best for numeric data, since wrapping text is annoying.
 |-----------|---------|
 | USD / CAD | 1.37787 |
 | EUR / USD | 1.09887 |
-| GBP / EUR | 1.11494 |
 | USD / JPY | 107.706 |
 
 # Chapter Two

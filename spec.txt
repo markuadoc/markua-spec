@@ -57,6 +57,82 @@ are based on the **CommonMark 0.29** spec:
 2. [Markua 0.10 Spec](http://markua.com/spec/markua010)
 3. [Markua 0.29 Spec](http://markua.com/spec/markua029)
 
+## How to write a book in Markua (M)
+
+The Markua specification is long. However, the amount you need to learn to get
+started is actually very short.
+
+This example shows everything you need to know to write a book in Markua:
+
+~~~
+# Chapter One
+
+This is a paragraph. You just write.
+
+Blank lines separate paragraphs. This is *italic* and **bold**.
+
+* * *
+
+That was a thematic break. "This is in quotes."
+
+Here's an ordered (i.e. numbered) list:
+
+1. foo
+2. bar
+3. baz
+
+Here's an unordered (i.e. bulleted) list:
+
+* foo
+* bar
+* baz
+
+# Chapter Two
+
+This is a paragraph in a new chapter.
+
+You can have external code samples:
+
+![](hello.rb "Hello World in Ruby")
+
+You can also inline code samples:
+
+{title: "Hello World in Ruby"}
+```ruby
+puts "hello"
+```
+
+You can also include single lines of code like `puts "hello"` in paragraphs.
+
+> Blockquotes are really easy too.
+> --Peter Armstrong, *Markua Spec*
+
+Finally, you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well.
+~~~
+
+As you can see, there is more syntax, including ordered and unordered lists,
+definition lists, tables, block quotes, external and inline code samples,
+inline math, etc. However, even with all this, the Markua document remains
+readable. Exactly how all of this syntax works is explained in the spec.
+
+Specifically, these are the rules:
+
+1. Paragraphs are separated from other paragraphs by blank lines.
+   (To add a blank line, add two consecutive newlines.)
+2. To make a chapter heading, start a line with a pound sign (`#`), followed by
+   a space and the name of the chapter.
+3. To add a thematic break (also known as a scene break), put three asterisks
+   (`* * *`) on a line with only whitespace.
+4. Chapter headings and thematic breaks are separated from paragraphs by single
+   newlines or blank lines. Blank lines are preferred for readability.
+5. By default, single newlines in paragraphs turn into single spaces in the
+   output, so you can manually wrap your paragraphs with newlines if you want.
+   It's optional, however, and typically a waste of time.
+6. Use `*one asterisk*` for italic and `**two asterisks**` for bold.
+7. All other text and punctuation is typed normally.
+
+That's it!
+
 ## Markua: Markdown for books and courses (M)
 
 Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
@@ -636,47 +712,6 @@ This simple format is called Markua.
 This is its specification.
 
 
-## How to write a novel in Markua (M)
-
-The Markua specification is long. However, the amount you need to learn to get
-started is actually very short.
-
-This example shows everything you need to know to write a novel in Markua:
-
-~~~
-# Chapter One
-
-This is a paragraph. You just write.
-
-Blank lines separate paragraphs. This is *italic* and **bold**.
-
-* * *
-
-That was a thematic break. "This is in quotes."
-
-# Chapter Two
-
-This is a paragraph in a new chapter.
-~~~
-
-Specifically, these are the rules:
-
-1. Paragraphs are separated from other paragraphs by blank lines.
-   (To add a blank line, add two consecutive newlines.)
-2. To make a chapter heading, start a line with a pound sign (`#`), followed by
-   a space and the name of the chapter.
-3. To add a thematic break (also known as a scene break), put three asterisks
-   (`* * *`) on a line with only whitespace.
-4. Chapter headings and thematic breaks are separated from paragraphs by single
-   newlines or blank lines. Blank lines are preferred for readability.
-5. By default, single newlines in paragraphs turn into single spaces in the
-   output, so you can manually wrap your paragraphs with newlines if you want.
-   It's optional, however, and typically a waste of time.
-6. Use `*one asterisk*` for italic and `**two asterisks**` for bold.
-7. All other text and punctuation is typed normally.
-
-That's it!
-
 ## How to write a computer programming book in Markua (M)
 
 The following example shows basically everything you need to know to write a
@@ -716,36 +751,6 @@ term 2
 
 ## Another Section
 
-Tables work too:
-
-| Header 1  | Header 2  |
-| --------- | --------- |
-| Content 1 | Content 2 |
-| Content 3 | Content 4 |
-
-You can have external code samples:
-
-![](hello.rb "Hello World in Ruby")
-
-You can also inline code samples:
-
-{title: "Hello World in Ruby"}
-```ruby
-puts "hello"
-```
-
-You can also include single lines of code like `puts "hello"` in paragraphs.
-
-> Blockquotes are really easy too.
-> --Peter Armstrong, *Markua Spec*
-
-Finally, you can do that with math `d = v_i t + \frac{1}{2} a t^2`$ too.
-~~~
-
-As you can see, there is more syntax, including ordered and unordered lists,
-definition lists, tables, block quotes, external and inline code samples,
-inline math, etc. However, even with all this, the Markua document remains
-readable. Exactly how all of this syntax works is explained in the spec.
 
 ## How to write a course (MOOC) in Markua (M)
 

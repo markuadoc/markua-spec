@@ -104,7 +104,9 @@ text in a table quickly gets annoying.
 
 # Chapter Two
 
-This is a paragraph in a new chapter.
+This is a paragraph in a new chapter. You can manually wrap
+your paragraphs however you want. Single newlines function like
+single spaces by default.
 
 You can have external code samples:
 

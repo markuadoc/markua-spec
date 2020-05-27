@@ -62,7 +62,7 @@ are based on the **CommonMark 0.29** spec:
 The Markua specification is long. However, the amount you need to learn to get
 started is actually very short.
 
-This example shows everything you need to know to write a book in Markua:
+This example shows everything you need to know to write most books in Markua:
 
 ~~~
 # Chapter One
@@ -87,6 +87,15 @@ Here's an unordered (i.e. bulleted) list:
 * bar
 * baz
 
+You can even have definition lists!
+
+term 1
+: definition 1a
+: definition 1b
+
+term 2
+: definition 2
+
 # Chapter Two
 
 This is a paragraph in a new chapter.
@@ -109,29 +118,6 @@ You can also include single lines of code like `puts "hello"` in paragraphs.
 
 Finally, you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well.
 ~~~
-
-As you can see, there is more syntax, including ordered and unordered lists,
-definition lists, tables, block quotes, external and inline code samples,
-inline math, etc. However, even with all this, the Markua document remains
-readable. Exactly how all of this syntax works is explained in the spec.
-
-Specifically, these are the rules:
-
-1. Paragraphs are separated from other paragraphs by blank lines.
-   (To add a blank line, add two consecutive newlines.)
-2. To make a chapter heading, start a line with a pound sign (`#`), followed by
-   a space and the name of the chapter.
-3. To add a thematic break (also known as a scene break), put three asterisks
-   (`* * *`) on a line with only whitespace.
-4. Chapter headings and thematic breaks are separated from paragraphs by single
-   newlines or blank lines. Blank lines are preferred for readability.
-5. By default, single newlines in paragraphs turn into single spaces in the
-   output, so you can manually wrap your paragraphs with newlines if you want.
-   It's optional, however, and typically a waste of time.
-6. Use `*one asterisk*` for italic and `**two asterisks**` for bold.
-7. All other text and punctuation is typed normally.
-
-That's it!
 
 ## Markua: Markdown for books and courses (M)
 
@@ -739,15 +725,6 @@ You can have ordered and unordered lists, including nested lists:
 3. baz
 
 ### A Sub-Section
-
-You can even have definition lists!
-
-term 1
-: definition 1a
-: definition 1b
-
-term 2
-: definition 2
 
 ## Another Section
 

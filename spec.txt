@@ -166,16 +166,16 @@ since typing text in a table quickly gets annoying.
 
 # Chapter Two
 
-Chapters can also have sections (`## Title`), sub-sections (`### Title`),
-sub-sub-sections (`#### Title`), sub-sub-sub-sections (`##### Title`) and
-sub-sub-sub-sub-sections (`###### Title`).
+Chapters can also have sections (## Title), sub-sections (### Title),
+sub-sub-sections (#### Title), sub-sub-sub-sections (##### Title) and
+sub-sub-sub-sub-sections (###### Title).
 
 This chapter has sections and sub-sections in it, so you can see them.
 
-You can also use Markdown's Setext headers for chapters (`=====`) and
-sections (`-----`) if you prefer that.
+You can also use Markdown's Setext headers for chapters (=====) and
+sections (-----) if you prefer that.
 
-Finally, you can group chapters in parts by adding `{class: part}` above a
+Finally, you can group chapters in parts by adding {class: part} above a
 chapter heading. That is an example of an attribute list.
 
 ## Images

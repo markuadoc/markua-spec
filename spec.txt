@@ -15147,10 +15147,9 @@ Besides supporting HTML blocks, Markdown and CommonMark also support raw HTML as
 inlines, in which HTML tags inserted in a leaf block such as a paragraph will be
 rendered without escaping.
 
-Just as Markua does [not support HTML blocks](#x), Markua also does not support raw
-HTML as inlines.
-
-The reasons are the same.
+Just as Markua does [not support HTML blocks](#no-html-blocks-m-), Markua also
+does not support raw HTML as inlines. The logic is the same, so the conclusion
+is the same.
 
 </div>
 

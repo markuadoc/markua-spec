@@ -266,32 +266,56 @@ You can add images like this:
 
 ![](mac.jpg)
 
-## Captions in Quotes by Default
+You can specify the alt text and figure caption like this:
 
-By default Markua functions like Markdown and CommonMark: the image captions are
-in quotes, and the alt text is in square brackets:
+![alt text for accessibility](image.png "Figure Caption")
+
+An example of the difference between alt text and a figure caption is:
 
 ![a red apple](mac.jpg "The Original Mac")
 
-The location of captions is determined by the global `captions` setting.
-The default value is `captions: round`, and functions as shown above.
+You can also set the alt text and/or the figure caption in an attribute list:
 
-## Captions can be in Square Brackets with a Global Setting
+{alt: "a red apple", caption: "The Original Mac"}
+![](mac.jpg)
 
-However, if you wish, you can set a global setting (`captions: square`)
-at the beginning of the document to have Markua to treat the text in square
-brackets as the caption. Then you can add images with captions like this:
+If you omit the figure caption, the alt text is used as the figure caption by
+default:
 
-![The Original Mac](mac.jpg)
+![The Original Mac, a Red McIntosh Apple](mac.jpg)
 
-With this setting, 
+If you are writing a descriptive figure caption which serves as perfectly good
+alt text, this is syntactic sugar.
 
-Note that if you do this, you need to use an attribute list for any alt text:
+If, however, you are writing a humorous or ironic figure caption which does not
+describe the figure, you should provide appropriate alt text for accessibility.
 
-{alt: "a red apple"}
-![The Original Mac](mac.jpg)
+# Global Settings
 
-In Markua 0.10, the default is value 
+Various global settings can be specified at the start of a Markua document to
+affect the behaviour of the Markua Processor.
+
+For example, the global setting which controls whether alt text is used as the
+figure caption if there is no figure caption explicitly set is called `caption`.
+It can have the value of `alt` (the default, which uses the alt text as the
+figure caption if no figure caption is set) or `none` (which omits the figure
+caption if no figure caption is set).
+
+Here's an example of global settings:
+
+```
+{
+caption: none
+}
+
+# Chapter One
+
+This is an apple, but this figure will have no caption.
+
+![a red apple](mac.jpg)
+
+Go figure.
+```
 
 # Code Samples
 
@@ -310,13 +334,16 @@ puts "hello"
 You can also include single lines of code like `puts "hello"` in paragraphs
 using backticks.
 
-# Other
+# Other Stuff
+
+Note that you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well,
+either inline in a paragraph or as a figure, using LaTeX math as the format.
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *Markua Spec*
 
-Finally, you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well,
-using LaTeX math as the format.
+Markua has lots of features not discussed in this example. Read the manual or
+the rest of the spec!
 ~~~
 
 ## Markua: Markdown for books and courses (M)

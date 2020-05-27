@@ -70,10 +70,6 @@ Blank lines separate paragraphs. This is *italic* and **bold**.
 
 That was a thematic break. "This is in quotes."
 
-By default image captions are in quotes, and the alt text is in square brackets:
-
-![a red apple](mac.jpg "The Original Mac")
-
 Here's a numbered list:
 
 1. foo
@@ -125,6 +121,15 @@ puts "hello"
 
 You can also include single lines of code like `puts "hello"` in paragraphs
 using backticks.
+
+By default image captions are in quotes, and the alt text is in square brackets:
+
+![a red apple](mac.jpg "The Original Mac")
+
+However, you can configure Markua to treat the text in square brackets as the
+caption:
+
+![The Original Mac](mac.jpg)
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *Markua Spec*
@@ -504,13 +509,17 @@ Images in the Markua beta were:
 ![The Figure Caption](url)
 ```
 
-Images in Markua are now:
+Images in Markua are now by default:
 
 ```
-![Some alt text](url "The Figure Title")
+![Some alt text](url "The Figure Caption")
 ```
 
 This is to bring Markua into compatibility with Markdown and CommonMark.
+
+
+
+(It's also why we need converters.)
 
 Also, in the Markua beta, there was support for both a `caption` and a `title`
 attribute. The `caption` was typically what was specified, and it was used as

@@ -10,8 +10,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## For Leanpub authors (M)
 
-If you're a Leanpub author writing in Markua, this is **NOT** what you should be
-reading:
+If you're a [Leanpub](https://leanpub.com) author writing in Markua, this is
+**NOT** what you should be reading:
 
 **Markua 0.29 is NOT yet supported on Leanpub.**
 
@@ -46,14 +46,16 @@ This document has two types of intended readers:
 
 This Introduction contains a number of introductory sections about Markua and its
 relationship to Markdown, CommonMark and GFM. It also contains sections which
-discuss [Leanpub](https://leanpub.com), to minimize confusion for Leanpub
-authors who encounter this document. If you're going to read this document, you
-really should read the Introduction, even if you normally skip them.
+discuss Leanpub, to minimize confusion for Leanpub authors who encounter this
+document.
+
+If you're going to read this document, you really should read the Introduction,
+even if you normally skip them.
 
 ## How to write a book in Markua (M)
 
-The Markua specification is long. However, the amount you need to learn to get
-started is actually very short.
+The Markua specification is long. However, if you're an author, the amount you
+need to learn to write in Markua is actually very short.
 
 This example shows everything you need to know to write most books in Markua:
 
@@ -68,13 +70,13 @@ Blank lines separate paragraphs. This is *italic* and **bold**.
 
 That was a thematic break. "This is in quotes."
 
-Here's an ordered (i.e. numbered) list:
+Here's a numbered list:
 
 1. foo
 2. bar
 3. baz
 
-Here's an unordered (i.e. bulleted) list:
+Here's a bulleted list:
 
 * foo
 * bar
@@ -89,6 +91,16 @@ term 1
 term 2
 : definition 2
 
+Definition lists are usually preferred, but if you must, you can use tables.
+These work best for numeric data, since wrapping text is annoying.
+
+| Currency  | Rate    |
+|-----------|---------|
+| USD / CAD | 1.37787 |
+| EUR / USD | 1.09887 |
+| GBP / EUR | 1.11494 |
+| USD / JPY | 107.706 |
+
 # Chapter Two
 
 This is a paragraph in a new chapter.
@@ -97,19 +109,21 @@ You can have external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
-You can also inline code samples:
+You can also have inline code samples:
 
 {title: "Hello World in Ruby"}
 ```ruby
 puts "hello"
 ```
 
-You can also include single lines of code like `puts "hello"` in paragraphs.
+You can also include single lines of code like `puts "hello"` in paragraphs
+using backticks.
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *Markua Spec*
 
-Finally, you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well.
+Finally, you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well,
+using LaTeX math as the format.
 ~~~
 
 ## The magical typewriter (M)

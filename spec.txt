@@ -18,8 +18,8 @@ reading:
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
 
-1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
-2. [Markua 0.10](https://leanpub.com/markua/read)
+1. [Markua 0.10](https://leanpub.com/markua/read) [preferred]
+2. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
 
 You should probably go read one of those manuals instead of this specification.
 

@@ -254,7 +254,7 @@ This is a paragraph.
 
 Setext headers look nice, but only if you're only using chapters and sections.
 If you want to add sub-sections or parts, you'll be using atx headers for at
-least some of your headers. My advice is to just use atx headers.
+least some of your headers. My advice is to just use atx headers all the time.
 
 Finally, note that while it is confusing and ugly to mix and match using Setext
 and atx headers for chapters and sections in the same document, you can do it.

@@ -72,7 +72,7 @@ This is its specification.
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
 
-1. [Markua 0.10](https://leanpub.com/markua/read) [preferred]
+1. [Markua 0.10](https://leanpub.com/markua/read) (preferred)
 2. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
 
 If you're a Leanpub author, you should probably go read one of those manuals
@@ -193,12 +193,13 @@ in quotes, and the alt text is in square brackets:
 
 ### Captions can be in Square Brackets with a Global Setting
 
-However, if you wish, you can set a global setting to have Markua to treat the
-text in square brackets as the caption:
+However, if you wish, you can set a global setting (image-captions: brackets)
+at the beginning of the document to have Markua to treat the text in square
+brackets as the caption. Then you can add images with captions like this:
 
 ![The Original Mac](mac.jpg)
 
-Now, if you do this, you need to use an attribute list for your alt text:
+Note that if you do this, you need to use an attribute list for your alt text:
 
 {alt: "a red apple"}
 ![The Original Mac](mac.jpg)

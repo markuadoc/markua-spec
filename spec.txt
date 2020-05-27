@@ -8,6 +8,21 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Introduction
 
+## For Leanpub authors (M)
+
+If you're a Leanpub author writing in Markua, this is **NOT** what you should be
+reading:
+
+**Markua 0.29 is NOT yet supported on Leanpub.**
+
+There are currently two ways to write in plain text on Leanpub. These are their
+user manuals:
+
+1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
+2. [Markua 0.10](https://leanpub.com/markua/read)
+
+You should probably go read one of those manuals instead of this specification.
+
 ## What is this document? (M)
 
 This is the specification of **Markua 0.29**, written by
@@ -34,19 +49,6 @@ relationship to Markdown, CommonMark and GFM. It also contains sections which
 discuss [Leanpub](https://leanpub.com), to minimize confusion for Leanpub
 authors who encounter this document. If you're going to read this document, you
 really should read the Preface, even if you normally skip them.
-
-## For Leanpub authors (M)
-
-If you're a Leanpub author writing in Markua, this is **NOT** what you should be
-reading: **the 0.29 version of Markua is NOT yet supported on Leanpub.**
-
-There are currently two ways to write in plain text on Leanpub. These are their
-user manuals:
-
-1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
-2. [Markua 0.10](https://leanpub.com/markua/read)
-
-You should probably go read one of those manuals instead of this specification.
 
 ## How to write a book in Markua (M)
 

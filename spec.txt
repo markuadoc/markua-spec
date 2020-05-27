@@ -119,6 +119,61 @@ You can also include single lines of code like `puts "hello"` in paragraphs.
 Finally, you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well.
 ~~~
 
+## The magical typewriter (M)
+
+Imagine you owned a magical typewriter.
+
+When you used this magical typewriter, you wrote with fewer distractions. You
+didn't just write faster, you wrote better.
+
+With your magical typewriter, you never worried about layout. The book formatted
+itself.
+
+You could hit a key on your magical typewriter to create an ebook from your
+manuscript with one click.
+
+All ebook formats would be created, and they'd all look good. You'd have PDF for
+computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
+great on phones.
+
+With your magical typewriter, you could publish your book before it was even
+done, and get feedback from readers all over the world. You could automatically
+share book updates with them. You would press one key on your magical typewriter
+to publish a new version, and all your readers would have it instantly.
+
+With your magical typewriter, you could easily compare your current manuscript
+to any other version of your manuscript that had ever existed.
+
+If you decided to make a print book, you could press a key on your magical
+typewriter to get a print-ready PDF. All you would need to do is add a cover.
+Or, if you wanted to work with a designer or publisher, you could press a
+different key to generate InDesign. They could then use this as a starting point
+for producing a beautiful print book.
+
+Your magical typewriter could even transform your completed book manuscript into
+a course that anyone in the world could take. All you'd need to do is to
+add some quizzes and exercises and then press a key for your magical typewriter
+to publish a massive open online course (MOOC) for you. The quizzes and exercises
+would mark themselves, and students would get certificates based on how well
+they did.
+
+With your magical typewriter, you'd only have to do one thing:
+
+Write.
+
+Wouldn't it be great if such a magical typewriter existed?
+
+It does. At [Leanpub](https://leanpub.com), we're building it.
+
+But there's one requirement for this magical typewriter to exist: a simple,
+coherent, open source, free, plain text format for a book or course manuscript.
+
+This simple format will be the basis for the magical typewriter.
+
+This simple format is called Markua.
+
+This is its specification.
+
 ## Markua: Markdown for books and courses (M)
 
 Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
@@ -640,129 +695,6 @@ Finally, Markua does not specify any CSS. However, advice will sometimes be
 offered in "CSS Note" sections. This is because certain semantically meaningful
 formatting (like strikethrough) is only done in HTML via CSS.
 
-# Introduction
-
-## The magical typewriter (M)
-
-Imagine you owned a magical typewriter.
-
-When you used this magical typewriter, you wrote with fewer distractions. You
-didn't just write faster, you wrote better.
-
-With your magical typewriter, you never worried about layout. The book formatted
-itself.
-
-You could hit a key on your magical typewriter to create an ebook from your
-manuscript with one click.
-
-All ebook formats would be created, and they'd all look good. You'd have PDF for
-computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
-great on phones.
-
-With your magical typewriter, you could publish your book before it was even
-done, and get feedback from readers all over the world. You could automatically
-share book updates with them. You would press one key on your magical typewriter
-to publish a new version, and all your readers would have it instantly.
-
-With your magical typewriter, you could easily compare your current manuscript
-to any other version of your manuscript that had ever existed.
-
-If you decided to make a print book, you could press a key on your magical
-typewriter to get a print-ready PDF. All you would need to do is add a cover.
-Or, if you wanted to work with a designer or publisher, you could press a
-different key to generate InDesign. They could then use this as a starting point
-for producing a beautiful print book.
-
-Your magical typewriter could even transform your completed book manuscript into
-a course that anyone in the world could take. All you'd need to do is to
-add some quizzes and exercises and then press a key for your magical typewriter
-to publish a massive open online course (MOOC) for you. The quizzes and exercises
-would mark themselves, and students would get certificates based on how well
-they did.
-
-With your magical typewriter, you'd only have to do one thing:
-
-Write.
-
-Wouldn't it be great if such a magical typewriter existed?
-
-It does. At [Leanpub](https://leanpub.com), we're building it.
-
-But there's one requirement for this magical typewriter to exist: a simple,
-coherent, open source, free, plain text format for a book or course manuscript.
-
-This simple format will be the basis for the magical typewriter.
-
-This simple format is called Markua.
-
-This is its specification.
-
-## Why the name "Markua"? (M)
-
-When I set out to specify Markua, I realized I needed a name. I wanted a name
-that conveyed the love that I have for Markdown while not implying endorsement
-by John Gruber in any way. I also did not want a name which referenced Leanpub:
-Markua is a standalone specification with its own identity, which anyone
-(including Leanpub competitors) can freely implement. Finally, I was on vacation
-in Hawaii when I named Markua, and I wanted something that sounded happy,
-friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
-I also wanted a name that had its .com domain name available, and that was short
-and spellable, for branding purposes. The Markua name had all these properties.
-
-## Handling errors and warnings (M)
-
-Markua is very easy to write in. However, it is possible (especially when
-creating a course) to make mistakes.
-
-There are three types of issues which can occur:
-
-1. **Warning:** This is a situation where the author is not making a mistake
-   according to the Markua Spec, but the Markua Processor may not be able to do
-   what is intended. This includes things like unrecognized or unsupported
-   attributes, or Markua features which have not been implemented by the Markua
-   Processor. When a Markua Processor encounters content which produces a
-   warning, it should format the text block which contains the
-   warning-producing content as well as possible.
-2. **Error:** This is an error made by the author which should not prevent the
-   book or course from being produced. This describes almost every error that
-   can be made by an author. This can be as simple as too many consecutive
-   asterisks in formatting text, to as complex as bugs with list indentation or
-   table formatting. When a Markua Processor encounters an error, it should
-   format the text block which contains the error as plain paragraph text.
-3. **Fatal Error:** This is an error made by the author which should prevent the
-   book or course from being produced. This basically never happens when
-   creating a book in Markua, but it can happen when creating a course, if a
-   quiz or exercise is invalid. (Since quizzes and exercises can be used by
-   Markua Processors such as Leanpub to create MOOCs which students take for
-   marks, it's crucial for them to be valid. It would do an author a disservice
-   to publish a course with invalid quizzes or exercises.) When a Markua
-   Processor encounters a fatal error, it should not generate a book or course
-   from the Markua document.
-
-Throughout the Markua Spec, you will encounter the phrases "is a fatal error",
-"is an error" or "should produce a warning" to describe these cases.
-
-Whenever a Markua Processor encounters something which is an error (fatal or not)
-or should produce a warning, it should also add an error or warning message to a
-list of error and warning messages. The content of this message should ideally be
-helpful, and indicate the position of the error or warning in the Markua
-document, whether it is an error or a warning, and as much information about the
-error or warning as is helpful.
-
-The Markua Processor should keep going whenever possible, to continue processing
-the remainder of the Markua document. It would be really annoying for authors to
-only get one error or warning at a time from a Markua Processor. You want to
-find as many errors and warnings as possible.
-
-When a Markua Processor is done processing a Markua document, it should provide
-the list of errors and warnings to the author via the appropriate channels. For
-a web-based tool, this can be a web page and/or an email message. For a
-command-line tool, this can be command-line output and/or an error log file.
-
-Finally, a Markua Processor is NOT allowed to output the list of errors and
-warnings in the output format(s) (such as PDF, EPUB, MOBI or HTML) which it is
-producing.
-
 ## Differences with Markua beta (M)
 
 Markua originated in 2014 (!) as a standalone specification, and evolved for a
@@ -990,6 +922,18 @@ The script `tools/makespec.py` can be used to convert `spec.txt` into
 HTML or CommonMark (which can then be converted into other formats).
 
 In the examples, the `→` character is used to represent tabs.
+
+## Why the name "Markua"? (M)
+
+When I set out to specify Markua, I realized I needed a name. I wanted a name
+that conveyed the love that I have for Markdown while not implying endorsement
+by John Gruber in any way. I also did not want a name which referenced Leanpub:
+Markua is a standalone specification with its own identity, which anyone
+(including Leanpub competitors) can freely implement. Finally, I was on vacation
+in Hawaii when I named Markua, and I wanted something that sounded happy,
+friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
+I also wanted a name that had its .com domain name available, and that was short
+and spellable, for branding purposes. The Markua name had all these properties.
 
 # Preliminaries
 

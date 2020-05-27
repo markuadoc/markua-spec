@@ -117,6 +117,9 @@ need to learn to write in Markua is actually very short.
 This example shows everything you need to know to write most books in Markua:
 
 ~~~
+{class: part}
+# Part One
+
 # Chapter One
 
 This is a paragraph. You just write.

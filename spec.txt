@@ -289,10 +289,9 @@ default:
 ![The Original Mac, a Red McIntosh Apple](mac.jpg)
 
 If you are writing a descriptive figure caption which serves as perfectly good
-alt text, this is syntactic sugar.
-
-If, however, you are writing a humorous or ironic figure caption which does not
-describe the figure, you should provide appropriate alt text for accessibility.
+alt text, this is syntactic sugar. If, however, you are writing a humorous or
+ironic figure caption which does not describe the figure, you should provide
+appropriate alt text for accessibility.
 
 # Global Settings
 
@@ -305,7 +304,8 @@ It can have the value of `alt` (the default, which uses the alt text as the
 figure caption if no figure caption is set) or `none` (which omits the figure
 caption if no figure caption is set).
 
-Here's an example of global settings:
+Here's an example of a complete Markua document showing the use of global
+settings:
 
 ```
 {
@@ -314,11 +314,11 @@ caption: none
 
 # Chapter One
 
-This is an apple, but this image will have alt text but no figure caption.
+This is an apple. This image will have alt text but no figure caption.
 
 ![a red apple](mac.jpg)
 
-No figure? Go figure.
+No figure caption? Go figure.
 ```
 
 # Code Samples

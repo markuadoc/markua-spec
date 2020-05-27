@@ -5042,6 +5042,44 @@ and **this** is not bold
 </div>
 
 
+<div class="extension">
+
+## No HTML Blocks (M)
+
+Markdown and CommonMark support HTML blocks, which are groups of lines that are
+treated as raw HTML (and will not be escaped in HTML output).
+
+Markua does not support HTML blocks. Instead it treats HTML as text to be
+rendered.
+
+The way it does this is by replacing a leading `<` with the entity `&lt;`.
+
+```````````````````````````````` example
+<h1>Hello</h1>
+
+<p>Hello world!</p>
+.
+<p>&lt;h1>Hello&lt;/h1>
+
+<p>&lt;p>Hello world!&lt;/p></p>
+````````````````````````````````
+
+Markua and Markdown have different use cases. Markdown is a better way to write
+HTML; Markua is a better way to write a book or course.
+
+HTML is just one possible output format of Markua, and other possible Markua
+output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
+were supported, a Markua Processor would have to support parsing and
+meaningfully outputting all of HTML syntax as well as all of Markua syntax.
+
+Since Markdown's only output format target is HTML, it might as well support
+HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
+From an implementation perspective, Markdown gets inline HTML support for free.
+This is not true in the case of Markua.
+
+</div>
+
+
 ## Link reference definitions
 
 A [link reference definition](@)
@@ -15105,53 +15143,16 @@ a.b-c_d@a.b_
 
 ## No Raw HTML (M)
 
-Markua does not treat HTML tags as HTML. Instead it treats them as text to be
-rendered.
+Besides supporting HTML blocks, Markdown and CommonMark also support raw HTML as
+inlines, in which HTML tags inserted in a leaf block such as a paragraph will be
+rendered without escaping.
 
-The way it does this is by replacing a leading `<` with the entity `&lt;`.
+Just as Markua does [not support HTML blocks](#x), Markua also does not support raw
+HTML as inlines.
 
-```````````````````````````````` example
-<h1>Hello</h1>
-
-<p>Hello world!</p>
-.
-<p>&lt;h1>Hello&lt;/h1>
-
-<p>&lt;p>Hello world!&lt;/p></p>
-````````````````````````````````
-
-HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If inline HTML was
-supported, a Markua Processor would have to support parsing and meaningfully
-outputting all of HTML syntax as well as all of Markua syntax.
-
-Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.
-
-Since Markdown's only output format target is HTML, it might as well support
-inline HTML: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.
-
-By not supporting inline HTML other than HTML comments, Markua imposes more
-constraints on writers who would be tempted to use inline HTML for layout
-purposes. Since Markua does not support inline HTML, attempting to do complex
-layout in Markua using HTML is just not possible. And since it's not possible,
-the temptation to procrastinate by doing formatting is reduced.
-
-Now, one design benefit of the support for inline HTML in Markdown is that
-Markdown's syntax can stay artificially small--since Markdown authors can always
-fall back to using HTML directly, Markdown does not need to be able to produce
-all of HTML. Since Markua does not support inline HTML, Markua must contain all
-concepts that it supports directly expressed using Markua syntax. For example,
-there is no official table syntax in Markdown, and Markdown authors can just use
-inline HTML tables. Since Markua does not support inline HTML, and since books
-often require tables, Markua needs to add a table syntax. Thankfully, GFM has
-already done that, and Markua just adds their [Tables (GFM)](#tables-gfm-)
-extension.
+The reasons are the same.
 
 </div>
-
 
 ## Hard line breaks
 

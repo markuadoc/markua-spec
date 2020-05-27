@@ -148,8 +148,6 @@ This longer example shows everything you need to know to write almost any type
 of book, such as a computer programming book, in Markua. It also explains most
 of Markua's important syntax while it's at it:
 
-* * *
-
 ~~~
 # Paragraphs
 
@@ -351,8 +349,6 @@ either inline in a paragraph or as a figure, using LaTeX math as the format.
 Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
-
-* * *
 
 ## Markua: Markdown for books and courses (M)
 

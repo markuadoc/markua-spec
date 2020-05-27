@@ -180,7 +180,9 @@ chapter heading. That is an example of an attribute list.
 
 ## Images
 
-You can add images.
+You can add images like this:
+
+![](mac.jpg)
 
 ### Captions in Quotes by Default
 

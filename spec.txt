@@ -316,11 +316,11 @@ caption: none
 
 # Chapter One
 
-This is an apple, but this figure will have no caption.
+This is an apple, but this image will have alt text but no figure caption.
 
 ![a red apple](mac.jpg)
 
-Go figure.
+No figure? Go figure.
 ```
 
 # Code Samples
@@ -329,7 +329,17 @@ The image syntax is the inspiration for the syntax for external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
-You can also have inline code samples, which can have a caption using an
+Note that you can also specify the figure caption as the alt text, as long as
+the global setting of `caption` is set to its default value of `alt`:
+
+![Hello World in Ruby](hello.rb)
+
+Just like with images, you can also use an attribute list for the caption:
+
+{caption: "Hello World in Ruby"}
+![](hello.rb)
+
+You can also have inline code samples, which can only have a caption using an
 attribute list:
 
 {caption: "Hello World in Ruby"}

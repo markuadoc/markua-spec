@@ -235,10 +235,10 @@ This is a paragraph.
 This is a paragraph.
 ```
 
-Note the use of backticks in the above example, to treat the Markua like inline
-code.
+Note the use of three backticks in the above example, to treat the Markua like
+inline code.
 
-The other style, called Setext headers, has the following headings:
+The other style of headers, called Setext headers, has the following headings:
 
 ```
 Chapter
@@ -252,11 +252,13 @@ Section
 This is a paragraph.
 ```
 
-Obviously, it's a terrible idea to mix and match using Setext and atx headers
-for chapters and sections in the same document, but you can do it.
+Setext headers look nice, but only if you're only using chapters and sections.
+If you want to add sub-sections or parts, you'll be using atx headers for at
+least some of your headers. My advice is to just use atx headers.
 
-Finally, to create the headings for Parts and for Sub-sections and below, you
-must use atx headers.
+Finally, note that while it is confusing and ugly to mix and match using Setext
+and atx headers for chapters and sections in the same document, you can do it.
+However, please don't.
 
 # Images
 

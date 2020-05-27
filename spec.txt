@@ -289,8 +289,11 @@ default:
 ![The Original Mac, a Red McIntosh Apple](mac.jpg)
 
 If you are writing a descriptive figure caption which serves as perfectly good
-alt text, this is syntactic sugar. If, however, you are writing a humorous or
-ironic figure caption which does not describe the figure, you should provide
+alt text, this is not terrible. However, it does mean that the alt text and
+figure caption are redundant, which is far from ideal.
+
+If, however, you are writing a humorous or ironic figure caption which does not
+describe the figure accurately, it is really important that you provide the
 appropriate alt text for accessibility.
 
 # Global Settings

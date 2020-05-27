@@ -2,7 +2,7 @@
 title: Markua Spec
 author: '*This formal specification of Markua 0.29 was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
 version: 0.29
-date: '2020-05-24'
+date: '2020-05-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 

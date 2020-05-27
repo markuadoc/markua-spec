@@ -109,12 +109,10 @@ document.
 If you're going to read this document, you really should read the Introduction,
 even if you normally skip them.
 
-## How to write a book in Markua (M)
+## How to write a novel in Markua (M)
 
 The Markua specification is long. However, if you're an author, the amount you
 need to learn to write in Markua is actually very short.
-
-### How to write a novel in Markua
 
 This example shows everything you need to know to write a novel in Markua:
 
@@ -144,7 +142,7 @@ This is a paragraph in a new chapter.
 
 I also showed **bold text**, even though *you only need italics* for novels!
 
-### How to write almost any book in Markua
+## How to write almost any book in Markua (M)
 
 This longer example shows everything you need to know to write almost any type
 of book, such as a computer programming book, in Markua. It also explains most

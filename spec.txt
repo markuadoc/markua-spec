@@ -118,6 +118,8 @@ need to learn to write in Markua is actually very short.
 
 This example shows everything you need to know to write a novel in Markua:
 
+* * *
+
 ~~~
 # Chapter One
 
@@ -137,6 +139,8 @@ That was a thematic break. "This is in quotes."
 
 This is a paragraph in a new chapter.
 ~~~
+
+* * *
 
 ### How to write almost any book in Markua
 

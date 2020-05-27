@@ -166,12 +166,30 @@ since typing text in a table quickly gets annoying.
 
 # Chapter Two
 
+Chapters can also have sections (`## Title`), sub-sections (`### Title`),
+sub-sub-sections (`#### Title`), sub-sub-sub-sections (`##### Title`) and
+sub-sub-sub-sub-sections (`###### Title`).
+
+This chapter has sections and sub-sections in it, so you can see them.
+
+You can also use Markdown's Setext headers for chapters (`=====`) and
+sections (`-----`) if you prefer that.
+
+Finally, you can group chapters in parts by adding `{class: part}` above a
+chapter heading. That is an example of an attribute list.
+
+## Images
+
 You can add images.
+
+### Captions in Quotes by Default
 
 By default Markua functions like Markdown and CommonMark: the image captions are
 in quotes, and the alt text is in square brackets:
 
 ![a red apple](mac.jpg "The Original Mac")
+
+### Captions can be in Square Brackets with a Global Setting
 
 However, if you wish, you can set a global setting to have Markua to treat the
 text in square brackets as the caption:
@@ -182,6 +200,8 @@ Now, if you do this, you need to use an attribute list for your alt text:
 
 {alt: "a red apple"}
 ![The Original Mac](mac.jpg)
+
+## Code Samples
 
 The image syntax is the inspiration for the syntax for external code samples:
 
@@ -197,6 +217,8 @@ puts "hello"
 
 You can also include single lines of code like `puts "hello"` in paragraphs
 using backticks.
+
+## Other
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *Markua Spec*

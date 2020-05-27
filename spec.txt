@@ -118,15 +118,15 @@ This example shows everything you need to know to write most books in Markua:
 
 ~~~
 {class: part}
-# Part One
+# A Part Heading
 
-# Chapter One
+# A Chapter Heading
 
 This is a paragraph. You just write.
 
 Blank lines separate paragraphs. This is *italic* and **bold**.
 
-## Section One
+## A Section Heading
 
 This is another paragraph. You can manually wrap your paragraphs
 however you want. Single newlines function like single spaces by
@@ -136,7 +136,7 @@ default.
 
 That was a thematic break. "This is in quotes."
 
-### Sub-Section One
+### A Sub-Section Heading
 
 Here's a numbered list:
 
@@ -149,6 +149,8 @@ Here's a bulleted list:
 * foo
 * bar
 * baz
+
+## Another Section Heading
 
 You can even have definition lists!
 
@@ -171,41 +173,63 @@ involving a small number of columns:
 Note that definition lists are preferred to tables for most use cases,
 since typing text in a table quickly gets annoying.
 
-# Chapter Two: Headings
+# Headings
 
-Chapters can also have sections (## Title), sub-sections (### Title),
-sub-sub-sections (#### Title), sub-sub-sub-sections (##### Title) and
-sub-sub-sub-sub-sections (###### Title).
+Markua supports both of Markdown's heading styles.
 
-This chapter has sections and sub-sections in it, so you can see them.
+The preferred style, called atx headers, has the following headings:
 
-Like Markdown, Markua supports two types of heading styles.
+```
+{class: part}
+# Part
 
-The preferred style, called "atx headers", has chapter headings (# Title)
-and section headings (## Title) which are consistent with the format of
-sub-section headings and below.
+A paragraph.
 
-The other style of header supported is Markdown's "Setext headers" for
-chapters (=====) and sections (-----). You can use that style of header if you
-prefer it. An example is shown below. Obviously, it's a terrible idea to mix
-and match using Setext and atx headers for chapters and sections in the same
-document, but you can do it.
+# Chapter
 
-Chapter Three
-=============
+A paragraph.
 
-No, you don't need to name chapters or sections starting with Chapter or
-Section; I'm just doing that to show what the things are.
+## Section
 
-Section One
------------
+A paragraph.
 
-Finally, you can group chapters in parts by adding {class: part} above a
-chapter heading. That is an example of an attribute list.
+### Sub-section
 
-The next section explains images.
+A paragraph.
 
-## Images
+#### Sub-sub-section
+
+A paragraph.
+
+##### Sub-sub-sub-section
+
+A paragraph.
+
+###### Sub-sub-sub-sub-section
+
+A paragraph.
+
+```
+
+The other style, called Setext headers, has the following headings:
+
+```
+Chapter
+=======
+
+A paragraph.
+
+Section
+-------
+
+A paragraph.
+
+```
+
+Obviously, it's a terrible idea to mix and match using Setext and atx headers
+for chapters and sections in the same document, but you can do it.
+
+# Images
 
 You can add images like this:
 

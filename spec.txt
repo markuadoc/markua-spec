@@ -421,8 +421,10 @@ and spellable, for branding purposes. The Markua name had all these properties.
 
 ## Markua 0.29 (M)
 
-Markua 0.29 is the version of Markua which is based on the CommonMark Spec.
-Work on the Markua 0.29 Spec started in 2019 and continues today.
+Markua 0.29 is the most recent version of Markua.
+
+The Markua 0.29 Spec is based on the CommonMark Spec. Work on the Markua 0.29
+Spec started in 2019 and continues today.
 
 Markua 0.29 is not yet supported in Leanpub. (Leanpub currently supports
 Markua 0.10.)
@@ -434,9 +436,9 @@ evolves.
 
 Unlike LFM and Markua 0.10 which will have a "Quirks Mode" and a "Spec Mode" on
 Leanpub, Leanpub's Markua 0.29 support will not have different modes. Since the
-Markua 0.29 Spec is being created first, there will only be one Markua 0.29 mode.
-This mode will evolve in beta, and it will eventually match the Markua 0.29
-Spec.
+Markua 0.29 Spec is being created first, there will only be one Markua 0.29
+mode. This mode will evolve in beta, and it will eventually match the Markua
+0.29 Spec.
 
 ## Markua 0.10 (M)
 
@@ -449,9 +451,9 @@ Spec, since it provides a more accurate description of Leanpub's Markua 0.10
 support.
 
 The reason for this divergence is simple: the Markua 0.10 Spec is based on the
-CommonMark Spec, but Leanpub's Markua support is not based on CommonMark.
-(CommonMark and the CommonMark Spec did not exist when the Markua project was
-started.)
+CommonMark 0.29 Spec, but Leanpub's Markua support is not currently based on
+CommonMark at all. (CommonMark and the CommonMark Spec did not exist when the
+Markua project was started.)
 
 Leanpub is working on a version ("Spec Mode") of our Markua 0.10 support which
 will be based on CommonMark. When this is complete, Leanpub's existing Markua

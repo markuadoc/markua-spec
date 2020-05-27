@@ -44,11 +44,11 @@ This document has two types of intended readers:
 1. authors with advanced questions about Markua 0.29 syntax
 2. developers implementing Markua Processors
 
-This Preface contains a number of introductory sections about Markua and its
+This Introduction contains a number of introductory sections about Markua and its
 relationship to Markdown, CommonMark and GFM. It also contains sections which
 discuss [Leanpub](https://leanpub.com), to minimize confusion for Leanpub
 authors who encounter this document. If you're going to read this document, you
-really should read the Preface, even if you normally skip them.
+really should read the Introduction, even if you normally skip them.
 
 ## How to write a book in Markua (M)
 

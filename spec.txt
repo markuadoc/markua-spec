@@ -621,53 +621,21 @@ Version 0.29 of the [GitHub Flavored Markdown
 Spec](https://github.github.com/gfm/) defines five extensions to CommonMark.
 In the GFM Spec, these extensions have "(extension)" in their title.
 
-Three of these five GFM extensions are included in the Markua Spec. Their
-content is unchanged, but their titles are renamed to say "(GFM)" instead of
-"(extension)", to more clearly specify their provenance. The other two GFM
-extensions are omitted.
+Three of these five GFM extensions are included in the Markua Spec:
 
-The reasoning for including or omitting these extensions is below.
+1. [Tables (GFM)](#tables-gfm-)
+2. [Strikethrough (GFM)](#strikethrough-gfm-)
+3. [Autolinks (GFM)](#autolinks-gfm-)
 
-### Tables (GFM) - included unchanged
+Their content is unchanged, but their titles are renamed to say "(GFM)" instead of
+"(extension)", to more clearly specify their provenance.
 
-This GFM extension is included unchanged.
+The other two GFM extensions are omitted:
 
-I considered requiring leading and trailing pipes (`|`), but since GFM tables
-require a delimiter line, this is enough to prevent false positives (of a
-parser deciding some text was a table when it was not).
-
-Also, any divergence from GFM tables, even as an improvement, would not be worth
-the incompatibility.
-
-### Strikethrough (GFM) - included unchanged
-
-This GFM extension is included unchanged.
-
-Why? It's useful.
-
-### Autolinks (GFM) - included unchanged
-
-This GFM extension is included unchanged.
-
-While this extension is neutral for paper books, ebooks and courses do stand to
-benefit from this.
-
-### Task list items (GFM) - removed
-
-This [GFM extension](https://github.github.com/gfm/#task-list-items-extension-)
-is not added to the Markua Spec.
-
-Markua is for books and courses, not todo lists.
-
-### Disallowed Raw HTML (GFM) - removed
-
-This [GFM extension](https://github.github.com/gfm/#disallowed-raw-html-extension-)
-is not added to the Markua Spec.
-
-Instead, the following is done:
-1. The "HTML blocks" chapter is removed from the Leaf blocks chapter.
-2. The "Raw HTML" section is removed from the Inlines chapter.
-3. A [No Raw HTML](#no-raw-html-m-) extension is added.
+1. [Task list items](https://github.github.com/gfm/#task-list-items-extension-)
+   is omitted since Markua is for books and courses, not todo lists.
+2. [Disallowed Raw HTML](https://github.github.com/gfm/#disallowed-raw-html-extension-)
+   is omitted since Markua goes farther and converts all raw HTML into text.
 
 ## About the HTML output (M)
 

@@ -70,6 +70,10 @@ Blank lines separate paragraphs. This is *italic* and **bold**.
 
 That was a thematic break. "This is in quotes."
 
+By default image captions are in quotes, and the alt text is in square brackets:
+
+![a red apple](mac.jpg "The Original Mac")
+
 Here's a numbered list:
 
 1. foo

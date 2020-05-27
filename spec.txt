@@ -142,7 +142,7 @@ This is a paragraph in a new chapter.
 
 * * *
 
-I also showed bold text, even though you only need italics for novels!
+I also showed **bold text**, even though *you only need italics* for novels!
 
 ### How to write almost any book in Markua
 

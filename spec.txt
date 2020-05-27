@@ -82,11 +82,11 @@ Specifically, Markua 0.29 is NOT yet supported on Leanpub.
 
 ## What is this document? (M)
 
-This is the specification of **Markua 0.29**, written by
+This is version 0.29 of the Markua Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
 
-The Markua Spec is based on version 0.29 of the CommonMark Spec, whose author is
-[John MacFarlane](https://johnmacfarlane.net/).
+Version 0.29 of the Markua Spec is based on version 0.29 of the CommonMark Spec,
+whose author is [John MacFarlane](https://johnmacfarlane.net/).
 
 This document also incorporates the specification of the GitHub Flavored
 Markdown (GFM) extensions from the
@@ -123,6 +123,10 @@ This is a paragraph. You just write.
 
 Blank lines separate paragraphs. This is *italic* and **bold**.
 
+This is another paragraph. You can manually wrap your paragraphs
+however you want. Single newlines function like single spaces by
+default.
+
 * * *
 
 That was a thematic break. "This is in quotes."
@@ -148,7 +152,8 @@ term 1
 term 2
 : definition 2
 
-You can also use tables, which work best for numeric data:
+You can also use tables, which work best for numeric tabular data
+involving a small number of columns:
 
 | Currency  | Rate    |
 |-----------|---------|
@@ -156,37 +161,42 @@ You can also use tables, which work best for numeric data:
 | EUR / USD | 1.09887 |
 | USD / JPY | 107.706 |
 
-Note that definition lists are preferred to tables for most text, since typing
-text in a table quickly gets annoying.
+Note that definition lists are preferred to tables for most use cases,
+since typing text in a table quickly gets annoying.
 
 # Chapter Two
 
-This is a paragraph in a new chapter. You can manually wrap
-your paragraphs however you want. Single newlines function like
-single spaces by default.
+You can add images.
 
-You can have external code samples:
+By default Markua functions like Markdown and CommonMark: the image captions are
+in quotes, and the alt text is in square brackets:
+
+![a red apple](mac.jpg "The Original Mac")
+
+However, if you wish, you can set a global setting to have Markua to treat the
+text in square brackets as the caption:
+
+![The Original Mac](mac.jpg)
+
+Now, if you do this, you need to use an attribute list for your alt text:
+
+{alt: "a red apple"}
+![The Original Mac](mac.jpg)
+
+The image syntax is the inspiration for the syntax for external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
-You can also have inline code samples:
+You can also have inline code samples, which can have a caption using an
+attribute list:
 
-{title: "Hello World in Ruby"}
+{caption: "Hello World in Ruby"}
 ```ruby
 puts "hello"
 ```
 
 You can also include single lines of code like `puts "hello"` in paragraphs
 using backticks.
-
-By default image captions are in quotes, and the alt text is in square brackets:
-
-![a red apple](mac.jpg "The Original Mac")
-
-However, you can configure Markua to treat the text in square brackets as the
-caption:
-
-![The Original Mac](mac.jpg)
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *Markua Spec*
@@ -529,6 +539,7 @@ the `title` if no `title` was present. (The caption was the text shown near
 the figure; the title was its name in a table of tables or list of figures.)
 So, in the Markua beta, you could do this:
 
+
 ```
 {alt: "Some alt text", caption: "The Caption", title: "The Title"}
 ![](url)
@@ -540,6 +551,8 @@ This was equivalent to this in the Markua beta:
 {alt: "Some alt text", title: "The Title"}
 ![The Caption](url)
 ```
+
+TODO - revisit this
 
 In Markua, there is no more `caption` attribute. The `title` attribute is used
 for both the figure caption and the figure name in any table of tables or list

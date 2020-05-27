@@ -173,7 +173,7 @@ since typing text in a table quickly gets annoying.
 
 Markua supports both of Markdown's heading styles.
 
-The preferred style, called atx headers, has the following headings:
+The preferred style, called atx headers, has the following meaning in Markua:
 
 ```
 {class: part}
@@ -204,8 +204,10 @@ This is a paragraph.
 ###### Sub-sub-sub-sub-section
 
 This is a paragraph.
-
 ```
+
+Note the use of backticks in the above example, to treat the Markua like inline
+code.
 
 The other style, called Setext headers, has the following headings:
 
@@ -219,11 +221,13 @@ Section
 -------
 
 This is a paragraph.
-
 ```
 
 Obviously, it's a terrible idea to mix and match using Setext and atx headers
 for chapters and sections in the same document, but you can do it.
+
+Finally, to create the headings for Parts and for Sub-sections and below, you
+must use atx headers.
 
 # Images
 
@@ -238,18 +242,25 @@ in quotes, and the alt text is in square brackets:
 
 ![a red apple](mac.jpg "The Original Mac")
 
+The location of captions is determined by the global `captions` setting.
+The default value is `captions: round`, and functions as shown above.
+
 ## Captions can be in Square Brackets with a Global Setting
 
-However, if you wish, you can set a global setting (image-captions: brackets)
+However, if you wish, you can set a global setting (`captions: square`)
 at the beginning of the document to have Markua to treat the text in square
 brackets as the caption. Then you can add images with captions like this:
 
 ![The Original Mac](mac.jpg)
 
-Note that if you do this, you need to use an attribute list for your alt text:
+With this setting, 
+
+Note that if you do this, you need to use an attribute list for any alt text:
 
 {alt: "a red apple"}
 ![The Original Mac](mac.jpg)
+
+In Markua 0.10, the default is value 
 
 # Code Samples
 

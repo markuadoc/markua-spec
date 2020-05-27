@@ -114,6 +114,8 @@ even if you normally skip them.
 The Markua specification is long. However, if you're an author, the amount you
 need to learn to write in Markua is actually very short.
 
+### How to write a novel in Markua
+
 This example shows everything you need to know to write a novel in Markua:
 
 ~~~
@@ -135,6 +137,8 @@ That was a thematic break. "This is in quotes."
 
 This is a paragraph in a new chapter.
 ~~~
+
+### How to write almost any book in Markua
 
 This longer example shows everything you need to know to write almost any type
 of book, such as a computer programming book, in Markua. It also explains most

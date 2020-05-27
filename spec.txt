@@ -114,6 +114,52 @@ even if you normally skip them.
 The Markua specification is long. However, if you're an author, the amount you
 need to learn to write in Markua is actually very short.
 
+This example shows everything you need to know to write a novel in Markua:
+
+~~~
+# Chapter One
+
+This is a paragraph. You just write.
+
+Blank lines separate paragraphs. This is *italic* and **bold**.
+
+* * *
+
+That was a thematic break. "This is in quotes."
+
+# Chapter Two
+
+This is a paragraph in a new chapter.
+~~~
+
+This longer example shows everything you need to know to write almost any type
+of book, such as a computer programming book, in Markua. It also explains most
+of the important syntax while it's at it:
+
+~~~
+# Paragraphs
+
+This is a paragraph. You just write.
+
+Blank lines separate paragraphs. This is *italic* and **bold**.
+
+This is another paragraph. You can manually wrap your paragraphs
+however you want. Single newlines function like single spaces by
+default.
+
+* * *
+
+That was a thematic break. "This is in quotes."
+
+# Lists
+
+Here's a numbered list (called "ordered"):
+
+
+
+
+This example shows everything you need to know to write most books in Markua:
+
 This example shows everything you need to know to write most books in Markua:
 
 ~~~

@@ -168,12 +168,11 @@ local create_anchors = function(doc, meta, to)
         else
           anchor = make_html_block('h' .. tostring(math.floor(level)),
                       {{'id', ident},
-                       {'href', '#'..ident},
                        {'class', 'definition'}})
           if num ~= '' then
             local numspan = make_html_inline('span', {{'class','number'}})
-            node_append_child(numspan, make_text(num))
-            node_append_child(anchor, numspan)
+            cmark.node_append_child(numspan, make_text(num))
+            cmark.node_append_child(anchor, numspan)
           end
         end
       end
@@ -184,7 +183,7 @@ local create_anchors = function(doc, meta, to)
         child = cmark.node_next(child)
       end
       for _,child in ipairs(children) do
-        node_append_child(anchor, child)
+        cmark.node_append_child(anchor, child)
       end
       cmark.node_insert_before(cur, anchor)
       cmark.node_unlink(cur)
@@ -222,17 +221,11 @@ local create_anchors = function(doc, meta, to)
         cmark.node_append_child(leftcol_div, markdown_code)
         cmark.node_append_child(rightcol_div, html_code)
         local examplenum_div = make_html_block('div', {{'class', 'examplenum'}})
-        local interact_link = make_html_inline('a', {{'class', 'dingus'},
-                    {'title', 'open in interactive dingus'}})
-        cmark.node_append_child(interact_link, make_text("Try It"))
         local examplenum_link = cmark.node_new(cmark.NODE_LINK)
         cmark.node_set_url(examplenum_link, '#example-' .. tostring(example))
         cmark.node_append_child(examplenum_link,
                                 make_text("Example " .. tostring(example)))
         cmark.node_append_child(examplenum_div, examplenum_link)
-        if format == 'html' then
-          cmark.node_append_child(examplenum_div, interact_link)
-        end
         example_div = make_html_block('div', {{'class', 'example'},
                                  {'id','example-' .. tostring(example)}})
         cmark.node_append_child(example_div, examplenum_div)

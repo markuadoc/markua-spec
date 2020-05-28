@@ -497,7 +497,7 @@ be based on CommonMark. When this is complete, Leanpub's existing Markua Support
 will continue to be supported unchanged for many years, and will be rebranded as
 "Markua Quirks Mode".
 
-## Converting Between LFM and Markua (M)
+## Converting between LFM and Markua (M)
 
 The launch of Spec Mode for both LFM and Markua on Leanpub will give authors of
 existing Leanpub books and courses the following choice for each of their books
@@ -514,14 +514,14 @@ To be clear, conversions from LFM to Markua will only be done in Spec Mode for
 both LFM and Markua. (The conversion will be between LFM Spec Mode and Markua
 Spec Mode.)
 
-## Differences with Leanpub Flavoured Markdown (M)
+## Differences between LFM and Markua (M)
 
-When considering converting between LFM and Markua in Spec Mode, it's important
-to highlight all the differences between Markua and LFM.
+When considering converting between LFM and Markua (both in Spec Mode), it's
+important to highlight all the differences between Markua and LFM.
 
-These are the top 9 differences between Markua Spec Mode and LFM as currently
-implemented in Leanpub. (These differences exist in LFM Quirks Mode currently,
-but they will also exist in LFM Spec Mode once it exists.)
+The following are the top 9 differences between Markua and LFM. This is true
+both with LFM as currently implemented in Leanpub (in Quirks Mode), but these
+differences will also exist in LFM Spec Mode once it exists.
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
    attribute list on an atx or Setext heading.

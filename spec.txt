@@ -575,13 +575,55 @@ The other two GFM extensions are omitted:
 ## About the HTML output (M)
 
 The HTML mapping defined in this specification is NOT a complete specification
-of the HTML documents produced by Markua Processors. It is only a specification
-of the parts of the HTML mapping where there is no need to have flexibility on
-the part of the Markua Processor. The HTML mapping should be thought of
-specifying HTML fragments, not documents. In all of the examples, a Markua
-Processor may add more HTML before and after the relevant content. The test is
-that the HTML produced contains the specified output, not that it is identical
-to the specified output.
+of the HTML documents produced by Markua Processors.
+
+Also, the HTML mapping defined in the specification is NOT considered to be
+canonical.
+
+For example, given the following Markua:
+
+```
+![a red apple](mac.jpg "The Original Mac")
+```
+
+a Markua Processor can produce HTML that looks like this:
+
+```
+<p><img src="mac.jpg" alt="a red apple" title="The Original Mac" /></p>
+```
+
+(That is what is produced at <https://spec.commonmark.org/dingus/> on
+2020-05-27, for example.)
+
+A Markua Processor can also, however, produce HTML that looks like this:
+
+```
+<figure>
+    <img src="mac.jpg"
+         alt="a red apple">
+    <figcaption>The Original Mac</figcaption>
+</figure>
+```
+
+Both approaches are completely legitimate, and have pros and cons.
+
+So, why show any HTML at all? There are two reasons:
+
+1. The CommonMark Spec shows HTML.
+2. Showing HTML allows parsers to test themselves.
+
+Finally, besides not being canonical, the HTML is not complete. It is only a
+specification of the parts of the HTML mapping where there is less need to have
+flexibility on the part of the Markua Processor.
+
+The HTML mapping should be thought of specifying HTML fragments, not documents.
+
+In all of the examples, a Markua Processor may add more HTML before and after
+the relevant content, as well as changing the relevant content itself.
+
+If a Markua Processor wishes to test that it produces the correct HTML, it
+should test that the HTML produced contains the specified output, not that it
+is identical to the specified output.
 
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the

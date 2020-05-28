@@ -89,9 +89,9 @@ This is the Markua Spec, written by
 The Markua Spec is based on the CommonMark Spec, whose author is
 [John MacFarlane](https://johnmacfarlane.net/).
 
-This document also incorporates the specification of the GitHub Flavored
-Markdown (GFM) extensions from the
-[GitHub Flavored Markdown Spec](https://github.github.com/gfm/).
+This document also incorporates the specification of three of the five GitHub
+Flavored Markdown (GFM) extensions from the [GitHub Flavored Markdown
+Spec](https://github.github.com/gfm/).
 
 Like the CommonMark Spec and the GitHub Flavored Markdown Spec, the Markua Spec
 is licensed under the Creative Commons license

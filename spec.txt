@@ -488,7 +488,9 @@ continue to be supported unchanged for many years, and will be rebranded as
 Markua is not yet fully supported on Leanpub.
 
 Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
-Markua support is not based on CommonMark.
+Markua support is not based on CommonMark. Markua and CommonMark were both
+launched in 2014, within a few months of each other. Leanpub's Markua
+implementation was based on its implementation of LFM, which started in 2011.
 
 Leanpub is working on a version ("Spec Mode") of its Markua support which will
 be based on CommonMark. When this is complete, Leanpub's existing Markua Support

@@ -464,6 +464,9 @@ Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
 Markdown to support book authoring. It started in 2011 and evolved with
 feedback from Leanpub authors until 2014, when Markua was launched.
 
+Leanpub **books** can currently be written in **LFM or Markua**.
+Leanpub **courses** can currently only be written in **Markua**, however.
+
 LFM is the predecessor of Markua. LFM is specified in the
 [Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm). (TODO)
 
@@ -480,12 +483,9 @@ based on CommonMark. When this is complete, Leanpub's existing LFM Support will
 continue to be supported unchanged for many years, and will be rebranded as
 "LFM Quirks Mode".
 
-## Converting Between LFM and Markua (M)
+## How does Leanpub's current Markua support match the Markua Spec? (M)
 
-Leanpub **books** can currently be written in **LFM or Markua**.
-Leanpub **courses** can currently only be written in **Markua**.
-
-However, Markua is not yet fully supported in Leanpub.
+Markua is not yet fully supported on Leanpub.
 
 Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
 Markua support is not based on CommonMark.
@@ -494,6 +494,8 @@ Leanpub is working on a version ("Spec Mode") of its Markua support which will
 be based on CommonMark. When this is complete, Leanpub's existing Markua Support
 will continue to be supported unchanged for many years, and will be rebranded as
 "Markua Quirks Mode".
+
+## Converting Between LFM and Markua (M)
 
 The launch of Spec Mode for LFM and Markua will give authors of existing books
 and courses on Leanpub the following choice for each of their books or courses:

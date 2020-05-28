@@ -559,14 +559,14 @@ differences will also exist in LFM Spec Mode once it exists.
    specification itself. (Leanpub still uses the Book.txt approach to specify
    which files are in a book, but other Markua Processors could use other
    approaches, or could just support parsing single files or input streams.)
-10. A number of features (courses, index entries, smart crosslinks, etc.) exist
-    in Markua Spec Mode that do not exist in LFM Spec Mode. Compare the two
-    specs for the full details.
+10. Most importantly, a number of features (courses, index entries, smart
+    crosslinks, etc.) exist in Markua Spec Mode that do not exist in LFM Spec
+    Mode. Compare the two specs for the full details.
 
-Note that the differences between Markua Spec Mode and LFM Spec Mode are not
-just incompatibilities: Markua Spec Mode has many more features than LFM Spec
-Mode. This is why we will support conversion from LFM Spec Mode to Markua Spec
-Mode, but not vice-versa.
+To emphasize point #10: the differences between Markua Spec Mode and LFM Spec
+Mode are not just incompatibilities: Markua Spec Mode has many more features
+than LFM Spec Mode. This is why Leanpub will support conversion from LFM Spec
+Mode to Markua Spec Mode, but not vice-versa.
 
 ## Structure of this document (M)
 

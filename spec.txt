@@ -141,11 +141,21 @@ This is a paragraph in a new chapter.
 
 * * *
 
-By the way, everything in the above example is identical in Markua as specified
-here, Leanpub Flavoured Markdown, Markdown as defined by John Gruber, and
-CommonMark as specified by John MacFarlane. In the simple case, Markua and
-Leanpub Flavoured Markdown are just mappings from Markdown concepts to book
-concepts. This is deliberate.
+By the way, everything in the above example is identical in the following
+Markdown dialects:
+
+* Markua as specified in this document
+* Markua as described in the Markua manual
+* Leanpub Flavoured Markdown as specified in TODO
+* Leanpub Flavoured Markdown as described in the LFM manual
+* GitHub Flavored Markdown as specified in the GFM Spec
+* CommonMark as specified by John MacFarlane in the CommonMark Spec
+* Markdown as originally described by John Gruber
+
+In the simple case, Markua and Leanpub Flavoured Markdown are just mappings from
+Markdown concepts to book concepts. This is deliberate.
+
+(Also, for simple use cases, all the Markdown dialects are the same.)
 
 ## How to write almost any book in Markua (M)
 

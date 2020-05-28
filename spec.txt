@@ -72,13 +72,14 @@ This is its specification.
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
 
-1. [Markua 0.10](https://leanpub.com/markua/read) (preferred)
+1. [Markua](https://leanpub.com/markua/read) (preferred)
 2. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
 
 If you're a Leanpub author, you should probably go read one of those manuals
 instead of this specification.
 
-Specifically, Markua 0.29 is NOT yet supported on Leanpub.
+Specifically, not all Markua features are supported on Leanpub. To learn what
+works and what does not work, you need to see the manual.
 
 ## What is this document? (M)
 
@@ -387,10 +388,7 @@ online courses.
 
 Markua was started at Leanpub in 2014, and benefited from the years of lessons
 that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
-successor to LFM. We iterated on our Markua support for many years, and reached
-a stable version of Markua 0.10 in October 2019.
-
-There are two versions of Markua specified: Markua 0.10 and Markua 0.29.
+successor to LFM. We have been iterating on our Markua support for many years.
 
 Markua's three main contributions are the following:
 
@@ -426,47 +424,6 @@ friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
 
-## Markua 0.29 (M)
-
-Markua 0.29 is the most recent version of Markua.
-
-The Markua 0.29 Spec is based on the CommonMark Spec. Work on the Markua 0.29
-Spec started in 2019 and continues today.
-
-Markua 0.29 is not yet supported in Leanpub. (Leanpub currently supports
-Markua 0.10.)
-
-When Markua 0.29 support is launched in beta on Leanpub, the [Markua 0.29
-Manual](https://leanpub.com/markua029) will document what works in Leanpub's
-Markua 0.29 support. This manual will evolve as Leanpub's Markua 0.29 support
-evolves.
-
-Unlike LFM and Markua 0.10 which will have a "Quirks Mode" and a "Spec Mode" on
-Leanpub, Leanpub's Markua 0.29 support will not have different modes. Since the
-Markua 0.29 Spec is being created first, there will only be one Markua 0.29
-mode. This mode will evolve in beta, and it will eventually match the Markua
-0.29 Spec.
-
-## Markua 0.10 (M)
-
-Markua 0.10 is the version of Markua which started in 2014 and evolved until
-October 2019.
-
-Leanpub authors should consult the
-[Markua 0.10 manual](https://leanpub.com/markua/read) instead of the Markua 0.10
-Spec, since it provides a more accurate description of Leanpub's Markua 0.10
-support.
-
-The reason for this divergence is simple: the Markua 0.10 Spec is based on the
-CommonMark 0.29 Spec, but Leanpub's Markua support is not currently based on
-CommonMark at all. (CommonMark and the CommonMark Spec did not exist when the
-Markua project was started.)
-
-Leanpub is working on a version ("Spec Mode") of our Markua 0.10 support which
-will be based on CommonMark. When this is complete, Leanpub's existing Markua
-0.10 Support will continue to be supported unchanged for many years, and will be
-rebranded as "Markua 0.10 Quirks Mode".
-
 ## What is Leanpub Flavoured Markdown (LFM)? (M)
 
 Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
@@ -489,24 +446,32 @@ based on CommonMark. When this is complete, Leanpub's existing LFM Support will
 continue to be supported unchanged for many years, and will be rebranded as
 "LFM Quirks Mode".
 
-## Converting Between LFM, Markua 0.10 and Markua 0.29 (M)
+## Converting Between LFM and Markua (M)
 
-Leanpub **books** can currently be written in **LFM or Markua 0.10**.
-Leanpub **courses** can currently only be written in **Markua 0.10**.
+Leanpub **books** can currently be written in **LFM or Markua**.
+Leanpub **courses** can currently only be written in **Markua**.
 
-The launch of Spec Mode for LFM and Markua 0.10 and the launch of the Markua
-0.29 beta will give authors of existing books and courses on Leanpub the
-following choice for each of their books or courses:
+However, Markua is not yet fully supported in Leanpub.
+
+Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
+Markua support is not based on CommonMark.
+
+Leanpub is working on a version ("Spec Mode") of its Markua support which will
+be based on CommonMark. When this is complete, Leanpub's existing Markua Support
+will continue to be supported unchanged for many years, and will be rebranded as
+"Markua Quirks Mode".
+
+The launch of Spec Mode for LFM and Markua will give authors of existing books
+and courses on Leanpub the following choice for each of their books or courses:
 
 1. Leave their book or course in Quirks Mode, for unchanged behaviour and
    performance.
 2. Switch their book or course to Spec Mode, for faster book or course
-   generation and better compliance with the LFM or Markua 0.10 specs.
+   generation and better compliance with the LFM or Markua specs.
 3. Click a button to save a version of their existing manuscript and then
-   automatically convert their LFM or Markua 0.10 manuscript into a Markua 0.29
-   manuscript.
+   automatically convert their LFM manuscript into a Markua manuscript.
 
-To be clear, conversions from LFM or Markua 0.10 will only be done in Spec Mode.
+To be clear, conversions from LFM to Markua will only be done in Spec Mode.
 
 ## Structure of this document (M)
 

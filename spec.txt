@@ -153,8 +153,6 @@ Markdown dialects:
 In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
 
-Also, for simple use cases, all the Markdown dialects are the same.
-
 ## How to write almost any book in Markua (M)
 
 The longer example below shows everything you need to know to write almost any
@@ -306,6 +304,9 @@ You can also set the alt text and/or the figure caption in an attribute list:
 {alt: "a red apple", caption: "The Original Mac"}
 ![](mac.jpg)
 
+Attribute lists are one of Markua's additions to Markdown, and are discussed
+later in this specification.
+
 If you wish, you can configure a Markua Processor to convert alt text into a
 figure caption if no separate figure caption is provided. (A figure caption is
 just as accessible as alt text, so this is fine.) Global settings are discussed
@@ -316,35 +317,55 @@ next.
 Various global settings can be specified at the start of a Markua document to
 affect the behaviour of the Markua Processor.
 
-For example, there is a global setting which controls whether alt text is
-converted into the figure caption if there is no figure caption explicitly set.
-This setting is called `caption`, and it can have the values of `alt` (meaning
-"if no caption is provided, remove the alt text and use it as the figure caption
-instead") or `none` (meaning "use no figure caption if no caption is provided,
-even if alt text is provided"). The default value of the `caption` global
-setting is `alt`. Note that if the alt text is converted into the figure
-caption, it is NOT also provided as alt text. It would be very frustrating to
-hear the same text spoken twice (once as the alt text and once as the figure
-caption) when using a screen reader.
+For example, there is a global setting called `alt-caption` which controls
+whether the alt text is removed and used instead as the figure caption if there
+is no figure caption explicitly set. The possible values of this setting are:
+
+`all`
+: If no caption is provided for a given resource, remove the alt text and use it
+as the figure caption instead. (This is the default value.)
+
+`text`
+: If no caption is provided for a given text-based resource (such as an external
+code sample), remove the alt text and use it as the figure caption instead.
+However, if the resource is not purely text-based, such as an image or a video,
+do not remove the remove the alt text and use it as the figure caption if no
+figure caption is provided.
+
+`none`
+: Never use the alt text as the figure caption, even if no figure caption is
+provided.
+
+Note that with the `all` and `text` values, if the alt text is converted into
+the figure caption, it is NOT also provided as alt text. It would be very
+frustrating to hear the same text spoken twice (once as the alt text and once
+as the figure caption) when using a screen reader.
 
 Here's an example of a complete Markua document showing the use of global
 settings:
 
 ```
 {
-caption: none
+alt-caption: text
 }
 
 # Chapter One
 
 This is an apple. This image will have alt text but no figure caption, because
-of the `caption: none` global setting which ensures that alt text is not
+of the `alt-caption: none` global setting which ensures that alt text is not
 converted into a figure caption if no figure caption is provided.
 
 ![a red apple](mac.jpg)
 
 No figure caption? Go figure.
 ```
+
+The generalization of the Markdown image syntax into resources, and the addition
+of global settings, are two more of Markua's additions to Markdown. These are
+also both discussed later in this specification.
+
+One important type of resource in Markua is code samples, which is discussed
+next.
 
 # Code Samples
 
@@ -358,18 +379,9 @@ Just like with images, you can also use an attribute list for the caption:
 ![](hello.rb)
 
 Note that you can also specify the figure caption as the alt text, as long as
-the global setting of `caption` is left at, or set to, its default value of
-`alt`:
+the global setting of `alt-caption` is not set to `none`:
 
 ![Hello World in Ruby](hello.rb)
-
-Since there is no need for alt text on code samples (because code samples are
-themselves text), this setting is preferable.
-
-TODO - should there be a separate setting which governs text resources which
-do not need alt text? Or could it be `alt-caption: all | text | none`, where
-`all` meant "use the alt text as the caption in all cases", `text` meant
-"use the alt text as the caption in cases where the resource is text"
 
 You can also have inline code samples, which can only have a caption using an
 attribute list:

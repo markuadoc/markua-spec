@@ -146,7 +146,6 @@ Markdown dialects:
 
 * Markua as specified in this document
 * Leanpub Flavoured Markdown as specified in TODO
-* Leanpub Flavoured Markdown as described in the LFM manual
 * GitHub Flavored Markdown as specified in the GFM Spec
 * CommonMark as specified by John MacFarlane in the CommonMark Spec
 * Markdown as originally described by John Gruber

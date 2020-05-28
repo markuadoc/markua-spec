@@ -145,8 +145,9 @@ This is a paragraph in a new chapter.
 ## How to write almost any book in Markua (M)
 
 This longer example shows everything you need to know to write almost any type
-of book, such as a computer programming book, in Markua. It also explains most
-of Markua's important syntax while it's at it:
+of book, such as a computer programming book, in Markua. This example also
+serves as a tutorial which explains most of Markua's important syntax in its
+content:
 
 ~~~
 # Paragraphs
@@ -245,6 +246,12 @@ inline code.
 The other style of headers, called Setext headers, has the following headings:
 
 ```
+{class: part}
+Part
+====
+
+This is a paragraph.
+
 Chapter
 =======
 
@@ -257,8 +264,10 @@ This is a paragraph.
 ```
 
 Setext headers look nice, but only if you're only using chapters and sections.
-If you want to add sub-sections or parts, you'll be using atx headers for at
+If you want to add sub-sections (or lower), you'll be using atx headers for at
 least some of your headers. My advice is to just use atx headers all the time.
+(The `{class: part}` attribute list on a chapter header to make a part header
+does actually work with Setext headers, but it's really ugly.)
 
 Finally, note that while it is confusing and ugly to mix and match using Setext
 and atx headers for chapters and sections in the same document, you can do it.

@@ -150,8 +150,8 @@ Markdown dialects:
 * CommonMark as specified by John MacFarlane in the CommonMark Spec
 * Markdown as originally described by John Gruber
 
-In the simple case, Markua and Leanpub Flavoured Markdown are just mappings from
-Markdown concepts to book concepts. This is deliberate.
+In the simple case, Markua is just a mapping from Markdown concepts to book
+concepts. This is deliberate.
 
 Also, for simple use cases, all the Markdown dialects are the same.
 

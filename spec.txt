@@ -598,11 +598,13 @@ A Markua Processor can produce HTML that looks like this:
 A Markua Processor can also, however, produce HTML that looks like this:
 
 ```
-<figure>
+<p>
+  <figure>
     <img src="mac.jpg"
          alt="a red apple">
     <figcaption>The Original Mac</figcaption>
-</figure>
+  </figure>
+</p>
 ```
 
 Both approaches are completely legitimate, and have pros and cons.

@@ -152,8 +152,8 @@ concepts. This is deliberate.
 This longer example shows everything you need to know to write almost any type
 of book, such as a computer programming book, in Markua. This example also
 serves as a tutorial which explains most of Markua's important syntax in its
-content. Some parts of this syntax is standard Markdown or CommonMark syntax,
-and other parts are extensions:
+content. Some parts of this syntax are just standard Markdown or CommonMark
+syntax, and other parts are Markua extensions:
 
 ~~~
 # Paragraphs

@@ -366,6 +366,11 @@ the global setting of `caption` is left at, or set to, its default value of
 Since there is no need for alt text on code samples (because code samples are
 themselves text), this setting is preferable.
 
+TODO - should there be a separate setting which governs text resources which
+do not need alt text? Or could it be `alt-caption: all | text | none`, where
+`all` meant "use the alt text as the caption in all cases", `text` meant
+"use the alt text as the caption in cases where the resource is text"
+
 You can also have inline code samples, which can only have a caption using an
 attribute list:
 

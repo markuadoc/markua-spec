@@ -584,10 +584,10 @@ to the CommonMark Spec:
 3. Since the [Metadata](#metadata-m-) and
    [Quizzes and exercises](#quizzes-and-exercises-m-) chapters are new, the
    numbering of some chapters is changed.
-4. The metadata at the top is changed.
+4. The metadata at the top of the spec itself is changed.
 
 The reason that HTML tags are not treated as HTML is discussed
-[here](#no-raw-html-m-).
+in the [No HTML Blocks](#no-html-blocks-m-) section.
 
 Next, three of the five GFM extensions are added. These are discussed
 [below](#github-flavored-markdown-gfm-extension-status-m-).

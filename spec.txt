@@ -442,7 +442,7 @@ Markdown to support book authoring. It started in 2011 and evolved with
 feedback from Leanpub authors until 2014, when Markua was launched.
 
 LFM is the predecessor of Markua. LFM is specified in the
-[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm).
+[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm). (TODO)
 
 Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
 instead of the LFM Spec, since it provides a more accurate description of

@@ -330,15 +330,19 @@ The image syntax is the inspiration for the syntax for external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
-Note that you can also specify the figure caption as the alt text, as long as
-the global setting of `caption` is set to its default value of `alt`:
-
-![Hello World in Ruby](hello.rb)
-
 Just like with images, you can also use an attribute list for the caption:
 
 {caption: "Hello World in Ruby"}
 ![](hello.rb)
+
+Note that you can also specify the figure caption as the alt text, as long as
+the global setting of `caption` is left at, or set to, its default value of
+`alt`:
+
+![Hello World in Ruby](hello.rb)
+
+Since there is no need for alt text on code samples (because code samples are
+themselves text), this setting is preferable.
 
 You can also have inline code samples, which can only have a caption using an
 attribute list:

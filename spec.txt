@@ -124,7 +124,7 @@ This example shows everything you need to know to write a novel in Markua:
 
 This is a paragraph. You just write.
 
-Blank lines separate paragraphs. This is *italic* and **bold**.
+Blank lines separate paragraphs. This is *italic text*.
 
 This is another paragraph. You can manually wrap your paragraphs
 however you want. Single newlines function like single spaces by
@@ -141,7 +141,6 @@ This is a paragraph in a new chapter.
 
 * * *
 
-I also showed **bold text**, even though *you only need italics* for novels!
 
 ## How to write almost any book in Markua (M)
 
@@ -154,7 +153,7 @@ of Markua's important syntax while it's at it:
 
 This is a paragraph. You just write.
 
-Blank lines separate paragraphs. This is *italic* and **bold**.
+Blank lines separate paragraphs. This is *italic text* and **this is bold**.
 
 This is another paragraph. You can manually wrap your paragraphs
 however you want. Single newlines function like single spaces by

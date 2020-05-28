@@ -323,14 +323,14 @@ is no figure caption explicitly set. The possible values of this setting are:
 
 `all`
 : If no caption is provided for a given resource, remove the alt text and use it
-as the figure caption instead. (This is the default value.)
+as the figure caption instead.
 
 `text`
 : If no caption is provided for a given text-based resource (such as an external
 code sample), remove the alt text and use it as the figure caption instead.
 However, if the resource is not purely text-based, such as an image or a video,
 do not remove the remove the alt text and use it as the figure caption if no
-figure caption is provided.
+figure caption is provided. (This is the default value.)
 
 `none`
 : Never use the alt text as the figure caption, even if no figure caption is
@@ -346,7 +346,7 @@ settings:
 
 ```
 {
-alt-caption: text
+alt-caption: none
 }
 
 # Chapter One
@@ -705,17 +705,17 @@ Both approaches are completely legitimate, and have pros and cons.
 
 So, why show any HTML at all? There are two reasons:
 
-1. The CommonMark Spec shows HTML.
+1. The CommonMark Spec shows HTML, and the Markua Spec tries to only be additive
+   to the CommonMark Spec.
 2. Showing HTML helps Markua Processors to test their parsers.
 
 Finally, besides not being canonical, the HTML is not complete. It is only a
 specification of the parts of the HTML mapping where there is less need to have
 flexibility on the part of the Markua Processor.
 
-The HTML mapping should be thought of specifying HTML fragments, not documents.
-
-In all of the examples, a Markua Processor may add more HTML before and after
-the relevant content, as well as changing the relevant content itself.
+The HTML mapping should be thought of specifying HTML fragments, not HTML
+documents. In all of the examples, a Markua Processor may add more HTML before
+and after the relevant content, as well as changing the relevant content itself.
 
 If a Markua Processor wishes to test that it produces the correct HTML, it
 should test that the HTML produced contains the specified output, not that it
@@ -724,10 +724,6 @@ is identical to the specified output.
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.
-
-Finally, Markua does not specify any CSS. However, advice will sometimes be
-offered in "CSS Note" sections. This is because certain semantically meaningful
-formatting (like strikethrough) is only done in HTML via CSS.
 
 ## What is Markdown?
 

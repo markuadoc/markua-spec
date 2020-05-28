@@ -83,11 +83,11 @@ works and what does not work, you need to see the manual.
 
 ## What is this document? (M)
 
-This is version 0.29 of the Markua Spec, written by
+This is the Markua Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
 
-Version 0.29 of the Markua Spec is based on version 0.29 of the CommonMark Spec,
-whose author is [John MacFarlane](https://johnmacfarlane.net/).
+The Markua Spec is based on the CommonMark Spec, whose author is
+[John MacFarlane](https://johnmacfarlane.net/).
 
 This document also incorporates the specification of the GitHub Flavored
 Markdown (GFM) extensions from the
@@ -99,7 +99,7 @@ is licensed under the Creative Commons license
 
 This document has two types of intended readers:
 
-1. authors with advanced questions about Markua 0.29 syntax
+1. authors with advanced questions about Markua syntax
 2. developers implementing Markua Processors
 
 This Introduction contains a number of introductory sections about Markua and its
@@ -553,9 +553,9 @@ There are two main drawbacks, however:
 Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
 
-Version 0.29 of the [GitHub Flavored Markdown
-Spec](https://github.github.com/gfm/) defines five extensions to CommonMark.
-In the GFM Spec, these extensions have "(extension)" in their title.
+The [GitHub Flavored Markdown Spec](https://github.github.com/gfm/) defines five
+extensions to CommonMark. In the GFM Spec, these extensions have "(extension)"
+in their title.
 
 Three of these five GFM extensions are included in the Markua Spec:
 

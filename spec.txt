@@ -499,8 +499,9 @@ will continue to be supported unchanged for many years, and will be rebranded as
 
 ## Converting Between LFM and Markua (M)
 
-The launch of Spec Mode for LFM and Markua will give authors of existing books
-and courses on Leanpub the following choice for each of their books or courses:
+The launch of Spec Mode for both LFM and Markua on Leanpub will give authors of
+existing Leanpub books and courses the following choice for each of their books
+or courses:
 
 1. Leave their book or course in Quirks Mode, for unchanged behaviour and
    performance.

@@ -580,13 +580,13 @@ of the HTML documents produced by Markua Processors.
 Also, the HTML mapping defined in the specification is NOT considered to be
 canonical.
 
-For example, given the following Markua:
+For example, consider the following Markua:
 
 ```
 ![a red apple](mac.jpg "The Original Mac")
 ```
 
-a Markua Processor can produce HTML that looks like this:
+A Markua Processor can produce HTML that looks like this:
 
 ```
 <p><img src="mac.jpg" alt="a red apple" title="The Original Mac" /></p>

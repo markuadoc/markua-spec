@@ -621,11 +621,11 @@ it has a number of significant benefits:
 3. Writing this specification as a series of extensions to CommonMark will
    enable people who are implementing it to just start with a compliant
    CommonMark implementation and modify it appropriately.
-4. Defining all Markua changes as extensions to CommonMark makes it abundantly
-   clear whether something that Markua does originates in CommonMark, or whether
-   it was added by GFM or by Markua. This is potentially helpful for authors,
-   since it will show them what will work in other Markdown dialects, and what
-   won't.
+4. Defining all Markua changes as extensions to CommonMark or deletions from
+   CommonMark makes it abundantly clear whether something that Markua does
+   originates in CommonMark, or whether it was added by GFM or by Markua. This
+   is potentially helpful for authors, since it will show them what will work
+   in other Markdown dialects, and what won't.
 5. It means that updating this document to keep it current with the CommonMark
    and GFM specs will be very easy.
 
@@ -686,8 +686,8 @@ A Markua Processor can produce HTML that looks like this:
 <p><img src="mac.jpg" alt="a red apple" title="The Original Mac" /></p>
 ```
 
-(That is what is produced at <https://spec.commonmark.org/dingus/> on
-2020-05-27, for example.)
+(That is what was produced at <https://spec.commonmark.org/dingus/> on
+2020-05-27, for example, and it is valid Markua as well as valid CommonMark.)
 
 A Markua Processor can also, however, produce HTML that looks like this:
 
@@ -706,7 +706,7 @@ Both approaches are completely legitimate, and have pros and cons.
 So, why show any HTML at all? There are two reasons:
 
 1. The CommonMark Spec shows HTML.
-2. Showing HTML allows parsers to test themselves.
+2. Showing HTML helps Markua Processors to test their parsers.
 
 Finally, besides not being canonical, the HTML is not complete. It is only a
 specification of the parts of the HTML mapping where there is less need to have

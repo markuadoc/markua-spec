@@ -157,11 +157,11 @@ Also, for simple use cases, all the Markdown dialects are the same.
 
 ## How to write almost any book in Markua (M)
 
-This longer example shows everything you need to know to write almost any type
-of book, such as a computer programming book, in Markua. This example also
+The longer example below shows everything you need to know to write almost any
+type of book, such as a computer programming book, in Markua. This example also
 serves as a tutorial which explains most of Markua's important syntax in its
 content. Some parts of this syntax are just standard Markdown or CommonMark
-syntax, and other parts are Markua extensions:
+syntax, and other parts are Markua extensions.
 
 ~~~
 # Paragraphs
@@ -319,13 +319,13 @@ affect the behaviour of the Markua Processor.
 For example, there is a global setting which controls whether alt text is
 converted into the figure caption if there is no figure caption explicitly set.
 This setting is called `caption`, and it can have the values of `alt` (meaning
-"convert the alt text into the figure caption if no caption is provided") or
-`none` (meaning "use no figure caption if no caption is provided, even if alt
-text is provided"). The default value of the `caption` global setting is `alt`.
-Note that if the alt text is converted into the figure caption, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure caption) when using a screen
-reader.
+"if no caption is provided, remove the alt text and use it as the figure caption
+instead") or `none` (meaning "use no figure caption if no caption is provided,
+even if alt text is provided"). The default value of the `caption` global
+setting is `alt`. Note that if the alt text is converted into the figure
+caption, it is NOT also provided as alt text. It would be very frustrating to
+hear the same text spoken twice (once as the alt text and once as the figure
+caption) when using a screen reader.
 
 Here's an example of a complete Markua document showing the use of global
 settings:

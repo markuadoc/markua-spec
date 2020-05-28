@@ -519,7 +519,7 @@ Spec Mode.)
 When considering converting between LFM and Markua (both in Spec Mode), it's
 important to highlight all the differences between Markua and LFM.
 
-The following are the top 9 differences between Markua and LFM. This is true
+The following are the top 10 differences between Markua and LFM. This is true
 both with LFM as currently implemented in Leanpub (in Quirks Mode), but these
 differences will also exist in LFM Spec Mode once it exists.
 
@@ -559,13 +559,14 @@ differences will also exist in LFM Spec Mode once it exists.
    specification itself. (Leanpub still uses the Book.txt approach to specify
    which files are in a book, but other Markua Processors could use other
    approaches, or could just support parsing single files or input streams.)
+10. A number of features (courses, index entries, smart crosslinks, etc.) exist
+    in Markua Spec Mode that do not exist in LFM Spec Mode. Compare the two
+    specs for the full details.
 
-There are also a number of differences between the full Markua Spec and LFM
-Spec. It is worth pointing out some of the most important ones:
-
-1. Markua supports courses; LFM does not.
-2. Index entries are supported in Markua, and are not supported in LFM.
-3. TODO
+Note that the differences between Markua Spec Mode and LFM Spec Mode are not
+just incompatibilities: Markua Spec Mode has many more features than LFM Spec
+Mode. This is why we will support conversion from LFM Spec Mode to Markua Spec
+Mode, but not vice-versa.
 
 ## Structure of this document (M)
 

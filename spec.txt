@@ -352,8 +352,9 @@ alt-caption: text
 # Chapter One
 
 This is an apple. This image will have alt text but no figure caption, because
-of the `alt-caption: none` global setting which ensures that alt text is not
-converted into a figure caption if no figure caption is provided.
+of the `alt-caption: text` global setting which ensures that alt text is not
+converted into a figure caption if no figure caption is provided, unless the
+resource is a text-based resource.
 
 ![a red apple](mac.jpg)
 

@@ -90,11 +90,11 @@ The Markua Spec is based on the CommonMark Spec, whose author is
 [John MacFarlane](https://johnmacfarlane.net/).
 
 This document also incorporates the specification of three of the five GitHub
-Flavored Markdown (GFM) extensions from the [GitHub Flavored Markdown
+Flavored Markdown (GFM) extensions from the [GFM
 Spec](https://github.github.com/gfm/).
 
-Like the CommonMark Spec and the GitHub Flavored Markdown Spec, the Markua Spec
-is licensed under the Creative Commons license
+Like the CommonMark Spec and the GFM Spec, the Markua Spec is licensed under
+the Creative Commons license
 [CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
 
 This document has two types of intended readers:
@@ -102,10 +102,10 @@ This document has two types of intended readers:
 1. authors with advanced questions about Markua syntax
 2. developers implementing Markua Processors
 
-This Introduction contains a number of introductory sections about Markua and its
-relationship to Markdown, CommonMark and GFM. It also contains sections which
-discuss Leanpub, to minimize confusion for Leanpub authors who encounter this
-document.
+This Introduction contains a number of introductory sections about Markua and
+its relationship to Markdown, CommonMark and GFM. It also contains sections
+which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
+this document.
 
 If you're going to read this document, you really should read the Introduction,
 even if you normally skip them.
@@ -560,8 +560,8 @@ to the CommonMark Spec:
 The reason that HTML tags are not treated as HTML is discussed
 [here](#no-raw-html-m-).
 
-Next, three of the five GitHub Flavored Markdown (GFM) extensions are added.
-These are discussed [below](#github-flavored-markdown-gfm-extension-status-m-).
+Next, three of the five GFM extensions are added. These are discussed
+[below](#github-flavored-markdown-gfm-extension-status-m-).
 
 Finally, many new sections about Markua are added. These are all labeled
 "(M)" for "(Markua extension)". There are so many of these extensions that
@@ -570,8 +570,7 @@ using (Markua extension) everywhere added too much clutter.
 So, for any given chapter or section of this document, it is either:
 
 1. written by John MacFarlane about CommonMark
-2. written by GitHub employees about GitHub Flavored Markdown, and ending with
-   "(GFM)"
+2. written by GitHub employees about GFM, and ending with "(GFM)"
 3. written by Peter Armstrong about Markua, and ending with "(M)"
 
 To be clear, every section which does not end with (M) or (GFM) is from the
@@ -619,9 +618,8 @@ There are two main drawbacks, however:
 Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
 
-The [GitHub Flavored Markdown Spec](https://github.github.com/gfm/) defines five
-extensions to CommonMark. In the GFM Spec, these extensions have "(extension)"
-in their title.
+The [GFM Spec](https://github.github.com/gfm/) defines five extensions to
+CommonMark. In the GFM Spec, these extensions have "(extension)" in their title.
 
 Three of these five GFM extensions are included in the Markua Spec:
 

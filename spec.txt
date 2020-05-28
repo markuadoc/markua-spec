@@ -283,29 +283,26 @@ You can also set the alt text and/or the figure caption in an attribute list:
 {alt: "a red apple", caption: "The Original Mac"}
 ![](mac.jpg)
 
-If you omit the figure caption, the alt text is used as the figure caption by
-default:
-
-![The Original Mac, a Red McIntosh Apple](mac.jpg)
-
-If you are writing a descriptive figure caption which serves as perfectly good
-alt text, this is not terrible. However, it does mean that the alt text and
-figure caption are redundant, which is far from ideal.
-
-If, however, you are writing a humorous or ironic figure caption which does not
-describe the figure accurately, it is really important that you provide the
-appropriate alt text for accessibility.
+If you wish, you can configure a Markua Processor to convert alt text into a
+figure caption if no separate figure caption is provided. (A figure caption is
+just as accessible as alt text, so this is fine.) Global settings are discussed
+next.
 
 # Global Settings
 
 Various global settings can be specified at the start of a Markua document to
 affect the behaviour of the Markua Processor.
 
-For example, the global setting which controls whether alt text is used as the
-figure caption if there is no figure caption explicitly set is called `caption`.
-It can have the value of `alt` (the default, which uses the alt text as the
-figure caption if no figure caption is set) or `none` (which omits the figure
-caption if no figure caption is set).
+For example, there is a global setting which controls whether alt text is
+converted into the figure caption if there is no figure caption explicitly set.
+This setting is called `caption`, and it can have the values of `alt` (meaning
+"convert the alt text into the figure caption if no caption is provided") or
+`none` (meaning "use no figure caption if no caption is provided, even if alt
+text is provided"). The default value of the `caption` global setting is `alt`.
+Note that if the alt text is converted into the figure caption, it is NOT also
+provided as alt text. It would be very annoying to hear the same text spoken
+twice (once as the alt text and once as the figure caption) when using a screen
+reader.
 
 Here's an example of a complete Markua document showing the use of global
 settings:
@@ -673,102 +670,14 @@ complex lists) is no longer supported.
 
 So, what Markua does instead is the following:
 
-1. Use Markdown's list support as specified by CommonMark.
+1. Uses Markdown's list support as specified by CommonMark.
 2. Adds attributes to ordered lists, to support numbering lists in ascending or
    descending order, and with letters and Roman numerals.
 
 Finally, the Markua beta called lists either "numbered" or "bulleted", since
 all lists have an order. (Otherwise, they wouldn't be lists!) However, Markua
-calls lists "ordered" and "unordered" for consistency with Markdown and HTML.
-
-### Image Changes
-
-The largest breaking change is in how figures, and especially images, are
-handled.
-
-Images in the Markua beta were:
-
-```
-{alt: "Some alt text"}
-![The Figure Caption](url)
-```
-
-Images in Markua are now by default:
-
-```
-![Some alt text](url "The Figure Caption")
-```
-
-This is to bring Markua into compatibility with Markdown and CommonMark.
-
-
-
-(It's also why we need converters.)
-
-Also, in the Markua beta, there was support for both a `caption` and a `title`
-attribute. The `caption` was typically what was specified, and it was used as
-the `title` if no `title` was present. (The caption was the text shown near
-the figure; the title was its name in a table of tables or list of figures.)
-So, in the Markua beta, you could do this:
-
-
-```
-{alt: "Some alt text", caption: "The Caption", title: "The Title"}
-![](url)
-```
-
-This was equivalent to this in the Markua beta:
-
-```
-{alt: "Some alt text", title: "The Title"}
-![The Caption](url)
-```
-
-TODO - revisit this
-
-In Markua, there is no more `caption` attribute. The `title` attribute is used
-for both the figure caption and the figure name in any table of tables or list
-of figures. (So, the `title` is now both the title and the caption.)
-
-So, in Markua, you can do this:
-
-```
-{alt: "Some alt text", title: "The Title"}
-![](url)
-```
-
-This is equivalent to this in Markua:
-
-```
-![Some alt text](url "The Figure Title")
-```
-
-As an aside, since it's used for both places, it could have been called either
-the `title` or the `caption`. The name `title` was chosen, since that is what
-HTML attribute is set by CommonMark.
-
-### Figure Changes
-
-While this is the correct decision for images, Markua has generalized the
-Markdown image syntax into a syntax for external resources, including code
-samples, audio, video, math and tables. So, this change means that all
-resources, even those that do not need alt text, end up using that syntax
-change.
-
-So, external code samples were:
-
-```
-![Hello World](hello.rb)
-```
-
-External code samples now are:
-
-```
-![](hello.rb "Hello World")
-```
-
-This is somewhat unfortunate, but necessary for consistency. Also, if you have
-internalized "square brackets = alt text", this is preferable.
+now calls lists "ordered" and "unordered" for consistency with Markdown and
+HTML.
 
 ### Other Changes
 
@@ -2089,6 +1998,7 @@ Here's an example of a settings block at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
+caption: alt
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -2119,6 +2029,7 @@ added at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
+caption: alt
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -2149,6 +2060,18 @@ The following settings apply to books and courses.
 
 `authors`
 : The authors of the Markua document.
+
+`caption`
+: `alt` or `none`. This is a global setting which controls whether alt text is
+converted into the figure caption if there is no figure caption explicitly set.
+This setting is called `caption`, and it can have the values of `alt` (meaning
+"convert the alt text into the figure caption if no caption is provided") or
+`none` (meaning "use no figure caption if no caption is provided, even if alt
+text is provided"). The default value of the `caption` global setting is `alt`.
+Note that if the alt text is converted into the figure caption, it is NOT also
+provided as alt text. It would be very annoying to hear the same text spoken
+twice (once as the alt text and once as the figure caption) when using a screen
+reader.
 
 `contributors`
 : Any contributors to the Markua document who are not authors.

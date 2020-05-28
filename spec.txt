@@ -641,84 +641,12 @@ Finally, Markua does not specify any CSS. However, advice will sometimes be
 offered in "CSS Note" sections. This is because certain semantically meaningful
 formatting (like strikethrough) is only done in HTML via CSS.
 
-## Differences with Markua beta (M)
-
-Markua originated in 2014 (!) as a standalone specification, and evolved for a
-number of years in beta before being rewritten in its current form.
-
-As such, there are a number of differences with various versions of the Markua
-spec. Frankly, there were a handful of cases where the original Markua decision
-was better, in isolation. However, at a big picture level, the tradeoff of being
-incompatible with CommonMark and GFM was not worth these improvements.
-
-### Newline Changes
-
-Soft line breaks (i.e. single newlines) can now be configured to output a space
-(with `soft-breaks: space`), a newline in the HTML source (with
-`soft-breaks: source`) or a break tag in HTML (with `soft-breaks: break`).
-
-The default is `source`, for compatibility with Markdown as specified by
-CommonMark.
-
-Forced line breaks are done with the two-space hack or the backslash hack, or
-by setting the `soft-breaks: break`. The behaviour of the Markua beta was to
-always have `soft-breaks: break`. So, if you have a book which was written in
-the style of the Markua beta, you will want to set the `soft-breaks: break`
-in the document settings.
-
-### List Changes
-
-In the Markua beta, great care was used to construct a syntax for nested lists
-which was flexible and powerful, and supported all kinds of indentation styles
-and numbering systems.
-
-It was also, however, incompatible with Markdown lists and newline handling.
-Specifically, it relied on newlines always being hard breaks. Since this is no
-longer true in Markua, the old Markua beta list support (for flat, simple and
-complex lists) is no longer supported.
-
-So, what Markua does instead is the following:
-
-1. Uses Markdown's list support as specified by CommonMark.
-2. Adds attributes to ordered lists, to support numbering lists in ascending or
-   descending order, and with letters and Roman numerals.
-
-Finally, the Markua beta called lists either "numbered" or "bulleted", since
-all lists have an order. (Otherwise, they wouldn't be lists!) However, Markua
-now calls lists "ordered" and "unordered" for consistency with Markdown and
-HTML.
-
-### Other Changes
-
-The other breaking changes with the early Markua beta include the following:
-
-* Complex tables have been removed
-* Enhanced list support has been removed
-* The three-backtick syntax is generalized code fences
-* Code fences are for code by default (incl. SVG); to change the type of an
-  inline resource in a code fence you must use an attribute list
-* Headings now use the Markdown style of Setext and atx headings, as specified
-  by CommonMark. Note that unlike previous versions of Markua, with atx headers
-  you can use as many # signs after the heading text as you want; trailing `#`
-  characters after whitespace are ignored, just as in CommonMark.
-* Parts need {class: part} since atx headings are used unchanged, instead of
-  relying on the presence of a trailing ` #` to differentiate part and chapter
-  headings. On the plus side, Setext chapter headings can get this attribute
-  and make parts now.
-* Setext headings for sub-sections and below require attribute lists to define
-  what they are. (With no attribute list, it's a chapter or section based on the
-  delimiter.)
-* Indented code blocks from Markdown are now supported, as specified by
-  CommonMark.
-* Using `===` for page break is no longer supported, since Setext headings were
-  restored. Use `{break: page}` instead.
-
 ## Differences with Leanpub Flavoured Markdown (M)
 
 Besides differences with Markdown in general, Markua also has a number of
 specific differences with Leanpub Flavoured Markdown (LFM).
 
-These are the top 9 differences between Markua and LFM:
+These are the top 9 differences between Markua and LFM as implemented in Leanpub:
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
    attribute list on an atx or Setext heading.
@@ -756,12 +684,14 @@ These are the top 9 differences between Markua and LFM:
    specification itself. (Leanpub still uses the Book.txt approach to specify
    which files are in a book, but other Markua Processors could use other
    approaches.)
-10. Using {pagebreak} is no longer supported. Use the `{break: page}` directive
-    instead.
 
-Besides these differences, there are a number of smaller ones, which you will
-discover if you compare the Markua Spec to the
-[Leanpub Flavoured Markdown Manual](https://leanpub.com/leanpubflavouredmarkdownmanual/).
+There are also a number of differences between the full Markua Spec and LFM
+Spec:
+
+1. Markua supports courses; LFM does not.
+2. Index entries are supported in Markua, and are not supported in LFM.
+3. TODO
+
 
 ## What is Markdown?
 
@@ -2295,15 +2225,20 @@ the direction will switch to left-to-right even if the given language was not
 supported--there are a lot of languages, but most of them are left-to-right
 languages.
 
-### The break directive
+</div>
 
-This directive is a nod to reality: sometimes an author will really, really
-want to insert a page break. This is how to do it.
+
+<div class="extension">
+
+## Adding a `{pagebreak}` (M)
+
+This is a nod to reality: sometimes an author will really, really want to
+insert a page break. This is how to do it:
 
 ~~~
 lorem ipsum dolor
 
-{break: page}
+{pagebreak}
 
 foo bar baz
 ~~~

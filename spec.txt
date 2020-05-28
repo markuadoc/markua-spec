@@ -351,11 +351,9 @@ alt-caption: text
 
 # Chapter One
 
-This is an apple. This image will have alt text but no figure caption.
+This is an apple with alt text but no figure caption.
 
 ![a red apple](mac.jpg)
-
-No figure caption? Go figure.
 ```
 
 The generalization of the Markdown image syntax into resources, and the addition

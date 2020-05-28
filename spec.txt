@@ -142,10 +142,9 @@ This is a paragraph in a new chapter.
 * * *
 
 By the way, everything in the above example is identical in Markua, Markdown as
-defined by John Gruber, and CommonMark as specified by John MacFarlane.
-
-In the simple case, Markua is just a mapping from Markdown concepts to book
-concepts.
+defined by John Gruber, and CommonMark as specified by John MacFarlane. In the
+simple case, Markua is just a mapping from Markdown concepts to book concepts.
+This is deliberate.
 
 ## How to write almost any book in Markua (M)
 

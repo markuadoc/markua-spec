@@ -35,6 +35,11 @@ If you're going to read this document, you really should read the
 [Introduction](http://markua.com/#introduction),
 even if you normally skip them.
 
+# Branches
+
+Markua is being specified on the `master` branch.
+Leanpub Flavoured Markdown (LFM) is being specified on the `lfm` branch.
+
 # Building the Spec
 
 To build the spec on a Mac, do the following:

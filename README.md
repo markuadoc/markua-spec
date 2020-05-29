@@ -1,6 +1,6 @@
 # About This Document
 
-This is the Markua Spec, written by
+This is the [Markua Spec](http://markua.com), written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
 
 The Markua Spec is based on the CommonMark Spec, whose author is
@@ -19,7 +19,7 @@ This document has two types of intended readers:
 1. authors with advanced questions about Markua syntax
 2. developers implementing Markua Processors
 
-This Introduction contains a number of introductory sections about Markua and
+The Introduction contains a number of introductory sections about Markua and
 its relationship to Markdown, CommonMark and GFM. It also contains sections
 which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
 this document.

@@ -346,7 +346,7 @@ settings:
 
 ```
 {
-alt-caption: none
+alt-caption: no
 }
 
 # Chapter One
@@ -2032,10 +2032,10 @@ The following settings apply to books and courses.
 `authors`
 : The authors of the Markua document.
 
-`caption`
-: `alt` or `none`. This is a global setting which controls whether alt text is
+`alt-caption`
+: `all`, `text` or `none`. TODO REWRITE This is a global setting which controls whether alt text is
 converted into the figure caption if there is no figure caption explicitly set.
-This setting is called `caption`, and it can have the values of `alt` (meaning
+This setting is called `caption`, and it can have the values of `all` (meaning
 "convert the alt text into the figure caption if no caption is provided") or
 `none` (meaning "use no figure caption if no caption is provided, even if alt
 text is provided"). The default value of the `caption` global setting is `alt`.
@@ -5139,7 +5139,8 @@ treated as raw HTML (and will not be escaped in HTML output).
 Markua does not support HTML blocks. Instead it treats HTML as text to be
 rendered.
 
-The way it does this is by replacing a leading `<` with the entity `&lt;`.
+The way it does this in HTML is by replacing a leading `<` with the entity
+`&lt;`.
 
 ```````````````````````````````` example
 <h1>Hello</h1>

@@ -31,7 +31,8 @@ its relationship to Markdown, CommonMark and GFM. It also contains sections
 which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
 this document.
 
-If you're going to read this document, you really should read the Introduction,
+If you're going to read this document, you really should read the
+[Introduction](http://markua.com/#introduction),
 even if you normally skip them.
 
 # Building the Spec

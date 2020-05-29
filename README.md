@@ -1,6 +1,13 @@
 # About This Document
 
-This is the [Markua Spec](http://markua.com), written by
+This formal specification of Markua was developed at Leanpub,
+is written by Peter Armstrong,
+is based on the CommonMark Spec by John MacFarlane,
+and is licensed under the Creative Commons license CC-BY-SA 4.0.
+
+* * *
+
+This is the [Markua Spec](http://markua.com`), written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
 
 The Markua Spec is based on the CommonMark Spec, whose author is

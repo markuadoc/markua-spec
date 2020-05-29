@@ -1,9 +1,9 @@
 # About This Document
 
-This formal specification of Markua was developed at Leanpub,
+*This formal specification of Markua was developed at Leanpub,
 is written by Peter Armstrong,
 is based on the CommonMark Spec by John MacFarlane,
-and is licensed under the Creative Commons license CC-BY-SA 4.0.
+and is licensed under the Creative Commons license CC-BY-SA 4.0.*
 
 * * *
 

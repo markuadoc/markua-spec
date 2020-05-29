@@ -8,65 +8,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Introduction
 
-## The magical typewriter (M)
-
-Imagine you owned a magical typewriter.
-
-When you used this magical typewriter, you wrote with fewer distractions. You
-didn't just write faster, you wrote better.
-
-With your magical typewriter, you never worried about layout. The book formatted
-itself.
-
-You could hit a key on your magical typewriter to create an ebook from your
-manuscript with one click.
-
-All ebook formats would be created, and they'd all look good. You'd have PDF for
-computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
-great on phones.
-
-With your magical typewriter, you could publish your book before it was even
-done, and get feedback from readers all over the world. You could automatically
-share book updates with them. You would press one key on your magical typewriter
-to publish a new version, and all your readers would have it instantly.
-
-With your magical typewriter, you could easily compare your current manuscript
-to any other version of your manuscript that had ever existed.
-
-If you decided to make a print book, you could press a key on your magical
-typewriter to get a print-ready PDF. All you would need to do is add a cover.
-
-If you wanted to work with a designer, you could press a different key to
-generate InDesign. They could then use this as a starting point for producing a
-beautiful print book.
-
-Or, if you wanted to work with a publisher, you could press a different key to
-get a Word document.
-
-Your magical typewriter could even transform your completed book manuscript into
-a course that anyone in the world could take. All you'd need to do is to
-add some quizzes and exercises and then press a key for your magical typewriter
-to publish a massive open online course (MOOC) for you. The quizzes and exercises
-would mark themselves, and students would get certificates based on how well
-they did.
-
-With your magical typewriter, you'd only have to do one thing:
-
-Write.
-
-Wouldn't it be great if such a magical typewriter existed?
-
-It does. At [Leanpub](https://leanpub.com), we're building it.
-
-But there's one requirement for this magical typewriter to exist: a simple,
-coherent, open, free, plain text format for a book or course manuscript.
-
-This simple format will be the basis for the magical typewriter.
-
-This simple format is called Markua.
-
-This is its specification.
-
 ## For Leanpub authors (M)
 
 There are currently two ways to write in plain text on Leanpub. These are their
@@ -83,39 +24,39 @@ works and what does not work, you need to see the manual.
 
 ## What is this document? (M)
 
-This is the Markua Spec, written by
+This is the Leanpub Flavoured Markdown (LFM) Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
 
-The Markua Spec is based on the CommonMark Spec, whose author is
+The LFM Spec is based on the CommonMark Spec, whose author is
 [John MacFarlane](https://johnmacfarlane.net/).
 
 This document also incorporates the specification of three of the five GitHub
 Flavored Markdown (GFM) extensions from the [GFM
 Spec](https://github.github.com/gfm/).
 
-Like the CommonMark Spec and the GFM Spec, the Markua Spec is licensed under
+Like the CommonMark Spec and the GFM Spec, the LFM Spec is licensed under
 the Creative Commons license
 [CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
 
 This document has two types of intended readers:
 
-1. authors with advanced questions about Markua syntax
-2. developers implementing Markua Processors
+1. authors with advanced questions about LFM syntax
+2. developers implementing LFM parsers
 
-This Introduction contains a number of introductory sections about Markua and
-its relationship to Markdown, CommonMark and GFM. It also contains sections
+This Introduction contains a number of introductory sections about LFM and its
+relationship to Markdown, CommonMark, GFM and Markua. It also contains sections
 which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
 this document.
 
 If you're going to read this document, you really should read the Introduction,
 even if you normally skip them.
 
-## How to write a novel in Markua (M)
+## How to write a novel in LFM (M)
 
-The Markua specification is long. However, if you're an author, the amount you
-need to learn to write in Markua is actually very short.
+The LFM specification is long. However, if you're an author, the amount you
+need to learn to write in LFM is actually very short.
 
-This example shows everything you need to know to write a novel in Markua:
+This example shows everything you need to know to write a novel in LFM:
 
 * * *
 
@@ -144,8 +85,8 @@ This is a paragraph in a new chapter.
 By the way, everything in the above example is identical in the following
 Markdown dialects:
 
-* Markua as specified in this document
-* Leanpub Flavoured Markdown as specified in TODO
+* Leanpub Flavoured Markdown as specified in this document
+* Markua as specified at <http://markua.com/>
 * GitHub Flavored Markdown as specified in the GFM Spec
 * CommonMark as specified by John MacFarlane in the CommonMark Spec
 * Markdown as originally described by John Gruber
@@ -222,8 +163,7 @@ Markua supports both of Markdown's heading styles.
 The preferred style, called atx headers, has the following meaning in Markua:
 
 ```
-{class: part}
-# Part
+-# Part
 
 This is a paragraph.
 
@@ -246,73 +186,28 @@ This is a paragraph.
 ##### Sub-sub-sub-section
 
 This is a paragraph.
-
-###### Sub-sub-sub-sub-section
-
-This is a paragraph.
 ```
 
 Note the use of three backticks in the above example, to treat the Markua like
 inline code.
 
-The other style of headers, called Setext headers, has the following headings:
-
-```
-{class: part}
-Part
-====
-
-This is a paragraph.
-
-Chapter
-=======
-
-This is a paragraph.
-
-Section
--------
-
-This is a paragraph.
-```
-
-Setext headers look nice, but only if you're only using chapters and sections.
-If you want to add sub-sections (or lower), you'll be using atx headers for at
-least some of your headers. My advice is to just use atx headers all the time.
-(The `{class: part}` attribute list on a chapter header to make a part header
-does actually work with Setext headers, but it's really ugly.)
-
-Finally, note that while it is confusing and ugly to mix and match using Setext
-and atx headers for chapters and sections in the same document, you can do it.
-However, please don't.
-
 # Images
 
 You can add images like this:
 
-![](mac.jpg)
+![](mac.jpg "Figure Caption")
 
-You can specify the alt text and figure caption like this:
+LFM can be configured to remove the alt text and use it as the figure caption if
+no separate figure caption is provided. (A figure caption is just as accessible
+as alt text, so this is fine.)
 
-![alt text for accessibility](image.png "Figure Caption")
+So, you can also add images like this:
 
-An example of the difference between alt text and a figure caption is:
+![Figure Caption](mac.jpg)
 
-![a red apple](mac.jpg "The Original Mac")
+On Leanpub in Quirks Mode, this is actually...
 
-You can also set the alt text and/or the figure caption in an attribute list:
-
-{alt: "a red apple", caption: "The Original Mac"}
-![](mac.jpg)
-
-Attribute lists are one of Markua's additions to Markdown, and are discussed
-later in this specification.
-
-If you wish, you can configure a Markua Processor to convert alt text into a
-figure caption if no separate figure caption is provided. (A figure caption is
-just as accessible as alt text, so this is fine.) Global settings are discussed
-next.
-
-# Global Settings
+This means LFM cannot actually show alt text 
 
 Various global settings can be specified at the start of a Markua document to
 affect the behaviour of the Markua Processor.

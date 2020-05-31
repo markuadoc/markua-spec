@@ -1709,7 +1709,6 @@ Here's an example of a settings block at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
-caption: alt
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -1740,7 +1739,6 @@ added at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
-caption: alt
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -1771,18 +1769,6 @@ The following settings apply to books and courses.
 
 `authors`
 : The authors of the Markua document.
-
-`alt-caption`
-: `all`, `text` or `none`. TODO REWRITE This is a global setting which controls whether alt text is
-converted into the figure caption if there is no figure caption explicitly set.
-This setting is called `caption`, and it can have the values of `all` (meaning
-"convert the alt text into the figure caption if no caption is provided") or
-`none` (meaning "use no figure caption if no caption is provided, even if alt
-text is provided"). The default value of the `caption` global setting is `alt`.
-Note that if the alt text is converted into the figure caption, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure caption) when using a screen
-reader.
 
 `contributors`
 : Any contributors to the Markua document who are not authors.

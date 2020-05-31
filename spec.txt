@@ -316,46 +316,26 @@ next.
 # Global Settings
 
 Various global settings can be specified at the start of a Markua document to
-affect the behaviour of the Markua Processor.
-
-For example, there is a global setting called `alt-caption` which controls
-whether the alt text is removed and used instead as the figure caption if there
-is no figure caption explicitly set. The possible values of this setting are:
-
-`all`
-: If no caption is provided for a given resource, regardless of the resource
-type, remove the alt text and use it as the figure caption instead.
-
-`text`
-: If no caption is provided for a given **text-based** resource (such as an
-external code sample), remove the alt text and use it as the figure caption
-instead. However, if the resource is not purely text-based, such as an image
-or a video, do not remove the remove the alt text and use it as the figure
-caption if no figure caption is provided. (This is the default value.)
-
-`none`
-: Never use the alt text as the figure caption, even if no figure caption is
-provided.
-
-Note that with the `all` and `text` values, if the alt text is converted into
-the figure caption, it is NOT also provided as alt text. It would be very
-frustrating to hear the same text spoken twice (once as the alt text and once
-as the figure caption) when using a screen reader.
-
-Here's an example of a complete Markua document showing the use of global
-settings:
+affect the behaviour of the Markua Processor. For example, you can set the
+`alt-caption` setting to `all` to make images use the alt text as the figure
+caption instead of as alt text:
 
 ```
 {
-alt-caption: none
+alt-caption: all
 }
 
 # Chapter One
 
-This is an apple with alt text but no figure caption.
+This is an apple with a figure caption but no alt text:
 
-![a red apple](mac.jpg)
+![The Original McIntosh, a red apple](mac.jpg)
 ```
+
+This gets you the terseness of inserting images as figures in LFM, in a general
+way. Note that if the `alt-caption` global setting is set to `text` (the
+default) this behaviour only happens for text-based resources like code samples.
+If the `alt-caption` is set to `none`, it never happens.
 
 The generalization of the Markdown image syntax into resources, and the addition
 of global settings, are two more of Markua's additions to Markdown. These are
@@ -1992,7 +1972,7 @@ added at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
-caption: alt
+alt-caption: all
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -2025,16 +2005,23 @@ The following settings apply to books and courses.
 : The authors of the Markua document.
 
 `alt-caption`
-: `all`, `text` or `none`. TODO REWRITE This is a global setting which controls whether alt text is
-converted into the figure caption if there is no figure caption explicitly set.
-This setting is called `caption`, and it can have the values of `all` (meaning
-"convert the alt text into the figure caption if no caption is provided") or
-`none` (meaning "use no figure caption if no caption is provided, even if alt
-text is provided"). The default value of the `caption` global setting is `alt`.
-Note that if the alt text is converted into the figure caption, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure caption) when using a screen
-reader.
+: `all`, `text` or `none`. The default is `text`. This controls whether the alt
+text on a resource is removed and used instead as the figure caption if there is
+no figure caption explicitly set. The possible values of this setting are `all`,
+`text` or `none`. If `all`, then if no caption is provided for a given resource,
+regardless of the resource type, remove the alt text and use it as the figure
+caption instead. (This setting is closest to the behaviour of LFM.) If `text`,
+then if no caption is provided for a given **text-based** resource (such as an
+external code sample), remove the alt text and use it as the figure caption
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the remove the alt text and use it as the figure caption
+if no figure caption is provided. (This is the default value. It behaves like
+Markdown for images and like LFM for text-based resource types.) If `none`, then
+never use the alt text as the figure caption, even for a text-based resource
+where no figure caption is provided. (This is how Markdown behaves.) Note that
+if the alt text is converted into the figure caption, it is NOT also provided as
+alt text. It would be very annoying to hear the same text spoken twice (once as
+the alt text and once as the figure caption) when using a screen reader.
 
 `contributors`
 : Any contributors to the Markua document who are not authors.

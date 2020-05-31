@@ -19,8 +19,9 @@ user manuals:
 If you're a Leanpub author, you should probably go read one of those manuals
 instead of this specification.
 
-Specifically, not all Markua features are supported on Leanpub. To learn what
-works and what does not work, you need to see the manual.
+Specifically, not all LFM features described in the LFM Spec are currently
+supported on Leanpub. To learn what works and what does not work, you need to
+see the manual.
 
 ## What is this document? (LFM)
 
@@ -91,16 +92,16 @@ Markdown dialects:
 * CommonMark as specified by John MacFarlane in the CommonMark Spec
 * Markdown as originally described by John Gruber
 
-In the simple case, Markua is just a mapping from Markdown concepts to book
+In the simple case, LFM is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
 
-## How to write almost any book in Markua (LFM)
+## How to write almost any book in Leanpub Flavoured Markdown (LFM)
 
 The longer example below shows everything you need to know to write almost any
-type of book, such as a computer programming book, in Markua. This example also
-serves as a tutorial which explains most of Markua's important syntax in its
+type of book, such as a computer programming book, in LFM. This example also
+serves as a tutorial which explains most of LFM's important syntax in its
 content. Some parts of this syntax are just standard Markdown or CommonMark
-syntax, and other parts are Markua extensions.
+syntax, and other parts are LFM extensions.
 
 ~~~
 # Paragraphs
@@ -158,12 +159,12 @@ since typing text in a table quickly gets annoying.
 
 # Headings
 
-Markua supports both of Markdown's heading styles.
+LFM supports both of Markdown's heading styles.
 
-The preferred style, called atx headers, has the following meaning in Markua:
+The preferred style, based on atx headers, has the following meaning in LFM:
 
 ```
--# Part
+-# Part (yes, you need `-#`)
 
 This is a paragraph.
 
@@ -188,7 +189,7 @@ This is a paragraph.
 This is a paragraph.
 ```
 
-Note the use of three backticks in the above example, to treat the Markua like
+Note the use of three backticks in the above example, to treat the LFM like
 inline code.
 
 # Images
@@ -209,8 +210,8 @@ On Leanpub in Quirks Mode, this is actually...
 
 This means LFM cannot actually show alt text 
 
-Various global settings can be specified at the start of a Markua document to
-affect the behaviour of the Markua Processor.
+Various global settings can be specified at the start of an LFM document to
+affect the behaviour of the LFM Processor.
 
 For example, there is a global setting called `alt-caption` which controls
 whether the alt text is removed and used instead as the figure caption if there
@@ -236,7 +237,7 @@ the figure caption, it is NOT also provided as alt text. It would be very
 frustrating to hear the same text spoken twice (once as the alt text and once
 as the figure caption) when using a screen reader.
 
-Here's an example of a complete Markua document showing the use of global
+Here's an example of a complete LFM document showing the use of global
 settings:
 
 ```
@@ -252,10 +253,10 @@ This is an apple with alt text but no figure caption.
 ```
 
 The generalization of the Markdown image syntax into resources, and the addition
-of global settings, are two more of Markua's additions to Markdown. These are
+of global settings, are two more of LFM's additions to Markdown. These are
 also both discussed later in this specification.
 
-One important type of resource in Markua is code samples, which is discussed
+One important type of resource in LFM is code samples, which is discussed
 next.
 
 # Code Samples
@@ -291,9 +292,9 @@ Note that you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well,
 either inline in a paragraph or as a figure, using LaTeX math as the format.
 
 > Blockquotes are really easy too.
-> --Peter Armstrong, *Markua Spec*
+> --Peter Armstrong, *LFM Spec*
 
-Markua has lots of features not discussed in this example. Read the manual or
+LFM has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
 
@@ -322,19 +323,18 @@ based on CommonMark. When this is complete, Leanpub's existing LFM Support will
 continue to be supported unchanged for many years, and will be rebranded as
 "LFM Quirks Mode".
 
-## How does Leanpub's current Markua support match the Markua Spec? (M)
+## How does Leanpub's current LFM support match the LFM Spec? (M)
 
-Markua is not yet fully supported on Leanpub.
+The LFM Spec is not yet fully supported on Leanpub.
 
-Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
-Markua support is not based on CommonMark. Markua and CommonMark were both
-launched in 2014, within a few months of each other. Leanpub's Markua
-implementation was based on its implementation of LFM, which started in 2011.
+Even though the LFM Spec is based on the CommonMark Spec, Leanpub's current
+LFM support is not based on CommonMark. LFM was launched in 2011; CommonMark was
+launched in 2014.
 
-Leanpub is working on a version ("Spec Mode") of its Markua support which will
-be based on CommonMark. When this is complete, Leanpub's existing Markua Support
+Leanpub is working on a version ("Spec Mode") of its LFM support which will
+be based on CommonMark. When this is complete, Leanpub's existing LFM Support
 will continue to be supported unchanged for many years, and will be rebranded as
-"Markua Quirks Mode".
+"LFM Quirks Mode".
 
 ## Differences between LFM and Markua (M)
 

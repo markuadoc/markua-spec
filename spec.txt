@@ -145,7 +145,8 @@ By the way, everything in the above example is identical in the following
 Markdown dialects:
 
 * Markua as specified in this document
-* Leanpub Flavoured Markdown as specified in TODO
+* Leanpub Flavoured Markdown as specified in the [Leanpub Flavoured Markdown
+  Spec](http://markua.com/spec/lfm).
 * GitHub Flavored Markdown as specified in the GFM Spec
 * CommonMark as specified by John MacFarlane in the CommonMark Spec
 * Markdown as originally described by John Gruber
@@ -322,15 +323,15 @@ whether the alt text is removed and used instead as the figure caption if there
 is no figure caption explicitly set. The possible values of this setting are:
 
 `all`
-: If no caption is provided for a given resource, remove the alt text and use it
-as the figure caption instead.
+: If no caption is provided for a given resource, regardless of the resource
+type, remove the alt text and use it as the figure caption instead.
 
 `text`
-: If no caption is provided for a given text-based resource (such as an external
-code sample), remove the alt text and use it as the figure caption instead.
-However, if the resource is not purely text-based, such as an image or a video,
-do not remove the remove the alt text and use it as the figure caption if no
-figure caption is provided. (This is the default value.)
+: If no caption is provided for a given **text-based** resource (such as an
+external code sample), remove the alt text and use it as the figure caption
+instead. However, if the resource is not purely text-based, such as an image
+or a video, do not remove the remove the alt text and use it as the figure
+caption if no figure caption is provided. (This is the default value.)
 
 `none`
 : Never use the alt text as the figure caption, even if no figure caption is
@@ -346,7 +347,7 @@ settings:
 
 ```
 {
-alt-caption: no
+alt-caption: none
 }
 
 # Chapter One
@@ -468,7 +469,7 @@ Leanpub **books** can currently be written in **LFM or Markua**.
 Leanpub **courses** can currently only be written in **Markua**, however.
 
 LFM is the predecessor of Markua. LFM is specified in the
-[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm). (TODO)
+[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm).
 
 Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
 instead of the LFM Spec, since it provides a more accurate description of

@@ -8,7 +8,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Introduction
 
-## For Leanpub authors (M)
+## For Leanpub authors (LFM)
 
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
@@ -22,7 +22,7 @@ instead of this specification.
 Specifically, not all Markua features are supported on Leanpub. To learn what
 works and what does not work, you need to see the manual.
 
-## What is this document? (M)
+## What is this document? (LFM)
 
 This is the Leanpub Flavoured Markdown (LFM) Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
@@ -51,7 +51,7 @@ this document.
 If you're going to read this document, you really should read the Introduction,
 even if you normally skip them.
 
-## How to write a novel in LFM (M)
+## How to write a novel in LFM (LFM)
 
 The LFM specification is long. However, if you're an author, the amount you
 need to learn to write in LFM is actually very short.
@@ -94,7 +94,7 @@ Markdown dialects:
 In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
 
-## How to write almost any book in Markua (M)
+## How to write almost any book in Markua (LFM)
 
 The longer example below shows everything you need to know to write almost any
 type of book, such as a computer programming book, in Markua. This example also
@@ -297,62 +297,6 @@ Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
 
-## Markua: Markdown for books and courses (M)
-
-Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
-
-Markua maps Markdown syntax to book concepts, and then adds some new syntax and
-concepts of its own.
-
-Markua documents can be automatically transformed into every popular type of
-ebook format. The computer programs which do this transformation are called
-Markua Processors. These programs understand both Markua syntax and how to
-generate the various output formats. An example Markua Processor is Leanpub:
-Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
-and can even output print-ready PDFs and InDesign files from them as well.
-
-Markua has been developed with extensive real-world testing and feedback.
-Markua has been used by Leanpub authors for years, both to create books and
-online courses.
-
-Markua was started at Leanpub in 2014, and benefited from the years of lessons
-that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
-successor to LFM. We have been iterating on our Markua support for many years.
-
-Markua's three main contributions are the following:
-
-1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-   (parts, chapters, sections, sub-sections, etc.), which provides the ability
-   for Markua Processors like Leanpub to produce an ebook or online course from
-   a Markua manuscript with one click.
-2. The unified resource and attribute list syntax, which lets Markua handle
-   audio, code, math and video in the same way that it does images, and which
-   supports inline, local and web resource locations.
-3. The mapping of book structures to courses, and the creation of a plain-text
-   based microformat for course quizzes and exercises, which supports automated
-   marking and automated production of everything which is required for a MOOC.
-
-If you have written something (say blog posts or lecture notes) in Markdown, you
-can use a Markua Processor, such as Leanpub, to turn them into an ebook or
-course with one click. Then, as you go down the path of enhancing the manuscript
-and adding things which only make sense in books or courses, this process will
-feel like decorating, not converting.
-
-The goal is for writers who are familiar with Markdown to feel that with Markua,
-Markdown just grew an understanding of book and course concepts.
-
-## Why the name "Markua"? (M)
-
-When I set out to specify Markua, I realized I needed a name. I wanted a name
-that conveyed the love that I have for Markdown while not implying endorsement
-by John Gruber in any way. I also did not want a name which referenced Leanpub:
-Markua is a standalone specification with its own identity, which anyone
-(including Leanpub competitors) can freely implement. Finally, I was on vacation
-in Hawaii when I named Markua, and I wanted something that sounded happy,
-friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
-I also wanted a name that had its .com domain name available, and that was short
-and spellable, for branding purposes. The Markua name had all these properties.
-
 ## What is Leanpub Flavoured Markdown (LFM)? (M)
 
 Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
@@ -391,23 +335,6 @@ Leanpub is working on a version ("Spec Mode") of its Markua support which will
 be based on CommonMark. When this is complete, Leanpub's existing Markua Support
 will continue to be supported unchanged for many years, and will be rebranded as
 "Markua Quirks Mode".
-
-## Converting between LFM and Markua (M)
-
-The launch of Spec Mode for both LFM and Markua on Leanpub will give authors of
-existing Leanpub books and courses the following choice for each of their books
-or courses:
-
-1. Leave their book or course in Quirks Mode, for unchanged behaviour and
-   performance.
-2. Switch their book or course to Spec Mode, for faster book or course
-   generation and better compliance with the LFM or Markua specs.
-3. Click a button to save a version of their existing manuscript and then
-   automatically convert their LFM manuscript into a Markua manuscript.
-
-To be clear, conversions from LFM to Markua will only be done in Spec Mode for
-both LFM and Markua. (The conversion will be between LFM Spec Mode and Markua
-Spec Mode.)
 
 ## Differences between LFM and Markua (M)
 
@@ -465,8 +392,8 @@ Mode to Markua Spec Mode, but not vice-versa.
 
 ## Structure of this document (M)
 
-The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
-specification of the Markua extensions.
+The LFM Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
+specification of the LFM extensions.
 
 The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
 preserved unchanged.
@@ -487,21 +414,20 @@ in the [No HTML Blocks](#no-html-blocks-m-) section.
 Next, three of the five GFM extensions are added. These are discussed
 [below](#github-flavored-markdown-gfm-extension-status-m-).
 
-Finally, many new sections about Markua are added. These are all labeled
-"(M)" for "(Markua extension)". There are so many of these extensions that
-using (Markua extension) everywhere added too much clutter.
+Finally, many new sections about LFM are added. These are all labeled
+"(LFM)" for "(LFM extension)".
 
 So, for any given chapter or section of this document, it is either:
 
 1. written by John MacFarlane about CommonMark
 2. written by GitHub employees about GFM, and ending with "(GFM)"
-3. written by Peter Armstrong about Markua, and ending with "(M)"
+3. written by Peter Armstrong about LFM, and ending with "(LFM)"
 
 To be clear, every section which does not end with (M) or (GFM) is from the
 original CommonMark Spec, and was written by John MacFarlane.
 
-Together, these sections combine to specify Markua, since Markua is CommonMark,
-minus HTML blocks and Raw HTML, plus some GFM extensions, plus (many!) Markua
+Together, these sections combine to specify LFM, since Markua is CommonMark,
+minus HTML blocks and Raw HTML, plus some GFM extensions, plus some LFM
 extensions.
 
 While this hybrid approach of creating the Markua specification is somewhat odd,
@@ -516,9 +442,9 @@ it has a number of significant benefits:
 3. Writing this specification as a series of extensions to CommonMark will
    enable people who are implementing it to just start with a compliant
    CommonMark implementation and modify it appropriately.
-4. Defining all Markua changes as extensions to CommonMark or deletions from
-   CommonMark makes it abundantly clear whether something that Markua does
-   originates in CommonMark, or whether it was added by GFM or by Markua. This
+4. Defining all LFM changes as extensions to CommonMark or deletions from
+   CommonMark makes it abundantly clear whether something that LFM does
+   originates in CommonMark, or whether it was added by GFM or by LFM. This
    is potentially helpful for authors, since it will show them what will work
    in other Markdown dialects, and what won't.
 5. It means that updating this document to keep it current with the CommonMark
@@ -526,26 +452,26 @@ it has a number of significant benefits:
 
 There are two main drawbacks, however:
 
-1. It would be nice to see "Markua" everywhere, instead of a combination of
-   "Markua", "CommonMark" and "GFM". For example, the
+1. It would be nice to see "LFM" everywhere, instead of a combination of
+   "LFM", "CommonMark" and "GFM". For example, the
    [Characters and lines](#characters-and-lines) section starts with a sentence
    ending "...is a valid CommonMark document." It would be less jarring to read
-   "...is a valid Markua document." However, this would not preserve what John
+   "...is a valid LFM document." However, this would not preserve what John
    MacFarlane wrote verbatim, and my judgment is that it's more important to
-   keep those sections unchanged than it is to make everything say "Markua".
-2. Sometimes, what Markua does is not specified fully in one section. So,
+   keep those sections unchanged than it is to make everything say "LFM".
+2. Sometimes, what LFM does is not specified fully in one section. So,
    occasionally there are two consecutive sections about essentially the same
    feature, such as "Autolinks" and "Autolinks (GFM)".
 
 ## GitHub Flavored Markdown (GFM) extension status (M)
 
-Note that while Markua is a strict superset of CommonMark, it is not a strict
+Note that while LFM is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
 
 The [GFM Spec](https://github.github.com/gfm/) defines five extensions to
 CommonMark. In the GFM Spec, these extensions have "(extension)" in their title.
 
-Three of these five GFM extensions are included in the Markua Spec:
+Three of these five GFM extensions are included in the LFM Spec:
 
 1. [Tables (GFM)](#tables-gfm-)
 2. [Strikethrough (GFM)](#strikethrough-gfm-)
@@ -557,19 +483,19 @@ Their content is unchanged, but their titles are renamed to say "(GFM)" instead 
 The other two GFM extensions are omitted:
 
 1. [Task list items](https://github.github.com/gfm/#task-list-items-extension-)
-   is omitted since Markua is for books and courses, not todo lists.
+   is omitted since LFM is for books and courses, not todo lists.
 2. [Disallowed Raw HTML](https://github.github.com/gfm/#disallowed-raw-html-extension-)
-   is omitted since Markua goes farther and converts all raw HTML into text.
+   is omitted since LFM goes farther and converts all raw HTML into text.
 
 ## About the HTML output (M)
 
 The HTML mapping defined in this specification is NOT a complete specification
-of the HTML documents produced by Markua Processors.
+of the HTML documents produced by LFM Processors.
 
 Also, the HTML mapping defined in the specification is NOT considered to be
 canonical.
 
-For example, consider the following Markua:
+For example, consider the following LFM:
 
 ```
 ![a red apple](mac.jpg "The Original Mac")

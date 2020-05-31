@@ -89,7 +89,7 @@ This is the Markua Spec, written by
 The Markua Spec is based on the CommonMark Spec, whose author is
 [John MacFarlane](https://johnmacfarlane.net/).
 
-This document also incorporates the specification of three of the five GitHub
+This document also incorporates the specification of two of the five GitHub
 Flavored Markdown (GFM) extensions from the [GFM
 Spec](https://github.github.com/gfm/).
 
@@ -589,7 +589,7 @@ to the CommonMark Spec:
 The reason that HTML tags are not treated as HTML is discussed
 in the [No HTML Blocks](#no-html-blocks-m-) section.
 
-Next, three of the five GFM extensions are added. These are discussed
+Next, two of the five GFM extensions are added. These are discussed
 [below](#github-flavored-markdown-gfm-extension-status-m-).
 
 Finally, many new sections about Markua are added. These are all labeled
@@ -629,19 +629,6 @@ it has a number of significant benefits:
 5. It means that updating this document to keep it current with the CommonMark
    and GFM specs will be very easy.
 
-There are two main drawbacks, however:
-
-1. It would be nice to see "Markua" everywhere, instead of a combination of
-   "Markua", "CommonMark" and "GFM". For example, the
-   [Characters and lines](#characters-and-lines) section starts with a sentence
-   ending "...is a valid CommonMark document." It would be less jarring to read
-   "...is a valid Markua document." However, this would not preserve what John
-   MacFarlane wrote verbatim, and my judgment is that it's more important to
-   keep those sections unchanged than it is to make everything say "Markua".
-2. Sometimes, what Markua does is not specified fully in one section. So,
-   occasionally there are two consecutive sections about essentially the same
-   feature, such as "Autolinks" and "Autolinks (GFM)".
-
 ## GitHub Flavored Markdown (GFM) extension status (M)
 
 Note that while Markua is a strict superset of CommonMark, it is not a strict
@@ -650,21 +637,25 @@ superset of the GitHub Flavored Markdown (GFM) Spec.
 The [GFM Spec](https://github.github.com/gfm/) defines five extensions to
 CommonMark. In the GFM Spec, these extensions have "(extension)" in their title.
 
-Three of these five GFM extensions are included in the Markua Spec:
+Two of these five GFM extensions are included in the Markua Spec:
 
 1. [Tables (GFM)](#tables-gfm-)
 2. [Strikethrough (GFM)](#strikethrough-gfm-)
-3. [Autolinks (GFM)](#autolinks-gfm-)
 
 Their content is unchanged, but their titles are renamed to say "(GFM)" instead of
 "(extension)", to more clearly specify their provenance.
 
-The other two GFM extensions are omitted:
+The other three GFM extensions are omitted:
 
 1. [Task list items](https://github.github.com/gfm/#task-list-items-extension-)
    is omitted since Markua is for books and courses, not todo lists.
 2. [Disallowed Raw HTML](https://github.github.com/gfm/#disallowed-raw-html-extension-)
    is omitted since Markua goes farther and converts all raw HTML into text.
+3. [Autolinks (GFM)](#autolinks-gfm-) is omitted, because the extra work to
+   create a link is literally typing two characters (`<` and `>`), so the added
+   complexity both in parsing and in documentation is not worth it. (It does
+   make sense for, say, a discussion forum. It does not make sense for books and
+   courses.)
 
 ## About the HTML output (M)
 
@@ -15054,177 +15045,6 @@ foo@bar.example.com
 .
 <p>foo@bar.example.com</p>
 ````````````````````````````````
-
-
-<div class="extension">
-
-## Autolinks (GFM)
-
-Markua enables the `autolink` extension, where autolinks will be recognised in a
-greater number of conditions.
-
-[Autolink]s can also be constructed without requiring the use of `<` and to `>`
-to delimit them, although they will be recognized under a smaller set of
-circumstances.  All such recognized autolinks can only come at the beginning of
-a line, after whitespace, or any of the delimiting characters `*`, `_`, `~`,
-and `(`.
-
-An [extended www autolink](@) will be recognized
-when the text `www.` is found followed by a [valid domain].
-A [valid domain](@) consists of segments
-of alphanumeric characters, underscores (`_`) and hyphens (`-`)
-separated by periods (`.`).
-There must be at least one period,
-and no underscores may be present in the last two segments of the domain.
-
-The scheme `http` will be inserted automatically:
-
-```````````````````````````````` example autolink
-www.commonmark.org
-.
-<p><a href="http://www.commonmark.org">www.commonmark.org</a></p>
-````````````````````````````````
-
-After a [valid domain], zero or more non-space non-`<` characters may follow:
-
-```````````````````````````````` example autolink
-Visit www.commonmark.org/help for more information.
-.
-<p>Visit <a href="http://www.commonmark.org/help">www.commonmark.org/help</a> for more information.</p>
-````````````````````````````````
-
-We then apply [extended autolink path validation](@) as follows:
-
-Trailing punctuation (specifically, `?`, `!`, `.`, `,`, `:`, `*`, `_`, and `~`)
-will not be considered part of the autolink, though they may be included in the
-interior of the link:
-
-```````````````````````````````` example autolink
-Visit www.commonmark.org.
-
-Visit www.commonmark.org/a.b.
-.
-<p>Visit <a href="http://www.commonmark.org">www.commonmark.org</a>.</p>
-<p>Visit <a href="http://www.commonmark.org/a.b">www.commonmark.org/a.b</a>.</p>
-````````````````````````````````
-
-When an autolink ends in `)`, we scan the entire autolink for the total number
-of parentheses.  If there is a greater number of closing parentheses than
-opening ones, we don't consider the unmatched trailing parentheses part of the
-autolink, in order to facilitate including an autolink inside a parenthesis:
-
-```````````````````````````````` example autolink
-www.google.com/search?q=Markup+(business)
-
-www.google.com/search?q=Markup+(business)))
-
-(www.google.com/search?q=Markup+(business))
-
-(www.google.com/search?q=Markup+(business)
-.
-<p><a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a></p>
-<p><a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a>))</p>
-<p>(<a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a>)</p>
-<p>(<a href="http://www.google.com/search?q=Markup+(business)">www.google.com/search?q=Markup+(business)</a></p>
-````````````````````````````````
-
-This check is only done when the link ends in a closing parentheses `)`, so if
-the only parentheses are in the interior of the autolink, no special rules are
-applied:
-
-```````````````````````````````` example autolink
-www.google.com/search?q=(business))+ok
-.
-<p><a href="http://www.google.com/search?q=(business))+ok">www.google.com/search?q=(business))+ok</a></p>
-````````````````````````````````
-
-If an autolink ends in a semicolon (`;`), we check to see if it appears to
-resemble an [entity reference][entity references]; if the preceding text is `&`
-followed by one or more alphanumeric characters.  If so, it is excluded from
-the autolink:
-
-```````````````````````````````` example autolink
-www.google.com/search?q=commonmark&hl=en
-
-www.google.com/search?q=commonmark&hl;
-.
-<p><a href="http://www.google.com/search?q=commonmark&amp;hl=en">www.google.com/search?q=commonmark&amp;hl=en</a></p>
-<p><a href="http://www.google.com/search?q=commonmark">www.google.com/search?q=commonmark</a>&amp;hl;</p>
-````````````````````````````````
-
-`<` immediately ends an autolink.
-
-```````````````````````````````` example autolink
-www.commonmark.org/he<lp
-.
-<p><a href="http://www.commonmark.org/he">www.commonmark.org/he</a>&lt;lp</p>
-````````````````````````````````
-
-An [extended url autolink](@) will be recognised when one of the schemes
-`http://`, `https://`, or `ftp://`, followed by a [valid domain], then zero or
-more non-space non-`<` characters according to
-[extended autolink path validation]:
-
-```````````````````````````````` example autolink
-http://commonmark.org
-
-(Visit https://encrypted.google.com/search?q=Markup+(business))
-
-Anonymous FTP is available at ftp://foo.bar.baz.
-.
-<p><a href="http://commonmark.org">http://commonmark.org</a></p>
-<p>(Visit <a href="https://encrypted.google.com/search?q=Markup+(business)">https://encrypted.google.com/search?q=Markup+(business)</a>)</p>
-<p>Anonymous FTP is available at <a href="ftp://foo.bar.baz">ftp://foo.bar.baz</a>.</p>
-````````````````````````````````
-
-
-An [extended email autolink](@) will be recognised when an email address is
-recognised within any text node.  Email addresses are recognised according to
-the following rules:
-
-* One ore more characters which are alphanumeric, or `.`, `-`, `_`, or `+`.
-* An `@` symbol.
-* One or more characters which are alphanumeric, or `-` or `_`,
-  separated by periods (`.`).
-  There must be at least one period.
-  The last character must not be one of `-` or `_`.
-
-The scheme `mailto:` will automatically be added to the generated link:
-
-```````````````````````````````` example autolink
-foo@bar.baz
-.
-<p><a href="mailto:foo@bar.baz">foo@bar.baz</a></p>
-````````````````````````````````
-
-`+` can occur before the `@`, but not after.
-
-```````````````````````````````` example autolink
-hello@mail+xyz.example isn't valid, but hello+xyz@mail.example is.
-.
-<p>hello@mail+xyz.example isn't valid, but <a href="mailto:hello+xyz@mail.example">hello+xyz@mail.example</a> is.</p>
-````````````````````````````````
-
-`.`, `-`, and `_` can occur on both sides of the `@`, but only `.` may occur at
-the end of the email address, in which case it will not be considered part of
-the address:
-
-```````````````````````````````` example autolink
-a.b-c_d@a.b
-
-a.b-c_d@a.b.
-
-a.b-c_d@a.b-
-
-a.b-c_d@a.b_
-.
-<p><a href="mailto:a.b-c_d@a.b">a.b-c_d@a.b</a></p>
-<p><a href="mailto:a.b-c_d@a.b">a.b-c_d@a.b</a>.</p>
-<p>a.b-c_d@a.b-</p>
-<p>a.b-c_d@a.b_</p>
-````````````````````````````````
-
-</div>
 
 
 <div class="extension">

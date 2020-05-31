@@ -196,100 +196,44 @@ inline code.
 
 You can add images like this:
 
-![](mac.jpg "Figure Caption")
-
-LFM can be configured to remove the alt text and use it as the figure caption if
-no separate figure caption is provided. (A figure caption is just as accessible
-as alt text, so this is fine.)
-
-So, you can also add images like this:
-
 ![Figure Caption](mac.jpg)
 
-On Leanpub in Quirks Mode, this is actually...
+What LFM does is removes the alt text and uses it as the figure caption.
+It is not possible to specify alt text in LFM. So, in order to provide a good
+experience for readers using screen readers, you should always specify a figure
+caption.
 
-This means LFM cannot actually show alt text 
-
-Various global settings can be specified at the start of an LFM document to
-affect the behaviour of the LFM Processor.
-
-For example, there is a global setting called `alt-caption` which controls
-whether the alt text is removed and used instead as the figure caption if there
-is no figure caption explicitly set. The possible values of this setting are:
-
-`all`
-: If no caption is provided for a given resource, remove the alt text and use it
-as the figure caption instead.
-
-`text`
-: If no caption is provided for a given text-based resource (such as an external
-code sample), remove the alt text and use it as the figure caption instead.
-However, if the resource is not purely text-based, such as an image or a video,
-do not remove the remove the alt text and use it as the figure caption if no
-figure caption is provided. (This is the default value.)
-
-`none`
-: Never use the alt text as the figure caption, even if no figure caption is
-provided.
-
-Note that with the `all` and `text` values, if the alt text is converted into
-the figure caption, it is NOT also provided as alt text. It would be very
-frustrating to hear the same text spoken twice (once as the alt text and once
-as the figure caption) when using a screen reader.
-
-Here's an example of a complete LFM document showing the use of global
-settings:
-
-```
-{
-alt-caption: no
-}
-
-# Chapter One
-
-This is an apple with alt text but no figure caption.
-
-![a red apple](mac.jpg)
-```
-
-The generalization of the Markdown image syntax into resources, and the addition
-of global settings, are two more of LFM's additions to Markdown. These are
-also both discussed later in this specification.
-
-One important type of resource in LFM is code samples, which is discussed
-next.
+Note that Markua handles images much better, and supports this syntax as
+syntactic sugar while also providing the ability to set different alt text from
+the figure caption.
 
 # Code Samples
 
 The image syntax is the inspiration for the syntax for external code samples:
 
-![](hello.rb "Hello World in Ruby")
+<<[Hello World in Ruby](code/hello.rb)
 
-Just like with images, you can also use an attribute list for the caption:
-
-{caption: "Hello World in Ruby"}
-![](hello.rb)
-
-Note that you can also specify the figure caption as the alt text, as long as
-the global setting of `alt-caption` is not set to `none`:
-
-![Hello World in Ruby](hello.rb)
+Note that Markua handles external code samples better than LFM: its syntax is
+more consistent with images and other types of resources.
 
 You can also have inline code samples, which can only have a caption using an
 attribute list:
 
-{caption: "Hello World in Ruby"}
-```ruby
+{title="Hello World in Ruby", lang=ruby}
+~~~~~~~
 puts "hello"
-```
+~~~~~~~
 
-You can also include single lines of code like `puts "hello"` in paragraphs
-using backticks.
+Note that Markua handles inline code samples better than LFM: its syntax is
+more consistent with images and other types of resources.
 
 # Other Stuff
 
-Note that you can easily add math `d = v_i t + \frac{1}{2} a t^2`$ as well,
+Note that you can easily add math {$$}d = v_i t + \frac{1}{2} a t^2{/$$}
 either inline in a paragraph or as a figure, using LaTeX math as the format.
+
+Note that Markua handles math resources better than LFM: its syntax is more
+consistent with images and other types of resources.
 
 > Blockquotes are really easy too.
 > --Peter Armstrong, *LFM Spec*
@@ -3982,7 +3926,7 @@ a blank line either before or after.
 
 The content of a code fence is treated as literal text, not parsed
 as inlines.  The first word of the [info string] is typically used to
-specify the language of the code sample, and rendered in the `class`
+`specify the language of the code sample, and rendered in the `class`
 attribute of the `code` tag.  However, this spec does not mandate any
 particular treatment of the [info string].
 
@@ -12818,154 +12762,6 @@ If you want a link after a literal `!`, backslash-escape the
 .
 <p>!<a href="/url" title="title">foo</a></p>
 ````````````````````````````````
-
-
-<div class="extension">
-
-## Image resource attributes (M)
-
-As shown in the Images section, the syntax to insert an image in Markua is
-the identical to that used by CommonMark and GFM. (That section is unchanged
-from the CommonMark spec.) It is, however, also consistent with the syntax that
-is used for other resource types.
-
-As discussed in the Resources section, Markua uses the image syntax for all
-resource types. Markua also reinterprets images as being a resource. This is
-important for the following reason:
-
-Resources can have attribute lists.
-
-Therefore, since images are resources in Markua, images can have attribute
-lists. These attributes are used to do basic image formatting.
-
-Most formatting in Markua is semantic--things like bold and italic, superscript,
-etc. This formatting is part of the manuscript and should not be changed by any
-publisher. The formatting for images, however, is some of the most non-semantic
-formatting in Markua. It's stuff which can absolutely be changed with no effect
-on the meaning of the Markua document. Specifically, images can have `width`,
-`height`, `align` or `float` attributes, or can even be `fullbleed`.
-
-These settings are so universal when applied to images that it would be too
-dogmatic for Markua to insist that the only way to format images was to add a
-`class` element, and then style the `class` of the image elsewhere. Markua is
-pragmatic: by providing a few basic ways to format images, it enables authors
-to make in-progress books look good enough to actually publish in-progress.
-
-The following are the supported attributes for image resources, in
-addition to the `class`, `format`, `title` and `type` attributes which all
-resources support:
-
-`align`
-: The `align` can be `left`, `right` or `middle`. The default is `middle`.
-Combined with `width` and `height`, this provides basic image formatting. When
-`align` is specified, text goes above and below the image, but the image and
-its surrounding whitespace occupies the entire width of the page. If you want
-the text to actually wrap around the image, use `float` instead. In terms of
-the specific values of `align`, a Markua Processor must interpret `left` as
-"on the left side of the page", `right` as "on the right side of the page" and
-`middle` as "in the middle of the content area of the page, respecting margins"
-in all cases. Finally, note that `inside` and `outside` are not supported for
-`align`.
-
-`alt`
-: The `alt` is the alt text, to be displayed when the image cannot be shown.
-This is provided in the figure attribute list or in the square brackets before
-the image, for local and web images. (Inline images don't have the square
-brackets, so for an inline image, the alt text can only be provided via an
-attribute.) If it is provided in both places, the one in the attribute list wins.
-
-`float`
-: The `float` can be `left`, `right`, `inside` or `outside`. The `left` and
-`right` attribute values mean the same thing as they do with `align`. When
-`float` is specified, text flows around the image. It is an error to specify
-both `align` and `float`. Note that `middle` is not supported for `float`,
-since Markua is not a good choice for the types of advanced layouts which flow
-text on both sides of an image. For that, you should use something like
-InDesign; this is why Markua Processors such as Leanpub can export InDesign
-files. Also, note that `float` supports `inside` or `outside`, but `align`
-does not. What a Markua Processor does with `inside` and `outside` is more
-complex. A Markua Processor must interpret `inside` as "near the spine" and
-`outside` as "away from the spine" in a print book. In an ebook, however, a
-Markua Processor has some flexibility in terms of the meaning of `inside` and
-`outside`: it can either interpret `inside` as "left" or it can interpret
-`inside` as "left if the language is left-to-right, and right if the language
-is right-to-left". Similarly, a Markua Processor can either interpret `outside`
-as "right" or it can interpret `outside` as "right if the language is
-left-to-right, and left if the language is right-to-left".
-
-`fullbleed`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor
-should ensure that the image is the full size of the page, with no margins on
-the page. If `false`, the `width`, `height` and `align` attributes are used
-instead and margins are respected. A Markua Processor should do something
-fancy and tasteful with the `title` attribute for a `fullbleed` image.
-
-`height`
-: The height of the image, in percentage of page content area height (respecting
-margins). This is specified as a number (integer or float) between 1 and 100
-followed by a percentage sign (%).
-
-`width`
-: The width of the image, in percentage of page content area width (respecting
-margins). This is specified as an number (integer or float) between 1 and 100
-followed by a percentage sign (%).
-
-Note that if only one of `width` and `height` are specified, the Markua
-Processor should scale the image proportionally if possible (again, respecting
-margins). If both `width` and `height` are specified, the Markua Processor
-should scale the image accordingly, ignoring the aspect ratio. (So, it's almost
-always a bad idea to specify both `width` and `height`.)
-
-```````````````````````````````` example
-![foo](pie.jpg)
-
-{alt: "foo"}
-![](pie.jpg)
-
-{alt: "foo"}
-![clobbered by alt foo](pie.jpg)
-.
-<p><img src="pie.jpg" alt="foo" /></p>
-<p><img src="pie.jpg" alt="foo" /></p>
-<p><img src="pie.jpg" alt="foo" /></p>
-````````````````````````````````
- 
-```````````````````````````````` example
-![foo](pie.jpg "bar")
-
-{alt: "foo"}
-![](pie.jpg "bar")
-
-{alt: "foo"}
-![clobbered by alt foo](pie.jpg "bar")
-.
-<p><img src="pie.jpg" alt="foo" title="bar" /></p>
-<p><img src="pie.jpg" alt="foo" title="bar" /></p>
-<p><img src="pie.jpg" alt="foo" title="bar" /></p>
-````````````````````````````````
-
-Since the other attributes are all presentational, there is no formal
-specification of the HTML which must result. So, here are some examples of usage
-instead, involving a very real and very delicious apple pie:
-
-```
-{fullbleed: true}
-![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
-
-{width: 100%}
-![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
-
-{width: "100%", height: '30%'}
-![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
-
-{width: 50%, float: left}
-![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
-
-{width: 50%, align: middle}
-![a half-eaten apple pie](pie.jpg "It Tasted Even Better")
-```
-
-</div>
 
 
 <div class="extension">

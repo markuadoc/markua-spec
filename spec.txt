@@ -1879,7 +1879,7 @@ some content
 some content
 ~~~
 
-## The lang directive
+## The lang directive (M)
 
 A book has a global `lang` setting, which defaults to `eng`, for English.
 

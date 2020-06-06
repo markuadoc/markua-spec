@@ -2241,7 +2241,7 @@ languages.
 
 <div class="extension">
 
-## Adding a `{pagebreak}` (M)
+## The pagebreak directive (M)
 
 This is a nod to reality: sometimes an author will really, really want to
 insert a page break. This is how to do it:

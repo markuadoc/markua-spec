@@ -2191,7 +2191,24 @@ some content
 some content
 ~~~
 
-### The lang directive
+There is syntactic sugar for boolean directives, where providing the key without
+a value is the equivalent of providing the key with the value `true`.
+
+In the following example, the two `{foo}` directives are equivalent:
+
+~~~
+some content
+
+{foo}
+
+some content
+
+{foo: true}
+
+some content
+~~~
+
+## The lang directive
 
 A book has a global `lang` setting, which defaults to `eng`, for English.
 
@@ -2244,7 +2261,9 @@ languages.
 ## The pagebreak directive (M)
 
 This is a nod to reality: sometimes an author will really, really want to
-insert a page break. This is how to do it:
+insert a page break.
+
+This is the `pagebreak` directive:
 
 ~~~
 lorem ipsum dolor
@@ -2254,7 +2273,19 @@ lorem ipsum dolor
 foo bar baz
 ~~~
 
-Its use is discouraged. Authors should spend their time writing, not formatting.
+This is using the syntactic sugar version of the syntax, but the explicit true
+also works, of course:
+
+~~~
+lorem ipsum dolor
+
+{pagebreak: true}
+
+foo bar baz
+~~~
+
+Either way, the use of this directive is discouraged. Authors should spend their
+time writing, not formatting.
 
 </div>
 

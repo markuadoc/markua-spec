@@ -13046,6 +13046,12 @@ then show examples of audio being inserted for both local and web audio files.
 
 The following are the supported attributes for audio resources, in addition to the `class`, `format`, `title` and `type` attributes which all resources support.
 
+`poster`
+: The `poster` is the URL or path to an image (such as an album cover or a
+photo of the artist) which should be shown to accompany the audio resource.
+A Markua Processor may choose to make this poster be a link to the resource,
+as well as making its title be a link to the resource.
+
 `transcript`
 : The URL or path to a transcript of the audio, which should be shown to people
 who cannot hear audio. This helps people with auditory disabilities view course

@@ -14614,7 +14614,7 @@ The alt text can also be set with an attribute list:
 ~~~
 Here's a paragraph before the figure.
 
-{format: latexmath}{alt: "too large to fit in the alt text"}
+{format: latexmath, alt: "too large to fit in the alt text"}
 ![](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
 
 Here's a paragraph after the figure.

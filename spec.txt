@@ -14690,15 +14690,6 @@ LaTeX math and AsciiMath can be inserted inline as a figure.
 * AsciiMath can be inserted by specifying either `asciimath` or `@` after three
   backticks, or by specifying an attribute list of `{format: asciimath}`.
 
-Both let you produce mathematical equations like this:
-
-```$
-\left|\sum_{i=1}^n a_ib_i\right|
-\le
-\left(\sum_{i=1}^n a_i^2\right)^{1/2}
-\left(\sum_{i=1}^n b_i^2\right)^{1/2}
-```
-
 ##### LaTeX math figures
 
 Here's how you do this using LaTeX math...

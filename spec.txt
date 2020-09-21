@@ -12405,6 +12405,33 @@ stuff
 <p>stuff</p>
 ````````````````````````````````
 
+To produce text which is underlined as well as other bolded and/or italicized, you combine the underscores for underlining with the asterisks for bold and italics:
+
+```````````````````````````````` example
+{
+italicize-underlines: false
+}
+
+# Chapter One
+
+stuff
+
+This is _*italicized and underlined*_.
+
+This is _**bolded and underlined**_.
+
+This is _***bolded and italicized and underlined***_.
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<p>This is <u><em>italicized and underlined</em></u>.</p>
+<p>This is <u><strong>bolded and underlined</strong></u>.</p>
+<p>This is <u><strong><em>bolded and italicized and underlined</em></strong></u>.</p>
+<p>stuff</p>
+````````````````````````````````
+
 </div>
 
 

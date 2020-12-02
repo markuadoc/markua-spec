@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*'
+author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/>**NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading [The Markua Manual](https://leanpub.com/markua/read), not this document!**<br/><br/>The Markua Manual documents Markua 0.1, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.29, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.29 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/>'
 version: 0.29
-date: '2020-05-28'
+date: '2020-11-03'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -292,24 +292,24 @@ You can add images like this:
 
 ![](mac.jpg)
 
-You can specify the alt text and figure caption like this:
+You can specify the alt text and figure title like this:
 
-![alt text for accessibility](image.png "Figure Caption")
+![alt text for accessibility](image.png "Figure Title")
 
-An example of the difference between alt text and a figure caption is:
+An example of the difference between alt text and a figure title is:
 
 ![a red apple](mac.jpg "The Original Mac")
 
-You can also set the alt text and/or the figure caption in an attribute list:
+You can also set the alt text and/or the figure title in an attribute list:
 
-{alt: "a red apple", caption: "The Original Mac"}
+{alt: "a red apple", title: "The Original Mac"}
 ![](mac.jpg)
 
 Attribute lists are one of Markua's additions to Markdown, and are discussed
 later in this specification.
 
 If you wish, you can configure a Markua Processor to convert alt text into a
-figure caption if no separate figure caption is provided. (A figure caption is
+figure title if no separate figure title is provided. (A figure title is
 just as accessible as alt text, so this is fine.) Global settings are discussed
 next.
 
@@ -317,25 +317,25 @@ next.
 
 Various global settings can be specified at the start of a Markua document to
 affect the behaviour of the Markua Processor. For example, you can set the
-`alt-caption` setting to `all` to make images use the alt text as the figure
-caption instead of as alt text:
+`alt-title` setting to `all` to make images use the alt text as the figure
+title instead of as alt text:
 
 ```
 {
-alt-caption: all
+alt-title: all
 }
 
 # Chapter One
 
-This is an apple with a figure caption but no alt text:
+This is an apple with a figure title but no alt text:
 
 ![The Original McIntosh, a red apple](mac.jpg)
 ```
 
 This gets you the terseness of inserting images as figures in LFM, in a general
-way. Note that if the `alt-caption` global setting is set to `text` (the
+way. Note that if the `alt-title` global setting is set to `text` (the
 default) this behaviour only happens for text-based resources like code samples.
-If the `alt-caption` is set to `none`, it never happens.
+If the `alt-title` is set to `none`, it never happens.
 
 The generalization of the Markdown image syntax into resources, and the addition
 of global settings, are two more of Markua's additions to Markdown. These are
@@ -350,20 +350,20 @@ The image syntax is the inspiration for the syntax for external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
-Just like with images, you can also use an attribute list for the caption:
+Just like with images, you can also use an attribute list for the title:
 
-{caption: "Hello World in Ruby"}
+{title: "Hello World in Ruby"}
 ![](hello.rb)
 
-Note that you can also specify the figure caption as the alt text, as long as
-the global setting of `alt-caption` is not set to `none`:
+Note that you can also specify the figure title as the alt text, as long as
+the global setting of `alt-title` is not set to `none`:
 
 ![Hello World in Ruby](hello.rb)
 
-You can also have inline code samples, which can only have a caption using an
+You can also have inline code samples, which can only have a title using an
 attribute list:
 
-{caption: "Hello World in Ruby"}
+{title: "Hello World in Ruby"}
 ```ruby
 puts "hello"
 ```
@@ -1941,7 +1941,7 @@ Here's an example of a settings block at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
-caption: alt
+alt-title: all
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -1972,7 +1972,7 @@ added at the start of a book:
 {
 italicize-underlines: false
 soft-breaks: space
-alt-caption: all
+alt-title: all
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
@@ -2004,24 +2004,25 @@ The following settings apply to books and courses.
 `authors`
 : The authors of the Markua document.
 
-`alt-caption`
+`alt-title`
 : `all`, `text` or `none`. The default is `text`. This controls whether the alt
-text on a resource is removed and used instead as the figure caption if there is
-no figure caption explicitly set. The possible values of this setting are `all`,
-`text` or `none`. If `all`, then if no caption is provided for a given resource,
+text on a resource is removed and used instead as the figure title if there is
+no figure title explicitly set. The possible values of this setting are `all`,
+`text` or `none`. If `all`, then if no title is provided for a given resource,
 regardless of the resource type, remove the alt text and use it as the figure
-caption instead. (This setting is closest to the behaviour of LFM.) If `text`,
-then if no caption is provided for a given **text-based** resource (such as an
-external code sample), remove the alt text and use it as the figure caption
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the remove the alt text and use it as the figure caption
-if no figure caption is provided. (This is the default value. It behaves like
-Markdown for images and like LFM for text-based resource types.) If `none`, then
-never use the alt text as the figure caption, even for a text-based resource
-where no figure caption is provided. (This is how Markdown behaves.) Note that
-if the alt text is converted into the figure caption, it is NOT also provided as
-alt text. It would be very annoying to hear the same text spoken twice (once as
-the alt text and once as the figure caption) when using a screen reader.
+title instead. (This setting is closest to the behaviour of LFM and of Markua
+version 0.1.) If `text`, then if no title is provided for a given **text-based**
+resource (such as an external code sample), remove the alt text and use it as
+the figure title instead. However, if the resource is not purely text-based,
+such as an image or a video, do not remove the remove the alt text and use it
+as the figure title if no figure title is provided. (This is the default value.
+It behaves like Markdown for images and like LFM for text-based resource types.)
+If `none`, then never use the alt text as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.) Note that if the alt text is converted into the figure title, it is
+NOT also provided as alt text. It would be very annoying to hear the same text
+spoken twice (once as the alt text and once as the figure title) when using a
+screen reader.
 
 `contributors`
 : Any contributors to the Markua document who are not authors.
@@ -12404,6 +12405,33 @@ stuff
 <p>stuff</p>
 ````````````````````````````````
 
+To produce text which is underlined as well as other bolded and/or italicized, you combine the underscores for underlining with the asterisks for bold and italics:
+
+```````````````````````````````` example
+{
+italicize-underlines: false
+}
+
+# Chapter One
+
+stuff
+
+This is _*italicized and underlined*_.
+
+This is _**bolded and underlined**_.
+
+This is _***bolded and italicized and underlined***_.
+
+stuff
+.
+<h1>Chapter One</h1>
+<p>stuff</p>
+<p>This is <u><em>italicized and underlined</em></u>.</p>
+<p>This is <u><strong>bolded and underlined</strong></u>.</p>
+<p>This is <u><strong><em>bolded and italicized and underlined</em></strong></u>.</p>
+<p>stuff</p>
+````````````````````````````````
+
 </div>
 
 
@@ -14484,6 +14512,12 @@ then show examples of audio being inserted for both local and web audio files.
 
 The following are the supported attributes for audio resources, in addition to the `class`, `format`, `title` and `type` attributes which all resources support.
 
+`poster`
+: The `poster` is the URL or path to an image (such as an album cover or a
+photo of the artist) which should be shown to accompany the audio resource.
+A Markua Processor may choose to make this poster be a link to the resource,
+as well as making its title be a link to the resource.
+
 `transcript`
 : The URL or path to a transcript of the audio, which should be shown to people
 who cannot hear audio. This helps people with auditory disabilities view course
@@ -14607,7 +14641,7 @@ The alt text can also be set with an attribute list:
 ~~~
 Here's a paragraph before the figure.
 
-{format: latexmath}{alt: "too large to fit in the alt text"}
+{format: latexmath, alt: "too large to fit in the alt text"}
 ![](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
 
 Here's a paragraph after the figure.
@@ -14682,15 +14716,6 @@ LaTeX math and AsciiMath can be inserted inline as a figure.
   backticks, or by specifying an attribute list of `{format: latexmath}`.
 * AsciiMath can be inserted by specifying either `asciimath` or `@` after three
   backticks, or by specifying an attribute list of `{format: asciimath}`.
-
-Both let you produce mathematical equations like this:
-
-```$
-\left|\sum_{i=1}^n a_ib_i\right|
-\le
-\left(\sum_{i=1}^n a_i^2\right)^{1/2}
-\left(\sum_{i=1}^n b_i^2\right)^{1/2}
-```
 
 ##### LaTeX math figures
 

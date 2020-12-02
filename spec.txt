@@ -15335,8 +15335,6 @@ The default value of `soft-breaks` is `source`, for compatibility with Markdown.
 However, most authors will want to set the value of `soft-breaks` to `break`,
 for compatibility with truth and beauty.
 
-The default value of `soft-breaks` is `soft`:
-
 ```````````````````````````````` example
 # Chapter One
 

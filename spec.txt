@@ -145,8 +145,8 @@ By the way, everything in the above example is identical in the following
 Markdown dialects:
 
 * Markua as specified in this document
-* Leanpub Flavoured Markdown as specified in the [Leanpub Flavoured Markdown
-  Spec](http://markua.com/spec/lfm).
+* Leanpub Flavoured Markdown as described in the
+  [Leanpub Flavoured Markdown (LFM) Manual](https://leanpub.com/lfm/read)
 * GitHub Flavored Markdown as specified in the GFM Spec
 * CommonMark as specified by John MacFarlane in the CommonMark Spec
 * Markdown as originally described by John Gruber
@@ -448,21 +448,9 @@ feedback from Leanpub authors until 2014, when Markua was launched.
 Leanpub **books** can currently be written in **LFM or Markua**.
 Leanpub **courses** can currently only be written in **Markua**, however.
 
-LFM is the predecessor of Markua. LFM is specified in the
-[Leanpub Flavoured Markdown Spec](http://markua.com/spec/lfm).
-
-Leanpub authors should consult the [LFM manual](https://leanpub.com/lfm/read)
-instead of the LFM Spec, since it provides a more accurate description of
-Leanpub's LFM support.
-
-The reason for this divergence is simple: the LFM Spec is based on the
-CommonMark Spec, but LFM is not based on CommonMark. (CommonMark and the
-CommonMark Spec did not even exist when LFM was completed.)
-
-Leanpub is working on a version ("Spec Mode") of its LFM support which will be
-based on CommonMark. When this is complete, Leanpub's existing LFM Support will
-continue to be supported unchanged for many years, and will be rebranded as
-"LFM Quirks Mode".
+LFM is the predecessor of Markua. LFM is not formally specified.
+Instead, Leanpub Flavoured Markdown is described in the
+[Leanpub Flavoured Markdown (LFM) Manual](https://leanpub.com/lfm/read).
 
 ## How does Leanpub's current Markua support match the Markua Spec? (M)
 
@@ -473,36 +461,17 @@ Markua support is not based on CommonMark. Markua and CommonMark were both
 launched in 2014, within a few months of each other. Leanpub's Markua
 implementation was based on its implementation of LFM, which started in 2011.
 
-Leanpub is working on a version ("Spec Mode") of its Markua support which will
-be based on CommonMark. When this is complete, Leanpub's existing Markua Support
-will continue to be supported unchanged for many years, and will be rebranded as
-"Markua Quirks Mode".
-
-## Converting between LFM and Markua (M)
-
-The launch of Spec Mode for both LFM and Markua on Leanpub will give authors of
-existing Leanpub books and courses the following choice for each of their books
-or courses:
-
-1. Leave their book or course in Quirks Mode, for unchanged behaviour and
-   performance.
-2. Switch their book or course to Spec Mode, for faster book or course
-   generation and better compliance with the LFM or Markua specs.
-3. Click a button to save a version of their existing manuscript and then
-   automatically convert their LFM manuscript into a Markua manuscript.
-
-To be clear, conversions from LFM to Markua will only be done in Spec Mode for
-both LFM and Markua. (The conversion will be between LFM Spec Mode and Markua
-Spec Mode.)
+Leanpub is working on a version ("Markua 0.29 Beta") of its Markua support which
+is based on CommonMark.hs and Pandoc. When this is complete, Leanpub's existing
+Markua Support will continue to be supported unchanged for many years, and will
+be rebranded as "Markua 0.1".
 
 ## Differences between LFM and Markua (M)
 
-When considering converting between LFM and Markua (both in Spec Mode), it's
-important to highlight all the differences between Markua and LFM.
+When considering converting between LFM and Markua, it's important to highlight
+all the differences between Markua and LFM.
 
-The following are the top 10 differences between Markua and LFM. This is true
-both with LFM as currently implemented in Leanpub (in Quirks Mode), but these
-differences will also exist in LFM Spec Mode once it exists.
+The following are the top 10 differences between Markua and LFM.
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
    attribute list on an atx or Setext heading.
@@ -541,13 +510,7 @@ differences will also exist in LFM Spec Mode once it exists.
    which files are in a book, but other Markua Processors could use other
    approaches, or could just support parsing single files or input streams.)
 10. Most importantly, a number of features (courses, index entries, smart
-    crosslinks, etc.) exist in Markua Spec Mode that do not exist in LFM Spec
-    Mode. Compare the two specs for the full details.
-
-To emphasize point #10: the differences between Markua Spec Mode and LFM Spec
-Mode are not just incompatibilities: Markua Spec Mode has many more features
-than LFM Spec Mode. This is why Leanpub will support conversion from LFM Spec
-Mode to Markua Spec Mode, but not vice-versa.
+    crosslinks, etc.) exist in Markua and do not exist in LFM.
 
 ## Structure of this document (M)
 

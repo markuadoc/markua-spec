@@ -531,7 +531,7 @@ to the CommonMark Spec:
 4. The metadata at the top of the spec itself is changed.
 
 The reason that HTML tags are not treated as HTML is discussed
-in the [No HTML Blocks](#no-html-blocks-m-) section.
+in the [No Raw HTML](#no-raw-html-m-) section.
 
 Next, two of the five GFM extensions are added. These are discussed
 [below](#github-flavored-markdown-gfm-extension-status-m-).
@@ -5069,26 +5069,16 @@ and **this** is not bold
 
 <div class="extension">
 
-## No HTML Blocks (M)
+## No Raw HTML (M)
 
 Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).
 
-Markua does not support HTML blocks. Instead it treats HTML as text to be
-rendered.
+Markua does not support raw HTML. Instead, **all raw HTML is removed**.
 
-The way it does this in HTML is by replacing a leading `<` with the entity
-`&lt;`.
-
-```````````````````````````````` example
-<h1>Hello</h1>
-
-<p>Hello world!</p>
-.
-<p>&lt;h1>Hello&lt;/h1>
-
-<p>&lt;p>Hello world!&lt;/p></p>
-````````````````````````````````
+As a side effect of this, since HTML comments are HTML, authors can use HTML
+comments (`<!-- a comment -->`) in Markua, and these comments will be removed
+from the output (along with any raw HTML tags).
 
 Markua and Markdown have different use cases. Markdown is a better way to write
 HTML; Markua is a better way to write a book or course.

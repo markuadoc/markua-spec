@@ -2163,7 +2163,12 @@ some content
 
 The specific directives are discussed next.
 
-### The pagebreak directive
+</div>
+
+
+<div class="extension">
+
+## The pagebreak directive
 
 This is a nod to reality: sometimes an author will really, really want to
 insert a page break.
@@ -2192,7 +2197,12 @@ foo bar baz
 Either way, the use of this directive is discouraged. Authors should spend their
 time writing, not formatting.
 
-### The mainmatter and backmatter directives
+</div>
+
+
+<div class="extension">
+
+## The mainmatter and backmatter directives
 
 Most published books have three types of material in them: the front matter,
 the text (or "main matter") and the back matter. (Yes, this applies to courses
@@ -2260,7 +2270,12 @@ appendix, and feel the need for different numbering, will they need to discover
 the section directives. Then, they can add them to their Markua document as
 appropriate.
 
-### The insertion directives (dedication, toc, etc.)
+</div>
+
+
+<div class="extension">
+
+## The insertion directives (dedication, toc, etc.)
 
 With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be
@@ -2340,7 +2355,12 @@ For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
 
-### The lang directive (M)
+</div>
+
+
+<div class="extension">
+
+## The lang directive (M)
 
 A book has a global `lang` setting, which defaults to `eng`, for English.
 

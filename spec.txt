@@ -2136,16 +2136,22 @@ the quiz or exercise. If `true`, the questions are randomly arranged; if
 
 Directives are switches which affect the future behaviour of a Markua Processor.
 
-The syntax for directives is simple: they are just contained in an attribute
-list. The only difference is that the attribute list is inserted an a line by
-itself, with one blank line above and below it.
+The syntax for directives is simple, and resembles an attribute list. A directive
+must have a blank line above and below it.
 
-A directive does not have any kind of "closing tag"--it simply remains in effect
-for the rest of the Markua document, or until the directive is overridden by
-another use of the same directive with a different value.
+Most directives do not have a value. Instead, their presence is all that is
+required. Here's that syntax for an imaginary directive `foo`:
 
-Here's the directive syntax, for a nonexistent directive `foo` with a value
-`bar`:
+~~~
+some content
+
+{foo}
+
+some content
+~~~
+
+Directives can also have values. Here's that syntax, for an imaginary directive
+`foo` with a value `bar`:
 
 ~~~
 some content
@@ -2155,29 +2161,14 @@ some content
 some content
 ~~~
 
-There is syntactic sugar for boolean directives, where providing the key without
-a value is the equivalent of providing the key with the value `true`.
-
-In the following example, the two `{foo}` directives are equivalent:
-
-~~~
-some content
-
-{foo}
-
-some content
-
-{foo: true}
-
-some content
-~~~
+The specific directives are discussed next.
 
 ### The pagebreak directive
 
 This is a nod to reality: sometimes an author will really, really want to
 insert a page break.
 
-This is the `pagebreak` directive:
+This is the `{pagebreak}` directive:
 
 ~~~
 lorem ipsum dolor

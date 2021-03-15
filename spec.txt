@@ -2187,29 +2187,18 @@ the quiz or exercise. If `true`, the questions are randomly arranged; if
 
 ## Directives (M)
 
-Directives are switches which affect the future behaviour of a Markua Processor.
+Directives are switches which affect the behaviour of a Markua Processor.
 
-The syntax for directives is simple, and resembles an attribute list. A directive
-must have a blank line above and below it.
+The syntax for directives is `{simple}`. A directive is surrounded in curly
+braces, and must have a blank line above and below it.
 
-Most directives do not have a value. Instead, their presence is all that is
-required. Here's that syntax for an imaginary directive `foo`:
+Directives do not have a value. Instead, their presence is all that is
+required. Here's the syntax for an imaginary directive `foo`:
 
 ~~~
 some content
 
 {foo}
-
-some content
-~~~
-
-Directives can also have values. Here's that syntax, for an imaginary directive
-`foo` with a value `bar`:
-
-~~~
-some content
-
-{foo: bar}
 
 some content
 ~~~
@@ -2236,19 +2225,8 @@ lorem ipsum dolor
 foo bar baz
 ~~~
 
-This is using the syntactic sugar version of the syntax, but the explicit true
-also works, of course:
-
-~~~
-lorem ipsum dolor
-
-{pagebreak: true}
-
-foo bar baz
-~~~
-
-Either way, the use of this directive is discouraged. Authors should spend their
-time writing, not formatting.
+The use of this directive is discouraged. Authors should spend their time
+writing, not formatting.
 
 </div>
 

@@ -2256,7 +2256,7 @@ time writing, not formatting.
 
 <div class="extension">
 
-## Book section directives (M)
+## The mainmatter and backmatter book section directives (M)
 
 Most published books have three types of material in them: the front matter,
 the text (or "main matter") and the back matter. (Yes, this applies to courses
@@ -2282,9 +2282,9 @@ accomplish the division of a manuscript into front matter, main matter and
 back matter. (We could try some convention about heading names, but that would
 be a highly objectionable, English-centric hack.)
 
-So, this is where the book `section` directives come in.
+So, this is where the book section directives come in.
 
-There are two legal values of the section directive:
+There are two book section directives:
 
 1. `mainmatter`
 2. `backmatter`
@@ -2294,29 +2294,30 @@ With this approach, your book is essentially the following:
 ~~~
 any frontmatter content, like a dedication, preface or introduction
 
-{section: mainmatter}
+{mainmatter}
 
 the body of your book (the text or main matter)
 
-{section: backmatter}
+{backmatter}
 
 any back matter content, such as appendices
 ~~~
 
-Note that there is no need for a `{section: frontmatter}` directive, ever.
+Note that there is no need for a `{frontmatter}` directive, so it does not
+exist. A Markua Processor should ignore it if it is encountered, but a warning
+can be provided.
 
-* Everything before the `{section: mainmatter}` directive is in the front
-  matter.
-* Everything after the `{section: mainmatter}` directive and before a
-  `{section: backmatter}` directive is in the main matter
-* Everything after the `{section: backmatter}` directive is in the back matter
+* Everything before the `{mainmatter}` directive is in the front matter.
+* Everything after the `{mainmatter}` directive and before a `{backmatter}`
+  directive is in the main matter
+* Everything after the `{backmatter}` directive is in the back matter
 
-The `{section: mainmatter}` and `{section: backmatter}` directives act as
-dividers, separating a book or course into logical groups of content.
+The `{mainmatter}` and `{backmatter}` directives act as dividers, separating a
+book or course into logical groups of content.
 
-While these book `section` directives are merely optional hints, there is a
-very strict rule about their use: each value (`mainmatter`, `backmatter`) of
-the `section` directive can only appear **once** in a document.
+While these book section directives are merely optional hints, there is a
+very strict rule about their use: each of them (`mainmatter`, `backmatter`)
+can only appear **once** in a document.
 
 Now, note that the most minimal way to write a book is to use no section
 directives at all. With this approach, everything is in the text (main matter)
@@ -2357,11 +2358,11 @@ more front matter content
 
 even more front matter content
 
-{section: mainmatter}
+{mainmatter}
 
 the main matter content
 
-{section: backmatter}
+{backmatter}
 
 some back matter content
 
@@ -2378,7 +2379,7 @@ all, it should log an error and ignore the directive.
 
 The following are some values of the `insert` directive which it may benefit a
 Markua Processor to support in front matter, which is everything before the
-`{section: mainmatter}` directive:
+`{mainmatter}` directive:
 
 * `half-title`
 * `series-title`
@@ -2394,7 +2395,7 @@ Again, it only makes sense to support these directives if there is some way of
 actually getting the content to insert, such as a web interface.
 
 Note that a Markua Processor can be really smart about certain things, if it
-wants. For example, in front matter (before a `{section: mainmatter}` directive),
+wants. For example, in front matter (before a `{mainmatter}` directive),
 it can choose to not number the pages before the Table of Contents, but to
 number the pages after the Table of Contents. Then, the author can use the
 `{insert: table-of-contents}` directive to choose where in the front matter the
@@ -2403,7 +2404,7 @@ also affect the numbering of content before and after it.
 
 The following are some values of the `insert` directive which it may benefit a
 Markua Processor to support in back matter, which is everything after the
-`{section: backmatter}` directive:
+`{backmatter}` directive:
 
 * `index`
 * `exercise-answers`

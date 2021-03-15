@@ -1871,6 +1871,59 @@ version of Markua without needing to specify anything special.
 
 <div class="extension">
 
+## The lang attribute (M)
+
+A book has a global `lang` setting, which defaults to `eng`, for English.
+
+However, many books are written in more than one language. Switching between
+languages in accomplished using the `lang` attribute.
+
+A `lang` attribute can be applied to a chapter, section, paragraph or even
+to a span.
+
+For example, say I'm writing a book about waka, renga and haiku. If I want to
+switch to Japanese to display a poem I can do so using a `lang` directive
+`{lang: jpn}` and then switch back to English using `{lang: eng}`:
+
+~~~
+This is some paragraph text which defaults to English. The following
+paragraph is in Japanese.
+
+{lang: jpn}
+古池や蛙飛び込む水の音
+(松尾芭蕉)
+
+This is some paragraph text which defaults to English, and it
+contains [古池や蛙飛び込む水の音]{lang: jpn} a span which is in Japanese.
+
+This is some paragraph text which defaults to English.
+~~~
+
+The value of the `lang` directive must be a valid
+[ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3) language code.
+
+The two main things that the `lang` directive affects are:
+
+1. the direction of the text (left-to-right or right-to-left)
+2. the font used for the language
+
+Since English is the default language of a Markua document, all Markua
+Processors must support the `eng` value of the `lang` directive. Support for
+all other language codes is optional. If the language code given as the value
+of a `lang` directive is not supported or is unrecognized, it must be
+interpreted as `eng` and switch the font accordingly and switch the direction
+to left-to-right. This way, a Markua Processor can add support for
+right-to-left languages such as Arabic (`{lang: ara}`) or
+Hebrew  (`{lang: heb}`), and know that when a different language is specified
+the direction will switch to left-to-right even if the given language was not
+supported--there are a lot of languages, but most of them are left-to-right
+languages.
+
+</div>
+
+
+<div class="extension">
+
 ## Document settings (M)
 
 The HTML which is output by a Markua Processor can be affected by certain global
@@ -2354,56 +2407,6 @@ regardless of the presence or position of the `quiz-answers` directive.
 For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
-
-</div>
-
-
-<div class="extension">
-
-## The lang directive (M)
-
-A book has a global `lang` setting, which defaults to `eng`, for English.
-
-However, many books are written in more than one language. Switching between
-languages in accomplished using the `lang` directive.
-
-For example, say I'm writing a book about waka, renga and haiku. If I want to
-switch to Japanese to display a poem I can do so using a `lang` directive
-`{lang: jpn}` and then switch back to English using `{lang: eng}`:
-
-~~~
-lorem ipsum dolor
-
-{lang: jpn}
-
-古池や蛙飛び込む水の音
-
-(松尾芭蕉)
-
-{lang: eng}
-
-foo bar baz
-~~~
-
-The value of the `lang` directive must be a valid
-[ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3) language code.
-
-The two main things that the `lang` directive affects are:
-
-1. the direction of the text (left-to-right or right-to-left)
-2. the font used for the language
-
-Since English is the default language of a Markua document, all Markua
-Processors must support the `eng` value of the `lang` directive. Support for
-all other language codes is optional. If the language code given as the value
-of a `lang` directive is not supported or is unrecognized, it must be
-interpreted as `eng` and switch the font accordingly and switch the direction
-to left-to-right. This way, a Markua Processor can add support for
-right-to-left languages such as Arabic (`{lang: ara}`) or
-Hebrew  (`{lang: heb}`), and know that when a different language is specified
-the direction will switch to left-to-right even if the given language was not
-supported--there are a lot of languages, but most of them are left-to-right
-languages.
 
 </div>
 
@@ -15322,10 +15325,13 @@ Some text [then a span]{foo: lorem, bar: ipsum} and more text.
 This [span has an id]{#hello}, so hooray!
 
 This span [also has an id]{id: world}. 
+
+This span contains [古池や蛙飛び込む水の音]{lang: jpn} Japanese text.
 .
 <p>Some text <span foo="lorem" bar="ipsum">then a span</span> and more text.</p>
 <p>This <span id="hello">span has an id</span>, so hooray!</p>
 <p>This span <span id="world">also has an id</span>.</p>
+<p>This span contains <span lang="jp">古池や蛙飛び込む水の音</span> Japanese text.</p>
 ````````````````````````````````
 
 Note, however, that you cannot start a normal span with a caret (`^`): this

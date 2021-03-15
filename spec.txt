@@ -15455,11 +15455,8 @@ is used as the input.
 
 Importantly, in order to avoid a number of bugs, the files are not just
 concatenated together unchanged--they **must** be concatenated together by Markua
-Processors in the following way:
-
-1. All newlines at the beginning and the end of each file are removed.
-2. Two newlines are added between the end of each file and the beginning of the
-next file.
+Processors by adding **two newlines** between the end of each file and the
+beginning of the next file.
 
 So, after this process, exactly one blank line separates the contents of each
 manuscript file. Note that because of this rule, a paragraph (or any other block

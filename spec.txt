@@ -2172,7 +2172,184 @@ some content
 some content
 ~~~
 
-## The lang directive (M)
+### The pagebreak directive
+
+This is a nod to reality: sometimes an author will really, really want to
+insert a page break.
+
+This is the `pagebreak` directive:
+
+~~~
+lorem ipsum dolor
+
+{pagebreak}
+
+foo bar baz
+~~~
+
+This is using the syntactic sugar version of the syntax, but the explicit true
+also works, of course:
+
+~~~
+lorem ipsum dolor
+
+{pagebreak: true}
+
+foo bar baz
+~~~
+
+Either way, the use of this directive is discouraged. Authors should spend their
+time writing, not formatting.
+
+### The mainmatter and backmatter directives
+
+Most published books have three types of material in them: the front matter,
+the text (or "main matter") and the back matter. (Yes, this applies to courses
+as well as books, since many Markua Processors like Leanpub can generate a
+book out of the course material.)
+
+What authors write, the manuscript, is typically what goes into the text,
+or main matter, of the book. In style guidelines this is often called the
+text; in formats such as TeX and LaTeX it is called main matter. It's what is
+typically numbered with Arabic numerals starting from 1.
+
+There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents,
+Foreword, Preface, etc.) which can come before the main text of the book. The
+stuff before the main matter is called "front matter". Some of the front matter
+comes before the Table of Contents and is not numbered; the rest of the front
+matter that comes after the Table of Contents gets numbered with Roman numerals.
+
+There's also a bunch of other stuff (appendices, the index, etc.) which can
+come after the main matter. This is called the "back matter".
+
+If Markua just relied on its headings support there would be no good way to
+accomplish the division of a manuscript into front matter, main matter and
+back matter. (We could try some convention about heading names, but that would
+be a highly objectionable, English-centric hack.)
+
+So, this is where the mainmatter and backmatter directives come in. With this
+approach, your book is essentially the following:
+
+~~~
+any frontmatter content, like a dedication, preface or introduction
+
+{mainmatter}
+
+the body of your book (the text or main matter)
+
+{backmatter}
+
+any back matter content, such as appendices
+~~~
+
+Note that there is no need for a `{frontmatter}` directive, so it does not
+exist. A Markua Processor should ignore it if it is encountered, but a warning
+can be provided.
+
+* Everything before the `{mainmatter}` directive is in the front matter.
+* Everything after the `{mainmatter}` directive and before a `{backmatter}`
+  directive is in the main matter
+* Everything after the `{backmatter}` directive is in the back matter
+
+The `{mainmatter}` and `{backmatter}` directives act as dividers, separating a
+book or course into logical groups of content.
+
+While these mainmatter and backmatter directives are merely optional hints, there is a
+very strict rule about their use: each of them (`{mainmatter}`, `{backmatter}`)
+can only appear **once** in a document.
+
+Now, note that the most minimal way to write a book is to use no section
+directives at all. With this approach, everything is in the text (main matter)
+of the book. Page numbering is in Arabic numerals, etc.
+
+For authors who do not know about the section directive, this is what they are
+doing. Nothing bad or unexpected will happen: they can write their book, and it
+will look correct. Only when they go to add things like a preface or an
+appendix, and feel the need for different numbering, will they need to discover
+the section directives. Then, they can add them to their Markua document as
+appropriate.
+
+### The insertion directives (dedication, toc, etc.)
+
+With a book or course, certain types of content gets created by the Markua
+Processor, or in metadata provided by the author. This content then needs to be
+positioned in the book or course.
+
+While a Markua Processor can adopt sensible defaults, sometimes an author wants
+more fine-grained control over where this automatically-generated content is
+inserted. That's what the various insertion directives are for.
+
+Here's an example book:
+
+~~~
+some front matter content
+
+{dedication}
+
+more front matter content
+
+{toc}
+
+{figures}
+
+even more front matter content
+
+{mainmatter}
+
+the main matter content
+
+{backmatter}
+
+some back matter content
+
+{index}
+
+more back matter content
+
+{quiz-answers}
+~~~
+
+The following the insertion directives which can occur in the front matter,
+which is everything before the `{mainmatter}` directive:
+
+* `{half-title}`
+* `{series-title}`
+* `{title-page}`
+* `{copyright}`
+* `{dedication}`
+* `{epigraph}`
+* `{toc}` (for the Table of Contents)
+* `{figures}` (for the List of Figures)
+* `{tables}` (for the List of Tables)
+
+Note that a Markua Processor can be smart about certain things, if it wants to.
+For example, it can choose to not number the pages before the Table of Contents,
+but to number the pages after the Table of Contents. Then, the author can use
+the `{toc}` directive to choose where in the front matter the Table of Contents
+is positioned. This will not only affect its position, it will also affect the
+numbering of content before and after it.
+
+The following are the insertion directives which can occur in the back matter,
+which is everything after the `{backmatter}` directive:
+
+* `{index}`
+* `{exercise-answers}`
+* `{quiz-answers}`
+
+The `exercise-answers` and `quiz-answers` directives are used to position
+the answers to any exercises or quizzes in the text of the Markua document.
+
+If neither of these directives are present, a Markua Processor should position
+any exercise answers somewhere near the back of the book (in the back matter,
+if it exists). For quiz answers, on the other hand, a Markua Processor may do
+whatever it wants in terms of whether the quiz answers are included in the book,
+regardless of the presence or position of the `quiz-answers` directive.
+
+For example, in Leanpub's online courses, the quiz answers are only provided
+when quizzes are completed and automatically marked, and are never output in the
+material book for the course.
+
+### The lang directive (M)
 
 A book has a global `lang` setting, which defaults to `eng`, for English.
 
@@ -2216,212 +2393,6 @@ Hebrew  (`{lang: heb}`), and know that when a different language is specified
 the direction will switch to left-to-right even if the given language was not
 supported--there are a lot of languages, but most of them are left-to-right
 languages.
-
-</div>
-
-
-<div class="extension">
-
-## The pagebreak directive (M)
-
-This is a nod to reality: sometimes an author will really, really want to
-insert a page break.
-
-This is the `pagebreak` directive:
-
-~~~
-lorem ipsum dolor
-
-{pagebreak}
-
-foo bar baz
-~~~
-
-This is using the syntactic sugar version of the syntax, but the explicit true
-also works, of course:
-
-~~~
-lorem ipsum dolor
-
-{pagebreak: true}
-
-foo bar baz
-~~~
-
-Either way, the use of this directive is discouraged. Authors should spend their
-time writing, not formatting.
-
-</div>
-
-
-<div class="extension">
-
-## The mainmatter and backmatter book section directives (M)
-
-Most published books have three types of material in them: the front matter,
-the text (or "main matter") and the back matter. (Yes, this applies to courses
-as well as books, since many Markua Processors like Leanpub can generate a
-book out of the course material.)
-
-What authors write, the manuscript, is typically what goes into the text,
-or main matter, of the book. In style guidelines this is often called the
-text; in formats such as TeX and LaTeX it is called main matter. It's what is
-typically numbered with Arabic numerals starting from 1.
-
-There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents,
-Foreword, Preface, etc.) which can come before the main text of the book. The
-stuff before the main matter is called "front matter". Some of the front matter
-comes before the Table of Contents and is not numbered; the rest of the front
-matter that comes after the Table of Contents gets numbered with Roman numerals.
-
-There's also a bunch of other stuff (appendices, the index, etc.) which can
-come after the main matter. This is called the "back matter".
-
-If Markua just relied on its headings support there would be no good way to
-accomplish the division of a manuscript into front matter, main matter and
-back matter. (We could try some convention about heading names, but that would
-be a highly objectionable, English-centric hack.)
-
-So, this is where the book section directives come in.
-
-There are two book section directives:
-
-1. `mainmatter`
-2. `backmatter`
-
-With this approach, your book is essentially the following:
-
-~~~
-any frontmatter content, like a dedication, preface or introduction
-
-{mainmatter}
-
-the body of your book (the text or main matter)
-
-{backmatter}
-
-any back matter content, such as appendices
-~~~
-
-Note that there is no need for a `{frontmatter}` directive, so it does not
-exist. A Markua Processor should ignore it if it is encountered, but a warning
-can be provided.
-
-* Everything before the `{mainmatter}` directive is in the front matter.
-* Everything after the `{mainmatter}` directive and before a `{backmatter}`
-  directive is in the main matter
-* Everything after the `{backmatter}` directive is in the back matter
-
-The `{mainmatter}` and `{backmatter}` directives act as dividers, separating a
-book or course into logical groups of content.
-
-While these book section directives are merely optional hints, there is a
-very strict rule about their use: each of them (`{mainmatter}`, `{backmatter}`)
-can only appear **once** in a document.
-
-Now, note that the most minimal way to write a book is to use no section
-directives at all. With this approach, everything is in the text (main matter)
-of the book. Page numbering is in Arabic numerals, etc.
-
-For authors who do not know about the section directive, this is what they are
-doing. Nothing bad or unexpected will happen: they can write their book, and it
-will look correct. Only when they go to add things like a preface or an
-appendix, and feel the need for different numbering, will they need to discover
-the section directives. Then, they can add them to their Markua document as
-appropriate.
-
-</div>
-
-
-<div class="extension">
-
-## Insert directives (M)
-
-With a book or course, certain types of content gets created by the Markua
-Processor, or in metadata provided by the author. This content then needs to be
-positioned in the book or course.
-
-While a Markua Processor can adopt sensible defaults, sometimes an author wants
-more fine-grained control over where this automatically-generated content is
-inserted. That's what the `insert` directive is for.
-
-Here's an example book:
-
-~~~
-some front matter content
-
-{insert: dedication}
-
-more front matter content
-
-{insert: table-of-contents}
-
-even more front matter content
-
-{mainmatter}
-
-the main matter content
-
-{backmatter}
-
-some back matter content
-
-{insert: index}
-
-more back matter content
-
-{insert: quiz-answers}
-~~~
-
-The `insert` directive can have any value. If a Markua Processor does not
-recognize it, does not support it in that location, or does not support it at
-all, it should log an error and ignore the directive.
-
-The following are some values of the `insert` directive which it may benefit a
-Markua Processor to support in front matter, which is everything before the
-`{mainmatter}` directive:
-
-* `half-title`
-* `series-title`
-* `title-page`
-* `copyright`
-* `dedication`
-* `epigraph`
-* `table-of-contents`
-* `list-of-figures`
-* `list-of-tables`
-
-Again, it only makes sense to support these directives if there is some way of
-actually getting the content to insert, such as a web interface.
-
-Note that a Markua Processor can be really smart about certain things, if it
-wants. For example, in front matter (before a `{mainmatter}` directive),
-it can choose to not number the pages before the Table of Contents, but to
-number the pages after the Table of Contents. Then, the author can use the
-`{insert: table-of-contents}` directive to choose where in the front matter the
-Table of Contents is positioned. This will not only affect its position, it will
-also affect the numbering of content before and after it.
-
-The following are some values of the `insert` directive which it may benefit a
-Markua Processor to support in back matter, which is everything after the
-`{backmatter}` directive:
-
-* `index`
-* `exercise-answers`
-* `quiz-answers`
-
-The `exercise-answers` and `quiz-answers` directives are used to position
-the answers to any exercises or quizzes in the text of the Markua document.
-
-If neither of these directives are present, a Markua Processor should position
-any exercise answers somewhere near the back of the book (in the back matter,
-if it exists). For quiz answers, on the other hand, a Markua Processor may do
-whatever it wants in terms of whether the quiz answers are included in the book,
-regardless of the presence or position of the `quiz-answers` directive.
-
-For example, in Leanpub's online courses, the quiz answers are only provided
-when quizzes are completed and automatically marked, and are never output in the
-material book for the course.
 
 </div>
 

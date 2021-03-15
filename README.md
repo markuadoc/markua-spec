@@ -101,7 +101,7 @@ luarocks install lcmark
 rm spec.html && make spec.html && open spec.html
 ```
 
-This step can also be run with the `./go.sh` script:
+Note that step 5 can also be run with the `./go.sh` script:
 
 ```
 ./go.sh

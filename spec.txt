@@ -2168,7 +2168,7 @@ The specific directives are discussed next.
 
 <div class="extension">
 
-## The pagebreak directive
+## The pagebreak directive (M)
 
 This is a nod to reality: sometimes an author will really, really want to
 insert a page break.
@@ -2202,7 +2202,7 @@ time writing, not formatting.
 
 <div class="extension">
 
-## The mainmatter and backmatter directives
+## The mainmatter and backmatter directives (M)
 
 Most published books have three types of material in them: the front matter,
 the text (or "main matter") and the back matter. (Yes, this applies to courses
@@ -2275,7 +2275,7 @@ appropriate.
 
 <div class="extension">
 
-## The insertion directives (dedication, toc, etc.)
+## The insertion directives (dedication, toc, etc.) (M)
 
 With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be

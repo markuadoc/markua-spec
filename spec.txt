@@ -9445,10 +9445,10 @@ after
 <p>after</p>
 ````````````````````````````````
 
-Finally, with definition lists, one thing you often want to do is link to a
-specific definition, not just to the list itself. This is useful to do, since
-in a document with many definitions, it's helpful if the reader scrolls to the
-right spot or opens to the right page.
+Finally, with definition lists, you need to link to a specific definition,
+not just to the list itself. This is useful to do, since in a document with many
+definitions, it's helpful if the reader scrolls to the right spot or opens to
+the right page.
 
 To do this, just define a span id on the element itself, and then link to it.
 
@@ -9467,53 +9467,6 @@ bar{#bar}
   <dd>This is bar.</dd>
 </dl>
 ````````````````````````````````
-
-Note that if you define an id attribute above the first definition list item,
-what you are doing is defining an id on the entire definition list. As such,
-this does not work on any subsequent list item: in the following definition
-list, the `{#definitions}` is the id of the definition list. It is not the id
-of foo.
-
-```````````````````````````````` example
-{#definitions}
-foo{#foo}
-: This is foo.
-
-bar{#bar}
-: This is bar.
-.
-<dl id="definitions">
-  <dt><span id="foo">foo</span></dt>
-  <dd>This is foo.</dd>
-
-  <dt><span id="bar">bar</span></dt>
-  <dd>This is bar.</dd>
-</dl>
-````````````````````````````````
-
-To be clear, the following is not legal in Markua:
-
-```````````````````````````````` example
-{#foo}
-foo
-: This is foo.
-
-{#bar}
-bar
-: This is bar.
-.
-<dl id="foo">
-  <dt>foo</dt>
-  <dd>This is foo.</dd>
-
-  <dt>bar</dt>
-  <dd>This is bar.</dd>
-</dl>
-````````````````````````````````
-
-Here, the id above foo is actually the id of the entire definition list, and the
-id above bar is not legal. A Markua Processor should ignore this id, and add an
-error to the list of errors.
 
 </div>
 

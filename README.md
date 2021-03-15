@@ -59,11 +59,50 @@ Leanpub Flavoured Markdown (LFM) is being specified on the `lfm` branch.
 
 # Building the Spec
 
-To build the spec on a Mac, do the following:
+To build the spec on a Mac, you need to have Lua 5.1 (NOT 5.4) installed, it seems.
+
+Homebrew wants to install Lua 5.4 when you do `brew install lua` or `brew install luarocks`.
+
+So, instead, you do this:
+
+1. Install Lua:
 
 ```
-brew install lua
-brew install luarocks
+brew install lua@5.1
+```
+
+2. Install wget if you don't have it already:
+
+```
+brew install wget
+```
+
+3. Install luarocks (instructions from https://luarocks.org/)
+
+```
+wget https://luarocks.org/releases/luarocks-3.5.0.tar.gz
+tar zxpf luarocks-3.5.0.tar.gz
+cd luarocks-3.5.0
+./configure
+make
+make install
+sudo luarocks install luasocket
+```
+
+4. Install lcmark:
+
+```
 luarocks install lcmark
-make spec.html
+```
+
+5. Build the spec:
+
+```
+rm spec.html && make spec.html && open spec.html
+```
+
+This step can also be run with the `./go.sh` script:
+
+```
+./go.sh
 ```

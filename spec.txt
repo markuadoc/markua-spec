@@ -2316,7 +2316,7 @@ The `{mainmatter}` and `{backmatter}` directives act as dividers, separating a
 book or course into logical groups of content.
 
 While these book section directives are merely optional hints, there is a
-very strict rule about their use: each of them (`mainmatter`, `backmatter`)
+very strict rule about their use: each of them (`{mainmatter}`, `{backmatter}`)
 can only appear **once** in a document.
 
 Now, note that the most minimal way to write a book is to use no section

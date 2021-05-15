@@ -2243,13 +2243,18 @@ book out of the course material.)
 What authors write, the manuscript, is typically what goes into the text,
 or main matter, of the book. In style guidelines this is often called the
 text; in formats such as TeX and LaTeX it is called main matter. It's what is
-typically numbered with Arabic numerals starting from 1.
+typically numbered with Arabic numerals starting from 1. In Markua, the first
+page of the mainmatter will be numbered page 1, regardless of whether or not
+the page number will be shown on that page.
 
 There's a bunch of other stuff (the Dedication, Epigraph, Table of Contents,
 Foreword, Preface, etc.) which can come before the main text of the book. The
-stuff before the main matter is called "front matter". Some of the front matter
-comes before the Table of Contents and is not numbered; the rest of the front
-matter that comes after the Table of Contents gets numbered with Roman numerals.
+stuff before the main matter is called "front matter". The special pages that
+can be created by insertion directives are not numbered. The rest of the
+frontmatter follows the same page numbering rules as the main matter, except
+that numbering uses Roman numerals. The first page of the frontmatter will be
+numbered page i, regardless of whether or not the page number will show on that
+page.
 
 There's also a bunch of other stuff (appendices, the index, etc.) which can
 come after the main matter. This is called the "back matter".

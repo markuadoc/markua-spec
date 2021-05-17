@@ -2313,8 +2313,10 @@ Processor, or in metadata provided by the author. This content then needs to be
 positioned in the book or course.
 
 While a Markua Processor can adopt sensible defaults, sometimes an author wants
-more fine-grained control over where this automatically-generated content is
-inserted. That's what the various insertion directives are for.
+more fine-grained control over where this automatically-generated content or
+user-provided metadata content is inserted. That's what the various insertion
+directives are for: to specify the positioning of where this content is
+inserted.
 
 Here's an example book:
 

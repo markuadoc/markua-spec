@@ -9332,7 +9332,30 @@ after
 <p>after</p>
 ````````````````````````````````
 
-This list will be numbered 3, 2, 1, regardless of the order of the numbers:
+This list will be numbered 3, 2, 1, not 3, 4, 5. Only the first number matters
+since the reversed attribute is set:
+
+```````````````````````````````` example
+before
+
+{reversed: true}
+3. foo
+4. bar
+5. baz
+
+after
+.
+<p>before</p>
+<ol reversed="true">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered 1, 0, -1, not 1, 2, 3. Only the first number matters
+since the reversed attribute is set:
 
 ```````````````````````````````` example
 before

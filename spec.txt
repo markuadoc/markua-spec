@@ -2104,7 +2104,7 @@ at the end of a chapter.
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. Whether single newlines
 produce a space (with `space`), a newline in the HTML source (with `source`) or
-a break tag (with `break`). See [this section](#configurable-soft-line-breaks-markua-extension-)
+a break tag (with `break`). See [this section](#configurable-soft-line-breaks-m-)
 for a full description of this setting. If you have been writing in the Markua
 beta, you will want to set this to `break`. If you want the Markdown behaviour,
 leave it at the default of `source`.
@@ -5082,10 +5082,14 @@ Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).
 
 Markua does not support raw HTML. Instead, **all raw HTML is removed**.
+This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
+which is inserted as inlines. Neither of these are supported by Markua.
+
+In both cases, the HTML is removed by the Markua parser.
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) in Markua, and these comments will be removed
-from the output (along with any raw HTML tags).
+from the output (along with any other raw HTML tags).
 
 Markua and Markdown have different use cases. Markdown is a better way to write
 HTML; Markua is a better way to write a book or course.
@@ -14967,20 +14971,6 @@ foo@bar.example.com
 <p>foo@bar.example.com</p>
 ````````````````````````````````
 
-
-<div class="extension">
-
-## No Raw HTML (M)
-
-Besides supporting HTML blocks, Markdown and CommonMark also support raw HTML as
-inlines, in which HTML tags inserted in a leaf block such as a paragraph will be
-rendered without escaping.
-
-Just as Markua does [not support HTML blocks](#no-html-blocks-m-), Markua also
-does not support raw HTML as inlines. The logic is the same, so the conclusion
-is the same.
-
-</div>
 
 ## Hard line breaks
 

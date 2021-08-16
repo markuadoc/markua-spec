@@ -8706,15 +8706,21 @@ Here the outer list is loose, the inner list tight:
 
 ## List attributes (M)
 
-Lists in Markdown (as described by John Gruber and specified by CommonMark) have
-some pretty major issues. Here are two of the biggest ones:
+By default, Markua keeps the behaviour of lists to be identical to that in
+Markdown, as described by John Gruber and specified by CommonMark.
+The enhancements that Markua makes to lists are purely additive: if you use any
+CommonMark-compliant list in a Markua document, it will work exactly as it would
+in CommonMark.
 
-* You can't make descending order lists.
-* You can't use letters or Roman numerals for labels.
+Now, lists in CommonMark have some major limitations. Here are two of the
+biggest ones:
 
-This list gets rendered as 3,4,5, since Markdown does not have a way of
-specifying that a list is descending, and it does not infer it from the
-order by default:
+1. You can't output descending order lists.
+2. You can't output letters or Roman numerals for labels in an ordered list.
+
+This list gets rendered as 3,4,5 (not 3,2,1), since Markdown does not have a way
+of specifying that a list is descending, and it does not infer it from the order
+by default:
 
 ```````````````````````````````` example
 before
@@ -8758,12 +8764,32 @@ Again, both of these behaviours are as defined in the CommonMark spec.
 Now, Markua can't change this by default, without being incompatibile with
 Markdown.
 
+Also, CommonMark allows [slight inconsistency](#example-295) in the amount of
+indentation of list items. I understand why, but this allows for documents which
+are incomprehensible and ugly. However, Markua must keep compatibility with
+CommonMark lists, so this is allowed.
+
 So what to do?
 
-Markua adds the list attributes extension, to support being able to output all
-the needed types of list from the limited list support in Markdown. The way this
-is done is by giving lists an attribute list, much like how resources can have
-an attribute list. (Lists are not resources, however.)
+Markua adds the **list attributes** extension.
+
+Adding attributes to lists allows them to output all the needed types of list
+from the limited list support in CommonMark, without introducing breaking
+incompatibilities to CommonMark lists.
+
+It is certainly possible to define a better list syntax than Markdown's: I have
+previously done exactly that, specifying a syntax for complex lists which was
+superior to Markdown's lists. Furthermore, Leanpub even implemented support for
+it! However, this syntax introduced incompatibilites with Markdown, and the
+tradeoff was not worth it. Markua's list enhancements must be purely additive
+to CommonMark lists, not incompatible with them in any way. They cannot
+introduce any breaking changes to existing CommonMark lists, or authors will be
+justifiably unhappy.
+
+The way the list attributes extension works is simple: it gives lists the
+ability to have an **attribute list**, much like how resources can have an
+attribute list. (Lists are not resources, however. That would not just be
+overkill, it would result in incompatibilites.)
 
 ### Supported Attributes for Lists
 

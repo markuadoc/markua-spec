@@ -8807,22 +8807,23 @@ or lowercase Roman numerals.
 
 `delimiter`
 : The type of the list delimiter to use, in output formats which allow custom
-list delimiters. Valid choices are `.` or `)`. The default value is inferred
+list delimiters. Valid choices are `"."` or `")"`. The default value is inferred
 by the delimiter used: if you use periods `.` to delimit the list, then the
 delimiter is `.`; if you use closing parentheses `)` to delimit the list, then
-the delimiter is `)`. Note that the delimiter does not need to be produced for
-all output formats. Specifically, HTML only supports using `.` for a list
-delimiter, so `)` is not supported in HTML. And since EPUB is based on HTML,
-and since MOBI is typically produced from EPUB, neither EPUB nor MOBI should be
-expected to support customizable delimiters. However, PDF and LaTeX are not
-subject to these limitations, and should support both `.` and `)` as list
-delimiters.
+the delimiter is `)`. Specifying the delimiter in the attribute list overrides
+the inferred delimiter, but conflicting delimiters are bad style. Note that the
+delimiter does not need to be produced for all output formats. Specifically,
+HTML only supports using `.` for a list delimiter, so `)` is not supported in
+HTML. And since EPUB is based on HTML, and since MOBI is typically produced from
+EPUB, neither EPUB nor MOBI should be expected to support customizable
+delimiters. However, PDF and LaTeX are not subject to these limitations, and
+should support both `.` and `)` as list delimiters.
 
 The use of these attributes are shown in the following examples.
 
 ### Lists with Attributes: Good Style
 
-This list will be numbered a, b, c (and will have the default delimiter of `.`):
+This list will be numbered a, b, c, and will have the delimiter of `.`:
 
 ```````````````````````````````` example
 before
@@ -8831,6 +8832,71 @@ before
 1. foo
 2. bar
 3. baz
+
+after
+.
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered a, b, c, and will have the delimiter of `.`:
+
+```````````````````````````````` example
+before
+
+{type: a, delimiter: "."}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered a, b, c, and will have the delimiter of `)` in
+output formats that support it (e.g. in PDF but not in HTML):
+
+```````````````````````````````` example
+before
+
+{type: a}
+1) foo
+2) bar
+3) baz
+
+after
+.
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered a, b, c, and will have the delimiter of `)` in
+output formats that support it (e.g. in PDF but not in HTML):
+
+```````````````````````````````` example
+before
+
+{type: a, delimiter: ")"}
+1) foo
+2) bar
+3) baz
 
 after
 .
@@ -9218,6 +9284,53 @@ after
 ````````````````````````````````
 
 ### Lists with Attributes: Bad Style
+
+This list will be numbered a, b, c, and will have the delimiter of `.`.
+The reason that this is bad style is that the specified delimiter and the
+inferred delimiter do not match:
+
+```````````````````````````````` example
+before
+
+{type: a, delimiter: "."}
+1) foo
+2) bar
+3) baz
+
+after
+.
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+This list will be numbered a, b, c, and will have the delimiter of `)` in
+output formats that support it (e.g. in PDF but not in HTML). The reason
+that this is bad style is that the specified delimiter and the inferred
+delimiter do not match:
+
+```````````````````````````````` example
+before
+
+{type: a, delimiter: ")"}
+1. foo
+2. bar
+3. baz
+
+after
+.
+<p>before</p>
+<ol type="a">
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+<p>after</p>
+````````````````````````````````
 
 This list will be numbered 3, 2, 1, regardless of the order of the numbers:
 

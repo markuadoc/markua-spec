@@ -1,6 +1,6 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>**NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading [The Markua Manual](https://leanpub.com/markua/read), not this document!**<br/><br/>The Markua Manual documents Markua 0.1, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.29, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.29 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/>'
+author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>**NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading [The Markua Manual](https://leanpub.com/markua/read), not this document!**<br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.29, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.29 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/>'
 version: 0.29
 date: '2021-08-16'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
@@ -464,7 +464,7 @@ implementation was based on its implementation of LFM, which started in 2011.
 Leanpub is working on a version ("Markua 0.29 Beta") of its Markua support which
 is based on CommonMark.hs and Pandoc. When this is complete, Leanpub's existing
 Markua Support will continue to be supported unchanged for many years, and will
-be rebranded as "Markua 0.1".
+be rebranded as "Markua 0.10".
 
 ## Differences between LFM and Markua (M)
 
@@ -2027,7 +2027,7 @@ no figure title explicitly set. The possible values of this setting are `all`,
 `text` or `none`. If `all`, then if no title is provided for a given resource,
 regardless of the resource type, remove the alt text and use it as the figure
 title instead. (This setting is closest to the behaviour of LFM and of Markua
-version 0.1.) If `text`, then if no title is provided for a given **text-based**
+version 0.10.) If `text`, then if no title is provided for a given **text-based**
 resource (such as an external code sample), remove the alt text and use it as
 the figure title instead. However, if the resource is not purely text-based,
 such as an image or a video, do not remove the remove the alt text and use it
@@ -2126,7 +2126,7 @@ Processor may override this setting.
 
 `version`
 : The version of the Markua document. This is primarily intended for use when
-producing analytics for courses. The default is `0.1`.
+producing analytics for courses. The default is `0.10`.
 
 ### Settings which apply to courses only
 

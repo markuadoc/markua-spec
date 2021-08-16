@@ -9410,7 +9410,7 @@ before
 after
 .
 <p>before</p>
-<ol reversed="true" start="1" type="i">
+<ol reversed="true" start="1">
 <li>foo</li>
 <li>bar</li>
 <li>baz</li>

@@ -8805,11 +8805,24 @@ Any value other than `true` is interpreted as `false`.
 `i`. `A` and `a` mean uppercase or lowercase letters; `I` or `i` mean uppercase
 or lowercase Roman numerals.
 
+`delimiter`
+: The type of the list delimiter to use, in output formats which allow custom
+list delimiters. Valid choices are `.` or `)`. The default value is inferred
+by the delimiter used: if you use periods `.` to delimit the list, then the
+delimiter is `.`; if you use closing parentheses `)` to delimit the list, then
+the delimiter is `)`. Note that the delimiter does not need to be produced for
+all output formats. Specifically, HTML only supports using `.` for a list
+delimiter, so `)` is not supported in HTML. And since EPUB is based on HTML,
+and since MOBI is typically produced from EPUB, neither EPUB nor MOBI should be
+expected to support customizable delimiters. However, PDF and LaTeX are not
+subject to these limitations, and should support both `.` and `)` as list
+delimiters.
+
 The use of these attributes are shown in the following examples.
 
 ### Lists with Attributes: Good Style
 
-This list will be numbered a, b, c:
+This list will be numbered a, b, c (and will have the default delimiter of `.`):
 
 ```````````````````````````````` example
 before

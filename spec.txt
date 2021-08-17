@@ -2107,7 +2107,10 @@ produce a space (with `space`), a newline in the HTML source (with `source`) or
 a break tag (with `break`). See [this section](#configurable-soft-line-breaks-m-)
 for a full description of this setting. If you have been writing in the Markua
 beta, you will want to set this to `break`. If you want the Markdown behaviour,
-leave it at the default of `source`.
+leave it at the default of `source`. **To be clear: if `soft-breaks` has the
+value of `break`, all single newlines function as hard line breaks (i.e. as
+they would if they were using the "two space hack" to produce a hard line break
+in normal Markdown).**
 
 `smart-punctuation`
 : If `smart` is `true`, use smart punctuation. Straight double and single quotes
@@ -15372,6 +15375,10 @@ So, Markua has a document setting called `soft-breaks`:
   is `break` is to indicate that when you hit a newline to get a line break, you
   get a real line break. In HTML, this means a break tag. (It should be rendered
   as a newline in non-HTML-based output formats like PDF.)
+
+**To be clear: if `soft-breaks` has the value of `break`, all single newlines
+function as hard line breaks (i.e. as they would if they were using the "two
+space hack" to produce a hard line break in normal Markdown).**
 
 The default value of `soft-breaks` is `source`, for compatibility with Markdown.
 However, most authors will want to set the value of `soft-breaks` to `break`,

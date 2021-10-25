@@ -2,3 +2,4 @@
 *.bak
 spec.html
 test/__pycache__
+.DS_Store

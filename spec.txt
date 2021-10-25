@@ -13793,17 +13793,17 @@ In your writing, it's often desirable to refer to these figures from elsewhere
 in your book. When creating such a reference, it's helpful to be able to
 reference the title and number of the chapter, section or figure.
 
-A> Adding a reference to the page number would also be helpful in print, but it
-A> is obviously problematic in an ebook, since certain ebook formats have resizable
-A> text and since the page displayed by PDF readers is often different than the
-A> printed page number, because of front matter Roman numerals. So, Markua doesn't
-A> provide any special magical syntax to refer to a page number, in order to
-A> discourage it--if Markua did support a reference to a page number, then the next
-A> logical step would be to only do so in certain output formats, and then writing
-A> Markua text would feel like programming. Instead of this nightmare, a really
-A> smart Markua Processor could hypothetically (and with the author's permission)
-A> automatically add page number references to these references when producing a
-A> print-ready PDF.
+Adding a reference to the page number would also be helpful in print, but it
+is obviously problematic in an ebook, since certain ebook formats have resizable
+text and since the page displayed by PDF readers is often different than the
+printed page number, because of front matter Roman numerals. So, Markua doesn't
+provide any special magical syntax to refer to a page number, in order to
+discourage it--if Markua did support a reference to a page number, then the next
+logical step would be to only do so in certain output formats, and then writing
+Markua text would feel like programming. Instead of this nightmare, a really
+smart Markua Processor could hypothetically (and with the author's permission)
+automatically add page number references to these references when producing a
+print-ready PDF.
 
 Here's how these references to titles and numbers work:
 

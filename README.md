@@ -83,7 +83,63 @@ brew install luarocks
 luarocks --lua-dir=/opt/homebrew/opt/lua@5.1 install lcmark
 ```
 
-4. Build the spec:
+4. Ensure `lua` points at the 5.1 version, not the 5.4 version (which is not used since yaml does not work yet):
+
+TODO - fix these:
+
+```
+~/repos/markua-spec[v_0_30]$ which luarocks
+~/repos/markua-spec[v_0_30]$ brew uninstall luarocks
+Error: No such keg: /opt/homebrew/Cellar/luarocks
+~/repos/markua-spec[v_0_30]$ brew install lua@5.3
+==> Downloading https://ghcr.io/v2/homebrew/core/lua/5.3/manifests/5.3.6-2
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/lua/5.3/blobs/sha256:c8b7e58e974dbd961e98ca2454e079834d9ab587a8793421541d9f3819b94499
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:c8b7e58e974dbd961e98ca2454e079834d9ab587a8793421541d9f3819b94499?se=2021-12-04T19%3A10%3A00Z&sig=Dmyhi6wn0ZSoyDJWnWkMrIRI57VoN
+######################################################################## 100.0%
+==> Pouring lua@5.3--5.3.6.arm64_monterey.bottle.2.tar.gz
+==> Caveats
+You may also want luarocks:
+  brew install luarocks
+
+lua@5.3 is keg-only, which means it was not symlinked into /opt/homebrew,
+because this is an alternate version of another formula.
+
+If you need to have lua@5.3 first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/lua@5.3/bin:$PATH"' >> /Users/peter/.bash_profile
+
+For compilers to find lua@5.3 you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/lua@5.3/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/lua@5.3/include"
+
+For pkg-config to find lua@5.3 you may need to set:
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/lua@5.3/lib/pkgconfig"
+
+==> Summary
+🍺  /opt/homebrew/Cellar/lua@5.3/5.3.6: 28 files, 407.3KB
+==> Running `brew cleanup lua@5.3`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+
+TODO
+
+/opt/homebrew/opt[stable]$ brew unlink lua
+Unlinking /opt/homebrew/Cellar/lua/5.4.3_1... 18 symlinks removed.
+/opt/homebrew/opt[stable]$ brew link lua@5.3 --overwrite
+Linking /opt/homebrew/Cellar/lua@5.3/5.3.6... 17 symlinks created.
+
+If you need to have this software first in your PATH instead consider running:
+  echo 'export PATH="/opt/homebrew/opt/lua@5.3/bin:$PATH"' >> /Users/peter/.bash_profile
+  
+  
+  
+
+cd /opt/homebrew/bin
+rm lua
+ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua5.1 lua
+```
+
+5. Build the spec:
 
 ```
 rm spec.html && make spec.html && open spec.html

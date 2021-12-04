@@ -179,7 +179,7 @@ You may also want luarocks:
 ==> Running `brew cleanup lua@5.1`...
 Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
 Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
-~/repos/lpub[paypal_two_ways]$ brew install luarocks
+$ brew install luarocks
 ==> Downloading https://ghcr.io/v2/homebrew/core/lua/manifests/5.4.3_1
 Already downloaded: /Users/peter/Library/Caches/Homebrew/downloads/beb4c946b907cea7c4aca5ff6c388aa71ceeaaf1cdf9b50e9a48187d7a95da1c--lua-5.4.3_1.bottle_manifest.json
 ==> Downloading https://ghcr.io/v2/homebrew/core/lua/blobs/sha256:d0ac5ebb4064dea9bb4afa547eb634f16ceed7662c653c3a9c24d28c4a2b75ec
@@ -212,4 +212,132 @@ to use Lua5.4, but you can require it to use another version at runtime
 with the `--lua-dir` flag, like this:
 
   luarocks --lua-dir=/opt/homebrew/opt/lua@5.1 install say
+```
+
+Then trying to install luarocks for 5.1
+
+```
+$ sudo luarocks --lua-dir=/opt/homebrew/opt/lua@5.1 install lcmark
+Password:
+Installing https://luarocks.org/lcmark-0.29.0-5.src.rock
+Missing dependencies for lcmark 0.29.0-5:
+   cmark >= 0.29.0 (not installed)
+   yaml >= 1.1 (not installed)
+   lpeg >= 0.12 (not installed)
+   optparse >= 1.0.1 (not installed)
+
+lcmark 0.29.0-5 depends on lua >= 5.1 (5.1-1 provided by VM)
+lcmark 0.29.0-5 depends on cmark >= 0.29.0 (not installed)
+Installing https://luarocks.org/cmark-0.29.0-1.src.rock
+
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c cmark_wrap.c -o cmark_wrap.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/blocks.c -o ext/blocks.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/houdini_html_u.c -o ext/houdini_html_u.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/references.c -o ext/references.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/buffer.c -o ext/buffer.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/html.c -o ext/html.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/render.c -o ext/render.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/cmark.c -o ext/cmark.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/inlines.c -o ext/inlines.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/scanners.c -o ext/scanners.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/cmark_ctype.c -o ext/cmark_ctype.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/iterator.c -o ext/iterator.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/utf8.c -o ext/utf8.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/commonmark.c -o ext/commonmark.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/latex.c -o ext/latex.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/xml.c -o ext/xml.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/houdini_href_e.c -o ext/houdini_href_e.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/man.c -o ext/man.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/houdini_html_e.c -o ext/houdini_html_e.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c ext/node.c -o ext/node.o -I. -Iext
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -bundle -undefined dynamic_lookup -all_load -o cmark.so cmark_wrap.o ext/blocks.o ext/houdini_html_u.o ext/references.o ext/buffer.o ext/html.o ext/render.o ext/cmark.o ext/inlines.o ext/scanners.o ext/cmark_ctype.o ext/iterator.o ext/utf8.o ext/commonmark.o ext/latex.o ext/xml.o ext/houdini_href_e.o ext/man.o ext/houdini_html_e.o ext/node.o
+No existing manifest. Attempting to rebuild...
+cmark 0.29.0-1 is now installed in /Users/peter/.luarocks (license: BSD2)
+
+lcmark 0.29.0-5 depends on yaml >= 1.1 (not installed)
+Installing https://luarocks.org/yaml-1.1.2-1.src.rock
+Missing dependencies for yaml 1.1.2-1:
+   lub >= 1.0.3, < 2 (not installed)
+
+yaml 1.1.2-1 depends on lua >= 5.1, < 5.4 (5.1-1 provided by VM)
+yaml 1.1.2-1 depends on lub >= 1.0.3, < 2 (not installed)
+Installing https://luarocks.org/lub-1.1.0-1.src.rock
+Missing dependencies for lub 1.1.0-1:
+   luafilesystem >= 1.4.0 (not installed)
+
+lub 1.1.0-1 depends on lua >= 5.1, < 5.4 (5.1-1 provided by VM)
+lub 1.1.0-1 depends on luafilesystem >= 1.4.0 (not installed)
+Installing https://luarocks.org/luafilesystem-1.8.0-1.src.rock
+
+luafilesystem 1.8.0-1 depends on lua >= 5.1 (5.1-1 provided by VM)
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/lfs.c -o src/lfs.o
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -bundle -undefined dynamic_lookup -all_load -o lfs.so src/lfs.o
+luafilesystem 1.8.0-1 is now installed in /Users/peter/.luarocks (license: MIT/X11)
+
+lub 1.1.0-1 is now installed in /Users/peter/.luarocks (license: MIT)
+
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/api.c -o src/api.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/b64.c -o src/b64.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/dumper.c -o src/dumper.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/emitter.c -o src/emitter.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/loader.c -o src/loader.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/lyaml.c -o src/lyaml.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/parser.c -o src/parser.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/reader.c -o src/reader.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/scanner.c -o src/scanner.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/strtod.c -o src/strtod.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c src/writer.c -o src/writer.o -Isrc
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -bundle -undefined dynamic_lookup -all_load -o yaml/core.so src/api.o src/b64.o src/dumper.o src/emitter.o src/loader.o src/lyaml.o src/parser.o src/reader.o src/scanner.o src/strtod.o src/writer.o
+yaml 1.1.2-1 is now installed in /Users/peter/.luarocks (license: MIT)
+
+lcmark 0.29.0-5 depends on lpeg >= 0.12 (not installed)
+Installing https://luarocks.org/lpeg-1.0.2-1.src.rock
+
+lpeg 1.0.2-1 depends on lua >= 5.1 (5.1-1 provided by VM)
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c lpcap.c -o lpcap.o
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c lpcode.c -o lpcode.o
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c lpprint.c -o lpprint.o
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c lptree.c -o lptree.o
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -O2 -fPIC -I/opt/homebrew/opt/lua@5.1/include/lua5.1 -c lpvm.c -o lpvm.o
+env MACOSX_DEPLOYMENT_TARGET=10.8 gcc -bundle -undefined dynamic_lookup -all_load -o lpeg.so lpcap.o lpcode.o lpprint.o lptree.o lpvm.o
+lpeg 1.0.2-1 is now installed in /Users/peter/.luarocks (license: MIT/X11)
+
+lcmark 0.29.0-5 depends on optparse >= 1.0.1 (not installed)
+Installing https://luarocks.org/optparse-1.4-1.src.rock
+
+optparse 1.4-1 depends on lua >= 5.1, < 5.5 (5.1-1 provided by VM)
+optparse 1.4-1 is now installed in /Users/peter/.luarocks (license: MIT/X11)
+
+lcmark 0.29.0-5 is now installed in /Users/peter/.luarocks (license: BSD2)
+
+$ luarocks list
+
+Rocks installed for Lua 5.4
+---------------------------
+
+$ luarocks --lua-dir=/opt/homebrew/opt/lua@5.1 list
+
+Rocks installed for Lua 5.1
+---------------------------
+
+cmark
+   0.29.0-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
+
+lcmark
+   0.29.0-5 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
+
+lpeg
+   1.0.2-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
+
+luafilesystem
+   1.8.0-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
+
+lub
+   1.1.0-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
+
+optparse
+   1.4-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
+
+yaml
+   1.1.2-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
 ```

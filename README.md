@@ -71,37 +71,25 @@ So, instead, you do this:
 brew install lua@5.1
 ```
 
-2. Install wget if you don't have it already:
+2. Install luarocks
 
 ```
-brew install wget
+brew install luarocks
 ```
 
-3. Install luarocks (instructions from https://luarocks.org/)
+3. Install lcmark:
 
 ```
-wget https://luarocks.org/releases/luarocks-3.5.0.tar.gz
-tar zxpf luarocks-3.5.0.tar.gz
-cd luarocks-3.5.0
-./configure
-make
-make install
-sudo luarocks install luasocket
+luarocks --lua-dir=/opt/homebrew/opt/lua@5.1 install lcmark
 ```
 
-4. Install lcmark:
-
-```
-luarocks install lcmark
-```
-
-5. Build the spec:
+4. Build the spec:
 
 ```
 rm spec.html && make spec.html && open spec.html
 ```
 
-Note that step 5 can also be run with the `./go.sh` script:
+Note that step 4 can also be run with the `./go.sh` script:
 
 ```
 ./go.sh

@@ -57,6 +57,28 @@ even if you normally skip them.
 Markua is being specified on the `master` branch.
 Leanpub Flavoured Markdown (LFM) is being specified on the `lfm` branch.
 
+# Building the Spec with Lua 5.3 - experimental
+
+```
+brew install lua@5.3
+brew link lua@5.3
+```
+
+Check:
+
+```
+~[]$ ls -lh /opt/homebrew/bin/lua*
+lrwxr-xr-x  1 peter  admin    31B  4 Dec 11:22 /opt/homebrew/bin/lua -> ../Cellar/lua@5.3/5.3.6/bin/lua
+lrwxr-xr-x  1 peter  admin    35B  4 Dec 11:22 /opt/homebrew/bin/lua-5.3 -> ../Cellar/lua@5.3/5.3.6/bin/lua-5.3
+lrwxr-xr-x  1 peter  admin    34B  4 Dec 11:22 /opt/homebrew/bin/lua5.3 -> ../Cellar/lua@5.3/5.3.6/bin/lua5.3
+lrwxr-xr-x  1 peter  admin    32B  4 Dec 11:22 /opt/homebrew/bin/luac -> ../Cellar/lua@5.3/5.3.6/bin/luac
+lrwxr-xr-x  1 peter  admin    36B  4 Dec 11:22 /opt/homebrew/bin/luac-5.3 -> ../Cellar/lua@5.3/5.3.6/bin/luac-5.3
+lrwxr-xr-x  1 peter  admin    35B  4 Dec 11:22 /opt/homebrew/bin/luac5.3 -> ../Cellar/lua@5.3/5.3.6/bin/luac5.3
+~[]$ 
+```
+
+
+
 # Building the Spec
 
 To build the spec on a Mac, you need to have Lua 5.1 (NOT 5.4) installed, it seems.

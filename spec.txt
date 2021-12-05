@@ -14556,24 +14556,24 @@ poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 
 <div class="extension">
 
-## Iframe resources (M)
+## IFrame resources (M)
 
-The syntax to insert an iframe is almost identical to that is used for video
+The syntax to insert an IFrame is almost identical to that is used for video
 resources.
 
-The idea about having a syntax to insert an iframe is simple: since Markua
+The idea about having a syntax to insert an IFrame is simple: since Markua
 does not support inline HTML, there is no implicit support for it. However,
 resources such as slide decks can be an important part of, say, courses which
 are created in Markua.
 
 So, the resource syntax is used for yet another task.
 
-The only resource location which is supported for an iframe resource is the
+The only resource location which is supported for an IFrame resource is the
 web resource location, for obvious reasons.
 
-### Supported Attributes for iframes
+### Supported Attributes for IFrames
 
-The following are the supported attributes for iframe resources, in addition to
+The following are the supported attributes for IFrame resources, in addition to
 the `class`, `format`, `title` and `type` attributes which all resources
 support.
 
@@ -14585,10 +14585,10 @@ support.
 
 `poster`
 : The `poster` is the URL or path to an image which should be shown instead of
-the iframe. If a Markua Processor is outputting some format where it is known
-that iframe resources are not supported, it must choose the poster to use as
-a replacement for the iframe. This poster is then turned into a link to a
-web page displaying the iframe content, either top-level or as an IFrame.
+the IFrame. If a Markua Processor is outputting some format where it is known
+that IFrame resources are not supported, it must choose the poster to use as
+a replacement for the IFrame. This poster is then turned into a link to a
+web page displaying the IFrame content, either top-level or as an IFrame.
 
 `poster-format`
 : The format of the `poster` image, if it exists. If this attribute is not
@@ -14597,8 +14597,8 @@ extension. This attribute needs to exist only to support `poster` images which
 do not have file extensions.
 
 `transcript`
-: The URL or path to a transcript of the resource contained in the iframe,
-which should be shown or dictated to people who cannot view the iframe content.
+: The URL or path to a transcript of the resource contained in the IFrame,
+which should be shown or dictated to people who cannot view the IFrame content.
 This helps people with visual disabilities view course material, and helps with
 ADA compliance. For example, what Leanpub does with a `transcript` is as
 follows: a URL is linked to in the title (but in a way which does not affect

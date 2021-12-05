@@ -398,3 +398,11 @@ stack traceback:
 make: *** [spec.html] Error 1
 ~/repos/markua-spec[v_0_30]$ 
 ```
+
+The lcmark.lua is in:
+
+```
+/Users/peter/.luarocks/share/lua/5.1/lcmark.lua
+```
+
+Presumably, this is because it was installed locally instead of globally.

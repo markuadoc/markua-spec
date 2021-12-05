@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>**NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading [The Markua Manual](https://leanpub.com/markua/read), not this document!**<br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/>'
-version: '0.30'
-date: '2021-10-25'
+version: '0.30.2'
+date: '2021-12-03'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -13793,7 +13793,7 @@ In your writing, it's often desirable to refer to these figures from elsewhere
 in your book. When creating such a reference, it's helpful to be able to
 reference the title and number of the chapter, section or figure.
 
-Adding a reference to the page number would also be helpful in print, but it
+A> Adding a reference to the page number would also be helpful in print, but it
 is obviously problematic in an ebook, since certain ebook formats have resizable
 text and since the page displayed by PDF readers is often different than the
 printed page number, because of front matter Roman numerals. So, Markua doesn't
@@ -14549,6 +14549,103 @@ poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 <p class="title">Introducing Markua</p>
 </div>
 <p>Here's a paragraph after the figure.</p>
+````````````````````````````````
+
+</div>
+
+
+<div class="extension">
+
+## IFrame resources (M)
+
+The syntax to insert an IFrame is almost identical to that is used for video
+resources.
+
+The idea about having a syntax to insert an IFrame is simple: since Markua
+does not support inline HTML, there is no implicit support for it. However,
+resources such as slide decks can be an important part of, say, courses which
+are created in Markua.
+
+So, the resource syntax is used for yet another task.
+
+The only resource location which is supported for an IFrame resource is the
+web resource location, for obvious reasons.
+
+### Supported Attributes for IFrames
+
+The following are the supported attributes for IFrame resources, in addition to
+the `class`, `format`, `title` and `type` attributes which all resources
+support.
+
+`align`
+: The `align` can be `left`, `right` or `middle`.
+
+`height`
+: This works just like it does with images.
+
+`poster`
+: The `poster` is the URL or path to an image which should be shown instead of
+the IFrame. If a Markua Processor is outputting some format where it is known
+that IFrame resources are not supported, it must choose the poster to use as
+a replacement for the IFrame. This poster is then turned into a link to a
+web page displaying the IFrame content, either top-level or as an IFrame.
+
+`poster-format`
+: The format of the `poster` image, if it exists. If this attribute is not
+specified, the format of the `poster` is inferred from the `poster` image file
+extension. This attribute needs to exist only to support `poster` images which
+do not have file extensions.
+
+`transcript`
+: The URL or path to a transcript of the resource contained in the IFrame,
+which should be shown or dictated to people who cannot view the IFrame content.
+This helps people with visual disabilities view course material, and helps with
+ADA compliance. For example, what Leanpub does with a `transcript` is as
+follows: a URL is linked to in the title (but in a way which does not affect
+the Table of Contents), and a path is assumed to be a path to a Markua file
+which is then used to produce a web page at a public URL, which then is also
+linked to in the title in a way which does not affect the Table of Contents.
+With the Markua files for transcripts, Leanpub only supports certain resource
+types to be included in the transcript files themselves. Specifically, images,
+video, audio are not supported, but code, poetry, math and tables are
+supported. When Leanpub generates a transcript, the URLs are publicly
+accessible but obscure. Identical transcripts should not make duplicate
+transcript files on the web, and using a new UUID every time would violate
+this. However, not changing the transcript URL when its content changed
+could lead to bad outcomes. So, the URL of a transcript on the web should be
+scoped to the book and affected both by its filename and its content. What
+Leanpub does is: (filename minus extension minus period plus hyphen plus the
+SHA hash).html. Including the filename eliminates collisions if filenames are
+unique but the hashes are not.
+
+`width`
+: This works just like it does with images.
+
+In the following sections, please note that while the examples are shown with
+an HTML mapping, please note that a Markua Processor has complete flexibility
+over how it handles the location of video resources and their display.
+
+```````````````````````````````` example
+Here's a paragraph before the figure.
+
+{type: iframe, poster: http://markua.com/slidedeckpreview.jpg, width: 300, height: 200}
+![](http://markua.com/slidedeck "Introducing Markua")
+
+Here's a paragraph after the figure.
+.
+<p>Here's a paragraph before the figure.</p>
+<div class="figure">
+<iframe title="Introducing Markua"
+    width="300"
+    height="200"
+    src="http://markua.com/slidedeck">
+<p class="title">Introducing Markua</p>
+</iframe>
+</div>
+<p>Here's a paragraph after the figure.</p>
+
+<video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
+poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 ````````````````````````````````
 
 </div>

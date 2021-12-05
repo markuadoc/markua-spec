@@ -341,3 +341,37 @@ optparse
 yaml
    1.1.2-1 (installed) - /Users/peter/.luarocks/lib/luarocks/rocks-5.1
 ```
+
+Trying again...
+
+```
+/opt/homebrew/bin[stable]$ ls -lh lua*
+lrwxr-xr-x  1 peter  admin    29B  4 Dec 14:35 lua -> ../Cellar/lua/5.4.3_1/bin/lua
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 lua-5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1
+lrwxr-xr-x  1 peter  admin    33B  4 Dec 14:35 lua-5.4 -> ../Cellar/lua/5.4.3_1/bin/lua-5.4
+lrwxr-xr-x  1 peter  admin    36B  4 Dec 14:35 lua5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/lua5.1
+lrwxr-xr-x  1 peter  admin    32B  4 Dec 14:35 lua5.4 -> ../Cellar/lua/5.4.3_1/bin/lua5.4
+lrwxr-xr-x  1 peter  admin    30B  4 Dec 14:35 luac -> ../Cellar/lua/5.4.3_1/bin/luac
+lrwxr-xr-x  1 peter  admin    38B  4 Dec 14:35 luac-5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/luac-5.1
+lrwxr-xr-x  1 peter  admin    34B  4 Dec 14:35 luac-5.4 -> ../Cellar/lua/5.4.3_1/bin/luac-5.4
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 luac5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/luac5.1
+lrwxr-xr-x  1 peter  admin    33B  4 Dec 14:35 luac5.4 -> ../Cellar/lua/5.4.3_1/bin/luac5.4
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 luarocks -> ../Cellar/luarocks/3.8.0/bin/luarocks
+lrwxr-xr-x  1 peter  admin    43B  4 Dec 14:35 luarocks-admin -> ../Cellar/luarocks/3.8.0/bin/luarocks-admin
+/opt/homebrew/bin[stable]$ rm lua
+/opt/homebrew/bin[stable]$ ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
+/opt/homebrew/bin[stable]$ ls -lh lua*
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 18:22 lua -> ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 lua-5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1
+lrwxr-xr-x  1 peter  admin    33B  4 Dec 14:35 lua-5.4 -> ../Cellar/lua/5.4.3_1/bin/lua-5.4
+lrwxr-xr-x  1 peter  admin    36B  4 Dec 14:35 lua5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/lua5.1
+lrwxr-xr-x  1 peter  admin    32B  4 Dec 14:35 lua5.4 -> ../Cellar/lua/5.4.3_1/bin/lua5.4
+lrwxr-xr-x  1 peter  admin    30B  4 Dec 14:35 luac -> ../Cellar/lua/5.4.3_1/bin/luac
+lrwxr-xr-x  1 peter  admin    38B  4 Dec 14:35 luac-5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/luac-5.1
+lrwxr-xr-x  1 peter  admin    34B  4 Dec 14:35 luac-5.4 -> ../Cellar/lua/5.4.3_1/bin/luac-5.4
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 luac5.1 -> ../Cellar/lua@5.1/5.1.5_8/bin/luac5.1
+lrwxr-xr-x  1 peter  admin    33B  4 Dec 14:35 luac5.4 -> ../Cellar/lua/5.4.3_1/bin/luac5.4
+lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 luarocks -> ../Cellar/luarocks/3.8.0/bin/luarocks
+lrwxr-xr-x  1 peter  admin    43B  4 Dec 14:35 luarocks-admin -> ../Cellar/luarocks/3.8.0/bin/luarocks-admin
+/opt/homebrew/bin[stable]$ 
+```

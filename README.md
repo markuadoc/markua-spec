@@ -375,3 +375,26 @@ lrwxr-xr-x  1 peter  admin    37B  4 Dec 14:35 luarocks -> ../Cellar/luarocks/3.
 lrwxr-xr-x  1 peter  admin    43B  4 Dec 14:35 luarocks-admin -> ../Cellar/luarocks/3.8.0/bin/luarocks-admin
 /opt/homebrew/bin[stable]$ 
 ```
+
+Then, this causes:
+
+```
+~/repos/markua-spec[v_0_30]$ ./go.sh 
+lua tools/make_spec.lua html < spec.txt > spec.html
+lua: tools/make_spec.lua:1: module 'lcmark' not found:
+	no field package.preload['lcmark']
+	no file './lcmark.lua'
+	no file '/opt/homebrew/share/lua/5.1/lcmark.lua'
+	no file '/opt/homebrew/share/lua/5.1/lcmark/init.lua'
+	no file '/opt/homebrew/lib/lua/5.1/lcmark.lua'
+	no file '/opt/homebrew/lib/lua/5.1/lcmark/init.lua'
+	no file './lcmark.so'
+	no file '/opt/homebrew/lib/lua/5.1/lcmark.so'
+	no file '/opt/homebrew/lib/lua/5.1/loadall.so'
+stack traceback:
+	[C]: in function 'require'
+	tools/make_spec.lua:1: in main chunk
+	[C]: ?
+make: *** [spec.html] Error 1
+~/repos/markua-spec[v_0_30]$ 
+```

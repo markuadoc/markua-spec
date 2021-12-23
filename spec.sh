@@ -24,7 +24,6 @@ docker exec $containerName make spec.html
 docker exec $containerName cp spec.html spec 
 
 docker stop $containerName
-echo "$preserveContainer abc"
 if ([[ "$preserveContainer" == "t" ]] || [[ "$preserveContainer" == "true" ]]) && [[ "$preserveContainer" != "" ]]; then
     echo "preserved container"
 else

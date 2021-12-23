@@ -59,50 +59,9 @@ Leanpub Flavoured Markdown (LFM) is being specified on the `lfm` branch.
 
 # Building the Spec
 
-To build the spec on a Mac, you need to have Lua 5.1 (NOT 5.4) installed, it seems.
+To build the spec you will need docker installed. You can check with 
+```docker -v``` 
+if you dont have docker you can download it from https://www.docker.com/products/docker-desktop
 
-Homebrew wants to install Lua 5.4 when you do `brew install lua` or `brew install luarocks`.
-
-So, instead, you do this:
-
-1. Install Lua:
-
-```
-brew install lua@5.1
-```
-
-2. Install wget if you don't have it already:
-
-```
-brew install wget
-```
-
-3. Install luarocks (instructions from https://luarocks.org/)
-
-```
-wget https://luarocks.org/releases/luarocks-3.5.0.tar.gz
-tar zxpf luarocks-3.5.0.tar.gz
-cd luarocks-3.5.0
-./configure
-make
-make install
-sudo luarocks install luasocket
-```
-
-4. Install lcmark:
-
-```
-luarocks install lcmark
-```
-
-5. Build the spec:
-
-```
-rm spec.html && make spec.html && open spec.html
-```
-
-Note that step 5 can also be run with the `./go.sh` script:
-
-```
-./go.sh
-```
+You will need the repository cloned, and then using the terminal navigate into the root of the repository on the master branch.
+Once there you can run ```./spec.sh```, this will create a docker container, generate the spec.html file in `$HOME/Desktop` by default, and then stop and remove the docker container. You can add a `-o [filepath]` flag to specify an output file path. The script will expect that spec.txt which it uses to build spec.html will be in the root, where it is by default.

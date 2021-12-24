@@ -12,7 +12,7 @@ if [ $containerName="" ]; then
 fi
 
 if [ $outputPath="" ]; then
-    outputPath=$HOME/Desktop
+    outputPath=$HOME/repos/markua-spec
 fi
 
 docker build -t lua-image .

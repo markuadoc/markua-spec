@@ -14627,8 +14627,8 @@ over how it handles the location of video resources and their display.
 ```````````````````````````````` example
 Here's a paragraph before the figure.
 
-{type: iframe, poster: http://markua.com/slidedeckpreview.jpg, width: 300, height: 200}
-![](http://markua.com/slidedeck "Introducing Markua")
+{type: iframe, poster: http://markua.com/Markua.png, width: 300, height: 200}
+![](http://markua.com/Markua.pdf "Introducing Markua")
 
 Here's a paragraph after the figure.
 .
@@ -14637,14 +14637,11 @@ Here's a paragraph after the figure.
 <iframe title="Introducing Markua"
     width="300"
     height="200"
-    src="http://markua.com/slidedeck">
+    src="http://markua.com/Markua.pdf">
 <p class="title">Introducing Markua</p>
 </iframe>
 </div>
 <p>Here's a paragraph after the figure.</p>
-
-<video src="https://www.youtube.com/watch?t=105&v=VOCYL-FNbr0"
-poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 ````````````````````````````````
 
 </div>

@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.3 (2022-01-06)</div>
+<div class="version">Version 0.30.4 (2022-01-11)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/><strong>NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading <a href="https://leanpub.com/markua/read">The Markua Manual</a>, not this document!</strong><br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/></span>
 </div>
@@ -246,22 +246,26 @@ $(document).ready(function() {
 <li><a href="#links"><span class="number">8.8</span>Links</a></li>
 <li><a href="#crosslinks-and-ids-m-"><span class="number">8.9</span>Crosslinks and ids (M)</a></li>
 <li><a href="#smart-crosslinks-m-"><span class="number">8.10</span>Smart crosslinks (M)</a></li>
-<li><a href="#images"><span class="number">8.11</span>Images</a></li>
-<li><a href="#image-resource-attributes-m-"><span class="number">8.12</span>Image resource attributes (M)</a></li>
-<li><a href="#inline-svg-images-m-"><span class="number">8.13</span>Inline SVG images (M)</a></li>
-<li><a href="#image-locations-and-embedding-m-"><span class="number">8.14</span>Image locations and embedding (M)</a></li>
-<li><a href="#video-resources-m-"><span class="number">8.15</span>Video resources (M)</a></li>
-<li><a href="#iframe-resources-m-"><span class="number">8.16</span>IFrame resources (M)</a></li>
-<li><a href="#audio-resources-m-"><span class="number">8.17</span>Audio resources (M)</a></li>
-<li><a href="#math-m-"><span class="number">8.18</span>Math (M)</a></li>
-<li><a href="#autolinks"><span class="number">8.19</span>Autolinks</a></li>
-<li><a href="#hard-line-breaks"><span class="number">8.20</span>Hard line breaks</a></li>
-<li><a href="#soft-line-breaks"><span class="number">8.21</span>Soft line breaks</a></li>
-<li><a href="#configurable-soft-line-breaks-m-"><span class="number">8.22</span>Configurable soft line breaks (M)</a></li>
-<li><a href="#span-attribute-lists-m-"><span class="number">8.23</span>Span attribute lists (M)</a></li>
-<li><a href="#index-entries-m-"><span class="number">8.24</span>Index entries (M)</a></li>
-<li><a href="#concatenating-files-and-blank-lines-m-"><span class="number">8.25</span>Concatenating files and blank lines (M)</a></li>
-<li><a href="#textual-content"><span class="number">8.26</span>Textual content</a></li>
+</ul>
+</li>
+<li><a href="#is-figure-8-2-anatomy-of-a-squirrel-on-page-42-"><span class="number">9</span> is “Figure 8.2: Anatomy of a Squirrel on page 42”</a>
+<ul>
+<li><a href="#images"><span class="number">9.1</span>Images</a></li>
+<li><a href="#image-resource-attributes-m-"><span class="number">9.2</span>Image resource attributes (M)</a></li>
+<li><a href="#inline-svg-images-m-"><span class="number">9.3</span>Inline SVG images (M)</a></li>
+<li><a href="#image-locations-and-embedding-m-"><span class="number">9.4</span>Image locations and embedding (M)</a></li>
+<li><a href="#video-resources-m-"><span class="number">9.5</span>Video resources (M)</a></li>
+<li><a href="#iframe-resources-m-"><span class="number">9.6</span>IFrame resources (M)</a></li>
+<li><a href="#audio-resources-m-"><span class="number">9.7</span>Audio resources (M)</a></li>
+<li><a href="#math-m-"><span class="number">9.8</span>Math (M)</a></li>
+<li><a href="#autolinks"><span class="number">9.9</span>Autolinks</a></li>
+<li><a href="#hard-line-breaks"><span class="number">9.10</span>Hard line breaks</a></li>
+<li><a href="#soft-line-breaks"><span class="number">9.11</span>Soft line breaks</a></li>
+<li><a href="#configurable-soft-line-breaks-m-"><span class="number">9.12</span>Configurable soft line breaks (M)</a></li>
+<li><a href="#span-attribute-lists-m-"><span class="number">9.13</span>Span attribute lists (M)</a></li>
+<li><a href="#index-entries-m-"><span class="number">9.14</span>Index entries (M)</a></li>
+<li><a href="#concatenating-files-and-blank-lines-m-"><span class="number">9.15</span>Concatenating files and blank lines (M)</a></li>
+<li><a href="#textual-content"><span class="number">9.16</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -16635,30 +16639,31 @@ and <code>number-figures</code> attributes .</p>
 <p>In your writing, it’s often desirable to refer to these figures from elsewhere
 in your book. When creating such a reference, it’s helpful to be able to
 reference the title and number of the chapter, section or figure.</p>
-<p>A&gt; Adding a reference to the page number would also be helpful in print, but it
-is obviously problematic in an ebook, since certain ebook formats have resizable
-text and since the page displayed by PDF readers is often different than the
-printed page number, because of front matter Roman numerals. So, Markua doesn’t
-provide any special magical syntax to refer to a page number, in order to
-discourage it–if Markua did support a reference to a page number, then the next
-logical step would be to only do so in certain output formats, and then writing
-Markua text would feel like programming. Instead of this nightmare, a really
-smart Markua Processor could hypothetically (and with the author’s permission)
-automatically add page number references to these references when producing a
-print-ready PDF.</p>
 <p>Here’s how these references to titles and numbers work:</p>
 <ul>
 <li><code>#t</code> is for “title”</li>
 <li><code>#n</code> is for “number”</li>
 <li><code>#d</code> is for “description” (e.g. “Figure”, “Chapter”, “Section”)</li>
-<li><code>#f</code> is for “full title”</li>
+<li><code>#p</code> is for “page number” (e.g. “42”)</li>
+<li><code>#f</code> is for “full title (excluding the page number)”</li>
+<li><code>#v</code> is for “verbose full title, including the page number</li>
 </ul>
-<p>So, for “Figure 8.2: Anatomy of a Squirrel”, these are:</p>
+<p>So, for a “Figure 8.2: Anatomy of a Squirrel” on page 42, these are:</p>
 <ul>
 <li><code>#t</code> is “Anatomy of a Squirrel”</li>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
+<li><code>#p</code> is “42”</li>
 <li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel”</li>
+</ul>
+<h1 id="is-figure-8-2-anatomy-of-a-squirrel-on-page-42-" class="definition">
+<span class="number">9</span><code>#v</code> is “Figure 8.2: Anatomy of a Squirrel on page 42”
+</h1>
+<p>A Markua Processor should use the language of the book when generating <code>#v</code>.</p>
+<p>Note that for a book which is in English:</p>
+<ul>
+<li><code>#f</code> is equivalent to the author typing: <code>#d #n: #t</code></li>
+<li><code>#v</code> is equivalent to the author typing: <code>#d #n: #t on page #p</code></li>
 </ul>
 <p>Note that in this example, “Anatomy of a Squirrel” was typed by the author,
 whereas “Figure 8.2: “ was generated by the Markua Processor. It does not
@@ -16695,7 +16700,7 @@ include either the <code>#d</code> or <code>#n</code> parts: it will be “Anato
 “Figure 8.2: Anatomy of a Squirrel”.</p>
 </div>
 <h2 id="images" class="definition">
-<span class="number">8.11</span>Images
+<span class="number">9.1</span>Images
 </h2>
 <p>Syntax for images is like the syntax for links, with one
 difference. Instead of <a href="#link-text">link text</a>, we have an
@@ -17044,7 +17049,7 @@ backslash-escape the opening <code>[</code>:</p>
 </div>
 <div class="extension">
 <h2 id="image-resource-attributes-m-" class="definition">
-<span class="number">8.12</span>Image resource attributes (M)
+<span class="number">9.2</span>Image resource attributes (M)
 </h2>
 <p>As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
@@ -17187,7 +17192,7 @@ instead, involving a very real and very delicious apple pie:</p>
 </div>
 <div class="extension">
 <h2 id="inline-svg-images-m-" class="definition">
-<span class="number">8.13</span>Inline SVG images (M)
+<span class="number">9.3</span>Inline SVG images (M)
 </h2>
 <p>Local and web resource locations are supported for any type of image; inline
 resource locations are supported for SVG images only.</p>
@@ -17231,7 +17236,7 @@ the SVG image.</p>
 <p>Note that when you are writing about SVG and want to display the SVG text, what
 you are really doing is creating a code resource. This is discussed below.</p>
 <h3 id="writing-about-svg" class="definition">
-<span class="number">8.13.1</span>Writing about SVG
+<span class="number">9.3.1</span>Writing about SVG
 </h3>
 <p>If you want to write about the SVG format, and show the actual SVG source
 (instead of the image produced), it needs to be of a <code>format</code> of <code>code</code>, not
@@ -17292,7 +17297,7 @@ since guessing when neither is present always produces a type of <code>code</cod
 </div>
 <div class="extension">
 <h2 id="image-locations-and-embedding-m-" class="definition">
-<span class="number">8.14</span>Image locations and embedding (M)
+<span class="number">9.4</span>Image locations and embedding (M)
 </h2>
 <p>Note that regardless of the image location, a Markua Processor can handle images
 in the following ways:</p>
@@ -17310,7 +17315,7 @@ GIF, PNG, JPEG, SVG and zipped SVG.</p>
 </div>
 <div class="extension">
 <h2 id="video-resources-m-" class="definition">
-<span class="number">8.15</span>Video resources (M)
+<span class="number">9.5</span>Video resources (M)
 </h2>
 <p>The syntax to insert a video is the same compact and consistent syntax that is
 used for any resource. Local and web resource locations are supported for both
@@ -17332,7 +17337,7 @@ work in some Markua Processors, like Leanpub, without specifying either the
 <p>We will discuss the supported and the default attributes for videos, and then
 show examples of videos being inserted for both local and web videos.</p>
 <h3 id="supported-attributes-for-video" class="definition">
-<span class="number">8.15.1</span>Supported Attributes for Video
+<span class="number">9.5.1</span>Supported Attributes for Video
 </h3>
 <p>The following are the supported attributes for video resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
@@ -17402,7 +17407,7 @@ with images.</p>
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
 <h3 id="local-video" class="definition">
-<span class="number">8.15.2</span>Local Video
+<span class="number">9.5.2</span>Local Video
 </h3>
 <div class="example" id="example-638">
 <div class="examplenum">
@@ -17427,7 +17432,7 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 </div>
 </div>
 <h3 id="web-video" class="definition">
-<span class="number">8.15.3</span>Web Video
+<span class="number">9.5.3</span>Web Video
 </h3>
 <div class="example" id="example-639">
 <div class="examplenum">
@@ -17456,7 +17461,7 @@ poster=&quot;http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg&quot;/&gt;
 </div>
 <div class="extension">
 <h2 id="iframe-resources-m-" class="definition">
-<span class="number">8.16</span>IFrame resources (M)
+<span class="number">9.6</span>IFrame resources (M)
 </h2>
 <p>The syntax to insert an IFrame is almost identical to that is used for video
 resources.</p>
@@ -17468,7 +17473,7 @@ are created in Markua.</p>
 <p>The only resource location which is supported for an IFrame resource is the
 web resource location, for obvious reasons.</p>
 <h3 id="supported-attributes-for-iframes" class="definition">
-<span class="number">8.16.1</span>Supported Attributes for IFrames
+<span class="number">9.6.1</span>Supported Attributes for IFrames
 </h3>
 <p>The following are the supported attributes for IFrame resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
@@ -17544,7 +17549,7 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 </div>
 <div class="extension">
 <h2 id="audio-resources-m-" class="definition">
-<span class="number">8.17</span>Audio resources (M)
+<span class="number">9.7</span>Audio resources (M)
 </h2>
 <p>The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
@@ -17572,7 +17577,7 @@ and Ogg Vorbis.</p>
 <p>We will discuss the supported and the default attributes for audio files, and
 then show examples of audio being inserted for both local and web audio files.</p>
 <h3 id="supported-attributes-for-audio" class="definition">
-<span class="number">8.17.1</span>Supported Attributes for Audio
+<span class="number">9.7.1</span>Supported Attributes for Audio
 </h3>
 <p>The following are the supported attributes for audio resources, in addition to the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
 <p><code>poster</code>
@@ -17590,7 +17595,7 @@ this. See the Video resources section above for more information.</p>
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
 <h3 id="local-audio" class="definition">
-<span class="number">8.17.2</span>Local Audio
+<span class="number">9.7.2</span>Local Audio
 </h3>
 <div class="example" id="example-641">
 <div class="examplenum">
@@ -17612,7 +17617,7 @@ over how it handles the location of video resources and their display.</p>
 </div>
 </div>
 <h3 id="web-audio" class="definition">
-<span class="number">8.17.3</span>Web Audio
+<span class="number">9.7.3</span>Web Audio
 </h3>
 <div class="example" id="example-642">
 <div class="examplenum">
@@ -17636,7 +17641,7 @@ over how it handles the location of video resources and their display.</p>
 </div>
 <div class="extension">
 <h2 id="math-m-" class="definition">
-<span class="number">8.18</span>Math (M)
+<span class="number">9.8</span>Math (M)
 </h2>
 <p>Math can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.</p>
@@ -17650,7 +17655,7 @@ format it.</p>
 <li>AsciiMath (<code>asciimath</code> or <code>@</code>)</li>
 </ol>
 <h3 id="supported-attributes-for-math" class="definition">
-<span class="number">8.18.1</span>Supported Attributes for Math
+<span class="number">9.8.1</span>Supported Attributes for Math
 </h3>
 <p>The following is the supported attribute for math resources, in addition to the
 <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support:</p>
@@ -17668,7 +17673,7 @@ into Markua: <code>latexmath</code> for LaTeX math and <code>asciimath</code> fo
 Markua Processor encounters one of these formats, it must assume the <code>type</code> of
 the resource is <code>math</code>, not <code>code</code>.</p>
 <h3 id="local-math-resources" class="definition">
-<span class="number">8.18.2</span>Local Math Resources
+<span class="number">9.8.2</span>Local Math Resources
 </h3>
 <p>Local math resources can be inserted as a figure.</p>
 <pre><code>Here's a paragraph before the figure.
@@ -17687,7 +17692,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="web-math-resources" class="definition">
-<span class="number">8.18.3</span>Web Math Resources
+<span class="number">9.8.3</span>Web Math Resources
 </h3>
 <p>This is identical to how local math resources work, including the significance
 of file extensions. The only difference is that the files are on the web.</p>
@@ -17707,14 +17712,14 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="inline-math-resources" class="definition">
-<span class="number">8.18.4</span>Inline Math Resources
+<span class="number">9.8.4</span>Inline Math Resources
 </h3>
 <p>Inline math resources are the most flexible way to insert math. They are the only
 way to insert math as a span resource, and the most straightforward way to add
 short math examples as figures. LaTeX math and AsciiMath can be inserted inline
 as a span or figure.</p>
 <h4 id="span" class="definition">
-<span class="number">8.18.4.1</span>Span
+<span class="number">9.8.4.1</span>Span
 </h4>
 <p>Being able to insert a math resource as a span is important, as it lets you write
 things like one of the kinematic equations <code>d = v_i t + \frac{1}{2} a t^2</code>$ inside
@@ -17724,7 +17729,7 @@ an <code>@</code> after the closing backtick for AsciiMath, or an attribute list
 a <code>format</code> of <code>latexmath</code> or <code>asciimath</code>. If none of these is done, the content
 of the backticks is treated as code and is output verbatim as monospaced text.</p>
 <h5 id="latex-math-span" class="definition">
-<span class="number">8.18.4.1.1</span>LaTeX math span
+<span class="number">9.8.4.1.1</span>LaTeX math span
 </h5>
 <p>There is syntactic sugar for LaTeX math which is inserted as a span, using the
 <code>$</code> character after the closing backtick:</p>
@@ -17739,7 +17744,7 @@ sentence.
 inside a sentence.
 </code></pre>
 <h5 id="asciimath-span" class="definition">
-<span class="number">8.18.4.1.2</span>AsciiMath span
+<span class="number">9.8.4.1.2</span>AsciiMath span
 </h5>
 <p><a href="http://asciimath.org/">AsciiMath</a> is a way of producing simple MathML equations,
 using about 1% of the typing. It’s more terse than LaTeX math.</p>
@@ -17754,7 +17759,7 @@ character after the closing backtick:</p>
 inside a sentence.
 </code></pre>
 <h4 id="figure" class="definition">
-<span class="number">8.18.4.2</span>Figure
+<span class="number">9.8.4.2</span>Figure
 </h4>
 <p>LaTeX math and AsciiMath can be inserted inline as a figure.</p>
 <ul>
@@ -17764,7 +17769,7 @@ backticks, or by specifying an attribute list of <code>{format: latexmath}</code
 backticks, or by specifying an attribute list of <code>{format: asciimath}</code>.</li>
 </ul>
 <h5 id="latex-math-figures" class="definition">
-<span class="number">8.18.4.2.1</span>LaTeX math figures
+<span class="number">9.8.4.2.1</span>LaTeX math figures
 </h5>
 <p>Here’s how you do this using LaTeX math…</p>
 <p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
@@ -17805,7 +17810,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h5 id="asciimath-figures" class="definition">
-<span class="number">8.18.4.2.2</span>AsciiMath figures
+<span class="number">9.8.4.2.2</span>AsciiMath figures
 </h5>
 <p>Here’s how you do this using AsciiMath…</p>
 <p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
@@ -17843,7 +17848,7 @@ text, what you are really doing is creating a code resource. This is essentially
 identical to what was shown earlier in writing about SVG images. It’s also shown
 below.</p>
 <h3 id="writing-about-math" class="definition">
-<span class="number">8.18.5</span>Writing about Math
+<span class="number">9.8.5</span>Writing about Math
 </h3>
 <p>If you want to write about math, and show the actual code (instead of the
 formatted output), it needs to be of a <code>format</code> of <code>code</code>, not <code>math</code>.</p>
@@ -17904,7 +17909,7 @@ abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/
 </code></pre>
 </div>
 <h2 id="autolinks" class="definition">
-<span class="number">8.19</span>Autolinks
+<span class="number">9.9</span>Autolinks
 </h2>
 <p><a id="autolink" href="#autolink" class="definition">Autolink</a>s are absolute URIs and email addresses inside
 <code>&lt;</code> and <code>&gt;</code>. They are parsed as links, with the URL or email address
@@ -18192,7 +18197,7 @@ spec</a>:</p>
 </div>
 </div>
 <h2 id="hard-line-breaks" class="definition">
-<span class="number">8.20</span>Hard line breaks
+<span class="number">9.10</span>Hard line breaks
 </h2>
 <p>A line ending (not in a code span or HTML tag) that is preceded
 by two or more spaces and does not occur at the end of a block
@@ -18425,7 +18430,7 @@ other block element:</p>
 </div>
 </div>
 <h2 id="soft-line-breaks" class="definition">
-<span class="number">8.21</span>Soft line breaks
+<span class="number">9.11</span>Soft line breaks
 </h2>
 <p>A regular line ending (not in a code span or HTML tag) that is not
 preceded by two or more spaces or a backslash is parsed as a
@@ -18470,7 +18475,7 @@ line ending or as a space.</p>
 as hard line breaks.</p>
 <div class="extension">
 <h2 id="configurable-soft-line-breaks-m-" class="definition">
-<span class="number">8.22</span>Configurable soft line breaks (M)
+<span class="number">9.12</span>Configurable soft line breaks (M)
 </h2>
 <p>There is a good argument to be made that single newlines at the end of a line
 should always be treated as a hard line break, not as a soft line break.</p>
@@ -18603,7 +18608,7 @@ paragraph-like contexts, such as definition list items.</p>
 </div>
 <div class="extension">
 <h2 id="span-attribute-lists-m-" class="definition">
-<span class="number">8.23</span>Span attribute lists (M)
+<span class="number">9.13</span>Span attribute lists (M)
 </h2>
 <p>Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -18639,7 +18644,7 @@ creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
 </div>
 <div class="extension">
 <h2 id="index-entries-m-" class="definition">
-<span class="number">8.24</span>Index entries (M)
+<span class="number">9.14</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -18736,7 +18741,7 @@ if index entries are being added where ids already are.</p>
 implementation flexibility.</p>
 </div>
 <h2 id="concatenating-files-and-blank-lines-m-" class="definition">
-<span class="number">8.25</span>Concatenating files and blank lines (M)
+<span class="number">9.15</span>Concatenating files and blank lines (M)
 </h2>
 <p>A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by
@@ -18882,7 +18887,7 @@ Yada<span class="space"> </span>yada<span class="space"> </span>yada.
 </div>
 </div>
 <h2 id="textual-content" class="definition">
-<span class="number">8.26</span>Textual content
+<span class="number">9.16</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>

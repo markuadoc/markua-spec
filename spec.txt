@@ -13811,7 +13811,11 @@ So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
 * `#n` is "8.2"
 * `#d` is "Figure"
 * `#s` is "Figure 8.2"
-* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF, if `include-page-numbers-in-references` is true (the default), it is "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy of a Squirrel" (just like EPUB and MOBI).
+* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF,
+  if `include-page-numbers-in-references` is true (the default), it is
+  "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if
+  `include-page-numbers-in-references` is false, it is "Figure 8.2:
+  Anatomy of a Squirrel" (just like EPUB and MOBI).
 
 Note that for a book which is in English:
 
@@ -13837,20 +13841,36 @@ Finally, note that you can make a smart crosslink to any id, including that of
 a paragraph or span inside some chapter, section or sub-section. What the
 Markua Processor should do is the following:
 
-* `#t` is the title (descriptive name) of the most specific containing block (eg. "chapter", "section"). The Markua Processor is free to use "section" for all sections and sub-sections, regardless of depth, since "section 5.4.3.2.1" reads better than "sub-sub-section 5.4.3.2.1".
-* `#n` is for "number", which is the number of the most specific containing block (eg. "3", "3.2", "5.4.3.2.1", etc.).
-* `#d` is for "description" (e.g. "Figure", "Chapter", "Section") of the nearest addressable block (a block that can be referenced by name and/or number, i.e. "chapter", "section", "figure", "table" but not "span" or "paragraph")
-* `#f` is for "full title", which uses the name of the addressable containing block
+* `#t` is the title (descriptive name) of the most specific containing block
+  (eg. "chapter", "section"). The Markua Processor is free to use "section"
+  for all sections and sub-sections, regardless of depth, since
+  "section 5.4.3.2.1" reads better than "sub-sub-section 5.4.3.2.1".
+* `#n` is for "number", which is the number of the most specific containing
+  block (eg. "3", "3.2", "5.4.3.2.1", etc.).
+* `#d` is for "description" (e.g. "Figure", "Chapter", "Section") of the
+  nearest containing addressable block (a block that can be referenced by name
+  and/or number, i.e. "chapter", "section", "figure", "table" but not "span" or
+  "paragraph")
+* `#s` is for "short title", which uses the output of `#d` and `#n` in a
+  language-specific way (in English, `#d #n`)
+* `#f` is for "full title", which uses the output of `#d`, `#n` and `#t` in a
+  language-specific way (in English, `#d #n: #t`), as well as adding the page
+  number in a language-specific way (in English `#d #n: #t  on page <number>`
+  [without the `<>`] if the `include-page-numbers-in-references` global
+  setting is true, and `#d #n: #t` if the `include-page-numbers-in-references`
+  global setting is false.
 
 So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
 
 * `#t` is "Anatomy of a Squirrel"
 * `#n` is "8.2"
 * `#d` is "Figure"
-* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF, if `include-page-numbers-in-references` is true (the default), it is "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy of a Squirrel" (just like EPUB and MOBI).
-
-
-
+* `#s` is "Figure 8.2"
+* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF, if
+  `include-page-numbers-in-references` is true (the default), it is
+  "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if
+  `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy
+  of a Squirrel" (just like EPUB and MOBI).
 
 The `code-sample-names`, `figure-names` and `table-names` settings control the
 words used to name things.
@@ -13871,9 +13891,9 @@ document.
 ~~~
 
 The only way to reference the title and numbers is in crosslinks. There's no
-syntax to do so without creating a crosslink--a crosslink is more helpful, since
-it is clickable, and adding another syntax simply to be less helpful to the
-reader is a bad idea. Markua has enough syntax as it is.
+syntax to do so without creating a crosslink--a crosslink is more helpful,
+since it is clickable, and adding another syntax simply to be less helpful to
+the reader is a bad idea. Markua has enough syntax as it is.
 
 Note that resources, chapters and sections all have implicit numbering. So, #n
 always works even if numbering is off. However, you will confuse readers if you

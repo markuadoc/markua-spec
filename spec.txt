@@ -13884,10 +13884,23 @@ This is discussed in [#f](#crosslinks).
 
 This is discussed in a [#d](#crosslinks) above.
 
-See [chapter #n](#span-elements), which is the best chapter in this book.
+See [chapter #n](#metadata), which is the best chapter in this book.
+
+See [#d #n](#metadata), which is the best chapter in this book.
+
+See [#s](#metadata), which is the best chapter in this book.
+
+See [section #n](#span-elements), which is the best section in this book.
+
+This is in [#f](#fancy-diagram), arguably the fanciest diagram in this
+document.
+
+This is in [#s](#fancy-diagram), arguably the fanciest diagram in this
+document.
 
 This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this
 document.
+
 ~~~
 
 The only way to reference the title and numbers is in crosslinks. There's no

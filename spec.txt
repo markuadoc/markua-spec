@@ -13823,10 +13823,29 @@ Also, note that regardless of section level, sections referenced in `#d` or `#f`
 are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
 
 The expectation is that `#f` will be used by authors who don't mind verbosity,
-and #t and #n will be used by authors who prefer control and brevity. The #d is
-for very lazy authors who like saving keystrokes and/or who don't know whether
-their publisher will call the code samples "Listing", "Example" or some other
-word and want to protect themselves against extra work.
+and `#t` and `#n` will be used by authors who prefer control and brevity.
+The #d is for very lazy authors who like saving keystrokes and/or who don't know
+whether their publisher will call the code samples "Listing", "Example" or some
+other word and want to protect themselves against extra work.
+
+Finally, note that you can make a smart crosslink to any id, including that of
+a paragraph or span inside some chapter, section or sub-section. What the
+Markua Processor should do is the following:
+
+* `#t` is the title (descriptive name) of the most specific containing block (eg. "chapter", "section"). The Markua Processor is free to use "section" for all sections and sub-sections, regardless of depth, since "section 5.4.3.2.1" reads better than "sub-sub-section 5.4.3.2.1".
+* `#n` is for "number", which is the number of the most specific containing block (eg. "3", "3.2", "5.4.3.2.1", etc.).
+* `#d` is for "description" (e.g. "Figure", "Chapter", "Section") of the nearest addressable block (a block that can be referenced by name and/or number, i.e. "chapter", "section", "figure", "table" but not "span" or "paragraph")
+* `#f` is for "full title", which uses the name of the addressable containing block
+
+So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
+
+* `#t` is "Anatomy of a Squirrel"
+* `#n` is "8.2"
+* `#d` is "Figure"
+* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF, if `include-page-numbers-in-references` is true (the default), it is "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy of a Squirrel" (just like EPUB and MOBI).
+
+
+
 
 The `code-sample-names`, `figure-names` and `table-names` settings control the
 words used to name things.

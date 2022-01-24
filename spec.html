@@ -16662,10 +16662,26 @@ matter; both can be referenced.</p>
 <p>Also, note that regardless of section level, sections referenced in <code>#d</code> or <code>#f</code>
 are all called “Section” (not “Sub-Section”, “Sub-Sub-Section”, etc.)</p>
 <p>The expectation is that <code>#f</code> will be used by authors who don’t mind verbosity,
-and #t and #n will be used by authors who prefer control and brevity. The #d is
-for very lazy authors who like saving keystrokes and/or who don’t know whether
-their publisher will call the code samples “Listing”, “Example” or some other
-word and want to protect themselves against extra work.</p>
+and <code>#t</code> and <code>#n</code> will be used by authors who prefer control and brevity.
+The #d is for very lazy authors who like saving keystrokes and/or who don’t know
+whether their publisher will call the code samples “Listing”, “Example” or some
+other word and want to protect themselves against extra work.</p>
+<p>Finally, note that you can make a smart crosslink to any id, including that of
+a paragraph or span inside some chapter, section or sub-section. What the
+Markua Processor should do is the following:</p>
+<ul>
+<li><code>#t</code> is the title (descriptive name) of the most specific containing block (eg. “chapter”, “section”). The Markua Processor is free to use “section” for all sections and sub-sections, regardless of depth, since “section 5.4.3.2.1” reads better than “sub-sub-section 5.4.3.2.1”.</li>
+<li><code>#n</code> is for “number”, which is the number of the most specific containing block (eg. “3”, “3.2”, “5.4.3.2.1”, etc.).</li>
+<li><code>#d</code> is for “description” (e.g. “Figure”, “Chapter”, “Section”) of the nearest addressable block (a block that can be referenced by name and/or number, i.e. “chapter”, “section”, “figure”, “table” but not “span” or “paragraph”)</li>
+<li><code>#f</code> is for “full title”, which uses the name of the addressable containing block</li>
+</ul>
+<p>So, for a “Figure 8.2: Anatomy of a Squirrel” on page 42, these are:</p>
+<ul>
+<li><code>#t</code> is “Anatomy of a Squirrel”</li>
+<li><code>#n</code> is “8.2”</li>
+<li><code>#d</code> is “Figure”</li>
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if <code>include-page-numbers-in-references</code> is true (the default), it is “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
+</ul>
 <p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
 words used to name things.</p>
 <p>Examples:</p>

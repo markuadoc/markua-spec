@@ -13802,6 +13802,7 @@ Here's how these references to titles and numbers work:
 * `#t` is for "title"
 * `#n` is for "number"
 * `#d` is for "description" (e.g. "Figure", "Chapter", "Section")
+* `#s` is for "short title" (e.g. "Figure 5", "Chapter 3", "Section 3.2")
 * `#f` is for "full title"
 
 So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
@@ -13809,10 +13810,11 @@ So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
 * `#t` is "Anatomy of a Squirrel"
 * `#n` is "8.2"
 * `#d` is "Figure"
+* `#s` is "Figure 8.2"
 * `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF, if `include-page-numbers-in-references` is true (the default), it is "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy of a Squirrel" (just like EPUB and MOBI).
 
 Note that for a book which is in English, `#f` is equivalent to the author
-typing: `#d #n: #t`. In other languages, the Markua Processor should do the
+typing: `#s: #t`. In other languages, the Markua Processor should do the
 right thing.
 
 Note that in this example, "Anatomy of a Squirrel" was typed by the author,

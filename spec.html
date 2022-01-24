@@ -16653,7 +16653,11 @@ reference the title and number of the chapter, section or figure.</p>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if <code>include-page-numbers-in-references</code> is true (the default), it is “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF,
+if <code>include-page-numbers-in-references</code> is true (the default), it is
+“Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
+<code>include-page-numbers-in-references</code> is false, it is “Figure 8.2:
+Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
 </ul>
 <p>Note that for a book which is in English:</p>
 <ul>
@@ -16675,17 +16679,36 @@ other word and want to protect themselves against extra work.</p>
 a paragraph or span inside some chapter, section or sub-section. What the
 Markua Processor should do is the following:</p>
 <ul>
-<li><code>#t</code> is the title (descriptive name) of the most specific containing block (eg. “chapter”, “section”). The Markua Processor is free to use “section” for all sections and sub-sections, regardless of depth, since “section 5.4.3.2.1” reads better than “sub-sub-section 5.4.3.2.1”.</li>
-<li><code>#n</code> is for “number”, which is the number of the most specific containing block (eg. “3”, “3.2”, “5.4.3.2.1”, etc.).</li>
-<li><code>#d</code> is for “description” (e.g. “Figure”, “Chapter”, “Section”) of the nearest addressable block (a block that can be referenced by name and/or number, i.e. “chapter”, “section”, “figure”, “table” but not “span” or “paragraph”)</li>
-<li><code>#f</code> is for “full title”, which uses the name of the addressable containing block</li>
+<li><code>#t</code> is the title (descriptive name) of the most specific containing block
+(eg. “chapter”, “section”). The Markua Processor is free to use “section”
+for all sections and sub-sections, regardless of depth, since
+“section 5.4.3.2.1” reads better than “sub-sub-section 5.4.3.2.1”.</li>
+<li><code>#n</code> is for “number”, which is the number of the most specific containing
+block (eg. “3”, “3.2”, “5.4.3.2.1”, etc.).</li>
+<li><code>#d</code> is for “description” (e.g. “Figure”, “Chapter”, “Section”) of the
+nearest containing addressable block (a block that can be referenced by name
+and/or number, i.e. “chapter”, “section”, “figure”, “table” but not “span” or
+“paragraph”)</li>
+<li><code>#s</code> is for “short title”, which uses the output of <code>#d</code> and <code>#n</code> in a
+language-specific way (in English, <code>#d #n</code>)</li>
+<li><code>#f</code> is for “full title”, which uses the output of <code>#d</code>, <code>#n</code> and <code>#t</code> in a
+language-specific way (in English, <code>#d #n: #t</code>), as well as adding the page
+number in a language-specific way (in English <code>#d #n: #t  on page &lt;number&gt;</code>
+[without the <code>&lt;&gt;</code>] if the <code>include-page-numbers-in-references</code> global
+setting is true, and <code>#d #n: #t</code> if the <code>include-page-numbers-in-references</code>
+global setting is false.</li>
 </ul>
 <p>So, for a “Figure 8.2: Anatomy of a Squirrel” on page 42, these are:</p>
 <ul>
 <li><code>#t</code> is “Anatomy of a Squirrel”</li>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if <code>include-page-numbers-in-references</code> is true (the default), it is “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
+<li><code>#s</code> is “Figure 8.2”</li>
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if
+<code>include-page-numbers-in-references</code> is true (the default), it is
+“Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
+<code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy
+of a Squirrel” (just like EPUB and MOBI).</li>
 </ul>
 <p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
 words used to name things.</p>
@@ -16702,9 +16725,9 @@ This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this
 document.
 </code></pre>
 <p>The only way to reference the title and numbers is in crosslinks. There’s no
-syntax to do so without creating a crosslink–a crosslink is more helpful, since
-it is clickable, and adding another syntax simply to be less helpful to the
-reader is a bad idea. Markua has enough syntax as it is.</p>
+syntax to do so without creating a crosslink–a crosslink is more helpful,
+since it is clickable, and adding another syntax simply to be less helpful to
+the reader is a bad idea. Markua has enough syntax as it is.</p>
 <p>Note that resources, chapters and sections all have implicit numbering. So, #n
 always works even if numbering is off. However, you will confuse readers if you
 refer to numbering they cannot see. Also, if numbering is off, the <code>#f</code> must not

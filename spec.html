@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.6 (2022-01-27)</div>
+<div class="version">Version 0.30.7 (2022-02-01)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/><strong>NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading <a href="https://leanpub.com/markua/read">The Markua Manual</a>, not this document!</strong><br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/></span>
 </div>
@@ -549,12 +549,12 @@ later in this specification.
 
 If you wish, you can configure a Markua Processor to convert alt text into a
 figure title if no separate figure title is provided. (A figure title is
-just as accessible as alt text, so this is fine.) Global settings are discussed
-next.
+just as accessible as alt text, so this is fine.) Document settings are
+discussed next.
 
-# Global Settings
+# Document Settings
 
-Various global settings can be specified at the start of a Markua document to
+Various document settings can be specified at the start of a Markua document to
 affect the behaviour of the Markua Processor. For example, you can set the
 `alt-title` setting to `all` to make images use the alt text as the figure
 title instead of as alt text:
@@ -572,12 +572,12 @@ This is an apple with a figure title but no alt text:
 ```
 
 This gets you the terseness of inserting images as figures in LFM, in a general
-way. Note that if the `alt-title` global setting is set to `text` (the
+way. Note that if the `alt-title` document setting is set to `text` (the
 default) this behaviour only happens for text-based resources like code samples.
 If the `alt-title` is set to `none`, it never happens.
 
 The generalization of the Markdown image syntax into resources, and the addition
-of global settings, are two more of Markua's additions to Markdown. These are
+of document settings, are two more of Markua's additions to Markdown. These are
 also both discussed later in this specification.
 
 One important type of resource in Markua is code samples, which is discussed
@@ -595,7 +595,7 @@ Just like with images, you can also use an attribute list for the title:
 ![](hello.rb)
 
 Note that you can also specify the figure title as the alt text, as long as
-the global setting of `alt-title` is not set to `none`:
+the document setting of `alt-title` is not set to `none`:
 
 ![Hello World in Ruby](hello.rb)
 
@@ -2320,7 +2320,8 @@ languages.</p>
 <span class="number">4.3</span>Document settings (M)
 </h2>
 <p>The HTML which is output by a Markua Processor can be affected by certain global
-settings. These can be overridden by one or more document settings hashes.</p>
+document settings. These can be overridden by one or more document settings
+hashes.</p>
 <p>The document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash is encountered, no more
 document settings hashes can be defined.</p>
@@ -2338,7 +2339,7 @@ part of the value.</p>
 <p>There must be at least one blank line between the end of the settings block and
 the start of any other document content other than another document settings
 hash.</p>
-<p>Here’s an example of a settings block at the start of a book:</p>
+<p>Here’s an example of a document settings block at the start of a book:</p>
 <pre><code>{
 italicize-underlines: false
 soft-breaks: space
@@ -2440,6 +2441,13 @@ as. The default is <code>text</code>. If you set this to <code>ruby</code>, it i
 setting <code>{format: ruby}</code> as an inline attribute list on every code span resource
 by default, e.g. <code>`puts &quot;hi&quot;`{format: ruby}</code>. If you need to override a
 specific resource to not be ruby, you would set <code>{format: text}</code>.</p>
+<p><code>include-page-numbers-in-references</code>
+: When a smart crosslink to a figure reference is inserted with <code>#f</code>, this
+setting determines how the reference is displayed. If true (the default), the
+text includes the page number (e.g. “Figure 8.2: Anatomy of a Squirrel on page
+42”) when inserted in a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of
+a Squirrel”. This setting has no effect on EPUB and MOBI, which never include
+page numbers in their references (since the text is resizable).</p>
 <p><code>italicize-underlines</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
@@ -11229,7 +11237,7 @@ after
 </div>
 <p>Note that single line breaks within the definitions (the <code>&lt;dd&gt;</code> not <code>&lt;dt&gt;</code>)
 are handled the same way as single line breaks within paragraphs, and are
-subject to the <code>soft-breaks</code> global setting which defaults to <code>source</code> for
+subject to the <code>soft-breaks</code> document setting which defaults to <code>source</code> for
 compatibility with Markdown.</p>
 <div class="example" id="example-359">
 <div class="examplenum">
@@ -11577,10 +11585,10 @@ than the previous question.</p>
 : This can be <code>all</code>, <code>incorrect</code> or <code>none</code>. It affects how answers are shown
 after a quiz or exercise is completed, say in a MOOC. For exercises, the
 default value is determined by the value of the <code>default-exercise-show-answers</code>
-global setting, with <code>all</code> being the default value of that attribute. For
+document setting, with <code>all</code> being the default value of that attribute. For
 quizzes, the default value is determined by the value of the
-<code>default-quiz-show-answers</code> global setting, with <code>incorrect</code> being the default
-value of that attribute. Global settings are discussed later.</p>
+<code>default-quiz-show-answers</code> document setting, with <code>incorrect</code> being the default
+value of that attribute. Document settings are discussed later.</p>
 <p><code>time-limit</code>
 : The time limit to finish the quiz, once started. The format is <code>XdYhZm</code>. For
 example, 3 days, 6 hours and 45 minutes is expressed as <code>3d6h45m</code>; 7 days is
@@ -12253,7 +12261,8 @@ Processors.</p>
 <p>Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
 for both, rather than just defining one “footnote or endnote” syntax and letting
-the author pick whether the notes are footnotes or endnotes via a global setting.</p>
+the author pick whether the notes are footnotes or endnotes via a document
+setting.</p>
 <p>To add an endnote, you insert an endnote tag using square brackets, two carets
 and the tag, like this:</p>
 <pre><code>This has an endnote[^^thenote].
@@ -14720,8 +14729,8 @@ Markdown workaround to produce underlines with HTML does not work.</p>
 <p>So, how to produce underline?</p>
 <p>In Markua, <code>*one asterisk*</code> produces italics, and <code>_one underscore_</code> can
 produce either italics or an underline based on the <code>italicize-underlines</code>
-global setting.</p>
-<p>The global setting <code>italicize-underlines</code> can be <code>true</code> or <code>false</code>. The default
+document setting.</p>
+<p>The document setting <code>italicize-underlines</code> can be <code>true</code> or <code>false</code>. The default
 is <code>true</code>, so that Markua functions the same way as Markdown by default.</p>
 <p>This will be a bit surprising for new authors who are discovering Markua and
 have never heard of Markdown, such as people writing novels in Markua. However,
@@ -14732,7 +14741,7 @@ had italicized like <code>_this_</code> suddenly became underlined instead!</p>
 <p>Furthermore, if you’ve written in a certain way (like <code>_this_</code> for italic) for
 years, your fingers essentially just do the right thing. I want this to still
 feel right for these people, not something that makes them think they need to go
-change a global setting. Almost nobody has spent years writing in Markua, so
+change a document setting. Almost nobody has spent years writing in Markua, so
 this is much less of an issue for them!</p>
 <p>(Also, frankly, most novels just need italic, not underline, so this isn’t a big
 issue. While underline does have legitimate uses, they are more niche than
@@ -14763,7 +14772,7 @@ stuff
 </code></pre>
 </div>
 </div>
-<p>This can be made explicit by setting the <code>italicize-underlines</code> global setting
+<p>This can be made explicit by setting the <code>italicize-underlines</code> document setting
 to <code>true</code>:</p>
 <div class="example" id="example-516">
 <div class="examplenum">
@@ -14794,7 +14803,7 @@ stuff
 </code></pre>
 </div>
 </div>
-<p>Set the <code>italicize-underlines</code> global setting to <code>false</code> to produce underline:</p>
+<p>Set the <code>italicize-underlines</code> document setting to <code>false</code> to produce underline:</p>
 <div class="example" id="example-517">
 <div class="examplenum">
 <a href="#example-517">Example 517</a>
@@ -16636,9 +16645,9 @@ writers:</p>
 <li>A number, if numbering is turned on.</li>
 </ol>
 <p>Whether the numbers exist is determined by the <code>number-chapters</code>, <code>number-parts</code>
-and <code>number-figures</code> global settings.</p>
+and <code>number-figures</code> document settings.</p>
 <p>Whether page numbers are output in smart crosslinks in a PDF is determined by
-the <code>include-page-numbers-in-references</code> global setting, which defaults to
+the <code>include-page-numbers-in-references</code> document setting, which defaults to
 <code>true</code>.  EPUB and MOBI do not support outputting page numbers in references,
 because they have resizable text (and thus the page numbers vary).</p>
 <p>In your writing, it’s often desirable to refer to these figures from elsewhere
@@ -16699,9 +16708,9 @@ language-specific way (in English, <code>#d #n</code>)</li>
 <li><code>#f</code> is for “full title”, which uses the output of <code>#d</code>, <code>#n</code> and <code>#t</code> in a
 language-specific way (in English, <code>#d #n: #t</code>), as well as adding the page
 number in a language-specific way (in English <code>#d #n: #t  on page &lt;number&gt;</code>
-[without the <code>&lt;&gt;</code>] if the <code>include-page-numbers-in-references</code> global
+[without the <code>&lt;&gt;</code>] if the <code>include-page-numbers-in-references</code> document
 setting is true, and <code>#d #n: #t</code> if the <code>include-page-numbers-in-references</code>
-global setting is false.</li>
+document setting is false.</li>
 </ul>
 <p>So, for a “Figure 8.2: Anatomy of a Squirrel” on page 42, these are:</p>
 <ul>
@@ -18587,7 +18596,8 @@ bar&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<p>This can be made explicit by setting the <code>soft-breaks</code> global setting to <code>source</code>:</p>
+<p>This can be made explicit by setting the <code>soft-breaks</code> document setting to
+<code>source</code>:</p>
 <div class="example" id="example-680">
 <div class="examplenum">
 <a href="#example-680">Example 680</a>
@@ -18610,7 +18620,8 @@ bar&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<p>This can be made shorter by setting the <code>soft-breaks</code> global setting to <code>space</code>:</p>
+<p>This can be made shorter by setting the <code>soft-breaks</code> document setting to
+<code>space</code>:</p>
 <div class="example" id="example-681">
 <div class="examplenum">
 <a href="#example-681">Example 681</a>
@@ -18633,7 +18644,7 @@ bar
 </div>
 </div>
 <p>If you want your line breaks to actually, well, produce line breaks, you need to
-set the <code>soft-breaks</code> global setting to <code>break</code>:</p>
+set the <code>soft-breaks</code> document setting to <code>break</code>:</p>
 <div class="example" id="example-682">
 <div class="examplenum">
 <a href="#example-682">Example 682</a>
@@ -18656,7 +18667,7 @@ bar&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<p>Finally, note that the <code>soft-breaks</code> global setting also applies to other
+<p>Finally, note that the <code>soft-breaks</code> document setting also applies to other
 paragraph-like contexts, such as definition list items.</p>
 </div>
 <div class="extension">

@@ -1965,6 +1965,9 @@ alt-title: all
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
+generate-sample: true
+generate-community: true
+generate-network: true
 }
 
 # Chapter One
@@ -2087,6 +2090,29 @@ page numbers in their references (since the text is resizable).
 `true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
 `false`, then `_this_` is underlined while `*this*` is italic. This is discussed
 [here](#underline-markua-extension-).
+
+`generate-sample`
+: `true` or `false`. The default value is `true`. If `generate-sample` is
+`true`, then a sample book or course is generated, which is composed of the
+content which is included in the sample with `{sample: true}` directives.
+If `generate-sample` is `false`, then a sample book or course is not generated,
+regardless of whether there are any `{sample: true}` directives.
+
+`generate-community`
+: `true` or `false`. The default value is `true`. If `generate-community` is
+`true`, then a community edition book or course is generated, which is composed
+of the content which is included in the community edition with
+`{community: true}` directives. If `generate-community` is `false`, then a
+community edition book or course is not generated, regardless of whether there
+are any `{community: true}` directives.
+
+`generate-network`
+: `true` or `false`. The default value is `true`. If `generate-network` is
+`true`, then a network edition book or course is generated, which is composed
+of the content which is included in the network edition with
+`{network: true}` directives. If `generate-network` is `false`, then a
+network edition book or course is not generated, regardless of whether there
+are any `{network: true}` directives.
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character

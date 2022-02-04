@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.7 (2022-02-01)</div>
+<div class="version">Version 0.30.8 (2022-02-04)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/><strong>NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading <a href="https://leanpub.com/markua/read">The Markua Manual</a>, not this document!</strong><br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/></span>
 </div>
@@ -2347,6 +2347,9 @@ alt-title: all
 smart-punctuation: true
 title: Markua Spec
 authors: Peter Armstrong and John MacFarlane
+generate-sample: true
+generate-community: true
+generate-network: true
 }
 
 # Chapter One
@@ -2453,6 +2456,26 @@ page numbers in their references (since the text is resizable).</p>
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
 <code>false</code>, then <code>_this_</code> is underlined while <code>*this*</code> is italic. This is discussed
 <a href="#underline-markua-extension-">here</a>.</p>
+<p><code>generate-sample</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-sample</code> is
+<code>true</code>, then a sample book or course is generated, which is composed of the
+content which is included in the sample with <code>{sample: true}</code> directives.
+If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
+regardless of whether there are any <code>{sample: true}</code> directives.</p>
+<p><code>generate-community</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
+<code>true</code>, then a community edition book or course is generated, which is composed
+of the content which is included in the community edition with
+<code>{community: true}</code> directives. If <code>generate-community</code> is <code>false</code>, then a
+community edition book or course is not generated, regardless of whether there
+are any <code>{community: true}</code> directives.</p>
+<p><code>generate-network</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-network</code> is
+<code>true</code>, then a network edition book or course is generated, which is composed
+of the content which is included in the network edition with
+<code>{network: true}</code> directives. If <code>generate-network</code> is <code>false</code>, then a
+network edition book or course is not generated, regardless of whether there
+are any <code>{network: true}</code> directives.</p>
 <p><code>lang</code>
 : The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
 language code of the language that the Markua document is written in. The

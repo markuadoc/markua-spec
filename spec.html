@@ -6963,8 +6963,10 @@ that <code>inside</code> and <code>outside</code> are not supported for <code>al
 : The width of the table, in percentage of page content area width (respecting
 margins). This is specified as an number (integer or float) between 1 and 100
 followed by a percentage sign (%).</p>
-<p>{key: value, comma: separated, optional: attribute_list}
-<img src="resource_path_or_url" alt="optional alt text" title="Optional Figure Title" /></p>
+<p>Recall that the resource syntax is as follows:</p>
+<pre><code>{key: value, comma: separated, optional: attribute_list}
+![optional alt text](resource_path_or_url &quot;Optional Figure Title&quot;)
+</code></pre>
 <p>The examples below assume that a table which looks like the following (from the
 GFM table example above) is defined in a file called <code>census.md</code> (real census
 data would be too long for a good example):</p>
@@ -7058,6 +7060,9 @@ resource location, the identical example results:</p>
 </code></pre>
 </div>
 </div>
+<p>Table resources should be defined in a file with a <code>.md</code> extension. If the
+extension is different, then there <strong>must</strong> be a <code>type: table</code> attribute in the
+attribute list.</p>
 <p>In the interest of brevity, here are some other examples of usage:</p>
 <pre><code>{title: &quot;Canadian Census Data&quot;}
 ![](census.md)

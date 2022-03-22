@@ -6011,8 +6011,10 @@ local or web resources:
 * Inline means "in the document"; all tables in GFM are inline.
 * Local means in the resources folder in a separate file, which can be helpful
   for keeping large tables from cluttering up your manuscript.
-* Web means at some http or https URL. This can be very useful in the case of
-  including dynamic data from an external data source!
+* Web means at some http or https URL.
+
+Both local and web resources can be very useful for including data sourced from
+an external data source, as well as making them easier to keep correct.
 
 The following are the supported attributes for table resources, in
 addition to the `class`, `format`, `title` and `type` attributes which all

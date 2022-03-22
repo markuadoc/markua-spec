@@ -6035,57 +6035,120 @@ followed by a percentage sign (%).
 {key: value, comma: separated, optional: attribute_list}
 ![optional alt text](resource_path_or_url "Optional Figure Title")
 
-The examples below assume that a table which looks like the following is
-defined in a file called `census.tbl`:
-
+The examples below assume that a table which looks like the following (from the
+GFM table example above) is defined in a file called `census.md` (real census
+data would be too long for a good example):
 
 ```````````````````````````````` example
-
-| abc | def |
+| foo | bar |
 | --- | --- |
+| baz | bim |
 .
 <table>
 <thead>
 <tr>
-<th>abc</th>
-<th>def</th>
+<th>foo</th>
+<th>bar</th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td>baz</td>
+<td>bim</td>
+</tr>
+</tbody>
 </table>
 ````````````````````````````````
 
+With this table above defined in a file which is available at a local
+resource location, the following example results:
 
 ```````````````````````````````` example
+![](census.md "Canadian Census Data")
 .
-(the output is not shown since it varies based on the table content)
+<figure>
+  <table>
+  <thead>
+  <tr>
+  <th>foo</th>
+  <th>bar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>baz</td>
+  <td>bim</td>
+  </tr>
+  </tbody>
+  </table>
+  <figcaption>Canadian Census Data</figcaption>
+</figure>
 ````````````````````````````````
- 
+
+With this table above defined in a file which is available at a given web
+resource location, the identical example results:
+
 ```````````````````````````````` example
-![foo](pie.jpg "bar")
-
-{alt: "foo"}
-![](pie.jpg "bar")
-
-{alt: "foo"}
-![clobbered by alt foo](pie.jpg "bar")
+![](http://markua.com/census.md "Canadian Census Data")
 .
-<p><img src="pie.jpg" alt="foo" title="bar" /></p>
-<p><img src="pie.jpg" alt="foo" title="bar" /></p>
-<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+<figure>
+  <table>
+  <thead>
+  <tr>
+  <th>foo</th>
+  <th>bar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>baz</td>
+  <td>bim</td>
+  </tr>
+  </tbody>
+  </table>
+  <figcaption>Canadian Census Data</figcaption>
+</figure>
 ````````````````````````````````
 
-Since the other attributes are all presentational, there is no formal
-specification of the HTML which must result. So, here are some examples of usage
-instead:
+In the interest of brevity, here are some other examples of usage:
+
+```
+{title: "Canadian Census Data"}
+![](census.md)
+
+{type: table}
+![](census.txt "Canadian Census Data")
+
+{type: table, title: "Canadian Census Data"}
+![](census.txt)
+```
+
+Note that there is some flexibility in the title attribute. If the `alt-title`
+document setting is `text` (the default) or `all`, then the alt text can be used
+as the title as well. (If the `alt-title` is `none`, then it cannot.)
+
+So, assuming a value of `text` or `all` for a document setting, this also works:
 
 ```
 ![Canadian Census Data](census.md)
+```
 
+(This is arguably the nicest looking version, and since tables are a text
+resource there are no accessibility concerns about there being no alt text.)
+
+This syntax can be used with an attribute list, of course:
+
+```
 {type: table}
 ![Canadian Census Data](census.txt)
+```
 
-{align: middle, width: 80%, title: Canadian Census Data}
-![](census.md)
+Finally, if there is both alt text and a title attribute, the alt text is
+clobbered by the title:
+
+```
+{align: middle, width: 80%, title: "Canadian Census Data"}
+![some alt text which gets clobbered by the title](census.md)
 ```
 
 </div>

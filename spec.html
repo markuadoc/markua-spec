@@ -6959,14 +6959,25 @@ of <code>align</code>, a Markua Processor must interpret <code>left</code> as �
 page”, <code>right</code> as “on the right side of the page” and <code>middle</code> as “in the middle
 of the content area of the page, respecting margins” in all cases. Finally, note
 that <code>inside</code> and <code>outside</code> are not supported for <code>align</code>.</p>
+<p><code>column-widths</code>
+: The column widths are a whitespace-separated list of numbers (integers and/or
+floats) and/or * symbols, from left to right, as a percentage of the total table
+width. In this attribute value, * means for the column to use the remaining
+space, equally divided between it and any other column with the * attribute.
+Some examples are: <code>{column-widths: &quot;10% 30% * 10%&quot;}</code>,
+<code>{column-widths: &quot;10% * 40% *&quot;}</code>, <code>{column-widths: &quot;10% 30% * 12.5%&quot;}</code>,
+<code>{column-widths: &quot;95% * *&quot;}</code>. The numbers used for the column-widths percentages
+must sum to exactly 100 (if only numbers are used), or to less than 100 (if
+there are any <code>*</code>s used). Every specified value must be at least 1, and every
+<code>*</code> must compute to at least 1. The number of values (numbers or <code>*</code>s) must
+match the number of columns. Like with the width attribute, the percentage sign
+(<code>%</code>) is required, to make it absolutely clear that these are not measurements
+in pixels or points.</p>
 <p><code>width</code>
 : The width of the table, in percentage of page content area width (respecting
 margins). This is specified as an number (integer or float) between 1 and 100
-followed by a percentage sign (%).</p>
-<p>Recall that the resource syntax is as follows:</p>
-<pre><code>{key: value, comma: separated, optional: attribute_list}
-![optional alt text](resource_path_or_url &quot;Optional Figure Title&quot;)
-</code></pre>
+followed by a percentage sign (%). The quotes are optional. So, you can say
+<code>{width: &quot;70%&quot;}</code>, <code>{width: 70%}</code>, <code>{width: &quot;70.5%&quot;}</code> or <code>{width: 70.5%}</code>.</p>
 <p>The examples below assume that a table which looks like the following (from the
 GFM table example above) is defined in a file called <code>census.md</code> (real census
 data would be too long for a good example):</p>
@@ -7072,6 +7083,13 @@ attribute list.</p>
 
 {type: table, title: &quot;Canadian Census Data&quot;}
 ![](census.txt)
+
+{title: &quot;Canadian Census Data&quot;, column-widths: &quot;30% *&quot;}
+![](census.md)
+</code></pre>
+<p>Recall that the resource syntax is as follows:</p>
+<pre><code>{key: value, comma: separated, optional: attribute_list}
+![optional alt text](resource_path_or_url &quot;Optional Figure Title&quot;)
 </code></pre>
 <p>Note that there is some flexibility in the title attribute. If the <code>alt-title</code>
 document setting is <code>text</code> (the default) or <code>all</code>, then the alt text can be used

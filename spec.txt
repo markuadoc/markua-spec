@@ -5990,6 +5990,107 @@ If there are no rows in the body, no `<tbody>` is generated in HTML output:
 </div>
 
 
+<div class="extension">
+
+## Table resources (M)
+
+As shown in the Tables section, the syntax to insert a table in Markua is
+the identical syntax to that used by GFM. (That section is unchanged from the
+GFM spec, which is built on top of the CommonMark spec.)
+
+Just as Markua reinterprets Markdown concepts like images as being resources,
+Markua also reinterprets GFM tables as being a resource. This is important for
+two reasons, in the case of tables:
+
+1. Resources can have attribute lists.
+2. Resources can be inline, local or web resources.
+
+So, Markua supports attribute list on tables, and tables which are inline,
+local or web resources:
+
+* Inline means "in the document"; all tables in GFM are inline.
+* Local means in the resources folder in a separate file, which can be helpful
+  for keeping large tables from cluttering up your manuscript.
+* Web means at some http or https URL. This can be very useful in the case of
+  including dynamic data from an external data source!
+
+The following are the supported attributes for table resources, in
+addition to the `class`, `format`, `title` and `type` attributes which all
+resources support:
+
+`align`
+: The `align` can be `left`, `right` or `middle`. The default is `middle`.
+This works the same way it does for images. Note that it applies to the position
+of the entire table, not to the cells within it. In terms of the specific values
+of `align`, a Markua Processor must interpret `left` as "on the left side of the
+page", `right` as "on the right side of the page" and `middle` as "in the middle
+of the content area of the page, respecting margins" in all cases. Finally, note
+that `inside` and `outside` are not supported for `align`.
+
+`width`
+: The width of the table, in percentage of page content area width (respecting
+margins). This is specified as an number (integer or float) between 1 and 100
+followed by a percentage sign (%).
+
+{key: value, comma: separated, optional: attribute_list}
+![optional alt text](resource_path_or_url "Optional Figure Title")
+
+The examples below assume that a table which looks like the following is
+defined in a file called `census.tbl`:
+
+
+```````````````````````````````` example
+
+| abc | def |
+| --- | --- |
+.
+<table>
+<thead>
+<tr>
+<th>abc</th>
+<th>def</th>
+</tr>
+</thead>
+</table>
+````````````````````````````````
+
+
+```````````````````````````````` example
+.
+(the output is not shown since it varies based on the table content)
+````````````````````````````````
+ 
+```````````````````````````````` example
+![foo](pie.jpg "bar")
+
+{alt: "foo"}
+![](pie.jpg "bar")
+
+{alt: "foo"}
+![clobbered by alt foo](pie.jpg "bar")
+.
+<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+<p><img src="pie.jpg" alt="foo" title="bar" /></p>
+````````````````````````````````
+
+Since the other attributes are all presentational, there is no formal
+specification of the HTML which must result. So, here are some examples of usage
+instead:
+
+```
+![Canadian Census Data](census.md)
+
+{type: table}
+![Canadian Census Data](census.txt)
+
+{align: middle, width: 80%, title: Canadian Census Data}
+![](census.md)
+```
+
+</div>
+
+
 # Container blocks
 
 A [container block](#container-blocks) is a block that has other
@@ -15835,6 +15936,12 @@ if index entries are being added where ids already are.
 
 Markua does not specify the HTML output of index entries, to maximize
 implementation flexibility.
+
+Finally, please note that if you use an exclamation mark (!) symbol in an
+index entry, you must backslash-escape it. Otherwise, it would be intepreted
+as an attempt at creating a sub-entry. (This actually got me, when I tried to
+reference *Hello! Flex 4*, one of my books. To do this, I would have to write
+the entry as `{i: "*Hello\! Flex 4*}` not as `{i: "*Hello! Flex 4*}`.
 
 </div>
 

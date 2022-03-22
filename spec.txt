@@ -6034,8 +6034,12 @@ that `inside` and `outside` are not supported for `align`.
 margins). This is specified as an number (integer or float) between 1 and 100
 followed by a percentage sign (%).
 
+Recall that the resource syntax is as follows:
+
+```
 {key: value, comma: separated, optional: attribute_list}
 ![optional alt text](resource_path_or_url "Optional Figure Title")
+```
 
 The examples below assume that a table which looks like the following (from the
 GFM table example above) is defined in a file called `census.md` (real census
@@ -6111,6 +6115,10 @@ resource location, the identical example results:
   <figcaption>Canadian Census Data</figcaption>
 </figure>
 ````````````````````````````````
+
+Table resources should be defined in a file with a `.md` extension. If the
+extension is different, then there **must** be a `type: table` attribute in the
+attribute list.
 
 In the interest of brevity, here are some other examples of usage:
 

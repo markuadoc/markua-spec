@@ -1861,8 +1861,7 @@ Extension attributes go far beyond adding icons to blurbs: they allow for
 specialized uses of Markua. Since CSS is so powerful, with creative uses of
 custom attributes and custom CSS, Markua documents can be transformed. Some
 obvious uses of extension attributes include adding CSS classes which can then
-be styled to set fonts, adding custom types to figures for things like lemmas
-and theorems, etc.
+be styled to set fonts, etc.
 
 This ensures that new attributes can be added to future versions of Markua
 without a negative effect on older Markua implementations. It also ensures that
@@ -3406,32 +3405,72 @@ Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
 Books and courses may embed many types of [resources](@).
 
-Resources vary in four different ways:
+Resources vary in five different ways:
 
-1. **Insertion Methods**: Figure and Span
-2. **Locations**: Local, Web and Inline
-3. **Types**: `audio`, `code`, `image`, `math`, `poetry`, `table` and `video`
-4. **Formats**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+1. **Insertion Method**: Figure and Span
+2. **Location**: Inline, Local, and Web
+3. **Type**: `audio`, `code`, `image`, `markua`, `math`, and `video`
+4. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+5. **Class**: `figure`, `lemma`, `listing`, `table`, etc.
 
-If you are familiar with Markdown, you will recognize that images, code
-and tables are being generalized here as just three of the seven types of
-resource, instead of being treated as special cases.
+What do these all mean?
 
-To be clear: the syntax for images, fenced code blocks, and tables is a superset
-of that specified by CommonMark and GFM. All images, fenced code blocks and
-tables supported by CommonMark and GFM work in Markua. Markua's changes here are
+1. The **Insertion Method** is how the resource is inserted into a given Markua
+   document. Figures are inserted as block content; spans are inserted inline.
+   Figures can have captions; spans cannot. There is no attribute for this; it
+   is inferred by how it is used.
+2. The **Location** is the location of the resource, when encountered by the
+   Markua Processor. There is no attribute for this; it is inferred from the
+   location.
+   * An inline resource is included directly in a Markua manuscript file.
+   * A local resource is located in the `resources` directory which accompanies
+     the Markua manuscript (or in a similar conceptual location for a web-based
+     Markua Processor).
+   * A web resource is on the web, accessed via `http://` or `https://`.
+3. The **Type** is the kind of the resource. It can be specified with the
+   `type` attribute, or inferred from the file extension (discussed below).
+   * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
+     self-explanatory, and are rendered in different ways by a Markua Processor.     
+   * The `markua` resource type represents any resource which is actually just
+     valid Markua text, but which may be further-differentiated by the `class`.
+     Examples include poems, theorems and lemmas.
+4. The **Format** is the format of the resource. It can be specified with the
+   `type` attribute, or inferred from the file extension (discussed below).
+   This is important information to help the Markua Processor handle the
+   resource correctly.
+5. The **Class** is the category of the resource as far as the reader is
+   concerned. The class can be used to differentiate identical types of Markua
+   resources in various lists, such as a List of Lemmas, List of Poems, or
+   List of Theorems. The default values of the class are determined by the
+   `type` of resource:
+   * A resource with type `audio` defaults to a class of `recording`.
+   * A resource with type `code` defaults to a class of `listing`.
+   * A resource with type `image` defaults to a class of `figure`.
+   * A resource with type `markua` defaults to a class of `none`. Common values
+     of the `class` for `markua` resource types include `poem`, `lemma`, `list`,
+     `table` and `theorem`.
+   * A resource with type `math` defaults to a class of `equation`.
+   * A resource with type `video` defaults to a class of `footage`.
+
+The list above may make it sound like Markua is somehow incompatible with
+Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
+this is not the case! The changes made by Markua are **purely additive**: the
+syntax for images, fenced code blocks, and tables is a superset of that
+specified by CommonMark and GFM. All images, fenced code blocks and tables
+supported by CommonMark and GFM work in Markua. Markua's changes here are
 additions, not modifications. Markua's resources are an extension, both
 conceptual and in features, of what was already in CommonMark and GFM.
 
-Specifically, what resources do is three things:
+Specifically, the most important thing that resources do is to provide a
+consistent conceptual framework for thinking about all resources, instead of
+just a number of different, unrelated things.
 
-1. Add attribute lists and format specifiers to all resource types, including
-   images, fenced code blocks and tables. Attribute lists can be used to specify
-   a figure title and (if applicable) alt text, set an id, specify the format,
-   and do other useful things.
-2. Add other types of resources (audio, poetry, math and video).
-3. Provide a consistent conceptual framework for thinking about all resources,
-   instead of just seven different, unrelated things.
+Besides that, resources also add add attribute lists, and type, format and class
+attributes for all resources, including the resources such as images, fenced
+code blocks and tables which are also found in other Markdown dialects.
+
+Attribute lists can be used to specify a figure title and alt text, set an id,
+specify the format, and do other useful things.
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local
 and web resources is similar to Markdown's inline image insertion syntax, and
@@ -3497,7 +3536,12 @@ attributes are discussed here, instead of on the specific resource types below.)
 `class`
 : All attribute lists support a `class` attribute. When used in figures, this is
 the class of the figure. This can be used for styling, and it can also be used by
-Markua Processors which group figures by classes, such as theorems or lemmas.
+Markua Processors which group figures by classes. Recommended values of the
+`class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor could
+recognize these class attributes and produce a List of Poems, List of Theorems,
+or List of Lemmas near the beginning of the document, much like any other
+resource types. The `class` attribute is especially handy when used with a
+resource of type `markua`.
 
 `format`
 : This is the resource format. Different resource types have different legal
@@ -3564,7 +3608,7 @@ supports alt text. The resource location does not matter: local, web and inline
 resources all support alt text.
 
 The four types of resource which can have alt text when inserted as a figure are
-`audio`, `image`, `math` and `video`. Resources of type `code`, `poetry` and
+`audio`, `image`, `math` and `video`. Resources of type `code`, `markua` and
 `table` do not support alt text, since they themselves are just text.
 
 Alt text is text which is intended to take the place of the resource if the
@@ -3785,7 +3829,7 @@ Web resources are identified by the absolute URL of the resource on the internet
 #### Inline resources
 
 Inline resources can be of type `code`, `image` (of SVG format only), `math`
-(regardless of format), `poetry`, or `table`. Since an SVG image is just XML
+(regardless of format), `markua`, or `table`. Since an SVG image is just XML
 text, it can be contained inline in the text of a Markua document. This is not
 something that is true for binary resources like PNG or JPEG images or any type
 of audio or video file--these can only be local or web resources.
@@ -3799,8 +3843,8 @@ There are seven types of resources:
 1. `audio`
 2. `code`
 3. `image`
-4. `math`
-5. `poetry`
+4. `markua`
+5. `math`
 6. `table`
 7. `video`
 
@@ -3891,15 +3935,20 @@ since Markdown and Markua files themselves are not inserted as resources.
 
 * `table` - Markua table - `.md`
 
-#### Poetry resource formats
+#### Markua resource formats
 
-Note that poetry is almost always contained as an inline resource in a Markua
+The `markua` resource format is always `markua`. The way that `markua` resources
+are differentiated is via their `class` attribute.
+
+TODO: !PA
+
+poetry is almost always contained as an inline resource in a Markua
 document. It only have a file extension for completeness. The `.text` file
 extension is used, since `.txt` was used for unformatted code, and since
 anything else would not have the appropriate behaviour for authors when trying
 to open the files locally by double-clicking.
 
-* `poetry` - Markua poetry - `.text`
+* `markua` - Markua - `.md`
 
 #### Video resource formats
 
@@ -3914,7 +3963,7 @@ Note that most code languages are not specified, and are guessed at with a forma
 of `guess`. A Markua Processor typically leaves this decision about the language
 recognized to the syntax highlighter, such as Pygments.
 
-* `text` - Unformatted code (with no syntax highlighting) - `.txt`
+* `text` - Unformatted code (with no syntax highlighting)
 * `guess` - Formatted code, with the language guessed at - any other file
   extension not listed previously in the sections above
 
@@ -4917,22 +4966,62 @@ requirement, nor is the choice of which continuation character is used.
 
 <div class="extension">
 
-## Poetry (M)
+## Markua (M)
 
-Poetry can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to poetry as to all other resources.
+Markua can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to Markua resources as to all other resources.
 
-Poetry can only be inserted as a figure. It cannot be inserted as a span
-resource, like code can. (When you insert poetry in a sentence, nothing is needed
-except quotes, so this makes sense.)
+There are two main use cases for a `markua` resource:
 
-Markua specifies only one specific file extension to be associated with a type of
-`poetry`: the `.text` extension.
+1. Inserting a specific `class` of resource, including `poem`, `theorem` or
+   `lemmma`. While most poems are different from theorems or lemmas, from the
+   perspective of a Markua Processor, they're very similar: they are just
+   Markua text which should be processed. The `class` attribute can be used to
+   produce a List of Poems, List of Theorems, or List of Lemmas near the
+   beginning of the document, much like any other resource types.
+2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
+   used in many places and sourced from a third party, such as a legal
+   department.
+
+Since the `markua` resource type
+
+`format`
+: This is the resource format. Different resource types have different legal
+values for format.
+
+`title`
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).
+
+`type`
+: This is the resource type. This is usually inferred from the format instead of
+being specified.
+
+
+
+
+
+
+
+
+
+
+Markua specifies only one specific file extension to be associated with a type
+of `poetry`: the `.text` extension.
 
 Poetry is different from code resources in one important way: in poetry, you can
 use Markua text formatting (bold, italic, strikethrough, etc.) to format your
-text. This is true regardless of whether the poetry is formatted with a
-proportional or monospaced font.
+text. (Markua formatting is interpreted as Markua, not represented verbatim in
+the output.) This is true regardless of whether the poetry is formatted with a
+proportional or monospaced font. If you 
+
+The value 
 
 ### Supported attributes for poetry
 
@@ -4970,12 +5059,25 @@ wrapping.
 
 ### Local poetry resources
 
-Local poetry resources look like many other resources inserted as figures.
+Local poetry resources look like many other resources inserted as figures:
 
 ~~~
 Here's a Shakespearean sonnet:
 
 ![](sonnet130.text "Sonnet 130")
+~~~
+
+The poetry type is only inferred from the `.text` extension. 
+If you don't want to rely on the `.text` extension, you can specify the `type`
+explicitly:
+
+~~~
+Here's a Shakespearean sonnet:
+
+{type: poetry, monospaced: false}
+![](sonnet130.text "Sonnet 130")
+~~~
+
 
 Here's an E. E. Cummings poem:
 
@@ -4984,7 +5086,7 @@ Here's an E. E. Cummings poem:
 ~~~
 
 If you don't want to rely on the `.text` extension, you can specify the `type`
-and `format` explicitly:
+explicitly:
 
 ~~~
 Here's a Shakespearean sonnet:

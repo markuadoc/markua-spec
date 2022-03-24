@@ -3585,13 +3585,26 @@ attributes are discussed here, instead of on the specific resource types below.)
 
 `class`
 : All attribute lists support a `class` attribute. When used in figures, this is
-the class of the figure. This can be used for styling, and it can also be used by
-Markua Processors which group figures by classes. Recommended values of the
-`class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor could
-recognize these class attributes and produce a List of Poems, List of Theorems,
-or List of Lemmas near the beginning of the document, much like any other
-resource types. The `class` attribute is especially handy when used with a
+the class of the figure. This can be used for styling, and it can also be used
+by Markua Processors which group figures by classes. Recommended values of the
+`class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor
+could recognize these class attributes and produce a List of Poems, List of
+Theorems, or List of Lemmas near the beginning of the document, much like any
+other resource types. The `class` attribute is especially handy when used with a
 resource of type `markua`.
+
+TODO: !PA
+
+math can be:
+- all `equation`
+- `theorem`, `lemma`, `postulate`, ...
+
+class for a poem of
+- `poem`, `sonnet`, ...
+
+- separately I need to handle monospaced etc.
+- leading spaces preservation in a poem class vs. leading spaces more generalized???
+
 
 `format`
 : This is the resource format. Different resource types have different legal

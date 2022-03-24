@@ -3409,7 +3409,7 @@ Resources vary in five different ways:
 
 1. **Insertion Method**: Figure and Span
 2. **Location**: Inline, Local, and Web
-3. **Type**: `audio`, `code`, `image`, `markua`, `math`, and `video`
+3. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
 4. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
 5. **Class**: `figure`, `lemma`, `listing`, `table`, etc.
 
@@ -3430,7 +3430,8 @@ What do these all mean?
 3. The **Type** is the kind of the resource. It can be specified with the
    `type` attribute, or inferred from the file extension (discussed below).
    * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
-     self-explanatory, and are rendered in different ways by a Markua Processor.     
+     self-explanatory, and are rendered in different ways by a Markua Processor.
+   * The `iframe` resource is ... TODO: !PA
    * The `markua` resource type represents any resource which is actually just
      valid Markua text, but which may be further-differentiated by the `class`.
      Examples include poems, theorems and lemmas.
@@ -14887,15 +14888,15 @@ at a public URL, which then is also linked to in the title in a way which does
 not affect the Table of Contents. With the Markua files for transcripts, Leanpub
 only supports certain resource types to be included in the transcript files
 themselves. Specifically, images, video, audio are not supported, but code,
-poetry, math and tables are supported. When Leanpub generates a transcript, the
-URLs are publicly accessible but obscure. Identical transcripts should not make
-duplicate transcript files on the web, and using a new UUID every time would
-violate this. However, not changing the transcript URL when its content changed
-could lead to bad outcomes. So, the URL of a transcript on the web should be
-scoped to the book and affected both by its filename and its content. What
-Leanpub does is: (filename minus extension minus period plus hyphen plus the
-SHA hash).html. Including the filename eliminates collisions if filenames are
-unique but the hashes are not.
+math and tables are supported. When Leanpub generates a transcript, the URLs are
+publicly accessible but obscure. Identical transcripts should not make duplicate
+transcript files on the web, and using a new UUID every time would violate this.
+However, not changing the transcript URL when its content changed could lead to
+bad outcomes. So, the URL of a transcript on the web should be scoped to the
+book and affected both by its filename and its content. What Leanpub does is:
+`(filename minus extension minus period plus hyphen plus the SHA hash).html`
+Including the filename eliminates collisions if filenames are unique but the
+hashes are not.
 
 `width`
 : This applies to the `poster` image for the video, and works just like it does
@@ -14961,7 +14962,7 @@ So, the resource syntax is used for yet another task.
 The only resource location which is supported for an IFrame resource is the
 web resource location, for obvious reasons.
 
-### Supported Attributes for IFrames
+### Supported Attributes for `iframe` Resources
 
 The following are the supported attributes for IFrame resources, in addition to
 the `class`, `format`, `title` and `type` attributes which all resources
@@ -14990,23 +14991,8 @@ do not have file extensions.
 : The URL or path to a transcript of the resource contained in the IFrame,
 which should be shown or dictated to people who cannot view the IFrame content.
 This helps people with visual disabilities view course material, and helps with
-ADA compliance. For example, what Leanpub does with a `transcript` is as
-follows: a URL is linked to in the title (but in a way which does not affect
-the Table of Contents), and a path is assumed to be a path to a Markua file
-which is then used to produce a web page at a public URL, which then is also
-linked to in the title in a way which does not affect the Table of Contents.
-With the Markua files for transcripts, Leanpub only supports certain resource
-types to be included in the transcript files themselves. Specifically, images,
-video, audio are not supported, but code, poetry, math and tables are
-supported. When Leanpub generates a transcript, the URLs are publicly
-accessible but obscure. Identical transcripts should not make duplicate
-transcript files on the web, and using a new UUID every time would violate
-this. However, not changing the transcript URL when its content changed
-could lead to bad outcomes. So, the URL of a transcript on the web should be
-scoped to the book and affected both by its filename and its content. What
-Leanpub does is: (filename minus extension minus period plus hyphen plus the
-SHA hash).html. Including the filename eliminates collisions if filenames are
-unique but the hashes are not.
+ADA compliance. For example, what Leanpub does with an `iframe` resource
+`transcript` is the same as what it does for a `video` transcript.
 
 `width`
 : This works just like it does with images.

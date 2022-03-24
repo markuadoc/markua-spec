@@ -3415,6 +3415,45 @@ Resources vary in five different ways:
 
 What do these all mean?
 
+
+
+TODO: !PA
+
+foo bar ![](sunglasses.png) baz
+
+foo bar
+
+![](sunglasses.png)
+
+baz
+
+foo bar
+
+{}
+![a sunglasses emoji](sunglasses.png)
+
+baz
+
+foo bar ![](sunglasses.png){class: figure} baz
+
+foo bar
+
+{class: figure}
+![](sunglasses.png)
+
+baz
+
+foo bar
+
+{class: figure}
+![a sunglasses emoji](sunglasses.png)
+
+baz
+
+
+
+
+
 1. The **Insertion Method** is how the resource is inserted into a given Markua
    document. Figures are inserted as block content; spans are inserted inline.
    Figures can have captions; spans cannot. There is no attribute for this; it

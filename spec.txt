@@ -3499,8 +3499,93 @@ TODO: !PA - is class `none` really the same thing as a class of `span` and
 is a span resource just a none resource, and should this mean that the insertion
 method is not a thing?
 
+TODO: !PA - in class just bloat in some cases? should it just be inferred from
+content of markua?
+
 TODO: !PA - either prevent `markua` resources from including other resources,
 or prevent cycles explicitly.
+
+book.txt:
+
+foo
+bar
+baz
+
++ resources dir:
+
+resources/a
+resources/b
+resources/c
+
+
+when we parse we concatenate the foo, bar and baz with blank lines
+
+
+AST parsing:
+
+1. CommonMark parses, makes AST
+2. We do exactly one traversal where we inline Markua resources into the AST => no cycles
+
+This is a preprocessing step on the AST, not a preprocessing of text files before CommonMark makes the AST.
+
+
+Markua resource is simpler than poetry etc.
+
+
+poetry spacing separate q.
+
+
+book.txt:
+
+
+foo.txt
+bar.txt
+baz.txt
+
+
+
+versus
+
+
+
+![](foo.txt)
+![](bar.txt)
+![](baz.txt)
+
+^ rejected since complex for user and implementer, even though fewer concepts in some way...
+
+
+Mateo:
+- CSV tables?
+- importing subset of a CSV?
+
+
+
+
+book.txt:
+==========
+foo.txt
+bar.md
+baz.text
+
+
+resources/
+table1.txt
+table2.md
+hello.rb
+howdy.js
+trees.jpg
+diagram.png
+
+
+
+
+
+
+
+
+
+
 
 The list above may make it sound like Markua is somehow incompatible with
 Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,

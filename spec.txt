@@ -3434,24 +3434,34 @@ What do these all mean?
    * The `iframe` resource is ... TODO: !PA
    * The `markua` resource type represents any resource which is actually just
      valid Markua text, but which may be further-differentiated by the `class`.
-     Examples include poems, theorems and lemmas.
+     Examples include lists, poems, tables, theorems and lemmas.
 4. The **Format** is the format of the resource. It can be specified with the
    `type` attribute, or inferred from the file extension (discussed below).
    This is important information to help the Markua Processor handle the
    resource correctly.
-5. The **Class** is the category of the resource as far as the reader is
-   concerned. The class can be used to differentiate identical types of Markua
-   resources in various lists, such as a List of Lemmas, List of Poems, or
-   List of Theorems. The default values of the class are determined by the
+5. The **Class** is the category of the resource as far as the Markua Processor
+   is concerned. The class can be used to differentiate identical types of
+   Markua resources in various lists, such as a List of Lemmas, List of Poems,
+   or List of Theorems. The default values of the class are determined by the
    `type` of resource:
    * A resource with type `audio` defaults to a class of `recording`.
    * A resource with type `code` defaults to a class of `listing`.
    * A resource with type `image` defaults to a class of `figure`.
    * A resource with type `markua` defaults to a class of `none`. Common values
      of the `class` for `markua` resource types include `poem`, `lemma`, `list`,
-     `table` and `theorem`.
+     `table` and `theorem`. The `none` class is special: it means that the
+     resource is not inserted in any special way, but is just inserted as though
+     the author typed it in the manuscript. This enables this class of `markua`
+     resource to be used for text substitution.
    * A resource with type `math` defaults to a class of `equation`.
    * A resource with type `video` defaults to a class of `footage`.
+
+TODO: !PA - is class `none` really the same thing as a class of `span` and
+is a span resource just a none resource, and should this mean that the insertion
+method is not a thing?
+
+TODO: !PA - either prevent `markua` resources from including other resources,
+or prevent cycles explicitly.
 
 The list above may make it sound like Markua is somehow incompatible with
 Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,

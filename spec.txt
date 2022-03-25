@@ -1967,6 +1967,7 @@ authors: Peter Armstrong and John MacFarlane
 generate-sample: true
 generate-community: true
 generate-network: true
+list-figures-by-class: true
 }
 
 # Chapter One
@@ -2117,6 +2118,14 @@ regardless of whether there are any `{sample: true}` directives.
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
 language code of the language that the Markua document is written in. The
 default is `eng`.
+
+`list-figures-by-class`
+: `true` or `false`. The default value is `true`. If `list-figures-by-class` is
+`true`, then the Markua Processor should group figures by their `class` (with
+appropriate modifications to the class name for localization or for multiple
+words) when building the list(s) of figures near the beginning of the book.
+This can be used to automatically produce a `List of Lemmas`, `List of
+Theorems`, `List of Poems`, `List of Code Samples`, etc.
 
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.
@@ -3401,11 +3410,6 @@ Foo
 
 ## Resources (M)
 
-TODO:
-- poetry spacing?
-- CSV tables?
-- importing subset of a CSV?
-
 Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
 Books and courses may embed many types of [resources](@).
@@ -3439,7 +3443,9 @@ What do these all mean?
    `type` attribute, or inferred from the file extension (discussed below).
    * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
      self-explanatory, and are rendered in different ways by a Markua Processor.
-   * The `iframe` resource is ... TODO: !PA
+   * The `iframe` resource is a resource which functions like an `<iframe>` in
+     HTML. For an ebook, it can just turn into an external link, but for an
+     online course, it can actually be presented as an IFrame.
    * The `markua` resource type represents any resource which is actually just
      valid Markua text, but which may be further-differentiated by the `class`.
      Examples include lists, poems, tables, theorems and lemmas.
@@ -3452,20 +3458,8 @@ What do these all mean?
    Markua resources in various lists, such as a List of Lemmas, List of Poems,
    or List of Theorems. When a resource is inserted as a span, the `class`
    is implicitly set to `none`, since resources which are inserted as spans
-   are not figures, and do not show up in any list of figures. Now, when a
-   resource is inserted as a figure, the default values of the `class` attribute
-   are determined by the `type` of resource:
-   * A resource with type `audio` defaults to a class of `recording`.
-   * A resource with type `code` defaults to a class of `listing`.
-   * A resource with type `image` defaults to a class of `figure`.
-   * A resource with type `markua` defaults to a class of `none`. Common values
-     of the `class` for `markua` resource types include `poem`, `lemma`, `list`,
-     `table` and `theorem`. The `none` class is special: it means that the
-     resource is not inserted in any special way, but is just inserted as though
-     the author typed it in the manuscript. This enables this class of `markua`
-     resource to be used for text substitution.
-   * A resource with type `math` defaults to a class of `equation`.
-   * A resource with type `video` defaults to a class of `footage`.
+   are not figures, and do not show up in any list of figures. The `class`
+   attribute is discussed further below.
 
 In order to prevent cycles (and infinitely long books!), resources are **NOT**
 allowed to include other resources: only a Markua document in the root
@@ -3571,19 +3565,6 @@ Theorems, or List of Lemmas near the beginning of the document, much like any
 other resource types. The `class` attribute is especially handy when used with a
 resource of type `markua`.
 
-TODO: !PA
-
-math can be:
-- all `equation`
-- `theorem`, `lemma`, `postulate`, ...
-
-class for a poem of
-- `poem`, `sonnet`, ...
-
-- separately I need to handle monospaced etc.
-- leading spaces preservation in a poem class vs. leading spaces more generalized???
-
-
 `format`
 : This is the resource format. Different resource types have different legal
 values for format.
@@ -3601,6 +3582,36 @@ This text is also displayed for the figure wherever the figure is listed
 `type`
 : This is the resource type. This is usually inferred from the format instead of
 being specified.
+
+The default value of the `class` attribute is `none` when the resource is
+inserted as a spane. When a resource is inserted as a figure, the default value
+of the `class` attribute is determined by the `type` of resource:
+
+* A resource with type `audio` defaults to a class of `recording`.
+* A resource with type `code` defaults to a class of `listing`.
+* A resource with type `image` defaults to a class of `figure`.
+* A resource with type `markua` defaults to a class of `none`. Common values
+  of the `class` for `markua` resource types include `poem`, `lemma`, `list`,
+  `table` and `theorem`. The `none` class is special: it means that the
+  resource is not inserted in any special way, but is just inserted as though
+  the author typed it in the manuscript. This enables this class of `markua`
+  resource to be used for text substitution.
+* A resource with type `math` defaults to a class of `equation`.
+* A resource with type `video` defaults to a class of `footage`.
+
+To be clear: other than the `none` value, there is nothing magical about the
+values of the `class` attribute. An author can set it to whatever they want.
+There is a document setting called `list-figures-by-class` which determines
+whether the class is used to group figures appropriately. This enables an author
+to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
+List of Sonnets, produced entirely dynamically based on the values of the
+`class` attribute, instead of just a `List of Figures`. See the Document
+Settings section for more information.
+
+TODO:
+- poetry spacing?
+- separately I need to handle monospaced etc.
+- leading spaces preservation in a poem class vs. leading spaces more generalized???
 
 Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.
@@ -3969,12 +3980,12 @@ inline resource. So, the `.asciimath` file extension is deliberately verbose.
 
 #### Table resource formats
 
-Note that tables are almost always contained as inline resources in a Markua
-document. They only have a file extension for completeness. The `.md` file
-extension is used, since the tables are formatted in a Markdown extension, and
-since Markdown and Markua files themselves are not inserted as resources.
+Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV tables. (CSV tables are not supported as inline
+resources, since they would result in too many false-positives.)
 
-* `table` - Markua table - `.md`
+* `markua` - Markua table - `.md`
+* `csv` - Comma-Separated Values table - `.csv`
 
 #### Markua resource formats
 
@@ -6322,6 +6333,18 @@ clobbered by the title:
 {align: middle, width: 80%, title: "Canadian Census Data"}
 ![some alt text which gets clobbered by the title](census.md)
 ```
+
+</div>
+
+
+<div class="extension">
+
+## CSV Table resources (M)
+
+TODO
+
+- local and web
+- subsets
 
 </div>
 

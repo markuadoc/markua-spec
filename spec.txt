@@ -3401,6 +3401,11 @@ Foo
 
 ## Resources (M)
 
+TODO:
+- poetry spacing?
+- CSV tables?
+- importing subset of a CSV?
+
 Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
 Books and courses may embed many types of [resources](@).
@@ -3415,49 +3420,13 @@ Resources vary in five different ways:
 
 What do these all mean?
 
-
-
-TODO: !PA
-
-foo bar ![](sunglasses.png) baz
-
-foo bar
-
-![](sunglasses.png)
-
-baz
-
-foo bar
-
-{}
-![a sunglasses emoji](sunglasses.png)
-
-baz
-
-foo bar ![](sunglasses.png){class: figure} baz
-
-foo bar
-
-{class: figure}
-![](sunglasses.png)
-
-baz
-
-foo bar
-
-{class: figure}
-![a sunglasses emoji](sunglasses.png)
-
-baz
-
-
-
-
-
 1. The **Insertion Method** is how the resource is inserted into a given Markua
    document. Figures are inserted as block content; spans are inserted inline.
    Figures can have captions; spans cannot. There is no attribute for this; it
-   is inferred by how it is used.
+   is inferred by how it is used. However, conceptually, a resource which is
+   inserted as a span implicitly has a `class` of `none`, and this overrides
+   any `class` specified in an attribute list attached to the resource inserted
+   as a span.
 2. The **Location** is the location of the resource, when encountered by the
    Markua Processor. There is no attribute for this; it is inferred from the
    location.
@@ -3481,8 +3450,11 @@ baz
 5. The **Class** is the category of the resource as far as the Markua Processor
    is concerned. The class can be used to differentiate identical types of
    Markua resources in various lists, such as a List of Lemmas, List of Poems,
-   or List of Theorems. The default values of the class are determined by the
-   `type` of resource:
+   or List of Theorems. When a resource is inserted as a span, the `class`
+   is implicitly set to `none`, since resources which are inserted as spans
+   are not figures, and do not show up in any list of figures. Now, when a
+   resource is inserted as a figure, the default values of the `class` attribute
+   are determined by the `type` of resource:
    * A resource with type `audio` defaults to a class of `recording`.
    * A resource with type `code` defaults to a class of `listing`.
    * A resource with type `image` defaults to a class of `figure`.
@@ -3495,97 +3467,18 @@ baz
    * A resource with type `math` defaults to a class of `equation`.
    * A resource with type `video` defaults to a class of `footage`.
 
-TODO: !PA - is class `none` really the same thing as a class of `span` and
-is a span resource just a none resource, and should this mean that the insertion
-method is not a thing?
+In order to prevent cycles (and infinitely long books!), resources are **NOT**
+allowed to include other resources: only a Markua document in the root
+`manuscript` directory can include resources, and all resources must live inside
+the `resources` directory or in a subdirectory inside of it, with nested
+subdirectories permitted.
 
-TODO: !PA - in class just bloat in some cases? should it just be inferred from
-content of markua?
-
-TODO: !PA - either prevent `markua` resources from including other resources,
-or prevent cycles explicitly.
-
-book.txt:
-
-foo
-bar
-baz
-
-+ resources dir:
-
-resources/a
-resources/b
-resources/c
-
-
-when we parse we concatenate the foo, bar and baz with blank lines
-
-
-AST parsing:
-
-1. CommonMark parses, makes AST
-2. We do exactly one traversal where we inline Markua resources into the AST => no cycles
-
-This is a preprocessing step on the AST, not a preprocessing of text files before CommonMark makes the AST.
-
-
-Markua resource is simpler than poetry etc.
-
-
-poetry spacing separate q.
-
-
-book.txt:
-
-
-foo.txt
-bar.txt
-baz.txt
-
-
-
-versus
-
-
-
-![](foo.txt)
-![](bar.txt)
-![](baz.txt)
-
-^ rejected since complex for user and implementer, even though fewer concepts in some way...
-
-
-Mateo:
-- CSV tables?
-- importing subset of a CSV?
-
-
-
-
-book.txt:
-==========
-foo.txt
-bar.md
-baz.text
-
-
-resources/
-table1.txt
-table2.md
-hello.rb
-howdy.js
-trees.jpg
-diagram.png
-
-
-
-
-
-
-
-
-
-
+Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type `markua` it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.
 
 The list above may make it sound like Markua is somehow incompatible with
 Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,

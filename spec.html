@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.10 (2022-03-22)</div>
+<div class="version">Version 0.30.11 (2022-03-25)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/><strong>NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading <a href="https://leanpub.com/markua/read">The Markua Manual</a>, not this document!</strong><br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/></span>
 </div>
@@ -196,14 +196,16 @@ $(document).ready(function() {
 <li><a href="#indented-code-blocks"><span class="number">5.7</span>Indented code blocks</a></li>
 <li><a href="#fenced-code-blocks"><span class="number">5.8</span>Fenced code blocks</a></li>
 <li><a href="#code-resources-m-"><span class="number">5.9</span>Code resources (M)</a></li>
-<li><a href="#poetry-m-"><span class="number">5.10</span>Poetry (M)</a></li>
-<li><a href="#no-raw-html-m-"><span class="number">5.11</span>No Raw HTML (M)</a></li>
-<li><a href="#link-reference-definitions"><span class="number">5.12</span>Link reference definitions</a></li>
-<li><a href="#paragraphs"><span class="number">5.13</span>Paragraphs</a></li>
-<li><a href="#paragraph-continuations-m-"><span class="number">5.14</span>Paragraph continuations (M)</a></li>
-<li><a href="#blank-lines"><span class="number">5.15</span>Blank lines</a></li>
-<li><a href="#tables-gfm-"><span class="number">5.16</span>Tables (GFM)</a></li>
-<li><a href="#table-resources-m-"><span class="number">5.17</span>Table resources (M)</a></li>
+<li><a href="#markua-resources-m-"><span class="number">5.10</span>Markua Resources (M)</a></li>
+<li><a href="#poetry-resources-m-"><span class="number">5.11</span>Poetry Resources (M)</a></li>
+<li><a href="#no-raw-html-m-"><span class="number">5.12</span>No Raw HTML (M)</a></li>
+<li><a href="#link-reference-definitions"><span class="number">5.13</span>Link reference definitions</a></li>
+<li><a href="#paragraphs"><span class="number">5.14</span>Paragraphs</a></li>
+<li><a href="#paragraph-continuations-m-"><span class="number">5.15</span>Paragraph continuations (M)</a></li>
+<li><a href="#blank-lines"><span class="number">5.16</span>Blank lines</a></li>
+<li><a href="#tables-gfm-"><span class="number">5.17</span>Tables (GFM)</a></li>
+<li><a href="#table-resources-m-"><span class="number">5.18</span>Table resources (M)</a></li>
+<li><a href="#csv-table-resources-m-"><span class="number">5.19</span>CSV Table resources (M)</a></li>
 </ul>
 </li>
 <li><a href="#container-blocks"><span class="number">6</span>Container blocks</a>
@@ -2266,8 +2268,7 @@ attribute just has no effect.</p>
 specialized uses of Markua. Since CSS is so powerful, with creative uses of
 custom attributes and custom CSS, Markua documents can be transformed. Some
 obvious uses of extension attributes include adding CSS classes which can then
-be styled to set fonts, adding custom types to figures for things like lemmas
-and theorems, etc.</p>
+be styled to set fonts, etc.</p>
 <p>This ensures that new attributes can be added to future versions of Markua
 without a negative effect on older Markua implementations. It also ensures that
 new versions of Markua can simply stop supporting attributes defined in this
@@ -2351,6 +2352,7 @@ authors: Peter Armstrong and John MacFarlane
 generate-sample: true
 generate-community: true
 generate-network: true
+list-figures-by-class: true
 }
 
 # Chapter One
@@ -2481,6 +2483,12 @@ regardless of whether there are any <code>{sample: true}</code> directives.</p>
 : The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
 language code of the language that the Markua document is written in. The
 default is <code>eng</code>.</p>
+<p><code>list-figures-by-class</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>list-figures-by-class</code> is
+<code>true</code>, then the Markua Processor should group figures by their <code>class</code> (with
+appropriate modifications to the class name for localization or for multiple
+words) when building the list(s) of figures near the beginning of the book.
+This can be used to automatically produce a <code>List of Lemmas</code>, <code>List of Theorems</code>, <code>List of Poems</code>, <code>List of Code Samples</code>, etc.</p>
 <p><code>number-chapters</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
 <p><code>number-figures</code>
@@ -4049,31 +4057,86 @@ Foo
 <p>Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
 Books and courses may embed many types of <a id="resources" href="#resources" class="definition">resources</a>.</p>
-<p>Resources vary in four different ways:</p>
+<p>Resources vary in five different ways:</p>
 <ol>
-<li><strong>Insertion Methods</strong>: Figure and Span</li>
-<li><strong>Locations</strong>: Local, Web and Inline</li>
-<li><strong>Types</strong>: <code>audio</code>, <code>code</code>, <code>image</code>, <code>math</code>, <code>poetry</code>, <code>table</code> and <code>video</code></li>
-<li><strong>Formats</strong>: <code>mp3</code>, <code>ruby</code>, <code>png</code>, <code>latexmath</code>, <code>mp4</code>, etc.</li>
+<li><strong>Insertion Method</strong>: Figure and Span</li>
+<li><strong>Location</strong>: Inline, Local, and Web</li>
+<li><strong>Type</strong>: <code>audio</code>, <code>code</code>, <code>image</code>, <code>iframe</code>, <code>markua</code>, <code>math</code>, and <code>video</code></li>
+<li><strong>Format</strong>: <code>mp3</code>, <code>ruby</code>, <code>png</code>, <code>latexmath</code>, <code>mp4</code>, etc.</li>
+<li><strong>Class</strong>: <code>figure</code>, <code>lemma</code>, <code>listing</code>, <code>table</code>, etc.</li>
 </ol>
-<p>If you are familiar with Markdown, you will recognize that images, code
-and tables are being generalized here as just three of the seven types of
-resource, instead of being treated as special cases.</p>
-<p>To be clear: the syntax for images, fenced code blocks, and tables is a superset
-of that specified by CommonMark and GFM. All images, fenced code blocks and
-tables supported by CommonMark and GFM work in Markua. Markua’s changes here are
+<p>What do these all mean?</p>
+<ol>
+<li>The <strong>Insertion Method</strong> is how the resource is inserted into a given Markua
+document. Figures are inserted as block content; spans are inserted inline.
+Figures can have captions; spans cannot. There is no attribute for this; it
+is inferred by how it is used. However, conceptually, a resource which is
+inserted as a span implicitly has a <code>class</code> of <code>none</code>, and this overrides
+any <code>class</code> specified in an attribute list attached to the resource inserted
+as a span.</li>
+<li>The <strong>Location</strong> is the location of the resource, when encountered by the
+Markua Processor. There is no attribute for this; it is inferred from the
+location.
+<ul>
+<li>An inline resource is included directly in a Markua manuscript file.</li>
+<li>A local resource is located in the <code>resources</code> directory which accompanies
+the Markua manuscript (or in a similar conceptual location for a web-based
+Markua Processor).</li>
+<li>A web resource is on the web, accessed via <code>http://</code> or <code>https://</code>.</li>
+</ul>
+</li>
+<li>The <strong>Type</strong> is the kind of the resource. It can be specified with the
+<code>type</code> attribute, or inferred from the file extension (discussed below).
+<ul>
+<li>The <code>audio</code>, <code>code</code>, <code>image</code>, <code>math</code> and <code>video</code> types are all reasonably
+self-explanatory, and are rendered in different ways by a Markua Processor.</li>
+<li>The <code>iframe</code> resource is a resource which functions like an <code>&lt;iframe&gt;</code> in
+HTML. For an ebook, it can just turn into an external link, but for an
+online course, it can actually be presented as an IFrame.</li>
+<li>The <code>markua</code> resource type represents any resource which is actually just
+valid Markua text, but which may be further-differentiated by the <code>class</code>.
+Examples include lists, poems, tables, theorems and lemmas.</li>
+</ul>
+</li>
+<li>The <strong>Format</strong> is the format of the resource. It can be specified with the
+<code>type</code> attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.</li>
+<li>The <strong>Class</strong> is the category of the resource as far as the Markua Processor
+is concerned. The class can be used to differentiate identical types of
+Markua resources in various lists, such as a List of Lemmas, List of Poems,
+or List of Theorems. When a resource is inserted as a span, the <code>class</code>
+is implicitly set to <code>none</code>, since resources which are inserted as spans
+are not figures, and do not show up in any list of figures. The <code>class</code>
+attribute is discussed further below.</li>
+</ol>
+<p>In order to prevent cycles (and infinitely long books!), resources are <strong>NOT</strong>
+allowed to include other resources: only a Markua document in the root
+<code>manuscript</code> directory can include resources, and all resources must live inside
+the <code>resources</code> directory or in a subdirectory inside of it, with nested
+subdirectories permitted.</p>
+<p>Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type <code>markua</code> it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.</p>
+<p>The list above may make it sound like Markua is somehow incompatible with
+Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
+this is not the case! The changes made by Markua are <strong>purely additive</strong>: the
+syntax for images, fenced code blocks, and tables is a superset of that
+specified by CommonMark and GFM. All images, fenced code blocks and tables
+supported by CommonMark and GFM work in Markua. Markua’s changes here are
 additions, not modifications. Markua’s resources are an extension, both
 conceptual and in features, of what was already in CommonMark and GFM.</p>
-<p>Specifically, what resources do is three things:</p>
-<ol>
-<li>Add attribute lists and format specifiers to all resource types, including
-images, fenced code blocks and tables. Attribute lists can be used to specify
-a figure title and (if applicable) alt text, set an id, specify the format,
-and do other useful things.</li>
-<li>Add other types of resources (audio, poetry, math and video).</li>
-<li>Provide a consistent conceptual framework for thinking about all resources,
-instead of just seven different, unrelated things.</li>
-</ol>
+<p>Specifically, the most important thing that resources do is to provide a
+consistent conceptual framework for thinking about all resources, instead of
+just a number of different, unrelated things.</p>
+<p>Besides that, resources also add add attribute lists, and type, format and class
+attributes for all resources, including the resources such as images, fenced
+code blocks and tables which are also found in other Markdown dialects.</p>
+<p>Attribute lists can be used to specify a figure title and alt text, set an id,
+specify the format, and do other useful things.</p>
 <p>If you’re familiar with Markdown syntax, you’ll note that the syntax for local
 and web resources is similar to Markdown’s inline image insertion syntax, and
 that the syntax for inline resources is just the fenced code blocks syntax from
@@ -4124,8 +4187,13 @@ type of resource, but <strong>all</strong> resources inserted as figures support
 attributes are discussed here, instead of on the specific resource types below.)</p>
 <p><code>class</code>
 : All attribute lists support a <code>class</code> attribute. When used in figures, this is
-the class of the figure. This can be used for styling, and it can also be used by
-Markua Processors which group figures by classes, such as theorems or lemmas.</p>
+the class of the figure. This can be used for styling, and it can also be used
+by Markua Processors which group figures by classes. Recommended values of the
+<code>class</code> attribute include <code>poem</code>, <code>theorem</code>, or <code>lemma</code>. A Markua Processor
+could recognize these class attributes and produce a List of Poems, List of
+Theorems, or List of Lemmas near the beginning of the document, much like any
+other resource types. The <code>class</code> attribute is especially handy when used with a
+resource of type <code>markua</code>.</p>
 <p><code>format</code>
 : This is the resource format. Different resource types have different legal
 values for format.</p>
@@ -4141,6 +4209,36 @@ This text is also displayed for the figure wherever the figure is listed
 <p><code>type</code>
 : This is the resource type. This is usually inferred from the format instead of
 being specified.</p>
+<p>The default value of the <code>class</code> attribute is <code>none</code> when the resource is
+inserted as a spane. When a resource is inserted as a figure, the default value
+of the <code>class</code> attribute is determined by the <code>type</code> of resource:</p>
+<ul>
+<li>A resource with type <code>audio</code> defaults to a class of <code>recording</code>.</li>
+<li>A resource with type <code>code</code> defaults to a class of <code>listing</code>.</li>
+<li>A resource with type <code>image</code> defaults to a class of <code>figure</code>.</li>
+<li>A resource with type <code>markua</code> defaults to a class of <code>none</code>. Common values
+of the <code>class</code> for <code>markua</code> resource types include <code>poem</code>, <code>lemma</code>, <code>list</code>,
+<code>table</code> and <code>theorem</code>. The <code>none</code> class is special: it means that the
+resource is not inserted in any special way, but is just inserted as though
+the author typed it in the manuscript. This enables this class of <code>markua</code>
+resource to be used for text substitution.</li>
+<li>A resource with type <code>math</code> defaults to a class of <code>equation</code>.</li>
+<li>A resource with type <code>video</code> defaults to a class of <code>footage</code>.</li>
+</ul>
+<p>To be clear: other than the <code>none</code> value, there is nothing magical about the
+values of the <code>class</code> attribute. An author can set it to whatever they want.
+There is a document setting called <code>list-figures-by-class</code> which determines
+whether the class is used to group figures appropriately. This enables an author
+to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
+List of Sonnets, produced entirely dynamically based on the values of the
+<code>class</code> attribute, instead of just a <code>List of Figures</code>. See the Document
+Settings section for more information.</p>
+<p>TODO:</p>
+<ul>
+<li>poetry spacing?</li>
+<li>separately I need to handle monospaced etc.</li>
+<li>leading spaces preservation in a poem class vs. leading spaces more generalized???</li>
+</ul>
 <p>Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.</p>
 <h5 id="figure-titles" class="definition">
@@ -4183,7 +4281,7 @@ puts &quot;hello world&quot;
 supports alt text. The resource location does not matter: local, web and inline
 resources all support alt text.</p>
 <p>The four types of resource which can have alt text when inserted as a figure are
-<code>audio</code>, <code>image</code>, <code>math</code> and <code>video</code>. Resources of type <code>code</code>, <code>poetry</code> and
+<code>audio</code>, <code>image</code>, <code>math</code> and <code>video</code>. Resources of type <code>code</code>, <code>markua</code> and
 <code>table</code> do not support alt text, since they themselves are just text.</p>
 <p>Alt text is text which is intended to take the place of the resource if the
 resource itself cannot be seen. In the case of images, the obvious use case is
@@ -4355,7 +4453,7 @@ supported.</p>
 <span class="number">5.6.2.3</span>Inline resources
 </h4>
 <p>Inline resources can be of type <code>code</code>, <code>image</code> (of SVG format only), <code>math</code>
-(regardless of format), <code>poetry</code>, or <code>table</code>. Since an SVG image is just XML
+(regardless of format), <code>markua</code>, or <code>table</code>. Since an SVG image is just XML
 text, it can be contained inline in the text of a Markua document. This is not
 something that is true for binary resources like PNG or JPEG images or any type
 of audio or video file–these can only be local or web resources.</p>
@@ -4368,8 +4466,8 @@ of audio or video file–these can only be local or web resources.</p>
 <li><code>audio</code></li>
 <li><code>code</code></li>
 <li><code>image</code></li>
+<li><code>markua</code></li>
 <li><code>math</code></li>
-<li><code>poetry</code></li>
 <li><code>table</code></li>
 <li><code>video</code></li>
 </ol>
@@ -4449,23 +4547,26 @@ inline resource. So, the <code>.asciimath</code> file extension is deliberately 
 <h4 id="table-resource-formats" class="definition">
 <span class="number">5.6.4.4</span>Table resource formats
 </h4>
-<p>Note that tables are almost always contained as inline resources in a Markua
-document. They only have a file extension for completeness. The <code>.md</code> file
-extension is used, since the tables are formatted in a Markdown extension, and
-since Markdown and Markua files themselves are not inserted as resources.</p>
+<p>Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV tables. (CSV tables are not supported as inline
+resources, since they would result in too many false-positives.)</p>
 <ul>
-<li><code>table</code> - Markua table - <code>.md</code></li>
+<li><code>markua</code> - Markua table - <code>.md</code></li>
+<li><code>csv</code> - Comma-Separated Values table - <code>.csv</code></li>
 </ul>
-<h4 id="poetry-resource-formats" class="definition">
-<span class="number">5.6.4.5</span>Poetry resource formats
+<h4 id="markua-resource-formats" class="definition">
+<span class="number">5.6.4.5</span>Markua resource formats
 </h4>
-<p>Note that poetry is almost always contained as an inline resource in a Markua
+<p>The <code>markua</code> resource format is always <code>markua</code>. The way that <code>markua</code> resources
+are differentiated is via their <code>class</code> attribute.</p>
+<p>TODO: !PA</p>
+<p>poetry is almost always contained as an inline resource in a Markua
 document. It only have a file extension for completeness. The <code>.text</code> file
 extension is used, since <code>.txt</code> was used for unformatted code, and since
 anything else would not have the appropriate behaviour for authors when trying
 to open the files locally by double-clicking.</p>
 <ul>
-<li><code>poetry</code> - Markua poetry - <code>.text</code></li>
+<li><code>markua</code> - Markua - <code>.md</code></li>
 </ul>
 <h4 id="video-resource-formats" class="definition">
 <span class="number">5.6.4.6</span>Video resource formats
@@ -4482,7 +4583,7 @@ to open the files locally by double-clicking.</p>
 of <code>guess</code>. A Markua Processor typically leaves this decision about the language
 recognized to the syntax highlighter, such as Pygments.</p>
 <ul>
-<li><code>text</code> - Unformatted code (with no syntax highlighting) - <code>.txt</code></li>
+<li><code>text</code> - Unformatted code (with no syntax highlighting)</li>
 <li><code>guess</code> - Formatted code, with the language guessed at - any other file
 extension not listed previously in the sections above</li>
 </ul>
@@ -5614,22 +5715,55 @@ automatically wrapped. However, adding a continuation character is not a
 requirement, nor is the choice of which continuation character is used.</p>
 </div>
 <div class="extension">
-<h2 id="poetry-m-" class="definition">
-<span class="number">5.10</span>Poetry (M)
+<h2 id="markua-resources-m-" class="definition">
+<span class="number">5.10</span>Markua Resources (M)
 </h2>
-<p>Poetry can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to poetry as to all other resources.</p>
-<p>Poetry can only be inserted as a figure. It cannot be inserted as a span
-resource, like code can. (When you insert poetry in a sentence, nothing is needed
-except quotes, so this makes sense.)</p>
-<p>Markua specifies only one specific file extension to be associated with a type of
-<code>poetry</code>: the <code>.text</code> extension.</p>
+<p>Markua can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to Markua resources as to all other resources.</p>
+<p>There are two main use cases for a <code>markua</code> resource:</p>
+<ol>
+<li>Inserting a specific <code>class</code> of resource, including <code>poem</code>, <code>theorem</code> or
+<code>lemmma</code>. While most poems are different from theorems or lemmas, from the
+perspective of a Markua Processor, they’re very similar: they are just
+Markua text which should be processed. The <code>class</code> attribute can be used to
+produce a List of Poems, List of Theorems, or List of Lemmas near the
+beginning of the document, much like any other resource types.</li>
+<li>Inserting boilerplate, such as a legal disclaimer, which may be needed to be
+used in many places and sourced from a third party, such as a legal
+department.</li>
+</ol>
+<p>Since the <code>markua</code> resource type… TODO</p>
+<p><code>format</code>
+: This is the resource format. Different resource types have different legal
+values for format.</p>
+<p><code>title</code>
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).</p>
+<p><code>type</code>
+: This is the resource type. This is usually inferred from the format instead of
+being specified.</p>
+</div>
+<div class="extension">
+<h2 id="poetry-resources-m-" class="definition">
+<span class="number">5.11</span>Poetry Resources (M)
+</h2>
+<p>TODO: !PA</p>
+<p>Markua specifies only one specific file extension to be associated with a type
+of <code>poetry</code>: the <code>.text</code> extension.</p>
 <p>Poetry is different from code resources in one important way: in poetry, you can
 use Markua text formatting (bold, italic, strikethrough, etc.) to format your
-text. This is true regardless of whether the poetry is formatted with a
-proportional or monospaced font.</p>
+text. (Markua formatting is interpreted as Markua, not represented verbatim in
+the output.) This is true regardless of whether the poetry is formatted with a
+proportional or monospaced font. If you</p>
+<p>The value</p>
 <h3 id="supported-attributes-for-poetry" class="definition">
-<span class="number">5.10.1</span>Supported attributes for poetry
+<span class="number">5.11.1</span>Supported attributes for poetry
 </h3>
 <p>The following are the supported attributes for poetry resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
@@ -5640,7 +5774,7 @@ use a monospaced font to output the poetry. If false, the Markua Processor may
 use whatever font (proportional or monospaced) it is configured to use to output
 poetry.</p>
 <h3 id="poetry-whitespace-and-newlines" class="definition">
-<span class="number">5.10.2</span>Poetry, whitespace and newlines
+<span class="number">5.11.2</span>Poetry, whitespace and newlines
 </h3>
 <p>Regardless of the value of the <code>monospaced</code> attribute, all whitespace inside a
 poetry resource is respected. This includes all spaces and newlines, regardless
@@ -5658,20 +5792,27 @@ Processor.</p>
 author should consider this a mistake that needs to be fixed by manually line
 wrapping.</p>
 <h3 id="local-poetry-resources" class="definition">
-<span class="number">5.10.3</span>Local poetry resources
+<span class="number">5.11.3</span>Local poetry resources
 </h3>
-<p>Local poetry resources look like many other resources inserted as figures.</p>
+<p>Local poetry resources look like many other resources inserted as figures:</p>
 <pre><code>Here's a Shakespearean sonnet:
 
 ![](sonnet130.text &quot;Sonnet 130&quot;)
+</code></pre>
+<p>The poetry type is only inferred from the <code>.text</code> extension.
+If you don’t want to rely on the <code>.text</code> extension, you can specify the <code>type</code>
+explicitly:</p>
+<pre><code>Here's a Shakespearean sonnet:
 
-Here's an E. E. Cummings poem:
-
-{monospaced: true}
+{type: poetry, monospaced: false}
+![](sonnet130.text &quot;Sonnet 130&quot;)
+</code></pre>
+<p>Here’s an E. E. Cummings poem:</p>
+<pre><code>{monospaced: true}
 ![](iwillbe.text &quot;I Will Be&quot;)
 </code></pre>
 <p>If you don’t want to rely on the <code>.text</code> extension, you can specify the <code>type</code>
-and <code>format</code> explicitly:</p>
+explicitly:</p>
 <pre><code>Here's a Shakespearean sonnet:
 
 {type: poetry, monospaced: false}
@@ -5683,7 +5824,7 @@ Here's an E. E. Cummings poem:
 ![](iwillbe.text &quot;I Will Be&quot;)
 </code></pre>
 <h3 id="web-poetry-resources" class="definition">
-<span class="number">5.10.4</span>Web poetry resources
+<span class="number">5.11.4</span>Web poetry resources
 </h3>
 <p>Web poetry resources function identically to how local poetry resources work,
 including the significance of file extensions. The only differences is that the
@@ -5703,7 +5844,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="inline-poetry-resources" class="definition">
-<span class="number">5.10.5</span>Inline poetry resources
+<span class="number">5.11.5</span>Inline poetry resources
 </h3>
 <p>To create an inline poetry resource, you use the fenced code block syntax, and
 you either use an attribute list or one of two types of syntactic sugar.</p>
@@ -5783,7 +5924,7 @@ me&amp;nbsp;&amp;nbsp;&amp;nbsp;ow&lt;/p&gt;
 </div>
 <p>No, the <code>&amp;nbsp;</code> isn’t very poetic. Neither is my poem.</p>
 <h3 id="but-what-if-i-want-every-character-taken-literally-" class="definition">
-<span class="number">5.10.6</span>But what if I want every character taken literally?
+<span class="number">5.11.6</span>But what if I want every character taken literally?
 </h3>
 <p>If you want to type poetry where every character is taken exactly literally, use
 a code block with a format of text for that:</p>
@@ -5810,7 +5951,7 @@ and<span class="space"> </span>**this**<span class="space"> </span>is<span class
 </div>
 <div class="extension">
 <h2 id="no-raw-html-m-" class="definition">
-<span class="number">5.11</span>No Raw HTML (M)
+<span class="number">5.12</span>No Raw HTML (M)
 </h2>
 <p>Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).</p>
@@ -5833,7 +5974,7 @@ From an implementation perspective, Markdown gets inline HTML support for free.
 This is not true in the case of Markua.</p>
 </div>
 <h2 id="link-reference-definitions" class="definition">
-<span class="number">5.12</span>Link reference definitions
+<span class="number">5.13</span>Link reference definitions
 </h2>
 <p>A <a id="link-reference-definition" href="#link-reference-definition" class="definition">link reference definition</a>
 consists of a <a href="#link-label">link label</a>, optionally preceded by up to three spaces of
@@ -5848,7 +5989,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-160">
@@ -6287,7 +6428,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-185">
 <div class="examplenum">
@@ -6311,7 +6452,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -6333,7 +6474,7 @@ are defined:</p>
 </div>
 </div>
 <h2 id="paragraphs" class="definition">
-<span class="number">5.13</span>Paragraphs
+<span class="number">5.14</span>Paragraphs
 </h2>
 <p>A sequence of non-blank lines that cannot be interpreted as other
 kinds of blocks forms a <a id="paragraph" href="#paragraph" class="definition">paragraph</a>.
@@ -6485,7 +6626,7 @@ bbb&lt;/p&gt;
 </div>
 <div class="extension">
 <h2 id="paragraph-continuations-m-" class="definition">
-<span class="number">5.14</span>Paragraph continuations (M)
+<span class="number">5.15</span>Paragraph continuations (M)
 </h2>
 <p>In books, you can insert things like lists in the middle of paragraphs.</p>
 <p>Ideally, this would be one paragraph. However, it’s not:</p>
@@ -6642,7 +6783,7 @@ bar
 </div>
 </div>
 <h2 id="blank-lines" class="definition">
-<span class="number">5.15</span>Blank lines
+<span class="number">5.16</span>Blank lines
 </h2>
 <p><a href="#blank-line">Blank lines</a> between block-level elements are ignored,
 except for the role they play in determining whether a <a href="#list">list</a>
@@ -6671,7 +6812,7 @@ aaa
 </div>
 <div class="extension">
 <h2 id="tables-gfm-" class="definition">
-<span class="number">5.16</span>Tables (GFM)
+<span class="number">5.17</span>Tables (GFM)
 </h2>
 <p>GFM enables the <code>table</code> extension, where an additional leaf block type is
 available.</p>
@@ -6926,7 +7067,7 @@ cells are inserted.  If there are greater, the excess is ignored:</p>
 </div>
 <div class="extension">
 <h2 id="table-resources-m-" class="definition">
-<span class="number">5.17</span>Table resources (M)
+<span class="number">5.18</span>Table resources (M)
 </h2>
 <p>As shown in the Tables section, the syntax to insert a table in Markua is
 the identical syntax to that used by GFM. (That section is unchanged from the
@@ -7109,6 +7250,14 @@ clobbered by the title:</p>
 ![some alt text which gets clobbered by the title](census.md)
 </code></pre>
 </div>
+<h2 id="csv-table-resources-m-" class="definition">
+<span class="number">5.19</span>CSV Table resources (M)
+</h2>
+<p>TODO</p>
+<ul>
+<li>local and web</li>
+<li>subsets</li>
+</ul>
 <h1 id="container-blocks" class="definition">
 <span class="number">6</span>Container blocks
 </h1>
@@ -16231,7 +16380,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-588">
 <div class="examplenum">
@@ -17662,15 +17811,15 @@ at a public URL, which then is also linked to in the title in a way which does
 not affect the Table of Contents. With the Markua files for transcripts, Leanpub
 only supports certain resource types to be included in the transcript files
 themselves. Specifically, images, video, audio are not supported, but code,
-poetry, math and tables are supported. When Leanpub generates a transcript, the
-URLs are publicly accessible but obscure. Identical transcripts should not make
-duplicate transcript files on the web, and using a new UUID every time would
-violate this. However, not changing the transcript URL when its content changed
-could lead to bad outcomes. So, the URL of a transcript on the web should be
-scoped to the book and affected both by its filename and its content. What
-Leanpub does is: (filename minus extension minus period plus hyphen plus the
-SHA hash).html. Including the filename eliminates collisions if filenames are
-unique but the hashes are not.</p>
+math and tables are supported. When Leanpub generates a transcript, the URLs are
+publicly accessible but obscure. Identical transcripts should not make duplicate
+transcript files on the web, and using a new UUID every time would violate this.
+However, not changing the transcript URL when its content changed could lead to
+bad outcomes. So, the URL of a transcript on the web should be scoped to the
+book and affected both by its filename and its content. What Leanpub does is:
+<code>(filename minus extension minus period plus hyphen plus the SHA hash).html</code>
+Including the filename eliminates collisions if filenames are unique but the
+hashes are not.</p>
 <p><code>width</code>
 : This applies to the <code>poster</code> image for the video, and works just like it does
 with images.</p>
@@ -17743,8 +17892,8 @@ are created in Markua.</p>
 <p>So, the resource syntax is used for yet another task.</p>
 <p>The only resource location which is supported for an IFrame resource is the
 web resource location, for obvious reasons.</p>
-<h3 id="supported-attributes-for-iframes" class="definition">
-<span class="number">8.16.1</span>Supported Attributes for IFrames
+<h3 id="supported-attributes-for-resources" class="definition">
+<span class="number">8.16.1</span>Supported Attributes for <code>iframe</code> Resources
 </h3>
 <p>The following are the supported attributes for IFrame resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
@@ -17768,23 +17917,8 @@ do not have file extensions.</p>
 : The URL or path to a transcript of the resource contained in the IFrame,
 which should be shown or dictated to people who cannot view the IFrame content.
 This helps people with visual disabilities view course material, and helps with
-ADA compliance. For example, what Leanpub does with a <code>transcript</code> is as
-follows: a URL is linked to in the title (but in a way which does not affect
-the Table of Contents), and a path is assumed to be a path to a Markua file
-which is then used to produce a web page at a public URL, which then is also
-linked to in the title in a way which does not affect the Table of Contents.
-With the Markua files for transcripts, Leanpub only supports certain resource
-types to be included in the transcript files themselves. Specifically, images,
-video, audio are not supported, but code, poetry, math and tables are
-supported. When Leanpub generates a transcript, the URLs are publicly
-accessible but obscure. Identical transcripts should not make duplicate
-transcript files on the web, and using a new UUID every time would violate
-this. However, not changing the transcript URL when its content changed
-could lead to bad outcomes. So, the URL of a transcript on the web should be
-scoped to the book and affected both by its filename and its content. What
-Leanpub does is: (filename minus extension minus period plus hyphen plus the
-SHA hash).html. Including the filename eliminates collisions if filenames are
-unique but the hashes are not.</p>
+ADA compliance. For example, what Leanpub does with an <code>iframe</code> resource
+<code>transcript</code> is the same as what it does for a <code>video</code> transcript.</p>
 <p><code>width</code>
 : This works just like it does with images.</p>
 <p>In the following sections, please note that while the examples are shown with

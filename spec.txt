@@ -3584,7 +3584,7 @@ This text is also displayed for the figure wherever the figure is listed
 being specified.
 
 The default value of the `class` attribute is `none` when the resource is
-inserted as a spane. When a resource is inserted as a figure, the default value
+inserted as a span. When a resource is inserted as a figure, the default value
 of the `class` attribute is determined by the `type` of resource:
 
 * A resource with type `audio` defaults to a class of `recording`.

@@ -5007,10 +5007,11 @@ requirement, nor is the choice of which continuation character is used.
 
 ## Markua Resources (M)
 
-Markua can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to Markua resources as to all other resources.
+Markua resources (i.e. a resource with a `type` of `markua`) can be a local, web
+or inline resource, just like any other resource, and the same resource syntax
+applies to Markua resources as to all other resources.
 
-There are three main use cases for a `markua` resource:
+There are three main use cases for a Markua resource:
 
 1. Inserting a specific `class` of resource, such as `poem` or `theorem`.
 2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be

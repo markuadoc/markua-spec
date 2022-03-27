@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>**NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading [The Markua Manual](https://leanpub.com/markua/read), not this document!**<br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/>'
-version: '0.30.11'
-date: '2022-03-25'
+version: '0.30.12'
+date: '2022-03-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -5266,7 +5266,8 @@ I'm not a poet, but I know it.
 
 ### But what if I want every character taken literally?
 
-If you want to type poetry where every character is taken exactly literally, use
+If you want to type poetry where every character is taken exactly literally,
+instead of being potentially interpreted as Markua formatting, you need to use
 a code block with a format of text for that:
 
 ```````````````````````````````` example

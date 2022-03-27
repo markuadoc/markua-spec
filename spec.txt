@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>**NOTE: If you are a Leanpub author, DO NOT READ THIS. Instead, you should be reading [The Markua Manual](https://leanpub.com/markua/read), not this document!**<br/><br/>The Markua Manual documents Markua 0.10, which is the version of Markua currently used on Leanpub. This document specifies Markua 0.30, which does NOT match what is currently on Leanpub. Instead, it is a bunch of forward-looking statements which guide the ongoing development of the Markua 0.30 beta. We have NOT shipped this yet. So, at the moment, this document is just for interest and feedback, not actual use by authors. This document is also subject to change: I make mistakes, and as we implement this specification on Leanpub, I am realizing just how many!<br/><br/><hr/><br/>'
-version: '0.30.10'
-date: '2022-03-22'
+version: '0.30.12'
+date: '2022-03-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -1861,8 +1861,7 @@ Extension attributes go far beyond adding icons to blurbs: they allow for
 specialized uses of Markua. Since CSS is so powerful, with creative uses of
 custom attributes and custom CSS, Markua documents can be transformed. Some
 obvious uses of extension attributes include adding CSS classes which can then
-be styled to set fonts, adding custom types to figures for things like lemmas
-and theorems, etc.
+be styled to set fonts, etc.
 
 This ensures that new attributes can be added to future versions of Markua
 without a negative effect on older Markua implementations. It also ensures that
@@ -1968,6 +1967,7 @@ authors: Peter Armstrong and John MacFarlane
 generate-sample: true
 generate-community: true
 generate-network: true
+list-figures-by-class: true
 }
 
 # Chapter One
@@ -2118,6 +2118,14 @@ regardless of whether there are any `{sample: true}` directives.
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
 language code of the language that the Markua document is written in. The
 default is `eng`.
+
+`list-figures-by-class`
+: `true` or `false`. The default value is `true`. If `list-figures-by-class` is
+`true`, then the Markua Processor should group figures by their `class` (with
+appropriate modifications to the class name for localization or for multiple
+words) when building the list(s) of figures near the beginning of the book.
+This can be used to automatically produce a `List of Lemmas`, `List of
+Theorems`, `List of Poems`, `List of Code Samples`, etc.
 
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.
@@ -3406,32 +3414,85 @@ Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
 Books and courses may embed many types of [resources](@).
 
-Resources vary in four different ways:
+Resources vary in five different ways:
 
-1. **Insertion Methods**: Figure and Span
-2. **Locations**: Local, Web and Inline
-3. **Types**: `audio`, `code`, `image`, `math`, `poetry`, `table` and `video`
-4. **Formats**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+1. **Insertion Method**: Figure and Span
+2. **Location**: Inline, Local, and Web
+3. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
+4. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+5. **Class**: `figure`, `lemma`, `listing`, `table`, etc.
 
-If you are familiar with Markdown, you will recognize that images, code
-and tables are being generalized here as just three of the seven types of
-resource, instead of being treated as special cases.
+What do these all mean?
 
-To be clear: the syntax for images, fenced code blocks, and tables is a superset
-of that specified by CommonMark and GFM. All images, fenced code blocks and
-tables supported by CommonMark and GFM work in Markua. Markua's changes here are
+1. The **Insertion Method** is how the resource is inserted into a given Markua
+   document. Figures are inserted as block content; spans are inserted inline.
+   Figures can have captions; spans cannot. There is no attribute for this; it
+   is inferred by how it is used. However, conceptually, a resource which is
+   inserted as a span implicitly has a `class` of `none`, and this overrides
+   any `class` specified in an attribute list attached to the resource inserted
+   as a span.
+2. The **Location** is the location of the resource, when encountered by the
+   Markua Processor. There is no attribute for this; it is inferred from the
+   location.
+   * An inline resource is included directly in a Markua manuscript file.
+   * A local resource is located in the `resources` directory which accompanies
+     the Markua manuscript (or in a similar conceptual location for a web-based
+     Markua Processor).
+   * A web resource is on the web, accessed via `http://` or `https://`.
+3. The **Type** is the kind of the resource. It can be specified with the
+   `type` attribute, or inferred from the file extension (discussed below).
+   * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
+     self-explanatory, and are rendered in different ways by a Markua Processor.
+   * The `iframe` resource is a resource which functions like an `<iframe>` in
+     HTML. For an ebook, it can just turn into an external link, but for an
+     online course, it can actually be presented as an IFrame.
+   * The `markua` resource type represents any resource which is actually just
+     valid Markua text, but which may be further-differentiated by the `class`.
+     Examples include lists, poems, tables, theorems and lemmas.
+4. The **Format** is the format of the resource. It can be specified with the
+   `type` attribute, or inferred from the file extension (discussed below).
+   This is important information to help the Markua Processor handle the
+   resource correctly.
+5. The **Class** is the category of the resource as far as the Markua Processor
+   is concerned. The class can be used to differentiate identical types of
+   Markua resources in various lists, such as a List of Lemmas, List of Poems,
+   or List of Theorems. When a resource is inserted as a span, the `class`
+   is implicitly set to `none`, since resources which are inserted as spans
+   are not figures, and do not show up in any list of figures. The `class`
+   attribute is discussed further below.
+
+In order to prevent cycles (and infinitely long books!), resources are **NOT**
+allowed to include other resources: only a Markua document in the root
+`manuscript` directory can include resources, and all resources must live inside
+the `resources` directory or in a subdirectory inside of it, with nested
+subdirectories permitted.
+
+Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type `markua` it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.
+
+The list above may make it sound like Markua is somehow incompatible with
+Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
+this is not the case! The changes made by Markua are **purely additive**: the
+syntax for images, fenced code blocks, and tables is a superset of that
+specified by CommonMark and GFM. All images, fenced code blocks and tables
+supported by CommonMark and GFM work in Markua. Markua's changes here are
 additions, not modifications. Markua's resources are an extension, both
 conceptual and in features, of what was already in CommonMark and GFM.
 
-Specifically, what resources do is three things:
+Specifically, the most important thing that resources do is to provide a
+consistent conceptual framework for thinking about all resources, instead of
+just a number of different, unrelated things.
 
-1. Add attribute lists and format specifiers to all resource types, including
-   images, fenced code blocks and tables. Attribute lists can be used to specify
-   a figure title and (if applicable) alt text, set an id, specify the format,
-   and do other useful things.
-2. Add other types of resources (audio, poetry, math and video).
-3. Provide a consistent conceptual framework for thinking about all resources,
-   instead of just seven different, unrelated things.
+Besides that, resources also add add attribute lists, and type, format and class
+attributes for all resources, including the resources such as images, fenced
+code blocks and tables which are also found in other Markdown dialects.
+
+Attribute lists can be used to specify a figure title and alt text, set an id,
+specify the format, and do other useful things.
 
 If you're familiar with Markdown syntax, you'll note that the syntax for local
 and web resources is similar to Markdown's inline image insertion syntax, and
@@ -3496,8 +3557,13 @@ attributes are discussed here, instead of on the specific resource types below.)
 
 `class`
 : All attribute lists support a `class` attribute. When used in figures, this is
-the class of the figure. This can be used for styling, and it can also be used by
-Markua Processors which group figures by classes, such as theorems or lemmas.
+the class of the figure. This can be used for styling, and it can also be used
+by Markua Processors which group figures by classes. Recommended values of the
+`class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor
+could recognize these class attributes and produce a List of Poems, List of
+Theorems, or List of Lemmas near the beginning of the document, much like any
+other resource types. The `class` attribute is especially handy when used with a
+resource of type `markua`.
 
 `format`
 : This is the resource format. Different resource types have different legal
@@ -3516,6 +3582,31 @@ This text is also displayed for the figure wherever the figure is listed
 `type`
 : This is the resource type. This is usually inferred from the format instead of
 being specified.
+
+The default value of the `class` attribute is `none` when the resource is
+inserted as a spane. When a resource is inserted as a figure, the default value
+of the `class` attribute is determined by the `type` of resource:
+
+* A resource with type `audio` defaults to a class of `recording`.
+* A resource with type `code` defaults to a class of `listing`.
+* A resource with type `image` defaults to a class of `figure`.
+* A resource with type `markua` defaults to a class of `none`. Common values
+  of the `class` for `markua` resource types include `poem`, `lemma`, `list`,
+  `table` and `theorem`. The `none` class is special: it means that the
+  resource is not inserted in any special way, but is just inserted as though
+  the author typed it in the manuscript. This enables this class of `markua`
+  resource to be used for text substitution.
+* A resource with type `math` defaults to a class of `equation`.
+* A resource with type `video` defaults to a class of `footage`.
+
+To be clear: other than the `none` value, there is nothing magical about the
+values of the `class` attribute. An author can set it to whatever they want.
+There is a document setting called `list-figures-by-class` which determines
+whether the class is used to group figures appropriately. This enables an author
+to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
+List of Sonnets, produced entirely dynamically based on the values of the
+`class` attribute, instead of just a `List of Figures`. See the Document
+Settings section for more information.
 
 Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.
@@ -3564,7 +3655,7 @@ supports alt text. The resource location does not matter: local, web and inline
 resources all support alt text.
 
 The four types of resource which can have alt text when inserted as a figure are
-`audio`, `image`, `math` and `video`. Resources of type `code`, `poetry` and
+`audio`, `image`, `math` and `video`. Resources of type `code`, `markua` and
 `table` do not support alt text, since they themselves are just text.
 
 Alt text is text which is intended to take the place of the resource if the
@@ -3785,7 +3876,7 @@ Web resources are identified by the absolute URL of the resource on the internet
 #### Inline resources
 
 Inline resources can be of type `code`, `image` (of SVG format only), `math`
-(regardless of format), `poetry`, or `table`. Since an SVG image is just XML
+(regardless of format), `markua`, or `table`. Since an SVG image is just XML
 text, it can be contained inline in the text of a Markua document. This is not
 something that is true for binary resources like PNG or JPEG images or any type
 of audio or video file--these can only be local or web resources.
@@ -3799,8 +3890,8 @@ There are seven types of resources:
 1. `audio`
 2. `code`
 3. `image`
-4. `math`
-5. `poetry`
+4. `markua`
+5. `math`
 6. `table`
 7. `video`
 
@@ -3884,22 +3975,19 @@ inline resource. So, the `.asciimath` file extension is deliberately verbose.
 
 #### Table resource formats
 
-Note that tables are almost always contained as inline resources in a Markua
-document. They only have a file extension for completeness. The `.md` file
-extension is used, since the tables are formatted in a Markdown extension, and
-since Markdown and Markua files themselves are not inserted as resources.
+Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV tables. (CSV tables are not supported as inline
+resources, since they would result in too many false-positives.)
 
-* `table` - Markua table - `.md`
+* `table` - Markua table - `.tbl`
+* `csv` - Comma-Separated Values table - `.csv`
 
-#### Poetry resource formats
+#### Markua resource formats
 
-Note that poetry is almost always contained as an inline resource in a Markua
-document. It only have a file extension for completeness. The `.text` file
-extension is used, since `.txt` was used for unformatted code, and since
-anything else would not have the appropriate behaviour for authors when trying
-to open the files locally by double-clicking.
+The `markua` resource format is always `markua`. The way that `markua` resources
+are differentiated is via their `class` attribute.
 
-* `poetry` - Markua poetry - `.text`
+* `markua` - Markua - `.md`
 
 #### Video resource formats
 
@@ -3914,7 +4002,7 @@ Note that most code languages are not specified, and are guessed at with a forma
 of `guess`. A Markua Processor typically leaves this decision about the language
 recognized to the syntax highlighter, such as Pygments.
 
-* `text` - Unformatted code (with no syntax highlighting) - `.txt`
+* `text` - Unformatted code (with no syntax highlighting)
 * `guess` - Formatted code, with the language guessed at - any other file
   extension not listed previously in the sections above
 
@@ -4557,10 +4645,10 @@ the same resource syntax applies to code as to all other resources.
 As discussed, code cannot have alt text. It's just text. If any alt text is
 provided for a code resource, it is ignored.
 
-Markua specifies only one specific file extension to be associated with a type of
-`code`: the `.txt` extension, which is for the format of `text`. However, Markua
-Processors must interpret **all** unspecified file extensions as specifying a
-resource of type `code` with a format of `guess`.
+Markua specifies only one specific file extension to be associated with a type
+of `code`: the `.txt` extension, which is for the format of `text`. However,
+Markua Processors must interpret **all** unspecified file extensions as
+specifying a resource of type `code` with a format of `guess`.
 
 Regardless of whether syntax highlighting is supported and the programming
 language is detected, all code must be formatted as `monospaced text` by Markua
@@ -4917,128 +5005,179 @@ requirement, nor is the choice of which continuation character is used.
 
 <div class="extension">
 
-## Poetry (M)
+## Markua Resources (M)
 
-Poetry can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to poetry as to all other resources.
+Markua can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to Markua resources as to all other resources.
 
-Poetry can only be inserted as a figure. It cannot be inserted as a span
-resource, like code can. (When you insert poetry in a sentence, nothing is needed
-except quotes, so this makes sense.)
+There are three main use cases for a `markua` resource:
 
-Markua specifies only one specific file extension to be associated with a type of
-`poetry`: the `.text` extension.
+1. Inserting a specific `class` of resource, such as `poem` or `theorem`.
+2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
+   used in many places and sourced from a third party, such as a legal
+   department.
+3. Controlling the behaviour of fonts or leading spaces for specific types of
+   text, such as poetry.
 
-Poetry is different from code resources in one important way: in poetry, you can
-use Markua text formatting (bold, italic, strikethrough, etc.) to format your
-text. This is true regardless of whether the poetry is formatted with a
-proportional or monospaced font.
+The following are the supported attributes for resources of type `markua`:
 
-### Supported attributes for poetry
+`type`
+: For a Markua resource, the `type` is `markua`. This is inferred as the type
+for all files with a `.md` .extension.
 
-The following are the supported attributes for poetry resources, in addition to
-the `class`, `format`, `title` and `type` attributes which all resources support.
+`class`
+: This can define a specific `class` of resource, including `poem`, `theorem` or
+`lemmma`. While most poems are different from theorems or lemmas, from the
+perspective of a Markua Processor, they're very similar: they are just
+Markua text which should be processed. The `class` attribute can be used to
+produce a List of Poems, List of Theorems, or List of Lemmas near the
+beginning of the document, much like any other resource types.
 
 `monospaced`
-: `true` or `false`. The default is `false`, except for a special case with
-inline poetry resources, discussed below. If `true`, the Markua Processor must
-use a monospaced font to output the poetry. If false, the Markua Processor may
-use whatever font (proportional or monospaced) it is configured to use to output
-poetry.
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor
+must use a monospaced font to output the text in the resource. If false, the
+Markua Processor may use whatever font (proportional or monospaced) it is
+configured to use to output Markua text. The value of `true` can be useful for
+certain types of poetry, for example.
 
-### Poetry, whitespace and newlines
+`format`
+: This is the resource format. For a Markua resource, the format is typically
+just `markua`, and can be typically ignored by a Markua Processor.
 
-Regardless of the value of the `monospaced` attribute, all whitespace inside a
-poetry resource is respected. This includes all spaces and newlines, regardless
+`title`
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).
+
+`whitespace`
+: `semantic` or `verbatim`. The default is `semantic`. With the default value of
+`semantic`, whitespace is processed the way that Markdown handles it. With the
+value of `verbatim`, leading whitespace, internal whitespace, trailing
+whitespace and newlines must all be preserved verbatim as typed. This can be
+useful for certain types of poetry, such as indenting the last two lines of a
+sonnet. To be clear, this includes all spaces and newlines, regardless
 of whether they are leading, internal or trailing spaces, and regardless of the
-number of consecutive newlines.
+number of consecutive leading, internal or trailing spaces or the number of 
+newlines. Now, while the whitespace is preserved, it is rendered using either a
+proportional font or a monospaced one based on the value of the `monospaced`
+attribute. If whitespace is verbatim, the `markua` resource should have newlines
+added by the author to ensure that automatic line wrapping is not relied upon.
+Markua Processors may wrap lines to ensure that all the text is visible on a
+page, and *may* add continuation characters (like the backslash `\` character)
+in the output to indicate that a line has been automatically wrapped by the
+Markua Processor. Obviously, seeing a continuation character is in poetry is
+terrible, so the author should consider this a mistake that needs to be fixed by
+manually line wrapping.
 
-(The whitespace is preserved, but it is rendered using either a proportional
-font or a monospaced one based on the value of the `monospaced` attribute.)
+### Local `markua` resources
 
-Poetry resources should have newlines added by the author to ensure that
-automatic line wrapping is not relied upon.
-
-Markua Processors may wrap lines to ensure that all poetry is visible on a page,
-and *may* add continuation characters (like the backslash `\` character) in the
-output to indicate that a line has been automatically wrapped by the Markua
-Processor.
-
-Obviously, seeing a continuation character is in poetry is terrible, so the
-author should consider this a mistake that needs to be fixed by manually line
-wrapping.
-
-### Local poetry resources
-
-Local poetry resources look like many other resources inserted as figures.
+Local `markua` resources look like many other resources inserted as figures:
 
 ~~~
-Here's a Shakespearean sonnet:
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+default to semantic whitespace:
 
-![](sonnet130.text "Sonnet 130")
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{monospaced: false, class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's some legal boilerplate:
+
+![](tos.md "Terms and Conditions")
 
 Here's an E. E. Cummings poem:
 
-{monospaced: true}
-![](iwillbe.text "I Will Be")
+{monospaced: true, class: poem, whitespace: verbatim}
+![](iwillbe.md "I Will Be")
 ~~~
 
-If you don't want to rely on the `.text` extension, you can specify the `type`
-and `format` explicitly:
+With a non-`.md` extension, the type of `markua` must be stated:
 
 ~~~
 Here's a Shakespearean sonnet:
 
-{type: poetry, monospaced: false}
-![](sonnet130.text "Sonnet 130")
+{type: markua, class: poem, whitespace: verbatim}
+![](sonnet130.txt "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](sonnet130.txt "Sonnet 130")
+
+Here's some legal boilerplate:
+
+{type: markua}
+![](tos.txt "Terms and Conditions")
 
 Here's an E. E. Cummings poem:
 
-{type: poetry, monospaced: true}
-![](iwillbe.text "I Will Be")
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+![](iwillbe.txt "I Will Be")
 ~~~
 
-### Web poetry resources
+### Web `markua` resources
 
-Web poetry resources function identically to how local poetry resources work,
-including the significance of file extensions. The only differences is that the
-files are on the web.
+Web resources of type `markua` function identically to how local Markua
+resources work, including the significance of file extensions. The only
+differences is that the files are on the web.
 
 ~~~
 Here's a Shakespearean sonnet:
 
-![](http://markua.com/sonnet130.text "Sonnet 130")
+![](http://markua.com/sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
 
 Here's a paragraph after the figure.
 ~~~
 
-You can also specify the type and format explicitly:
+### Inline `markua` resources
 
-~~~
-Here's a Shakespearean sonnet:
+You might wonder why an inline resource of type `markua` would be supported at
+all. After all, isn't it just Markua text?
 
-{type: poetry, monospaced: false}
-![](http://markua.com/sonnet130.text "Sonnet 130")
+The reasons it is supported are simple: for the attribute lists, and so that the
+resource can show up in a list of resources.
 
-Here's a paragraph after the figure.
-~~~
+To create an inline resource of type `markua`, you use the fenced code block
+syntax, and you use an attribute list to specify the type of resource.
 
-### Inline poetry resources
-
-To create an inline poetry resource, you use the fenced code block syntax, and
-you either use an attribute list or one of two types of syntactic sugar.
+There are a handful of syntactic sugar options available:
 
 `&`
-: This is equivalent to `{type: poetry, monospaced: false}`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
+
+`&&`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
 
 `*`
-: This is equivalent to `{type: poetry, monospaced: true}`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
 
-Here's a portion of Shakespearean Sonnet 130, using `&` to indicate that
-`monospaced` is false:
+`**`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
 
-```````````````````````````````` example
-Foo
+This is made clear in the following example:
+
+~~~
+Here's part of a poem:
 
 ```&
 I grant I never saw a goddess go;
@@ -5047,28 +5186,36 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ```
 
-Bar
-.
-<p>Foo</p>
-<div class="poetry">
-<p>I grant I never saw a goddess go;<br />
-My mistress when she walks treads on the ground.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br />
-&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.</p>
-</div>
-<p>Bar</p>
-````````````````````````````````
+That is equivalent to:
 
-Yes, manual indentation of the last two lines of the sonnet is done with
-`&nbsp;`, since that's what they are: non-breaking spaces. Also, note that this
-sonnet didn't use any formatting characters to make things bold or italic, since
-Shakespeare spent his time writing, not formatting. (If Shakespeare *had* used a
-computer, I'd like to think he would have written in Markua.)
+{type: markua, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
 
-Here's a portion of a "poem" using `*` to indicate that `monospaced` is true:
+Here's part of a poem:
 
-```````````````````````````````` example
-Foo
+```&&
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
 
 ```*
 i
@@ -5079,25 +5226,48 @@ i
 me   ow
 ```
 
-Bar
-.
-<p>Foo</p>
-<div class="poetry monospaced">
-<p>i<br />
-&nbsp;&nbsp;<em>am</em><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>l a z y</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat<br />
-<br />
-me&nbsp;&nbsp;&nbsp;ow</p>
-</div>
-<p>Bar</p>
-````````````````````````````````
+That is equivalent to:
 
-No, the `&nbsp;` isn't very poetic. Neither is my poem.
+{type: markua, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+Here's part of a poem:
+
+```**
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+~~~
+
+I'm not a poet, but I know it.
 
 ### But what if I want every character taken literally?
 
-If you want to type poetry where every character is taken exactly literally, use
+If you want to type poetry where every character is taken exactly literally,
+instead of being potentially interpreted as Markua formatting, you need to use
 a code block with a format of text for that:
 
 ```````````````````````````````` example
@@ -6044,6 +6214,40 @@ match the number of columns. Like with the width attribute, the percentage sign
 (`%`) is required, to make it absolutely clear that these are not measurements
 in pixels or points.
 
+`crop-start`
+: Sometimes it's desirable to only show part of a table resource defined in an
+external file. The `crop-start` and `crop-end` attributes let you accomplish
+this. The `crop-start` attribute defines the line which represents the first
+line included from the resource. For example, `{crop-start: 10, crop-end: 15,
+line-numbers: true, number-from: 10}` ensures that lines 10-15 are shown. The
+default value is 1, which is the first line of the file. The `crop-start`
+attribute is only valid for `csv` format tables, not `markua` format tables.
+
+`crop-end`
+: This attribute ends the range started with crop-start. The default value of
+`crop-end` is to be omitted, which is equivalent to specifying the last line of
+the file. The `crop-end` attribute is only valid for `csv` format tables, not
+`markua` format tables.
+
+`footer`
+: `true`, `false` or `dynamic`. The default is `dynamic` for `markua` format
+tables, and `false` for `csv` format tables. If `dynamic`, the existence of a
+footer is determined by whether the content of the table contains a footer.
+For a `csv` format table, `true` means that the last row is treated as a footer
+row, and `false` means that the last row is not treated as a footer row.
+
+`format`
+: The `format` can be either `markua` (the default) or `csv`. The `csv` format
+can ony be used with local or web resources, to reduce false positives. CSV
+resources are discussed in the next section.
+
+`header`
+: `true`, `false` or `dynamic`. The default is `dynamic` for `markua` format
+tables, and `true` for `csv` format tables. If `dynamic`, the existence of a
+header is determined by whether the content of the table contains a header.
+For a `csv` format table, `true` means that the first row is treated as a header
+row, and `false` means that the first row is not treated as a header row.
+
 `width`
 : The width of the table, in percentage of page content area width (respecting
 margins). This is specified as an number (integer or float) between 1 and 100
@@ -6051,7 +6255,7 @@ followed by a percentage sign (%). The quotes are optional. So, you can say
 `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
 The examples below assume that a table which looks like the following (from the
-GFM table example above) is defined in a file called `census.md` (real census
+GFM table example above) is defined in a file called `census.tbl` (real census
 data would be too long for a good example):
 
 ```````````````````````````````` example
@@ -6079,7 +6283,7 @@ With this table above defined in a file which is available at a local
 resource location, the following example results:
 
 ```````````````````````````````` example
-![](census.md "Canadian Census Data")
+![](census.tbl "Canadian Census Data")
 .
 <figure>
   <table>
@@ -6104,7 +6308,7 @@ With this table above defined in a file which is available at a given web
 resource location, the identical example results:
 
 ```````````````````````````````` example
-![](http://markua.com/census.md "Canadian Census Data")
+![](http://markua.com/census.tbl "Canadian Census Data")
 .
 <figure>
   <table>
@@ -6125,24 +6329,43 @@ resource location, the identical example results:
 </figure>
 ````````````````````````````````
 
-Table resources should be defined in a file with a `.md` extension. If the
+Table resources should be defined in a file with a `.tbl` extension. If the
 extension is different, then there **must** be a `type: table` attribute in the
 attribute list.
 
-In the interest of brevity, here are some other examples of usage:
+In the interest of brevity, some other examples of usage are below.
+
+With the `.tbl` extension, the `table` type is inferred:
 
 ```
 {title: "Canadian Census Data"}
-![](census.md)
+![](census.tbl)
 
+![](census.tbl "Canadian Census Data")
+
+![Canadian Census Data](census.tbl)
+
+{title: "Canadian Census Data", column-widths: "30% *"}
+![](census.tbl)
+
+{column-widths: "30% *"}
+![](census.tbl "Canadian Census Data")
+
+{column-widths: "30% *"}
+![Canadian Census Data](census.tbl)
+```
+
+With a non-`.tbl` extension, the `table` type must be specified:
+
+```
 {type: table}
 ![](census.txt "Canadian Census Data")
 
 {type: table, title: "Canadian Census Data"}
 ![](census.txt)
 
-{title: "Canadian Census Data", column-widths: "30% *"}
-![](census.md)
+{type: table, title: "Canadian Census Data", column-widths: "30% *"}
+![](census.txt)
 ```
 
 Recall that the resource syntax is as follows:
@@ -6159,7 +6382,7 @@ as the title as well. (If the `alt-title` is `none`, then it cannot.)
 So, assuming a value of `text` or `all` for a document setting, this also works:
 
 ```
-![Canadian Census Data](census.md)
+![Canadian Census Data](census.tbl)
 ```
 
 (This is arguably the nicest looking version, and since tables are a text
@@ -6177,10 +6400,52 @@ clobbered by the title:
 
 ```
 {align: middle, width: 80%, title: "Canadian Census Data"}
-![some alt text which gets clobbered by the title](census.md)
+![some alt text which gets clobbered by the title](census.tbl)
 ```
 
 </div>
+
+
+<div class="extension">
+
+## CSV Table resources (M)
+
+As discussed above, tables which are local or web resources can have a `csv`
+format.
+
+For a `csv` table, the existence of a header and/or footer row cannot be
+inferred from the data, and must be specified in an attribute list. The default
+value of `header` is `true`, and the default value of `footer` is `false`.
+
+Also, as discussed, a `csv` table can have `crop-start` and `crop-end`
+attributes, for easily presenting a subset of a larger CSV. If `crop-start` and
+`crop-end` are used with `header` of true, the header should be displayed by the
+Markua Processor.
+
+Examples:
+
+```
+{type: table, format: csv}
+![Canadian Census Data](census.csv)
+
+{type: table, format: csv, title: "Canadian Census Data"}
+![](census.csv)
+
+{type: table, format: csv}
+![](census.csv "Canadian Census Data")
+
+{type: table, format: csv, header: true}
+![Canadian Census Data](census.csv)
+
+{type: table, format: csv, header: true, footer: true}
+![Canadian Census Data](census.csv)
+
+{type: table, format: csv, header: true, footer: true, crop-start: 5, crop-end: 10}
+![Canadian Census Data](census.csv)
+```
+
+</div>
+
 
 
 # Container blocks
@@ -14785,15 +15050,15 @@ at a public URL, which then is also linked to in the title in a way which does
 not affect the Table of Contents. With the Markua files for transcripts, Leanpub
 only supports certain resource types to be included in the transcript files
 themselves. Specifically, images, video, audio are not supported, but code,
-poetry, math and tables are supported. When Leanpub generates a transcript, the
-URLs are publicly accessible but obscure. Identical transcripts should not make
-duplicate transcript files on the web, and using a new UUID every time would
-violate this. However, not changing the transcript URL when its content changed
-could lead to bad outcomes. So, the URL of a transcript on the web should be
-scoped to the book and affected both by its filename and its content. What
-Leanpub does is: (filename minus extension minus period plus hyphen plus the
-SHA hash).html. Including the filename eliminates collisions if filenames are
-unique but the hashes are not.
+math and tables are supported. When Leanpub generates a transcript, the URLs are
+publicly accessible but obscure. Identical transcripts should not make duplicate
+transcript files on the web, and using a new UUID every time would violate this.
+However, not changing the transcript URL when its content changed could lead to
+bad outcomes. So, the URL of a transcript on the web should be scoped to the
+book and affected both by its filename and its content. What Leanpub does is:
+`(filename minus extension minus period plus hyphen plus the SHA hash).html`
+Including the filename eliminates collisions if filenames are unique but the
+hashes are not.
 
 `width`
 : This applies to the `poster` image for the video, and works just like it does
@@ -14859,7 +15124,7 @@ So, the resource syntax is used for yet another task.
 The only resource location which is supported for an IFrame resource is the
 web resource location, for obvious reasons.
 
-### Supported Attributes for IFrames
+### Supported Attributes for `iframe` Resources
 
 The following are the supported attributes for IFrame resources, in addition to
 the `class`, `format`, `title` and `type` attributes which all resources
@@ -14888,23 +15153,8 @@ do not have file extensions.
 : The URL or path to a transcript of the resource contained in the IFrame,
 which should be shown or dictated to people who cannot view the IFrame content.
 This helps people with visual disabilities view course material, and helps with
-ADA compliance. For example, what Leanpub does with a `transcript` is as
-follows: a URL is linked to in the title (but in a way which does not affect
-the Table of Contents), and a path is assumed to be a path to a Markua file
-which is then used to produce a web page at a public URL, which then is also
-linked to in the title in a way which does not affect the Table of Contents.
-With the Markua files for transcripts, Leanpub only supports certain resource
-types to be included in the transcript files themselves. Specifically, images,
-video, audio are not supported, but code, poetry, math and tables are
-supported. When Leanpub generates a transcript, the URLs are publicly
-accessible but obscure. Identical transcripts should not make duplicate
-transcript files on the web, and using a new UUID every time would violate
-this. However, not changing the transcript URL when its content changed
-could lead to bad outcomes. So, the URL of a transcript on the web should be
-scoped to the book and affected both by its filename and its content. What
-Leanpub does is: (filename minus extension minus period plus hyphen plus the
-SHA hash).html. Including the filename eliminates collisions if filenames are
-unique but the hashes are not.
+ADA compliance. For example, what Leanpub does with an `iframe` resource
+`transcript` is the same as what it does for a `video` transcript.
 
 `width`
 : This works just like it does with images.

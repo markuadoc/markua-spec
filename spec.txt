@@ -5056,7 +5056,7 @@ This text is also displayed for the figure wherever the figure is listed
 
 `whitespace`
 : `semantic` or `verbatim`. The default is `semantic`. With the default value of
-`semantic`, whitespace is processed the way that Markdown handles it. With the
+`semantic`, whitespace is processed the way that Markua handles it. With the
 value of `verbatim`, leading whitespace, internal whitespace, trailing
 whitespace and newlines must all be preserved verbatim as typed. This can be
 useful for certain types of poetry, such as indenting the last two lines of a

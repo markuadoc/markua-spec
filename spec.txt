@@ -5079,68 +5079,105 @@ manually line wrapping.
 Local `markua` resources look like many other resources inserted as figures:
 
 ~~~
-Here's a Shakespearean sonnet:
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+default to semantic whitespace:
 
-{type: markua}
 ![](sonnet130.md "Sonnet 130")
 
-Here's a Shakespearean sonnet:
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
 
-{type: markua, monospaced: false}
-![](sonnet130.text "Sonnet 130")
+{class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{monospaced: false, class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
 
 Here's some legal boilerplate:
 
-{type: markua}
 ![](tos.md "Terms and Conditions")
 
 Here's an E. E. Cummings poem:
 
-{type: markua, monospaced: true}
+{monospaced: true, class: poem, whitespace: verbatim}
 ![](iwillbe.md "I Will Be")
 ~~~
 
-### Web poetry resources
-
-Web poetry resources function identically to how local poetry resources work,
-including the significance of file extensions. The only differences is that the
-files are on the web.
+With a non-`.md` extension, the type of `markua` must be stated:
 
 ~~~
 Here's a Shakespearean sonnet:
 
-![](http://markua.com/sonnet130.text "Sonnet 130")
+{type: markua, class: poem, whitespace: verbatim}
+![](sonnet130.txt "Sonnet 130")
 
-Here's a paragraph after the figure.
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](sonnet130.txt "Sonnet 130")
+
+Here's some legal boilerplate:
+
+{type: markua}
+![](tos.txt "Terms and Conditions")
+
+Here's an E. E. Cummings poem:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+![](iwillbe.txt "I Will Be")
 ~~~
 
-You can also specify the type and format explicitly:
+### Web `markua` resources
+
+Web resources of type `markua` function identically to how local Markua
+resources work, including the significance of file extensions. The only
+differences is that the files are on the web.
 
 ~~~
 Here's a Shakespearean sonnet:
 
-{type: poetry, monospaced: false}
-![](http://markua.com/sonnet130.text "Sonnet 130")
+![](http://markua.com/sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
 
 Here's a paragraph after the figure.
 ~~~
 
-### Inline poetry resources
+### Inline `markua` resources
 
-To create an inline poetry resource, you use the fenced code block syntax, and
-you either use an attribute list or one of two types of syntactic sugar.
+You might wonder why an inline resource of type `markua` would be supported at
+all. After all, isn't it just Markua text?
+
+The reasons it is supported are simple: for the attribute lists, and so that the
+resource can show up in a list of resources.
+
+To create an inline resource of type `markua`, you use the fenced code block
+syntax, and you use an attribute list to specify the type of resource.
+
+There are a handful of syntactic sugar options available:
 
 `&`
-: This is equivalent to `{type: poetry, monospaced: false}`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
+
+`&&`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
 
 `*`
-: This is equivalent to `{type: poetry, monospaced: true}`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
 
-Here's a portion of Shakespearean Sonnet 130, using `&` to indicate that
-`monospaced` is false:
+`**`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
 
-```````````````````````````````` example
-Foo
+This is made clear in the following example:
+
+~~~
+Here's part of a poem:
 
 ```&
 I grant I never saw a goddess go;
@@ -5149,28 +5186,36 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ```
 
-Bar
-.
-<p>Foo</p>
-<div class="poetry">
-<p>I grant I never saw a goddess go;<br />
-My mistress when she walks treads on the ground.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;And yet, by heaven, I think my love as rare<br />
-&nbsp;&nbsp;&nbsp;&nbsp;As any she belied with false compare.</p>
-</div>
-<p>Bar</p>
-````````````````````````````````
+That is equivalent to:
 
-Yes, manual indentation of the last two lines of the sonnet is done with
-`&nbsp;`, since that's what they are: non-breaking spaces. Also, note that this
-sonnet didn't use any formatting characters to make things bold or italic, since
-Shakespeare spent his time writing, not formatting. (If Shakespeare *had* used a
-computer, I'd like to think he would have written in Markua.)
+{type: markua, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
 
-Here's a portion of a "poem" using `*` to indicate that `monospaced` is true:
+Here's part of a poem:
 
-```````````````````````````````` example
-Foo
+```&&
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
 
 ```*
 i
@@ -5181,21 +5226,43 @@ i
 me   ow
 ```
 
-Bar
-.
-<p>Foo</p>
-<div class="poetry monospaced">
-<p>i<br />
-&nbsp;&nbsp;<em>am</em><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>l a z y</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat<br />
-<br />
-me&nbsp;&nbsp;&nbsp;ow</p>
-</div>
-<p>Bar</p>
-````````````````````````````````
+That is equivalent to:
 
-No, the `&nbsp;` isn't very poetic. Neither is my poem.
+{type: markua, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+Here's part of a poem:
+
+```**
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+~~~
+
+I'm not a poet, but I know it.
 
 ### But what if I want every character taken literally?
 

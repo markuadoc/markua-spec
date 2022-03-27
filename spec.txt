@@ -6394,6 +6394,12 @@ Examples:
 {type: table, format: csv}
 ![Canadian Census Data](census.csv)
 
+{type: table, format: csv, title: "Canadian Census Data"}
+![](census.csv)
+
+{type: table, format: csv}
+![](census.csv "Canadian Census Data")
+
 {type: table, format: csv, header: true}
 ![Canadian Census Data](census.csv)
 
@@ -6403,7 +6409,6 @@ Examples:
 {type: table, format: csv, header: true, footer: true, crop-start: 5, crop-end: 10}
 ![Canadian Census Data](census.csv)
 ```
-
 
 </div>
 

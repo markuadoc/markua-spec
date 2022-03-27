@@ -6199,6 +6199,40 @@ match the number of columns. Like with the width attribute, the percentage sign
 (`%`) is required, to make it absolutely clear that these are not measurements
 in pixels or points.
 
+`crop-start`
+: Sometimes it's desirable to only show part of a table resource defined in an
+external file. The `crop-start` and `crop-end` attributes let you accomplish
+this. The `crop-start` attribute defines the line which represents the first
+line included from the resource. For example, `{crop-start: 10, crop-end: 15,
+line-numbers: true, number-from: 10}` ensures that lines 10-15 are shown. The
+default value is 1, which is the first line of the file. The `crop-start`
+attribute is only valid for `csv` format tables, not `markua` format tables.
+
+`crop-end`
+: This attribute ends the range started with crop-start. The default value of
+`crop-end` is to be omitted, which is equivalent to specifying the last line of
+the file. The `crop-end` attribute is only valid for `csv` format tables, not
+`markua` format tables.
+
+`footer`
+: `true`, `false` or `dynamic`. The default is `dynamic` for `markua` format
+tables, and `false` for `csv` format tables. If `dynamic`, the existence of a
+footer is determined by whether the content of the table contains a footer.
+For a `csv` format table, `true` means that the last row is treated as a footer
+row, and `false` means that the last row is not treated as a footer row.
+
+`format`
+: The `format` can be either `markua` (the default) or `csv`. The `csv` format
+can ony be used with local or web resources, to reduce false positives. CSV
+resources are discussed in the next section.
+
+`header`
+: `true`, `false` or `dynamic`. The default is `dynamic` for `markua` format
+tables, and `true` for `csv` format tables. If `dynamic`, the existence of a
+header is determined by whether the content of the table contains a header.
+For a `csv` format table, `true` means that the first row is treated as a header
+row, and `false` means that the first row is not treated as a header row.
+
 `width`
 : The width of the table, in percentage of page content area width (respecting
 margins). This is specified as an number (integer or float) between 1 and 100
@@ -6338,13 +6372,40 @@ clobbered by the title:
 </div>
 
 
+<div class="extension">
 
 ## CSV Table resources (M)
 
-TODO
+As discussed above, tables which are local or web resources can have a `csv`
+format.
 
-- local and web
-- subsets
+For a `csv` table, the existence of a header and/or footer row cannot be
+inferred from the data, and must be specified in an attribute list. The default
+value of `header` is `true`, and the default value of `footer` is `false`.
+
+Also, as discussed, a `csv` table can have `crop-start` and `crop-end`
+attributes, for easily presenting a subset of a larger CSV. If `crop-start` and
+`crop-end` are used with `header` of true, the header should be displayed by the
+Markua Processor.
+
+Examples:
+
+```
+{type: table, format: csv}
+![Canadian Census Data](census.csv)
+
+{type: table, format: csv, header: true}
+![Canadian Census Data](census.csv)
+
+{type: table, format: csv, header: true, footer: true}
+![Canadian Census Data](census.csv)
+
+{type: table, format: csv, header: true, footer: true, crop-start: 5, crop-end: 10}
+![Canadian Census Data](census.csv)
+```
+
+
+</div>
 
 
 

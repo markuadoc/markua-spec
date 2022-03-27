@@ -3608,11 +3608,6 @@ List of Sonnets, produced entirely dynamically based on the values of the
 `class` attribute, instead of just a `List of Figures`. See the Document
 Settings section for more information.
 
-TODO:
-- poetry spacing?
-- separately I need to handle monospaced etc.
-- leading spaces preservation in a poem class vs. leading spaces more generalized???
-
 Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.
 
@@ -3984,21 +3979,13 @@ Tables can be formatted either as Markua tables or, for tables which are
 local or web resources, as CSV tables. (CSV tables are not supported as inline
 resources, since they would result in too many false-positives.)
 
-* `markua` - Markua table - `.md`
+* `table` - Markua table - `.tbl`
 * `csv` - Comma-Separated Values table - `.csv`
 
 #### Markua resource formats
 
 The `markua` resource format is always `markua`. The way that `markua` resources
 are differentiated is via their `class` attribute.
-
-TODO: !PA
-
-poetry is almost always contained as an inline resource in a Markua
-document. It only have a file extension for completeness. The `.text` file
-extension is used, since `.txt` was used for unformatted code, and since
-anything else would not have the appropriate behaviour for authors when trying
-to open the files locally by double-clicking.
 
 * `markua` - Markua - `.md`
 
@@ -4658,10 +4645,10 @@ the same resource syntax applies to code as to all other resources.
 As discussed, code cannot have alt text. It's just text. If any alt text is
 provided for a code resource, it is ignored.
 
-Markua specifies only one specific file extension to be associated with a type of
-`code`: the `.txt` extension, which is for the format of `text`. However, Markua
-Processors must interpret **all** unspecified file extensions as specifying a
-resource of type `code` with a format of `guess`.
+Markua specifies only one specific file extension to be associated with a type
+of `code`: the `.txt` extension, which is for the format of `text`. However,
+Markua Processors must interpret **all** unspecified file extensions as
+specifying a resource of type `code` with a format of `guess`.
 
 Regardless of whether syntax highlighting is supported and the programming
 language is detected, all code must be formatted as `monospaced text` by Markua
@@ -5023,23 +5010,39 @@ requirement, nor is the choice of which continuation character is used.
 Markua can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to Markua resources as to all other resources.
 
-There are two main use cases for a `markua` resource:
+There are three main use cases for a `markua` resource:
 
-1. Inserting a specific `class` of resource, including `poem`, `theorem` or
-   `lemmma`. While most poems are different from theorems or lemmas, from the
-   perspective of a Markua Processor, they're very similar: they are just
-   Markua text which should be processed. The `class` attribute can be used to
-   produce a List of Poems, List of Theorems, or List of Lemmas near the
-   beginning of the document, much like any other resource types.
+1. Inserting a specific `class` of resource, such as `poem` or `theorem`.
 2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
    used in many places and sourced from a third party, such as a legal
    department.
+3. Controlling the behaviour of fonts or leading spaces for specific types of
+   text, such as poetry.
 
-Since the `markua` resource type... TODO
+The following are the supported attributes for resources of type `markua`:
+
+`type`
+: For a Markua resource, the `type` is `markua`. This is inferred as the type
+for all files with a `.md` .extension.
+
+`class`
+: This can define a specific `class` of resource, including `poem`, `theorem` or
+`lemmma`. While most poems are different from theorems or lemmas, from the
+perspective of a Markua Processor, they're very similar: they are just
+Markua text which should be processed. The `class` attribute can be used to
+produce a List of Poems, List of Theorems, or List of Lemmas near the
+beginning of the document, much like any other resource types.
+
+`monospaced`
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor
+must use a monospaced font to output the text in the resource. If false, the
+Markua Processor may use whatever font (proportional or monospaced) it is
+configured to use to output Markua text. The value of `true` can be useful for
+certain types of poetry, for example.
 
 `format`
-: This is the resource format. Different resource types have different legal
-values for format.
+: This is the resource format. For a Markua resource, the format is typically
+just `markua`, and can be typically ignored by a Markua Processor.
 
 `title`
 : This is text which is shown near the figure, typically above or below it. A
@@ -5051,106 +5054,50 @@ may contain the Markua text formatting specified earlier (e.g. bold, italic).
 This text is also displayed for the figure wherever the figure is listed
 (e.g. List of Illustrations, Table of Tables, etc.).
 
-`type`
-: This is the resource type. This is usually inferred from the format instead of
-being specified.
-
-</div>
-
-
-<div class="extension">
-
-## Poetry Resources (M)
-
-TODO: !PA
-
-Markua specifies only one specific file extension to be associated with a type
-of `poetry`: the `.text` extension.
-
-Poetry is different from code resources in one important way: in poetry, you can
-use Markua text formatting (bold, italic, strikethrough, etc.) to format your
-text. (Markua formatting is interpreted as Markua, not represented verbatim in
-the output.) This is true regardless of whether the poetry is formatted with a
-proportional or monospaced font. If you 
-
-The value 
-
-### Supported attributes for poetry
-
-The following are the supported attributes for poetry resources, in addition to
-the `class`, `format`, `title` and `type` attributes which all resources support.
-
-`monospaced`
-: `true` or `false`. The default is `false`, except for a special case with
-inline poetry resources, discussed below. If `true`, the Markua Processor must
-use a monospaced font to output the poetry. If false, the Markua Processor may
-use whatever font (proportional or monospaced) it is configured to use to output
-poetry.
-
-### Poetry, whitespace and newlines
-
-Regardless of the value of the `monospaced` attribute, all whitespace inside a
-poetry resource is respected. This includes all spaces and newlines, regardless
+`whitespace`
+: `semantic` or `verbatim`. The default is `semantic`. With the default value of
+`semantic`, whitespace is processed the way that Markdown handles it. With the
+value of `verbatim`, leading whitespace, internal whitespace, trailing
+whitespace and newlines must all be preserved verbatim as typed. This can be
+useful for certain types of poetry, such as indenting the last two lines of a
+sonnet. To be clear, this includes all spaces and newlines, regardless
 of whether they are leading, internal or trailing spaces, and regardless of the
-number of consecutive newlines.
+number of consecutive leading, internal or trailing spaces or the number of 
+newlines. Now, while the whitespace is preserved, it is rendered using either a
+proportional font or a monospaced one based on the value of the `monospaced`
+attribute. If whitespace is verbatim, the `markua` resource should have newlines
+added by the author to ensure that automatic line wrapping is not relied upon.
+Markua Processors may wrap lines to ensure that all the text is visible on a
+page, and *may* add continuation characters (like the backslash `\` character)
+in the output to indicate that a line has been automatically wrapped by the
+Markua Processor. Obviously, seeing a continuation character is in poetry is
+terrible, so the author should consider this a mistake that needs to be fixed by
+manually line wrapping.
 
-(The whitespace is preserved, but it is rendered using either a proportional
-font or a monospaced one based on the value of the `monospaced` attribute.)
+### Local `markua` resources
 
-Poetry resources should have newlines added by the author to ensure that
-automatic line wrapping is not relied upon.
-
-Markua Processors may wrap lines to ensure that all poetry is visible on a page,
-and *may* add continuation characters (like the backslash `\` character) in the
-output to indicate that a line has been automatically wrapped by the Markua
-Processor.
-
-Obviously, seeing a continuation character is in poetry is terrible, so the
-author should consider this a mistake that needs to be fixed by manually line
-wrapping.
-
-### Local poetry resources
-
-Local poetry resources look like many other resources inserted as figures:
+Local `markua` resources look like many other resources inserted as figures:
 
 ~~~
 Here's a Shakespearean sonnet:
 
-![](sonnet130.text "Sonnet 130")
-~~~
+{type: markua}
+![](sonnet130.md "Sonnet 130")
 
-The poetry type is only inferred from the `.text` extension. 
-If you don't want to rely on the `.text` extension, you can specify the `type`
-explicitly:
-
-~~~
 Here's a Shakespearean sonnet:
 
-{type: poetry, monospaced: false}
+{type: markua, monospaced: false}
 ![](sonnet130.text "Sonnet 130")
-~~~
 
+Here's some legal boilerplate:
+
+{type: markua}
+![](tos.md "Terms and Conditions")
 
 Here's an E. E. Cummings poem:
 
-~~~
-{monospaced: true}
-![](iwillbe.text "I Will Be")
-~~~
-
-If you don't want to rely on the `.text` extension, you can specify the `type`
-explicitly:
-
-~~~
-Here's a Shakespearean sonnet:
-
-{type: poetry, monospaced: false}
-![](sonnet130.text "Sonnet 130")
-
-Here's an E. E. Cummings poem:
-
-{type: poetry, monospaced: true}
-![](iwillbe.text "I Will Be")
+{type: markua, monospaced: true}
+![](iwillbe.md "I Will Be")
 ~~~
 
 ### Web poetry resources
@@ -6240,7 +6187,7 @@ followed by a percentage sign (%). The quotes are optional. So, you can say
 `{width: "70%"}`, `{width: 70%}`, `{width: "70.5%"}` or `{width: 70.5%}`.
 
 The examples below assume that a table which looks like the following (from the
-GFM table example above) is defined in a file called `census.md` (real census
+GFM table example above) is defined in a file called `census.tbl` (real census
 data would be too long for a good example):
 
 ```````````````````````````````` example
@@ -6268,7 +6215,7 @@ With this table above defined in a file which is available at a local
 resource location, the following example results:
 
 ```````````````````````````````` example
-![](census.md "Canadian Census Data")
+![](census.tbl "Canadian Census Data")
 .
 <figure>
   <table>
@@ -6293,7 +6240,7 @@ With this table above defined in a file which is available at a given web
 resource location, the identical example results:
 
 ```````````````````````````````` example
-![](http://markua.com/census.md "Canadian Census Data")
+![](http://markua.com/census.tbl "Canadian Census Data")
 .
 <figure>
   <table>
@@ -6314,24 +6261,43 @@ resource location, the identical example results:
 </figure>
 ````````````````````````````````
 
-Table resources should be defined in a file with a `.md` extension. If the
+Table resources should be defined in a file with a `.tbl` extension. If the
 extension is different, then there **must** be a `type: table` attribute in the
 attribute list.
 
-In the interest of brevity, here are some other examples of usage:
+In the interest of brevity, some other examples of usage are below.
+
+With the `.tbl` extension, the `table` type is inferred:
 
 ```
 {title: "Canadian Census Data"}
-![](census.md)
+![](census.tbl)
 
+![](census.tbl "Canadian Census Data")
+
+![Canadian Census Data](census.tbl)
+
+{title: "Canadian Census Data", column-widths: "30% *"}
+![](census.tbl)
+
+{column-widths: "30% *"}
+![](census.tbl "Canadian Census Data")
+
+{column-widths: "30% *"}
+![Canadian Census Data](census.tbl)
+```
+
+With a non-`.tbl` extension, the `table` type must be specified:
+
+```
 {type: table}
 ![](census.txt "Canadian Census Data")
 
 {type: table, title: "Canadian Census Data"}
 ![](census.txt)
 
-{title: "Canadian Census Data", column-widths: "30% *"}
-![](census.md)
+{type: table, title: "Canadian Census Data", column-widths: "30% *"}
+![](census.txt)
 ```
 
 Recall that the resource syntax is as follows:
@@ -6348,7 +6314,7 @@ as the title as well. (If the `alt-title` is `none`, then it cannot.)
 So, assuming a value of `text` or `all` for a document setting, this also works:
 
 ```
-![Canadian Census Data](census.md)
+![Canadian Census Data](census.tbl)
 ```
 
 (This is arguably the nicest looking version, and since tables are a text
@@ -6366,7 +6332,7 @@ clobbered by the title:
 
 ```
 {align: middle, width: 80%, title: "Canadian Census Data"}
-![some alt text which gets clobbered by the title](census.md)
+![some alt text which gets clobbered by the title](census.tbl)
 ```
 
 </div>

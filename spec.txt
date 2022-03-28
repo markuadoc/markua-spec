@@ -3590,12 +3590,12 @@ of the `class` attribute is determined by the `type` of resource:
 * A resource with type `audio` defaults to a class of `recording`.
 * A resource with type `code` defaults to a class of `listing`.
 * A resource with type `image` defaults to a class of `figure`.
-* A resource with type `markua` defaults to a class of `none`. Common values
-  of the `class` for `markua` resource types include `poem`, `lemma`, `list`,
-  `table` and `theorem`. The `none` class is special: it means that the
-  resource is not inserted in any special way, but is just inserted as though
-  the author typed it in the manuscript. This enables this class of `markua`
-  resource to be used for text substitution.
+* A resource with type `markua` defaults to a class of `none`. Other values
+  of the `class` for `markua` resource types include `poem` and `list`.
+  The `none` class is special: it means that the resource is not inserted in any
+  special way, but is just inserted as though the author typed it in the
+  manuscript. This enables this class of `markua` resource to be used for text
+  substitution.
 * A resource with type `math` defaults to a class of `equation`.
 * A resource with type `video` defaults to a class of `footage`.
 
@@ -3976,10 +3976,11 @@ inline resource. So, the `.asciimath` file extension is deliberately verbose.
 #### Table resource formats
 
 Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV tables. (CSV tables are not supported as inline
-resources, since they would result in too many false-positives.)
+local or web resources, as CSV-format tables. (CSV-format tables are not
+supported as inline resources, since they would result in too many
+false-positives.)
 
-* `table` - Markua table - `.tbl`
+* `markua` - Markua table - `.tbl`
 * `csv` - Comma-Separated Values table - `.csv`
 
 #### Markua resource formats
@@ -5027,14 +5028,15 @@ explicitly, and it can be inferred as the type for all files with a `.md`
 .extension.
 
 `class`
-: This can define a specific `class` of resource, such as a `poem` or `sonnet`.
-To be clear, from the perspective of Markua, there is no specific meaning
-associated with any class, and other than `poem` there is no specific list of
-"supported" classes of Markua resources. (There is, however, support for
-semantic sugar to produce inline resources of type `markua` and class `poem`;
-see below for details.) A Markua Processor can produce a list of a given class
-of resource near the beginning of the document, such as a List of Poems or
-(in this example) a List of Sonnets.
+: This can define a specific `class` of resource, such as a `poem` or `list`.
+The default is `none`, which means that the resource is not inserted in any
+special way, but is just inserted as though the author typed it in the
+manuscript. This enables this class of `markua` resource to be used for text
+substitution, without showing up in some list of resources near the front of the
+book. There is semantic sugar to produce inline resources of type `markua` and
+class `poem`; see below for details.) A Markua Processor can produce a list of a
+given class of resource near the beginning of the document, such as a List of
+Poems or a List of Lists.
 
 `monospaced`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor
@@ -5044,8 +5046,8 @@ configured to use to output Markua text. The value of `true` can be useful for
 certain types of poetry, for example.
 
 `format`
-: This is the resource format. For a Markua resource, the format is typically
-just `markua`, and can be typically ignored by a Markua Processor.
+: This is the resource format. For a Markua resource, the format is always
+just `markua`, and should be ignored by a Markua Processor.
 
 `title`
 : This is text which is shown near the figure, typically above or below it. A
@@ -5105,8 +5107,29 @@ will have its whitespace preserved (for indenting the last two lines):
 {monospaced: false, class: poem, whitespace: verbatim}
 ![](sonnet130.md "Sonnet 130")
 
+Here's a list of Canadian cities sorted by population. This implicitly has a
+`class` of `none`:
+
+![](cities.md "Canadian Cities by Population")
+
+Here's that same list, but with an explicit class of `none`:
+
+{class: none}
+![](cities.md "Canadian Cities by Population")
+
+Here's that same list, but with a class of `list` so it shows up in a List of
+Lists, if there is one:
+
+{class: list}
+![](cities.md "Canadian Cities by Population")
+
 Here's some legal boilerplate:
 
+![](tos.md "Terms and Conditions")
+
+Here's some legal boilerplate, with the explicit class of `none`:
+
+{class: none}
 ![](tos.md "Terms and Conditions")
 
 Here's an E. E. Cummings poem:
@@ -5278,6 +5301,20 @@ me   ow
 ~~~
 
 I'm not a poet, but I know it.
+
+Finally, here's an example of an inline Markua resource being used for a list:
+
+~~~
+{class: list, title: "Canadian Cities by Population"}
+```
+1. Toronto
+2. Vancouver
+```
+~~~
+
+Despite the seeming generality of this example, it's actually fairly niche:
+most lists are just lists, not resources, and do not need to be wrapped in a
+resource.
 
 ### But what if I want every character taken literally?
 
@@ -6253,8 +6290,8 @@ row, and `false` means that the last row is not treated as a footer row.
 
 `format`
 : The `format` can be either `markua` (the default) or `csv`. The `csv` format
-can ony be used with local or web resources, to reduce false positives. CSV
-resources are discussed in the next section.
+can ony be used with local or web resources, to reduce false positives.
+CSV-format table resources are discussed in the next section.
 
 `header`
 : `true`, `false` or `dynamic`. The default is `dynamic` for `markua` format
@@ -6423,12 +6460,12 @@ clobbered by the title:
 
 <div class="extension">
 
-## CSV Table resources (M)
+## CSV-format Table resources (M)
 
-As discussed above, tables which are local or web resources can have a `csv`
-format.
+As discussed above, tables (i.e. resources of type `table`) which are local or
+web resources can have a `csv` format, instead of the default `markua` format.
 
-For a `csv` table, the existence of a header and/or footer row cannot be
+For a `csv`-format table, the existence of a header and/or footer row cannot be
 inferred from the data, and must be specified in an attribute list. The default
 value of `header` is `true`, and the default value of `footer` is `false`.
 

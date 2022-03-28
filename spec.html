@@ -5710,10 +5710,9 @@ or inline resource, just like any other resource, and the same resource syntax
 applies to Markua resources as to all other resources.</p>
 <p>There are three main use cases for a Markua resource:</p>
 <ol>
-<li>Inserting a specific <code>class</code> of resource, such as <code>poem</code> or <code>theorem</code>.</li>
+<li>Inserting a specific <code>class</code> of resource, such as a <code>poem</code>.</li>
 <li>Inserting boilerplate, such as a legal disclaimer, which may be needed to be
-used in many places and sourced from a third party, such as a legal
-department.</li>
+used in many places and/or sourced from a third party.</li>
 <li>Controlling the behaviour of fonts or leading spaces for specific types of
 text, such as poetry.</li>
 </ol>
@@ -5722,12 +5721,9 @@ text, such as poetry.</li>
 : For a Markua resource, the <code>type</code> is <code>markua</code>. This is inferred as the type
 for all files with a <code>.md</code> .extension.</p>
 <p><code>class</code>
-: This can define a specific <code>class</code> of resource, including <code>poem</code>, <code>theorem</code> or
-<code>lemmma</code>. While most poems are different from theorems or lemmas, from the
-perspective of a Markua Processor, they’re very similar: they are just
-Markua text which should be processed. The <code>class</code> attribute can be used to
-produce a List of Poems, List of Theorems, or List of Lemmas near the
-beginning of the document, much like any other resource types.</p>
+: This can define a specific <code>class</code> of resource, such as a <code>poem</code> or <code>sonnet</code>.
+The <code>class</code> attribute can be used to produce a List of Poems or List of Sonnets
+near the beginning of the document, much like any other class of resource.</p>
 <p><code>monospaced</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, the Markua Processor
 must use a monospaced font to output the text in the resource. If false, the
@@ -5765,10 +5761,10 @@ in the output to indicate that a line has been automatically wrapped by the
 Markua Processor. Obviously, seeing a continuation character is in poetry is
 terrible, so the author should consider this a mistake that needs to be fixed by
 manually line wrapping.</p>
-<h3 id="local-resources" class="definition">
-<span class="number">5.10.1</span>Local <code>markua</code> resources
+<h3 id="local-markua-resources" class="definition">
+<span class="number">5.10.1</span>Local Markua resources
 </h3>
-<p>Local <code>markua</code> resources look like many other resources inserted as figures:</p>
+<p>Local Markua resources look like many other resources inserted as figures:</p>
 <pre><code>Here's a Shakespearean sonnet, which will not have a `class` and which will
 default to semantic whitespace:
 
@@ -5816,12 +5812,12 @@ Here's an E. E. Cummings poem:
 {type: markua, class: poem, whitespace: verbatim, monospaced: true}
 ![](iwillbe.txt &quot;I Will Be&quot;)
 </code></pre>
-<h3 id="web-resources" class="definition">
-<span class="number">5.10.2</span>Web <code>markua</code> resources
+<h3 id="web-markua-resources" class="definition">
+<span class="number">5.10.2</span>Web Markua resources
 </h3>
-<p>Web resources of type <code>markua</code> function identically to how local Markua
-resources work, including the significance of file extensions. The only
-differences is that the files are on the web.</p>
+<p>Web Markua resources function identically to how local Markua resources work,
+including the significance of file extensions. The only difference is that the
+files are on the web.</p>
 <pre><code>Here's a Shakespearean sonnet:
 
 ![](http://markua.com/sonnet130.md &quot;Sonnet 130&quot;)
@@ -5833,16 +5829,20 @@ Here's a Shakespearean sonnet:
 
 Here's a paragraph after the figure.
 </code></pre>
-<h3 id="inline-resources" class="definition">
-<span class="number">5.10.3</span>Inline <code>markua</code> resources
+<h3 id="inline-markua-resources" class="definition">
+<span class="number">5.10.3</span>Inline Markua resources
 </h3>
 <p>You might wonder why an inline resource of type <code>markua</code> would be supported at
 all. After all, isn’t it just Markua text?</p>
-<p>The reasons it is supported are simple: for the attribute lists, and so that the
-resource can show up in a list of resources.</p>
+<p>There are three reasons it is supported:</p>
+<ol>
+<li>Consistency</li>
+<li>For the attribute lists, which allow configurable whitespace, etc.</li>
+<li>So that the resource can show up in a list of resources</li>
+</ol>
 <p>To create an inline resource of type <code>markua</code>, you use the fenced code block
-syntax, and you use an attribute list to specify the type of resource.</p>
-<p>There are a handful of syntactic sugar options available:</p>
+syntax, and you can use an attribute list to specify the type of resource.</p>
+<p>You can also use one of a handful of syntactic sugar options:</p>
 <p><code>&amp;</code>
 : equivalent to <code>{type: markua, whitespace: verbatim, monospaced: false}</code></p>
 <p><code>&amp;&amp;</code>
@@ -6004,7 +6004,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-158">
@@ -6443,7 +6443,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-183">
 <div class="examplenum">
@@ -6467,7 +6467,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -6834,7 +6834,7 @@ available.</p>
 <p>A <a id="table" href="#table" class="definition">table</a> is an arrangement of data with rows and columns, consisting of a
 single header row, a <a href="#delimiter-row">delimiter row</a> separating the header from the data, and
 zero or more data rows.</p>
-<p>Each row consists of cells containing arbitrary text, in which <a href="#inlines">inlines</a> are
+<p>Each row consists of cells containing arbitrary text, in which <a href="#inline">inlines</a> are
 parsed, separated by pipes (<code>|</code>).  A leading and trailing pipe is also
 recommended for clarity of reading, and if there’s otherwise parsing ambiguity.
 Spaces between pipes and cell content are trimmed.  Block-level elements cannot
@@ -16463,7 +16463,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-586">
 <div class="examplenum">

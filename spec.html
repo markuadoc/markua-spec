@@ -5722,8 +5722,13 @@ text, such as poetry.</li>
 for all files with a <code>.md</code> .extension.</p>
 <p><code>class</code>
 : This can define a specific <code>class</code> of resource, such as a <code>poem</code> or <code>sonnet</code>.
-The <code>class</code> attribute can be used to produce a List of Poems or List of Sonnets
-near the beginning of the document, much like any other class of resource.</p>
+To be clear, from the perspective of Markua, there is no specific meaning
+associated with any class, and other than <code>poem</code> there is no specific list of
+“supported” classes. (There is, however, support for semantic sugar to produce
+inline resources of type <code>markua</code> and class <code>poem</code>; see below for details.
+A Markua Processor can produce a list of a given class of resource near the
+beginning of the document, such as a List of Poems or (in this example) a List
+of Sonnets.</p>
 <p><code>monospaced</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, the Markua Processor
 must use a monospaced font to output the text in the resource. If false, the

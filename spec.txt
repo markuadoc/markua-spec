@@ -5016,24 +5016,25 @@ There are three main use cases for a Markua resource:
 1. Inserting a specific `class` of resource, such as a `poem`.
 2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
    used in many places and/or sourced from a third party.
-3. Controlling the behaviour of fonts or leading spaces for specific types of
+3. Controlling the behaviour of fonts or whitespace for specific types of
    text, such as poetry.
 
 The following are the supported attributes for resources of type `markua`:
 
 `type`
-: For a Markua resource, the `type` is `markua`. This is inferred as the type
-for all files with a `.md` .extension.
+: For a Markua resource, the `type` is `markua`. This can be specified
+explicitly, and it can be inferred as the type for all files with a `.md`
+.extension.
 
 `class`
 : This can define a specific `class` of resource, such as a `poem` or `sonnet`.
 To be clear, from the perspective of Markua, there is no specific meaning
 associated with any class, and other than `poem` there is no specific list of
-"supported" classes. (There is, however, support for semantic sugar to produce
-inline resources of type `markua` and class `poem`; see below for details.
-A Markua Processor can produce a list of a given class of resource near the
-beginning of the document, such as a List of Poems or (in this example) a List
-of Sonnets.
+"supported" classes of Markua resources. (There is, however, support for
+semantic sugar to produce inline resources of type `markua` and class `poem`;
+see below for details.) A Markua Processor can produce a list of a given class
+of resource near the beginning of the document, such as a List of Poems or
+(in this example) a List of Sonnets.
 
 `monospaced`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor

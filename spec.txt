@@ -5087,6 +5087,12 @@ default to semantic whitespace:
 
 ![](sonnet130.md "Sonnet 130")
 
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+have its whitespace preserved (for indenting the last two lines):
+
+{whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
 Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
 will have its whitespace preserved (for indenting the last two lines):
 

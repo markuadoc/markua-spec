@@ -5013,10 +5013,9 @@ applies to Markua resources as to all other resources.
 
 There are three main use cases for a Markua resource:
 
-1. Inserting a specific `class` of resource, such as `poem` or `theorem`.
+1. Inserting a specific `class` of resource, such as a `poem`.
 2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
-   used in many places and sourced from a third party, such as a legal
-   department.
+   used in many places and/or sourced from a third party.
 3. Controlling the behaviour of fonts or leading spaces for specific types of
    text, such as poetry.
 
@@ -5027,12 +5026,9 @@ The following are the supported attributes for resources of type `markua`:
 for all files with a `.md` .extension.
 
 `class`
-: This can define a specific `class` of resource, including `poem`, `theorem` or
-`lemmma`. While most poems are different from theorems or lemmas, from the
-perspective of a Markua Processor, they're very similar: they are just
-Markua text which should be processed. The `class` attribute can be used to
-produce a List of Poems, List of Theorems, or List of Lemmas near the
-beginning of the document, much like any other resource types.
+: This can define a specific `class` of resource, such as a `poem` or `sonnet`.
+The `class` attribute can be used to produce a List of Poems or List of Sonnets
+near the beginning of the document, much like any other class of resource.
 
 `monospaced`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor
@@ -5075,9 +5071,9 @@ Markua Processor. Obviously, seeing a continuation character is in poetry is
 terrible, so the author should consider this a mistake that needs to be fixed by
 manually line wrapping.
 
-### Local `markua` resources
+### Local Markua resources
 
-Local `markua` resources look like many other resources inserted as figures:
+Local Markua resources look like many other resources inserted as figures:
 
 ~~~
 Here's a Shakespearean sonnet, which will not have a `class` and which will
@@ -5131,11 +5127,11 @@ Here's an E. E. Cummings poem:
 ![](iwillbe.txt "I Will Be")
 ~~~
 
-### Web `markua` resources
+### Web Markua resources
 
-Web resources of type `markua` function identically to how local Markua
-resources work, including the significance of file extensions. The only
-differences is that the files are on the web.
+Web Markua resources function identically to how local Markua resources work,
+including the significance of file extensions. The only difference is that the
+files are on the web.
 
 ~~~
 Here's a Shakespearean sonnet:
@@ -5150,18 +5146,21 @@ Here's a Shakespearean sonnet:
 Here's a paragraph after the figure.
 ~~~
 
-### Inline `markua` resources
+### Inline Markua resources
 
 You might wonder why an inline resource of type `markua` would be supported at
 all. After all, isn't it just Markua text?
 
-The reasons it is supported are simple: for the attribute lists, and so that the
-resource can show up in a list of resources.
+There are three reasons it is supported:
+
+1. Consistency
+2. For the attribute lists, which allow configurable whitespace, etc.
+3. So that the resource can show up in a list of resources
 
 To create an inline resource of type `markua`, you use the fenced code block
-syntax, and you use an attribute list to specify the type of resource.
+syntax, and you can use an attribute list to specify the type of resource.
 
-There are a handful of syntactic sugar options available:
+You can also use one of a handful of syntactic sugar options:
 
 `&`
 : equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`

@@ -5713,22 +5713,23 @@ applies to Markua resources as to all other resources.</p>
 <li>Inserting a specific <code>class</code> of resource, such as a <code>poem</code>.</li>
 <li>Inserting boilerplate, such as a legal disclaimer, which may be needed to be
 used in many places and/or sourced from a third party.</li>
-<li>Controlling the behaviour of fonts or leading spaces for specific types of
+<li>Controlling the behaviour of fonts or whitespace for specific types of
 text, such as poetry.</li>
 </ol>
 <p>The following are the supported attributes for resources of type <code>markua</code>:</p>
 <p><code>type</code>
-: For a Markua resource, the <code>type</code> is <code>markua</code>. This is inferred as the type
-for all files with a <code>.md</code> .extension.</p>
+: For a Markua resource, the <code>type</code> is <code>markua</code>. This can be specified
+explicitly, and it can be inferred as the type for all files with a <code>.md</code>
+.extension.</p>
 <p><code>class</code>
 : This can define a specific <code>class</code> of resource, such as a <code>poem</code> or <code>sonnet</code>.
 To be clear, from the perspective of Markua, there is no specific meaning
 associated with any class, and other than <code>poem</code> there is no specific list of
-“supported” classes. (There is, however, support for semantic sugar to produce
-inline resources of type <code>markua</code> and class <code>poem</code>; see below for details.
-A Markua Processor can produce a list of a given class of resource near the
-beginning of the document, such as a List of Poems or (in this example) a List
-of Sonnets.</p>
+“supported” classes of Markua resources. (There is, however, support for
+semantic sugar to produce inline resources of type <code>markua</code> and class <code>poem</code>;
+see below for details.) A Markua Processor can produce a list of a given class
+of resource near the beginning of the document, such as a List of Poems or
+(in this example) a List of Sonnets.</p>
 <p><code>monospaced</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, the Markua Processor
 must use a monospaced font to output the text in the resource. If false, the
@@ -5773,6 +5774,12 @@ manually line wrapping.</p>
 <pre><code>Here's a Shakespearean sonnet, which will not have a `class` and which will
 default to semantic whitespace:
 
+![](sonnet130.md &quot;Sonnet 130&quot;)
+
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+have its whitespace preserved (for indenting the last two lines):
+
+{whitespace: verbatim}
 ![](sonnet130.md &quot;Sonnet 130&quot;)
 
 Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
@@ -5832,6 +5839,9 @@ Here's a Shakespearean sonnet:
 {type: markua}
 ![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
 
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
+
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="inline-markua-resources" class="definition">
@@ -5841,9 +5851,9 @@ Here's a paragraph after the figure.
 all. After all, isn’t it just Markua text?</p>
 <p>There are three reasons it is supported:</p>
 <ol>
-<li>Consistency</li>
-<li>For the attribute lists, which allow configurable whitespace, etc.</li>
-<li>So that the resource can show up in a list of resources</li>
+<li>for consistency</li>
+<li>for the attribute lists, which allow configurable whitespace, etc.</li>
+<li>so that the resource can show up in a list of resources</li>
 </ol>
 <p>To create an inline resource of type <code>markua</code>, you use the fenced code block
 syntax, and you can use an attribute list to specify the type of resource.</p>

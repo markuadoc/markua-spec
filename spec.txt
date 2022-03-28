@@ -5027,8 +5027,13 @@ for all files with a `.md` .extension.
 
 `class`
 : This can define a specific `class` of resource, such as a `poem` or `sonnet`.
-The `class` attribute can be used to produce a List of Poems or List of Sonnets
-near the beginning of the document, much like any other class of resource.
+To be clear, from the perspective of Markua, there is no specific meaning
+associated with any class, and other than `poem` there is no specific list of
+"supported" classes. (There is, however, support for semantic sugar to produce
+inline resources of type `markua` and class `poem`; see below for details.
+A Markua Processor can produce a list of a given class of resource near the
+beginning of the document, such as a List of Poems or (in this example) a List
+of Sonnets.
 
 `monospaced`
 : `true` or `false`. The default is `false`. If `true`, the Markua Processor

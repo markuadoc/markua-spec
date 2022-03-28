@@ -5155,6 +5155,9 @@ Here's a Shakespearean sonnet:
 {type: markua}
 ![](http://markua.com/sonnet130.txt "Sonnet 130")
 
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
+
 Here's a paragraph after the figure.
 ~~~
 
@@ -5165,9 +5168,9 @@ all. After all, isn't it just Markua text?
 
 There are three reasons it is supported:
 
-1. Consistency
-2. For the attribute lists, which allow configurable whitespace, etc.
-3. So that the resource can show up in a list of resources
+1. for consistency
+2. for the attribute lists, which allow configurable whitespace, etc.
+3. so that the resource can show up in a list of resources
 
 To create an inline resource of type `markua`, you use the fenced code block
 syntax, and you can use an attribute list to specify the type of resource.

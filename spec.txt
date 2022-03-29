@@ -3665,6 +3665,7 @@ $ - latexmath
 
 [A]
 
+{type: markua, whitespace: verbatim, monospace: false}
 {type: markua, class: poem, whitespace: verbatim, monospace: false}
 ```
 I grant I never saw a goddess go;
@@ -3680,6 +3681,7 @@ aoeu
 
 [B]
 
+{type: markua, whitespace: verbatim, monospace: true}
 {type: markua, class: poem, whitespace: verbatim, monospace: true}
 ```
 I grant I never saw a goddess go;
@@ -3693,16 +3695,21 @@ i
       C
       A
       T
-      
+
 My mistress when she walks treads on the ground.
     And yet, by *heaven*, I think my love as rare
     As any she belied with **false compare**.
 ```
 
+{class: poem}
 ```*
 aoeu
 ```
 
+{class: physics}
+```$
+e = mc^2
+```
 
 
 

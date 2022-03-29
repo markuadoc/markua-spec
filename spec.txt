@@ -3412,34 +3412,26 @@ Foo
 
 Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
-Books and courses may embed many types of [resources](@).
+Books and courses may embed many kinds of [resources](@).
 
-Resources vary in five different ways:
+Resources vary in four different ways:
 
-1. **Insertion Method**: Figure and Span
-2. **Location**: Inline, Local, and Web
-3. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
-4. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
-5. **Class**: `figure`, `lemma`, `listing`, `table`, etc.
+1. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
+2. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
+3. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+4. **Location**: Inline, Local, and Web
 
 What do these all mean?
 
-1. The **Insertion Method** is how the resource is inserted into a given Markua
-   document. Figures are inserted as block content; spans are inserted inline.
-   Figures can have captions; spans cannot. There is no attribute for this; it
-   is inferred by how it is used. However, conceptually, a resource which is
-   inserted as a span implicitly has a `class` of `none`, and this overrides
-   any `class` specified in an attribute list attached to the resource inserted
-   as a span.
-2. The **Location** is the location of the resource, when encountered by the
-   Markua Processor. There is no attribute for this; it is inferred from the
-   location.
-   * An inline resource is included directly in a Markua manuscript file.
-   * A local resource is located in the `resources` directory which accompanies
-     the Markua manuscript (or in a similar conceptual location for a web-based
-     Markua Processor).
-   * A web resource is on the web, accessed via `http://` or `https://`.
-3. The **Type** is the kind of the resource. It can be specified with the
+1. The **Class** is the category of the resource as far as the Markua Processor
+   is concerned. The class can be used to differentiate identical types of
+   Markua resources in various lists, such as a List of Lemmas, List of Poems,
+   or List of Theorems. When a resource is inserted without an attribute list,
+   either in a span (such as an emoji in a sentence) or in a block (such as an
+   image, list or table with no caption), the the `class` is implicitly set to
+   `span`. Resources with a class of `span` do not show up in any list of
+   figures. The `class` attribute is discussed further below.
+2. The **Type** is the kind of the resource. It can be specified with the
    `type` attribute, or inferred from the file extension (discussed below).
    * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
      self-explanatory, and are rendered in different ways by a Markua Processor.
@@ -3449,17 +3441,24 @@ What do these all mean?
    * The `markua` resource type represents any resource which is actually just
      valid Markua text, but which may be further-differentiated by the `class`.
      Examples include lists, poems, tables, theorems and lemmas.
-4. The **Format** is the format of the resource. It can be specified with the
+3. The **Format** is the format of the resource. It can be specified with the
    `type` attribute, or inferred from the file extension (discussed below).
    This is important information to help the Markua Processor handle the
    resource correctly.
-5. The **Class** is the category of the resource as far as the Markua Processor
-   is concerned. The class can be used to differentiate identical types of
-   Markua resources in various lists, such as a List of Lemmas, List of Poems,
-   or List of Theorems. When a resource is inserted as a span, the `class`
-   is implicitly set to `none`, since resources which are inserted as spans
-   are not figures, and do not show up in any list of figures. The `class`
-   attribute is discussed further below.
+4. The **Location** is the location of the resource, when encountered by the
+   Markua Processor. There is no attribute for this; it is inferred from the
+   location.
+   * An inline resource is included directly in a Markua manuscript file.
+   * A local resource is located in the `resources` directory which accompanies
+     the Markua manuscript (or in a similar conceptual location for a web-based
+     Markua Processor).
+   * A web resource is on the web, accessed via `http://` or `https://`.
+
+TODO
+
+Since resources can...
+
+A Markua Processor must prevent cycles... 
 
 In order to prevent cycles (and infinitely long books!), resources are **NOT**
 allowed to include other resources: only a Markua document in the root
@@ -5188,6 +5187,12 @@ Here's a paragraph after the figure.
 
 You might wonder why an inline resource of type `markua` would be supported at
 all. After all, isn't it just Markua text?
+
+
+Defaults:
+
+
+
 
 There are three reasons it is supported:
 
@@ -16823,3 +16828,64 @@ closers:
 
 After we're done, we remove all delimiters above `stack_bottom` from the
 delimiter stack.
+
+# TODO
+
+Challenge:
+
+{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+
+![](person.jpg)
+
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Tables:
+row-start, row-end, col-start, col-end, cols: 4,6,7,12, rows: 13..18,22
+
+
+~~~
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+~~~
+
+
+
+
+```text
+
+
+
+
+Defaults:
+
+~~~text
+foo
+~~~
+
+```guess
+foo
+```
+
+Special Formats after ~~~ or ```
+
+table
+list
+markua
+
+Other
+
+{}
+~~~
+
+

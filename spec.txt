@@ -3416,22 +3416,148 @@ Books and courses may embed many kinds of [resources](@).
 
 Resources vary in four different ways:
 
-1. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
-2. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
-3. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+1. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`  <= TODO: `table` and `list`? rm `markua`?
+2. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+3. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
 4. **Location**: Inline, Local, and Web
+
+
+THIS MUST BE SUPPORTED:
+
+insertion method span:
+
+foo bar ![](foo.png){title: "Peter Was Wrong"} baz
+
+
+insertion method figure:
+
+foo bar
+
+{title: "Peter Was Wrong"}
+![](foo.png)
+
+baz
+
+
+THIS MUST BE SUPPORTED:
+
+insertion method span:
+
+foo bar ![](foo.png){class: span} baz
+
+
+insertion method span:
+
+foo bar ![](foo.png) baz
+
+
+insertion method span (inside a new para):
+
+foo bar
+
+![](foo.png)
+
+baz
+
+insertion method span (inside a new para):
+
+foo bar
+
+![](foo.png)
+
+baz
+insertion method span (inside a new para):
+
+foo bar `puts hello`{lang: ruby} baz
+
+foo bar
+
+{class: listing}
+```ruby
+puts hello
+```
+
+{class: lithograph}
+![](foo.png)
+
+baz
+
+
+
+
+foo bar ![](baz.png){title: "Here's a Baz"} baz lorem ipsum 
+
+either:
+a) we ignore the title because images inserted in a span context cannot be figures and thus cannot have captions
+b) we respect the title because clearly the author wants one, so then we make a figure but what we do about spacing is up to the Markua Processor but it looks like this probably:
+
+foo bar
+(BAZ PICTURE)
+Here's a Baz
+baz lorem ipsum
+
+Since there is a figure caption, it IS a figure, and thus we
+add newlines where needed.
+
+I was saying (a). I am now saying (b).
+
+We could possibly add a warning, indicating that we added single newlines.
+
+foo bar ![](baz.png){title: "Here's a Baz"} baz lorem ipsum 
+== BECOMES ==>
+foo bar
+![](baz.png){title: "Here's a Baz"}
+baz lorem ipsum 
+
+
+because we're now going with (b), "Insertion Method: Figure and Span" is no longer needed.
+
+
+DECISION:
+Resources vary in four different ways.
+1. Type: audio, code, image, iframe, markua, math, and video
+2. Format: mp3, ruby, png, latexmath, mp4, etc.
+3. Class: span, figure, equation, listing, table, etc.
+4. Location: Inline, Local, and Web
+
+
+Class is JUST about the list(s) of figures at the beginning of
+a document, nothing more.
+
+e.g. zoo animals by mammal / bird or cute / scary
+
+
+
+# h1
+
+## h2
+
+para
+
+para
+
+para
+
+para *italics text* stuff `puts "foo"`{lang: ruby} stuff **bold** stuff
+
+baz
+
+this is sad ![](tears-of-joy.png) really
+
+baz
+
+insertion method span (inside a new para):
+
+foo bar
+
+![](foo.png)
+
+baz
+
 
 What do these all mean?
 
-1. The **Class** is the category of the resource as far as the Markua Processor
-   is concerned. The class can be used to differentiate identical types of
-   Markua resources in various lists, such as a List of Lemmas, List of Poems,
-   or List of Theorems. When a resource is inserted without an attribute list,
-   either in a span (such as an emoji in a sentence) or in a block (such as an
-   image, list or table with no caption), the the `class` is implicitly set to
-   `span`. Resources with a class of `span` do not show up in any list of
-   figures. The `class` attribute is discussed further below.
-2. The **Type** is the kind of the resource. It can be specified with the
+1. The **Type** is the kind of the resource. It can be specified with the
    `type` attribute, or inferred from the file extension (discussed below).
    * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
      self-explanatory, and are rendered in different ways by a Markua Processor.
@@ -3441,10 +3567,34 @@ What do these all mean?
    * The `markua` resource type represents any resource which is actually just
      valid Markua text, but which may be further-differentiated by the `class`.
      Examples include lists, poems, tables, theorems and lemmas.
-3. The **Format** is the format of the resource. It can be specified with the
+2. The **Format** is the format of the resource. It can be specified with the
    `type` attribute, or inferred from the file extension (discussed below).
    This is important information to help the Markua Processor handle the
    resource correctly.
+3. The **Class** determines whether, and how, the resource is presented in a
+   particular list of resources near the beginning of the book. The `span`
+   class is special, in that it never shows up in a list of resources. All other
+   classes of resource may show up in a list of resources, grouped by their
+   class. The class is completely orthogonal to the type or format of a
+   resource. For example, all resources in a book could just be categorized as
+   in the `span` or `figure` class. This would result in a List of Figures
+   near the beginning of the book, which listed all resources of class figure,
+   regardless of their `type` (e.g. `image`, `code`, `table`, etc.) or their
+   `format` (e.g. `jpg`, `ruby`, `csv`, etc.)
+   
+   Regardless of
+   their type or format, resources can be listed in different lists of
+   classes of resources near the beginning of a book. For example, a book may
+   choose to only categorize resources as spans or figures. 
+    lists of
+   r the category of the resource as far as the Markua Processor
+   is concerned. The class can be used to differentiate identical types of
+   Markua resources in various lists, such as a List of Lemmas, List of Poems,
+   or List of Theorems. When a resource is inserted without an attribute list,
+   either in a span (such as an emoji in a sentence) or in a block (such as an
+   image, list or table with no caption), the the `class` is implicitly set to
+   `span`. Resources with a class of `span` do not show up in any list of
+   figures. The `class` attribute is discussed further below.
 4. The **Location** is the location of the resource, when encountered by the
    Markua Processor. There is no attribute for this; it is inferred from the
    location.
@@ -16890,4 +17040,11 @@ Other
 {}
 ~~~
 
+Syntactic sugar following ```:
 
+```
+$ - latexmath
+@ - asciimath
+! - svg
+
+```

@@ -3555,6 +3555,159 @@ foo bar
 baz
 
 
+
+
+
+
+Types:
+`audio`, `code`, `image`, `iframe`, `list`, `math`, `table`, `video`
+
+
+
+Types:
+`audio`, `code`, `image`, `iframe`, `list`, `math`, `raw`, `table`, `video`
+
+
+
+
+
+Format of  `image`:
+
+`png`, `svg`, ...
+
+```
+
+
+
+
+
+
+
+`table` (format: markua, csv)
+`list` (format: markua)
+`raw` (format: markua) <= any old markua in some external file which gets preprocessed
+
+
+NO `raw` Markua resource format (which is equivalent to just typing it) because it is not "a thing in the book"...
+
+
+{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim, monospaced: true}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+
+![](person.jpg)
+
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+
+
+
+{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+```
+
+
+^ needs sugar
+
+
+
+sugar list:
+
+```@
+aoeu
+```
+
+
+Syntactic sugar following ```:
+
+NEED AND HAVE:
+```
+$ - latexmath
+@ - asciimath
+! - svg
+(three tildes => ```text)
+(three backticks => ```guess)
+```
+
+
+~~~markdown
+puts "foo"
+
+```
+"hello"
+```
+
+puts "bar"
+~~~
+
+
+
+
+WANT:
+```
+$ - latexmath
+@ - asciimath
+! - svg
+(three tildes => ```text)
+(three backticks => ```guess)
+```
+
+[A]
+
+{type: markua, class: poem, whitespace: verbatim, monospace: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+```
+
+```&
+aoeu
+```
+
+
+[B]
+
+{type: markua, class: poem, whitespace: verbatim, monospace: true}
+```
+I grant I never saw a goddess go;
+i 
+
+    a m 
+
+
+    a 
+
+      C
+      A
+      T
+      
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+```
+
+```*
+aoeu
+```
+
+
+
+
+
+
 What do these all mean?
 
 1. The **Type** is the kind of the resource. It can be specified with the

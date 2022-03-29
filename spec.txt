@@ -3661,7 +3661,28 @@ $ - latexmath
 ! - svg
 (three tildes => ```text)
 (three backticks => ```guess)
+& - {type: markua, whitespace: verbatim}
 ```
+
+
+
+{type: markua, whitespace: verbatim, class: poem, monospace: true}
+```
+i 
+
+    a m 
+
+
+    a 
+
+      C
+      A
+      T
+```
+
+
+
+
 
 [A]
 

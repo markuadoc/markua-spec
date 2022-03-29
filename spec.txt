@@ -3683,6 +3683,59 @@ i
 
 
 
+# My Book
+
+foo
+
+```$
+e = mc^2
+```
+
+bar
+
+```$
+e = mc^2
+```
+
+baz
+
+```$
+e = mc^2
+```
+
+# End
+
+yay
+
+a) Parse step:
+Markdown => CM + Pandoc Markua reader => AST
+b) PDF output step:
+AST => Pandoc LaTeX writer => LaTeX == xelatex ==> PDF
+c) EPUB output step:
+AST => EPUB writer AND PDF output for every LaTeX math we block and we process it and convert all PDFs to SVG ==> EPUB containing SVGs
+d) MOBI output step:
+EPUB containing PNGs => kindlegen => MOBI
+
+can (d) work with SVGs
+
+Markdown => CM + Pandoc Markua reader => AST => Pandoc LaTeX writer => LaTeX == xelatex ==> PDF
+
+
+
+
+Markdown => CM + Pandoc => AST => Pandoc writer => LaTeX plus 3 PDFs with latexmath somehow ==> PDF to SVG == xelatex which uses the SVGs ==> PDF
+
+
+
+
+
+
+
+
+
+
+
+
 
 [A]
 

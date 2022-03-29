@@ -16833,7 +16833,6 @@ delimiter stack.
 
 type: a, i, I, 1, etc for lists conflicts with type:
 
-
 nested Markua resources
 
 {type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}

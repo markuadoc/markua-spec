@@ -3696,6 +3696,25 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ```
 
+ Foo
+
+
+Foo
+
+
+foo <i>Moby Dick</i> bar
+foo <em>Moby Dick</em> bar
+
+
+foo <b>bar</b> baz
+foo <i>bar</i> baz
+
+
+foo <strong>bar</strong> baz
+foo <em>bar</em> baz
+foo <i>bar</i> baz
+
+
 
 
 {type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}

@@ -3660,7 +3660,7 @@ baz
 THESE ARE THE TYPES:
 
 Types:
-`audio`, `code`, `image`, `iframe`, `list`, `math`, `table`, `video`
+`audio`, `code`, `image`, `iframe`, `list`, `math`, `table`, `verbatim`, `video`
 
 `table` (format: markua, csv)
 `list` (format: markua)
@@ -3713,6 +3713,53 @@ foo <i>bar</i> baz
 foo <strong>bar</strong> baz
 foo <em>bar</em> baz
 foo <i>bar</i> baz
+
+
+WE DO NOT WANT THIS, IT IS HELL:
+
+{whitespace: verbatim, monospaced: true}
+# Some Chapter
+
+  This para is indented two spaces. Inside here, we respect   *our*   whitespace.
+
+ This is indented one space.
+
+
+
+    Foo bar baz.
+
+
+    Foo bar baz.
+Yada yada.
+
+BUT THEN WHAT?
+
+```poetry
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+  And yet, by *heaven*, I       think            my love as rare
+  As any she belied with **false compare**.
+```   
+
+BEST ANSWER: no `markua` resource, but yes to a limited `poetry` resource????
+
+MAR 31: YES (as `verbatim` resource.). prevent slippery slope of expanded scope
+
+
+CB:
+1. Are there other formats beside code and poetry that need whitespace verbatim?
+
+`verbatim` resource type.
+What `verbatim` means is...
+1. whitespace is preserved verbatim
+2. no automatic indenting is done
+3. basic Markua text formatting (bold, italic, etc.) is done
+4. Markua resources (e.g. tables, images, lists) CANNOT be nested in it.
+5. can add {monospaced: true | false} (default false)
+6. can be local, web, inline resource
+7. {type: verbatim, class: normal_rules_apply}
+
+
 
 
 

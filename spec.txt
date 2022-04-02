@@ -3416,13 +3416,15 @@ Books and courses may embed many kinds of [resources](@).
 
 Resources vary in four different ways:
 
-1. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`  <= TODO: `table` and `list`? rm `markua`?
+1. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
 2. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
 3. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
 4. **Location**: Inline, Local, and Web
 
 [Mar 31: YES]
 
+
+  <= TODO: `table` and `list`? rm `markua`?
 
 
 THIS MUST BE SUPPORTED:
@@ -3696,45 +3698,8 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ```
 
- Foo
 
-
-Foo
-
-
-foo <i>Moby Dick</i> bar
-foo <em>Moby Dick</em> bar
-
-
-foo <b>bar</b> baz
-foo <i>bar</i> baz
-
-
-foo <strong>bar</strong> baz
-foo <em>bar</em> baz
-foo <i>bar</i> baz
-
-
-WE DO NOT WANT THIS, IT IS HELL:
-
-{whitespace: verbatim, monospaced: true}
-# Some Chapter
-
-  This para is indented two spaces. Inside here, we respect   *our*   whitespace.
-
- This is indented one space.
-
-
-
-    Foo bar baz.
-
-
-    Foo bar baz.
-Yada yada.
-
-BUT THEN WHAT?
-
-```poetry
+```verbatim
 I grant I never saw a goddess go;
 My mistress when she walks treads on the ground.
   And yet, by *heaven*, I       think            my love as rare
@@ -3758,8 +3723,6 @@ What `verbatim` means is...
 5. can add {monospaced: true | false} (default false)
 6. can be local, web, inline resource
 7. {type: verbatim, class: normal_rules_apply}
-
-
 
 
 

@@ -3416,459 +3416,11 @@ Books and courses may embed many kinds of [resources](@).
 
 Resources vary in four different ways:
 
-1. **Type**: `audio`, `code`, `image`, `iframe`, `markua`, `math`, and `video`
+1. **Type**: `audio`, `code`, `iframe`, `image`, `list`, `math`, `table`,
+   `verbatim`, `video`
 2. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
 3. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
 4. **Location**: Inline, Local, and Web
-
-[Mar 31: YES]
-
-
-  <= TODO: `table` and `list`? rm `markua`?
-
-
-THIS MUST BE SUPPORTED:
-
-insertion method span:
-
-foo bar ![](foo.png){title: "Peter Was Wrong"} baz
-
-[Mar 31: YES]
-
-
-equivalent to insertion method figure:
-
-foo bar
-{title: "Peter Was Wrong"}
-![](foo.png)
-baz
-
-[Mar 31: YES]
-
-equivalent to insertion method figure:
-
-foo bar
-
-{title: "Peter Was Wrong"}
-![](foo.png)
-
-{class: continued-para}
-baz
-
-[Mar 31: YES]
-
-equivalent to insertion method figure:
-
-foo bar
-
-{title: "Peter Was Wrong"}
-![](foo.png)
-
-^
-baz
-
-[Mar 31: YES]
-
-
-IF you have a title:, you CANNOT have a `class` of `span`.
-
-[Mar 31: YES]
-
-THIS MUST BE SUPPORTED:
-
-insertion method span:
-
-foo bar ![](foo.png){class: span} baz
-
-
-insertion method span:
-
-foo bar ![](foo.png) baz
-
-
-insertion method span (inside a new para):
-
-foo bar
-
-![](foo.png)
-
-baz
-
-insertion method span (inside a new para):
-
-foo bar `puts hello`{lang: ruby} baz
-
-foo bar next is a code resource with class of listing
-
-{class: listing}
-```ruby
-puts hello
-```
-
-{class: lithograph}
-![](foo.png)
-
-baz
-
-{class: figure}
-![](foo.png)
-
-baz
-
-{title: "Something with a title has a class of 'figure' unless specified"}
-![](foo.png)
-
-baz
-
-
-What's the `class`?
-
-if there is a title
-  if the class was set to `span`
-    remove `span` class, set it to `figure`, produce warning
-  elsif the class was explicitly set to anything else
-    that's the class
-  else # no class set
-    class is `figure`
-  end
-else # no title
-  if the class was set to `span`
-    it's span
-  elsif the class was explicitly set to anything else
-    that's the class
-  else # no class set
-    it is `span`
-  end
-end
-
-What do we do with figure numbering?
-
-Spec - have a global setting called figure-number-format: sequential | chapter (default sequential):
-
-n
-
-Figure 1, Figure 2, Figure 3, ...
-
-OR
-
-chapter_num.n
-
-Figure 1.1, Figure 1.2, Figure 4.1, Figure 5.1, Figure 5.2, ...
-
-SO:
-
-1. Group by class, capitalized.
-2. Number respecting figure-number-format: sequential | chapter
-
-RESULT:
-
-for class `listing`:
-
-Listing 1, Listing 2, Listing 3, ...
-Listing 3.1, Listing 3.2, Listing 4.1, ...
-
-In a document:
-
-List of Listings (`class: listing`)
-...
-
-List of Figures (`class: figure` [or implicit])
-...
-
-List of Equations (`class: equation`)
-...
-
-etc.
-
-[Mar 31: YES]
-
-
-
-
-
-
-foo bar ![](baz.png){title: "Here's a Baz"} baz lorem ipsum 
-
-either:
-a) we ignore the title because images inserted in a span context cannot be figures and thus cannot have captions
-b) we respect the title because clearly the author wants one, so then we make a figure but what we do about spacing is up to the Markua Processor but it looks like this probably:
-
-foo bar
-(BAZ PICTURE)
-Here's a Baz
-baz lorem ipsum
-
-Since there is a figure caption, it IS a figure, and thus we
-add newlines where needed.
-
-I was saying (a). I am now saying (b).
-
-We could possibly add a warning, indicating that we added single newlines.
-
-foo bar ![](baz.png){title: "Here's a Baz"} baz lorem ipsum 
-== BECOMES ==>
-foo bar
-![](baz.png){title: "Here's a Baz"}
-baz lorem ipsum 
-
-
-because we're now going with (b), "Insertion Method: Figure and Span" is no longer needed.
-
-
-DECISION:
-Resources vary in four different ways.
-1. Type: audio, code, image, iframe, markua, math, and video
-2. Format: mp3, ruby, png, latexmath, mp4, etc.
-3. Class: span, figure, equation, listing, table, etc.
-4. Location: Inline, Local, and Web
-
-
-Class is JUST about the list(s) of figures at the beginning of
-a document, nothing more.
-
-e.g. zoo animals by mammal / bird or cute / scary
-
-
-
-# h1
-
-## h2
-
-para
-
-para
-
-para
-
-para *italics text* stuff `puts "foo"`{lang: ruby} stuff **bold** stuff
-
-baz
-
-this is sad ![](tears-of-joy.png) really
-
-baz
-
-insertion method span (inside a new para):
-
-foo bar
-
-![](foo.png)
-
-baz
-
-
-
-
-THESE ARE THE TYPES:
-
-Types:
-`audio`, `code`, `image`, `iframe`, `list`, `math`, `table`, `verbatim`, `video`
-
-`table` (format: markua, csv)
-`list` (format: markua)
-
-
-
-
-
-
-#########
-MAR 31:
-
-CHOICES: (the below would have relevant syntactic sugar)
-a) type `poetry` with whitespace always verbatim and limited Markua formatting and monospaced font optional
-b) type `poetry` with whitespace either verbatim or semantic and limited Markua formatting and monospaced font optional
-c) type `markua` with class `poem` or anything with whitespace either `verbatim` or `semantic` and all Markua formatting and monospaced font optional
-d) no whitespace verbatim, no poetry resources, etc.
-e) rm poetry resource, be able to stick a class of poetry on a fenced markua block [literally c]
-f) ```poem which is syntactic sugar for (c) or (a)
-
-NO `raw` Markua resource format (which is equivalent to just typing it) because it is not "a thing in the book"...
-
-{type: poetry, title: "Nothing Like The Sun"}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by *heaven*, I       think            my love as rare
-    As any she belied with **false compare**.
-
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-
-```verbatim
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-  And yet, by *heaven*, I       think            my love as rare
-  As any she belied with **false compare**.
-```   
-
-BEST ANSWER: no `markua` resource, but yes to a limited `poetry` resource????
-
-MAR 31: YES (as `verbatim` resource.). prevent slippery slope of expanded scope
-
-
-CB:
-1. Are there other formats beside code and poetry that need whitespace verbatim?
-
-`verbatim` resource type.
-What `verbatim` means is...
-1. whitespace is preserved verbatim
-2. no automatic indenting is done
-3. basic Markua text formatting (bold, italic, etc.) is done
-4. Markua resources (e.g. tables, images, lists) CANNOT be nested in it.
-5. can add {monospaced: true | false} (default false)
-6. can be local, web, inline resource
-7. {type: verbatim, class: normal_rules_apply}
-
-
-
-
-{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by *heaven*, I       think            my love as rare
-    As any she belied with **false compare**.
-
-![](person.jpg)
-
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-
-#########
-
-
-
-
-
-
-
-{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by *heaven*, I think my love as rare
-    As any she belied with **false compare**.
-```
-
-
-^ needs sugar
-
-
-
-sugar list:
-
-```@
-aoeu
-```
-
-
-Syntactic sugar following ```:
-
-```
-$ - latexmath
-@ - asciimath
-! - svg
-(three tildes => ```text)
-(three backticks => ```guess)
-& - {type: markua, whitespace: verbatim}
-```
-
-
-
-[A]
-
-{type: markua, whitespace: verbatim, monospace: false}
-{type: markua, class: poem, whitespace: verbatim, monospace: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by *heaven*, I think my love as rare
-    As any she belied with **false compare**.
-```
-
-```&
-aoeu
-```
-
-
-
-
-What do these all mean?
-
-1. The **Type** is the kind of the resource. It can be specified with the
-   `type` attribute, or inferred from the file extension (discussed below).
-   * The `audio`, `code`, `image`, `math` and `video` types are all reasonably
-     self-explanatory, and are rendered in different ways by a Markua Processor.
-   * The `iframe` resource is a resource which functions like an `<iframe>` in
-     HTML. For an ebook, it can just turn into an external link, but for an
-     online course, it can actually be presented as an IFrame.
-   * The `markua` resource type represents any resource which is actually just
-     valid Markua text, but which may be further-differentiated by the `class`.
-     Examples include lists, poems, tables, theorems and lemmas.
-2. The **Format** is the format of the resource. It can be specified with the
-   `type` attribute, or inferred from the file extension (discussed below).
-   This is important information to help the Markua Processor handle the
-   resource correctly.
-3. The **Class** determines whether, and how, the resource is presented in a
-   particular list of resources near the beginning of the book. The `span`
-   class is special, in that it never shows up in a list of resources. All other
-   classes of resource may show up in a list of resources, grouped by their
-   class. The class is completely orthogonal to the type or format of a
-   resource. For example, all resources in a book could just be categorized as
-   in the `span` or `figure` class. This would result in a List of Figures
-   near the beginning of the book, which listed all resources of class figure,
-   regardless of their `type` (e.g. `image`, `code`, `table`, etc.) or their
-   `format` (e.g. `jpg`, `ruby`, `csv`, etc.)
-   
-   Regardless of
-   their type or format, resources can be listed in different lists of
-   classes of resources near the beginning of a book. For example, a book may
-   choose to only categorize resources as spans or figures. 
-    lists of
-   r the category of the resource as far as the Markua Processor
-   is concerned. The class can be used to differentiate identical types of
-   Markua resources in various lists, such as a List of Lemmas, List of Poems,
-   or List of Theorems. When a resource is inserted without an attribute list,
-   either in a span (such as an emoji in a sentence) or in a block (such as an
-   image, list or table with no caption), the the `class` is implicitly set to
-   `span`. Resources with a class of `span` do not show up in any list of
-   figures. The `class` attribute is discussed further below.
-4. The **Location** is the location of the resource, when encountered by the
-   Markua Processor. There is no attribute for this; it is inferred from the
-   location.
-   * An inline resource is included directly in a Markua manuscript file.
-   * A local resource is located in the `resources` directory which accompanies
-     the Markua manuscript (or in a similar conceptual location for a web-based
-     Markua Processor).
-   * A web resource is on the web, accessed via `http://` or `https://`.
-
-TODO
-
-Since resources can...
-
-A Markua Processor must prevent cycles... 
-
-In order to prevent cycles (and infinitely long books!), resources are **NOT**
-allowed to include other resources: only a Markua document in the root
-`manuscript` directory can include resources, and all resources must live inside
-the `resources` directory or in a subdirectory inside of it, with nested
-subdirectories permitted.
-
-Because of this limitation, a Markua Processor which is building an AST
-(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
-traversal of the AST, and when it encounters a resource of type `markua` it
-should then parse the resource as Markua and replace the Markua resource with
-the subtree which is the result of parsing the Markua resource, and there is no
-need to do this recursively.
 
 The list above may make it sound like Markua is somehow incompatible with
 Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
@@ -3905,11 +3457,185 @@ If any resource is missing during book or course generation, a Markua processor
 should insert something like the "missing image" often seen on web pages into
 the book or course.
 
-### Resource insertion methods
+TODO
 
-Resources can be inserted either as figures or as spans.
+### Resource Types
 
-#### Figures
+There are nine types of resources:
+
+1. `audio`
+2. `code`
+3. `iframe`
+4. `image`
+5. `list`
+6. `math`
+7. `table`
+8. `verbatim`
+9. `video`
+
+Each type of resource has a number of supported formats. Any of the nine
+resource types can be inserted as a local resource or web resource, and many of
+the resource types can also be inserted as an inline resource.
+
+### Resource Formats
+
+TODO
+
+The **Format** is the format of the resource. It can be specified with the
+`type` attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.
+
+### Resource Classes
+
+TODO
+
+The **Class** determines whether, and how, the resource is presented in a
+particular list of resources near the beginning of the book. The `span`
+class is special, in that it never shows up in a list of resources. All other
+classes of resource may show up in a list of resources, grouped by their
+class. The class is completely orthogonal to the type or format of a
+resource. For example, all resources in a book could just be categorized as
+in the `span` or `figure` class. This would result in a List of Figures
+near the beginning of the book, which listed all resources of class figure,
+regardless of their `type` (e.g. `image`, `code`, `table`, etc.) or their
+`format` (e.g. `jpg`, `ruby`, `csv`, etc.)
+TODO  Regardless of
+their type or format, resources can be listed in different lists of
+classes of resources near the beginning of a book. For example, a book may
+choose to only categorize resources as spans or figures. 
+lists of
+r the category of the resource as far as the Markua Processor
+is concerned. The class can be used to differentiate identical types of
+Markua resources in various lists, such as a List of Lemmas, List of Poems,
+or List of Theorems. When a resource is inserted without an attribute list,
+either in a span (such as an emoji in a sentence) or in a block (such as an
+image, list or table with no caption), the the `class` is implicitly set to
+`span`. Resources with a class of `span` do not show up in any list of
+figures. The `class` attribute is discussed further below.
+
+
+### Resource Locations
+
+TODO
+
+The **Location** is the location of the resource, when encountered by the
+Markua Processor. There is no attribute for this; it is inferred from the
+location.
+* An inline resource is included directly in a Markua manuscript file.
+* A local resource is located in the `resources` directory which accompanies
+the Markua manuscript (or in a similar conceptual location for a web-based
+Markua Processor).
+* A web resource is on the web, accessed via `http://` or `https://`.
+
+A resource is either considered a local, web or inline resource based on its
+location:
+
+Local Resource
+: The resource is stored along with the manuscript--either in a `resources`
+directory on a local filesystem, or uploaded to the same web service where the
+Markua document is being written.
+
+Web Resource
+: The resource is referred to via an `http` or `https` URL.
+
+Inline Resource
+: The resource is defined right in the body of a Markua document.
+
+#### Local resources
+
+If local resources are used, all local resources must be stored inside a
+`resources` directory, or one of its subdirectories. The `resources` directory
+is not part of the path to the resource.
+
+Here's how the paths to local resources work:
+
+1. An image called `foo.jpg` in the `resources` directory should be referred to
+   as `![](foo.jpg)`, but can also be referred to as `![](resources/foo.jpg)`.
+2. An image called `bar.png` in a subdirectory `images` of the `resources`
+   directory should be referred to as `![](images/bar.png)`, but can also be
+   referred to as `![](resources/images/foo.jpg)`.
+3. For security reasons, leading slashes `/` and navigating upward (`../`) are
+   not allowed: `![](/foo.jpg)`, `![](/images/bar.png)` and `![](../foo.jpg)`
+   are all illegal.
+
+The reason that paths can either include or omit the resources directory is
+simple: including it makes it a simple relative path, which means that
+Markdown-aware tools that support, say, external images will just work. However,
+omitting it is nice to type, so this is something which should be supported as
+well. And the reason the resources directory exists is to keep the Markua
+manuscript file(s) separate from the resources, to reduce clutter.
+
+Nested directory trees work as well. A file called `foo.rb` in a
+`ch1/examples/ruby` directory tree inside the `resources` directory is referenced
+as `![](ch1/examples/ruby/foo.rb)` or as `![](resources/ch1/examples/ruby/foo.rb)`.
+
+Markua does not specify whether there are any subdirectories of the `resources`
+directory, or what their names are. Since any subdirectories have their names as
+part of the path to the resource, authors can do whatever they want. For example,
+you can create subdirectories of the `resources` directory for different types of
+resource, such as `audio`, `code`, `images`, etc., but you can also just put them
+all in the `resources` directory together. To be clear: the names of the
+directories have no meaning, and do not restrict the formats of what can go inside
+them.
+
+If you are using a hosted service to write in Markua, this service can store
+resources wherever it wants. However, if they provide a download (say as a zip
+file) they should create the resources directory and provide the uploaded
+resources in that directory. If a nested structure is used, it should be exported
+that way--if a web service produces paths which reference images inside an images
+directory (e.g. as `images/foo.png`), then the zip file containing an export
+should contain a `resources` directory which contains an `images` subdirectory
+with the images.
+
+#### Web resources
+
+If web resources are supported, both `http:` and `https:` resources should be
+supported.
+
+Web resources are identified by the absolute URL of the resource on the internet.
+
+#### Inline resources
+
+Certain types of resources can be inserted inline in a Markua document:
+
+* `code`
+* `image` (of SVG format only)
+* `list`
+* `math` (either `latexmath` or `asciimath`)
+* `table`
+* `verbatim`
+
+Since an SVG image is just XML text, it can be contained inline in the text of a
+Markua document. This is not true for binary resources like PNG or JPEG images
+or any type of audio or video file--these can only be local or web resources.
+
+The syntax for SVG images is discussed later.
+
+
+## Verbatim Resources (M)
+
+TODO
+
+Since resources can...
+
+In order to prevent cycles (and infinitely long books!), resources are **NOT**
+allowed to include other resources: only a Markua document in the root
+`manuscript` directory can include resources, and all resources must live inside
+the `resources` directory or in a subdirectory inside of it, with nested
+subdirectories permitted.
+
+Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type `markua` it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.
+
+
+## Resource Attribute Lists
+
+TODO
 
 All resources can be inserted as figures. Figures are the normal case for how a
 resource is inserted. In many Markua documents, they will be most or all of the
@@ -3943,6 +3669,19 @@ You can also insert an inline resource as a figure using three or more tildes
 inline resource content (default format is `text` with tildes)
 ~~~
 ```
+
+
+## Common Resource Attributes (M)
+
+TODO
+
+
+### Resource insertion methods
+
+Resources can be inserted either as figures or as spans.
+
+#### Figures
+
 
 ##### Figure attributes
 
@@ -4200,100 +3939,6 @@ For example, this resource would be formatted as Ruby code:
 Yada yada `puts "hi"`{format: ruby} yada yada.
 ~~~
 
-### Resource Locations
-
-A resource is either considered a local, web or inline resource based on its
-location:
-
-Local Resource
-: The resource is stored along with the manuscript--either in a `resources`
-directory on a local filesystem, or uploaded to the same web service where the
-Markua document is being written.
-
-Web Resource
-: The resource is referred to via an `http` or `https` URL.
-
-Inline Resource
-: The resource is defined right in the body of a Markua document.
-
-#### Local resources
-
-If local resources are used, all local resources must be stored inside a
-`resources` directory, or one of its subdirectories. The `resources` directory
-is not part of the path to the resource.
-
-Here's how the paths to local resources work:
-
-1. An image called `foo.jpg` in the `resources` directory should be referred to
-   as `![](foo.jpg)`, but can also be referred to as `![](resources/foo.jpg)`.
-2. An image called `bar.png` in a subdirectory `images` of the `resources`
-   directory should be referred to as `![](images/bar.png)`, but can also be
-   referred to as `![](resources/images/foo.jpg)`.
-3. For security reasons, leading slashes `/` and navigating upward (`../`) are
-   not allowed: `![](/foo.jpg)`, `![](/images/bar.png)` and `![](../foo.jpg)`
-   are all illegal.
-
-The reason that paths can either include or omit the resources directory is
-simple: including it makes it a simple relative path, which means that
-Markdown-aware tools that support, say, external images will just work. However,
-omitting it is nice to type, so this is something which should be supported as
-well. And the reason the resources directory exists is to keep the Markua
-manuscript file(s) separate from the resources, to reduce clutter.
-
-Nested directory trees work as well. A file called `foo.rb` in a
-`ch1/examples/ruby` directory tree inside the `resources` directory is referenced
-as `![](ch1/examples/ruby/foo.rb)` or as `![](resources/ch1/examples/ruby/foo.rb)`.
-
-Markua does not specify whether there are any subdirectories of the `resources`
-directory, or what their names are. Since any subdirectories have their names as
-part of the path to the resource, authors can do whatever they want. For example,
-you can create subdirectories of the `resources` directory for different types of
-resource, such as `audio`, `code`, `images`, etc., but you can also just put them
-all in the `resources` directory together. To be clear: the names of the
-directories have no meaning, and do not restrict the formats of what can go inside
-them.
-
-If you are using a hosted service to write in Markua, this service can store
-resources wherever it wants. However, if they provide a download (say as a zip
-file) they should create the resources directory and provide the uploaded
-resources in that directory. If a nested structure is used, it should be exported
-that way--if a web service produces paths which reference images inside an images
-directory (e.g. as `images/foo.png`), then the zip file containing an export
-should contain a `resources` directory which contains an `images` subdirectory
-with the images.
-
-#### Web resources
-
-If web resources are supported, both `http:` and `https:` resources should be
-supported.
-
-Web resources are identified by the absolute URL of the resource on the internet.
-
-#### Inline resources
-
-Inline resources can be of type `code`, `image` (of SVG format only), `math`
-(regardless of format), `markua`, or `table`. Since an SVG image is just XML
-text, it can be contained inline in the text of a Markua document. This is not
-something that is true for binary resources like PNG or JPEG images or any type
-of audio or video file--these can only be local or web resources.
-
-The syntax for SVG images is discussed later.
-
-### Resource types
-
-There are seven types of resources:
-
-1. `audio`
-2. `code`
-3. `image`
-4. `markua`
-5. `math`
-6. `table`
-7. `video`
-
-Each type of resource has a number of supported formats. Any of the seven
-resource types can be inserted as a local resource or web resource, and many of
-the resource types can also be inserted as an inline resource.
 
 ### Resource formats
 
@@ -15565,6 +15210,10 @@ poster="http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg"/>
 
 ## IFrame resources (M)
 
+The `iframe` resource is a resource which functions like an `<iframe>` in HTML.
+For an ebook, it can just turn into an external link, but for an online course,
+it can actually be presented as an IFrame.
+
 The syntax to insert an IFrame is almost identical to that is used for video
 resources.
 
@@ -17295,3 +16944,379 @@ $ - latexmath
 ! - svg
 
 ```
+
+
+
+
+THIS MUST BE SUPPORTED:
+
+insertion method span:
+
+foo bar ![](foo.png){title: "Peter Was Wrong"} baz
+
+[Mar 31: YES]
+
+
+equivalent to insertion method figure:
+
+foo bar
+{title: "Peter Was Wrong"}
+![](foo.png)
+baz
+
+[Mar 31: YES]
+
+equivalent to insertion method figure:
+
+foo bar
+
+{title: "Peter Was Wrong"}
+![](foo.png)
+
+{class: continued-para}
+baz
+
+[Mar 31: YES]
+
+equivalent to insertion method figure:
+
+foo bar
+
+{title: "Peter Was Wrong"}
+![](foo.png)
+
+^
+baz
+
+[Mar 31: YES]
+
+
+IF you have a title:, you CANNOT have a `class` of `span`.
+
+[Mar 31: YES]
+
+THIS MUST BE SUPPORTED:
+
+insertion method span:
+
+foo bar ![](foo.png){class: span} baz
+
+
+insertion method span:
+
+foo bar ![](foo.png) baz
+
+
+insertion method span (inside a new para):
+
+foo bar
+
+![](foo.png)
+
+baz
+
+insertion method span (inside a new para):
+
+foo bar `puts hello`{lang: ruby} baz
+
+foo bar next is a code resource with class of listing
+
+{class: listing}
+```ruby
+puts hello
+```
+
+{class: lithograph}
+![](foo.png)
+
+baz
+
+{class: figure}
+![](foo.png)
+
+baz
+
+{title: "Something with a title has a class of 'figure' unless specified"}
+![](foo.png)
+
+baz
+
+
+What's the `class`?
+
+if there is a title
+  if the class was set to `span`
+    remove `span` class, set it to `figure`, produce warning
+  elsif the class was explicitly set to anything else
+    that's the class
+  else # no class set
+    class is `figure`
+  end
+else # no title
+  if the class was set to `span`
+    it's span
+  elsif the class was explicitly set to anything else
+    that's the class
+  else # no class set
+    it is `span`
+  end
+end
+
+What do we do with figure numbering?
+
+Spec - have a global setting called figure-number-format: sequential | chapter (default sequential):
+
+n
+
+Figure 1, Figure 2, Figure 3, ...
+
+OR
+
+chapter_num.n
+
+Figure 1.1, Figure 1.2, Figure 4.1, Figure 5.1, Figure 5.2, ...
+
+SO:
+
+1. Group by class, capitalized.
+2. Number respecting figure-number-format: sequential | chapter
+
+RESULT:
+
+for class `listing`:
+
+Listing 1, Listing 2, Listing 3, ...
+Listing 3.1, Listing 3.2, Listing 4.1, ...
+
+In a document:
+
+List of Listings (`class: listing`)
+...
+
+List of Figures (`class: figure` [or implicit])
+...
+
+List of Equations (`class: equation`)
+...
+
+etc.
+
+[Mar 31: YES]
+
+
+
+
+
+
+foo bar ![](baz.png){title: "Here's a Baz"} baz lorem ipsum 
+
+either:
+a) we ignore the title because images inserted in a span context cannot be figures and thus cannot have captions
+b) we respect the title because clearly the author wants one, so then we make a figure but what we do about spacing is up to the Markua Processor but it looks like this probably:
+
+foo bar
+(BAZ PICTURE)
+Here's a Baz
+baz lorem ipsum
+
+Since there is a figure caption, it IS a figure, and thus we
+add newlines where needed.
+
+I was saying (a). I am now saying (b).
+
+We could possibly add a warning, indicating that we added single newlines.
+
+foo bar ![](baz.png){title: "Here's a Baz"} baz lorem ipsum 
+== BECOMES ==>
+foo bar
+![](baz.png){title: "Here's a Baz"}
+baz lorem ipsum 
+
+
+because we're now going with (b), "Insertion Method: Figure and Span" is no longer needed.
+
+
+DECISION:
+Resources vary in four different ways.
+1. Type: audio, code, image, iframe, markua, math, and video
+2. Format: mp3, ruby, png, latexmath, mp4, etc.
+3. Class: span, figure, equation, listing, table, etc.
+4. Location: Inline, Local, and Web
+
+
+Class is JUST about the list(s) of figures at the beginning of
+a document, nothing more.
+
+e.g. zoo animals by mammal / bird or cute / scary
+
+
+
+# h1
+
+## h2
+
+para
+
+para
+
+para
+
+para *italics text* stuff `puts "foo"`{lang: ruby} stuff **bold** stuff
+
+baz
+
+this is sad ![](tears-of-joy.png) really
+
+baz
+
+insertion method span (inside a new para):
+
+foo bar
+
+![](foo.png)
+
+baz
+
+
+
+
+THESE ARE THE TYPES:
+
+Types:
+
+`table` (format: markua, csv)
+`list` (format: markua)
+
+
+
+
+
+
+#########
+MAR 31:
+
+CHOICES: (the below would have relevant syntactic sugar)
+a) type `poetry` with whitespace always verbatim and limited Markua formatting and monospaced font optional
+b) type `poetry` with whitespace either verbatim or semantic and limited Markua formatting and monospaced font optional
+c) type `markua` with class `poem` or anything with whitespace either `verbatim` or `semantic` and all Markua formatting and monospaced font optional
+d) no whitespace verbatim, no poetry resources, etc.
+e) rm poetry resource, be able to stick a class of poetry on a fenced markua block [literally c]
+f) ```poem which is syntactic sugar for (c) or (a)
+
+NO `raw` Markua resource format (which is equivalent to just typing it) because it is not "a thing in the book"...
+
+{type: poetry, title: "Nothing Like The Sun"}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I       think            my love as rare
+    As any she belied with **false compare**.
+
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+
+```verbatim
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+  And yet, by *heaven*, I       think            my love as rare
+  As any she belied with **false compare**.
+```   
+
+BEST ANSWER: no `markua` resource, but yes to a limited `poetry` resource????
+
+MAR 31: YES (as `verbatim` resource.). prevent slippery slope of expanded scope
+
+
+CB:
+1. Are there other formats beside code and poetry that need whitespace verbatim?
+
+`verbatim` resource type.
+What `verbatim` means is...
+1. whitespace is preserved verbatim
+2. no automatic indenting is done
+3. basic Markua text formatting (bold, italic, etc.) is done
+4. Markua resources (e.g. tables, images, lists) CANNOT be nested in it.
+5. can add {monospaced: true | false} (default false)
+6. can be local, web, inline resource
+7. {type: verbatim, class: normal_rules_apply}
+
+
+
+
+{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I       think            my love as rare
+    As any she belied with **false compare**.
+
+![](person.jpg)
+
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+
+#########
+
+
+
+
+
+
+
+{type: markua, class: poem, title: "Nothing Like The Sun", whitespace: verbatim}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+```
+
+
+^ needs sugar
+
+
+
+sugar list:
+
+```@
+aoeu
+```
+
+
+Syntactic sugar following ```:
+
+```
+$ - latexmath
+@ - asciimath
+! - svg
+(three tildes => ```text)
+(three backticks => ```guess)
+& - {type: markua, whitespace: verbatim}
+```
+
+
+
+[A]
+
+{type: markua, whitespace: verbatim, monospace: false}
+{type: markua, class: poem, whitespace: verbatim, monospace: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by *heaven*, I think my love as rare
+    As any she belied with **false compare**.
+```
+
+```&
+aoeu
+```
+
+

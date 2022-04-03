@@ -8,7 +8,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Introduction
 
-## The magical typewriter (M)
+<div class="extension">
+
+## What is Markua? (M)
+
+### The magical typewriter
 
 Imagine you owned a magical typewriter.
 
@@ -67,7 +71,7 @@ This simple format is called Markua.
 
 This is its specification.
 
-## For Leanpub authors (M)
+### For Leanpub authors
 
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
@@ -81,7 +85,7 @@ instead of this specification.
 Specifically, not all Markua features are supported on Leanpub. To learn what
 works and what does not work, you need to see the manual.
 
-## What is this document? (M)
+### What is this document?
 
 This is the Markua Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
@@ -110,7 +114,7 @@ this document.
 If you're going to read this document, you really should read the Introduction,
 even if you normally skip them.
 
-## How to write a novel in Markua (M)
+### How to write a novel in Markua
 
 The Markua specification is long. However, if you're an author, the amount you
 need to learn to write in Markua is actually very short.
@@ -154,7 +158,7 @@ Markdown dialects:
 In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
 
-## How to write almost any book in Markua (M)
+### How to write almost any book in Markua
 
 The longer example below shows everything you need to know to write almost any
 type of book, such as a computer programming book, in Markua. This example also
@@ -383,7 +387,7 @@ Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
 
-## Markua: Markdown for books and courses (M)
+### Markua: Markdown for books and courses
 
 Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
 
@@ -427,7 +431,7 @@ feel like decorating, not converting.
 The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
-## Why the name "Markua"? (M)
+### Why the name "Markua"?
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name
 that conveyed the love that I have for Markdown while not implying endorsement
@@ -439,7 +443,7 @@ friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
 
-## What is Leanpub Flavoured Markdown (LFM)? (M)
+### What is Leanpub Flavoured Markdown (LFM)?
 
 Leanpub Flavoured Markdown (LFM) was Leanpub's original attempt to extend
 Markdown to support book authoring. It started in 2011 and evolved with
@@ -452,7 +456,7 @@ LFM is the predecessor of Markua. LFM is not formally specified.
 Instead, Leanpub Flavoured Markdown is described in the
 [Leanpub Flavoured Markdown (LFM) Manual](https://leanpub.com/lfm/read).
 
-## How does Leanpub's current Markua support match the Markua Spec? (M)
+### How does Leanpub's current Markua support match the Markua Spec?
 
 Markua is not yet fully supported on Leanpub.
 
@@ -466,7 +470,7 @@ is based on CommonMark.hs and Pandoc. When this is complete, Leanpub's existing
 Markua Support will continue to be supported unchanged for many years, and will
 be rebranded as "Markua 0.10".
 
-## Differences between LFM and Markua (M)
+### Differences between LFM and Markua
 
 When considering converting between LFM and Markua, it's important to highlight
 all the differences between Markua and LFM.
@@ -512,7 +516,7 @@ The following are the top 10 differences between Markua and LFM.
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
 
-## Structure of this document (M)
+### Structure of this document
 
 The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
 specification of the Markua extensions.
@@ -573,7 +577,7 @@ it has a number of significant benefits:
 5. It means that updating this document to keep it current with the CommonMark
    and GFM specs will be very easy.
 
-## GitHub Flavored Markdown (GFM) extension status (M)
+### GitHub Flavored Markdown (GFM) extension status
 
 Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
@@ -601,7 +605,7 @@ The other three GFM extensions are omitted:
    make sense for, say, a discussion forum. It does not make sense for books and
    courses.)
 
-## About the HTML output (M)
+### About the HTML output
 
 The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.
@@ -659,6 +663,9 @@ is identical to the specified output.
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.
+
+</div>
+
 
 ## What is Markdown?
 
@@ -1473,31 +1480,6 @@ bar</p>
 <p>[a](url &quot;tit&quot;)</p>
 ````````````````````````````````
 
-<div class="extension">
-
-## Entity and numeric character references (M)
-
-In PDF and other non-HTML-based output formats, a Markua Processor may choose
-to do the following for HTML entity and numeric character references:
-
-1. Convert it to the correct character in the font which it is using for body
-   text.
-2. Convert it to a character for missing character, typically which is a box
-   which looks like tofu.
-3. Convert it into an image and insert the image. For example, when encountering
-   `&#x1F602;` (the HTML entity reference to the Unicode code point in
-   hexadecimal of the "face with tears of joy" emoji), a Markua processor can
-   just insert an image of a smiling face with tears of joy.
-
-In HTML and in HTML-based output formats such as EPUB, the entity or numeric
-character reference must be output instead.
-
-In output formats such as MOBI which are typically derived from EPUB, a Markua
-Processor may either output the entity or numeric character reference or it may
-choose to use one of the approaches used for non-HTML output formats.
-
-</div>
-
 
 <div class="extension">
 
@@ -2259,7 +2241,7 @@ The specific directives are discussed next.
 
 <div class="extension">
 
-## The pagebreak directive (M)
+### The pagebreak directive
 
 This is a nod to reality: sometimes an author will really, really want to
 insert a page break.
@@ -2277,12 +2259,7 @@ foo bar baz
 The use of this directive is discouraged. Authors should spend their time
 writing, not formatting.
 
-</div>
-
-
-<div class="extension">
-
-## The mainmatter and backmatter directives (M)
+### The mainmatter and backmatter directives
 
 Most published books have three types of material in them: the front matter,
 the text (or "main matter") and the back matter. (Yes, this applies to courses
@@ -2355,12 +2332,7 @@ appendix, and feel the need for different numbering, will they need to discover
 the section directives. Then, they can add them to their Markua document as
 appropriate.
 
-</div>
-
-
-<div class="extension">
-
-## The insertion directives (dedication, toc, etc.) (M)
+## The insertion directives (dedication, toc, etc.)
 
 With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be
@@ -3404,653 +3376,6 @@ Foo
 
 </div>
 
-
-
-<div class="extension">
-
-## Resources (M)
-
-Markua documents are written in plain text, either in one text file or multiple
-text files. However, modern books and courses sometimes contain more than text.
-Books and courses may embed many kinds of [resources](@).
-
-Resources vary in four different ways:
-
-1. **Type**: `audio`, `code`, `iframe`, `image`, `list`, `math`, `table`,
-   `verbatim`, `video`
-2. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
-3. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
-4. **Location**: Inline, Local, and Web
-
-The list above may make it sound like Markua is somehow incompatible with
-Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
-this is not the case! The changes made by Markua are **purely additive**: the
-syntax for images, fenced code blocks, and tables is a superset of that
-specified by CommonMark and GFM. All images, fenced code blocks and tables
-supported by CommonMark and GFM work in Markua. Markua's changes here are
-additions, not modifications. Markua's resources are an extension, both
-conceptual and in features, of what was already in CommonMark and GFM.
-
-Specifically, the most important thing that resources do is to provide a
-consistent conceptual framework for thinking about all resources, instead of
-just a number of different, unrelated things.
-
-Besides that, resources also add add attribute lists, and type, format and class
-attributes for all resources, including the resources such as images, fenced
-code blocks and tables which are also found in other Markdown dialects.
-
-Attribute lists can be used to specify a figure title and alt text, set an id,
-specify the format, and do other useful things.
-
-If you're familiar with Markdown syntax, you'll note that the syntax for local
-and web resources is similar to Markdown's inline image insertion syntax, and
-that the syntax for inline resources is just the fenced code blocks syntax from
-CommonMark with the addition of format specifiers and attribute lists.
-Furthermore, the image syntax is the inspiration for the syntax of all local and
-web resources.
-
-Note that this section is conceptual, and does not contain HTML mapping which
-serves as tests. Those are contained in subsequent sections about each resource
-type.
-
-If any resource is missing during book or course generation, a Markua processor
-should insert something like the "missing image" often seen on web pages into
-the book or course.
-
-TODO
-
-### Resource Types
-
-There are nine types of resources:
-
-1. `audio`
-2. `code`
-3. `iframe`
-4. `image`
-5. `list`
-6. `math`
-7. `table`
-8. `verbatim`
-9. `video`
-
-Each type of resource has a number of supported formats. Any of the nine
-resource types can be inserted as a local resource or web resource, and many of
-the resource types can also be inserted as an inline resource.
-
-### Resource Formats
-
-TODO
-
-The **Format** is the format of the resource. It can be specified with the
-`type` attribute, or inferred from the file extension (discussed below).
-This is important information to help the Markua Processor handle the
-resource correctly.
-
-### Resource Classes
-
-TODO
-
-The **Class** determines whether, and how, the resource is presented in a
-particular list of resources near the beginning of the book. The `span`
-class is special, in that it never shows up in a list of resources. All other
-classes of resource may show up in a list of resources, grouped by their
-class. The class is completely orthogonal to the type or format of a
-resource. For example, all resources in a book could just be categorized as
-in the `span` or `figure` class. This would result in a List of Figures
-near the beginning of the book, which listed all resources of class figure,
-regardless of their `type` (e.g. `image`, `code`, `table`, etc.) or their
-`format` (e.g. `jpg`, `ruby`, `csv`, etc.)
-TODO  Regardless of
-their type or format, resources can be listed in different lists of
-classes of resources near the beginning of a book. For example, a book may
-choose to only categorize resources as spans or figures. 
-lists of
-r the category of the resource as far as the Markua Processor
-is concerned. The class can be used to differentiate identical types of
-Markua resources in various lists, such as a List of Lemmas, List of Poems,
-or List of Theorems. When a resource is inserted without an attribute list,
-either in a span (such as an emoji in a sentence) or in a block (such as an
-image, list or table with no caption), the the `class` is implicitly set to
-`span`. Resources with a class of `span` do not show up in any list of
-figures. The `class` attribute is discussed further below.
-
-
-### Resource Locations
-
-TODO
-
-The **Location** is the location of the resource, when encountered by the
-Markua Processor. There is no attribute for this; it is inferred from the
-location.
-* An inline resource is included directly in a Markua manuscript file.
-* A local resource is located in the `resources` directory which accompanies
-the Markua manuscript (or in a similar conceptual location for a web-based
-Markua Processor).
-* A web resource is on the web, accessed via `http://` or `https://`.
-
-A resource is either considered a local, web or inline resource based on its
-location:
-
-Local Resource
-: The resource is stored along with the manuscript--either in a `resources`
-directory on a local filesystem, or uploaded to the same web service where the
-Markua document is being written.
-
-Web Resource
-: The resource is referred to via an `http` or `https` URL.
-
-Inline Resource
-: The resource is defined right in the body of a Markua document.
-
-#### Local resources
-
-If local resources are used, all local resources must be stored inside a
-`resources` directory, or one of its subdirectories. The `resources` directory
-is not part of the path to the resource.
-
-Here's how the paths to local resources work:
-
-1. An image called `foo.jpg` in the `resources` directory should be referred to
-   as `![](foo.jpg)`, but can also be referred to as `![](resources/foo.jpg)`.
-2. An image called `bar.png` in a subdirectory `images` of the `resources`
-   directory should be referred to as `![](images/bar.png)`, but can also be
-   referred to as `![](resources/images/foo.jpg)`.
-3. For security reasons, leading slashes `/` and navigating upward (`../`) are
-   not allowed: `![](/foo.jpg)`, `![](/images/bar.png)` and `![](../foo.jpg)`
-   are all illegal.
-
-The reason that paths can either include or omit the resources directory is
-simple: including it makes it a simple relative path, which means that
-Markdown-aware tools that support, say, external images will just work. However,
-omitting it is nice to type, so this is something which should be supported as
-well. And the reason the resources directory exists is to keep the Markua
-manuscript file(s) separate from the resources, to reduce clutter.
-
-Nested directory trees work as well. A file called `foo.rb` in a
-`ch1/examples/ruby` directory tree inside the `resources` directory is referenced
-as `![](ch1/examples/ruby/foo.rb)` or as `![](resources/ch1/examples/ruby/foo.rb)`.
-
-Markua does not specify whether there are any subdirectories of the `resources`
-directory, or what their names are. Since any subdirectories have their names as
-part of the path to the resource, authors can do whatever they want. For example,
-you can create subdirectories of the `resources` directory for different types of
-resource, such as `audio`, `code`, `images`, etc., but you can also just put them
-all in the `resources` directory together. To be clear: the names of the
-directories have no meaning, and do not restrict the formats of what can go inside
-them.
-
-If you are using a hosted service to write in Markua, this service can store
-resources wherever it wants. However, if they provide a download (say as a zip
-file) they should create the resources directory and provide the uploaded
-resources in that directory. If a nested structure is used, it should be exported
-that way--if a web service produces paths which reference images inside an images
-directory (e.g. as `images/foo.png`), then the zip file containing an export
-should contain a `resources` directory which contains an `images` subdirectory
-with the images.
-
-#### Web resources
-
-If web resources are supported, both `http:` and `https:` resources should be
-supported.
-
-Web resources are identified by the absolute URL of the resource on the internet.
-
-#### Inline resources
-
-Certain types of resources can be inserted inline in a Markua document:
-
-* `code`
-* `image` (of SVG format only)
-* `list`
-* `math` (either `latexmath` or `asciimath`)
-* `table`
-* `verbatim`
-
-Since an SVG image is just XML text, it can be contained inline in the text of a
-Markua document. This is not true for binary resources like PNG or JPEG images
-or any type of audio or video file--these can only be local or web resources.
-
-The syntax for SVG images is discussed later.
-
-
-## Verbatim Resources (M)
-
-TODO
-
-Since resources can...
-
-In order to prevent cycles (and infinitely long books!), resources are **NOT**
-allowed to include other resources: only a Markua document in the root
-`manuscript` directory can include resources, and all resources must live inside
-the `resources` directory or in a subdirectory inside of it, with nested
-subdirectories permitted.
-
-Because of this limitation, a Markua Processor which is building an AST
-(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
-traversal of the AST, and when it encounters a resource of type `markua` it
-should then parse the resource as Markua and replace the Markua resource with
-the subtree which is the result of parsing the Markua resource, and there is no
-need to do this recursively.
-
-
-## Resource Attribute Lists
-
-TODO
-
-All resources can be inserted as figures. Figures are the normal case for how a
-resource is inserted. In many Markua documents, they will be most or all of the
-resources.
-
-The syntax for a local or web resource inserted as a figure is as follows:
-
-~~~
-{key: value, comma: separated, optional: attribute_list}
-![optional alt text](resource_path_or_url "Optional Figure Title")
-~~~
-
-The syntax for an inline resource inserted as a figure is as follows:
-
-~~~
-{key: value, comma: separated, optional: attribute_list}
-```optional_format
-inline resource content (default format is `guess` with backticks)
-```
-~~~
-
-The number of backticks can be three or more. This is just the fenced code blocks
-syntax, which is discussed later.
-
-You can also insert an inline resource as a figure using three or more tildes
-(`~`) as the delimiter:
-
-```
-{key: value, comma: separated, optional: attribute_list}
-~~~optional_format
-inline resource content (default format is `text` with tildes)
-~~~
-```
-
-
-## Common Resource Attributes (M)
-
-TODO
-
-
-### Resource insertion methods
-
-Resources can be inserted either as figures or as spans.
-
-#### Figures
-
-
-##### Figure attributes
-
-A figure can also have attributes. The supported attributes vary based on the
-type of resource, but **all** resources inserted as figures support the
-`class`, `format`, `title` and `type` attributes. (As such, these four
-attributes are discussed here, instead of on the specific resource types below.)
-
-`class`
-: All attribute lists support a `class` attribute. When used in figures, this is
-the class of the figure. This can be used for styling, and it can also be used
-by Markua Processors which group figures by classes. Recommended values of the
-`class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor
-could recognize these class attributes and produce a List of Poems, List of
-Theorems, or List of Lemmas near the beginning of the document, much like any
-other resource types. The `class` attribute is especially handy when used with a
-resource of type `markua`.
-
-`format`
-: This is the resource format. Different resource types have different legal
-values for format.
-
-`title`
-: This is text which is shown near the figure, typically above or below it. A
-Markua Processor can choose where to position titles based on any criteria it
-chooses. For example, a Markua Processor can position all titles above or
-below figures, or use a different behaviour based on the resource format (e.g.
-table titles above, image titles below). Note that the figure title itself
-may contain the Markua text formatting specified earlier (e.g. bold, italic).
-This text is also displayed for the figure wherever the figure is listed
-(e.g. List of Illustrations, Table of Tables, etc.).
-
-`type`
-: This is the resource type. This is usually inferred from the format instead of
-being specified.
-
-The default value of the `class` attribute is `none` when the resource is
-inserted as a span. When a resource is inserted as a figure, the default value
-of the `class` attribute is determined by the `type` of resource:
-
-* A resource with type `audio` defaults to a class of `recording`.
-* A resource with type `code` defaults to a class of `listing`.
-* A resource with type `image` defaults to a class of `figure`.
-* A resource with type `markua` defaults to a class of `none`. Other values
-  of the `class` for `markua` resource types include `poem` and `list`.
-  The `none` class is special: it means that the resource is not inserted in any
-  special way, but is just inserted as though the author typed it in the
-  manuscript. This enables this class of `markua` resource to be used for text
-  substitution.
-* A resource with type `math` defaults to a class of `equation`.
-* A resource with type `video` defaults to a class of `footage`.
-
-To be clear: other than the `none` value, there is nothing magical about the
-values of the `class` attribute. An author can set it to whatever they want.
-There is a document setting called `list-figures-by-class` which determines
-whether the class is used to group figures appropriately. This enables an author
-to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
-List of Sonnets, produced entirely dynamically based on the values of the
-`class` attribute, instead of just a `List of Figures`. See the Document
-Settings section for more information.
-
-Figures can have both alt text and a figure title. These are distinct things.
-We will discuss the figure title first and the alt text second.
-
-##### Figure titles
-
-A resource which is inserted as a figure can have a figure title.
-
-This title shows up in two places in the output:
-
-1. Near the resource, typically above or below it, per the preference of the
-Markua Processor.
-2. Based on the resource type, either in the List of Illustrations, List of
-Tables or Table of Figures, if they are generated for the book. This text
-should also be a crosslink to the title inserted near the figure itself.
-
-The title for a figure can provided in one of two ways:
-
-1. In quotes after the filename or URL of a local or web resource.
-   ~~~
-   ![](algorithm.rb "My Amazing Algorithm")
-   ~~~
-2. In the attribute list above the resource.
-   ~~~
-   {title: "My Amazing Algorithm"}
-   ![](algorithm.rb)
-   ~~~
-
-The first choice is clearly shorter, as well as more pleasant to write and to
-read.
-
-Since inline resources do not use the bracket syntax, any titles must be added
-in the attribute list:
-
-~~~
-{title: "My Amazing Algorithm"}
-```ruby
-puts "hello world"
-```
-~~~
-
-##### Figure alt text
-
-A figure can have alt text, as long as the type of resource being inserted
-supports alt text. The resource location does not matter: local, web and inline
-resources all support alt text.
-
-The four types of resource which can have alt text when inserted as a figure are
-`audio`, `image`, `math` and `video`. Resources of type `code`, `markua` and
-`table` do not support alt text, since they themselves are just text.
-
-Alt text is text which is intended to take the place of the resource if the
-resource itself cannot be seen. In the case of images, the obvious use case is
-for readers with visual disabilities who are using a screen reader, but it also
-includes audiobooks and ebook readers which often do not support embedded
-images, audio and video, and which may have a hard time displaying math.
-
-Here's an example of good alt text:
-
-~~~
-![a red apple, possibly a McIntosh or Spartan](fruit.jpg)
-~~~
-
-You can also use an attribute list:
-
-~~~
-{alt: "a red apple, possibly a McIntosh or Spartan"}
-![](fruit.jpg)
-~~~
-
-The alt text should **not** have the same content as the figure title, if the
-figure title is present. (Imagine the annoyance for someone with a visual
-disability having their screen reader read identical alt text and figure titles
-to them throughout an entire book!)
-
-Instead, the alt text should be descriptive of the image content, while the figure
-title can be more creative. For example, a figure title may be "Washington
-Crossing the Delaware" and the alt text could be "Denzel Washington on a boat in
-a river." Having good alt text would enable readers who cannot see the image to
-still get the joke which the figure title makes.
-
-##### Figure titles and alt text together
-
-These are some examples of figures with both alt text and a figure title:
-
-~~~
-![a red apple](mac.jpg "The Original Mac")
-
-{alt: "a red apple", title: "The Original Mac"}
-![](mac.jpg)
-
-{alt: "a blue circle", title: "Earth From Space (Simplified)"}
-```!
-<svg width="20" height="20">
-  <circle cx="10" cy="10" r="9" fill="blue"/>
-</svg>
-```
-~~~
-
-##### The figure attribute list takes precedence
-
-It is always an error to specify an attribute both in the attribute list for a
-figure and in the syntactic sugar locations, either after the backticks or in the
-square brackets.
-
-However, if this is done, then the value in the attribute list takes precedence.
-
-In the following figure, the format is `text` not `ruby`:
-
-~~~
-{format: text}
-```ruby
-puts "hello world"
-```
-~~~
-
-In the following figure, the alt text would be "foo" not "bar":
-
-~~~
-{alt: foo}
-![bar](foo.png)
-~~~
-
-In the following figure, the title text would be "foo" not "bar":
-
-~~~
-{title: foo}
-![](foo.png "bar")
-~~~
-
-Again, the Markua Processor should treat all of these as an error.
-
-#### Spans
-
-Inserting a resource as a span means to continue the block context which it is
-in, instead of starting a new leaf block for the resource.
-
-There are three types of resources which can be inserted as spans:
-
-1. Single-line inline code resources.
-2. A `math` resource (regardless of location) without a title.
-3. A local or web `image` resource without a title.
-
-An inline code resource can be inserted as a span using the following syntax:
-
-~~~
-backtick `resource`format backtick
-~~~
-
-The math formats, including the syntactic sugar for them, are discussed later.
-
-A local image resource without a title can be inserted as expected:
-
-~~~
-This is an ![a red apple](mac.jpg) not a banana.
-~~~
-
-A web image resource without a title can be inserted as expected:
-
-~~~
-This is an ![a red apple](http://markua.com/mac.jpg) not a banana.
-~~~
-
-Note that inline image resources cannot be inserted as spans, since even SVG is
-so verbose it would make the resulting document very hard to read.
-
-Also, note that if you wish to insert an image in the middle of a sentence,
-chances are you are trying to insert an emoji. You can do this with a span image,
-if you want exact control of what your emoji look like. However, note that emoji
-also have special support in Markua, described [here](#emoji).
-
-Finally, if a title is present, the Markua Processor must treat the resource
-as having implicit newlines before and after it, so that it is handled as a
-figure. (Figure titles do not make sense inside of sentences.)
-
-~~~
-This is ![a red apple](mac.jpg "The Original Mac") not a banana.
-~~~
-
-##### Span attribute lists can be used to set the format
-
-When a resource is inserted as a span, the resource is inserted as part of the
-flow of text of a paragraph with no newlines before or after it. A span resource
-is intended to be extremely short and simple.
-
-By default, the type of an inline resource is `code` and the format is `guess`.
-Math and SVG images override this using special syntaxes, discussed later.
-
-However, to support rare use cases, any span can have an attribute list. The
-attribute list on a span is specified immediately after the closing backtick.
-Span attribute lists can be used to set the format explicitly.
-
-For example, this resource would be formatted as Ruby code:
-~~~
-Yada yada `puts "hi"`{format: ruby} yada yada.
-~~~
-
-
-### Resource formats
-
-Both the type and the format can be specified in an attribute list, by the
-respective `type` and `format` attributes.
-
-The type and the format can also be inferred from the file extension and, in the
-case of web resources, the URL.
-
-Markua Processors must interpret all unspecified file extensions as specifying a
-resource of type `code` with a format of `guess`, unless the resource is a web
-resource.
-
-If the type and format are not specified and the resource is a web resource, the
-Markua Processor may use the domain to decide what type of resource to assume.
-For example, a domain of `youtube.com` may be assumed to be of type `video`, a
-domain of `instagram.com` may be assumed to be of type `image`, and a domain of
-`github.com` may be assumed to be of type `code`.
-
-If the type is not specified in the attribute list, the format determines the
-type. The formats can either be specified by the `format` attribute or (in most
-cases) inferred from the file extension for local and web resources. (Inline
-resources obviously have no file extension, since they are contained in the body
-of a Markua document.)
-
-As an author, all you typically do is provide the correct file extension for a
-local resource or set the format in the attribute list. Markua recognizes the
-format, and uses it to determine the type. If the format is unrecognized, then
-the resource is treated as a resource of type `code` and with a format of
-`guess`.
-
-It's important to emphasize that the type and format of a resource can be
-overridden using an attribute list. The file extensions just set the default
-type and format that are inferred.
-
-In rare instances, it is useful to override the `type` and `format` which have
-been inferred by the Markua Processor based on the file extension of the
-resource. This is done by specifying a type and/or format in the attribute list
-of the resource.
-
-The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.
-
-#### Audio resource formats
-
-* `aac` - AAC audio - `.aac`, `.m4a`
-* `mp3` - MP3 audio - `.mp3`
-* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
-* `wav` - WAV audio - `.wav`, `.wave`
-
-#### Image resource formats
-
-* `jpeg` - JPEG image - `.jpg` or `.jpeg`
-* `gif` - GIF image - `.gif`
-* `png` - PNG image - `.png`
-* `svg` - SVG image - `.svg`
-* `svgz` - SVG image (zipped) - `.svgz`
-
-#### Math resource formats
-
-Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
-Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
-There is a simple reason for this: Markua needs LaTeX math for math, but only
-needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
-file with an extension of `.tex` that just contains LaTeX code and you want to
-display it, then add a `{type: code, format: latex}` attribute list.
-
-* `asciimath` - AsciiMath math - `.asciimath`
-* `latexmath` - LaTeX math - `.tex`
-
-Note that the assumption is that AsciiMath will almost always be used as an
-inline resource. So, the `.asciimath` file extension is deliberately verbose.
-
-#### Table resource formats
-
-Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)
-
-* `markua` - Markua table - `.tbl`
-* `csv` - Comma-Separated Values table - `.csv`
-
-#### Markua resource formats
-
-The `markua` resource format is always `markua`. The way that `markua` resources
-are differentiated is via their `class` attribute.
-
-* `markua` - Markua - `.md`
-
-#### Video resource formats
-
-Note that .mp4 is used for MP4 video, not MP4 AAC audio.
-
-* `mp4` - MP4 video - `.mp4`
-* `webm` - WebM video - `.webm`
-
-#### Code resource formats
-
-Note that most code languages are not specified, and are guessed at with a format
-of `guess`. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.
-
-* `text` - Unformatted code (with no syntax highlighting)
-* `guess` - Formatted code, with the language guessed at - any other file
-  extension not listed previously in the sections above
-
-</div>
-
-
 ## Indented code blocks
 
 An [indented code block](@) is composed of one or more
@@ -4675,714 +4000,6 @@ Closing code fences cannot have [info strings]:
 </code></pre>
 ````````````````````````````````
 
-
-
-<div class="extension">
-
-## Code resources (M)
-
-Code can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to code as to all other resources.
-
-As discussed, code cannot have alt text. It's just text. If any alt text is
-provided for a code resource, it is ignored.
-
-Markua specifies only one specific file extension to be associated with a type
-of `code`: the `.txt` extension, which is for the format of `text`. However,
-Markua Processors must interpret **all** unspecified file extensions as
-specifying a resource of type `code` with a format of `guess`.
-
-Regardless of whether syntax highlighting is supported and the programming
-language is detected, all code must be formatted as `monospaced text` by Markua
-Processors.
-
-The `text` format means to not do any syntax highlighting as well.
-
-The `guess` format is a request for the Markua Processor to guess at the
-programming language based on the file extension and/or the syntax of the code
-itself. Then, if the detected language corresponds to a particular programming
-language which the Markua Processor recognizes, and if the Markua Processor
-supports syntax highlighting, then it can format the resource as nicely
-syntax-highlighted code. Syntax highlighting is entirely optional in Markua
-Processors. If a Markua Processor does not support syntax highlighting, and/or
-if it cannot detect a matching supported programming language, then it must
-format the code as though the format was `text`--i.e. to format it as
-unformatted monospaced text.
-
-Besides the `text` and `guess` values of the format attribute, you can also
-specify the programming language by setting the format attribute to a specific
-programming language. This is more reliable than `guess`. Unlike other resource
-types, Markua does not specify the complete set of the values of the `format`
-attribute--there are so many programming languages in the world, and new ones
-are added so frequently, that doing so would be impractical.
-
-However, while a complete set of the values of the `format` attribute is not
-specified, Markua does specify the `console` value of the `format` attribute to
-indicate console input. A Markua Processor should format console input as such.
-(For example, Leanpub uses the open source Pygments library for its code
-formatting, and Pygments handles `console` format correctly, so Leanpub gets this
-for free.)
-
-The default value of the format attribute for code is complex:
-
-1. For code which is inserted as a span (which is only supported with inline
-   resources), the default format is `text`.
-2. For code which is inserted as a figure which is inserted as an inline
-   resource using three tildes, the default format is `text`.
-3. For all other code, the default format is `guess`. This includes local and web
-   resources inserted as figures, and code inserted as an inline figure using
-   three backticks.
-
-Note that the default format can be overridden by specifying it via an attribute
-list, or after the three backticks in syntactic sugar.
-
-### Supported Attributes for Code
-
-The following are the supported attributes for code resources, in addition to the
-`class`, `format`, `title` and `type` attributes which all resources support.
-
-`line-numbers`
-: This determines whether the code sample shows line numbers. Legal values are
-`true` or `false`. The default value is `false`. Any value other than `true` is
-interpreted as `false`.
-
-`number-from`
-: If line numbers are shown, this lets you override the starting number of the
-line numbers. The default value is `1`.
-
-`crop-start`
-: Sometimes it's desirable to only show part of a code resource defined in an
-external file as the code example. The `crop-start` and `crop-end` attributes let
-you accomplish this. The `crop-start` attribute defines the line which represents
-the first line included from the resource. For example, `{crop-start: 10,
-crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are
-shown and are numbered as lines 10-15. The default value is 1, which is the first
-line of the file.
-
-`crop-end`
-: This attribute ends the range started with crop-start. The default value of
-`crop-end` is to be omitted, which is equivalent to specifying the last line of
-the file.
-
-#### Default Value of the `format` attribute in Inline Code Samples
-
-The default value of the `format` attribute for a code resource inserted as a
-figure varies based on context.
-
-If the code resource is a local or web resource, it defaults to `guess`.
-
-If the code resource is an inline resource, the default varies based on the
-delimiter, and whether the code is inserted as a span or as a block.
-
-With three backticks the default format is `guess`, and with three tildes, the
-default format is `text`. This way, you can vary the default without having to
-type an attribute list: if you want the code language guessed at, use backticks;
-if you don't, use tildes. Of course, you can specify any attributes you wish
-with either delimiter, and specified attributes override default ones. The only
-reason there are different defaults are to make things easier to type.
-Programmers refer to such niceties as "syntactic sugar".
-
-The default value of block code resources inserted with three backticks can be
-overridden from `guess` to some other value by setting by the
-`default-code-language` attribute on the entire Markua document. (This attribute
-has no effect on resources inserted with three tildes.) The default value of
-code span resources inserted as spans with single backticks can be overridden
-from the default value of `text` to some other value by setting the
-`default-code-span-language` on the entire Markua document.
-
-### Local Code Resources
-
-Local code resources can be inserted as a figure.
-
-This first figure will be a type of code and a format of `guess`. A Markua
-Processor which associates `.rb` file extensions with Ruby code will treat this
-as Ruby code; a Markua Processor which has no association for `.rb` files will
-treat it as plain text:
-
-~~~
-Here's a paragraph before the figure.
-
-![](hello.rb "Hello World in Ruby")
-
-Here's a paragraph after the figure.
-~~~
-
-That is equivalent to:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: guess}
-![](hello.rb "Hello World in Ruby")
-
-Here's a paragraph after the figure.
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: ruby}
-![](hello.rb "Hello World in Ruby")
-
-Here's a paragraph after the figure.
-~~~
-
-Note that the title is optional in all figures:
-
-~~~
-Here's a paragraph before the figure.
-
-![](hello.rb)
-
-Here's a paragraph after the figure.
-~~~
-
-### Web Code Resources
-
-Web code resources function identically to how local code resources work,
-including the significance of file extensions. The only differences is that the
-files are on the web.
-
-This will be a type of code and a format of `guess` since the file extension is
-not specified:
-
-~~~
-![](http://markua.com/hello.rb "Hello World in Ruby")
-~~~
-
-That is equivalent to:
-
-~~~
-{format: guess}
-![](http://markua.com/hello.rb "Hello World in Ruby")
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-{format: ruby}
-![](http://markua.com/hello.rb "Hello World in Ruby")
-~~~
-
-### Inline Code Resources
-
-Inline code resources are the most flexible way to insert code. They are the only
-way to insert code as a span resource, and the most straightforward way to add
-short code examples as figures.
-
-The great thing about inline code resources, either as spans or figures, is that
-they work the same way as they do in CommonMark and GFM, with small additions
-by Markua.
-
-#### No Attribute Lists or Format Specifiers on Indented Code Blocks
-
-Indented code blocks are supported for compatibility with CommonMark and GFM.
-However, no attribute lists or format specifiers can be used. If you want to use
-them, use a fenced code block.
-
-#### Attribute Lists and Format Specifiers on Fenced Code Blocks
-
-Fenced code blocks, discussed earlier, are how to insert inline code resources
-as figures. These can have attribute lists or format specifiers.
-
-This will be a type of code and a format of `guess` since three backticks are
-used and since the format is not specified:
-
-~~~
-Some paragraph.
-
-```
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-That is equivalent to:
-
-~~~
-Some paragraph.
-
-```guess
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-If you don't want to take chances you can do this to explicitly specify the
-format:
-
-~~~
-Some paragraph.
-
-```ruby
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-This Ruby code may be formatted as such if the Markua Processor understands
-`ruby`. If not, the `ruby` format will be ignored.
-
-If you don't like syntactic sugar you can do:
-
-~~~
-Some paragraph.
-
-{format: ruby}
-```
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-If you want a figure title, you can add it to the attribute list with any of
-the above. For example:
-
-~~~
-Some paragraph.
-
-{title: "Hello World in Ruby"}
-```ruby
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-Finally, if you want the code to definitely not get syntax highlighted, you can
-force format to be `text` in one of two ways.
-
-First, you can set it explicitly:
-
-~~~
-Some paragraph.
-
-```text
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-Second, you can use three tildes instead of three backticks, since the default
-with tildes is `text` not `guess`:
-
-```
-Some paragraph.
-
-~~~
-puts "hello"
-~~~
-
-Some paragraph.
-```
-
-As discussed previously, console input and output should be formatted as such by
-a Markua Processor:
-
-~~~
-```console
-$ git init
-Initialized empty Git repository in /path/to/repo
-```
-~~~
-
-Finally, it's important to note that when you are writing about other inline
-formats, such as SVG or AsciiMath, what you are really doing is creating a code
-resource. This is shown in the sections below, which discuss SVG and AsciiMath,
-but this applies more broadly.
-
-#### Attribute Lists on Code Spans
-
-Code spans are discussed later in the spec. While code spans are done just as in
-CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
-This serves as a hint to any syntax highlighter:
-
-~~~
-Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
-~~~
-
-### Marking Code as Added or Deleted
-
-Markua supports marking code as added or deleted, which can be helpful if you are
-writing a computer programming book and want to indicate what code should be
-added or removed to a larger program.
-
-The way to do this is to add special comment lines to your code.
-
-The magic words are `markua-start-insert`, `markua-end-insert`,
-`markua-start-delete` and `markua-end-delete`. Any line containing one of those
-words will be removed completely by a Markua Processor before being inserted into
-the output.
-
-The Markua Processor will then be able to determine which code is being deleted
-or inserted, and format it accordingly. The recommended way for a Markua
-Processor to do this is to make code which is being inserted get **`bolded`**,
-and to make code which is getting deleted to be put in ~~`strikethrough`~~.
-
-Finally, while syntax highlighting is optional in a Markua Processor, if a Markua
-Processor does support syntax highlighting it is allowed for the Markua Processor
-to not do any syntax highlighting when there is the presence of any of any
-special `markua-*` comments. Syntax highlighting may make it harder to notice the
-added and removed code, if they are formatted with bold and strikethrough
-respectively.
-
-### Line Wrapping in Code Resources
-
-Code resources should have newlines added by the author to ensure that automatic
-line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
-all code is visible on a page, and *may* add continuation characters (like the
-backslash `\` character) in the output to indicate that a line has been
-automatically wrapped. However, adding a continuation character is not a
-requirement, nor is the choice of which continuation character is used.
-
-</div>
-
-
-<div class="extension">
-
-## Markua Resources (M)
-
-Markua resources (i.e. a resource with a `type` of `markua`) can be a local, web
-or inline resource, just like any other resource, and the same resource syntax
-applies to Markua resources as to all other resources.
-
-There are three main use cases for a Markua resource:
-
-1. Inserting a specific `class` of resource, such as a `poem`.
-2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
-   used in many places and/or sourced from a third party.
-3. Controlling the behaviour of fonts or whitespace for specific types of
-   text, such as poetry.
-
-The following are the supported attributes for resources of type `markua`:
-
-`type`
-: For a Markua resource, the `type` is `markua`. This can be specified
-explicitly, and it can be inferred as the type for all files with a `.md`
-.extension.
-
-`class`
-: This can define a specific `class` of resource, such as a `poem` or `list`.
-The default is `none`, which means that the resource is not inserted in any
-special way, but is just inserted as though the author typed it in the
-manuscript. This enables this class of `markua` resource to be used for text
-substitution, without showing up in some list of resources near the front of the
-book. There is semantic sugar to produce inline resources of type `markua` and
-class `poem`; see below for details.) A Markua Processor can produce a list of a
-given class of resource near the beginning of the document, such as a List of
-Poems or a List of Lists.
-
-`monospaced`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor
-must use a monospaced font to output the text in the resource. If false, the
-Markua Processor may use whatever font (proportional or monospaced) it is
-configured to use to output Markua text. The value of `true` can be useful for
-certain types of poetry, for example.
-
-`format`
-: This is the resource format. For a Markua resource, the format is always
-just `markua`, and should be ignored by a Markua Processor.
-
-`title`
-: This is text which is shown near the figure, typically above or below it. A
-Markua Processor can choose where to position titles based on any criteria it
-chooses. For example, a Markua Processor can position all titles above or
-below figures, or use a different behaviour based on the resource format (e.g.
-table titles above, image titles below). Note that the figure title itself
-may contain the Markua text formatting specified earlier (e.g. bold, italic).
-This text is also displayed for the figure wherever the figure is listed
-(e.g. List of Illustrations, Table of Tables, etc.).
-
-`whitespace`
-: `semantic` or `verbatim`. The default is `semantic`. With the default value of
-`semantic`, whitespace is processed the way that Markua handles it. With the
-value of `verbatim`, leading whitespace, internal whitespace, trailing
-whitespace and newlines must all be preserved verbatim as typed. This can be
-useful for certain types of poetry, such as indenting the last two lines of a
-sonnet. To be clear, this includes all spaces and newlines, regardless
-of whether they are leading, internal or trailing spaces, and regardless of the
-number of consecutive leading, internal or trailing spaces or the number of 
-newlines. Now, while the whitespace is preserved, it is rendered using either a
-proportional font or a monospaced one based on the value of the `monospaced`
-attribute. If whitespace is verbatim, the `markua` resource should have newlines
-added by the author to ensure that automatic line wrapping is not relied upon.
-Markua Processors may wrap lines to ensure that all the text is visible on a
-page, and *may* add continuation characters (like the backslash `\` character)
-in the output to indicate that a line has been automatically wrapped by the
-Markua Processor. Obviously, seeing a continuation character is in poetry is
-terrible, so the author should consider this a mistake that needs to be fixed by
-manually line wrapping.
-
-### Local Markua resources
-
-Local Markua resources look like many other resources inserted as figures:
-
-~~~
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-default to semantic whitespace:
-
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-have its whitespace preserved (for indenting the last two lines):
-
-{whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
-
-{class: poem, whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
-
-{monospaced: false, class: poem, whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
-
-Here's a list of Canadian cities sorted by population. This implicitly has a
-`class` of `none`:
-
-![](cities.md "Canadian Cities by Population")
-
-Here's that same list, but with an explicit class of `none`:
-
-{class: none}
-![](cities.md "Canadian Cities by Population")
-
-Here's that same list, but with a class of `list` so it shows up in a List of
-Lists, if there is one:
-
-{class: list}
-![](cities.md "Canadian Cities by Population")
-
-Here's some legal boilerplate:
-
-![](tos.md "Terms and Conditions")
-
-Here's some legal boilerplate, with the explicit class of `none`:
-
-{class: none}
-![](tos.md "Terms and Conditions")
-
-Here's an E. E. Cummings poem:
-
-{monospaced: true, class: poem, whitespace: verbatim}
-![](iwillbe.md "I Will Be")
-~~~
-
-With a non-`.md` extension, the type of `markua` must be stated:
-
-~~~
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim}
-![](sonnet130.txt "Sonnet 130")
-
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](sonnet130.txt "Sonnet 130")
-
-Here's some legal boilerplate:
-
-{type: markua}
-![](tos.txt "Terms and Conditions")
-
-Here's an E. E. Cummings poem:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-![](iwillbe.txt "I Will Be")
-~~~
-
-### Web Markua resources
-
-Web Markua resources function identically to how local Markua resources work,
-including the significance of file extensions. The only difference is that the
-files are on the web.
-
-~~~
-Here's a Shakespearean sonnet:
-
-![](http://markua.com/sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet:
-
-{type: markua}
-![](http://markua.com/sonnet130.txt "Sonnet 130")
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](http://markua.com/sonnet130.txt "Sonnet 130")
-
-Here's a paragraph after the figure.
-~~~
-
-### Inline Markua resources
-
-You might wonder why an inline resource of type `markua` would be supported at
-all. After all, isn't it just Markua text?
-
-
-Defaults:
-
-
-
-
-There are three reasons it is supported:
-
-1. for consistency
-2. for the attribute lists, which allow configurable whitespace, etc.
-3. so that the resource can show up in a list of resources
-
-To create an inline resource of type `markua`, you use the fenced code block
-syntax, and you can use an attribute list to specify the type of resource.
-
-You can also use one of a handful of syntactic sugar options:
-
-`&`
-: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
-
-`&&`
-: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
-
-`*`
-: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
-
-`**`
-: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
-
-This is made clear in the following example:
-
-~~~
-Here's part of a poem:
-
-```&
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```&&
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```*
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-Here's part of a poem:
-
-```**
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-~~~
-
-I'm not a poet, but I know it.
-
-Finally, here's an example of an inline Markua resource being used for a list:
-
-~~~
-{class: list, title: "Canadian Cities by Population"}
-```
-1. Toronto
-2. Vancouver
-```
-~~~
-
-Despite the seeming generality of this example, it's actually fairly niche:
-most lists are just lists, not resources, and do not need to be wrapped in a
-resource.
-
-### But what if I want every character taken literally?
-
-If you want to type poetry where every character is taken exactly literally,
-instead of being potentially interpreted as Markua formatting, you need to use
-a code block with a format of text for that:
-
-```````````````````````````````` example
-```text
-*this* isn't italic
-and **this** is not bold
-* * * cherry blossoms * * *
-```
-.
-<pre><code>*this* isn't italic
-and **this** is not bold
-* * * cherry blossoms * * *
-</code></pre>
-````````````````````````````````
-
-</div>
 
 
 <div class="extension">
@@ -6257,6 +4874,1363 @@ If there are no rows in the body, no `<tbody>` is generated in HTML output:
 ````````````````````````````````
 
 </div>
+
+
+
+
+<div class="extension">
+
+# Resources (M)
+
+Markua documents are written in plain text, either in one text file or multiple
+text files. However, modern books and courses sometimes contain more than text.
+Books and courses may embed many kinds of [resources](@).
+
+Resources vary in four different ways:
+
+1. **Type**: `audio`, `code`, `iframe`, `image`, `list`, `math`, `table`,
+   `verbatim`, `video`
+2. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
+3. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
+4. **Location**: Inline, Local, and Web
+
+The list above may make it sound like Markua is somehow incompatible with
+Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
+this is not the case! The changes made by Markua are **purely additive**: the
+syntax for images, fenced code blocks, and tables is a superset of that
+specified by CommonMark and GFM. All images, fenced code blocks and tables
+supported by CommonMark and GFM work in Markua. Markua's changes here are
+additions, not modifications. Markua's resources are an extension, both
+conceptual and in features, of what was already in CommonMark and GFM.
+
+Specifically, the most important thing that resources do is to provide a
+consistent conceptual framework for thinking about all resources, instead of
+just a number of different, unrelated things.
+
+Besides that, resources also add add attribute lists, and type, format and class
+attributes for all resources, including the resources such as images, fenced
+code blocks and tables which are also found in other Markdown dialects.
+
+Attribute lists can be used to specify a figure title and alt text, set an id,
+specify the format, and do other useful things.
+
+If you're familiar with Markdown syntax, you'll note that the syntax for local
+and web resources is similar to Markdown's inline image insertion syntax, and
+that the syntax for inline resources is just the fenced code blocks syntax from
+CommonMark with the addition of format specifiers and attribute lists.
+Furthermore, the image syntax is the inspiration for the syntax of all local and
+web resources.
+
+Note that this section is conceptual, and does not contain HTML mapping which
+serves as tests. Those are contained in subsequent sections about each resource
+type.
+
+If any resource is missing during book or course generation, a Markua processor
+should insert something like the "missing image" often seen on web pages into
+the book or course.
+
+TODO
+
+## Resource Types
+
+There are nine types of resources:
+
+1. `audio`
+2. `code`
+3. `iframe`
+4. `image`
+5. `list`
+6. `math`
+7. `table`
+8. `verbatim`
+9. `video`
+
+Each type of resource has a number of supported formats. Any of the nine
+resource types can be inserted as a local resource or web resource, and many of
+the resource types can also be inserted as an inline resource.
+
+## Resource Formats
+
+TODO
+
+The **Format** is the format of the resource. It can be specified with the
+`type` attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.
+
+## Resource Classes
+
+TODO
+
+The **Class** determines whether, and how, the resource is presented in a
+particular list of resources near the beginning of the book. The `span`
+class is special, in that it never shows up in a list of resources. All other
+classes of resource may show up in a list of resources, grouped by their
+class. The class is completely orthogonal to the type or format of a
+resource. For example, all resources in a book could just be categorized as
+in the `span` or `figure` class. This would result in a List of Figures
+near the beginning of the book, which listed all resources of class figure,
+regardless of their `type` (e.g. `image`, `code`, `table`, etc.) or their
+`format` (e.g. `jpg`, `ruby`, `csv`, etc.)
+TODO  Regardless of
+their type or format, resources can be listed in different lists of
+classes of resources near the beginning of a book. For example, a book may
+choose to only categorize resources as spans or figures. 
+lists of
+r the category of the resource as far as the Markua Processor
+is concerned. The class can be used to differentiate identical types of
+Markua resources in various lists, such as a List of Lemmas, List of Poems,
+or List of Theorems. When a resource is inserted without an attribute list,
+either in a span (such as an emoji in a sentence) or in a block (such as an
+image, list or table with no caption), the the `class` is implicitly set to
+`span`. Resources with a class of `span` do not show up in any list of
+figures. The `class` attribute is discussed further below.
+
+
+## Resource Locations
+
+TODO
+
+The **Location** is the location of the resource, when encountered by the
+Markua Processor. There is no attribute for this; it is inferred from the
+location.
+* An inline resource is included directly in a Markua manuscript file.
+* A local resource is located in the `resources` directory which accompanies
+the Markua manuscript (or in a similar conceptual location for a web-based
+Markua Processor).
+* A web resource is on the web, accessed via `http://` or `https://`.
+
+A resource is either considered a local, web or inline resource based on its
+location:
+
+Local Resource
+: The resource is stored along with the manuscript--either in a `resources`
+directory on a local filesystem, or uploaded to the same web service where the
+Markua document is being written.
+
+Web Resource
+: The resource is referred to via an `http` or `https` URL.
+
+Inline Resource
+: The resource is defined right in the body of a Markua document.
+
+#### Local resources
+
+If local resources are used, all local resources must be stored inside a
+`resources` directory, or one of its subdirectories. The `resources` directory
+is not part of the path to the resource.
+
+Here's how the paths to local resources work:
+
+1. An image called `foo.jpg` in the `resources` directory should be referred to
+   as `![](foo.jpg)`, but can also be referred to as `![](resources/foo.jpg)`.
+2. An image called `bar.png` in a subdirectory `images` of the `resources`
+   directory should be referred to as `![](images/bar.png)`, but can also be
+   referred to as `![](resources/images/foo.jpg)`.
+3. For security reasons, leading slashes `/` and navigating upward (`../`) are
+   not allowed: `![](/foo.jpg)`, `![](/images/bar.png)` and `![](../foo.jpg)`
+   are all illegal.
+
+The reason that paths can either include or omit the resources directory is
+simple: including it makes it a simple relative path, which means that
+Markdown-aware tools that support, say, external images will just work. However,
+omitting it is nice to type, so this is something which should be supported as
+well. And the reason the resources directory exists is to keep the Markua
+manuscript file(s) separate from the resources, to reduce clutter.
+
+Nested directory trees work as well. A file called `foo.rb` in a
+`ch1/examples/ruby` directory tree inside the `resources` directory is referenced
+as `![](ch1/examples/ruby/foo.rb)` or as `![](resources/ch1/examples/ruby/foo.rb)`.
+
+Markua does not specify whether there are any subdirectories of the `resources`
+directory, or what their names are. Since any subdirectories have their names as
+part of the path to the resource, authors can do whatever they want. For example,
+you can create subdirectories of the `resources` directory for different types of
+resource, such as `audio`, `code`, `images`, etc., but you can also just put them
+all in the `resources` directory together. To be clear: the names of the
+directories have no meaning, and do not restrict the formats of what can go inside
+them.
+
+If you are using a hosted service to write in Markua, this service can store
+resources wherever it wants. However, if they provide a download (say as a zip
+file) they should create the resources directory and provide the uploaded
+resources in that directory. If a nested structure is used, it should be exported
+that way--if a web service produces paths which reference images inside an images
+directory (e.g. as `images/foo.png`), then the zip file containing an export
+should contain a `resources` directory which contains an `images` subdirectory
+with the images.
+
+#### Web resources
+
+If web resources are supported, both `http:` and `https:` resources should be
+supported.
+
+Web resources are identified by the absolute URL of the resource on the internet.
+
+#### Inline resources
+
+Certain types of resources can be inserted inline in a Markua document:
+
+* `code`
+* `image` (of SVG format only)
+* `list`
+* `math` (either `latexmath` or `asciimath`)
+* `table`
+* `verbatim`
+
+Since an SVG image is just XML text, it can be contained inline in the text of a
+Markua document. This is not true for binary resources like PNG or JPEG images
+or any type of audio or video file--these can only be local or web resources.
+
+The syntax for SVG images is discussed later.
+
+
+## Verbatim Resources (M)
+
+TODO
+
+Since resources can...
+
+In order to prevent cycles (and infinitely long books!), resources are **NOT**
+allowed to include other resources: only a Markua document in the root
+`manuscript` directory can include resources, and all resources must live inside
+the `resources` directory or in a subdirectory inside of it, with nested
+subdirectories permitted.
+
+Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type `markua` it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.
+
+
+## Resource Attribute Lists
+
+TODO
+
+All resources can be inserted as figures. Figures are the normal case for how a
+resource is inserted. In many Markua documents, they will be most or all of the
+resources.
+
+The syntax for a local or web resource inserted as a figure is as follows:
+
+~~~
+{key: value, comma: separated, optional: attribute_list}
+![optional alt text](resource_path_or_url "Optional Figure Title")
+~~~
+
+The syntax for an inline resource inserted as a figure is as follows:
+
+~~~
+{key: value, comma: separated, optional: attribute_list}
+```optional_format
+inline resource content (default format is `guess` with backticks)
+```
+~~~
+
+The number of backticks can be three or more. This is just the fenced code blocks
+syntax, which is discussed later.
+
+You can also insert an inline resource as a figure using three or more tildes
+(`~`) as the delimiter:
+
+```
+{key: value, comma: separated, optional: attribute_list}
+~~~optional_format
+inline resource content (default format is `text` with tildes)
+~~~
+```
+
+
+## Common Resource Attributes (M)
+
+TODO
+
+
+### Resource insertion methods
+
+Resources can be inserted either as figures or as spans.
+
+#### Figures
+
+
+##### Figure attributes
+
+A figure can also have attributes. The supported attributes vary based on the
+type of resource, but **all** resources inserted as figures support the
+`class`, `format`, `title` and `type` attributes. (As such, these four
+attributes are discussed here, instead of on the specific resource types below.)
+
+`class`
+: All attribute lists support a `class` attribute. When used in figures, this is
+the class of the figure. This can be used for styling, and it can also be used
+by Markua Processors which group figures by classes. Recommended values of the
+`class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor
+could recognize these class attributes and produce a List of Poems, List of
+Theorems, or List of Lemmas near the beginning of the document, much like any
+other resource types. The `class` attribute is especially handy when used with a
+resource of type `markua`.
+
+`format`
+: This is the resource format. Different resource types have different legal
+values for format.
+
+`title`
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).
+
+`type`
+: This is the resource type. This is usually inferred from the format instead of
+being specified.
+
+The default value of the `class` attribute is `none` when the resource is
+inserted as a span. When a resource is inserted as a figure, the default value
+of the `class` attribute is determined by the `type` of resource:
+
+* A resource with type `audio` defaults to a class of `recording`.
+* A resource with type `code` defaults to a class of `listing`.
+* A resource with type `image` defaults to a class of `figure`.
+* A resource with type `markua` defaults to a class of `none`. Other values
+  of the `class` for `markua` resource types include `poem` and `list`.
+  The `none` class is special: it means that the resource is not inserted in any
+  special way, but is just inserted as though the author typed it in the
+  manuscript. This enables this class of `markua` resource to be used for text
+  substitution.
+* A resource with type `math` defaults to a class of `equation`.
+* A resource with type `video` defaults to a class of `footage`.
+
+To be clear: other than the `none` value, there is nothing magical about the
+values of the `class` attribute. An author can set it to whatever they want.
+There is a document setting called `list-figures-by-class` which determines
+whether the class is used to group figures appropriately. This enables an author
+to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
+List of Sonnets, produced entirely dynamically based on the values of the
+`class` attribute, instead of just a `List of Figures`. See the Document
+Settings section for more information.
+
+Figures can have both alt text and a figure title. These are distinct things.
+We will discuss the figure title first and the alt text second.
+
+##### Figure titles
+
+A resource which is inserted as a figure can have a figure title.
+
+This title shows up in two places in the output:
+
+1. Near the resource, typically above or below it, per the preference of the
+Markua Processor.
+2. Based on the resource type, either in the List of Illustrations, List of
+Tables or Table of Figures, if they are generated for the book. This text
+should also be a crosslink to the title inserted near the figure itself.
+
+The title for a figure can provided in one of two ways:
+
+1. In quotes after the filename or URL of a local or web resource.
+   ~~~
+   ![](algorithm.rb "My Amazing Algorithm")
+   ~~~
+2. In the attribute list above the resource.
+   ~~~
+   {title: "My Amazing Algorithm"}
+   ![](algorithm.rb)
+   ~~~
+
+The first choice is clearly shorter, as well as more pleasant to write and to
+read.
+
+Since inline resources do not use the bracket syntax, any titles must be added
+in the attribute list:
+
+~~~
+{title: "My Amazing Algorithm"}
+```ruby
+puts "hello world"
+```
+~~~
+
+##### Figure alt text
+
+A figure can have alt text, as long as the type of resource being inserted
+supports alt text. The resource location does not matter: local, web and inline
+resources all support alt text.
+
+The four types of resource which can have alt text when inserted as a figure are
+`audio`, `image`, `math` and `video`. Resources of type `code`, `markua` and
+`table` do not support alt text, since they themselves are just text.
+
+Alt text is text which is intended to take the place of the resource if the
+resource itself cannot be seen. In the case of images, the obvious use case is
+for readers with visual disabilities who are using a screen reader, but it also
+includes audiobooks and ebook readers which often do not support embedded
+images, audio and video, and which may have a hard time displaying math.
+
+Here's an example of good alt text:
+
+~~~
+![a red apple, possibly a McIntosh or Spartan](fruit.jpg)
+~~~
+
+You can also use an attribute list:
+
+~~~
+{alt: "a red apple, possibly a McIntosh or Spartan"}
+![](fruit.jpg)
+~~~
+
+The alt text should **not** have the same content as the figure title, if the
+figure title is present. (Imagine the annoyance for someone with a visual
+disability having their screen reader read identical alt text and figure titles
+to them throughout an entire book!)
+
+Instead, the alt text should be descriptive of the image content, while the figure
+title can be more creative. For example, a figure title may be "Washington
+Crossing the Delaware" and the alt text could be "Denzel Washington on a boat in
+a river." Having good alt text would enable readers who cannot see the image to
+still get the joke which the figure title makes.
+
+##### Figure titles and alt text together
+
+These are some examples of figures with both alt text and a figure title:
+
+~~~
+![a red apple](mac.jpg "The Original Mac")
+
+{alt: "a red apple", title: "The Original Mac"}
+![](mac.jpg)
+
+{alt: "a blue circle", title: "Earth From Space (Simplified)"}
+```!
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+##### The figure attribute list takes precedence
+
+It is always an error to specify an attribute both in the attribute list for a
+figure and in the syntactic sugar locations, either after the backticks or in the
+square brackets.
+
+However, if this is done, then the value in the attribute list takes precedence.
+
+In the following figure, the format is `text` not `ruby`:
+
+~~~
+{format: text}
+```ruby
+puts "hello world"
+```
+~~~
+
+In the following figure, the alt text would be "foo" not "bar":
+
+~~~
+{alt: foo}
+![bar](foo.png)
+~~~
+
+In the following figure, the title text would be "foo" not "bar":
+
+~~~
+{title: foo}
+![](foo.png "bar")
+~~~
+
+Again, the Markua Processor should treat all of these as an error.
+
+#### Spans
+
+Inserting a resource as a span means to continue the block context which it is
+in, instead of starting a new leaf block for the resource.
+
+There are three types of resources which can be inserted as spans:
+
+1. Single-line inline code resources.
+2. A `math` resource (regardless of location) without a title.
+3. A local or web `image` resource without a title.
+
+An inline code resource can be inserted as a span using the following syntax:
+
+~~~
+backtick `resource`format backtick
+~~~
+
+The math formats, including the syntactic sugar for them, are discussed later.
+
+A local image resource without a title can be inserted as expected:
+
+~~~
+This is an ![a red apple](mac.jpg) not a banana.
+~~~
+
+A web image resource without a title can be inserted as expected:
+
+~~~
+This is an ![a red apple](http://markua.com/mac.jpg) not a banana.
+~~~
+
+Note that inline image resources cannot be inserted as spans, since even SVG is
+so verbose it would make the resulting document very hard to read.
+
+Also, note that if you wish to insert an image in the middle of a sentence,
+chances are you are trying to insert an emoji. You can do this with a span image,
+if you want exact control of what your emoji look like. However, note that emoji
+also have special support in Markua, described [here](#emoji).
+
+Finally, if a title is present, the Markua Processor must treat the resource
+as having implicit newlines before and after it, so that it is handled as a
+figure. (Figure titles do not make sense inside of sentences.)
+
+~~~
+This is ![a red apple](mac.jpg "The Original Mac") not a banana.
+~~~
+
+##### Span attribute lists can be used to set the format
+
+When a resource is inserted as a span, the resource is inserted as part of the
+flow of text of a paragraph with no newlines before or after it. A span resource
+is intended to be extremely short and simple.
+
+By default, the type of an inline resource is `code` and the format is `guess`.
+Math and SVG images override this using special syntaxes, discussed later.
+
+However, to support rare use cases, any span can have an attribute list. The
+attribute list on a span is specified immediately after the closing backtick.
+Span attribute lists can be used to set the format explicitly.
+
+For example, this resource would be formatted as Ruby code:
+~~~
+Yada yada `puts "hi"`{format: ruby} yada yada.
+~~~
+
+
+### Resource formats
+
+Both the type and the format can be specified in an attribute list, by the
+respective `type` and `format` attributes.
+
+The type and the format can also be inferred from the file extension and, in the
+case of web resources, the URL.
+
+Markua Processors must interpret all unspecified file extensions as specifying a
+resource of type `code` with a format of `guess`, unless the resource is a web
+resource.
+
+If the type and format are not specified and the resource is a web resource, the
+Markua Processor may use the domain to decide what type of resource to assume.
+For example, a domain of `youtube.com` may be assumed to be of type `video`, a
+domain of `instagram.com` may be assumed to be of type `image`, and a domain of
+`github.com` may be assumed to be of type `code`.
+
+If the type is not specified in the attribute list, the format determines the
+type. The formats can either be specified by the `format` attribute or (in most
+cases) inferred from the file extension for local and web resources. (Inline
+resources obviously have no file extension, since they are contained in the body
+of a Markua document.)
+
+As an author, all you typically do is provide the correct file extension for a
+local resource or set the format in the attribute list. Markua recognizes the
+format, and uses it to determine the type. If the format is unrecognized, then
+the resource is treated as a resource of type `code` and with a format of
+`guess`.
+
+It's important to emphasize that the type and format of a resource can be
+overridden using an attribute list. The file extensions just set the default
+type and format that are inferred.
+
+In rare instances, it is useful to override the `type` and `format` which have
+been inferred by the Markua Processor based on the file extension of the
+resource. This is done by specifying a type and/or format in the attribute list
+of the resource.
+
+The following sections list the various resource formats for each type of
+resource, along with the file extensions which make that format and type be
+inferred. Note that these file extensions are case-insensitive.
+
+#### Audio resource formats
+
+* `aac` - AAC audio - `.aac`, `.m4a`
+* `mp3` - MP3 audio - `.mp3`
+* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
+* `wav` - WAV audio - `.wav`, `.wave`
+
+#### Image resource formats
+
+* `jpeg` - JPEG image - `.jpg` or `.jpeg`
+* `gif` - GIF image - `.gif`
+* `png` - PNG image - `.png`
+* `svg` - SVG image - `.svg`
+* `svgz` - SVG image (zipped) - `.svgz`
+
+#### Math resource formats
+
+Note that AsciiMath and LaTeX math are almost always contained as inline
+resources in a Markua document. They only have file extensions for completeness.
+Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
+There is a simple reason for this: Markua needs LaTeX math for math, but only
+needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
+file with an extension of `.tex` that just contains LaTeX code and you want to
+display it, then add a `{type: code, format: latex}` attribute list.
+
+* `asciimath` - AsciiMath math - `.asciimath`
+* `latexmath` - LaTeX math - `.tex`
+
+Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the `.asciimath` file extension is deliberately verbose.
+
+#### Table resource formats
+
+Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV-format tables. (CSV-format tables are not
+supported as inline resources, since they would result in too many
+false-positives.)
+
+* `markua` - Markua table - `.tbl`
+* `csv` - Comma-Separated Values table - `.csv`
+
+#### Markua resource formats
+
+The `markua` resource format is always `markua`. The way that `markua` resources
+are differentiated is via their `class` attribute.
+
+* `markua` - Markua - `.md`
+
+#### Video resource formats
+
+Note that .mp4 is used for MP4 video, not MP4 AAC audio.
+
+* `mp4` - MP4 video - `.mp4`
+* `webm` - WebM video - `.webm`
+
+#### Code resource formats
+
+Note that most code languages are not specified, and are guessed at with a format
+of `guess`. A Markua Processor typically leaves this decision about the language
+recognized to the syntax highlighter, such as Pygments.
+
+* `text` - Unformatted code (with no syntax highlighting)
+* `guess` - Formatted code, with the language guessed at - any other file
+  extension not listed previously in the sections above
+
+</div>
+
+
+<div class="extension">
+
+## Code resources (M)
+
+Code can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.
+
+As discussed, code cannot have alt text. It's just text. If any alt text is
+provided for a code resource, it is ignored.
+
+Markua specifies only one specific file extension to be associated with a type
+of `code`: the `.txt` extension, which is for the format of `text`. However,
+Markua Processors must interpret **all** unspecified file extensions as
+specifying a resource of type `code` with a format of `guess`.
+
+Regardless of whether syntax highlighting is supported and the programming
+language is detected, all code must be formatted as `monospaced text` by Markua
+Processors.
+
+The `text` format means to not do any syntax highlighting as well.
+
+The `guess` format is a request for the Markua Processor to guess at the
+programming language based on the file extension and/or the syntax of the code
+itself. Then, if the detected language corresponds to a particular programming
+language which the Markua Processor recognizes, and if the Markua Processor
+supports syntax highlighting, then it can format the resource as nicely
+syntax-highlighted code. Syntax highlighting is entirely optional in Markua
+Processors. If a Markua Processor does not support syntax highlighting, and/or
+if it cannot detect a matching supported programming language, then it must
+format the code as though the format was `text`--i.e. to format it as
+unformatted monospaced text.
+
+Besides the `text` and `guess` values of the format attribute, you can also
+specify the programming language by setting the format attribute to a specific
+programming language. This is more reliable than `guess`. Unlike other resource
+types, Markua does not specify the complete set of the values of the `format`
+attribute--there are so many programming languages in the world, and new ones
+are added so frequently, that doing so would be impractical.
+
+However, while a complete set of the values of the `format` attribute is not
+specified, Markua does specify the `console` value of the `format` attribute to
+indicate console input. A Markua Processor should format console input as such.
+(For example, Leanpub uses the open source Pygments library for its code
+formatting, and Pygments handles `console` format correctly, so Leanpub gets this
+for free.)
+
+The default value of the format attribute for code is complex:
+
+1. For code which is inserted as a span (which is only supported with inline
+   resources), the default format is `text`.
+2. For code which is inserted as a figure which is inserted as an inline
+   resource using three tildes, the default format is `text`.
+3. For all other code, the default format is `guess`. This includes local and web
+   resources inserted as figures, and code inserted as an inline figure using
+   three backticks.
+
+Note that the default format can be overridden by specifying it via an attribute
+list, or after the three backticks in syntactic sugar.
+
+### Supported Attributes for Code
+
+The following are the supported attributes for code resources, in addition to the
+`class`, `format`, `title` and `type` attributes which all resources support.
+
+`line-numbers`
+: This determines whether the code sample shows line numbers. Legal values are
+`true` or `false`. The default value is `false`. Any value other than `true` is
+interpreted as `false`.
+
+`number-from`
+: If line numbers are shown, this lets you override the starting number of the
+line numbers. The default value is `1`.
+
+`crop-start`
+: Sometimes it's desirable to only show part of a code resource defined in an
+external file as the code example. The `crop-start` and `crop-end` attributes let
+you accomplish this. The `crop-start` attribute defines the line which represents
+the first line included from the resource. For example, `{crop-start: 10,
+crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are
+shown and are numbered as lines 10-15. The default value is 1, which is the first
+line of the file.
+
+`crop-end`
+: This attribute ends the range started with crop-start. The default value of
+`crop-end` is to be omitted, which is equivalent to specifying the last line of
+the file.
+
+#### Default Value of the `format` attribute in Inline Code Samples
+
+The default value of the `format` attribute for a code resource inserted as a
+figure varies based on context.
+
+If the code resource is a local or web resource, it defaults to `guess`.
+
+If the code resource is an inline resource, the default varies based on the
+delimiter, and whether the code is inserted as a span or as a block.
+
+With three backticks the default format is `guess`, and with three tildes, the
+default format is `text`. This way, you can vary the default without having to
+type an attribute list: if you want the code language guessed at, use backticks;
+if you don't, use tildes. Of course, you can specify any attributes you wish
+with either delimiter, and specified attributes override default ones. The only
+reason there are different defaults are to make things easier to type.
+Programmers refer to such niceties as "syntactic sugar".
+
+The default value of block code resources inserted with three backticks can be
+overridden from `guess` to some other value by setting by the
+`default-code-language` attribute on the entire Markua document. (This attribute
+has no effect on resources inserted with three tildes.) The default value of
+code span resources inserted as spans with single backticks can be overridden
+from the default value of `text` to some other value by setting the
+`default-code-span-language` on the entire Markua document.
+
+### Local Code Resources
+
+Local code resources can be inserted as a figure.
+
+This first figure will be a type of code and a format of `guess`. A Markua
+Processor which associates `.rb` file extensions with Ruby code will treat this
+as Ruby code; a Markua Processor which has no association for `.rb` files will
+treat it as plain text:
+
+~~~
+Here's a paragraph before the figure.
+
+![](hello.rb "Hello World in Ruby")
+
+Here's a paragraph after the figure.
+~~~
+
+That is equivalent to:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: guess}
+![](hello.rb "Hello World in Ruby")
+
+Here's a paragraph after the figure.
+~~~
+
+If you don't want to take chances you can do this:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: ruby}
+![](hello.rb "Hello World in Ruby")
+
+Here's a paragraph after the figure.
+~~~
+
+Note that the title is optional in all figures:
+
+~~~
+Here's a paragraph before the figure.
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+### Web Code Resources
+
+Web code resources function identically to how local code resources work,
+including the significance of file extensions. The only differences is that the
+files are on the web.
+
+This will be a type of code and a format of `guess` since the file extension is
+not specified:
+
+~~~
+![](http://markua.com/hello.rb "Hello World in Ruby")
+~~~
+
+That is equivalent to:
+
+~~~
+{format: guess}
+![](http://markua.com/hello.rb "Hello World in Ruby")
+~~~
+
+If you don't want to take chances you can do this:
+
+~~~
+{format: ruby}
+![](http://markua.com/hello.rb "Hello World in Ruby")
+~~~
+
+### Inline Code Resources
+
+Inline code resources are the most flexible way to insert code. They are the only
+way to insert code as a span resource, and the most straightforward way to add
+short code examples as figures.
+
+The great thing about inline code resources, either as spans or figures, is that
+they work the same way as they do in CommonMark and GFM, with small additions
+by Markua.
+
+#### No Attribute Lists or Format Specifiers on Indented Code Blocks
+
+Indented code blocks are supported for compatibility with CommonMark and GFM.
+However, no attribute lists or format specifiers can be used. If you want to use
+them, use a fenced code block.
+
+#### Attribute Lists and Format Specifiers on Fenced Code Blocks
+
+Fenced code blocks, discussed earlier, are how to insert inline code resources
+as figures. These can have attribute lists or format specifiers.
+
+This will be a type of code and a format of `guess` since three backticks are
+used and since the format is not specified:
+
+~~~
+Some paragraph.
+
+```
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+That is equivalent to:
+
+~~~
+Some paragraph.
+
+```guess
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you don't want to take chances you can do this to explicitly specify the
+format:
+
+~~~
+Some paragraph.
+
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+This Ruby code may be formatted as such if the Markua Processor understands
+`ruby`. If not, the `ruby` format will be ignored.
+
+If you don't like syntactic sugar you can do:
+
+~~~
+Some paragraph.
+
+{format: ruby}
+```
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you want a figure title, you can add it to the attribute list with any of
+the above. For example:
+
+~~~
+Some paragraph.
+
+{title: "Hello World in Ruby"}
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Finally, if you want the code to definitely not get syntax highlighted, you can
+force format to be `text` in one of two ways.
+
+First, you can set it explicitly:
+
+~~~
+Some paragraph.
+
+```text
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Second, you can use three tildes instead of three backticks, since the default
+with tildes is `text` not `guess`:
+
+```
+Some paragraph.
+
+~~~
+puts "hello"
+~~~
+
+Some paragraph.
+```
+
+As discussed previously, console input and output should be formatted as such by
+a Markua Processor:
+
+~~~
+```console
+$ git init
+Initialized empty Git repository in /path/to/repo
+```
+~~~
+
+Finally, it's important to note that when you are writing about other inline
+formats, such as SVG or AsciiMath, what you are really doing is creating a code
+resource. This is shown in the sections below, which discuss SVG and AsciiMath,
+but this applies more broadly.
+
+#### Attribute Lists on Code Spans
+
+Code spans are discussed later in the spec. While code spans are done just as in
+CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
+This serves as a hint to any syntax highlighter:
+
+~~~
+Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
+~~~
+
+### Marking Code as Added or Deleted
+
+Markua supports marking code as added or deleted, which can be helpful if you are
+writing a computer programming book and want to indicate what code should be
+added or removed to a larger program.
+
+The way to do this is to add special comment lines to your code.
+
+The magic words are `markua-start-insert`, `markua-end-insert`,
+`markua-start-delete` and `markua-end-delete`. Any line containing one of those
+words will be removed completely by a Markua Processor before being inserted into
+the output.
+
+The Markua Processor will then be able to determine which code is being deleted
+or inserted, and format it accordingly. The recommended way for a Markua
+Processor to do this is to make code which is being inserted get **`bolded`**,
+and to make code which is getting deleted to be put in ~~`strikethrough`~~.
+
+Finally, while syntax highlighting is optional in a Markua Processor, if a Markua
+Processor does support syntax highlighting it is allowed for the Markua Processor
+to not do any syntax highlighting when there is the presence of any of any
+special `markua-*` comments. Syntax highlighting may make it harder to notice the
+added and removed code, if they are formatted with bold and strikethrough
+respectively.
+
+### Line Wrapping in Code Resources
+
+Code resources should have newlines added by the author to ensure that automatic
+line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
+all code is visible on a page, and *may* add continuation characters (like the
+backslash `\` character) in the output to indicate that a line has been
+automatically wrapped. However, adding a continuation character is not a
+requirement, nor is the choice of which continuation character is used.
+
+</div>
+
+
+<div class="extension">
+
+## Markua Resources (M)
+
+Markua resources (i.e. a resource with a `type` of `markua`) can be a local, web
+or inline resource, just like any other resource, and the same resource syntax
+applies to Markua resources as to all other resources.
+
+There are three main use cases for a Markua resource:
+
+1. Inserting a specific `class` of resource, such as a `poem`.
+2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
+   used in many places and/or sourced from a third party.
+3. Controlling the behaviour of fonts or whitespace for specific types of
+   text, such as poetry.
+
+The following are the supported attributes for resources of type `markua`:
+
+`type`
+: For a Markua resource, the `type` is `markua`. This can be specified
+explicitly, and it can be inferred as the type for all files with a `.md`
+.extension.
+
+`class`
+: This can define a specific `class` of resource, such as a `poem` or `list`.
+The default is `none`, which means that the resource is not inserted in any
+special way, but is just inserted as though the author typed it in the
+manuscript. This enables this class of `markua` resource to be used for text
+substitution, without showing up in some list of resources near the front of the
+book. There is semantic sugar to produce inline resources of type `markua` and
+class `poem`; see below for details.) A Markua Processor can produce a list of a
+given class of resource near the beginning of the document, such as a List of
+Poems or a List of Lists.
+
+`monospaced`
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor
+must use a monospaced font to output the text in the resource. If false, the
+Markua Processor may use whatever font (proportional or monospaced) it is
+configured to use to output Markua text. The value of `true` can be useful for
+certain types of poetry, for example.
+
+`format`
+: This is the resource format. For a Markua resource, the format is always
+just `markua`, and should be ignored by a Markua Processor.
+
+`title`
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).
+
+`whitespace`
+: `semantic` or `verbatim`. The default is `semantic`. With the default value of
+`semantic`, whitespace is processed the way that Markua handles it. With the
+value of `verbatim`, leading whitespace, internal whitespace, trailing
+whitespace and newlines must all be preserved verbatim as typed. This can be
+useful for certain types of poetry, such as indenting the last two lines of a
+sonnet. To be clear, this includes all spaces and newlines, regardless
+of whether they are leading, internal or trailing spaces, and regardless of the
+number of consecutive leading, internal or trailing spaces or the number of 
+newlines. Now, while the whitespace is preserved, it is rendered using either a
+proportional font or a monospaced one based on the value of the `monospaced`
+attribute. If whitespace is verbatim, the `markua` resource should have newlines
+added by the author to ensure that automatic line wrapping is not relied upon.
+Markua Processors may wrap lines to ensure that all the text is visible on a
+page, and *may* add continuation characters (like the backslash `\` character)
+in the output to indicate that a line has been automatically wrapped by the
+Markua Processor. Obviously, seeing a continuation character is in poetry is
+terrible, so the author should consider this a mistake that needs to be fixed by
+manually line wrapping.
+
+### Local Markua resources
+
+Local Markua resources look like many other resources inserted as figures:
+
+~~~
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+default to semantic whitespace:
+
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+have its whitespace preserved (for indenting the last two lines):
+
+{whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{monospaced: false, class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a list of Canadian cities sorted by population. This implicitly has a
+`class` of `none`:
+
+![](cities.md "Canadian Cities by Population")
+
+Here's that same list, but with an explicit class of `none`:
+
+{class: none}
+![](cities.md "Canadian Cities by Population")
+
+Here's that same list, but with a class of `list` so it shows up in a List of
+Lists, if there is one:
+
+{class: list}
+![](cities.md "Canadian Cities by Population")
+
+Here's some legal boilerplate:
+
+![](tos.md "Terms and Conditions")
+
+Here's some legal boilerplate, with the explicit class of `none`:
+
+{class: none}
+![](tos.md "Terms and Conditions")
+
+Here's an E. E. Cummings poem:
+
+{monospaced: true, class: poem, whitespace: verbatim}
+![](iwillbe.md "I Will Be")
+~~~
+
+With a non-`.md` extension, the type of `markua` must be stated:
+
+~~~
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim}
+![](sonnet130.txt "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](sonnet130.txt "Sonnet 130")
+
+Here's some legal boilerplate:
+
+{type: markua}
+![](tos.txt "Terms and Conditions")
+
+Here's an E. E. Cummings poem:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+![](iwillbe.txt "I Will Be")
+~~~
+
+### Web Markua resources
+
+Web Markua resources function identically to how local Markua resources work,
+including the significance of file extensions. The only difference is that the
+files are on the web.
+
+~~~
+Here's a Shakespearean sonnet:
+
+![](http://markua.com/sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
+
+Here's a paragraph after the figure.
+~~~
+
+### Inline Markua resources
+
+You might wonder why an inline resource of type `markua` would be supported at
+all. After all, isn't it just Markua text?
+
+
+Defaults:
+
+
+
+
+There are three reasons it is supported:
+
+1. for consistency
+2. for the attribute lists, which allow configurable whitespace, etc.
+3. so that the resource can show up in a list of resources
+
+To create an inline resource of type `markua`, you use the fenced code block
+syntax, and you can use an attribute list to specify the type of resource.
+
+You can also use one of a handful of syntactic sugar options:
+
+`&`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
+
+`&&`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
+
+`*`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
+
+`**`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
+
+This is made clear in the following example:
+
+~~~
+Here's part of a poem:
+
+```&
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
+
+```&&
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
+
+```*
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+Here's part of a poem:
+
+```**
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+~~~
+
+I'm not a poet, but I know it.
+
+Finally, here's an example of an inline Markua resource being used for a list:
+
+~~~
+{class: list, title: "Canadian Cities by Population"}
+```
+1. Toronto
+2. Vancouver
+```
+~~~
+
+Despite the seeming generality of this example, it's actually fairly niche:
+most lists are just lists, not resources, and do not need to be wrapped in a
+resource.
+
+### But what if I want every character taken literally?
+
+If you want to type poetry where every character is taken exactly literally,
+instead of being potentially interpreted as Markua formatting, you need to use
+a code block with a format of text for that:
+
+```````````````````````````````` example
+```text
+*this* isn't italic
+and **this** is not bold
+* * * cherry blossoms * * *
+```
+.
+<pre><code>*this* isn't italic
+and **this** is not bold
+* * * cherry blossoms * * *
+</code></pre>
+````````````````````````````````
+
+</div>
+
+
 
 
 <div class="extension">

@@ -11387,10 +11387,6 @@ Multiple     spaces
 ````````````````````````````````
 
 
-<!-- END TESTS -->
-
-
-
 
 <div class="extension">
 
@@ -16564,6 +16560,10 @@ incorrect number of questions, or with questions incorrectly used as alternates
 for each other, would be much more difficult.
 
 </div>
+
+
+<!-- END TESTS -->
+
 
 
 # Appendix: A parsing strategy

@@ -1,6 +1,6 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>**NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on Leanpub. Leanpub's Markua 0.30 support is currently incomplete. For example, courses are not yet implemented in Markua 0.30, so you still need to use Markua 0.10 for them.<br/><br/><hr/><br/>'
+author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on Leanpub. The Markua 0.30 support in Leanpub is currently incomplete. For example, courses are not yet implemented in Markua 0.30, so you still need to use Markua 0.10 for them.<br/><br/><hr/><br/>'
 version: '0.30.14'
 date: '2022-04-03'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'

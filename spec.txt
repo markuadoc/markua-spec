@@ -11255,7 +11255,7 @@ that all `<hr />` elements are thematic breaks, and style them in a way
 appropriate for a scene break in fiction.
 
 
-## Paragraph continuations (Markua extension)
+## Paragraph continuations
 
 In books, you can insert things like lists in the middle of paragraphs.
 
@@ -11395,16 +11395,9 @@ bar
 
 
 
-TODO
-
-
-
-
-
-
 <div class="extension">
 
-## Configurable soft line breaks (M)
+## Configurable soft line breaks
 
 There is a good argument to be made that single newlines at the end of a line
 should always be treated as a hard line break, not as a soft line break.
@@ -11521,9 +11514,10 @@ paragraph-like contexts, such as definition list items.
 </div>
 
 
+
 <div class="extension">
 
-## Span attribute lists (M)
+## Span attribute lists
 
 Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -11556,7 +11550,7 @@ creates a `[^footnote]` instead. (Footnotes are discussed below.)
 
 <div class="extension">
 
-## Index entries (M)
+## Index entries
 
 Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -11698,7 +11692,7 @@ the entry as `{i: "*Hello\! Flex 4*}` not as `{i: "*Hello! Flex 4*}`.
 </div>
 
 
-## Concatenating files and blank lines (M)
+## Concatenating files and blank lines
 
 A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by

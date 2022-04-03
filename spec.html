@@ -196,9 +196,8 @@ $(document).ready(function() {
 <li><a href="#soft-line-breaks"><span class="number">6.8</span>Soft line breaks</a></li>
 <li><a href="#textual-content"><span class="number">6.9</span>Textual content</a></li>
 <li><a href="#character-substitutions-markua-extension-"><span class="number">6.10</span>Character substitutions (Markua extension)</a></li>
-<li><a href="#footnotes-markua-extension-"><span class="number">6.11</span>Footnotes (Markua extension)</a></li>
-<li><a href="#endnotes-markua-extension-"><span class="number">6.12</span>Endnotes (Markua extension)</a></li>
-<li><a href="#underline-markua-extension-"><span class="number">6.13</span>Underline (Markua extension)</a></li>
+<li><a href="#footnotes-and-endnotes-markua-extension-"><span class="number">6.11</span>Footnotes and endnotes (Markua extension)</a></li>
+<li><a href="#underline-markua-extension-"><span class="number">6.12</span>Underline (Markua extension)</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -13489,10 +13488,13 @@ doesn’t make straight quotes curly in a code span, it doesn’t make curly quo
 straight in a code span either.)</p>
 </div>
 <div class="extension">
-<h2 id="footnotes-markua-extension-" class="definition">
-<span class="number">6.11</span>Footnotes (Markua extension)
+<h2 id="footnotes-and-endnotes-markua-extension-" class="definition">
+<span class="number">6.11</span>Footnotes and endnotes (Markua extension)
 </h2>
-<p>Books often have footnotes. So, Markua has them too.</p>
+<p>Books often have footnotes and endnotes. So, Markua has them too.</p>
+<h3 id="footnotes" class="definition">
+<span class="number">6.11.1</span>Footnotes
+</h3>
 <p>To add a footnote, you insert a footnote tag using square brackets, a caret and
 the tag, like this:</p>
 <pre><code>This has a footnote[^thenote].
@@ -13520,12 +13522,9 @@ be specified by the <code>restart-footnote-numbering</code> setting.</p>
 should output them <em>somewhere</em>, but the details are not specified. This is
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
-</div>
-<div class="extension">
-<h2 id="endnotes-markua-extension-" class="definition">
-<span class="number">6.12</span>Endnotes (Markua extension)
-</h2>
-<p>Books often have endnotes. So, Markua has them too.</p>
+<h3 id="endnotes" class="definition">
+<span class="number">6.11.2</span>Endnotes
+</h3>
 <p>Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
 for both, rather than just defining one “footnote or endnote” syntax and letting
@@ -13550,7 +13549,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="single-reference-to-footnotes-and-endnotes" class="definition">
-<span class="number">6.12.1</span>Single reference to footnotes and endnotes
+<span class="number">6.11.3</span>Single reference to footnotes and endnotes
 </h3>
 <p>You can only refer to a footnote or endnote once. You can’t define a footnote or
 endnote in one place and refer to it multiple times in the same Markua document.
@@ -13558,8 +13557,8 @@ If you wish to refer to a parenthetical piece of text from multiple places in a
 Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 <a href="#crosslinks">crosslink</a>.</p>
-<h3 id="footnote-and-endnote-support-required-for-paragraphs-only" class="definition">
-<span class="number">6.12.2</span>Footnote and endnote support required for paragraphs only
+<h3 id="footnote-and-endnote-support-is-required-for-paragraphs-only" class="definition">
+<span class="number">6.11.4</span>Footnote and endnote support is required for paragraphs only
 </h3>
 <p>A Markua Processor must support footnote and endnote references inserted in
 normal paragraph content. However, that’s it.</p>
@@ -13578,7 +13577,7 @@ only supports inserting footnotes or endnotes in normal paragraph content.</p>
 </div>
 <div class="extension">
 <h2 id="underline-markua-extension-" class="definition">
-<span class="number">6.13</span>Underline (Markua extension)
+<span class="number">6.12</span>Underline (Markua extension)
 </h2>
 <p>In Markdown as defined by John Gruber, and in CommonMark and GFM,
 <code>*one asterisk*</code> and <code>_one underscore_</code> both produce <em>italics</em>, and there is no
@@ -13588,7 +13587,7 @@ italics. In some languages and in some contexts, underlining serves a distinct,
 legitimate purpose.</p>
 <p>Worse, Markua bans all inline HTML except HTML comments. So even the gross
 Markdown workaround to produce underlines with HTML does not work.</p>
-<p>So, how to produce underline?</p>
+<p>So, how to produce an actual underline?</p>
 <p>In Markua, <code>*one asterisk*</code> produces italics, and <code>_one underscore_</code> can
 produce either italics or an underline based on the <code>italicize-underlines</code>
 document setting.</p>

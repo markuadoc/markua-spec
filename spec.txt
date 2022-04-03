@@ -697,6 +697,8 @@ top of the example.
 
 </div>
 
+
+
 ## What is Markdown?
 
 Markdown is a plain text format for writing structured documents,
@@ -1602,6 +1604,8 @@ We can divide blocks into two types:
 [container blocks](#container-blocks),
 which can contain other blocks, and [leaf blocks](#leaf-blocks),
 which cannot.
+
+
 
 # Leaf blocks
 
@@ -3094,6 +3098,8 @@ Closing code fences cannot have [info strings]:
 </code></pre>
 ````````````````````````````````
 
+
+
 <div class="extension">
 
 ## No HTML Blocks (Markua extension)
@@ -3112,6 +3118,8 @@ comments (`<!-- a comment -->`) in Markua, and these comments will be removed
 from the output (along with any other raw HTML tags).
 
 </div>
+
+
 
 ## Link reference definitions
 

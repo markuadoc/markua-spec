@@ -212,6 +212,10 @@ $(document).ready(function() {
 <li><a href="#part-headings"><span class="number">7.6</span>Part headings</a></li>
 <li><a href="#thematic-break-semantics"><span class="number">7.7</span>Thematic break semantics</a></li>
 <li><a href="#paragraph-continuations-markua-extension-"><span class="number">7.8</span>Paragraph continuations (Markua extension)</a></li>
+<li><a href="#configurable-soft-line-breaks-m-"><span class="number">7.9</span>Configurable soft line breaks (M)</a></li>
+<li><a href="#span-attribute-lists-m-"><span class="number">7.10</span>Span attribute lists (M)</a></li>
+<li><a href="#index-entries-m-"><span class="number">7.11</span>Index entries (M)</a></li>
+<li><a href="#concatenating-files-and-blank-lines-m-"><span class="number">7.12</span>Concatenating files and blank lines (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-markua-extension-"><span class="number">8</span>Resources (Markua extension)</a>
@@ -14621,6 +14625,428 @@ bar
 </div>
 </div>
 </div>
+<p>TODO</p>
+<div class="extension">
+<h2 id="configurable-soft-line-breaks-m-" class="definition">
+<span class="number">7.9</span>Configurable soft line breaks (M)
+</h2>
+<p>There is a good argument to be made that single newlines at the end of a line
+should always be treated as a hard line break, not as a soft line break.</p>
+<p>In ancient history, some text editors did not automatically wrap lines of text,
+so manual wrapping of plain text files was a good thing to do. However, for
+writing, automatic wrapping of paragraphs is essential for staying in the flow
+while writing, and for being able to edit your text without needing to re-wrap
+every line in a paragraph. This is one decision that even Microsoft Word gets
+right.</p>
+<p>So, Markua used to treat single newlines at the end of a line as a hard line
+break, not as a soft line break.</p>
+<p>However, compatibility with Markdown by default is more than fixing things such
+as this which I consider to be mistakes, even though the Markdown two-space hack
+to force a hard line break makes me die a little inside every time I (don’t) see
+it. As I’ve grown older, I’ve become more willing to compromise.</p>
+<p>So, Markua has a document setting called <code>soft-breaks</code>:</p>
+<ul>
+<li>If <code>soft-breaks</code> is <code>source</code>, then single newlines inside paragraphs in the
+Markua produce single newlines in the HTML source. This will pretend to
+break the line: while it does break the line in the HTML source, it does
+not break the line when the HTML is rendered. So, this type of line break
+only is a line break in the HTML source. In the output, it actually functions
+like a space. (It should be rendered as a space in non-HTML-based output
+formats like PDF.)</li>
+<li>If <code>soft-breaks</code> is <code>space</code>, then single newlines inside paragraphs in the
+Markua document produce single spaces in the HTML output. This functions
+identically to single newlines when rendered as HTML. (It should be rendered
+as a space in non-HTML-based output formats like PDF.)</li>
+<li>If <code>soft-breaks</code> is <code>break</code>, then single newlines inside paragraphs in the
+Markua document produce break tags in the HTML output. The reason this value
+is <code>break</code> is to indicate that when you hit a newline to get a line break, you
+get a real line break. In HTML, this means a break tag. (It should be rendered
+as a newline in non-HTML-based output formats like PDF.)</li>
+</ul>
+<p><strong>To be clear: if <code>soft-breaks</code> has the value of <code>break</code>, all single newlines
+function as hard line breaks (i.e. as they would if they were using the “two
+space hack” to produce a hard line break in normal Markdown).</strong></p>
+<p>The default value of <code>soft-breaks</code> is <code>source</code>, for compatibility with Markdown.
+However, most authors will want to set the value of <code>soft-breaks</code> to <code>break</code>,
+for compatibility with truth and beauty.</p>
+<div class="example" id="example-637">
+<div class="examplenum">
+<a href="#example-637">Example 637</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+foo
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;foo
+bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>This can be made explicit by setting the <code>soft-breaks</code> document setting to
+<code>source</code>:</p>
+<div class="example" id="example-638">
+<div class="examplenum">
+<a href="#example-638">Example 638</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">{
+soft-breaks:<span class="space"> </span>source
+}
+
+#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+foo
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;foo
+bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>This can be made shorter by setting the <code>soft-breaks</code> document setting to
+<code>space</code>:</p>
+<div class="example" id="example-639">
+<div class="examplenum">
+<a href="#example-639">Example 639</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">{
+soft-breaks:<span class="space"> </span>space
+}
+
+#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+foo
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;foo<span class="space"> </span>bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>If you want your line breaks to actually, well, produce line breaks, you need to
+set the <code>soft-breaks</code> document setting to <code>break</code>:</p>
+<div class="example" id="example-640">
+<div class="examplenum">
+<a href="#example-640">Example 640</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">{
+soft-breaks:<span class="space"> </span>break
+}
+
+#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+foo
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;foo&lt;br<span class="space"> </span>/&gt;
+bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Finally, note that the <code>soft-breaks</code> document setting also applies to other
+paragraph-like contexts, such as definition list items.</p>
+</div>
+<div class="extension">
+<h2 id="span-attribute-lists-m-" class="definition">
+<span class="number">7.10</span>Span attribute lists (M)
+</h2>
+<p>Surrounding text in square brackets can be useful not just for giving it a URL
+to link to. If you wish to add attributes to an arbitrary span of text, you can
+create an arbitrary span of text using square brackets and then add an attribute
+list immediately afterward. You can use any attribute list on this span, and you
+can also just use the id syntactic sugar <code>{#theid}</code> on this span. The most
+common uses of this are to add <code>id</code> attributes or index entries. (Index entries
+are discussed later.)</p>
+<div class="example" id="example-641">
+<div class="examplenum">
+<a href="#example-641">Example 641</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">Some<span class="space"> </span>text<span class="space"> </span>[then<span class="space"> </span>a<span class="space"> </span>span]{foo:<span class="space"> </span>lorem,<span class="space"> </span>bar:<span class="space"> </span>ipsum}<span class="space"> </span>and<span class="space"> </span>more<span class="space"> </span>text.
+
+This<span class="space"> </span>[span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{#hello},<span class="space"> </span>so<span class="space"> </span>hooray!
+
+This<span class="space"> </span>span<span class="space"> </span>[also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{id:<span class="space"> </span>world}.<span class="space"> </span>
+
+This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>[古池や蛙飛び込む水の音]{lang:<span class="space"> </span>jpn}<span class="space"> </span>Japanese<span class="space"> </span>text.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;Some<span class="space"> </span>text<span class="space"> </span>&lt;span<span class="space"> </span>foo=&quot;lorem&quot;<span class="space"> </span>bar=&quot;ipsum&quot;&gt;then<span class="space"> </span>a<span class="space"> </span>span&lt;/span&gt;<span class="space"> </span>and<span class="space"> </span>more<span class="space"> </span>text.&lt;/p&gt;
+&lt;p&gt;This<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;hello&quot;&gt;span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id&lt;/span&gt;,<span class="space"> </span>so<span class="space"> </span>hooray!&lt;/p&gt;
+&lt;p&gt;This<span class="space"> </span>span<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;world&quot;&gt;also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>&lt;span<span class="space"> </span>lang=&quot;jp&quot;&gt;古池や蛙飛び込む水の音&lt;/span&gt;<span class="space"> </span>Japanese<span class="space"> </span>text.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Note, however, that you cannot start a normal span with a caret (<code>^</code>): this
+creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
+</div>
+<div class="extension">
+<h2 id="index-entries-m-" class="definition">
+<span class="number">7.11</span>Index entries (M)
+</h2>
+<p>Markua supports adding index entries via the attribute list syntax. Index
+entries let authors or indexers produce professional-looking indexes in
+Markua books.</p>
+<p>Index entries can either be attached to block or span elements using the same
+attribute list syntax. In fact, index entries can just be added as part of a
+larger attribute list.</p>
+<p>The actual syntax of what the value of an index entry looks like is <a href="https://en.wikibooks.org/wiki/LaTeX/Indexing">inspired
+by LaTeX</a>.</p>
+<p>The key of an index entry is <code>i</code>, for index.</p>
+<p>In its simplest form, an index entry is simply <code>{i: &quot;hello&quot;}</code>. Like any
+attribute list, you don’t need a space between the colon and the quote–you can
+also do <code>{i:&quot;hello&quot;}</code>.</p>
+<p>These are the various formats of an index entry:</p>
+<pre><code>{i: hello}
+{i: &quot;hello&quot;}
+{i: &quot;Armstrong, Peter&quot;}
+{i: &quot;Yahoo\!&quot;}
+{i: &quot;*hello*&quot;}
+{i: &quot;**hello**&quot;}
+{i: &quot;hello!Peter&quot;}
+{i: &quot;hello!*Peter*&quot;}
+{i: &quot;hello!**Peter**&quot;}
+{i: &quot;Peter|see{i:'hello'}&quot;}
+{i: &quot;Jen|seealso{i:'Jenny'}&quot;}
+</code></pre>
+<p>Here’s what they do:</p>
+<p><code>{i: hello}</code>
+: Adds an index entry for <code>hello</code>. If an index entry has no punctuation or
+formatting then it does not need quotes.</p>
+<p><code>{i: &quot;hello&quot;}</code>
+: Adds an index entry for <code>hello</code>. Quotes are always fine to use, even when not
+required.</p>
+<p><code>{i: &quot;Armstrong, Peter&quot;}</code>
+: Adds an index entry for <code>Armstrong, Peter</code>. The quotes are always omitted.
+Their function is to allow things like exclamation marks and other punctuation
+to be added without fear, in case you don’t feel like learning which punctuation
+is safe.</p>
+<p><code>{i: &quot;Yahoo\!&quot;}</code>
+: Adds an index entry for <code>Yahoo!</code>. Note that the exclamation mark must be
+backslash-escaped because <code>!</code> is a delimiter otherwise. The <code>|</code>, <code>{</code>, <code>}</code> and
+<code>\</code> characters also must be backslash-escaped.</p>
+<p><code>{i: &quot;*hello*&quot;}</code>
+: Adds an index entry for <code>hello</code>, with <code>hello</code> in italics.</p>
+<p><code>{i: &quot;**hello**&quot;}</code>
+: Adds an index entry for <code>hello</code>, with <code>hello</code> in bold.</p>
+<p><code>{i: &quot;hello!Peter&quot;}</code>
+: Adds an index entry for <code>Peter</code> which is a sub-entry of <code>hello</code>.</p>
+<p><code>{i: &quot;hello!*Peter*&quot;}</code>
+: Adds an index entry for <code>Peter</code> (with <em>Peter</em> in emphasis) which is a
+sub-entry of <code>hello</code>. Note that this cannot be combined with a see or
+seealso (the | syntax).</p>
+<p><code>{i: &quot;hello!**Peter**&quot;}</code>
+: Adds an index entry for <code>Peter</code> (with <strong>Peter</strong> in strong emphasis) which is a
+sub-entry of <code>hello</code>. Note that this cannot be combined with a see or seealso
+(the | syntax).</p>
+<p><code>{i: &quot;Peter|see{i:'hello'}&quot;}</code>
+: Adds an index entry for <code>Peter</code>, which references the index entry <code>hello</code> with
+the equivalent of “see” in the language of the book. Note that this cannot be
+combined with a sub-entry (the ! syntax).</p>
+<p><code>{i: &quot;Jen|seealso{i:'Jenny'}&quot;}</code>
+: Adds an index entry for <code>Jen</code>, which references the index entry <code>Jenny</code> with
+the equivalent of “see also” in the language of the book. Note that this cannot
+be combined with a sub-entry (the ! syntax).</p>
+<p>Index entries are case sensitive. For example, <code>{i: &quot;mark&quot;}</code> and <code>{i: &quot;Mark&quot;}</code>
+are distinct entries. (The first is for a result or a smudge, the second is a
+person’s name.)</p>
+<p>To attach an index entry to the start of a block, put it on its own line above
+a block:</p>
+<pre><code>{i: &quot;hello&quot;}
+I just came to say hello, hello, hello, hello
+</code></pre>
+<p>To attach an index entry to a word, just add the index entry after the word:</p>
+<pre><code>I just came to say hello{i: &quot;hello&quot;}, hello, hello, hello
+</code></pre>
+<p>To attach an index entry to a span element, just add the index entry after the
+span element:</p>
+<pre><code>The first program that a programmer writes in a language is usually
+*Hello World*{i: &quot;Hello World&quot;}
+</code></pre>
+<p>Index entries can have commas and other punctuation (except colons) in their
+definition:</p>
+<pre><code>My wife read some book about a whale by Herman Melville{i: &quot;Melville, Herman&quot;}.
+</code></pre>
+<p>Multiple index entries can exist in a block, or even a sentence:</p>
+<pre><code>Supposedly the great-great-great-granduncle of the musician Moby{i: &quot;Moby&quot;} was
+Herman Melville{i: &quot;Melville, Herman&quot;}, the author of a book about a
+whale{i: &quot;Moby-Dick; or, The Whale&quot;}.
+</code></pre>
+<p>Note that adding index entries is best left until the author is done writing the
+book. At that time, ids like {#myid} can be converted to {id: #myid, i: “blah”}
+if index entries are being added where ids already are.</p>
+<p>Markua does not specify the HTML output of index entries, to maximize
+implementation flexibility.</p>
+<p>Finally, please note that if you use an exclamation mark (!) symbol in an
+index entry, you must backslash-escape it. Otherwise, it would be intepreted
+as an attempt at creating a sub-entry. (This actually got me, when I tried to
+reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to write
+the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
+</div>
+<h2 id="concatenating-files-and-blank-lines-m-" class="definition">
+<span class="number">7.12</span>Concatenating files and blank lines (M)
+</h2>
+<p>A Markua document can be written in one file or multiple manuscript files. If a
+manuscript is written in multiple files, these files are concatenated together by
+the Markua Processor to produce one temporary manuscript file, and that one file
+is used as the input.</p>
+<p>Importantly, in order to avoid a number of bugs, the files are not just
+concatenated together unchanged–they <strong>must</strong> be concatenated together by Markua
+Processors by adding <strong>two newlines</strong> between the end of each file and the
+beginning of the next file.</p>
+<p>So, after this process, exactly one blank line separates the contents of each
+manuscript file. Note that because of this rule, a paragraph (or any other block
+element) cannot span multiple manuscript files.</p>
+<p>To see why this approach is so important, consider the following single-file
+Markua document:</p>
+<div class="example" id="example-642">
+<div class="examplenum">
+<a href="#example-642">Example 642</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.
+
+#<span class="space"> </span>Chapter<span class="space"> </span>Two
+
+Yada<span class="space"> </span>yada<span class="space"> </span>yada.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.&lt;/p&gt;
+&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>Two&lt;/h1&gt;
+&lt;p&gt;Yada<span class="space"> </span>yada<span class="space"> </span>yada.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Suppose instead a multiple-file approach was used, in which there were two files,
+ch1.txt and ch2.txt, with the following content.</p>
+<p>ch1.txt:</p>
+<div class="example" id="example-643">
+<div class="examplenum">
+<a href="#example-643">Example 643</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>ch2.txt:</p>
+<div class="example" id="example-644">
+<div class="examplenum">
+<a href="#example-644">Example 644</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>Two
+
+Yada<span class="space"> </span>yada<span class="space"> </span>yada.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>Two&lt;/h1&gt;
+&lt;p&gt;Yada<span class="space"> </span>yada<span class="space"> </span>yada.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>If Markua did not add any newlines between files, then these files would produce
+the following incorrect manuscript:</p>
+<div class="example" id="example-645">
+<div class="examplenum">
+<a href="#example-645">Example 645</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.#<span class="space"> </span>Chapter<span class="space"> </span>Two
+
+Yada<span class="space"> </span>yada<span class="space"> </span>yada.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.#Chapter<span class="space"> </span>Two&lt;/p&gt;
+&lt;p&gt;Yada<span class="space"> </span>yada<span class="space"> </span>yada.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>If Markua only added one newline when concatenating, this would produce a correct
+manuscript (since headings end paragraphs), but one with possible bugs:</p>
+<div class="example" id="example-646">
+<div class="examplenum">
+<a href="#example-646">Example 646</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.
+#<span class="space"> </span>Chapter<span class="space"> </span>Two
+
+Yada<span class="space"> </span>yada<span class="space"> </span>yada.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.&lt;/p&gt;
+&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>Two&lt;/h1&gt;
+&lt;p&gt;Yada<span class="space"> </span>yada<span class="space"> </span>yada.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Worse, since a number of text editors such as Emacs have a “strip blank lines at
+the end of files” setting, it would be possible to introduce such a bug if Markua
+simply relied on blank lines being added to the end of a file by the author.</p>
+<p>So, because of the blank line rule, concatenating the files produces the same
+manuscript as the single-file manuscript above:</p>
+<div class="example" id="example-647">
+<div class="examplenum">
+<a href="#example-647">Example 647</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
+
+Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.
+
+#<span class="space"> </span>Chapter<span class="space"> </span>Two
+
+Yada<span class="space"> </span>yada<span class="space"> </span>yada.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
+&lt;p&gt;Lorem<span class="space"> </span>ipsum<span class="space"> </span>dolor.&lt;/p&gt;
+&lt;h1<span class="space"> </span>class=&quot;chapter&quot;&gt;Chapter<span class="space"> </span>Two&lt;/h1&gt;
+&lt;p&gt;Yada<span class="space"> </span>yada<span class="space"> </span>yada.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+</div>
+<p>TODO</p>
 <h1 id="resources-markua-extension-" class="definition">
 <span class="number">8</span>Resources (Markua extension)
 </h1>
@@ -15753,9 +16179,9 @@ resource.</p>
 <p>If you want to type poetry where every character is taken exactly literally,
 instead of being potentially interpreted as Markua formatting, you need to use
 a code block with a format of text for that:</p>
-<div class="example" id="example-637">
+<div class="example" id="example-648">
 <div class="examplenum">
-<a href="#example-637">Example 637</a>
+<a href="#example-648">Example 648</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```text
@@ -15859,9 +16285,9 @@ followed by a percentage sign (%). The quotes are optional. So, you can say
 <p>The examples below assume that a table which looks like the following (from the
 GFM table example above) is defined in a file called <code>census.tbl</code> (real census
 data would be too long for a good example):</p>
-<div class="example" id="example-638">
+<div class="example" id="example-649">
 <div class="examplenum">
-<a href="#example-638">Example 638</a>
+<a href="#example-649">Example 649</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">|<span class="space"> </span>foo<span class="space"> </span>|<span class="space"> </span>bar<span class="space"> </span>|
@@ -15889,9 +16315,9 @@ data would be too long for a good example):</p>
 </div>
 <p>With this table above defined in a file which is available at a local
 resource location, the following example results:</p>
-<div class="example" id="example-639">
+<div class="example" id="example-650">
 <div class="examplenum">
-<a href="#example-639">Example 639</a>
+<a href="#example-650">Example 650</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![](census.tbl<span class="space"> </span>&quot;Canadian<span class="space"> </span>Census<span class="space"> </span>Data&quot;)
@@ -15920,9 +16346,9 @@ resource location, the following example results:</p>
 </div>
 <p>With this table above defined in a file which is available at a given web
 resource location, the identical example results:</p>
-<div class="example" id="example-640">
+<div class="example" id="example-651">
 <div class="examplenum">
-<a href="#example-640">Example 640</a>
+<a href="#example-651">Example 651</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![](http://markua.com/census.tbl<span class="space"> </span>&quot;Canadian<span class="space"> </span>Census<span class="space"> </span>Data&quot;)
@@ -16050,9 +16476,9 @@ really long quotes.</p>
 <p>Like figures and tables, blockquotes can be inserted in the middle of a
 paragraph or as a sibling of it.</p>
 <p>These are the two ways to make block quotes in Markua:</p>
-<div class="example" id="example-641">
+<div class="example" id="example-652">
 <div class="examplenum">
-<a href="#example-641">Example 641</a>
+<a href="#example-652">Example 652</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">This<span class="space"> </span>is<span class="space"> </span>the<span class="space"> </span>first<span class="space"> </span>paragraph.
@@ -16110,9 +16536,9 @@ biggest ones:</p>
 <p>This list gets rendered as 3,4,5 (not 3,2,1), since Markdown does not have a way
 of specifying that a list is descending, and it does not infer it from the order
 by default:</p>
-<div class="example" id="example-642">
+<div class="example" id="example-653">
 <div class="examplenum">
-<a href="#example-642">Example 642</a>
+<a href="#example-653">Example 653</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16137,9 +16563,9 @@ after
 </div>
 <p>This looks like a list, but it is in fact a paragraph. There are no break tags
 after the foo, bar and baz, just soft breaks:</p>
-<div class="example" id="example-643">
+<div class="example" id="example-654">
 <div class="examplenum">
-<a href="#example-643">Example 643</a>
+<a href="#example-654">Example 654</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16214,9 +16640,9 @@ should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <span class="number">8.13.2</span>Lists with Attributes: Good Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
-<div class="example" id="example-644">
+<div class="example" id="example-655">
 <div class="examplenum">
-<a href="#example-644">Example 644</a>
+<a href="#example-655">Example 655</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16241,9 +16667,9 @@ after
 </div>
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
-<div class="example" id="example-645">
+<div class="example" id="example-656">
 <div class="examplenum">
-<a href="#example-645">Example 645</a>
+<a href="#example-656">Example 656</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16269,9 +16695,9 @@ after
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>)</code> in
 output formats that support it (e.g. in PDF but not in HTML):</p>
-<div class="example" id="example-646">
+<div class="example" id="example-657">
 <div class="examplenum">
-<a href="#example-646">Example 646</a>
+<a href="#example-657">Example 657</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16297,9 +16723,9 @@ after
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>)</code> in
 output formats that support it (e.g. in PDF but not in HTML):</p>
-<div class="example" id="example-647">
+<div class="example" id="example-658">
 <div class="examplenum">
-<a href="#example-647">Example 647</a>
+<a href="#example-658">Example 658</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16324,9 +16750,9 @@ after
 </div>
 </div>
 <p>This list will be numbered A, B, C:</p>
-<div class="example" id="example-648">
+<div class="example" id="example-659">
 <div class="examplenum">
-<a href="#example-648">Example 648</a>
+<a href="#example-659">Example 659</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16351,9 +16777,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e:</p>
-<div class="example" id="example-649">
+<div class="example" id="example-660">
 <div class="examplenum">
-<a href="#example-649">Example 649</a>
+<a href="#example-660">Example 660</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16378,9 +16804,9 @@ after
 </div>
 </div>
 <p>This list will be numbered i, ii, iii:</p>
-<div class="example" id="example-650">
+<div class="example" id="example-661">
 <div class="examplenum">
-<a href="#example-650">Example 650</a>
+<a href="#example-661">Example 661</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16405,9 +16831,9 @@ after
 </div>
 </div>
 <p>This list will be numbered I, II, III:</p>
-<div class="example" id="example-651">
+<div class="example" id="example-662">
 <div class="examplenum">
-<a href="#example-651">Example 651</a>
+<a href="#example-662">Example 662</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16432,9 +16858,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, iv, v:</p>
-<div class="example" id="example-652">
+<div class="example" id="example-663">
 <div class="examplenum">
-<a href="#example-652">Example 652</a>
+<a href="#example-663">Example 663</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16459,9 +16885,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 2, 1:</p>
-<div class="example" id="example-653">
+<div class="example" id="example-664">
 <div class="examplenum">
-<a href="#example-653">Example 653</a>
+<a href="#example-664">Example 664</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16486,9 +16912,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, b, a:</p>
-<div class="example" id="example-654">
+<div class="example" id="example-665">
 <div class="examplenum">
-<a href="#example-654">Example 654</a>
+<a href="#example-665">Example 665</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16513,9 +16939,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, ii, i:</p>
-<div class="example" id="example-655">
+<div class="example" id="example-666">
 <div class="examplenum">
-<a href="#example-655">Example 655</a>
+<a href="#example-666">Example 666</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16545,9 +16971,9 @@ after
 <p>Everything which has been said about attribute lists on lists applies to nested
 lists as well. This example shows a nested list of the form 1, a, i, * (the
 final nested list is an unordered list, not an ordered list):</p>
-<div class="example" id="example-656">
+<div class="example" id="example-667">
 <div class="examplenum">
-<a href="#example-656">Example 656</a>
+<a href="#example-667">Example 667</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16623,9 +17049,9 @@ after
 <p>It is acceptable to just use the number of the first label, and rely on list
 behaviour.</p>
 <p>This list will be numbered 1, 2, 3:</p>
-<div class="example" id="example-657">
+<div class="example" id="example-668">
 <div class="examplenum">
-<a href="#example-657">Example 657</a>
+<a href="#example-668">Example 668</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16649,9 +17075,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 4, 5:</p>
-<div class="example" id="example-658">
+<div class="example" id="example-669">
 <div class="examplenum">
-<a href="#example-658">Example 658</a>
+<a href="#example-669">Example 669</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16675,9 +17101,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e:</p>
-<div class="example" id="example-659">
+<div class="example" id="example-670">
 <div class="examplenum">
-<a href="#example-659">Example 659</a>
+<a href="#example-670">Example 670</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16702,9 +17128,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, iv, v:</p>
-<div class="example" id="example-660">
+<div class="example" id="example-671">
 <div class="examplenum">
-<a href="#example-660">Example 660</a>
+<a href="#example-671">Example 671</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16729,9 +17155,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 2, 1:</p>
-<div class="example" id="example-661">
+<div class="example" id="example-672">
 <div class="examplenum">
-<a href="#example-661">Example 661</a>
+<a href="#example-672">Example 672</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16760,9 +17186,9 @@ after
 </h3>
 <p>This list will be numbered 1, 2, 3. This is just the default behaviour made
 explicit:</p>
-<div class="example" id="example-662">
+<div class="example" id="example-673">
 <div class="examplenum">
-<a href="#example-662">Example 662</a>
+<a href="#example-673">Example 673</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16792,9 +17218,9 @@ after
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>.
 The reason that this is bad style is that the specified delimiter and the
 inferred delimiter do not match:</p>
-<div class="example" id="example-663">
+<div class="example" id="example-674">
 <div class="examplenum">
-<a href="#example-663">Example 663</a>
+<a href="#example-674">Example 674</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16822,9 +17248,9 @@ after
 output formats that support it (e.g. in PDF but not in HTML). The reason
 that this is bad style is that the specified delimiter and the inferred
 delimiter do not match:</p>
-<div class="example" id="example-664">
+<div class="example" id="example-675">
 <div class="examplenum">
-<a href="#example-664">Example 664</a>
+<a href="#example-675">Example 675</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16850,9 +17276,9 @@ after
 </div>
 <p>This list will be numbered 3, 2, 1, not 3, 4, 5. Only the first number matters
 since the reversed attribute is set:</p>
-<div class="example" id="example-665">
+<div class="example" id="example-676">
 <div class="examplenum">
-<a href="#example-665">Example 665</a>
+<a href="#example-676">Example 676</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16878,9 +17304,9 @@ after
 </div>
 <p>This list will be numbered 1, 0, -1, not 1, 2, 3. Only the first number matters
 since the reversed attribute is set:</p>
-<div class="example" id="example-666">
+<div class="example" id="example-677">
 <div class="examplenum">
-<a href="#example-666">Example 666</a>
+<a href="#example-677">Example 677</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16905,9 +17331,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e, regardless of the order of the numbers:</p>
-<div class="example" id="example-667">
+<div class="example" id="example-678">
 <div class="examplenum">
-<a href="#example-667">Example 667</a>
+<a href="#example-678">Example 678</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16932,9 +17358,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 1, 0, -1:</p>
-<div class="example" id="example-668">
+<div class="example" id="example-679">
 <div class="examplenum">
-<a href="#example-668">Example 668</a>
+<a href="#example-679">Example 679</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16960,9 +17386,9 @@ after
 </div>
 <p>This list will be numbered i, 0, -1, since the Romans didn’t have the concept of
 zero or negative numbers (and thus neither do Roman numerals):</p>
-<div class="example" id="example-669">
+<div class="example" id="example-680">
 <div class="examplenum">
-<a href="#example-669">Example 669</a>
+<a href="#example-680">Example 680</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16987,9 +17413,9 @@ after
 </div>
 </div>
 <p>This list will be numbered a, 0, -1, since there are no negative letters either:</p>
-<div class="example" id="example-670">
+<div class="example" id="example-681">
 <div class="examplenum">
-<a href="#example-670">Example 670</a>
+<a href="#example-681">Example 681</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -18686,6 +19112,7 @@ delimiter stack.
 [Paragraphs]: #paragraphs
 [inline link]: #inline-link
 [of the same types]: #of-the-same-type
+[Index entries (M)]: #index-entries-m-
 [Supported attributes on written questionss]: #supported-attributes-on-written-questions
 [of the same type]: #of-the-same-type
 [Resource Typess]: #resource-types
@@ -18693,6 +19120,7 @@ delimiter stack.
 [Conditional Inclusion Attributes on Headingss]: #conditional-inclusion-attributes-on-headings
 [Emphasis and strong emphasiss]: #emphasis-and-strong-emphasis
 [character]: #character
+[Configurable soft line breaks (M)]: #configurable-soft-line-breaks-m-
 [Footnote and endnote support is required for paragraphs only]: #footnote-and-endnote-support-is-required-for-paragraphs-only
 [link destination]: #link-destination
 [Footnote and endnote support is required for paragraphs onlys]: #footnote-and-endnote-support-is-required-for-paragraphs-only
@@ -18711,160 +19139,166 @@ delimiter stack.
 [Table resource formats]: #table-resource-formats
 [thematic break]: #thematic-break
 [How does Leanpub's current Markua support match the Markua Spec?]: #how-does-leanpub-s-current-markua-support-match-the-markua-spec-
+[TODOs]: #todo
 [Entity and numeric character references]: #entity-and-numeric-character-references
 [Common Resource Attributes]: #common-resource-attributes
+[TODO]: #todo
+[Question alternatess]: #question-alternates
 [What is Markua? (Markua extension)]: #what-is-markua-markua-extension-
+[Question alternates]: #question-alternates
 [Directives]: #directives
 [Audio resource formats]: #audio-resource-formats
 [Resource Attribute Listss]: #resource-attribute-lists
 [The magical typewriter]: #the-magical-typewriter
 [indented code block]: #indented-code-block
+[Hints on questionss]: #hints-on-questions
 [Supported Attributes for Codes]: #supported-attributes-for-code
 [Inline Code Resources]: #inline-code-resources
 [Preliminaries]: #preliminaries
+[Configurable soft line breaks (M)s]: #configurable-soft-line-breaks-m-
 [Attribute Lists]: #attribute-lists
-[TODOs]: #todo
-[TODO]: #todo
+[Hints on questions]: #hints-on-questions
+[Supported attributes on written questions]: #supported-attributes-on-written-questions
 [Thematic breakss]: #thematic-breaks
 [inline]: #inline
-[Question alternatess]: #question-alternates
-[Question alternates]: #question-alternates
+[blocks]: #blocks
+[Written questions]: #written-questions
 [tabs]: #tab
-[Hints on questionss]: #hints-on-questions
+[Lists with Attributes: Good Styles]: #lists-with-attributes-good-style
 [Local Code Resourcess]: #local-code-resources
-[Hints on questions]: #hints-on-questions
+[Figures]: #figures
 [The magical typewriters]: #the-magical-typewriter
-[Supported attributes on written questions]: #supported-attributes-on-written-questions
+[Attribute List Formats]: #attribute-list-format
 [Extension attributess]: #extension-attributes
 [About the HTML output]: #about-the-html-output
 [Backslash escapess]: #backslash-escapes
 [Blank liness]: #blank-lines
-[blocks]: #blocks
+[Fill in the blank questions]: #fill-in-the-blank-questions
 [Lists with Attributes: Bad Style]: #lists-with-attributes-bad-style
 [fenced code blocks]: #fenced-code-block
 [What is this document?]: #what-is-this-document-
-[Written questions]: #written-questions
-[Lists with Attributes: Redundant Styles]: #lists-with-attributes-redundant-style
-[Figure alt texts]: #figure-alt-text
+[Examples of multiple selection questionss]: #examples-of-multiple-selection-questions
+[Supported attributes on multiple selection questionss]: #supported-attributes-on-multiple-selection-questions
+[Supported attributes on multiple selection questions]: #supported-attributes-on-multiple-selection-questions
 [paragraph]: #paragraph
 [Figuress]: #figures
 [How to write a novel in Markua]: #how-to-write-a-novel-in-markua
-[Attribute List Formats]: #attribute-list-format
+[Multiple selection questionss]: #multiple-selection-questions
 [can open emphasis]: #can-open-emphasis
 [Paragraph continuation text]: #paragraph-continuation-text
-[Fill in the blank questions]: #fill-in-the-blank-questions
-[Examples of multiple selection questionss]: #examples-of-multiple-selection-questions
+[Multiple selection questions]: #multiple-selection-questions
+[Supported attributes on multiple choice questionss]: #supported-attributes-on-multiple-choice-questions
 [tables]: #table
 [Incorrect usage]: #incorrect-usage
 [Container blocks]: #container-blocks
-[Supported attributes on multiple selection questionss]: #supported-attributes-on-multiple-selection-questions
+[Video resource formats]: #video-resource-formats
 [code fence]: #code-fence
 [Default Value of the  attribute in Inline Code Samples]: #default-value-of-the-attribute-in-inline-code-samples
-[Supported attributes on multiple selection questions]: #supported-attributes-on-multiple-selection-questions
+[Multiple choice questionss]: #multiple-choice-questions
 [class Attributes]: #class-attributes
 [id Attributes]: #id-attributes
-[Multiple selection questionss]: #multiple-selection-questions
-[Multiple selection questions]: #multiple-selection-questions
+[Lists with Attributes: Redundant Style]: #lists-with-attributes-redundant-style
+[Quiz and exercise attributess]: #quiz-and-exercise-attributes
 [Fenced code blockss]: #fenced-code-blocks
 [What is Leanpub Flavoured Markdown (LFM)?]: #what-is-leanpub-flavoured-markdown-lfm-
-[Supported attributes on multiple choice questionss]: #supported-attributes-on-multiple-choice-questions
-[Characters and lines]: #characters-and-lines
-[CSV-format Table resources]: #csv-format-table-resources
-[Multiple choice questionss]: #multiple-choice-questions
-[Quiz and exercise output]: #quiz-and-exercise-output
-[Quiz and exercise attributess]: #quiz-and-exercise-attributes
-[Fenced code blocks]: #fenced-code-blocks
 [Quiz and exercise attributes]: #quiz-and-exercise-attributes
 [Settings which apply to books and courses]: #settings-which-apply-to-books-and-courses
+[CSV-format Table resources]: #csv-format-table-resources
 [A malformed quiz or exercise is an error]: #a-malformed-quiz-or-exercise-is-an-error
+[An empty quiz or exercise is not an errors]: #an-empty-quiz-or-exercise-is-not-an-error
+[An empty quiz or exercise is not an error]: #an-empty-quiz-or-exercise-is-not-an-error
+[Fenced code blocks]: #fenced-code-blocks
+[The pagebreak directives]: #the-pagebreak-directive
+[Quiz and exercise validation]: #quiz-and-exercise-validation
+[Quiz and exercise outputs]: #quiz-and-exercise-output
 [Autolinks]: #autolinks
 [Attribute List Format]: #attribute-list-format
-[An empty quiz or exercise is not an errors]: #an-empty-quiz-or-exercise-is-not-an-error
+[Quiz and exercise output]: #quiz-and-exercise-output
 [Why is a spec needed?s]: #why-is-a-spec-needed-
-[An empty quiz or exercise is not an error]: #an-empty-quiz-or-exercise-is-not-an-error
-[The pagebreak directives]: #the-pagebreak-directive
+[Resource insertion methodss]: #resource-insertion-methods
+[Quizzes and exercises (Markua extension)]: #quizzes-and-exercises-markua-extension-
 [right-flanking delimiter runs]: #right-flanking-delimiter-run
 [delimiter rows]: #delimiter-row
 [Lists with Attributes: Lazy Style]: #lists-with-attributes-lazy-style
 [Unicode whitespace]: #unicode-whitespace
 [email autolink]: #email-autolink
-[Quiz and exercise validation]: #quiz-and-exercise-validation
+[Lists with Attributes: Bad Styles]: #lists-with-attributes-bad-style
 [link labels]: #link-label
 [reference link]: #reference-link
 [Block quotes with curly braces (Markua extension)s]: #block-quotes-with-curly-braces-markua-extension-
 [Inline Markua resources]: #inline-markua-resources
 [Code spanss]: #code-spans
-[Quiz and exercise outputs]: #quiz-and-exercise-output
+[Lists with Attributes: Redundant Styles]: #lists-with-attributes-redundant-style
 [Markua: Markdown for books and coursess]: #markua-markdown-for-books-and-courses
 [Markua Resources]: #markua-resources
 [Multiple choice questions]: #multiple-choice-questions
 [What is Markua? (Markua extension)s]: #what-is-markua-markua-extension-
-[Figure alt text]: #figure-alt-text
+[Lists with Attributes: Lazy Styles]: #lists-with-attributes-lazy-style
 [info strings]: #info-string
-[Quizzes and exercises (Markua extension)]: #quizzes-and-exercises-markua-extension-
-[Lists with Attributes: Bad Styles]: #lists-with-attributes-bad-style
+[Nested Lists with Attributess]: #nested-lists-with-attributes
+[Nested Lists with Attributes]: #nested-lists-with-attributes
 [Verbatim Resources]: #verbatim-resources
 [Correct usage]: #correct-usage
 [Imagess]: #images
 [can open emphasiss]: #can-open-emphasis
 [Supported attributes on fill in the blank questionss]: #supported-attributes-on-fill-in-the-blank-questions
 [line]: #line
-[Lists with Attributes: Redundant Style]: #lists-with-attributes-redundant-style
-[Lists with Attributes: Lazy Styles]: #lists-with-attributes-lazy-style
+[Supported Attributes for Listss]: #supported-attributes-for-lists
+[Supported Attributes for Lists]: #supported-attributes-for-lists
 [Setext headings]: #setext-headings
-[Nested Lists with Attributess]: #nested-lists-with-attributes
-[Nested Lists with Attributes]: #nested-lists-with-attributes
+[List attributes (Markua extension)s]: #list-attributes-markua-extension-
+[List attributes (Markua extension)]: #list-attributes-markua-extension-
 [Attribute Valuess]: #attribute-values
 [Blocks and inliness]: #blocks-and-inlines
 [Entity and numeric character referencess]: #entity-and-numeric-character-references
-[Lists with Attributes: Good Styles]: #lists-with-attributes-good-style
-[Supported Attributes for Listss]: #supported-attributes-for-lists
+[Block quotes with curly braces (Markua extension)]: #block-quotes-with-curly-braces-markua-extension-
+[Local Markua resourcess]: #local-markua-resources
 [ASCII control character]: #ascii-control-character
-[Supported Attributes for Lists]: #supported-attributes-for-lists
+[Table resourcess]: #table-resources
 [Figure titles]: #figure-titles
 [Links]: #links
 [Resource formats]: #resource-formats
-[List attributes (Markua extension)s]: #list-attributes-markua-extension-
+[Table resources]: #table-resources
 [Endnotes]: #endnotes
-[List attributes (Markua extension)]: #list-attributes-markua-extension-
-[Block quotes with curly braces (Markua extension)]: #block-quotes-with-curly-braces-markua-extension-
 [But what if I want every character taken literally?s]: #but-what-if-i-want-every-character-taken-literally-
+[But what if I want every character taken literally?]: #but-what-if-i-want-every-character-taken-literally-
+[Inline Markua resourcess]: #inline-markua-resources
 [Markua: Markdown for books and courses]: #markua-markdown-for-books-and-courses
-[Table resourcess]: #table-resources
+[Single reference to footnotes and endnotess]: #single-reference-to-footnotes-and-endnotes
 [tab]: #tab
 [lines]: #line
-[Table resources]: #table-resources
+[Web Markua resources]: #web-markua-resources
 [CSV-format Table resourcess]: #csv-format-table-resources
 [bullet list]: #bullet-list
 [Paragraph continuations (Markua extension)]: #paragraph-continuations-markua-extension-
-[But what if I want every character taken literally?]: #but-what-if-i-want-every-character-taken-literally-
+[Local Markua resources]: #local-markua-resources
 [tight]: #tight
-[Inline Markua resourcess]: #inline-markua-resources
-[URI autolinks]: #uri-autolink
+[Markua Resourcess]: #markua-resources
+[Line Wrapping in Code Resourcess]: #line-wrapping-in-code-resources
 [left-flanking delimiter run]: #left-flanking-delimiter-run
 [Resources (Markua extension)]: #resources-markua-extension-
 [setext headings]: #setext-heading
-[Web Markua resources]: #web-markua-resources
-[Local Markua resourcess]: #local-markua-resources
-[No Raw HTML (Markua extension)]: #no-raw-html-markua-extension-
-[Local Markua resources]: #local-markua-resources
-[The mainmatter and backmatter directivess]: #the-mainmatter-and-backmatter-directives
-[ASCII control characters]: #ascii-control-character
-[Markua Resourcess]: #markua-resources
-[Line Wrapping in Code Resourcess]: #line-wrapping-in-code-resources
-[link title]: #link-title
-[No Attribute Lists or Format Specifiers on Indented Code Blockss]: #no-attribute-lists-or-format-specifiers-on-indented-code-blocks
 [Line Wrapping in Code Resources]: #line-wrapping-in-code-resources
 [Marking Code as Added or Deleteds]: #marking-code-as-added-or-deleted
+[No Raw HTML (Markua extension)]: #no-raw-html-markua-extension-
 [Marking Code as Added or Deleted]: #marking-code-as-added-or-deleted
+[The mainmatter and backmatter directivess]: #the-mainmatter-and-backmatter-directives
+[ASCII control characters]: #ascii-control-character
+[Attribute Lists on Code Spanss]: #attribute-lists-on-code-spans
+[Attribute Lists on Code Spans]: #attribute-lists-on-code-spans
+[link title]: #link-title
+[No Attribute Lists or Format Specifiers on Indented Code Blockss]: #no-attribute-lists-or-format-specifiers-on-indented-code-blocks
+[Attribute Lists and Format Specifiers on Fenced Code Blocks]: #attribute-lists-and-format-specifiers-on-fenced-code-blocks
+[can open strong emphasiss]: #can-open-strong-emphasis
+[principle of uniformitys]: #principle-of-uniformity
 [Structure of this documents]: #structure-of-this-document
 [Paragraph continuation texts]: #paragraph-continuation-text
 [Blocks and inlines]: #blocks-and-inlines
-[Attribute Lists on Code Spanss]: #attribute-lists-on-code-spans
+[Settings which apply to books and coursess]: #settings-which-apply-to-books-and-courses
 [link label]: #link-label
 [setext heading underlines]: #setext-heading-underline
-[Attribute Lists on Code Spans]: #attribute-lists-on-code-spans
-[Attribute Lists and Format Specifiers on Fenced Code Blocks]: #attribute-lists-and-format-specifiers-on-fenced-code-blocks
+[Web Code Resources]: #web-code-resources
+[Local Code Resources]: #local-code-resources
 [Resources (Markua extension)s]: #resources-markua-extension-
 [line endings]: #line-ending
 [block quote markers]: #block-quote-marker
@@ -18874,91 +19308,91 @@ delimiter stack.
 [tights]: #tight
 [Figure titles and alt text togethers]: #figure-titles-and-alt-text-together
 [No HTML Blocks (Markua extension)s]: #no-html-blocks-markua-extension-
-[can open strong emphasiss]: #can-open-strong-emphasis
-[Linkss]: #links
-[principle of uniformitys]: #principle-of-uniformity
-[setext heading underline]: #setext-heading-underline
-[Settings which apply to books and coursess]: #settings-which-apply-to-books-and-courses
-[Textual contents]: #textual-content
-[Web Code Resources]: #web-code-resources
-[Local Code Resources]: #local-code-resources
-[left-flanking delimiter runs]: #left-flanking-delimiter-run
 [The lang attribute]: #the-lang-attribute
-[Part headings]: #part-headings
+[Linkss]: #links
 [For Leanpub authors]: #for-leanpub-authors
+[setext heading underline]: #setext-heading-underline
+[Characters and lines]: #characters-and-lines
+[Textual contents]: #textual-content
+[Code resources]: #code-resources
+[Code resource formatss]: #code-resource-formats
+[left-flanking delimiter runs]: #left-flanking-delimiter-run
+[Link reference definitionss]: #link-reference-definitions
+[Part headings]: #part-headings
+[URI autolinks]: #uri-autolink
 [thematic breaks]: #thematic-break
 [Supported attributes on multiple choice questions]: #supported-attributes-on-multiple-choice-questions
 [Indented code blocks]: #indented-code-blocks
 [How to write almost any book in Markua]: #how-to-write-almost-any-book-in-markua
-[Code resources]: #code-resources
+[Markua resource formats]: #markua-resource-formats
 [Video resource formatss]: #video-resource-formats
 [Tables (GFM extension)s]: #tables-gfm-extension-
-[Code resource formatss]: #code-resource-formats
+[Math resource formatss]: #math-resource-formats
 [Optional Automatic Curly Quotes Outside of Code Blocks and Spans]: #optional-automatic-curly-quotes-outside-of-code-blocks-and-spans
-[Link reference definitionss]: #link-reference-definitions
-[Video resource formats]: #video-resource-formats
-[Markua resource formats]: #markua-resource-formats
+[The insertion directives (dedication, toc, etc.)s]: #the-insertion-directives-dedication-toc-etc-
+[Image resource formatss]: #image-resource-formats
+[Image resource formats]: #image-resource-formats
 [Web Markua resourcess]: #web-markua-resources
 [Resource Types]: #resource-types
 [Blurb icons with extension attributes]: #blurb-icons-with-extension-attributes
-[Math resource formatss]: #math-resource-formats
-[inline links]: #inline-link
-[The insertion directives (dedication, toc, etc.)s]: #the-insertion-directives-dedication-toc-etc-
-[loose]: #loose
-[Image resource formatss]: #image-resource-formats
-[Image resource formats]: #image-resource-formats
-[Paragraphss]: #paragraphs
-[Single reference to footnotes and endnotess]: #single-reference-to-footnotes-and-endnotes
 [Resource formatss]: #resource-formats
+[inline links]: #inline-link
+[Span attribute lists can be used to set the formats]: #span-attribute-lists-can-be-used-to-set-the-format
+[loose]: #loose
+[start numbers]: #start-number
+[Spanss]: #spans
+[Paragraphss]: #paragraphs
+[The figure attribute list takes precedences]: #the-figure-attribute-list-takes-precedence
+[The figure attribute list takes precedence]: #the-figure-attribute-list-takes-precedence
 [fenced code block]: #fenced-code-block
 [Inline resourcess]: #inline-resources
 [blank line]: #blank-line
-[Span attribute lists can be used to set the formats]: #span-attribute-lists-can-be-used-to-set-the-format
-[start numbers]: #start-number
-[Spanss]: #spans
+[matches]: #matches
+[Figure alt texts]: #figure-alt-text
+[Figure alt text]: #figure-alt-text
 [Using blurbs to center text]: #using-blurbs-to-center-text
 [No HTML Blocks (Markua extension)]: #no-html-blocks-markua-extension-
 [link text]: #link-text
 [GitHub Flavored Markdown (GFM) extension status]: #github-flavored-markdown-gfm-extension-status
-[The figure attribute list takes precedences]: #the-figure-attribute-list-takes-precedence
+[Figure titless]: #figure-titles
 [delimiter runs]: #delimiter-run
 [Hexadecimal numeric character references]: #hexadecimal-numeric-character-references
-[The figure attribute list takes precedence]: #the-figure-attribute-list-takes-precedence
-[matches]: #matches
+[Figure attributess]: #figure-attributes
+[Figure attributes]: #figure-attributes
 [Supported attributes on fill in the blank questions]: #supported-attributes-on-fill-in-the-blank-questions
 [Quizzes and exercises (Markua extension)s]: #quizzes-and-exercises-markua-extension-
-[Figure titless]: #figure-titles
-[Figure attributess]: #figure-attributes
+[Span attribute lists (M)]: #span-attribute-lists-m-
+[Common Resource Attributess]: #common-resource-attributes
 [can close strong emphasis]: #can-close-strong-emphasis
 [code fences]: #code-fence
 [Precedences]: #precedence
-[Figure attributes]: #figure-attributes
-[Link reference definitions]: #link-reference-definitions
-[Figures]: #figures
-[Resource insertion methodss]: #resource-insertion-methods
-[ordered list marker]: #ordered-list-marker
-[Common Resource Attributess]: #common-resource-attributes
-[table]: #table
 [Resource Attribute Lists]: #resource-attribute-lists
+[Link reference definitions]: #link-reference-definitions
 [Verbatim Resourcess]: #verbatim-resources
 [Inline resources]: #inline-resources
+[ordered list marker]: #ordered-list-marker
 [Web resourcess]: #web-resources
+[table]: #table
 [Web resources]: #web-resources
-[delimiter row]: #delimiter-row
 [Local resourcess]: #local-resources
 [Local resources]: #local-resources
+[Resource Formats]: #resource-formats
+[Resource Locations]: #resource-locations
+[delimiter row]: #delimiter-row
+[Resource Classes]: #resource-classes
+[list marker]: #list-marker
 [looses]: #loose
 [Resource Locationss]: #resource-locations
 [Resource inlines (Markua extension)]: #resource-inlines-markua-extension-
-[Resource Locations]: #resource-locations
+[resourcess]: #resources
 [shortcut reference link]: #shortcut-reference-link
 [ordered lists]: #ordered-list
 [reference links]: #reference-link
-[Resource Classes]: #resource-classes
-[list marker]: #list-marker
-[Resource Formats]: #resource-formats
-[resourcess]: #resources
 [resources]: #resources
+[Decimal numeric character referencess]: #decimal-numeric-character-references
+[Concatenating files and blank lines (M)]: #concatenating-files-and-blank-lines-m-
+[Index entries (M)s]: #index-entries-m-
+[Span attribute lists (M)s]: #span-attribute-lists-m-
 [code span]: #code-span
 [Default Value of the  attribute in Inline Code Sampless]: #default-value-of-the-attribute-in-inline-code-samples
 [CSS Note]: #css-note
@@ -19076,7 +19510,7 @@ delimiter stack.
 [About this documents]: #about-this-document
 [delimiter run]: #delimiter-run
 [For Leanpub authorss]: #for-leanpub-authors
-[Decimal numeric character referencess]: #decimal-numeric-character-references
+[Concatenating files and blank lines (M)s]: #concatenating-files-and-blank-lines-m-
 [Unicode whitespace characters]: #unicode-whitespace-character
 [Blurb classess]: #blurb-classes
 [collapsed reference link]: #collapsed-reference-link

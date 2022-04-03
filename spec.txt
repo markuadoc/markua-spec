@@ -6014,6 +6014,488 @@ Here the outer list is loose, the inner list tight:
 ````````````````````````````````
 
 
+
+<div class="extension">
+
+## Asides (Markua extension)
+
+Since Markua is for writing books and courses, including technical books and
+courses, it needs not just a syntax for blockquotes--it also needs a syntax for
+asides and for blurbs.
+
+These syntaxes are very similar to the Markua syntax for blockquotes. Like
+blockquotes, any headings inside asides or blurbs do not show up in a Table of
+Contents (if one is present), and they can also be formatted differently by
+Markua Processors.
+
+We will consider asides first.
+
+Asides are typically short or long notes in books which are tangential to the
+main idea--sort of like footnotes, but in the body text itself. In technical
+books, quite often they are formatted in a box. Asides can span multiple pages.
+
+The syntaxes for asides are very similar to blockquotes:
+
+1. By prefacing lines with `A> `, i.e. an `A`, then a greater than character
+   (`>`), then a space.
+2. By wrapping the aside in `{aside}` ... `{/aside}`
+
+Option #1 is preferable for short asides; option #2 is easier on authors for
+really long asides.
+
+For consistency with blockquotes, asides can be siblings of paragraphs or nested
+in them.
+
+Here's a short aside:
+
+```````````````````````````````` example
+A> This is a short aside.
+.
+<aside>
+<p>This is a short aside.</p>
+</aside>
+````````````````````````````````
+
+Here's a longer aside, which also contains a heading:
+
+```````````````````````````````` example
+A> # A Longer Aside
+A>
+A> This is a longer aside.
+A>
+A> It can have multiple paragraphs.
+.
+<aside>
+<h1>A Longer Aside</h1>
+<p>This is a longer aside.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+Here's the same longer aside using the `{aside}` syntax:
+
+```````````````````````````````` example
+{aside}
+# A Longer Aside
+
+This is a longer aside.
+
+It can have multiple paragraphs.
+{/aside}
+.
+<aside>
+<h1>A Longer Aside</h1>
+<p>This is a longer aside.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+</div>
+
+
+
+<div class="extension">
+
+## Blurbs (Markua extension)
+
+Blurbs are like asides, but shorter. A blurb is not intended to span multiple
+pages of output.
+
+The syntaxes for blurbs are very similar to asides:
+
+1. By prefacing lines with `B> `, i.e. a `B`, then a greater than character
+   (`>`), then a space.
+2. By wrapping the blurb in `{blurb}` ... `{/blurb}`
+
+Here's a short blurb:
+
+```````````````````````````````` example
+B> This is a short blurb.
+.
+<aside class="blurb">
+<p>This is a short blurb.</p>
+</aside>
+````````````````````````````````
+
+Here's a longer blurb, which also contains a heading:
+
+```````````````````````````````` example
+B> # A Longer Blurb
+B>
+B> This is a longer blurb.
+B>
+B> It can have multiple paragraphs.
+.
+<aside class="blurb">
+<h1>A Longer Blurb</h1>
+<p>This is a longer blurb.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+Here's the same longer blurb using the `{blurb}` syntax:
+
+```````````````````````````````` example
+{blurb}
+# A Longer Blurb
+
+This is a longer blurb.
+
+It can have multiple paragraphs.
+{/blurb}
+.
+<aside class="blurb">
+<h1>A Longer Blurb</h1>
+<p>This is a longer blurb.</p>
+<p>It can have multiple paragraphs.</p>
+</aside>
+````````````````````````````````
+
+### Blurb classes
+
+Blurbs also have support for an attribute list, which can contain a `class`
+attribute.
+
+Markua has its origin in authoring computer programming books. In computer
+programming books, there are a number of blurb types which are a
+de facto standard:
+
+* `center`
+* `discussion`
+* `error`
+* `information`
+* `tip`
+* `warning`
+
+These blurb types can be set on a blurb as its `class` attribute. A Markua
+Processor can optionally style these blurbs appropriately based on the class,
+for example by adding custom icons for each class of blurb.
+
+Here's how this looks with the `B> ` syntax:
+
+```````````````````````````````` example
+{class: warning}
+B> This is a warning!
+.
+<aside class="blurb warning">
+<p>This is a warning!</p>
+</aside>
+````````````````````````````````
+
+Here's how this looks with the `{blurb}` syntax:
+
+```````````````````````````````` example
+{blurb, class: warning}
+This is a warning!
+{/blurb}
+.
+<aside class="blurb warning">
+<p>This is a warning!</p>
+</aside>
+````````````````````````````````
+
+The attribute list must either directly precede the `B>` with no blank line
+between it and the `B>`, or it must be combined with the `{blurb}` block
+opening. It is **NOT** legal Markua syntax to have an attribute list preceding a
+`{blurb}` block opening like this:
+
+~~~
+{class: warning}
+{blurb}
+That is not legal Markua...
+~~~
+
+
+### Syntactic sugar for blurb classes
+
+Having to constantly type `{class: warning}` in a computer programming book with
+a number of warnings would get tedious, as would any of the other blurb classes
+listed above.
+
+So, Markua defines a standard shorthand syntax for these classes of blurbs. With
+this syntax, you use a different letter than `B` in the `B>`, to create a blurb
+with the appropriate `class`.
+
+These are the syntactic sugar values you can use which have a heritage in
+computer programming books:
+
+`D>`
+: `{class: discussion}`
+
+`E>`
+: `{class: error}`
+
+`I>`
+: `{class: information}`
+
+`Q>`
+: `{class: question}`
+
+`T>`
+: `{class: tip}`
+
+`W>`
+: `{class: warning}`
+
+`X>`
+: `{class: exercise}`
+
+```````````````````````````````` example
+D> This is a discussion blurb.
+
+{class: discussion}
+B> This is a discussion blurb.
+
+{blurb, class: discussion}
+This is a discussion blurb.
+{/blurb}
+.
+<aside class="blurb discussion">
+<p>This is a discussion blurb.</p>
+</aside>
+
+<aside class="blurb discussion">
+<p>This is a discussion blurb.</p>
+</aside>
+
+<aside class="blurb discussion">
+<p>This is a discussion blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+E> This is an error blurb.
+
+{class: error}
+B> This is an error blurb.
+
+{blurb, class: error}
+This is an error blurb.
+{/blurb}
+.
+<aside class="blurb error">
+<p>This is an error blurb.</p>
+</aside>
+
+<aside class="blurb error">
+<p>This is an error blurb.</p>
+</aside>
+
+<aside class="blurb error">
+<p>This is an error blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+X> This is an exercise blurb.
+
+{class: exercise}
+B> This is an exercise blurb.
+
+{blurb, class: exercise}
+This is an exercise blurb.
+{/blurb}
+.
+<aside class="blurb exercise">
+<p>This is an exercise blurb.</p>
+</aside>
+
+<aside class="blurb exercise">
+<p>This is an exercise blurb.</p>
+</aside>
+
+<aside class="blurb exercise">
+<p>This is an exercise blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+I> This is an information blurb.
+
+{class: information}
+B> This is an information blurb.
+
+{blurb, class: information}
+This is an information blurb.
+{/blurb}
+.
+<aside class="blurb information">
+<p>This is an information blurb.</p>
+</aside>
+
+<aside class="blurb information">
+<p>This is an information blurb.</p>
+</aside>
+
+<aside class="blurb information">
+<p>This is an information blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+Q> This is a question blurb.
+
+{class: question}
+B> This is a question blurb.
+
+{blurb, class: question}
+This is a question blurb.
+{/blurb}
+.
+<aside class="blurb question">
+<p>This is a question blurb.</p>
+</aside>
+
+<aside class="blurb question">
+<p>This is a question blurb.</p>
+</aside>
+
+<aside class="blurb question">
+<p>This is a question blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+T> This is a tip blurb.
+
+{class: tip}
+B> This is a tip blurb.
+
+{blurb, class: tip}
+This is a tip blurb.
+{/blurb}
+.
+<aside class="blurb tip">
+<p>This is a tip blurb.</p>
+</aside>
+
+<aside class="blurb tip">
+<p>This is a tip blurb.</p>
+</aside>
+
+<aside class="blurb tip">
+<p>This is a tip blurb.</p>
+</aside>
+````````````````````````````````
+
+```````````````````````````````` example
+W> This is a warning blurb.
+
+{class: warning}
+B> This is a warning blurb.
+
+{blurb, class: warning}
+This is a warning blurb.
+{/blurb}
+.
+<aside class="blurb warning">
+<p>This is a warning blurb.</p>
+</aside>
+
+<aside class="blurb warning">
+<p>This is a warning blurb.</p>
+</aside>
+
+<aside class="blurb warning">
+<p>This is a warning blurb.</p>
+</aside>
+````````````````````````````````
+
+Note that `Q>` and `X>` are a bit confusing:
+
+* `Q>` defines a blurb which is formatted like a question, but `{quiz}`
+(discussed later) defines a quiz, and quizzes have actual numbered questions in
+them. It is unfortunate that the words `quiz` and `question` both start with the
+letter `Q`. Also, please note that the `question` blurb is not the same thing as
+a question in a quiz.
+* `X>` defines a blurb which is formatted like an exercise, but `{exercise}`
+(discussed later) defines a structured exercise similar to a quiz. It is
+unfortunate that the term "exercise" is used for both. However, picking a worse
+word (such as, say, example) just to avoid any ambiguity would be worse.
+
+Also note that nothing in this section defines what a Markua Processor must *do*
+with the given class of blurb, in terms of formatting. Leanpub, for example, uses
+it to add an appropriate icon from
+[Font Awesome](https://fortawesome.github.io/Font-Awesome/)
+at the left of the blurb, but other Markua Processors are free to do something
+different.
+
+Finally, note that specifying a class in metadata overrides what the syntactic
+sugar does, and is also an error:
+
+```````````````````````````````` example
+{class: tip}
+W> This is a tip blurb, not a warning blurb.
+.
+<aside class="blurb tip">
+<p>This is a tip blurb, not a warning blurb.</p>
+</aside>
+````````````````````````````````
+
+### Using blurbs to center text
+
+You can also use a blurb to center text.
+
+The following two ways to do this are equivalent:
+
+```````````````````````````````` example
+C> This is a centered blurb.
+
+{class: center}
+B> This is a centered blurb.
+.
+<aside class="blurb center">
+<p>This is a centered blurb.</p>
+</aside>
+<aside class="blurb center">
+<p>This is a centered blurb.</p>
+</aside>
+````````````````````````````````
+
+This is the only way to center text in Markua.
+
+Unlike other blurb types which have their origin in technical books, centering
+text has a wide range of uses. So, it could have been thought of as something
+different than a blurb. However, in terms of its behaviour and the way it's
+inserted, centered text is a blurb--whether it's inserted via syntactic sugar or
+via a class attribute on a normal blurb element.
+
+
+### Blurb icons with extension attributes
+
+Markua Processors must ignore any attributes which they do not understand.
+
+Because of this, Markua attribute lists can contain any number of extension
+attributes. An extension attribute is an attribute which is not defined in the
+Markua specification, but which is understood by some specific Markua Processor.
+
+As an example of an extension attribute, Leanpub adds an `icon` attribute to
+blurbs. Markua does not specify that a blurb must support an `icon` attribute,
+or what it would mean if it did. However, Leanpub understands an `icon`
+attribute to reference an icon from Font Awesome. The value of this attribute
+is assumed to be the name of an icon in Font Awesome, without the `fa-` prefix.
+So, in any Markua Processor, you can do this:
+
+~~~
+{icon: car}
+B> You can't spell carbon without it!
+
+{icon: leanpub}
+B> Yes, we're in Font Awesome!
+
+{icon: github}
+B> So is GitHub, of course. Unicorns.
+~~~
+
+In Leanpub, this will produce a nice icon of a car, using the Font Awesome icon.
+In a Markua implementation that does not understand the icon attribute, nothing
+will be generated for that attribute--it will be functionally equivalent to the
+attribute not being present.
+
+</div>
+
+
+
 # Inlines
 
 Inlines are parsed sequentially from the beginning of the character
@@ -9634,9 +10116,11 @@ straight in a code span either.)
 
 <div class="extension">
 
-## Footnotes (Markua extension)
+## Footnotes and endnotes (Markua extension)
 
-Books often have footnotes. So, Markua has them too.
+Books often have footnotes and endnotes. So, Markua has them too.
+
+### Footnotes
 
 To add a footnote, you insert a footnote tag using square brackets, a caret and
 the tag, like this:
@@ -9676,15 +10160,7 @@ should output them *somewhere*, but the details are not specified. This is
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.
 
-</div>
-
-
-
-<div class="extension">
-
-## Endnotes (Markua extension)
-
-Books often have endnotes. So, Markua has them too.
+### Endnotes
 
 Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
@@ -9729,7 +10205,7 @@ Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 [crosslink](#crosslinks).
 
-### Footnote and endnote support required for paragraphs only
+### Footnote and endnote support is required for paragraphs only
 
 A Markua Processor must support footnote and endnote references inserted in
 normal paragraph content. However, that's it.
@@ -9768,7 +10244,7 @@ legitimate purpose.
 Worse, Markua bans all inline HTML except HTML comments. So even the gross
 Markdown workaround to produce underlines with HTML does not work.
 
-So, how to produce underline?
+So, how to produce an actual underline?
 
 In Markua, `*one asterisk*` produces italics, and `_one underscore_` can
 produce either italics or an underline based on the `italicize-underlines`

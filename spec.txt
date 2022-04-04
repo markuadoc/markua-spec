@@ -124,16 +124,18 @@ The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
 
-## Markua's one key subtraction: no raw HTML
+## Markua's one key subtraction from Markdown: raw HTML is removed
 
-Markua also has one key subtraction from Markdown: suport for raw HTML, either
+Markua also has one key subtraction from Markdown: support for raw HTML, either
 as inlines or blocks, is completely removed.
 
 Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
-Instead, **all raw HTML is removed**. This is true both for raw HTML which is
-inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
-these are supported by Markua. In both cases, **raw HTML must be completely
-removed by the Markua Processor.**
+
+Instead, in Markua **all raw HTML elements are removed**.
+
+This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
+which is inserted as inlines. Neither of these are supported by Markua. In both
+cases, **raw HTML must be completely removed by the Markua Processor.**
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) as comments in Markua: since these comments are
@@ -152,6 +154,10 @@ Since Markdown's only output format target is HTML, it might as well support
 HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
 From an implementation perspective, Markdown gets inline HTML support for free.
 This is not true in the case of Markua.
+
+Note that besides raw HTML, Markua does not remove anything else from Markdown.
+(As is discussed later, the Markua spec is written with the CommonMark spec as a
+starting point, so that you can verify this for yourself.)
 
 
 ## How to write a novel in Markua
@@ -11801,6 +11807,60 @@ stuff
 </div>
 
 
+<div class="extension">
+
+## Superscript and subscript (M)
+
+To produce superscript like the 3 in 5^3^ = 125, surround it with carets like `5^3^ = 125`.
+
+```````````````````````````````` example
+Superscript: 5^3^ = 125
+.
+<p>Superscript: 5<sup>3</sup> = 125</p>
+````````````````````````````````
+
+To produce subscript like the 2 in H~2~O, surround it with single tildes like `H~2~O`.
+
+```````````````````````````````` example
+Subscript: H~2~O
+.
+<p>Subscript: H<sub>2</sub>O</p>
+````````````````````````````````
+
+</div>
+
+
+
+<div class="extension">
+
+## Strikethrough (GFM)
+
+Markua enables the `strikethrough` extension, where an additional emphasis type is
+available.
+
+Strikethrough text is any text wrapped in two tildes (`~`).
+
+```````````````````````````````` example
+~~Hi~~ Hello, world!
+.
+<p><del>Hi</del> Hello, world!</p>
+````````````````````````````````
+
+As with regular emphasis delimiters, a new paragraph will cause strikethrough
+parsing to cease:
+
+```````````````````````````````` example
+This ~~has a
+
+new paragraph~~.
+.
+<p>This ~~has a</p>
+<p>new paragraph~~.</p>
+````````````````````````````````
+
+</div>
+
+
 
 <div class="extension">
 
@@ -11944,6 +12004,35 @@ reference *Hello! Flex 4*, one of my books. To do this, I would have to write
 the entry as `{i: "*Hello\! Flex 4*}` not as `{i: "*Hello! Flex 4*}`.
 
 </div>
+
+
+
+## Textual content
+
+Any characters not given an interpretation by the above rules will
+be parsed as plain textual content.
+
+```````````````````````````````` example
+hello $.;'there
+.
+<p>hello $.;'there</p>
+````````````````````````````````
+
+
+```````````````````````````````` example
+Foo χρῆν
+.
+<p>Foo χρῆν</p>
+````````````````````````````````
+
+
+Internal spaces are preserved verbatim:
+
+```````````````````````````````` example
+Multiple     spaces
+.
+<p>Multiple     spaces</p>
+````````````````````````````````
 
 
 
@@ -15342,43 +15431,6 @@ incorrect number of questions, or with questions incorrectly used as alternates
 for each other, would be much more difficult.
 
 </div>
-
-
-
-
-
-
-
-
-
-
-## Textual content
-
-Any characters not given an interpretation by the above rules will
-be parsed as plain textual content.
-
-```````````````````````````````` example
-hello $.;'there
-.
-<p>hello $.;'there</p>
-````````````````````````````````
-
-
-```````````````````````````````` example
-Foo χρῆν
-.
-<p>Foo χρῆν</p>
-````````````````````````````````
-
-
-Internal spaces are preserved verbatim:
-
-```````````````````````````````` example
-Multiple     spaces
-.
-<p>Multiple     spaces</p>
-````````````````````````````````
-
 
 
 

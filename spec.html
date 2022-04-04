@@ -142,7 +142,7 @@ $(document).ready(function() {
 <li><a href="#the-magical-typewriter-m-"><span class="number">1.1</span>The magical typewriter (M)</a></li>
 <li><a href="#markua-markdown-for-books-and-courses-m-"><span class="number">1.2</span>Markua: Markdown for books and courses (M)</a></li>
 <li><a href="#markua-s-five-key-additions-to-markdown-m-"><span class="number">1.3</span>Markua’s five key additions to Markdown (M)</a></li>
-<li><a href="#markua-s-one-key-subtraction-no-raw-html"><span class="number">1.4</span>Markua’s one key subtraction: no raw HTML</a></li>
+<li><a href="#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed"><span class="number">1.4</span>Markua’s one key subtraction from Markdown: raw HTML is removed</a></li>
 <li><a href="#how-to-write-a-novel-in-markua"><span class="number">1.5</span>How to write a novel in Markua</a></li>
 <li><a href="#how-to-write-almost-any-book-in-markua"><span class="number">1.6</span>How to write almost any book in Markua</a></li>
 <li><a href="#for-leanpub-authors"><span class="number">1.7</span>For Leanpub authors</a></li>
@@ -220,7 +220,10 @@ $(document).ready(function() {
 <li><a href="#character-substitutions-m-"><span class="number">7.10</span>Character substitutions (M)</a></li>
 <li><a href="#footnotes-and-endnotes-m-"><span class="number">7.11</span>Footnotes and endnotes (M)</a></li>
 <li><a href="#underline-m-"><span class="number">7.12</span>Underline (M)</a></li>
-<li><a href="#index-entries-m-"><span class="number">7.13</span>Index entries (M)</a></li>
+<li><a href="#superscript-and-subscript-m-"><span class="number">7.13</span>Superscript and subscript (M)</a></li>
+<li><a href="#strikethrough-gfm-"><span class="number">7.14</span>Strikethrough (GFM)</a></li>
+<li><a href="#index-entries-m-"><span class="number">7.15</span>Index entries (M)</a></li>
+<li><a href="#textual-content"><span class="number">7.16</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">8</span>Resources (M)</a>
@@ -251,7 +254,6 @@ $(document).ready(function() {
 <li><a href="#written-questions"><span class="number">9.7</span>Written questions</a></li>
 <li><a href="#hints-on-questions"><span class="number">9.8</span>Hints on questions</a></li>
 <li><a href="#question-alternates"><span class="number">9.9</span>Question alternates</a></li>
-<li><a href="#textual-content"><span class="number">9.10</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -358,16 +360,16 @@ and adding things which only make sense in books or courses, this process will
 feel like decorating, not converting.</p>
 <p>The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.</p>
-<h2 id="markua-s-one-key-subtraction-no-raw-html" class="definition">
-<span class="number">1.4</span>Markua’s one key subtraction: no raw HTML
+<h2 id="markua-s-one-key-subtraction-from-markdown-raw-html-is-removed" class="definition">
+<span class="number">1.4</span>Markua’s one key subtraction from Markdown: raw HTML is removed
 </h2>
-<p>Markua also has one key subtraction from Markdown: suport for raw HTML, either
+<p>Markua also has one key subtraction from Markdown: support for raw HTML, either
 as inlines or blocks, is completely removed.</p>
-<p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
-Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
-inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
-these are supported by Markua. In both cases, <strong>raw HTML must be completely
-removed by the Markua Processor.</strong></p>
+<p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
+<p>Instead, in Markua <strong>all raw HTML elements are removed</strong>.</p>
+<p>This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
+which is inserted as inlines. Neither of these are supported by Markua. In both
+cases, <strong>raw HTML must be completely removed by the Markua Processor.</strong></p>
 <p>As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (<code>&lt;!-- a comment --&gt;</code>) as comments in Markua: since these comments are
 HTML, they will be completely removed from the output (along with any other
@@ -382,6 +384,9 @@ meaningfully outputting all of HTML syntax as well as all of Markua syntax.</p>
 HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
 From an implementation perspective, Markdown gets inline HTML support for free.
 This is not true in the case of Markua.</p>
+<p>Note that besides raw HTML, Markua does not remove anything else from Markdown.
+(As is discussed later, the Markua spec is written with the CommonMark spec as a
+starting point, so that you can verify this for yourself.)</p>
 <h2 id="how-to-write-a-novel-in-markua" class="definition">
 <span class="number">1.5</span>How to write a novel in Markua
 </h2>
@@ -5508,7 +5513,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-173">
@@ -5947,7 +5952,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-198">
 <div class="examplenum">
@@ -5971,7 +5976,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -13357,7 +13362,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-555">
 <div class="examplenum">
@@ -15078,8 +15083,80 @@ stuff
 </div>
 </div>
 <div class="extension">
+<h2 id="superscript-and-subscript-m-" class="definition">
+<span class="number">7.13</span>Superscript and subscript (M)
+</h2>
+<p>To produce superscript like the 3 in 5^3^ = 125, surround it with carets like <code>5^3^ = 125</code>.</p>
+<div class="example" id="example-645">
+<div class="examplenum">
+<a href="#example-645">Example 645</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">Superscript:<span class="space"> </span>5^3^<span class="space"> </span>=<span class="space"> </span>125
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;Superscript:<span class="space"> </span>5&lt;sup&gt;3&lt;/sup&gt;<span class="space"> </span>=<span class="space"> </span>125&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>To produce subscript like the 2 in H~2~O, surround it with single tildes like <code>H~2~O</code>.</p>
+<div class="example" id="example-646">
+<div class="examplenum">
+<a href="#example-646">Example 646</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">Subscript:<span class="space"> </span>H~2~O
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;Subscript:<span class="space"> </span>H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+</div>
+<div class="extension">
+<h2 id="strikethrough-gfm-" class="definition">
+<span class="number">7.14</span>Strikethrough (GFM)
+</h2>
+<p>Markua enables the <code>strikethrough</code> extension, where an additional emphasis type is
+available.</p>
+<p>Strikethrough text is any text wrapped in two tildes (<code>~</code>).</p>
+<div class="example" id="example-647">
+<div class="examplenum">
+<a href="#example-647">Example 647</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">~~Hi~~<span class="space"> </span>Hello,<span class="space"> </span>world!
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;&lt;del&gt;Hi&lt;/del&gt;<span class="space"> </span>Hello,<span class="space"> </span>world!&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>As with regular emphasis delimiters, a new paragraph will cause strikethrough
+parsing to cease:</p>
+<div class="example" id="example-648">
+<div class="examplenum">
+<a href="#example-648">Example 648</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">This<span class="space"> </span>~~has<span class="space"> </span>a
+
+new<span class="space"> </span>paragraph~~.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;This<span class="space"> </span>~~has<span class="space"> </span>a&lt;/p&gt;
+&lt;p&gt;new<span class="space"> </span>paragraph~~.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+</div>
+<div class="extension">
 <h2 id="index-entries-m-" class="definition">
-<span class="number">7.13</span>Index entries (M)
+<span class="number">7.15</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -15179,6 +15256,51 @@ index entry, you must backslash-escape it. Otherwise, it would be intepreted
 as an attempt at creating a sub-entry. (This actually got me, when I tried to
 reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to write
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
+</div>
+<h2 id="textual-content" class="definition">
+<span class="number">7.16</span>Textual content
+</h2>
+<p>Any characters not given an interpretation by the above rules will
+be parsed as plain textual content.</p>
+<div class="example" id="example-649">
+<div class="examplenum">
+<a href="#example-649">Example 649</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">hello<span class="space"> </span>$.;'there
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;hello<span class="space"> </span>$.;'there&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-650">
+<div class="examplenum">
+<a href="#example-650">Example 650</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">Foo<span class="space"> </span>χρῆν
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;Foo<span class="space"> </span>χρῆν&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Internal spaces are preserved verbatim:</p>
+<div class="example" id="example-651">
+<div class="examplenum">
+<a href="#example-651">Example 651</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces&lt;/p&gt;
+</code></pre>
+</div>
 </div>
 <div class="extension">
 <h1 id="resources-m-" class="definition">
@@ -16307,9 +16429,9 @@ resource.</p>
 <p>If you want to type poetry where every character is taken exactly literally,
 instead of being potentially interpreted as Markua formatting, you need to use
 a code block with a format of text for that:</p>
-<div class="example" id="example-645">
+<div class="example" id="example-652">
 <div class="examplenum">
-<a href="#example-645">Example 645</a>
+<a href="#example-652">Example 652</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```text
@@ -16411,9 +16533,9 @@ followed by a percentage sign (%). The quotes are optional. So, you can say
 <p>The examples below assume that a table which looks like the following (from the
 GFM table example above) is defined in a file called <code>census.tbl</code> (real census
 data would be too long for a good example):</p>
-<div class="example" id="example-646">
+<div class="example" id="example-653">
 <div class="examplenum">
-<a href="#example-646">Example 646</a>
+<a href="#example-653">Example 653</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">|<span class="space"> </span>foo<span class="space"> </span>|<span class="space"> </span>bar<span class="space"> </span>|
@@ -16441,9 +16563,9 @@ data would be too long for a good example):</p>
 </div>
 <p>With this table above defined in a file which is available at a local
 resource location, the following example results:</p>
-<div class="example" id="example-647">
+<div class="example" id="example-654">
 <div class="examplenum">
-<a href="#example-647">Example 647</a>
+<a href="#example-654">Example 654</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![](census.tbl<span class="space"> </span>&quot;Canadian<span class="space"> </span>Census<span class="space"> </span>Data&quot;)
@@ -16472,9 +16594,9 @@ resource location, the following example results:</p>
 </div>
 <p>With this table above defined in a file which is available at a given web
 resource location, the identical example results:</p>
-<div class="example" id="example-648">
+<div class="example" id="example-655">
 <div class="examplenum">
-<a href="#example-648">Example 648</a>
+<a href="#example-655">Example 655</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![](http://markua.com/census.tbl<span class="space"> </span>&quot;Canadian<span class="space"> </span>Census<span class="space"> </span>Data&quot;)
@@ -16598,9 +16720,9 @@ really long quotes.</p>
 <p>Like figures and tables, blockquotes can be inserted in the middle of a
 paragraph or as a sibling of it.</p>
 <p>These are the two ways to make block quotes in Markua:</p>
-<div class="example" id="example-649">
+<div class="example" id="example-656">
 <div class="examplenum">
-<a href="#example-649">Example 649</a>
+<a href="#example-656">Example 656</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">This<span class="space"> </span>is<span class="space"> </span>the<span class="space"> </span>first<span class="space"> </span>paragraph.
@@ -16656,9 +16778,9 @@ biggest ones:</p>
 <p>This list gets rendered as 3,4,5 (not 3,2,1), since Markdown does not have a way
 of specifying that a list is descending, and it does not infer it from the order
 by default:</p>
-<div class="example" id="example-650">
+<div class="example" id="example-657">
 <div class="examplenum">
-<a href="#example-650">Example 650</a>
+<a href="#example-657">Example 657</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16683,9 +16805,9 @@ after
 </div>
 <p>This looks like a list, but it is in fact a paragraph. There are no break tags
 after the foo, bar and baz, just soft breaks:</p>
-<div class="example" id="example-651">
+<div class="example" id="example-658">
 <div class="examplenum">
-<a href="#example-651">Example 651</a>
+<a href="#example-658">Example 658</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16760,9 +16882,9 @@ should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <span class="number">8.13.2</span>Lists with Attributes: Good Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
-<div class="example" id="example-652">
+<div class="example" id="example-659">
 <div class="examplenum">
-<a href="#example-652">Example 652</a>
+<a href="#example-659">Example 659</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16787,9 +16909,9 @@ after
 </div>
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
-<div class="example" id="example-653">
+<div class="example" id="example-660">
 <div class="examplenum">
-<a href="#example-653">Example 653</a>
+<a href="#example-660">Example 660</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16815,9 +16937,9 @@ after
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>)</code> in
 output formats that support it (e.g. in PDF but not in HTML):</p>
-<div class="example" id="example-654">
+<div class="example" id="example-661">
 <div class="examplenum">
-<a href="#example-654">Example 654</a>
+<a href="#example-661">Example 661</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16843,9 +16965,9 @@ after
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>)</code> in
 output formats that support it (e.g. in PDF but not in HTML):</p>
-<div class="example" id="example-655">
+<div class="example" id="example-662">
 <div class="examplenum">
-<a href="#example-655">Example 655</a>
+<a href="#example-662">Example 662</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16870,9 +16992,9 @@ after
 </div>
 </div>
 <p>This list will be numbered A, B, C:</p>
-<div class="example" id="example-656">
+<div class="example" id="example-663">
 <div class="examplenum">
-<a href="#example-656">Example 656</a>
+<a href="#example-663">Example 663</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16897,9 +17019,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e:</p>
-<div class="example" id="example-657">
+<div class="example" id="example-664">
 <div class="examplenum">
-<a href="#example-657">Example 657</a>
+<a href="#example-664">Example 664</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16924,9 +17046,9 @@ after
 </div>
 </div>
 <p>This list will be numbered i, ii, iii:</p>
-<div class="example" id="example-658">
+<div class="example" id="example-665">
 <div class="examplenum">
-<a href="#example-658">Example 658</a>
+<a href="#example-665">Example 665</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16951,9 +17073,9 @@ after
 </div>
 </div>
 <p>This list will be numbered I, II, III:</p>
-<div class="example" id="example-659">
+<div class="example" id="example-666">
 <div class="examplenum">
-<a href="#example-659">Example 659</a>
+<a href="#example-666">Example 666</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -16978,9 +17100,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, iv, v:</p>
-<div class="example" id="example-660">
+<div class="example" id="example-667">
 <div class="examplenum">
-<a href="#example-660">Example 660</a>
+<a href="#example-667">Example 667</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17005,9 +17127,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 2, 1:</p>
-<div class="example" id="example-661">
+<div class="example" id="example-668">
 <div class="examplenum">
-<a href="#example-661">Example 661</a>
+<a href="#example-668">Example 668</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17032,9 +17154,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, b, a:</p>
-<div class="example" id="example-662">
+<div class="example" id="example-669">
 <div class="examplenum">
-<a href="#example-662">Example 662</a>
+<a href="#example-669">Example 669</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17059,9 +17181,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, ii, i:</p>
-<div class="example" id="example-663">
+<div class="example" id="example-670">
 <div class="examplenum">
-<a href="#example-663">Example 663</a>
+<a href="#example-670">Example 670</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17091,9 +17213,9 @@ after
 <p>Everything which has been said about attribute lists on lists applies to nested
 lists as well. This example shows a nested list of the form 1, a, i, * (the
 final nested list is an unordered list, not an ordered list):</p>
-<div class="example" id="example-664">
+<div class="example" id="example-671">
 <div class="examplenum">
-<a href="#example-664">Example 664</a>
+<a href="#example-671">Example 671</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17169,9 +17291,9 @@ after
 <p>It is acceptable to just use the number of the first label, and rely on list
 behaviour.</p>
 <p>This list will be numbered 1, 2, 3:</p>
-<div class="example" id="example-665">
+<div class="example" id="example-672">
 <div class="examplenum">
-<a href="#example-665">Example 665</a>
+<a href="#example-672">Example 672</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17195,9 +17317,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 4, 5:</p>
-<div class="example" id="example-666">
+<div class="example" id="example-673">
 <div class="examplenum">
-<a href="#example-666">Example 666</a>
+<a href="#example-673">Example 673</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17221,9 +17343,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e:</p>
-<div class="example" id="example-667">
+<div class="example" id="example-674">
 <div class="examplenum">
-<a href="#example-667">Example 667</a>
+<a href="#example-674">Example 674</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17248,9 +17370,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, iv, v:</p>
-<div class="example" id="example-668">
+<div class="example" id="example-675">
 <div class="examplenum">
-<a href="#example-668">Example 668</a>
+<a href="#example-675">Example 675</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17275,9 +17397,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 2, 1:</p>
-<div class="example" id="example-669">
+<div class="example" id="example-676">
 <div class="examplenum">
-<a href="#example-669">Example 669</a>
+<a href="#example-676">Example 676</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17306,9 +17428,9 @@ after
 </h3>
 <p>This list will be numbered 1, 2, 3. This is just the default behaviour made
 explicit:</p>
-<div class="example" id="example-670">
+<div class="example" id="example-677">
 <div class="examplenum">
-<a href="#example-670">Example 670</a>
+<a href="#example-677">Example 677</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17338,9 +17460,9 @@ after
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>.
 The reason that this is bad style is that the specified delimiter and the
 inferred delimiter do not match:</p>
-<div class="example" id="example-671">
+<div class="example" id="example-678">
 <div class="examplenum">
-<a href="#example-671">Example 671</a>
+<a href="#example-678">Example 678</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17368,9 +17490,9 @@ after
 output formats that support it (e.g. in PDF but not in HTML). The reason
 that this is bad style is that the specified delimiter and the inferred
 delimiter do not match:</p>
-<div class="example" id="example-672">
+<div class="example" id="example-679">
 <div class="examplenum">
-<a href="#example-672">Example 672</a>
+<a href="#example-679">Example 679</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17396,9 +17518,9 @@ after
 </div>
 <p>This list will be numbered 3, 2, 1, not 3, 4, 5. Only the first number matters
 since the reversed attribute is set:</p>
-<div class="example" id="example-673">
+<div class="example" id="example-680">
 <div class="examplenum">
-<a href="#example-673">Example 673</a>
+<a href="#example-680">Example 680</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17424,9 +17546,9 @@ after
 </div>
 <p>This list will be numbered 1, 0, -1, not 1, 2, 3. Only the first number matters
 since the reversed attribute is set:</p>
-<div class="example" id="example-674">
+<div class="example" id="example-681">
 <div class="examplenum">
-<a href="#example-674">Example 674</a>
+<a href="#example-681">Example 681</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17451,9 +17573,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e, regardless of the order of the numbers:</p>
-<div class="example" id="example-675">
+<div class="example" id="example-682">
 <div class="examplenum">
-<a href="#example-675">Example 675</a>
+<a href="#example-682">Example 682</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17478,9 +17600,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 1, 0, -1:</p>
-<div class="example" id="example-676">
+<div class="example" id="example-683">
 <div class="examplenum">
-<a href="#example-676">Example 676</a>
+<a href="#example-683">Example 683</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17506,9 +17628,9 @@ after
 </div>
 <p>This list will be numbered i, 0, -1, since the Romans didn’t have the concept of
 zero or negative numbers (and thus neither do Roman numerals):</p>
-<div class="example" id="example-677">
+<div class="example" id="example-684">
 <div class="examplenum">
-<a href="#example-677">Example 677</a>
+<a href="#example-684">Example 684</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -17533,9 +17655,9 @@ after
 </div>
 </div>
 <p>This list will be numbered a, 0, -1, since there are no negative letters either:</p>
-<div class="example" id="example-678">
+<div class="example" id="example-685">
 <div class="examplenum">
-<a href="#example-678">Example 678</a>
+<a href="#example-685">Example 685</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -18408,51 +18530,6 @@ book or course again. However, fixing the consequences of a quiz being
 administered to hundreds–or thousands, or tens of thousands–of people with an
 incorrect number of questions, or with questions incorrectly used as alternates
 for each other, would be much more difficult.</p>
-</div>
-<h2 id="textual-content" class="definition">
-<span class="number">9.10</span>Textual content
-</h2>
-<p>Any characters not given an interpretation by the above rules will
-be parsed as plain textual content.</p>
-<div class="example" id="example-679">
-<div class="examplenum">
-<a href="#example-679">Example 679</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">hello<span class="space"> </span>$.;'there
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;hello<span class="space"> </span>$.;'there&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<div class="example" id="example-680">
-<div class="examplenum">
-<a href="#example-680">Example 680</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">Foo<span class="space"> </span>χρῆν
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;Foo<span class="space"> </span>χρῆν&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>Internal spaces are preserved verbatim:</p>
-<div class="example" id="example-681">
-<div class="examplenum">
-<a href="#example-681">Example 681</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces&lt;/p&gt;
-</code></pre>
-</div>
 </div>
 <!-- END TESTS -->
 <div class="appendices">

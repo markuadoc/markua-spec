@@ -309,8 +309,46 @@ coherent, open, free, plain text format for a book or course manuscript.</p>
 <p>This simple format will be the basis for the magical typewriter.</p>
 <p>This simple format is called Markua.</p>
 <p>This is its specification.</p>
+<h3 id="markua-markdown-for-books-and-courses" class="definition">
+<span class="number">1.1.2</span>Markua: Markdown for books and courses
+</h3>
+<p>Markua, pronounced “mar-coo-ah”, is Markdown for books and courses.</p>
+<p>Markua maps Markdown syntax to book concepts, and then adds some new syntax and
+concepts of its own.</p>
+<p>Markua documents can be automatically transformed into every popular type of
+ebook format. The computer programs which do this transformation are called
+Markua Processors. These programs understand both Markua syntax and how to
+generate the various output formats. An example Markua Processor is Leanpub:
+Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
+and can even output print-ready PDFs and InDesign files from them as well.</p>
+<p>Markua has been developed with extensive real-world testing and feedback.
+Markua has been used by Leanpub authors for years, both to create books and
+online courses.</p>
+<p>Markua was started at Leanpub in 2014, and benefited from the years of lessons
+that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
+successor to LFM. We have been iterating on our Markua support for many years.</p>
+<p>Markua’s three main contributions are the following:</p>
+<ol>
+<li>The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
+(parts, chapters, sections, sub-sections, etc.), which provides the ability
+for Markua Processors like Leanpub to produce an ebook or online course from
+a Markua manuscript with one click.</li>
+<li>The unified resource and attribute list syntax, which lets Markua handle
+audio, code, math and video in the same way that it does images, and which
+supports inline, local and web resource locations.</li>
+<li>The mapping of book structures to courses, and the creation of a plain-text
+based microformat for course quizzes and exercises, which supports automated
+marking and automated production of everything which is required for a MOOC.</li>
+</ol>
+<p>If you have written something (say blog posts or lecture notes) in Markdown, you
+can use a Markua Processor, such as Leanpub, to turn them into an ebook or
+course with one click. Then, as you go down the path of enhancing the manuscript
+and adding things which only make sense in books or courses, this process will
+feel like decorating, not converting.</p>
+<p>The goal is for writers who are familiar with Markdown to feel that with Markua,
+Markdown just grew an understanding of book and course concepts.</p>
 <h3 id="for-leanpub-authors" class="definition">
-<span class="number">1.1.2</span>For Leanpub authors
+<span class="number">1.1.3</span>For Leanpub authors
 </h3>
 <p>There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:</p>
@@ -323,7 +361,7 @@ instead of this specification.</p>
 <p>Specifically, not all Markua features are supported on Leanpub. To learn what
 works and what does not work, you need to see the manual.</p>
 <h3 id="what-is-this-document-" class="definition">
-<span class="number">1.1.3</span>What is this document?
+<span class="number">1.1.4</span>What is this document?
 </h3>
 <p>This is the Markua Spec, written by
 <a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
@@ -347,7 +385,7 @@ this document.</p>
 <p>If you’re going to read this document, you really should read the Introduction,
 even if you normally skip them.</p>
 <h3 id="how-to-write-a-novel-in-markua" class="definition">
-<span class="number">1.1.4</span>How to write a novel in Markua
+<span class="number">1.1.5</span>How to write a novel in Markua
 </h3>
 <p>The Markua specification is long. However, if you’re an author, the amount you
 need to learn to write in Markua is actually very short.</p>
@@ -385,7 +423,7 @@ Markdown dialects:</p>
 <p>In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.</p>
 <h3 id="how-to-write-almost-any-book-in-markua" class="definition">
-<span class="number">1.1.5</span>How to write almost any book in Markua
+<span class="number">1.1.6</span>How to write almost any book in Markua
 </h3>
 <p>The longer example below shows everything you need to know to write almost any
 type of book, such as a computer programming book, in Markua. This example also
@@ -611,44 +649,6 @@ either inline in a paragraph or as a figure, using LaTeX math as the format.
 Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 </code></pre>
-<h3 id="markua-markdown-for-books-and-courses" class="definition">
-<span class="number">1.1.6</span>Markua: Markdown for books and courses
-</h3>
-<p>Markua, pronounced “mar-coo-ah”, is Markdown for books and courses.</p>
-<p>Markua maps Markdown syntax to book concepts, and then adds some new syntax and
-concepts of its own.</p>
-<p>Markua documents can be automatically transformed into every popular type of
-ebook format. The computer programs which do this transformation are called
-Markua Processors. These programs understand both Markua syntax and how to
-generate the various output formats. An example Markua Processor is Leanpub:
-Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
-and can even output print-ready PDFs and InDesign files from them as well.</p>
-<p>Markua has been developed with extensive real-world testing and feedback.
-Markua has been used by Leanpub authors for years, both to create books and
-online courses.</p>
-<p>Markua was started at Leanpub in 2014, and benefited from the years of lessons
-that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
-successor to LFM. We have been iterating on our Markua support for many years.</p>
-<p>Markua’s three main contributions are the following:</p>
-<ol>
-<li>The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-(parts, chapters, sections, sub-sections, etc.), which provides the ability
-for Markua Processors like Leanpub to produce an ebook or online course from
-a Markua manuscript with one click.</li>
-<li>The unified resource and attribute list syntax, which lets Markua handle
-audio, code, math and video in the same way that it does images, and which
-supports inline, local and web resource locations.</li>
-<li>The mapping of book structures to courses, and the creation of a plain-text
-based microformat for course quizzes and exercises, which supports automated
-marking and automated production of everything which is required for a MOOC.</li>
-</ol>
-<p>If you have written something (say blog posts or lecture notes) in Markdown, you
-can use a Markua Processor, such as Leanpub, to turn them into an ebook or
-course with one click. Then, as you go down the path of enhancing the manuscript
-and adding things which only make sense in books or courses, this process will
-feel like decorating, not converting.</p>
-<p>The goal is for writers who are familiar with Markdown to feel that with Markua,
-Markdown just grew an understanding of book and course concepts.</p>
 <h3 id="why-the-name-markua-" class="definition">
 <span class="number">1.1.7</span>Why the name “Markua”?
 </h3>

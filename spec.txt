@@ -122,14 +122,16 @@ Markdown just grew an understanding of book and course concepts.
 There are currently two ways to write in plain text on Leanpub. These are their
 user manuals:
 
-1. [Markua](https://leanpub.com/markua/read) (preferred)
-2. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
+1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
+   (LFM is obsolete, and is on long-term support)
+2. [Markua 0.10](https://leanpub.com/markua/read) (this is the default for
+   books and courses on Leanpub)
+3. [Markua 0.30 Beta](https://leanpub.com/markua/read) (this is described here!)
 
-If you're a Leanpub author, you should probably go read one of those manuals
-instead of this specification.
+Not all features in the Markua spec are supported in the Markua 0.30 beta. If
+you want a stable experience (or if you want to create courses), you currently
+need to use Leanpub's Markua 0.10 support. (This is why it's still the default.)
 
-Specifically, not all Markua features are supported on Leanpub. To learn what
-works and what does not work, you need to see the manual.
 
 ### What is this document?
 
@@ -363,6 +365,7 @@ figure title if no separate figure title is provided. (A figure title is
 just as accessible as alt text, so this is fine.) Document settings are
 discussed next.
 
+
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
@@ -445,6 +448,7 @@ in Hawaii when I named Markua, and I wanted something that sounded happy,
 friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.
+
 
 ### What is Leanpub Flavoured Markdown (LFM)?
 

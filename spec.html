@@ -354,7 +354,7 @@ Markdown just grew an understanding of book and course concepts.</p>
 user manuals:</p>
 <ol>
 <li><a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM)</a>
-(LFM is obsolete, and is on long-term support)</li>
+(LFM was launched in 2011. It is now obsolete, and is on long-term support.)</li>
 <li><a href="https://leanpub.com/markua/read">Markua 0.10</a> (this is the default for
 books and courses on Leanpub)</li>
 <li><a href="https://leanpub.com/markua030/read">Markua 0.30 Beta</a> (the user manual for
@@ -364,22 +364,20 @@ Markua 0.30 is not yet stable, so for now you’re better off reading this!)</li
 you want a stable experience and user manual, you currently need to use
 Leanpub’s Markua 0.10 support (which is the default choice for new books).
 This is also true if you want to create courses. Leanpub’s Markua 0.30
-implementation does not support courses yet.</p>
+implementation does not support courses yet. (Also, LFM has never supported
+courses.)</p>
 <p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
 manual</a>. Everything documented in that
 manual should work as described, and our Markua 0.10 version will continue to be
 supported for years to come.</p>
-<p>Please note that Even though the Markua Spec is based on the CommonMark Spec,
-Leanpub’s current Markua support is not based on CommonMark. Markua and
-CommonMark were both launched in 2014, within a few months of each other.
-Leanpub’s Markua implementation was based on its Ruby-based implementation of
-LFM, which dates back to 2011.</p>
-<h4 id="differences-between-lfm-and-markua-0-10" class="definition">
-<span class="number">1.1.3.1</span>Differences between LFM and Markua 0.10
-</h4>
-<p>When considering converting between LFM and Markua, it’s important to highlight
-all the differences between Markua and LFM.</p>
-<p>The following are the top 10 differences between Markua and LFM.</p>
+<p>Even though the Markua Spec is based on the CommonMark Spec, Leanpub’s current
+Markua support is not based on CommonMark. Markua and CommonMark were both
+launched in 2014, within a few months of each other. Leanpub’s Markua
+implementation was based on its Ruby-based implementation of LFM, which dates
+back to 2011.</p>
+<p>If you are writing a new book or course on Leanpub, you should absolutely choose
+Markua over LFM. If you are familiar with LFM, the following list of the 10
+differences between Markua and LFM may be useful:</p>
 <ol>
 <li>In LFM, parts are created with <code>-# Part</code>. In Markua, parts are created an
 attribute list on an atx or Setext heading.</li>
@@ -420,10 +418,6 @@ approaches, or could just support parsing single files or input streams.)</li>
 <li>Most importantly, a number of features (courses, index entries, smart
 crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 </ol>
-<h4 id="differences-between-markua-0-10-and-markua-0-30-this-spec-" class="definition">
-<span class="number">1.1.3.2</span>Differences between Markua 0.10 and Markua 0.30 (this spec)
-</h4>
-<p>TODO</p>
 <h3 id="how-to-write-a-novel-in-markua" class="definition">
 <span class="number">1.1.4</span>How to write a novel in Markua
 </h3>
@@ -689,8 +683,8 @@ either inline in a paragraph or as a figure, using LaTeX math as the format.
 Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 </code></pre>
-<h3 id="what-is-this-document-" class="definition">
-<span class="number">1.1.6</span>What is this document?
+<h3 id="origin-and-structure-of-this-document" class="definition">
+<span class="number">1.1.6</span>Origin and structure of this document
 </h3>
 <p>This is the Markua Spec, written by
 <a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
@@ -707,57 +701,14 @@ the Creative Commons license
 <li>authors with advanced questions about Markua syntax</li>
 <li>developers implementing Markua Processors</li>
 </ol>
-<p>This Introduction contains a number of introductory sections about Markua and
-its relationship to Markdown, CommonMark and GFM. It also contains sections
-which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
-this document.</p>
-<p>If you’re going to read this document, you really should read the Introduction,
-even if you normally skip them.</p>
-<h3 id="why-the-name-markua-" class="definition">
-<span class="number">1.1.7</span>Why the name “Markua”?
-</h3>
-<p>When I set out to specify Markua, I realized I needed a name. I wanted a name
-that conveyed the love that I have for Markdown while not implying endorsement
-by John Gruber in any way. I also did not want a name which referenced Leanpub:
-Markua is a standalone specification with its own identity, which anyone
-(including Leanpub competitors) can freely implement. Finally, I was on vacation
-in Hawaii when I named Markua, and I wanted something that sounded happy,
-friendly and almost Hawaiian. (Yes, I’m aware that there is no r in Hawaiian.)
-I also wanted a name that had its .com domain name available, and that was short
-and spellable, for branding purposes. The Markua name had all these properties.</p>
-<h3 id="structure-of-this-document" class="definition">
-<span class="number">1.1.8</span>Structure of this document
-</h3>
 <p>The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
 specification of the Markua extensions.</p>
 <p>The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
 preserved unchanged.</p>
-<p>Besides the numerous extensions which were added, the following are the changes
-to the CommonMark Spec:</p>
-<ol>
-<li>The “HTML blocks” section is removed from the Leaf blocks chapter.</li>
-<li>The “Raw HTML” section is removed from the Inlines chapter.</li>
-<li>Since the <a href="#metadata-m-">Metadata</a> and
-<a href="#quizzes-and-exercises-m-">Quizzes and exercises</a> chapters are new, the
-numbering of some chapters is changed.</li>
-<li>The metadata at the top of the spec itself is changed.</li>
-</ol>
-<p>TODO</p>
-<p>Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.</p>
-<p>HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
-were supported, a Markua Processor would have to support parsing and
-meaningfully outputting all of HTML syntax as well as all of Markua syntax.</p>
-<p>Since Markdown’s only output format target is HTML, it might as well support
-HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.</p>
 <p>Next, two of the five GFM extensions are added. These are discussed
 <a href="#github-flavored-markdown-gfm-extension-status-m-">below</a>.</p>
-<p>Finally, many new sections about Markua are added. These are all labeled
-“(M)” for “(Markua extension)”. There are so many of these extensions that
-using (Markua extension) everywhere added too much clutter.</p>
+<p>Finally, many new chapters or sections about Markua are added. These are all
+labeled with “(Markua extension)”.</p>
 <p>So, for any given chapter or section of this document, it is either:</p>
 <ol>
 <li>written by John MacFarlane about CommonMark</li>
@@ -795,9 +746,6 @@ in other Markdown dialects, and what won’t.</li>
 <li>It means that updating this document to keep it current with the CommonMark
 and GFM specs will be very easy.</li>
 </ol>
-<h3 id="github-flavored-markdown-gfm-extension-status" class="definition">
-<span class="number">1.1.9</span>GitHub Flavored Markdown (GFM) extension status
-</h3>
 <p>Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.</p>
 <p>Version 0.29 of the <a href="https://github.github.com/gfm/">GFM Spec</a> defines five
@@ -822,8 +770,21 @@ because the extra work to create a link is literally typing two characters
 is not worth it. (It does make sense for, say, a discussion forum. It does
 not make sense for books and courses.)</li>
 </ol>
+<h3 id="use-cases-of-markua-and-markdown" class="definition">
+<span class="number">1.1.7</span>Use cases of Markua and Markdown
+</h3>
+<p>Markua and Markdown have different use cases. Markdown is a better way to write
+HTML; Markua is a better way to write a book or course.</p>
+<p>HTML is just one possible output format of Markua, and other possible Markua
+output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
+were supported, a Markua Processor would have to support parsing and
+meaningfully outputting all of HTML syntax as well as all of Markua syntax.</p>
+<p>Since Markdown’s only output format target is HTML, it might as well support
+HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
+From an implementation perspective, Markdown gets inline HTML support for free.
+This is not true in the case of Markua.</p>
 <h3 id="about-the-html-output" class="definition">
-<span class="number">1.1.10</span>About the HTML output
+<span class="number">1.1.8</span>About the HTML output
 </h3>
 <p>The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.</p>
@@ -865,6 +826,18 @@ is identical to the specified output.</p>
 <p>Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.</p>
+<h3 id="why-the-name-markua-" class="definition">
+<span class="number">1.1.9</span>Why the name “Markua”?
+</h3>
+<p>When I set out to specify Markua, I realized I needed a name. I wanted a name
+that conveyed the love that I have for Markdown while not implying endorsement
+by John Gruber in any way. I also did not want a name which referenced Leanpub:
+Markua is a standalone specification with its own identity, which anyone
+(including Leanpub competitors) can freely implement. Finally, I was on vacation
+in Hawaii when I named Markua, and I wanted something that sounded happy,
+friendly and almost Hawaiian. (Yes, I’m aware that there is no r in Hawaiian.)
+I also wanted a name that had its .com domain name available, and that was short
+and spellable, for branding purposes. The Markua name had all these properties.</p>
 </div>
 <h2 id="what-is-markdown-" class="definition">
 <span class="number">1.2</span>What is Markdown?
@@ -5354,7 +5327,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-173">
@@ -5793,7 +5766,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-198">
 <div class="examplenum">
@@ -5817,7 +5790,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -13203,7 +13176,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-555">
 <div class="examplenum">

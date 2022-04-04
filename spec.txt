@@ -149,7 +149,7 @@ implementation was based on its Ruby-based implementation of LFM, which dates
 back to 2011.
 
 If you are writing a new book or course on Leanpub, you should absolutely choose
-Markua over LFM. If you are familiar with LFM, the following list of the 10
+Markua over LFM. If you are familiar with LFM, the following list of the top 10
 differences between Markua and LFM may be useful:
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
@@ -466,7 +466,7 @@ the rest of the spec!
 ~~~
 
 
-### What is this document?
+### Origin and structure of this document
 
 This is the Markua Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
@@ -487,84 +487,17 @@ This document has two types of intended readers:
 1. authors with advanced questions about Markua syntax
 2. developers implementing Markua Processors
 
-This Introduction contains a number of introductory sections about Markua and
-its relationship to Markdown, CommonMark and GFM. It also contains sections
-which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
-this document.
-
-If you're going to read this document, you really should read the Introduction,
-even if you normally skip them.
-
-
-
-
-
-
-
-
-
-
-### Why the name "Markua"?
-
-When I set out to specify Markua, I realized I needed a name. I wanted a name
-that conveyed the love that I have for Markdown while not implying endorsement
-by John Gruber in any way. I also did not want a name which referenced Leanpub:
-Markua is a standalone specification with its own identity, which anyone
-(including Leanpub competitors) can freely implement. Finally, I was on vacation
-in Hawaii when I named Markua, and I wanted something that sounded happy,
-friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
-I also wanted a name that had its .com domain name available, and that was short
-and spellable, for branding purposes. The Markua name had all these properties.
-
-
-### Structure of this document
-
 The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
 specification of the Markua extensions.
 
 The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
 preserved unchanged.
 
-Besides the numerous extensions which were added, the following are the changes
-to the CommonMark Spec:
-
-1. The "HTML blocks" section is removed from the Leaf blocks chapter.
-2. The "Raw HTML" section is removed from the Inlines chapter.
-3. Since the [Metadata](#metadata-m-) and
-   [Quizzes and exercises](#quizzes-and-exercises-m-) chapters are new, the
-   numbering of some chapters is changed.
-4. The metadata at the top of the spec itself is changed.
-
-
-
-TODO
-
-Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.
-
-HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
-were supported, a Markua Processor would have to support parsing and
-meaningfully outputting all of HTML syntax as well as all of Markua syntax.
-
-Since Markdown's only output format target is HTML, it might as well support
-HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.
-
-
-
-
-
-
-
-
 Next, two of the five GFM extensions are added. These are discussed
 [below](#github-flavored-markdown-gfm-extension-status-m-).
 
-Finally, many new sections about Markua are added. These are all labeled
-"(M)" for "(Markua extension)". There are so many of these extensions that
-using (Markua extension) everywhere added too much clutter.
+Finally, many new chapters or sections about Markua are added. These are all
+labeled with "(Markua extension)".
 
 So, for any given chapter or section of this document, it is either:
 
@@ -607,8 +540,6 @@ it has a number of significant benefits:
 5. It means that updating this document to keep it current with the CommonMark
    and GFM specs will be very easy.
 
-### GitHub Flavored Markdown (GFM) extension status
-
 Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.
 
@@ -635,6 +566,23 @@ The other three GFM extensions are omitted:
    (`<` and `>`), so the added complexity both in parsing and in documentation
    is not worth it. (It does make sense for, say, a discussion forum. It does
    not make sense for books and courses.)
+
+
+### Use cases of Markua and Markdown
+
+Markua and Markdown have different use cases. Markdown is a better way to write
+HTML; Markua is a better way to write a book or course.
+
+HTML is just one possible output format of Markua, and other possible Markua
+output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
+were supported, a Markua Processor would have to support parsing and
+meaningfully outputting all of HTML syntax as well as all of Markua syntax.
+
+Since Markdown's only output format target is HTML, it might as well support
+HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
+From an implementation perspective, Markdown gets inline HTML support for free.
+This is not true in the case of Markua.
+
 
 ### About the HTML output
 
@@ -694,6 +642,19 @@ is identical to the specified output.
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.
+
+
+### Why the name "Markua"?
+
+When I set out to specify Markua, I realized I needed a name. I wanted a name
+that conveyed the love that I have for Markdown while not implying endorsement
+by John Gruber in any way. I also did not want a name which referenced Leanpub:
+Markua is a standalone specification with its own identity, which anyone
+(including Leanpub competitors) can freely implement. Finally, I was on vacation
+in Hawaii when I named Markua, and I wanted something that sounded happy,
+friendly and almost Hawaiian. (Yes, I'm aware that there is no r in Hawaiian.)
+I also wanted a name that had its .com domain name available, and that was short
+and spellable, for branding purposes. The Markua name had all these properties.
 
 </div>
 

@@ -326,15 +326,21 @@ online courses.</p>
 <p>Markua was started at Leanpub in 2014, and benefited from the years of lessons
 that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
 successor to LFM. We have been iterating on our Markua support for many years.</p>
-<p>Markua’s three main contributions are the following:</p>
+<p>Markua’s five main contributions are the following:</p>
 <ol>
 <li>The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-(parts, chapters, sections, sub-sections, etc.), which provides the ability
-for Markua Processors like Leanpub to produce an ebook or online course from
+(chapters, sections, sub-sections, etc.), which provides the ability for
+Markua Processors like Leanpub to produce an ebook or online course from
 a Markua manuscript with one click.</li>
-<li>The unified resource and attribute list syntax, which lets Markua handle
-audio, code, math and video in the same way that it does images, and which
-supports inline, local and web resource locations.</li>
+<li>The unified resource syntax, which lets Markua handle audio, code, iframe,
+math, verbatim and video resources in the same way that it does images and
+tables, and which supports inline, local and web resource locations.</li>
+<li>The unified attribute list syntax, which lets Markua define properties for
+resources using the same syntax that is used for other document elements,
+such as part headings and index entries.</li>
+<li>A comprehensive definition of document settings, so that authors can use
+Markua to produce documents which are styled via global switches, rather than
+by tedious micromanagement.</li>
 <li>The mapping of book structures to courses, and the creation of a plain-text
 based microformat for course quizzes and exercises, which supports automated
 marking and automated production of everything which is required for an
@@ -5296,8 +5302,8 @@ foo
 treated as raw HTML (and will not be escaped in HTML output).</p>
 <p>Markua does not support HTML blocks. Instead, <strong>all raw HTML is removed</strong>.
 This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua.
-In both cases, the HTML is removed by the Markua parser.</p>
+which is inserted as inlines. Neither of these are supported by Markua.</p>
+<p><strong>In both cases, the HTML must be completely removed by the Markua Processor.</strong></p>
 <p>As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments will be removed
 from the output (along with any other raw HTML tags).</p>
@@ -14301,7 +14307,7 @@ spec</a>:</p>
 <p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
 inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
 these are supported by Markua.</p>
-<p>In both cases, the HTML is removed by the Markua parser.</p>
+<p><strong>In both cases, the HTML must be completely removed by the Markua Processor.</strong></p>
 <p>As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments will be removed
 from the output (along with any other raw HTML tags).</p>

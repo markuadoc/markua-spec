@@ -94,16 +94,22 @@ Markua was started at Leanpub in 2014, and benefited from the years of lessons
 that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
 successor to LFM. We have been iterating on our Markua support for many years.
 
-Markua's three main contributions are the following:
+Markua's five main contributions are the following:
 
 1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-   (parts, chapters, sections, sub-sections, etc.), which provides the ability
-   for Markua Processors like Leanpub to produce an ebook or online course from
+   (chapters, sections, sub-sections, etc.), which provides the ability for
+   Markua Processors like Leanpub to produce an ebook or online course from
    a Markua manuscript with one click.
-2. The unified resource and attribute list syntax, which lets Markua handle
-   audio, code, math and video in the same way that it does images, and which
-   supports inline, local and web resource locations.
-3. The mapping of book structures to courses, and the creation of a plain-text
+2. The unified resource syntax, which lets Markua handle audio, code, iframe,
+   math, verbatim and video resources in the same way that it does images and
+   tables, and which supports inline, local and web resource locations.
+3. The unified attribute list syntax, which lets Markua define properties for
+   resources using the same syntax that is used for other document elements,
+   such as part headings and index entries.
+4. A comprehensive definition of document settings, so that authors can use
+   Markua to produce documents which are styled via global switches, rather than
+   by tedious micromanagement.
+5. The mapping of book structures to courses, and the creation of a plain-text
    based microformat for course quizzes and exercises, which supports automated
    marking and automated production of everything which is required for an
    online course.

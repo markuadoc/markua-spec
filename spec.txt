@@ -2304,7 +2304,7 @@ appendix, and feel the need for different numbering, will they need to discover
 the section directives. Then, they can add them to their Markua document as
 appropriate.
 
-## The insertion directives (dedication, toc, etc.)
+### The insertion directives (dedication, toc, etc.)
 
 With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be
@@ -2386,25 +2386,13 @@ For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
 
+</div>
 
 
 
+<div class="extension">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Document Structure (Markua extension)
 
 ## Part headings
 
@@ -2474,7 +2462,20 @@ Foo
 <p>Foo</p>
 ````````````````````````````````
 
-## Thematic break semantics
+## Chapter and Section Headings
+
+Markua maps the Markdown headings... TODO
+
+
+</div>
+
+
+
+<div class="extension">
+
+## TODO
+
+### Thematic break semantics
 
 Thematic breaks, as shown above, produce an `<hr />` in HTML.
 

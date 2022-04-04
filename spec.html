@@ -160,14 +160,12 @@ $(document).ready(function() {
 <li><a href="#attribute-lists"><span class="number">3.1</span>Attribute Lists</a></li>
 <li><a href="#document-settings"><span class="number">3.2</span>Document settings</a></li>
 <li><a href="#directives"><span class="number">3.3</span>Directives</a></li>
-<li><a href="#the-insertion-directives-dedication-toc-etc-"><span class="number">3.4</span>The insertion directives (dedication, toc, etc.)</a></li>
-<li><a href="#the-lang-attribute"><span class="number">3.5</span>The lang attribute</a></li>
-<li><a href="#part-headings"><span class="number">3.6</span>Part headings</a></li>
-<li><a href="#thematic-break-semantics"><span class="number">3.7</span>Thematic break semantics</a></li>
-<li><a href="#paragraph-continuations"><span class="number">3.8</span>Paragraph continuations</a></li>
-<li><a href="#configurable-soft-line-breaks"><span class="number">3.9</span>Configurable soft line breaks</a></li>
-<li><a href="#span-attribute-lists"><span class="number">3.10</span>Span attribute lists</a></li>
-<li><a href="#concatenating-files-and-blank-lines"><span class="number">3.11</span>Concatenating files and blank lines</a></li>
+<li><a href="#document-structure-markua-extension-"><span class="number">3.4</span>Document Structure (Markua extension)</a></li>
+<li><a href="#todo"><span class="number">3.5</span>TODO</a></li>
+<li><a href="#paragraph-continuations"><span class="number">3.6</span>Paragraph continuations</a></li>
+<li><a href="#configurable-soft-line-breaks"><span class="number">3.7</span>Configurable soft line breaks</a></li>
+<li><a href="#span-attribute-lists"><span class="number">3.8</span>Span attribute lists</a></li>
+<li><a href="#concatenating-files-and-blank-lines"><span class="number">3.9</span>Concatenating files and blank lines</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">4</span>Blocks and inlines</a>
@@ -2175,8 +2173,49 @@ as an attribute list on headings. You can only say <code>{sample: true}</code> i
 above a heading. You can’t have a blank line below it (otherwise it would be a
 directive, and not be valid) and you can’t attach it to anything other than a
 heading (like a paragraph, figure, etc.).</p>
+<h3 id="the-lang-attribute" class="definition">
+<span class="number">3.1.8</span>The lang attribute
+</h3>
+<p>A book has a global <code>lang</code> setting, which defaults to <code>eng</code>, for English.</p>
+<p>However, many books are written in more than one language. Switching between
+languages in accomplished using the <code>lang</code> attribute.</p>
+<p>A <code>lang</code> attribute can be applied to a chapter, section, paragraph or even
+to a span.</p>
+<p>For example, say I’m writing a book about waka, renga and haiku. If I want to
+switch to Japanese to display a poem I can do so using a <code>lang</code> directive
+<code>{lang: jpn}</code> and then switch back to English using <code>{lang: eng}</code>:</p>
+<pre><code>This is some paragraph text which defaults to English. The following
+paragraph is in Japanese.
+
+{lang: jpn}
+古池や蛙飛び込む水の音
+(松尾芭蕉)
+
+This is some paragraph text which defaults to English, and it
+contains [古池や蛙飛び込む水の音]{lang: jpn} a span which is in Japanese.
+
+This is some paragraph text which defaults to English.
+</code></pre>
+<p>The value of the <code>lang</code> directive must be a valid
+<a href="https://en.wikipedia.org/wiki/ISO_639-3">ISO 639-3</a> language code.</p>
+<p>The two main things that the <code>lang</code> directive affects are:</p>
+<ol>
+<li>the direction of the text (left-to-right or right-to-left)</li>
+<li>the font used for the language</li>
+</ol>
+<p>Since English is the default language of a Markua document, all Markua
+Processors must support the <code>eng</code> value of the <code>lang</code> directive. Support for
+all other language codes is optional. If the language code given as the value
+of a <code>lang</code> directive is not supported or is unrecognized, it must be
+interpreted as <code>eng</code> and switch the font accordingly and switch the direction
+to left-to-right. This way, a Markua Processor can add support for
+right-to-left languages such as Arabic (<code>{lang: ara}</code>) or
+Hebrew  (<code>{lang: heb}</code>), and know that when a different language is specified
+the direction will switch to left-to-right even if the given language was not
+supported–there are a lot of languages, but most of them are left-to-right
+languages.</p>
 <h3 id="extension-attributes" class="definition">
-<span class="number">3.1.8</span>Extension attributes
+<span class="number">3.1.9</span>Extension attributes
 </h3>
 <p>Markua Processors may encounter attributes which they do not understand.</p>
 <p>Whenever this happens, these attributes must be filtered from the output. A
@@ -2551,9 +2590,9 @@ will look correct. Only when they go to add things like a preface or an
 appendix, and feel the need for different numbering, will they need to discover
 the section directives. Then, they can add them to their Markua document as
 appropriate.</p>
-<h2 id="the-insertion-directives-dedication-toc-etc-" class="definition">
-<span class="number">3.4</span>The insertion directives (dedication, toc, etc.)
-</h2>
+<h3 id="the-insertion-directives-dedication-toc-etc-" class="definition">
+<span class="number">3.3.3</span>The insertion directives (dedication, toc, etc.)
+</h3>
 <p>With a book or course, certain types of content gets created by the Markua
 Processor, or in metadata provided by the author. This content then needs to be
 positioned in the book or course.</p>
@@ -2625,50 +2664,14 @@ regardless of the presence or position of the <code>quiz-answers</code> directiv
 <p>For example, in Leanpub’s online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.</p>
-<h2 id="the-lang-attribute" class="definition">
-<span class="number">3.5</span>The lang attribute
+</div>
+<div class="extension">
+<h2 id="document-structure-markua-extension-" class="definition">
+<span class="number">3.4</span>Document Structure (Markua extension)
 </h2>
-<p>A book has a global <code>lang</code> setting, which defaults to <code>eng</code>, for English.</p>
-<p>However, many books are written in more than one language. Switching between
-languages in accomplished using the <code>lang</code> attribute.</p>
-<p>A <code>lang</code> attribute can be applied to a chapter, section, paragraph or even
-to a span.</p>
-<p>For example, say I’m writing a book about waka, renga and haiku. If I want to
-switch to Japanese to display a poem I can do so using a <code>lang</code> directive
-<code>{lang: jpn}</code> and then switch back to English using <code>{lang: eng}</code>:</p>
-<pre><code>This is some paragraph text which defaults to English. The following
-paragraph is in Japanese.
-
-{lang: jpn}
-古池や蛙飛び込む水の音
-(松尾芭蕉)
-
-This is some paragraph text which defaults to English, and it
-contains [古池や蛙飛び込む水の音]{lang: jpn} a span which is in Japanese.
-
-This is some paragraph text which defaults to English.
-</code></pre>
-<p>The value of the <code>lang</code> directive must be a valid
-<a href="https://en.wikipedia.org/wiki/ISO_639-3">ISO 639-3</a> language code.</p>
-<p>The two main things that the <code>lang</code> directive affects are:</p>
-<ol>
-<li>the direction of the text (left-to-right or right-to-left)</li>
-<li>the font used for the language</li>
-</ol>
-<p>Since English is the default language of a Markua document, all Markua
-Processors must support the <code>eng</code> value of the <code>lang</code> directive. Support for
-all other language codes is optional. If the language code given as the value
-of a <code>lang</code> directive is not supported or is unrecognized, it must be
-interpreted as <code>eng</code> and switch the font accordingly and switch the direction
-to left-to-right. This way, a Markua Processor can add support for
-right-to-left languages such as Arabic (<code>{lang: ara}</code>) or
-Hebrew  (<code>{lang: heb}</code>), and know that when a different language is specified
-the direction will switch to left-to-right even if the given language was not
-supported–there are a lot of languages, but most of them are left-to-right
-languages.</p>
-<h2 id="part-headings" class="definition">
-<span class="number">3.6</span>Part headings
-</h2>
+<h3 id="part-headings" class="definition">
+<span class="number">3.4.1</span>Part headings
+</h3>
 <p>As <a href="#markua-heading-mapping-to-book-and-course-structures">discussed</a>,
 Markua uses a <code>{class: part}</code> attribute on an <code>h1</code> heading to make a part
 heading from what would otherwise be a chapter heading.</p>
@@ -2677,9 +2680,9 @@ the heading itself is that there is a <code>class=&quot;part&quot;</code> attrib
 obviously, the part and chapter headings are treated differently elsewhere, such
 as in the table of contents of the book or the navigation structure of the
 course.</p>
-<h3 id="correct-usage" class="definition">
-<span class="number">3.6.1</span>Correct usage
-</h3>
+<h4 id="correct-usage" class="definition">
+<span class="number">3.4.1.1</span>Correct usage
+</h4>
 <p>Part heading, atx headers:</p>
 <div class="example" id="example-47">
 <div class="examplenum">
@@ -2717,9 +2720,9 @@ This<span class="space"> </span>is<span class="space"> </span>a<span class="spac
 </code></pre>
 </div>
 </div>
-<h3 id="incorrect-usage" class="definition">
-<span class="number">3.6.2</span>Incorrect usage
-</h3>
+<h4 id="incorrect-usage" class="definition">
+<span class="number">3.4.1.2</span>Incorrect usage
+</h4>
 <p>Adding <code>{class: part}</code> to any other heading level than an <code>h1</code> is ignored.</p>
 <p>Ignored on atx section headers:</p>
 <div class="example" id="example-49">
@@ -2758,9 +2761,18 @@ Foo
 </code></pre>
 </div>
 </div>
-<h2 id="thematic-break-semantics" class="definition">
-<span class="number">3.7</span>Thematic break semantics
+<h3 id="chapter-and-section-heading-mapping" class="definition">
+<span class="number">3.4.2</span>Chapter and Section Heading Mapping
+</h3>
+<p>TODO</p>
+</div>
+<div class="extension">
+<h2 id="todo" class="definition">
+<span class="number">3.5</span>TODO
 </h2>
+<h3 id="thematic-break-semantics" class="definition">
+<span class="number">3.5.1</span>Thematic break semantics
+</h3>
 <p>Thematic breaks, as shown above, produce an <code>&lt;hr /&gt;</code> in HTML.</p>
 <p>Thematic breaks are treated as scene breaks by Markua.</p>
 <p>In other formats, such as PDF, a Markua Processor may format the thematic break
@@ -2768,14 +2780,14 @@ in a way appropriate for a scene break in fiction.</p>
 <p>There are no additional tests in this section, since this is just a note about
 semantics and about CSS.</p>
 <h3 id="css-note" class="definition">
-<span class="number">3.7.1</span>CSS Note
+<span class="number">3.5.2</span>CSS Note
 </h3>
 <p>Since Markua bans all inline HTML except HTML comments, the only way to produce
 an <code>&lt;hr /&gt;</code> is using the above thematic break syntax. So, designers can assume
 that all <code>&lt;hr /&gt;</code> elements are thematic breaks, and style them in a way
 appropriate for a scene break in fiction.</p>
 <h2 id="paragraph-continuations" class="definition">
-<span class="number">3.8</span>Paragraph continuations
+<span class="number">3.6</span>Paragraph continuations
 </h2>
 <p>In books, you can insert things like lists in the middle of paragraphs.</p>
 <p>Ideally, this would be one paragraph. However, it’s not:</p>
@@ -2933,7 +2945,7 @@ bar
 </div>
 <div class="extension">
 <h2 id="configurable-soft-line-breaks" class="definition">
-<span class="number">3.9</span>Configurable soft line breaks
+<span class="number">3.7</span>Configurable soft line breaks
 </h2>
 <p>There is a good argument to be made that single newlines at the end of a line
 should always be treated as a hard line break, not as a soft line break.</p>
@@ -3068,7 +3080,7 @@ paragraph-like contexts, such as definition list items.</p>
 </div>
 <div class="extension">
 <h2 id="span-attribute-lists" class="definition">
-<span class="number">3.10</span>Span attribute lists
+<span class="number">3.8</span>Span attribute lists
 </h2>
 <p>Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -3104,7 +3116,7 @@ creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
 </div>
 <div class="extension">
 <h2 id="concatenating-files-and-blank-lines" class="definition">
-<span class="number">3.11</span>Concatenating files and blank lines
+<span class="number">3.9</span>Concatenating files and blank lines
 </h2>
 <p>A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by
@@ -5353,7 +5365,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-173">
@@ -5792,7 +5804,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-198">
 <div class="examplenum">
@@ -5816,7 +5828,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -5991,7 +6003,7 @@ bbb&lt;/p&gt;
 <h2 id="blank-lines" class="definition">
 <span class="number">5.9</span>Blank lines
 </h2>
-<p><a href="#blank-lines">Blank lines</a> between block-level elements are ignored,
+<p><a href="#blank-line">Blank lines</a> between block-level elements are ignored,
 except for the role they play in determining whether a <a href="#list">list</a>
 is <a href="#tight">tight</a> or <a href="#loose">loose</a>.</p>
 <p>Blank lines at the beginning and end of the document are also ignored.</p>
@@ -6277,7 +6289,7 @@ cells are inserted.  If there are greater, the excess is ignored:</p>
 <p>A <a href="#container-blocks">container block</a> is a block that has other
 blocks as its contents.  There are two basic kinds of container blocks:
 <a href="#block-quotes">block quotes</a> and <a href="#list-items">list items</a>.
-<a href="#list">Lists</a> are meta-containers for <a href="#list-items">list items</a>.</p>
+<a href="#lists">Lists</a> are meta-containers for <a href="#list-items">list items</a>.</p>
 <p>We define the syntax for container blocks recursively.  The general
 form of the definition is:</p>
 <blockquote>
@@ -13202,7 +13214,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-555">
 <div class="examplenum">

@@ -491,8 +491,9 @@ This document has two types of intended readers:
 The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
 specification of the Markua extensions.
 
-The starting point is the CommonMark Spec. Almost the entire CommonMark Spec is
-preserved unchanged.
+The starting point is the CommonMark Spec. With the exception of the removal of
+the HTML Blocks and Raw HTML sections, the entire CommonMark Spec is preserved
+unchanged.
 
 Next, two of the five GFM extensions are added. These are discussed
 [below](#github-flavored-markdown-gfm-extension-status-m-).
@@ -506,20 +507,20 @@ So, for any given chapter or section of this document, it is either:
 2. written by GitHub employees about GFM, and ending with "(GFM extension)"
 3. written by Peter Armstrong about Markua, and ending with "(Markua extension)"
 
-Where an entire chapter is added by the Markua spec, only the chapter is named
-with (Markua extension), since it is obvious that every section in it is also a
-Markua extension.
-
-Where a section inside an original CommonMark spec chapter is added by the
-Markua spec, that section is named with (Markua extension).
-
-To be clear, every chapter or section which does not end with (Markua extension)
-or (GFM extension) is from the original CommonMark Spec, and was written by John
-MacFarlane. 
-
 Together, these sections combine to specify Markua, since Markua is CommonMark,
-minus HTML blocks and Raw HTML, plus some GFM extensions, plus (many!) Markua
+minus HTML blocks and Raw HTML, plus two GFM extensions, plus many Markua
 extensions.
+
+To be clear about the origin of every chapter and section:
+
+* Where an entire chapter is added by the Markua spec, only the chapter name has
+(Markua extension) added to it, since it is obvious that every section in it is
+also a Markua extension.
+* Where a section inside an original CommonMark spec chapter is added by the
+Markua spec, that section has (Markua extension) added to its name.
+* Every chapter or section which does not end with (Markua extension) or (GFM
+extension) is from the original CommonMark Spec, and was written by John
+MacFarlane.
 
 While this hybrid approach of creating the Markua specification is somewhat odd,
 it has a number of significant benefits:
@@ -541,14 +542,8 @@ it has a number of significant benefits:
 5. It means that updating this document to keep it current with the CommonMark
    and GFM specs will be very easy.
 
-Note that while Markua is a strict superset of CommonMark, it is not a strict
-superset of the GitHub Flavored Markdown (GFM) Spec.
-
-Version 0.29 of the [GFM Spec](https://github.github.com/gfm/) defines five
-extensions to CommonMark. In the GFM Spec, these extensions have "(extension)"
-in their title.
-
-Two of these five GFM extensions are included in the Markua Spec:
+In terms of the GFM extensions, the following two GFM extensions are included
+in the Markua Spec:
 
 1. [Tables (GFM extension)](#tables-gfm-)
 2. [Strikethrough (GFM extension)](#strikethrough-gfm-)

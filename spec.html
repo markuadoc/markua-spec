@@ -350,44 +350,82 @@ Markdown just grew an understanding of book and course concepts.</p>
 <h3 id="for-leanpub-authors" class="definition">
 <span class="number">1.1.3</span>For Leanpub authors
 </h3>
-<p>There are currently two ways to write in plain text on Leanpub. These are their
+<p>There are three ways to write in plain text on Leanpub. These are their
 user manuals:</p>
 <ol>
 <li><a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM)</a>
 (LFM is obsolete, and is on long-term support)</li>
 <li><a href="https://leanpub.com/markua/read">Markua 0.10</a> (this is the default for
 books and courses on Leanpub)</li>
-<li><a href="https://leanpub.com/markua/read">Markua 0.30 Beta</a> (this is described here!)</li>
+<li><a href="https://leanpub.com/markua/read">Markua 0.30 Beta</a> (the user manual for
+Markua 0.30 is not published, so for now you’re stuck with this spec!)</li>
 </ol>
 <p>Not all features in the Markua spec are supported in the Markua 0.30 beta. If
-you want a stable experience (or if you want to create courses), you currently
-need to use Leanpub’s Markua 0.10 support. (This is why it’s still the default.)</p>
-<h3 id="what-is-this-document-" class="definition">
-<span class="number">1.1.4</span>What is this document?
-</h3>
-<p>This is the Markua Spec, written by
-<a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
-<p>The Markua Spec is based on the CommonMark Spec, whose author is
-<a href="https://johnmacfarlane.net/">John MacFarlane</a>.</p>
-<p>This document also incorporates the specification of two of the five GitHub
-Flavored Markdown (GFM extension) extensions from the <a href="https://github.github.com/gfm/">GFM
-Spec</a>.</p>
-<p>Like the CommonMark Spec and the GFM Spec, the Markua Spec is licensed under
-the Creative Commons license
-<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
-<p>This document has two types of intended readers:</p>
+you want a stable experience and user manual, you currently need to use
+Leanpub’s Markua 0.10 support (which is the default choice for new books).
+This is also true if you want to create courses. Leanpub’s Markua 0.30
+implementation does not support courses yet.</p>
+<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
+manual</a>. Everything documented in that
+manual should work as described, and our Markua 0.10 version will continue to be
+supported for years to come.</p>
+<p>Please note that Even though the Markua Spec is based on the CommonMark Spec,
+Leanpub’s current Markua support is not based on CommonMark. Markua and
+CommonMark were both launched in 2014, within a few months of each other.
+Leanpub’s Markua implementation was based on its Ruby-based implementation of
+LFM, which dates back to 2011.</p>
+<h4 id="differences-between-lfm-and-markua-0-10" class="definition">
+<span class="number">1.1.3.1</span>Differences between LFM and Markua 0.10
+</h4>
+<p>When considering converting between LFM and Markua, it’s important to highlight
+all the differences between Markua and LFM.</p>
+<p>The following are the top 10 differences between Markua and LFM.</p>
 <ol>
-<li>authors with advanced questions about Markua syntax</li>
-<li>developers implementing Markua Processors</li>
+<li>In LFM, parts are created with <code>-# Part</code>. In Markua, parts are created an
+attribute list on an atx or Setext heading.</li>
+<li>In LFM, there is a special syntax for inserting code samples:
+<code>&lt;&lt;[Optional Title](code/some_code_file.rb)</code>. In Markua, however, code
+is just a resource, and the LFM syntax is not supported.</li>
+<li>In LFM, to mark code as added or removed, the magic words were
+<code>leanpub-start-insert</code>, <code>leanpub-end-insert</code>, <code>leanpub-start-delete</code> and
+<code>leanpub-end-delete</code>. In Markua, the magic words are <code>markua-start-insert</code>,
+<code>markua-end-insert</code>, <code>markua-start-delete</code> and <code>markua-end-delete</code>.</li>
+<li>In LFM, there is a special syntax for inserting math: <code>{$$}...{/$$}</code>. This
+looks nice to people who like LaTeX, and looks like nothing else in
+Markdown. In Markua, however, math is just another resource, and that
+LaTeX-inspired syntax for wrapping math resources is not supported.</li>
+<li>In LFM, there are <code>G&gt;</code> “generic boxes”. In Markua, these are replaced with
+blurbs (<code>B&gt;</code>).</li>
+<li>LFM had the <code>C&gt;</code> syntax to center text, but we didn’t have the same effect on
+generic boxes, and blurbs did not exist. In Markua, a <code>C&gt;</code> syntax is just
+syntactic sugar for a centered blurb, for greater consistency. Because of
+this, the blurb also gets the ability to be centered by adding a
+<code>{class: center}</code> attribute.</li>
+<li>LFM had <code>{rtl}</code> and <code>{ltr}</code> directives. These are not supported in Markua,
+and neither is a <code>{dir}</code> attribute in general: any given language is either a
+left-to-right or a right-to-left language, so specifying the language with
+the <code>lang</code> document setting and the <code>{lang: ___}</code> directive is sufficient.</li>
+<li>LFM used Sample.txt to define the sample content. Markua moves the definition
+of what constitutes sample content into a <code>{sample: true}</code> attribute on
+parts, chapters and sections. So, in Markua, inclusion in the sample is at
+the content level, not the file level. This helps avoid a number of bugs that
+could happen with including at the file level, if a file did not clearly
+break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not
+supported for books which use Markua.)</li>
+<li>LFM used Book.txt to define the book content. In Markua, the way that the
+list of manuscript files is defined is considered out of scope of the Markua
+specification itself. (Leanpub still uses the Book.txt approach to specify
+which files are in a book, but other Markua Processors could use other
+approaches, or could just support parsing single files or input streams.)</li>
+<li>Most importantly, a number of features (courses, index entries, smart
+crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 </ol>
-<p>This Introduction contains a number of introductory sections about Markua and
-its relationship to Markdown, CommonMark and GFM. It also contains sections
-which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
-this document.</p>
-<p>If you’re going to read this document, you really should read the Introduction,
-even if you normally skip them.</p>
+<h4 id="differences-between-markua-0-10-and-markua-0-30-this-spec-" class="definition">
+<span class="number">1.1.3.2</span>Differences between Markua 0.10 and Markua 0.30 (this spec)
+</h4>
+<p>TODO</p>
 <h3 id="how-to-write-a-novel-in-markua" class="definition">
-<span class="number">1.1.5</span>How to write a novel in Markua
+<span class="number">1.1.4</span>How to write a novel in Markua
 </h3>
 <p>The Markua specification is long. However, if you’re an author, the amount you
 need to learn to write in Markua is actually very short.</p>
@@ -425,7 +463,7 @@ Markdown dialects:</p>
 <p>In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.</p>
 <h3 id="how-to-write-almost-any-book-in-markua" class="definition">
-<span class="number">1.1.6</span>How to write almost any book in Markua
+<span class="number">1.1.5</span>How to write almost any book in Markua
 </h3>
 <p>The longer example below shows everything you need to know to write almost any
 type of book, such as a computer programming book, in Markua. This example also
@@ -582,7 +620,6 @@ figure title if no separate figure title is provided. (A figure title is
 just as accessible as alt text, so this is fine.) Document settings are
 discussed next.
 
-
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
@@ -652,6 +689,30 @@ either inline in a paragraph or as a figure, using LaTeX math as the format.
 Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 </code></pre>
+<h3 id="what-is-this-document-" class="definition">
+<span class="number">1.1.6</span>What is this document?
+</h3>
+<p>This is the Markua Spec, written by
+<a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
+<p>The Markua Spec is based on the CommonMark Spec, whose author is
+<a href="https://johnmacfarlane.net/">John MacFarlane</a>.</p>
+<p>This document also incorporates the specification of two of the five GitHub
+Flavored Markdown (GFM extension) extensions from the <a href="https://github.github.com/gfm/">GFM
+Spec</a>.</p>
+<p>Like the CommonMark Spec and the GFM Spec, the Markua Spec is licensed under
+the Creative Commons license
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+<p>This document has two types of intended readers:</p>
+<ol>
+<li>authors with advanced questions about Markua syntax</li>
+<li>developers implementing Markua Processors</li>
+</ol>
+<p>This Introduction contains a number of introductory sections about Markua and
+its relationship to Markdown, CommonMark and GFM. It also contains sections
+which discuss Leanpub, to minimize confusion for Leanpub authors who encounter
+this document.</p>
+<p>If you’re going to read this document, you really should read the Introduction,
+even if you normally skip them.</p>
 <h3 id="why-the-name-markua-" class="definition">
 <span class="number">1.1.7</span>Why the name “Markua”?
 </h3>
@@ -664,77 +725,8 @@ in Hawaii when I named Markua, and I wanted something that sounded happy,
 friendly and almost Hawaiian. (Yes, I’m aware that there is no r in Hawaiian.)
 I also wanted a name that had its .com domain name available, and that was short
 and spellable, for branding purposes. The Markua name had all these properties.</p>
-<h3 id="what-is-leanpub-flavoured-markdown-lfm-" class="definition">
-<span class="number">1.1.8</span>What is Leanpub Flavoured Markdown (LFM)?
-</h3>
-<p>Leanpub Flavoured Markdown (LFM) was Leanpub’s original attempt to extend
-Markdown to support book authoring. It started in 2011 and evolved with
-feedback from Leanpub authors until 2014, when Markua was launched.</p>
-<p>Leanpub <strong>books</strong> can currently be written in <strong>LFM or Markua</strong>.
-Leanpub <strong>courses</strong> can currently only be written in <strong>Markua</strong>, however.</p>
-<p>LFM is the predecessor of Markua. LFM is not formally specified.
-Instead, Leanpub Flavoured Markdown is described in the
-<a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM) Manual</a>.</p>
-<h3 id="how-does-leanpub-s-current-markua-support-match-the-markua-spec-" class="definition">
-<span class="number">1.1.9</span>How does Leanpub’s current Markua support match the Markua Spec?
-</h3>
-<p>Markua is not yet fully supported on Leanpub.</p>
-<p>Even though the Markua Spec is based on the CommonMark Spec, Leanpub’s current
-Markua support is not based on CommonMark. Markua and CommonMark were both
-launched in 2014, within a few months of each other. Leanpub’s Markua
-implementation was based on its implementation of LFM, which started in 2011.</p>
-<p>Leanpub is working on a version (“Markua 0.30 Beta”) of its Markua support which
-is based on CommonMark.hs and Pandoc. When this is complete, Leanpub’s existing
-Markua Support will continue to be supported unchanged for many years, and will
-be rebranded as “Markua 0.10”.</p>
-<h3 id="differences-between-lfm-and-markua" class="definition">
-<span class="number">1.1.10</span>Differences between LFM and Markua
-</h3>
-<p>When considering converting between LFM and Markua, it’s important to highlight
-all the differences between Markua and LFM.</p>
-<p>The following are the top 10 differences between Markua and LFM.</p>
-<ol>
-<li>In LFM, parts are created with <code>-# Part</code>. In Markua, parts are created an
-attribute list on an atx or Setext heading.</li>
-<li>In LFM, there is a special syntax for inserting code samples:
-<code>&lt;&lt;[Optional Title](code/some_code_file.rb)</code>. In Markua, however, code
-is just a resource, and the LFM syntax is not supported.</li>
-<li>In LFM, to mark code as added or removed, the magic words were
-<code>leanpub-start-insert</code>, <code>leanpub-end-insert</code>, <code>leanpub-start-delete</code> and
-<code>leanpub-end-delete</code>. In Markua, the magic words are <code>markua-start-insert</code>,
-<code>markua-end-insert</code>, <code>markua-start-delete</code> and <code>markua-end-delete</code>.</li>
-<li>In LFM, there is a special syntax for inserting math: <code>{$$}...{/$$}</code>. This
-looks nice to people who like LaTeX, and looks like nothing else in
-Markdown. In Markua, however, math is just another resource, and that
-LaTeX-inspired syntax for wrapping math resources is not supported.</li>
-<li>In LFM, there are <code>G&gt;</code> “generic boxes”. In Markua, these are replaced with
-blurbs (<code>B&gt;</code>).</li>
-<li>LFM had the <code>C&gt;</code> syntax to center text, but we didn’t have the same effect on
-generic boxes, and blurbs did not exist. In Markua, a <code>C&gt;</code> syntax is just
-syntactic sugar for a centered blurb, for greater consistency. Because of
-this, the blurb also gets the ability to be centered by adding a
-<code>{class: center}</code> attribute.</li>
-<li>LFM had <code>{rtl}</code> and <code>{ltr}</code> directives. These are not supported in Markua,
-and neither is a <code>{dir}</code> attribute in general: any given language is either a
-left-to-right or a right-to-left language, so specifying the language with
-the <code>lang</code> document setting and the <code>{lang: ___}</code> directive is sufficient.</li>
-<li>LFM used Sample.txt to define the sample content. Markua moves the definition
-of what constitutes sample content into a <code>{sample: true}</code> attribute on
-parts, chapters and sections. So, in Markua, inclusion in the sample is at
-the content level, not the file level. This helps avoid a number of bugs that
-could happen with including at the file level, if a file did not clearly
-break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not
-supported for books which use Markua.)</li>
-<li>LFM used Book.txt to define the book content. In Markua, the way that the
-list of manuscript files is defined is considered out of scope of the Markua
-specification itself. (Leanpub still uses the Book.txt approach to specify
-which files are in a book, but other Markua Processors could use other
-approaches, or could just support parsing single files or input streams.)</li>
-<li>Most importantly, a number of features (courses, index entries, smart
-crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
-</ol>
 <h3 id="structure-of-this-document" class="definition">
-<span class="number">1.1.11</span>Structure of this document
+<span class="number">1.1.8</span>Structure of this document
 </h3>
 <p>The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
 specification of the Markua extensions.</p>
@@ -804,7 +796,7 @@ in other Markdown dialects, and what won’t.</li>
 and GFM specs will be very easy.</li>
 </ol>
 <h3 id="github-flavored-markdown-gfm-extension-status" class="definition">
-<span class="number">1.1.12</span>GitHub Flavored Markdown (GFM) extension status
+<span class="number">1.1.9</span>GitHub Flavored Markdown (GFM) extension status
 </h3>
 <p>Note that while Markua is a strict superset of CommonMark, it is not a strict
 superset of the GitHub Flavored Markdown (GFM) Spec.</p>
@@ -831,7 +823,7 @@ is not worth it. (It does make sense for, say, a discussion forum. It does
 not make sense for books and courses.)</li>
 </ol>
 <h3 id="about-the-html-output" class="definition">
-<span class="number">1.1.13</span>About the HTML output
+<span class="number">1.1.10</span>About the HTML output
 </h3>
 <p>The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.</p>

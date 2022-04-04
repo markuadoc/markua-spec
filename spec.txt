@@ -127,8 +127,8 @@ user manuals:
    (LFM is obsolete, and is on long-term support)
 2. [Markua 0.10](https://leanpub.com/markua/read) (this is the default for
    books and courses on Leanpub)
-3. [Markua 0.30 Beta](https://leanpub.com/markua/read) (the user manual for
-   Markua 0.30 is not published, so for now you're stuck with this spec!)
+3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) (the user manual for
+   Markua 0.30 is not yet stable, so for now you're better off reading this!)
 
 Not all features in the Markua spec are supported in the Markua 0.30 beta. If
 you want a stable experience and user manual, you currently need to use

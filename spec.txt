@@ -98,8 +98,8 @@ Markua's five main contributions are the following:
 
 1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
    (chapters, sections, sub-sections, etc.), which provides the ability for
-   Markua Processors like Leanpub to produce an ebook or online course from
-   a Markua manuscript with one click.
+   Markua Processors like Leanpub to produce an ebook from a Markua manuscript
+   with one click.
 2. The unified resource syntax, which lets Markua handle audio, code, iframe,
    math, verbatim and video resources in the same way that it does images and
    tables, and which supports inline, local and web resource locations.
@@ -109,10 +109,10 @@ Markua's five main contributions are the following:
 4. A comprehensive definition of document settings, so that authors can use
    Markua to produce documents which are styled via global switches, rather than
    by tedious micromanagement.
-5. The mapping of book structures to courses, and the creation of a plain-text
-   based microformat for course quizzes and exercises, which supports automated
-   marking and automated production of everything which is required for an
-   online course.
+5. The mapping of book structures to online courses, and the creation of a
+   plain-text microformat for course quizzes and exercises, which supports
+   automated marking and automated production of everything which is required
+   for an online course.
 
 If you have written something (say blog posts or lecture notes) in Markdown, you
 can use a Markua Processor, such as Leanpub, to turn them into an ebook or
@@ -1521,25 +1521,273 @@ Awesome](https://fontawesome.com/icons/leanpub?style=brands) would be output as
 
 <div class="extension">
 
-# Metadata (Markua extension)
+# Document semantics (Markua extension)
+
+As discussed in the introduction, Markua is an extension to Markdown. The goal
+is for Markua to feel as though Markdown just magically grew a knowledge of
+how to produce books and courses.
+
+To recap, Markua's five main additions to Markdown are the following:
+
+1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
+   (chapters, sections, sub-sections, etc.), which provides the ability for
+   Markua Processors like Leanpub to produce an ebook from a Markua manuscript
+   with one click.
+2. The unified resource syntax, which lets Markua handle audio, code, iframe,
+   math, verbatim and video resources in the same way that it does images and
+   tables, and which supports inline, local and web resource locations.
+3. The unified attribute list syntax, which lets Markua define properties for
+   resources using the same syntax that is used for other document elements,
+   such as part headings and index entries.
+4. A comprehensive definition of document settings, so that authors can use
+   Markua to produce documents which are styled via global switches, rather than
+   by tedious micromanagement.
+5. The mapping of book structures to online courses, and the creation of a
+   plain-text microformat for course quizzes and exercises, which supports
+   automated marking and automated production of everything which is required
+   for an online course.
+
+The first four of these five additions are discussed in this section. They
+concern the document structure and metadata.
 
 Markua adds a number of extensions to support metadata in a consistent way.
 These include attributes (on everything), settings (at the beginning of a
-document) and directives (at certain points throughout the document).
-
-All metadata is enclosed in curly braces `{` ... `}`.
+document) and directives (at certain points throughout the document). All
+metadata is enclosed in curly braces `{` ... `}`.
 
 Metadata is not actually output in the Markua document itself. Instead, it
 changes the behaviour of the Markua Processor, sometimes dramatically.
 
+First, however, it is important to start with how Markua headers and metadata
+are used to define document structure.
+
+## How headers define document structure
+
+Markua is a way of writing books and courses. Books have things like chapters,
+sections and subsections. Courses typically call their chapters "modules", but
+it's the same idea. Sometimes books or courses organize their chapters or
+modules in parts.
+
+Markdown defines two types of heading styles.
+
+Markua's first innovation is to map both of these heading styles to document
+structure concepts.
+
+The preferred style, called atx headers, has the following meaning in Markua:
+
+```
+{class: part}
+# Part
+
+This is a paragraph.
+
+# Chapter
+
+This is a paragraph.
+
+## Section
+
+This is a paragraph.
+
+### Sub-section
+
+This is a paragraph.
+
+#### Sub-sub-section
+
+This is a paragraph.
+
+##### Sub-sub-sub-section
+
+This is a paragraph.
+
+###### Sub-sub-sub-sub-section
+
+This is a paragraph.
+```
+
+The other style of headers, called Setext headers, defines two levels of
+heading only. Here's how those are used in Markua:
+
+```
+{class: part}
+Part
+====
+
+This is a paragraph.
+
+Chapter
+=======
+
+This is a paragraph.
+
+Section
+-------
+
+This is a paragraph.
+```
+
+Setext headers look nice, but only if you're only using chapters and sections.
+If you want to add sub-sections (or lower), you'll be using atx headers for at
+least some of your headers. My advice is to just use atx headers all the time.
+(The `{class: part}` attribute list on a chapter header to make a part header
+does actually work with Setext headers, but it's really ugly.)
+
+Note that while it is confusing and ugly to mix and match using atx and Setext
+headers for chapters and sections in the same document, you can do it. However,
+please don't.
+
+Now, regardless of whether you are using the atx or Setext header style of
+header, the key point is that Markua is mapping the headers to document
+structure concepts. The header defines the name of the part, chapter, section,
+etc., and the content underneath it becomes the content of that given thing
+(until the next header is reached).
+
+In the HTML output, the Part and Chapter heading (for atx or Setext headers)
+both produce an `h1`, the `Section` heading produces an `h2`, and the
+Sub-Section heading produces an `h3`. Lower levels go down to `h6`.
+
+To be clear, these are the Markdown "atx" header mappings:
+
+`#`
+: Used for a Chapter heading when there is no `{class: part}` attribute list,
+  and used for a Part heading when there is. This produces an `h1` in HTML.
+
+`##`
+: Used for a Section heading. This produces an `h2` in HTML.
+
+`###`
+: Used for a Sub-Section heading. This produces an `h3` in HTML.
+
+`####`
+: Used for a Sub-Sub-Section heading. This produces an `h4` in HTML.
+
+`#####`
+: Used for a Sub-Sub-Sub-Section heading. This produces an `h5` in HTML.
+
+`######`
+: Used for a Sub-Sub-Sub-Sub-Section heading. This produces an `h6` in HTML.
+
+The reason that a Part heading and a Chapter heading both use the `#` symbol,
+and are only differentiated by the presence of a `{class: part}` attribute list,
+is that not all books have parts, so it would be awkward to start chapters with
+the second-level heading.
+
+```````````````````````````````` example
+{class: part}
+# Part
+
+This is a paragraph.
+
+# Chapter
+
+This is a paragraph.
+
+## Section
+
+This is a paragraph.
+
+### Sub-section
+
+This is a paragraph.
+
+#### Sub-sub-section
+
+This is a paragraph.
+
+##### Sub-sub-sub-section
+
+This is a paragraph.
+
+###### Sub-sub-sub-sub-section
+
+This is a paragraph.
+.
+<h1 class="part">Part</h1>
+<p>This is a paragraph.</p>
+<h1>Chapter</h1>
+<p>This is a paragraph.</p>
+<h2>Section</h2>
+<p>This is a paragraph.</p>
+<h3>Sub-section</h3>
+<p>This is a paragraph.</p>
+<h4>Sub-sub-section</h4>
+<p>This is a paragraph.</p>
+<h5>Sub-sub-sub-section</h5>
+<p>This is a paragraph.</p>
+<h6>Sub-sub-sub-sub-section</h6>
+<p>This is a paragraph.</p>
+````````````````````````````````
+
+These are the Setext header mappings:
+
+```````````````````````````````` example
+{class: part}
+Part
+====
+
+This is a paragraph.
+
+Chapter
+-------
+
+This is a paragraph.
+.
+<h1 class="part">Part</h1>
+<p>This is a paragraph.</p>
+<h1>Chapter</h1>
+<p>This is a paragraph.</p>
+````````````````````````````````
+
+In the HTML output, the only difference between a part and chapter heading on
+the heading itself is that there is a `class="part"` attribute shown. However,
+obviously, the part and chapter headings are treated differently elsewhere, such
+as in the table of contents of the book or the navigation structure of the
+course.
+
+The `{class: part}` is an example of an attribute list, which is another of
+Markua's main additions to Markdown. There can be no blank line between the
+attribute list and the header it is attached to. Attribute lists are discussed
+in the Metadata section later.
+
+Note that adding a `{class: part}` attribute list to any other heading level
+than an `h1` is ignored by Markua.
+
+Here's an example of this being incorrectly added to an atx section header,
+which will have no effect:
+
+```````````````````````````````` example
+{class: part}
+## Section Heading
+
+Foo
+.
+<h2>Section Heading</h2>
+<p>Foo</p>
+````````````````````````````````
+
+Here's an example of this being incorrectly added to a Setext section header,
+which will also have no effect:
+
+```````````````````````````````` example
+{class: part}
+Section Heading
+---------------
+
+Foo
+.
+<h2>Section Heading</h2>
+<p>Foo</p>
+````````````````````````````````
 
 
-## Attribute Lists
+
+## Attribute lists
 
 Attribute lists are used to define everything from specify the language of code
 blocks, add ids for crosslinking and even support extensions to Markua.
 
-### Attribute List Format
+### Attribute list format
 
 An attribute list is one or more key-value, comma-separated pairs:
 
@@ -2454,224 +2702,11 @@ material book for the course.
 
 <div class="extension">
 
-# Document Structure (Markua extension)
+## Manifest Files
 
-Markua is a way of writing books and courses. Books have things like chapters,
-sections and subsections. Courses typically call their chapters "modules", but
-it's the same idea. Sometimes books or courses organize their chapters or
-modules in parts.
+TODO
 
-Markdown defines two types of heading styles.
-
-Markua's first innovation is to map both of these heading styles to document
-structure concepts.
-
-The preferred style, called atx headers, has the following meaning in Markua:
-
-```
-{class: part}
-# Part
-
-This is a paragraph.
-
-# Chapter
-
-This is a paragraph.
-
-## Section
-
-This is a paragraph.
-
-### Sub-section
-
-This is a paragraph.
-
-#### Sub-sub-section
-
-This is a paragraph.
-
-##### Sub-sub-sub-section
-
-This is a paragraph.
-
-###### Sub-sub-sub-sub-section
-
-This is a paragraph.
-```
-
-The other style of headers, called Setext headers, defines two levels of
-heading only. Here's how those are used in Markua:
-
-```
-{class: part}
-Part
-====
-
-This is a paragraph.
-
-Chapter
-=======
-
-This is a paragraph.
-
-Section
--------
-
-This is a paragraph.
-```
-
-Setext headers look nice, but only if you're only using chapters and sections.
-If you want to add sub-sections (or lower), you'll be using atx headers for at
-least some of your headers. My advice is to just use atx headers all the time.
-(The `{class: part}` attribute list on a chapter header to make a part header
-does actually work with Setext headers, but it's really ugly.)
-
-Note that while it is confusing and ugly to mix and match using atx and Setext
-headers for chapters and sections in the same document, you can do it. However,
-please don't.
-
-Now, regardless of whether you are using the atx or Setext header style of
-header, the key point is that Markua is mapping the headers to document
-structure concepts. The header defines the name of the part, chapter, section,
-etc., and the content underneath it becomes the content of that given thing
-(until the next header is reached).
-
-In the HTML output, the Part and Chapter heading (for atx or Setext headers)
-both produce an `h1`, the `Section` heading produces an `h2`, and the
-Sub-Section heading produces an `h3`. Lower levels go down to `h6`.
-
-To be clear, these are the Markdown "atx" header mappings:
-
-`#`
-: Used for a Chapter heading when there is no `{class: part}` attribute list,
-  and used for a Part heading when there is. This produces an `h1` in HTML.
-
-`##`
-: Used for a Section heading. This produces an `h2` in HTML.
-
-`###`
-: Used for a Sub-Section heading. This produces an `h3` in HTML.
-
-`####`
-: Used for a Sub-Sub-Section heading. This produces an `h4` in HTML.
-
-`#####`
-: Used for a Sub-Sub-Sub-Section heading. This produces an `h5` in HTML.
-
-`######`
-: Used for a Sub-Sub-Sub-Sub-Section heading. This produces an `h6` in HTML.
-
-The reason that a Part heading and a Chapter heading both use the `#` symbol,
-and are only differentiated by the presence of a `{class: part}` attribute list,
-is that not all books have parts, so it would be awkward to start chapters with
-the second-level heading.
-
-```````````````````````````````` example
-{class: part}
-# Part
-
-This is a paragraph.
-
-# Chapter
-
-This is a paragraph.
-
-## Section
-
-This is a paragraph.
-
-### Sub-section
-
-This is a paragraph.
-
-#### Sub-sub-section
-
-This is a paragraph.
-
-##### Sub-sub-sub-section
-
-This is a paragraph.
-
-###### Sub-sub-sub-sub-section
-
-This is a paragraph.
-.
-<h1 class="part">Part</h1>
-<p>This is a paragraph.</p>
-<h1>Chapter</h1>
-<p>This is a paragraph.</p>
-<h2>Section</h2>
-<p>This is a paragraph.</p>
-<h3>Sub-section</h3>
-<p>This is a paragraph.</p>
-<h4>Sub-sub-section</h4>
-<p>This is a paragraph.</p>
-<h5>Sub-sub-sub-section</h5>
-<p>This is a paragraph.</p>
-<h6>Sub-sub-sub-sub-section</h6>
-<p>This is a paragraph.</p>
-````````````````````````````````
-
-These are the Setext header mappings:
-
-```````````````````````````````` example
-{class: part}
-Part
-====
-
-This is a paragraph.
-
-Chapter
--------
-
-This is a paragraph.
-.
-<h1 class="part">Part</h1>
-<p>This is a paragraph.</p>
-<h1>Chapter</h1>
-<p>This is a paragraph.</p>
-````````````````````````````````
-
-In the HTML output, the only difference between a part and chapter heading on
-the heading itself is that there is a `class="part"` attribute shown. However,
-obviously, the part and chapter headings are treated differently elsewhere, such
-as in the table of contents of the book or the navigation structure of the
-course.
-
-The `{class: part}` is an example of an attribute list, which is another of
-Markua's main additions to Markdown. There can be no blank line between the
-attribute list and the header it is attached to. Attribute lists are discussed
-in the Metadata section later.
-
-Note that adding a `{class: part}` attribute list to any other heading level
-than an `h1` is ignored by Markua.
-
-Here's an example of this being incorrectly added to an atx section header,
-which will have no effect:
-
-```````````````````````````````` example
-{class: part}
-## Section Heading
-
-Foo
-.
-<h2>Section Heading</h2>
-<p>Foo</p>
-````````````````````````````````
-
-Here's an example of this being incorrectly added to a Setext section header,
-which will also have no effect:
-
-```````````````````````````````` example
-{class: part}
-Section Heading
----------------
-
-Foo
-.
-<h2>Section Heading</h2>
-<p>Foo</p>
-````````````````````````````````
+## 
 
 </div>
 
@@ -4533,7 +4568,7 @@ Closing code fences cannot have [info strings]:
 
 <div class="extension">
 
-## No HTML Blocks (Markua extension)
+## No HTML blocks (Markua extension)
 
 Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).
@@ -11201,7 +11236,7 @@ foo@bar.example.com
 
 <div class="extension">
 
-## No Raw HTML (Markua extension)
+## No raw HTML (Markua extension)
 
 Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
 

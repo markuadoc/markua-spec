@@ -71,6 +71,52 @@ This simple format is called Markua.
 
 This is its specification.
 
+
+### Markua: Markdown for books and courses
+
+Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
+
+Markua maps Markdown syntax to book concepts, and then adds some new syntax and
+concepts of its own.
+
+Markua documents can be automatically transformed into every popular type of
+ebook format. The computer programs which do this transformation are called
+Markua Processors. These programs understand both Markua syntax and how to
+generate the various output formats. An example Markua Processor is Leanpub:
+Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
+and can even output print-ready PDFs and InDesign files from them as well.
+
+Markua has been developed with extensive real-world testing and feedback.
+Markua has been used by Leanpub authors for years, both to create books and
+online courses.
+
+Markua was started at Leanpub in 2014, and benefited from the years of lessons
+that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
+successor to LFM. We have been iterating on our Markua support for many years.
+
+Markua's three main contributions are the following:
+
+1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
+   (parts, chapters, sections, sub-sections, etc.), which provides the ability
+   for Markua Processors like Leanpub to produce an ebook or online course from
+   a Markua manuscript with one click.
+2. The unified resource and attribute list syntax, which lets Markua handle
+   audio, code, math and video in the same way that it does images, and which
+   supports inline, local and web resource locations.
+3. The mapping of book structures to courses, and the creation of a plain-text
+   based microformat for course quizzes and exercises, which supports automated
+   marking and automated production of everything which is required for a MOOC.
+
+If you have written something (say blog posts or lecture notes) in Markdown, you
+can use a Markua Processor, such as Leanpub, to turn them into an ebook or
+course with one click. Then, as you go down the path of enhancing the manuscript
+and adding things which only make sense in books or courses, this process will
+feel like decorating, not converting.
+
+The goal is for writers who are familiar with Markdown to feel that with Markua,
+Markdown just grew an understanding of book and course concepts.
+
+
 ### For Leanpub authors
 
 There are currently two ways to write in plain text on Leanpub. These are their
@@ -387,49 +433,6 @@ Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
 
-### Markua: Markdown for books and courses
-
-Markua, pronounced "mar-coo-ah", is Markdown for books and courses.
-
-Markua maps Markdown syntax to book concepts, and then adds some new syntax and
-concepts of its own.
-
-Markua documents can be automatically transformed into every popular type of
-ebook format. The computer programs which do this transformation are called
-Markua Processors. These programs understand both Markua syntax and how to
-generate the various output formats. An example Markua Processor is Leanpub:
-Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
-and can even output print-ready PDFs and InDesign files from them as well.
-
-Markua has been developed with extensive real-world testing and feedback.
-Markua has been used by Leanpub authors for years, both to create books and
-online courses.
-
-Markua was started at Leanpub in 2014, and benefited from the years of lessons
-that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
-successor to LFM. We have been iterating on our Markua support for many years.
-
-Markua's three main contributions are the following:
-
-1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-   (parts, chapters, sections, sub-sections, etc.), which provides the ability
-   for Markua Processors like Leanpub to produce an ebook or online course from
-   a Markua manuscript with one click.
-2. The unified resource and attribute list syntax, which lets Markua handle
-   audio, code, math and video in the same way that it does images, and which
-   supports inline, local and web resource locations.
-3. The mapping of book structures to courses, and the creation of a plain-text
-   based microformat for course quizzes and exercises, which supports automated
-   marking and automated production of everything which is required for a MOOC.
-
-If you have written something (say blog posts or lecture notes) in Markdown, you
-can use a Markua Processor, such as Leanpub, to turn them into an ebook or
-course with one click. Then, as you go down the path of enhancing the manuscript
-and adding things which only make sense in books or courses, this process will
-feel like decorating, not converting.
-
-The goal is for writers who are familiar with Markdown to feel that with Markua,
-Markdown just grew an understanding of book and course concepts.
 
 ### Why the name "Markua"?
 
@@ -456,6 +459,7 @@ LFM is the predecessor of Markua. LFM is not formally specified.
 Instead, Leanpub Flavoured Markdown is described in the
 [Leanpub Flavoured Markdown (LFM) Manual](https://leanpub.com/lfm/read).
 
+
 ### How does Leanpub's current Markua support match the Markua Spec?
 
 Markua is not yet fully supported on Leanpub.
@@ -469,6 +473,7 @@ Leanpub is working on a version ("Markua 0.30 Beta") of its Markua support which
 is based on CommonMark.hs and Pandoc. When this is complete, Leanpub's existing
 Markua Support will continue to be supported unchanged for many years, and will
 be rebranded as "Markua 0.10".
+
 
 ### Differences between LFM and Markua
 
@@ -516,6 +521,7 @@ The following are the top 10 differences between Markua and LFM.
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
 
+
 ### Structure of this document
 
 The Markua Spec is a strange hybrid of the CommonMark Spec, the GFM Spec and the
@@ -533,7 +539,6 @@ to the CommonMark Spec:
    [Quizzes and exercises](#quizzes-and-exercises-m-) chapters are new, the
    numbering of some chapters is changed.
 4. The metadata at the top of the spec itself is changed.
-
 
 
 

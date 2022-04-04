@@ -118,80 +118,6 @@ The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
 
-### For Leanpub authors
-
-There are three ways to write in plain text on Leanpub. These are their
-user manuals:
-
-1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
-   (LFM was launched in 2011. It is now obsolete, and is on long-term support.)
-2. [Markua 0.10](https://leanpub.com/markua/read) (this is the default for
-   books and courses on Leanpub)
-3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) (the user manual for
-   Markua 0.30 is not yet stable, so for now you're better off reading this!)
-
-Not all features in the Markua spec are supported in the Markua 0.30 beta. If
-you want a stable experience and user manual, you currently need to use
-Leanpub's Markua 0.10 support (which is the default choice for new books).
-This is also true if you want to create courses. Leanpub's Markua 0.30
-implementation does not support courses yet. (Also, LFM has never supported
-courses.)
-
-Leanpub's Markua 0.10 support is fully documented in its own [user
-manual](https://leanpub.com/markua/read). Everything documented in that
-manual should work as described, and our Markua 0.10 version will continue to be
-supported for years to come.
-
-Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
-Markua support is not based on CommonMark. Markua and CommonMark were both
-launched in 2014, within a few months of each other. Leanpub's Markua
-implementation was based on its Ruby-based implementation of LFM, which dates
-back to 2011.
-
-If you are writing a new book or course on Leanpub, you should absolutely choose
-Markua over LFM. If you are familiar with LFM, the following list of the top 10
-differences between Markua and LFM may be useful:
-
-1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
-   attribute list on an atx or Setext heading.
-2. In LFM, there is a special syntax for inserting code samples:
-   `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code
-   is just a resource, and the LFM syntax is not supported.
-3. In LFM, to mark code as added or removed, the magic words were
-   `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and
-   `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`,
-   `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
-4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This
-   looks nice to people who like LaTeX, and looks like nothing else in
-   Markdown. In Markua, however, math is just another resource, and that
-   LaTeX-inspired syntax for wrapping math resources is not supported.
-5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with
-   blurbs (`B>`).
-6. LFM had the `C>` syntax to center text, but we didn't have the same effect on
-   generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just
-   syntactic sugar for a centered blurb, for greater consistency. Because of
-   this, the blurb also gets the ability to be centered by adding a
-   `{class: center}` attribute.
-7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua,
-   and neither is a `{dir}` attribute in general: any given language is either a
-   left-to-right or a right-to-left language, so specifying the language with
-   the `lang` document setting and the `{lang: ___}` directive is sufficient.
-8. LFM used Sample.txt to define the sample content. Markua moves the definition
-   of what constitutes sample content into a `{sample: true}` attribute on
-   parts, chapters and sections. So, in Markua, inclusion in the sample is at
-   the content level, not the file level. This helps avoid a number of bugs that
-   could happen with including at the file level, if a file did not clearly
-   break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not
-   supported for books which use Markua.)
-9. LFM used Book.txt to define the book content. In Markua, the way that the
-   list of manuscript files is defined is considered out of scope of the Markua
-   specification itself. (Leanpub still uses the Book.txt approach to specify
-   which files are in a book, but other Markua Processors could use other
-   approaches, or could just support parsing single files or input streams.)
-10. Most importantly, a number of features (courses, index entries, smart
-    crosslinks, etc.) exist in Markua and do not exist in LFM.
-
-
 ### How to write a novel in Markua
 
 The Markua specification is long. However, if you're an author, the amount you
@@ -235,6 +161,7 @@ Markdown dialects:
 
 In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
+
 
 ### How to write almost any book in Markua
 
@@ -466,6 +393,80 @@ the rest of the spec!
 ~~~
 
 
+### For Leanpub authors
+
+There are three ways to write in plain text on Leanpub. These are their
+user manuals:
+
+1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
+   (LFM was launched in 2011. It is now obsolete, and is on long-term support.)
+2. [Markua 0.10](https://leanpub.com/markua/read) (this is the default for
+   books and courses on Leanpub)
+3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) (the user manual for
+   Markua 0.30 is not yet stable, so for now you're better off reading this!)
+
+Not all features in the Markua spec are supported in the Markua 0.30 beta. If
+you want a stable experience and user manual, you currently need to use
+Leanpub's Markua 0.10 support (which is the default choice for new books).
+This is also true if you want to create courses. Leanpub's Markua 0.30
+implementation does not support courses yet. (Also, LFM has never supported
+courses.)
+
+Leanpub's Markua 0.10 support is fully documented in its own [user
+manual](https://leanpub.com/markua/read). Everything documented in that
+manual should work as described, and our Markua 0.10 version will continue to be
+supported for years to come.
+
+Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
+Markua support is not based on CommonMark. Markua and CommonMark were both
+launched in 2014, within a few months of each other. Leanpub's Markua
+implementation was based on its Ruby-based implementation of LFM, which dates
+back to 2011.
+
+If you are writing a new book or course on Leanpub, you should absolutely choose
+Markua over LFM. If you are familiar with LFM, the following list of the top 10
+differences between Markua and LFM may be useful:
+
+1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
+   attribute list on an atx or Setext heading.
+2. In LFM, there is a special syntax for inserting code samples:
+   `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code
+   is just a resource, and the LFM syntax is not supported.
+3. In LFM, to mark code as added or removed, the magic words were
+   `leanpub-start-insert`, `leanpub-end-insert`, `leanpub-start-delete` and
+   `leanpub-end-delete`. In Markua, the magic words are `markua-start-insert`,
+   `markua-end-insert`, `markua-start-delete` and `markua-end-delete`.
+4. In LFM, there is a special syntax for inserting math: `{$$}...{/$$}`. This
+   looks nice to people who like LaTeX, and looks like nothing else in
+   Markdown. In Markua, however, math is just another resource, and that
+   LaTeX-inspired syntax for wrapping math resources is not supported.
+5. In LFM, there are `G>` "generic boxes". In Markua, these are replaced with
+   blurbs (`B>`).
+6. LFM had the `C>` syntax to center text, but we didn't have the same effect on
+   generic boxes, and blurbs did not exist. In Markua, a `C>` syntax is just
+   syntactic sugar for a centered blurb, for greater consistency. Because of
+   this, the blurb also gets the ability to be centered by adding a
+   `{class: center}` attribute.
+7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua,
+   and neither is a `{dir}` attribute in general: any given language is either a
+   left-to-right or a right-to-left language, so specifying the language with
+   the `lang` document setting and the `{lang: ___}` directive is sufficient.
+8. LFM used Sample.txt to define the sample content. Markua moves the definition
+   of what constitutes sample content into a `{sample: true}` attribute on
+   parts, chapters and sections. So, in Markua, inclusion in the sample is at
+   the content level, not the file level. This helps avoid a number of bugs that
+   could happen with including at the file level, if a file did not clearly
+   break at a chapter boundary. (So, in Leanpub, the Sample.txt approach is not
+   supported for books which use Markua.)
+9. LFM used Book.txt to define the book content. In Markua, the way that the
+   list of manuscript files is defined is considered out of scope of the Markua
+   specification itself. (Leanpub still uses the Book.txt approach to specify
+   which files are in a book, but other Markua Processors could use other
+   approaches, or could just support parsing single files or input streams.)
+10. Most importantly, a number of features (courses, index entries, smart
+    crosslinks, etc.) exist in Markua and do not exist in LFM.
+
+
 ### Origin and structure of this document
 
 This is the Markua Spec, written by
@@ -566,22 +567,6 @@ The other three GFM extensions are omitted:
    (`<` and `>`), so the added complexity both in parsing and in documentation
    is not worth it. (It does make sense for, say, a discussion forum. It does
    not make sense for books and courses.)
-
-
-### Use cases of Markua and Markdown
-
-Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.
-
-HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
-were supported, a Markua Processor would have to support parsing and
-meaningfully outputting all of HTML syntax as well as all of Markua syntax.
-
-Since Markdown's only output format target is HTML, it might as well support
-HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.
 
 
 ### About the HTML output
@@ -4403,12 +4388,24 @@ treated as raw HTML (and will not be escaped in HTML output).
 Markua does not support HTML blocks. Instead, **all raw HTML is removed**.
 This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
 which is inserted as inlines. Neither of these are supported by Markua.
-
 In both cases, the HTML is removed by the Markua parser.
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) in Markua, and these comments will be removed
 from the output (along with any other raw HTML tags).
+
+Markua and Markdown have different use cases. Markdown is a better way to write
+HTML; Markua is a better way to write a book or course.
+
+HTML is just one possible output format of Markua, and other possible Markua
+output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
+were supported, a Markua Processor would have to support parsing and
+meaningfully outputting all of HTML syntax as well as all of Markua syntax.
+
+Since Markdown's only output format target is HTML, it might as well support
+HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
+From an implementation perspective, Markdown gets inline HTML support for free.
+This is not true in the case of Markua.
 
 </div>
 

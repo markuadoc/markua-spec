@@ -9980,7 +9980,7 @@ There are eight types of resources:
 7. `verbatim`
 8. `video`
 
-The `code`, `image` and `table resource types are an extension of what is
+The `code`, `image` and `table` resource types are an extension of what is
 already supported in Markdown; the `audio`, `iframe`, `math`, `verbatim` and
 `video` resource types are new.
 

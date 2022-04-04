@@ -2532,11 +2532,9 @@ please don't.
 
 Now, regardless of whether you are using the atx or Setext header style of
 header, the key point is that Markua is mapping the headers to document
-structure concepts.
-
-The header defines the name of the part, chapter, section, etc., and the content
-underneath it becomes the content of that given thing (until the next header
-is reached).
+structure concepts. The header defines the name of the part, chapter, section,
+etc., and the content underneath it becomes the content of that given thing
+(until the next header is reached).
 
 In the HTML output, the Part and Chapter heading (for atx or Setext headers)
 both produce an `h1`, the `Section` heading produces an `h2`, and the

@@ -297,9 +297,8 @@ get a Word document.</p>
 <p>Your magical typewriter could even transform your completed book manuscript into
 a course that anyone in the world could take. All you’d need to do is to
 add some quizzes and exercises and then press a key for your magical typewriter
-to publish a massive open online course (MOOC) for you. The quizzes and exercises
-would mark themselves, and students would get certificates based on how well
-they did.</p>
+to publish an online course for you. The quizzes and exercises would mark
+themselves, and students would get certificates based on how well they did.</p>
 <p>With your magical typewriter, you’d only have to do one thing:</p>
 <p>Write.</p>
 <p>Wouldn’t it be great if such a magical typewriter existed?</p>
@@ -338,7 +337,8 @@ audio, code, math and video in the same way that it does images, and which
 supports inline, local and web resource locations.</li>
 <li>The mapping of book structures to courses, and the creation of a plain-text
 based microformat for course quizzes and exercises, which supports automated
-marking and automated production of everything which is required for a MOOC.</li>
+marking and automated production of everything which is required for an
+online course.</li>
 </ol>
 <p>If you have written something (say blog posts or lecture notes) in Markdown, you
 can use a Markua Processor, such as Leanpub, to turn them into an ebook or
@@ -2559,7 +2559,7 @@ Processor may do something smart when a course which is 100% complete changes
 the <code>id</code> values of a quiz or quizzes, since this will affect current students.</p>
 <p><code>default-exercise-show-answers</code>
 : This can be <code>all</code> (the default), <code>incorrect</code> or <code>none</code>. It affects how answers
-are shown after an exercise is completed, say in a MOOC.</p>
+are shown after an exercise is completed, say in an online course.</p>
 <p><code>default-quiz-attempts</code>
 : The default number of allowed attempts on a quiz. The default is <code>1</code>. Note
 that for quizzes, a value of <code>0</code> means the quiz cannot be taken (yet). A value
@@ -2574,7 +2574,7 @@ submitted when the <code>time-limit</code> is expired. If false, it is not. Eith
 incomplete quiz counts as an attempt.</p>
 <p><code>default-quiz-show-answers</code>
 : This can be <code>all</code>, <code>incorrect</code> (the default) or <code>none</code>. It affects how answers
-are shown after a quiz is completed, say in a MOOC.</p>
+are shown after a quiz is completed, say in an online course.</p>
 <p><code>default-quiz-use-result</code>
 : <code>best</code> or <code>latest</code>. The default is <code>best</code>. Whether the best result on the quiz
 is used, or the latest one.</p>
@@ -17386,13 +17386,13 @@ after
 </h1>
 <p>Markua was initially designed for the writing of books, but it has been extended
 to support creating courses. For example, Leanpub authors can click a button to
-create a massive open online course (MOOC), complete with automated marking,
-entirely from a Markua document.</p>
+create an online course, complete with automated marking, entirely from a Markua
+document.</p>
 <p><strong>To convert a Markua document from a book into a course, all you need to do is
 add quizzes and exercises.</strong></p>
 <p>Over the past decade, there has been a steady growth of interest in courses
-delivered over the internet at massive scale. These Massive Open Online Courses,
-or MOOCs, consist of essentially four things:</p>
+delivered over the internet at massive scale. These courses consist of
+essentially four things:</p>
 <ol>
 <li>Reading material</li>
 <li>Video or audio lectures</li>
@@ -17402,11 +17402,11 @@ or MOOCs, consist of essentially four things:</p>
 <p>It turns out the four things in this list all work perfectly in a Markua
 document. So, not only can Markua be used to easily create a textbook which
 includes video, audio, images and quizzes, it is also an amazingly simple and
-flexible way of creating a MOOC. A MOOC is essentially just a textbook which is
-executable, plus discussion forums and credentials. For example,
-<a href="https://leanpub.com">Leanpub</a> authors can click one button to create a massive
-open online course (MOOC), complete with automated marking for all the quizzes
-in the course, entirely from one Markua document.</p>
+flexible way of creating an online course. An online course is essentially just
+a textbook which is executable, plus discussion forums and credentials. For
+example, <a href="https://leanpub.com">Leanpub</a> authors can click one button to create a
+course, complete with automated marking for all the quizzes in the course,
+entirely from one Markua document.</p>
 <p>Quizzes and exercises are essentially the same. The only difference is that
 quizzes are intended to be marked, and exercises are not. Because of their
 similarities, they are discussed here together.</p>
@@ -17458,9 +17458,9 @@ c) 7
 is so the identity of an exercise can be preserved across generations of a
 course.</p>
 <p>A quiz or exercise can contain any Markua content, not just questions and
-answers. This is true regardless of whether the quiz or exercise is in a MOOC,
-an ebook or on paper. Note that video and audio resources don’t work so well on
-paper, however.</p>
+answers. This is true regardless of whether the quiz or exercise is in an online
+course, an ebook or on paper. Note that video and audio resources don’t work so
+well on paper, however.</p>
 <p>If a quiz or exercise starts with any type of heading immediately after the
 <code>{quiz}</code> or <code>{exercise}</code> line, this heading’s content should be considered the
 name of the quiz or exercise. This can be used in a list of quizzes or exercises
@@ -17493,7 +17493,7 @@ Look at the Leanpub [website](https://leanpub.com/).
 
 ! Answers could include &quot;bootstrapped startup&quot;, the spec evolving, etc.
 
-That's it for this quiz, and this MOOC!
+That's it for this quiz, and this course!
 
 **Thanks for taking my course!**
 {/quiz}
@@ -17514,13 +17514,13 @@ question.</p>
 </h2>
 <p>A Markua Processor has many degrees of freedom in terms of whether, and how,
 to output quizzes and exercises. As such, no HTML mapping is shown here.</p>
-<p>For example, when outputting an online course or MOOC, the Markua Processor
-can basically do whatever it wants. It can choose to output an ebook of the
-course material only, and put all quizzes and exercises only in the online
-version. Or it can choose to put all the quizzes only in the online version,
-and include the exercises in the ebook version as well. Or it can include the
-quizzes and exercises in the ebook version, but only include the answers for
-the exercises in the ebook version.</p>
+<p>For example, when outputting an online course, the Markua Processor can
+basically do whatever it wants. It can choose to output an ebook of the course
+material only, and put all quizzes and exercises only in the online version.
+Or it can choose to put all the quizzes only in the online version, and include
+the exercises in the ebook version as well. Or it can include the quizzes and
+exercises in the ebook version, but only include the answers for the exercises
+in the ebook version.</p>
 <p>If, on the other hand, a Markua Processor is outputting a textbook, it may
 choose to output the quizzes in an entirely separate ebook or print-ready PDF,
 for use in physical classrooms.</p>
@@ -17656,7 +17656,7 @@ integer is permitted. Subsequent questions will have a number which is 1 higher
 than the previous question.</p>
 <p><code>show-answers</code>
 : This can be <code>all</code>, <code>incorrect</code> or <code>none</code>. It affects how answers are shown
-after a quiz or exercise is completed, say in a MOOC. For exercises, the
+after a quiz or exercise is completed, say in a course. For exercises, the
 default value is determined by the value of the <code>default-exercise-show-answers</code>
 document setting, with <code>all</code> being the default value of that attribute. For
 quizzes, the default value is determined by the value of the
@@ -17950,11 +17950,12 @@ notation? And how are the numbers formatted? Are they US or Canadian numbers
 means something different in the US and EU–does <code>123,456</code> mean <code>123456</code> or
 <code>123.456</code>?</p>
 <p>These questions are made worse by the fact that Markua can be used to create
-human-marked paper quizzes as well as automatically-marked MOOCs. So,
-specifying rules which made the syntax unambiguous for MOOCs would mean that
-the answers for human-marked paper quizzes could not be specified with a
-tolerable amount of ambiguity. So, the format of the answer values in a fill
-in the blank question is out of scope of the Markua Spec.</p>
+human-marked paper quizzes as well as automatically-marked courses. So,
+specifying rules which made the syntax unambiguous for online courses with
+automated marking would mean that the answers for human-marked paper quizzes
+could not be specified with a tolerable amount of ambiguity. So, the format of
+the answer values in a fill in the blank question is out of scope of the Markua
+Spec.</p>
 <h3 id="supported-attributes-on-fill-in-the-blank-questions" class="definition">
 <span class="number">10.6.1</span>Supported attributes on fill in the blank questions
 </h3>
@@ -17986,8 +17987,9 @@ answer. Instead, the answer is essentially a “note to markers”, whether thos
 markers are underpaid graduate students or unpaid AIs. Markua does not specify
 any microformat for this note to markers: it is just Markua text, kind of like
 a blockquote (but with each line starting with <code>!</code> not <code>&gt;</code>).</p>
-<p>A Markua Processor generating a MOOC may handle written questions at its own
-discretion, including not including them or giving them a <code>points</code> value of 0.</p>
+<p>A Markua Processor generating an online course may handle written questions at
+its own discretion, including not including them or giving them a <code>points</code> value
+of 0.</p>
 <p>Examples:</p>
 <pre><code>{quiz, id: &quot;quiz3&quot;}
 
@@ -18047,8 +18049,8 @@ more than one is an error. Providing none of them means that the question is a
 fill in the blank question, not a written question.</p>
 <p><code>points</code>
 : The number of points the question is worth. This number can be 0 or higher.
-The default is 1. A Markua Processor generating a MOOC may override this. For
-example, when generating a MOOC, Leanpub overrides all written questions to
+The default is 1. A Markua Processor generating a course may override this. For
+example, when generating a course, Leanpub overrides all written questions to
 have a points attribute of 0, regardless of what (if anything) is specified for
 this attribute by the author.</p>
 <p><code>words</code>
@@ -18117,14 +18119,14 @@ answers for each question.</li>
 <h2 id="question-alternates" class="definition">
 <span class="number">10.9</span>Question alternates
 </h2>
-<p>The fact that a Markua document can be used to create an online course or MOOC
-means that certain aspects of the syntax for quizzes and exercises are more
-robust than they would otherwise. One example of this is question alternates.</p>
-<p>In an online course or MOOC, some professors might not want every question the
-same, despite the fact that question order and answer order can be randomized.
-So, Markua supports question alternates, using a simple (if slightly ugly)
-syntax. Question alternates are only supported in quizzes, since they make no
-sense to include in exercises.</p>
+<p>The fact that a Markua document can be used to create an online course means
+that certain aspects of the syntax for quizzes and exercises are more robust
+than they would otherwise. One example of this is question alternates.</p>
+<p>In an online course, some professors might not want every question the same,
+despite the fact that question order and answer order can be randomized. So,
+Markua supports question alternates, using a simple (if slightly ugly) syntax.
+Question alternates are only supported in quizzes, since they make no sense to
+include in exercises.</p>
 <p>To create question alternates, every question in the quiz (not just those with
 alternates) must be numbered sequentially, starting from 1, using a <code>?#</code> syntax.
 This is a question mark followed by the number of the question, e.g.

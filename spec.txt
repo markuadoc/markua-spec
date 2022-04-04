@@ -124,7 +124,7 @@ The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
 
-## Markua's one key subtraction from Markdown: raw HTML is removed
+## Markua's one key subtraction from Markdown: raw HTML is removed (M)
 
 Markua also has one key subtraction from Markdown: support for raw HTML, either
 as inlines or blocks, is completely removed.
@@ -160,7 +160,7 @@ Note that besides raw HTML, Markua does not remove anything else from Markdown.
 starting point, so that you can verify this for yourself.)
 
 
-## How to write a novel in Markua
+## How to write a novel in Markua (M)
 
 The Markua specification is long. However, if you're an author, the amount you
 need to learn to write in Markua is actually very short.
@@ -205,7 +205,7 @@ In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
 
 
-## How to write almost any book in Markua
+## How to write almost any book in Markua (M)
 
 The longer example below shows everything you need to know to write almost any
 type of book, such as a computer programming book, in Markua. This example also
@@ -438,7 +438,7 @@ the rest of the spec!
 ~~~
 
 
-## For Leanpub authors
+## For Leanpub authors (M)
 
 There are three ways to write in plain text on Leanpub. These are their
 user manuals:
@@ -512,7 +512,7 @@ differences between Markua and LFM may be useful:
     crosslinks, etc.) exist in Markua and do not exist in LFM.
 
 
-## Origin and structure of this document
+## Origin and structure of this document (M)
 
 This is the Markua Spec, written by
 [Peter Armstrong](https://twitter.com/peterarmstrong).
@@ -609,7 +609,7 @@ The other three GFM extensions are omitted:
    not make sense for books and courses.)
 
 
-## About the HTML output
+## About the HTML output (M)
 
 The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.
@@ -669,7 +669,7 @@ specified. Any custom settings are specified in a document settings list in the
 top of the example.
 
 
-## Why the name "Markua"?
+## Why the name "Markua"? (M)
 
 When I set out to specify Markua, I realized I needed a name. I wanted a name
 that conveyed the love that I have for Markdown while not implying endorsement
@@ -1597,7 +1597,7 @@ changes the behaviour of the Markua Processor, sometimes dramatically.
 First, however, it is important to start with how Markua headers and metadata
 are used to define document structure.
 
-## How headers define document structure
+## How headers define document structure (M)
 
 Markua is a way of writing books and courses. Books have things like chapters,
 sections and subsections. Courses typically call their chapters "modules", but
@@ -1818,7 +1818,7 @@ Foo
 
 
 
-## Attribute lists
+## Attribute lists (M)
 
 Attribute lists are used to define everything from specify the language of code
 blocks, add ids for crosslinking and even support extensions to Markua.
@@ -2127,7 +2127,7 @@ new versions of Markua can simply stop supporting attributes defined in this
 version of Markua without needing to specify anything special.
 
 
-## Document settings
+## Document settings (M)
 
 The HTML which is output by a Markua Processor can be affected by certain global
 document settings. These can be overridden by one or more document settings
@@ -2538,7 +2538,7 @@ the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
 
 
-## Directives
+## Directives (M)
 
 Directives are switches which affect the behaviour of a Markua Processor.
 
@@ -2732,27 +2732,9 @@ For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
 
-## Thematic break semantics
-
-Thematic breaks, as shown above, produce an `<hr />` in HTML.
-
-Thematic breaks are treated as scene breaks by Markua.
-
-In other formats, such as PDF, a Markua Processor may format the thematic break
-in a way appropriate for a scene break in fiction.
-
-There are no additional tests in this section, since this is just a note about
-semantics and about CSS.
-
-### CSS Note
-
-Since Markua bans all inline HTML except HTML comments, the only way to produce
-an `<hr />` is using the above thematic break syntax. So, designers can assume
-that all `<hr />` elements are thematic breaks, and style them in a way
-appropriate for a scene break in fiction.
 
 
-## Paragraph continuations
+## Paragraph continuations (M)
 
 In books, you can insert things like lists in the middle of paragraphs.
 
@@ -2894,7 +2876,7 @@ bar
 
 <div class="extension">
 
-## Span attribute lists
+## Span attribute lists (M)
 
 Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -2928,7 +2910,7 @@ creates a `[^footnote]` instead. (Footnotes are discussed below.)
 
 <div class="extension">
 
-## Concatenating files and blank lines
+## Concatenating files and blank lines (M)
 
 A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by

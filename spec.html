@@ -195,8 +195,8 @@ $(document).ready(function() {
 <li><a href="#no-raw-html-markua-extension-"><span class="number">6.6</span>No Raw HTML (Markua extension)</a></li>
 <li><a href="#hard-line-breaks"><span class="number">6.7</span>Hard line breaks</a></li>
 <li><a href="#soft-line-breaks"><span class="number">6.8</span>Soft line breaks</a></li>
-<li><a href="#textual-content"><span class="number">6.9</span>Textual content</a></li>
-<li><a href="#resource-inlines-markua-extension-"><span class="number">6.10</span>Resource inlines (Markua extension)</a></li>
+<li><a href="#resource-content-markua-extension-"><span class="number">6.9</span>Resource content (Markua extension)</a></li>
+<li><a href="#textual-content"><span class="number">6.10</span>Textual content</a></li>
 <li><a href="#character-substitutions-markua-extension-"><span class="number">6.11</span>Character substitutions (Markua extension)</a></li>
 <li><a href="#footnotes-and-endnotes-markua-extension-"><span class="number">6.12</span>Footnotes and endnotes (Markua extension)</a></li>
 <li><a href="#underline-markua-extension-"><span class="number">6.13</span>Underline (Markua extension)</a></li>
@@ -211,11 +211,11 @@ $(document).ready(function() {
 <li><a href="#the-lang-attribute"><span class="number">7.5</span>The lang attribute</a></li>
 <li><a href="#part-headings"><span class="number">7.6</span>Part headings</a></li>
 <li><a href="#thematic-break-semantics"><span class="number">7.7</span>Thematic break semantics</a></li>
-<li><a href="#paragraph-continuations-markua-extension-"><span class="number">7.8</span>Paragraph continuations (Markua extension)</a></li>
-<li><a href="#configurable-soft-line-breaks-m-"><span class="number">7.9</span>Configurable soft line breaks (M)</a></li>
-<li><a href="#span-attribute-lists-m-"><span class="number">7.10</span>Span attribute lists (M)</a></li>
-<li><a href="#index-entries-m-"><span class="number">7.11</span>Index entries (M)</a></li>
-<li><a href="#concatenating-files-and-blank-lines-m-"><span class="number">7.12</span>Concatenating files and blank lines (M)</a></li>
+<li><a href="#paragraph-continuations"><span class="number">7.8</span>Paragraph continuations</a></li>
+<li><a href="#configurable-soft-line-breaks"><span class="number">7.9</span>Configurable soft line breaks</a></li>
+<li><a href="#span-attribute-lists"><span class="number">7.10</span>Span attribute lists</a></li>
+<li><a href="#index-entries"><span class="number">7.11</span>Index entries</a></li>
+<li><a href="#concatenating-files-and-blank-lines"><span class="number">7.12</span>Concatenating files and blank lines</a></li>
 </ul>
 </li>
 <li><a href="#resources-markua-extension-"><span class="number">8</span>Resources (Markua extension)</a>
@@ -13289,8 +13289,35 @@ baz&lt;/p&gt;
 line ending or as a space.</p>
 <p>A renderer may also provide an option to render soft line breaks
 as hard line breaks.</p>
+<div class="extension">
+<h2 id="resource-content-markua-extension-" class="definition">
+<span class="number">6.9</span>Resource content (Markua extension)
+</h2>
+<p>Markua defines the concept of resources, as well as inlines for a number of
+resources. This syntax is based on the image syntax.</p>
+<p>There are eight types of resources:</p>
+<ol>
+<li><code>audio</code></li>
+<li><code>code</code></li>
+<li><code>iframe</code></li>
+<li><code>image</code></li>
+<li><code>math</code></li>
+<li><code>table</code></li>
+<li><code>verbatim</code></li>
+<li><code>video</code></li>
+</ol>
+<p>Each type of resource has a number of supported formats. Any of the eight
+resource types can be inserted as a local resource or web resource, and many of
+the resource types can also be inserted as an inline resource.</p>
+<p>While it would be correct to discuss them all here (since all resources are
+inlines), it is more convenient to discuss them in a top-level section (since
+resources share a number of common characteristics). So, resources are discussed
+later, after the discussion of metadata.</p>
+<p>To be clear: even though they have not been fully described yet, resources are
+not parsed as plain textual content.</p>
+</div>
 <h2 id="textual-content" class="definition">
-<span class="number">6.9</span>Textual content
+<span class="number">6.10</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>
@@ -13333,17 +13360,6 @@ be parsed as plain textual content.</p>
 <pre><code class="language-html">&lt;p&gt;Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces&lt;/p&gt;
 </code></pre>
 </div>
-</div>
-<div class="extension">
-<h2 id="resource-inlines-markua-extension-" class="definition">
-<span class="number">6.10</span>Resource inlines (Markua extension)
-</h2>
-<p>Markua defines the concept of resources, as well as inlines for a number of
-resources. This syntax is based on the image syntax.</p>
-<p>While it would be correct to discuss them all here (since all resources are
-inlines), it is more convenient to discuss them in a top-level section (since
-resources share a number of common characteristics). So, resources are discussed
-later, after the discussion of metadata.</p>
 </div>
 <div class="extension">
 <h2 id="character-substitutions-markua-extension-" class="definition">
@@ -14468,8 +14484,8 @@ semantics and about CSS.</p>
 an <code>&lt;hr /&gt;</code> is using the above thematic break syntax. So, designers can assume
 that all <code>&lt;hr /&gt;</code> elements are thematic breaks, and style them in a way
 appropriate for a scene break in fiction.</p>
-<h2 id="paragraph-continuations-markua-extension-" class="definition">
-<span class="number">7.8</span>Paragraph continuations (Markua extension)
+<h2 id="paragraph-continuations" class="definition">
+<span class="number">7.8</span>Paragraph continuations
 </h2>
 <p>In books, you can insert things like lists in the middle of paragraphs.</p>
 <p>Ideally, this would be one paragraph. However, it’s not:</p>
@@ -14625,10 +14641,9 @@ bar
 </div>
 </div>
 </div>
-<p>TODO</p>
 <div class="extension">
-<h2 id="configurable-soft-line-breaks-m-" class="definition">
-<span class="number">7.9</span>Configurable soft line breaks (M)
+<h2 id="configurable-soft-line-breaks" class="definition">
+<span class="number">7.9</span>Configurable soft line breaks
 </h2>
 <p>There is a good argument to be made that single newlines at the end of a line
 should always be treated as a hard line break, not as a soft line break.</p>
@@ -14762,8 +14777,8 @@ bar&lt;/p&gt;
 paragraph-like contexts, such as definition list items.</p>
 </div>
 <div class="extension">
-<h2 id="span-attribute-lists-m-" class="definition">
-<span class="number">7.10</span>Span attribute lists (M)
+<h2 id="span-attribute-lists" class="definition">
+<span class="number">7.10</span>Span attribute lists
 </h2>
 <p>Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -14798,8 +14813,8 @@ This<span class="space"> </span>span<span class="space"> </span>contains<span cl
 creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
 </div>
 <div class="extension">
-<h2 id="index-entries-m-" class="definition">
-<span class="number">7.11</span>Index entries (M)
+<h2 id="index-entries" class="definition">
+<span class="number">7.11</span>Index entries
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -14900,8 +14915,8 @@ as an attempt at creating a sub-entry. (This actually got me, when I tried to
 reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to write
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
 </div>
-<h2 id="concatenating-files-and-blank-lines-m-" class="definition">
-<span class="number">7.12</span>Concatenating files and blank lines (M)
+<h2 id="concatenating-files-and-blank-lines" class="definition">
+<span class="number">7.12</span>Concatenating files and blank lines
 </h2>
 <p>A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by
@@ -19100,6 +19115,7 @@ delimiter stack.
 [Emphasis and strong emphasis]: #emphasis-and-strong-emphasis
 [Hard line breaks]: #hard-line-breaks
 [Blurb classes]: #blurb-classes
+[Concatenating files and blank lines]: #concatenating-files-and-blank-lines
 [Container blockss]: #container-blocks
 [Unicode punctuation characters]: #unicode-punctuation-character
 [Tables (GFM extension)]: #tables-gfm-extension-
@@ -19112,7 +19128,6 @@ delimiter stack.
 [Paragraphs]: #paragraphs
 [inline link]: #inline-link
 [of the same types]: #of-the-same-type
-[Index entries (M)]: #index-entries-m-
 [Supported attributes on written questionss]: #supported-attributes-on-written-questions
 [of the same type]: #of-the-same-type
 [Resource Typess]: #resource-types
@@ -19120,7 +19135,6 @@ delimiter stack.
 [Conditional Inclusion Attributes on Headingss]: #conditional-inclusion-attributes-on-headings
 [Emphasis and strong emphasiss]: #emphasis-and-strong-emphasis
 [character]: #character
-[Configurable soft line breaks (M)]: #configurable-soft-line-breaks-m-
 [Footnote and endnote support is required for paragraphs only]: #footnote-and-endnote-support-is-required-for-paragraphs-only
 [link destination]: #link-destination
 [Footnote and endnote support is required for paragraphs onlys]: #footnote-and-endnote-support-is-required-for-paragraphs-only
@@ -19135,170 +19149,171 @@ delimiter stack.
 [Tabs]: #tabs
 [softbreaks]: #softbreak
 [Spans]: #spans
+[TODOs]: #todo
 [Examples of multiple selection questions]: #examples-of-multiple-selection-questions
 [Table resource formats]: #table-resource-formats
 [thematic break]: #thematic-break
 [How does Leanpub's current Markua support match the Markua Spec?]: #how-does-leanpub-s-current-markua-support-match-the-markua-spec-
-[TODOs]: #todo
+[TODO]: #todo
 [Entity and numeric character references]: #entity-and-numeric-character-references
 [Common Resource Attributes]: #common-resource-attributes
-[TODO]: #todo
 [Question alternatess]: #question-alternates
-[What is Markua? (Markua extension)]: #what-is-markua-markua-extension-
 [Question alternates]: #question-alternates
+[What is Markua? (Markua extension)]: #what-is-markua-markua-extension-
+[Hints on questionss]: #hints-on-questions
 [Directives]: #directives
 [Audio resource formats]: #audio-resource-formats
 [Resource Attribute Listss]: #resource-attribute-lists
 [The magical typewriter]: #the-magical-typewriter
 [indented code block]: #indented-code-block
-[Hints on questionss]: #hints-on-questions
+[Hints on questions]: #hints-on-questions
 [Supported Attributes for Codes]: #supported-attributes-for-code
 [Inline Code Resources]: #inline-code-resources
 [Preliminaries]: #preliminaries
-[Configurable soft line breaks (M)s]: #configurable-soft-line-breaks-m-
-[Attribute Lists]: #attribute-lists
-[Hints on questions]: #hints-on-questions
 [Supported attributes on written questions]: #supported-attributes-on-written-questions
-[Thematic breakss]: #thematic-breaks
-[inline]: #inline
+[Attribute Lists]: #attribute-lists
 [blocks]: #blocks
 [Written questions]: #written-questions
+[Thematic breakss]: #thematic-breaks
+[inline]: #inline
+[Supported Attributes for Lists]: #supported-attributes-for-lists
+[Common Resource Attributess]: #common-resource-attributes
 [tabs]: #tab
-[Lists with Attributes: Good Styles]: #lists-with-attributes-good-style
+[Metadata (Markua extension)s]: #metadata-markua-extension-
 [Local Code Resourcess]: #local-code-resources
-[Figures]: #figures
+[Fill in the blank questions]: #fill-in-the-blank-questions
 [The magical typewriters]: #the-magical-typewriter
-[Attribute List Formats]: #attribute-list-format
+[Examples of multiple selection questionss]: #examples-of-multiple-selection-questions
 [Extension attributess]: #extension-attributes
 [About the HTML output]: #about-the-html-output
 [Backslash escapess]: #backslash-escapes
 [Blank liness]: #blank-lines
-[Fill in the blank questions]: #fill-in-the-blank-questions
+[Supported attributes on multiple selection questionss]: #supported-attributes-on-multiple-selection-questions
 [Lists with Attributes: Bad Style]: #lists-with-attributes-bad-style
 [fenced code blocks]: #fenced-code-block
 [What is this document?]: #what-is-this-document-
-[Examples of multiple selection questionss]: #examples-of-multiple-selection-questions
-[Supported attributes on multiple selection questionss]: #supported-attributes-on-multiple-selection-questions
 [Supported attributes on multiple selection questions]: #supported-attributes-on-multiple-selection-questions
+[Multiple selection questionss]: #multiple-selection-questions
+[Multiple selection questions]: #multiple-selection-questions
 [paragraph]: #paragraph
 [Figuress]: #figures
 [How to write a novel in Markua]: #how-to-write-a-novel-in-markua
-[Multiple selection questionss]: #multiple-selection-questions
+[Supported attributes on multiple choice questionss]: #supported-attributes-on-multiple-choice-questions
 [can open emphasis]: #can-open-emphasis
 [Paragraph continuation text]: #paragraph-continuation-text
-[Multiple selection questions]: #multiple-selection-questions
-[Supported attributes on multiple choice questionss]: #supported-attributes-on-multiple-choice-questions
+[URI autolinks]: #uri-autolink
+[Multiple choice questionss]: #multiple-choice-questions
 [tables]: #table
 [Incorrect usage]: #incorrect-usage
 [Container blocks]: #container-blocks
-[Video resource formats]: #video-resource-formats
+[Nested Lists with Attributess]: #nested-lists-with-attributes
 [code fence]: #code-fence
 [Default Value of the  attribute in Inline Code Samples]: #default-value-of-the-attribute-in-inline-code-samples
-[Multiple choice questionss]: #multiple-choice-questions
+[Quiz and exercise attributess]: #quiz-and-exercise-attributes
 [class Attributes]: #class-attributes
 [id Attributes]: #id-attributes
-[Lists with Attributes: Redundant Style]: #lists-with-attributes-redundant-style
-[Quiz and exercise attributess]: #quiz-and-exercise-attributes
+[Quiz and exercise attributes]: #quiz-and-exercise-attributes
+[Document settings]: #document-settings
 [Fenced code blockss]: #fenced-code-blocks
 [What is Leanpub Flavoured Markdown (LFM)?]: #what-is-leanpub-flavoured-markdown-lfm-
-[Quiz and exercise attributes]: #quiz-and-exercise-attributes
-[Settings which apply to books and courses]: #settings-which-apply-to-books-and-courses
-[CSV-format Table resources]: #csv-format-table-resources
 [A malformed quiz or exercise is an error]: #a-malformed-quiz-or-exercise-is-an-error
 [An empty quiz or exercise is not an errors]: #an-empty-quiz-or-exercise-is-not-an-error
+[CSV-format Table resources]: #csv-format-table-resources
 [An empty quiz or exercise is not an error]: #an-empty-quiz-or-exercise-is-not-an-error
-[Fenced code blocks]: #fenced-code-blocks
-[The pagebreak directives]: #the-pagebreak-directive
+[The pagebreak directive]: #the-pagebreak-directive
 [Quiz and exercise validation]: #quiz-and-exercise-validation
+[Fenced code blocks]: #fenced-code-blocks
 [Quiz and exercise outputs]: #quiz-and-exercise-output
+[Quiz and exercise output]: #quiz-and-exercise-output
+[Resource Attribute Lists]: #resource-attribute-lists
 [Autolinks]: #autolinks
 [Attribute List Format]: #attribute-list-format
-[Quiz and exercise output]: #quiz-and-exercise-output
-[Why is a spec needed?s]: #why-is-a-spec-needed-
-[Resource insertion methodss]: #resource-insertion-methods
 [Quizzes and exercises (Markua extension)]: #quizzes-and-exercises-markua-extension-
+[Why is a spec needed?s]: #why-is-a-spec-needed-
+[Lists with Attributes: Bad Styles]: #lists-with-attributes-bad-style
+[Lists with Attributes: Redundant Styles]: #lists-with-attributes-redundant-style
 [right-flanking delimiter runs]: #right-flanking-delimiter-run
 [delimiter rows]: #delimiter-row
 [Lists with Attributes: Lazy Style]: #lists-with-attributes-lazy-style
 [Unicode whitespace]: #unicode-whitespace
 [email autolink]: #email-autolink
-[Lists with Attributes: Bad Styles]: #lists-with-attributes-bad-style
+[Lists with Attributes: Redundant Style]: #lists-with-attributes-redundant-style
 [link labels]: #link-label
 [reference link]: #reference-link
 [Block quotes with curly braces (Markua extension)s]: #block-quotes-with-curly-braces-markua-extension-
 [Inline Markua resources]: #inline-markua-resources
 [Code spanss]: #code-spans
-[Lists with Attributes: Redundant Styles]: #lists-with-attributes-redundant-style
+[Lists with Attributes: Lazy Styles]: #lists-with-attributes-lazy-style
 [Markua: Markdown for books and coursess]: #markua-markdown-for-books-and-courses
 [Markua Resources]: #markua-resources
 [Multiple choice questions]: #multiple-choice-questions
 [What is Markua? (Markua extension)s]: #what-is-markua-markua-extension-
-[Lists with Attributes: Lazy Styles]: #lists-with-attributes-lazy-style
-[info strings]: #info-string
-[Nested Lists with Attributess]: #nested-lists-with-attributes
 [Nested Lists with Attributes]: #nested-lists-with-attributes
+[info strings]: #info-string
+[Lists with Attributes: Good Styles]: #lists-with-attributes-good-style
+[Supported Attributes for Listss]: #supported-attributes-for-lists
 [Verbatim Resources]: #verbatim-resources
 [Correct usage]: #correct-usage
 [Imagess]: #images
 [can open emphasiss]: #can-open-emphasis
 [Supported attributes on fill in the blank questionss]: #supported-attributes-on-fill-in-the-blank-questions
 [line]: #line
-[Supported Attributes for Listss]: #supported-attributes-for-lists
-[Supported Attributes for Lists]: #supported-attributes-for-lists
-[Setext headings]: #setext-headings
 [List attributes (Markua extension)s]: #list-attributes-markua-extension-
 [List attributes (Markua extension)]: #list-attributes-markua-extension-
+[Setext headings]: #setext-headings
+[Block quotes with curly braces (Markua extension)]: #block-quotes-with-curly-braces-markua-extension-
+[Markua Resourcess]: #markua-resources
 [Attribute Valuess]: #attribute-values
 [Blocks and inliness]: #blocks-and-inlines
 [Entity and numeric character referencess]: #entity-and-numeric-character-references
-[Block quotes with curly braces (Markua extension)]: #block-quotes-with-curly-braces-markua-extension-
-[Local Markua resourcess]: #local-markua-resources
-[ASCII control character]: #ascii-control-character
 [Table resourcess]: #table-resources
+[Table resources]: #table-resources
+[ASCII control character]: #ascii-control-character
+[But what if I want every character taken literally?s]: #but-what-if-i-want-every-character-taken-literally-
 [Figure titles]: #figure-titles
 [Links]: #links
 [Resource formats]: #resource-formats
-[Table resources]: #table-resources
-[Endnotes]: #endnotes
-[But what if I want every character taken literally?s]: #but-what-if-i-want-every-character-taken-literally-
 [But what if I want every character taken literally?]: #but-what-if-i-want-every-character-taken-literally-
+[Endnotes]: #endnotes
 [Inline Markua resourcess]: #inline-markua-resources
+[Span attribute lists can be used to set the formats]: #span-attribute-lists-can-be-used-to-set-the-format
+[Web Markua resources]: #web-markua-resources
 [Markua: Markdown for books and courses]: #markua-markdown-for-books-and-courses
-[Single reference to footnotes and endnotess]: #single-reference-to-footnotes-and-endnotes
+[Local Markua resourcess]: #local-markua-resources
 [tab]: #tab
 [lines]: #line
-[Web Markua resources]: #web-markua-resources
+[Local Markua resources]: #local-markua-resources
 [CSV-format Table resourcess]: #csv-format-table-resources
 [bullet list]: #bullet-list
-[Paragraph continuations (Markua extension)]: #paragraph-continuations-markua-extension-
-[Local Markua resources]: #local-markua-resources
-[tight]: #tight
-[Markua Resourcess]: #markua-resources
 [Line Wrapping in Code Resourcess]: #line-wrapping-in-code-resources
+[Line Wrapping in Code Resources]: #line-wrapping-in-code-resources
+[tight]: #tight
+[Marking Code as Added or Deleteds]: #marking-code-as-added-or-deleted
+[Marking Code as Added or Deleted]: #marking-code-as-added-or-deleted
 [left-flanking delimiter run]: #left-flanking-delimiter-run
 [Resources (Markua extension)]: #resources-markua-extension-
 [setext headings]: #setext-heading
-[Line Wrapping in Code Resources]: #line-wrapping-in-code-resources
-[Marking Code as Added or Deleteds]: #marking-code-as-added-or-deleted
-[No Raw HTML (Markua extension)]: #no-raw-html-markua-extension-
-[Marking Code as Added or Deleted]: #marking-code-as-added-or-deleted
-[The mainmatter and backmatter directivess]: #the-mainmatter-and-backmatter-directives
-[ASCII control characters]: #ascii-control-character
 [Attribute Lists on Code Spanss]: #attribute-lists-on-code-spans
 [Attribute Lists on Code Spans]: #attribute-lists-on-code-spans
+[No Raw HTML (Markua extension)]: #no-raw-html-markua-extension-
+[Attribute Lists and Format Specifiers on Fenced Code Blocks]: #attribute-lists-and-format-specifiers-on-fenced-code-blocks
+[The mainmatter and backmatter directivess]: #the-mainmatter-and-backmatter-directives
+[ASCII control characters]: #ascii-control-character
+[principle of uniformitys]: #principle-of-uniformity
+[can open strong emphasiss]: #can-open-strong-emphasis
 [link title]: #link-title
 [No Attribute Lists or Format Specifiers on Indented Code Blockss]: #no-attribute-lists-or-format-specifiers-on-indented-code-blocks
-[Attribute Lists and Format Specifiers on Fenced Code Blocks]: #attribute-lists-and-format-specifiers-on-fenced-code-blocks
-[can open strong emphasiss]: #can-open-strong-emphasis
-[principle of uniformitys]: #principle-of-uniformity
+[Configurable soft line breaks]: #configurable-soft-line-breaks
+[Document settingss]: #document-settings
+[Web Code Resources]: #web-code-resources
 [Structure of this documents]: #structure-of-this-document
 [Paragraph continuation texts]: #paragraph-continuation-text
 [Blocks and inlines]: #blocks-and-inlines
-[Settings which apply to books and coursess]: #settings-which-apply-to-books-and-courses
+[Local Code Resources]: #local-code-resources
 [link label]: #link-label
 [setext heading underlines]: #setext-heading-underline
-[Web Code Resources]: #web-code-resources
-[Local Code Resources]: #local-code-resources
+[CSS Note]: #css-note
+[For Leanpub authors]: #for-leanpub-authors
 [Resources (Markua extension)s]: #resources-markua-extension-
 [line endings]: #line-ending
 [block quote markers]: #block-quote-marker
@@ -19308,161 +19323,161 @@ delimiter stack.
 [tights]: #tight
 [Figure titles and alt text togethers]: #figure-titles-and-alt-text-together
 [No HTML Blocks (Markua extension)s]: #no-html-blocks-markua-extension-
-[The lang attribute]: #the-lang-attribute
-[Linkss]: #links
-[For Leanpub authors]: #for-leanpub-authors
-[setext heading underline]: #setext-heading-underline
 [Characters and lines]: #characters-and-lines
-[Textual contents]: #textual-content
+[Linkss]: #links
 [Code resources]: #code-resources
+[setext heading underline]: #setext-heading-underline
 [Code resource formatss]: #code-resource-formats
-[left-flanking delimiter runs]: #left-flanking-delimiter-run
+[Textual contents]: #textual-content
 [Link reference definitionss]: #link-reference-definitions
+[matchess]: #matches
+[left-flanking delimiter runs]: #left-flanking-delimiter-run
+[Video resource formats]: #video-resource-formats
 [Part headings]: #part-headings
-[URI autolinks]: #uri-autolink
+[Markua resource formats]: #markua-resource-formats
 [thematic breaks]: #thematic-break
 [Supported attributes on multiple choice questions]: #supported-attributes-on-multiple-choice-questions
 [Indented code blocks]: #indented-code-blocks
 [How to write almost any book in Markua]: #how-to-write-almost-any-book-in-markua
-[Markua resource formats]: #markua-resource-formats
+[Math resource formatss]: #math-resource-formats
 [Video resource formatss]: #video-resource-formats
 [Tables (GFM extension)s]: #tables-gfm-extension-
-[Math resource formatss]: #math-resource-formats
-[Optional Automatic Curly Quotes Outside of Code Blocks and Spans]: #optional-automatic-curly-quotes-outside-of-code-blocks-and-spans
-[The insertion directives (dedication, toc, etc.)s]: #the-insertion-directives-dedication-toc-etc-
 [Image resource formatss]: #image-resource-formats
+[Optional Automatic Curly Quotes Outside of Code Blocks and Spans]: #optional-automatic-curly-quotes-outside-of-code-blocks-and-spans
 [Image resource formats]: #image-resource-formats
+[backtick string]: #backtick-string
+[Resource formatss]: #resource-formats
 [Web Markua resourcess]: #web-markua-resources
 [Resource Types]: #resource-types
 [Blurb icons with extension attributes]: #blurb-icons-with-extension-attributes
-[Resource formatss]: #resource-formats
-[inline links]: #inline-link
-[Span attribute lists can be used to set the formats]: #span-attribute-lists-can-be-used-to-set-the-format
-[loose]: #loose
 [start numbers]: #start-number
+[inline links]: #inline-link
 [Spanss]: #spans
-[Paragraphss]: #paragraphs
+[loose]: #loose
 [The figure attribute list takes precedences]: #the-figure-attribute-list-takes-precedence
 [The figure attribute list takes precedence]: #the-figure-attribute-list-takes-precedence
+[Paragraphss]: #paragraphs
+[matches]: #matches
+[Figure alt texts]: #figure-alt-text
 [fenced code block]: #fenced-code-block
 [Inline resourcess]: #inline-resources
 [blank line]: #blank-line
-[matches]: #matches
-[Figure alt texts]: #figure-alt-text
 [Figure alt text]: #figure-alt-text
+[Figure titless]: #figure-titles
+[Figure attributess]: #figure-attributes
 [Using blurbs to center text]: #using-blurbs-to-center-text
 [No HTML Blocks (Markua extension)]: #no-html-blocks-markua-extension-
 [link text]: #link-text
 [GitHub Flavored Markdown (GFM) extension status]: #github-flavored-markdown-gfm-extension-status
-[Figure titless]: #figure-titles
+[Figure attributes]: #figure-attributes
 [delimiter runs]: #delimiter-run
 [Hexadecimal numeric character references]: #hexadecimal-numeric-character-references
-[Figure attributess]: #figure-attributes
-[Figure attributes]: #figure-attributes
+[Figures]: #figures
+[Resource insertion methodss]: #resource-insertion-methods
 [Supported attributes on fill in the blank questions]: #supported-attributes-on-fill-in-the-blank-questions
 [Quizzes and exercises (Markua extension)s]: #quizzes-and-exercises-markua-extension-
-[Span attribute lists (M)]: #span-attribute-lists-m-
-[Common Resource Attributess]: #common-resource-attributes
+[Verbatim Resourcess]: #verbatim-resources
+[code span]: #code-span
 [can close strong emphasis]: #can-close-strong-emphasis
 [code fences]: #code-fence
 [Precedences]: #precedence
-[Resource Attribute Lists]: #resource-attribute-lists
-[Link reference definitions]: #link-reference-definitions
-[Verbatim Resourcess]: #verbatim-resources
-[Inline resources]: #inline-resources
-[ordered list marker]: #ordered-list-marker
 [Web resourcess]: #web-resources
-[table]: #table
+[Link reference definitions]: #link-reference-definitions
 [Web resources]: #web-resources
 [Local resourcess]: #local-resources
+[ordered list marker]: #ordered-list-marker
 [Local resources]: #local-resources
-[Resource Formats]: #resource-formats
+[table]: #table
+[resources]: #resources
 [Resource Locations]: #resource-locations
-[delimiter row]: #delimiter-row
+[Paragraph continuations]: #paragraph-continuations
 [Resource Classes]: #resource-classes
 [list marker]: #list-marker
+[delimiter row]: #delimiter-row
+[Resource Formats]: #resource-formats
+[resourcess]: #resources
 [looses]: #loose
 [Resource Locationss]: #resource-locations
-[Resource inlines (Markua extension)]: #resource-inlines-markua-extension-
-[resourcess]: #resources
+[Concatenating files and blank liness]: #concatenating-files-and-blank-lines
+[Index entriess]: #index-entries
 [shortcut reference link]: #shortcut-reference-link
 [ordered lists]: #ordered-list
 [reference links]: #reference-link
-[resources]: #resources
-[Decimal numeric character referencess]: #decimal-numeric-character-references
-[Concatenating files and blank lines (M)]: #concatenating-files-and-blank-lines-m-
-[Index entries (M)s]: #index-entries-m-
-[Span attribute lists (M)s]: #span-attribute-lists-m-
-[code span]: #code-span
+[Index entries]: #index-entries
+[Span attribute listss]: #span-attribute-lists
+[Configurable soft line breakss]: #configurable-soft-line-breaks
+[Span attribute lists]: #span-attribute-lists
+[Paragraph continuationss]: #paragraph-continuations
+[The insertion directives (dedication, toc, etc.)s]: #the-insertion-directives-dedication-toc-etc-
 [Default Value of the  attribute in Inline Code Sampless]: #default-value-of-the-attribute-in-inline-code-samples
-[CSS Note]: #css-note
+[Thematic break semanticss]: #thematic-break-semantics
 [info string]: #info-string
 [Syntactic sugar for blurb classes]: #syntactic-sugar-for-blurb-classes
-[Thematic break semanticss]: #thematic-break-semantics
 [Thematic break semantics]: #thematic-break-semantics
 [Differences between LFM and Markua]: #differences-between-lfm-and-markua
 [Correct usages]: #correct-usage
+[Part headingss]: #part-headings
 [List itemss]: #list-items
 [can close strong emphasiss]: #can-close-strong-emphasis
-[Part headingss]: #part-headings
+[The lang attributes]: #the-lang-attribute
 [Setext headingss]: #setext-headings
 [bullet lists]: #bullet-list
-[The lang attributes]: #the-lang-attribute
+[The lang attribute]: #the-lang-attribute
 [How does Leanpub's current Markua support match the Markua Spec?s]: #how-does-leanpub-s-current-markua-support-match-the-markua-spec-
 [Endnotess]: #endnotes
 [CSS Notes]: #css-note
 [Insecure characters]: #insecure-characters
 [Math resource formats]: #math-resource-formats
-[Footnotes and endnotes (Markua extension)]: #footnotes-and-endnotes-markua-extension-
 [The mainmatter and backmatter directives]: #the-mainmatter-and-backmatter-directives
+[The pagebreak directives]: #the-pagebreak-directive
 [title Attributess]: #title-attributes
 [Thematic breaks]: #thematic-breaks
 [Quiz and exercise validations]: #quiz-and-exercise-validation
 [indented code blocks]: #indented-code-block
 [Leaf blockss]: #leaf-blocks
 [Backslash escapes]: #backslash-escapes
-[The pagebreak directive]: #the-pagebreak-directive
 [Directivess]: #directives
-[What is Markdown?s]: #what-is-markdown-
 [link reference definition]: #link-reference-definition
+[What is Markdown?s]: #what-is-markdown-
 [Settings which apply to courses only]: #settings-which-apply-to-courses-only
+[Settings which apply to books and coursess]: #settings-which-apply-to-books-and-courses
 [Underline (Markua extension)]: #underline-markua-extension-
 [blank lines]: #blank-line
 [collapsed reference links]: #collapsed-reference-link
-[Resource inlines (Markua extension)s]: #resource-inlines-markua-extension-
+[Settings which apply to books and courses]: #settings-which-apply-to-books-and-courses
 [principle of uniformity]: #principle-of-uniformity
 [Web Code Resourcess]: #web-code-resources
 [A malformed quiz or exercise is an errors]: #a-malformed-quiz-or-exercise-is-an-error
-[Document settingss]: #document-settings
-[Document settings]: #document-settings
-[start number]: #start-number
 [Extension attributes]: #extension-attributes
-[space]: #space
 [class Attributess]: #class-attributes
-[What is this document?s]: #what-is-this-document-
+[start number]: #start-number
 [title Attributes]: #title-attributes
+[space]: #space
 [id Attributess]: #id-attributes
+[What is this document?s]: #what-is-this-document-
 [Attribute Values]: #attribute-values
-[What is Leanpub Flavoured Markdown (LFM)?s]: #what-is-leanpub-flavoured-markdown-lfm-
-[No Raw HTML (Markua extension)s]: #no-raw-html-markua-extension-
 [Attribute Keyss]: #attribute-keys
 [Attribute Keys]: #attribute-keys
+[What is Leanpub Flavoured Markdown (LFM)?s]: #what-is-leanpub-flavoured-markdown-lfm-
+[No Raw HTML (Markua extension)s]: #no-raw-html-markua-extension-
+[Attribute List Formats]: #attribute-list-format
+[Attribute Listss]: #attribute-lists
 [Asides (Markua extension)s]: #asides-markua-extension-
 [Fill in the blank questionss]: #fill-in-the-blank-questions
-[Attribute Listss]: #attribute-lists
-[Metadata (Markua extension)s]: #metadata-markua-extension-
-[Audio resource formatss]: #audio-resource-formats
+[Single reference to footnotes and endnotess]: #single-reference-to-footnotes-and-endnotes
 [Footnotess]: #footnotes
-[scheme]: #scheme
-[backtick string]: #backtick-string
+[Audio resource formatss]: #audio-resource-formats
 [Footnotes and endnotes (Markua extension)s]: #footnotes-and-endnotes-markua-extension-
-[The insertion directives (dedication, toc, etc.)]: #the-insertion-directives-dedication-toc-etc-
+[scheme]: #scheme
+[Footnotes and endnotes (Markua extension)]: #footnotes-and-endnotes-markua-extension-
 [Optional Automatic Curly Quotes Outside of Code Blocks and Spanss]: #optional-automatic-curly-quotes-outside-of-code-blocks-and-spans
-[matchess]: #matches
-[Definition lists (Markua extension)]: #definition-lists-markua-extension-
+[The insertion directives (dedication, toc, etc.)]: #the-insertion-directives-dedication-toc-etc-
 [Character substitutions (Markua extension)]: #character-substitutions-markua-extension-
-[Definition lists (Markua extension)s]: #definition-lists-markua-extension-
 [Textual content]: #textual-content
+[Definition lists (Markua extension)]: #definition-lists-markua-extension-
+[Resource content (Markua extension)s]: #resource-content-markua-extension-
+[Definition lists (Markua extension)s]: #definition-lists-markua-extension-
+[Decimal numeric character referencess]: #decimal-numeric-character-references
 [link reference definitions]: #link-reference-definition
 [What is Markdown?]: #what-is-markdown-
 [Hard line breakss]: #hard-line-breaks
@@ -19491,7 +19506,7 @@ delimiter stack.
 [email autolinks]: #email-autolink
 [Inline Code Resourcess]: #inline-code-resources
 [Incorrect usages]: #incorrect-usage
-[Paragraph continuations (Markua extension)s]: #paragraph-continuations-markua-extension-
+[Inline resources]: #inline-resources
 [Emoji (Markua extension)s]: #emoji-markua-extension-
 [Entity references]: #entity-references
 [How to write a novel in Markuas]: #how-to-write-a-novel-in-markua
@@ -19510,7 +19525,7 @@ delimiter stack.
 [About this documents]: #about-this-document
 [delimiter run]: #delimiter-run
 [For Leanpub authorss]: #for-leanpub-authors
-[Concatenating files and blank lines (M)s]: #concatenating-files-and-blank-lines-m-
+[Resource content (Markua extension)]: #resource-content-markua-extension-
 [Unicode whitespace characters]: #unicode-whitespace-character
 [Blurb classess]: #blurb-classes
 [collapsed reference link]: #collapsed-reference-link

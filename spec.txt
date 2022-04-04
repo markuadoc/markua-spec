@@ -9960,6 +9960,46 @@ line ending or as a space.
 A renderer may also provide an option to render soft line breaks
 as hard line breaks.
 
+
+
+<div class="extension">
+
+## Resource content (Markua extension)
+
+Markua defines the concept of resources, as well as inlines for a number of
+resources. This syntax is based on the image syntax.
+
+There are eight types of resources:
+
+1. `audio`
+2. `code`
+3. `iframe`
+4. `image`
+5. `math`
+6. `table`
+7. `verbatim`
+8. `video`
+
+The `code`, `image` and `table resource types are an extension of what is
+already supported in Markdown; the `audio`, `iframe`, `math`, `verbatim` and
+`video` resource types are new.
+
+Either way, each `type` of resource has a number of supported `format`s. Any of
+the eight resource types can be inserted as a local resource or web resource,
+and many of the resource types can also be inserted as an inline resource.
+
+While it would be correct to discuss them all here (since all resources are
+inlines), it is more convenient to discuss them in a top-level section (since
+resources share a number of common characteristics). So, resources are discussed
+later, after the discussion of metadata.
+
+To be clear: even though they have not been fully described yet, resources are
+not parsed as plain textual content.
+
+</div>
+
+
+
 ## Textual content
 
 Any characters not given an interpretation by the above rules will
@@ -9986,21 +10026,6 @@ Multiple     spaces
 .
 <p>Multiple     spaces</p>
 ````````````````````````````````
-
-
-<div class="extension">
-
-## Resource inlines (Markua extension)
-
-Markua defines the concept of resources, as well as inlines for a number of
-resources. This syntax is based on the image syntax.
-
-While it would be correct to discuss them all here (since all resources are
-inlines), it is more convenient to discuss them in a top-level section (since
-resources share a number of common characteristics). So, resources are discussed
-later, after the discussion of metadata.
-
-</div>
 
 
 

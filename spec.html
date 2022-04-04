@@ -139,18 +139,19 @@ $(document).ready(function() {
 <ul>
 <li><a href="#introduction"><span class="number">1</span>Introduction</a>
 <ul>
-<li><a href="#markua-markdown-for-books-and-courses-markua-extension-"><span class="number">1.1</span>Markua: Markdown for books and courses (Markua extension)</a></li>
-<li><a href="#markua-s-five-key-additions-to-markdown"><span class="number">1.2</span>Markua’s five key additions to Markdown</a></li>
-<li><a href="#markua-s-one-key-subtraction-no-raw-html"><span class="number">1.3</span>Markua’s one key subtraction: no raw HTML</a></li>
-<li><a href="#how-to-write-a-novel-in-markua"><span class="number">1.4</span>How to write a novel in Markua</a></li>
-<li><a href="#how-to-write-almost-any-book-in-markua"><span class="number">1.5</span>How to write almost any book in Markua</a></li>
-<li><a href="#for-leanpub-authors"><span class="number">1.6</span>For Leanpub authors</a></li>
-<li><a href="#origin-and-structure-of-this-document"><span class="number">1.7</span>Origin and structure of this document</a></li>
-<li><a href="#about-the-html-output"><span class="number">1.8</span>About the HTML output</a></li>
-<li><a href="#why-the-name-markua-"><span class="number">1.9</span>Why the name “Markua”?</a></li>
-<li><a href="#what-is-markdown-"><span class="number">1.10</span>What is Markdown?</a></li>
-<li><a href="#why-is-a-spec-needed-"><span class="number">1.11</span>Why is a spec needed?</a></li>
-<li><a href="#about-this-document"><span class="number">1.12</span>About this document</a></li>
+<li><a href="#the-magical-typewriter-m-"><span class="number">1.1</span>The magical typewriter (M)</a></li>
+<li><a href="#markua-markdown-for-books-and-courses-m-"><span class="number">1.2</span>Markua: Markdown for books and courses (M)</a></li>
+<li><a href="#markua-s-five-key-additions-to-markdown-m-"><span class="number">1.3</span>Markua’s five key additions to Markdown (M)</a></li>
+<li><a href="#markua-s-one-key-subtraction-no-raw-html"><span class="number">1.4</span>Markua’s one key subtraction: no raw HTML</a></li>
+<li><a href="#how-to-write-a-novel-in-markua"><span class="number">1.5</span>How to write a novel in Markua</a></li>
+<li><a href="#how-to-write-almost-any-book-in-markua"><span class="number">1.6</span>How to write almost any book in Markua</a></li>
+<li><a href="#for-leanpub-authors"><span class="number">1.7</span>For Leanpub authors</a></li>
+<li><a href="#origin-and-structure-of-this-document"><span class="number">1.8</span>Origin and structure of this document</a></li>
+<li><a href="#about-the-html-output"><span class="number">1.9</span>About the HTML output</a></li>
+<li><a href="#why-the-name-markua-"><span class="number">1.10</span>Why the name “Markua”?</a></li>
+<li><a href="#what-is-markdown-"><span class="number">1.11</span>What is Markdown?</a></li>
+<li><a href="#why-is-a-spec-needed-"><span class="number">1.12</span>Why is a spec needed?</a></li>
+<li><a href="#about-this-document"><span class="number">1.13</span>About this document</a></li>
 </ul>
 </li>
 <li><a href="#preliminaries"><span class="number">2</span>Preliminaries</a>
@@ -160,10 +161,10 @@ $(document).ready(function() {
 <li><a href="#insecure-characters"><span class="number">2.3</span>Insecure characters</a></li>
 <li><a href="#backslash-escapes"><span class="number">2.4</span>Backslash escapes</a></li>
 <li><a href="#entity-and-numeric-character-references"><span class="number">2.5</span>Entity and numeric character references</a></li>
-<li><a href="#emoji-markua-extension-"><span class="number">2.6</span>Emoji (Markua extension)</a></li>
+<li><a href="#emoji-m-"><span class="number">2.6</span>Emoji (M)</a></li>
 </ul>
 </li>
-<li><a href="#document-semantics-markua-extension-"><span class="number">3</span>Document semantics (Markua extension)</a>
+<li><a href="#document-semantics-m-"><span class="number">3</span>Document semantics (M)</a>
 <ul>
 <li><a href="#how-headers-define-document-structure"><span class="number">3.1</span>How headers define document structure</a></li>
 <li><a href="#attribute-lists"><span class="number">3.2</span>Attribute lists</a></li>
@@ -188,11 +189,11 @@ $(document).ready(function() {
 <li><a href="#setext-headings"><span class="number">5.3</span>Setext headings</a></li>
 <li><a href="#indented-code-blocks"><span class="number">5.4</span>Indented code blocks</a></li>
 <li><a href="#fenced-code-blocks"><span class="number">5.5</span>Fenced code blocks</a></li>
-<li><a href="#no-html-blocks-markua-extension-"><span class="number">5.6</span>No HTML blocks (Markua extension)</a></li>
+<li><a href="#no-html-blocks-m-"><span class="number">5.6</span>No HTML blocks (M)</a></li>
 <li><a href="#link-reference-definitions"><span class="number">5.7</span>Link reference definitions</a></li>
 <li><a href="#paragraphs"><span class="number">5.8</span>Paragraphs</a></li>
 <li><a href="#blank-lines"><span class="number">5.9</span>Blank lines</a></li>
-<li><a href="#tables-gfm-extension-"><span class="number">5.10</span>Tables (GFM extension)</a></li>
+<li><a href="#tables-gfm-"><span class="number">5.10</span>Tables (GFM)</a></li>
 </ul>
 </li>
 <li><a href="#container-blocks"><span class="number">6</span>Container blocks</a>
@@ -200,9 +201,9 @@ $(document).ready(function() {
 <li><a href="#block-quotes"><span class="number">6.1</span>Block quotes</a></li>
 <li><a href="#list-items"><span class="number">6.2</span>List items</a></li>
 <li><a href="#lists"><span class="number">6.3</span>Lists</a></li>
-<li><a href="#definition-lists-markua-extension-"><span class="number">6.4</span>Definition lists (Markua extension)</a></li>
-<li><a href="#asides-markua-extension-"><span class="number">6.5</span>Asides (Markua extension)</a></li>
-<li><a href="#blurbs-markua-extension-"><span class="number">6.6</span>Blurbs (Markua extension)</a></li>
+<li><a href="#definition-lists-m-"><span class="number">6.4</span>Definition lists (M)</a></li>
+<li><a href="#asides-m-"><span class="number">6.5</span>Asides (M)</a></li>
+<li><a href="#blurbs-m-"><span class="number">6.6</span>Blurbs (M)</a></li>
 </ul>
 </li>
 <li><a href="#inlines"><span class="number">7</span>Inlines</a>
@@ -212,17 +213,17 @@ $(document).ready(function() {
 <li><a href="#links"><span class="number">7.3</span>Links</a></li>
 <li><a href="#images"><span class="number">7.4</span>Images</a></li>
 <li><a href="#autolinks"><span class="number">7.5</span>Autolinks</a></li>
-<li><a href="#no-raw-html-markua-extension-"><span class="number">7.6</span>No raw HTML (Markua extension)</a></li>
+<li><a href="#no-raw-html-m-"><span class="number">7.6</span>No raw HTML (M)</a></li>
 <li><a href="#hard-line-breaks"><span class="number">7.7</span>Hard line breaks</a></li>
 <li><a href="#soft-line-breaks"><span class="number">7.8</span>Soft line breaks</a></li>
-<li><a href="#resource-content-markua-extension-"><span class="number">7.9</span>Resource content (Markua extension)</a></li>
-<li><a href="#character-substitutions-markua-extension-"><span class="number">7.10</span>Character substitutions (Markua extension)</a></li>
-<li><a href="#footnotes-and-endnotes-markua-extension-"><span class="number">7.11</span>Footnotes and endnotes (Markua extension)</a></li>
-<li><a href="#underline-markua-extension-"><span class="number">7.12</span>Underline (Markua extension)</a></li>
-<li><a href="#index-entries-markua-extension-"><span class="number">7.13</span>Index entries (Markua extension)</a></li>
+<li><a href="#resource-content-m-"><span class="number">7.9</span>Resource content (M)</a></li>
+<li><a href="#character-substitutions-m-"><span class="number">7.10</span>Character substitutions (M)</a></li>
+<li><a href="#footnotes-and-endnotes-m-"><span class="number">7.11</span>Footnotes and endnotes (M)</a></li>
+<li><a href="#underline-m-"><span class="number">7.12</span>Underline (M)</a></li>
+<li><a href="#index-entries-m-"><span class="number">7.13</span>Index entries (M)</a></li>
 </ul>
 </li>
-<li><a href="#resources-markua-extension-"><span class="number">8</span>Resources (Markua extension)</a>
+<li><a href="#resources-m-"><span class="number">8</span>Resources (M)</a>
 <ul>
 <li><a href="#resource-types"><span class="number">8.1</span>Resource Types</a></li>
 <li><a href="#resource-formats"><span class="number">8.2</span>Resource Formats</a></li>
@@ -235,11 +236,11 @@ $(document).ready(function() {
 <li><a href="#markua-resources"><span class="number">8.9</span>Markua Resources</a></li>
 <li><a href="#table-resources"><span class="number">8.10</span>Table resources</a></li>
 <li><a href="#csv-format-table-resources"><span class="number">8.11</span>CSV-format Table resources</a></li>
-<li><a href="#block-quotes-with-curly-braces-markua-extension-"><span class="number">8.12</span>Block quotes with curly braces (Markua extension)</a></li>
-<li><a href="#list-attributes-markua-extension-"><span class="number">8.13</span>List attributes (Markua extension)</a></li>
+<li><a href="#block-quotes-with-curly-braces-m-"><span class="number">8.12</span>Block quotes with curly braces (M)</a></li>
+<li><a href="#list-attributes-m-"><span class="number">8.13</span>List attributes (M)</a></li>
 </ul>
 </li>
-<li><a href="#quizzes-and-exercises-markua-extension-"><span class="number">9</span>Quizzes and exercises (Markua extension)</a>
+<li><a href="#quizzes-and-exercises-m-"><span class="number">9</span>Quizzes and exercises (M)</a>
 <ul>
 <li><a href="#quiz-and-exercise-output"><span class="number">9.1</span>Quiz and exercise output</a></li>
 <li><a href="#quiz-and-exercise-validation"><span class="number">9.2</span>Quiz and exercise validation</a></li>
@@ -268,8 +269,8 @@ $(document).ready(function() {
 <span class="number">1</span>Introduction
 </h1>
 <div class="extension">
-<h2 id="markua-markdown-for-books-and-courses-markua-extension-" class="definition">
-<span class="number">1.1</span>Markua: Markdown for books and courses (Markua extension)
+<h2 id="the-magical-typewriter-m-" class="definition">
+<span class="number">1.1</span>The magical typewriter (M)
 </h2>
 <p>Imagine you owned a magical typewriter.</p>
 <p>When you used this magical typewriter, you wrote with fewer distractions. You
@@ -308,7 +309,9 @@ coherent, open, free, plain text format for a book or course manuscript.</p>
 <p>This simple format will be the basis for the magical typewriter.</p>
 <p>This simple format is called Markua.</p>
 <p>This is its specification.</p>
-<hr />
+<h2 id="markua-markdown-for-books-and-courses-m-" class="definition">
+<span class="number">1.2</span>Markua: Markdown for books and courses (M)
+</h2>
 <p>Markua, pronounced “mar-coo-ah”, is Markdown for books and courses.</p>
 <p>Markua maps Markdown syntax to book concepts, and then adds some new syntax and
 concepts of its own.</p>
@@ -324,26 +327,27 @@ online courses.</p>
 <p>Markua was started at Leanpub in 2014, and benefited from the years of lessons
 that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
 successor to LFM. We have been iterating on our Markua support for many years.</p>
-<h2 id="markua-s-five-key-additions-to-markdown" class="definition">
-<span class="number">1.2</span>Markua’s five key additions to Markdown
+<h2 id="markua-s-five-key-additions-to-markdown-m-" class="definition">
+<span class="number">1.3</span>Markua’s five key additions to Markdown (M)
 </h2>
 <p>Markua’s five main additions to Markdown are the following:</p>
 <ol>
-<li>The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
+<li>The mapping of <strong>Markdown headings (h1, h2, h3, etc.) to book structures</strong>
 (chapters, sections, sub-sections, etc.), which provides the ability for
 Markua Processors like Leanpub to produce an ebook from a Markua manuscript
 with one click.</li>
-<li>The unified resource syntax, which lets Markua handle audio, code, iframe,
-math, verbatim and video resources in the same way that it does images and
-tables, and which supports inline, local and web resource locations.</li>
-<li>The attribute list syntax, which lets Markua define properties for resources
-using the same syntax that is used for other document elements, such as part
-headings and index entries.</li>
-<li>A comprehensive definition of document settings, so that authors can use
+<li>The <strong>unified resource syntax</strong>, which lets Markua handle audio, code,
+iframe, math, verbatim and video resources in the same way that it does
+images and tables, and which supports inline, local and web resource
+locations.</li>
+<li>The <strong>attribute list syntax</strong>, which lets Markua define properties for
+resources using the same syntax that is used for other document elements,
+such as part headings and index entries.</li>
+<li>A comprehensive definition of <strong>document settings</strong>, so that authors can use
 Markua to produce documents which are styled via global switches, rather than
 by tedious micromanagement.</li>
-<li>The mapping of book structures to online courses, and the creation of a
-plain-text microformat for course quizzes and exercises, which supports
+<li>The mapping of book structures to <strong>online courses</strong>, and the creation of a
+plain-text microformat for course <strong>quizzes and exercises</strong>, which supports
 automated marking and automated production of everything which is required
 for an online course.</li>
 </ol>
@@ -355,7 +359,7 @@ feel like decorating, not converting.</p>
 <p>The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.</p>
 <h2 id="markua-s-one-key-subtraction-no-raw-html" class="definition">
-<span class="number">1.3</span>Markua’s one key subtraction: no raw HTML
+<span class="number">1.4</span>Markua’s one key subtraction: no raw HTML
 </h2>
 <p>Markua also has one key subtraction from Markdown: suport for raw HTML, either
 as inlines or blocks, is completely removed.</p>
@@ -379,7 +383,7 @@ HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
 From an implementation perspective, Markdown gets inline HTML support for free.
 This is not true in the case of Markua.</p>
 <h2 id="how-to-write-a-novel-in-markua" class="definition">
-<span class="number">1.4</span>How to write a novel in Markua
+<span class="number">1.5</span>How to write a novel in Markua
 </h2>
 <p>The Markua specification is long. However, if you’re an author, the amount you
 need to learn to write in Markua is actually very short.</p>
@@ -417,7 +421,7 @@ Markdown dialects:</p>
 <p>In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.</p>
 <h2 id="how-to-write-almost-any-book-in-markua" class="definition">
-<span class="number">1.5</span>How to write almost any book in Markua
+<span class="number">1.6</span>How to write almost any book in Markua
 </h2>
 <p>The longer example below shows everything you need to know to write almost any
 type of book, such as a computer programming book, in Markua. This example also
@@ -647,7 +651,7 @@ Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 </code></pre>
 <h2 id="for-leanpub-authors" class="definition">
-<span class="number">1.6</span>For Leanpub authors
+<span class="number">1.7</span>For Leanpub authors
 </h2>
 <p>There are three ways to write in plain text on Leanpub. These are their
 user manuals:</p>
@@ -718,14 +722,14 @@ approaches, or could just support parsing single files or input streams.)</li>
 crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 </ol>
 <h2 id="origin-and-structure-of-this-document" class="definition">
-<span class="number">1.7</span>Origin and structure of this document
+<span class="number">1.8</span>Origin and structure of this document
 </h2>
 <p>This is the Markua Spec, written by
 <a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
 <p>The Markua Spec is based on the CommonMark Spec, whose author is
 <a href="https://johnmacfarlane.net/">John MacFarlane</a>.</p>
 <p>This document also incorporates the specification of two of the five GitHub
-Flavored Markdown (GFM extension) extensions from the <a href="https://github.github.com/gfm/">GFM
+Flavored Markdown (GFM) extensions from the <a href="https://github.github.com/gfm/">GFM
 Spec</a>.</p>
 <p>Like the CommonMark Spec and the GFM Spec, the Markua Spec is licensed under
 the Creative Commons license
@@ -747,8 +751,8 @@ labeled with “(Markua extension)”.</p>
 <p>So, for any given chapter or section of this document, it is either:</p>
 <ol>
 <li>written by John MacFarlane about CommonMark</li>
-<li>written by GitHub employees about GFM, and ending with “(GFM extension)”</li>
-<li>written by Peter Armstrong about Markua, and ending with “(Markua extension)”</li>
+<li>written by GitHub employees about GFM, and ending with “(GFM)”</li>
+<li>written by Peter Armstrong about Markua, and ending with “(M)”</li>
 </ol>
 <p>Together, these sections combine to specify Markua, since Markua is CommonMark,
 minus HTML blocks and Raw HTML, plus two GFM extensions, plus many Markua
@@ -759,10 +763,9 @@ extensions.</p>
 (Markua extension) added to it, since it is obvious that every section in it is
 also a Markua extension.</li>
 <li>Where a section inside an original CommonMark spec chapter is added by the
-Markua spec, that section has (Markua extension) added to its name.</li>
-<li>Every chapter or section which does not end with (Markua extension) or (GFM
-extension) is from the original CommonMark Spec, and was written by John
-MacFarlane.</li>
+Markua spec, that section has (M) added to its name.</li>
+<li>Every chapter or section which does not end with (M) or (GFM) is from the
+original CommonMark Spec, and was written by John MacFarlane.</li>
 </ul>
 <p>While this hybrid approach of creating the Markua specification is somewhat odd,
 it has a number of significant benefits:</p>
@@ -787,8 +790,8 @@ and GFM specs will be very easy.</li>
 <p>In terms of the GFM extensions, the following two GFM extensions are included
 in the Markua Spec:</p>
 <ol>
-<li><a href="#tables-gfm-">Tables (GFM extension)</a></li>
-<li><a href="#strikethrough-gfm-">Strikethrough (GFM extension)</a></li>
+<li><a href="#tables-gfm-">Tables (GFM)</a></li>
+<li><a href="#strikethrough-gfm-">Strikethrough (GFM)</a></li>
 </ol>
 <p>Their content is unchanged, but their titles are renamed to say “(GFM
 extension)” instead of “(extension)”, to more clearly specify their provenance.</p>
@@ -806,7 +809,7 @@ is not worth it. (It does make sense for, say, a discussion forum. It does
 not make sense for books and courses.)</li>
 </ol>
 <h2 id="about-the-html-output" class="definition">
-<span class="number">1.8</span>About the HTML output
+<span class="number">1.9</span>About the HTML output
 </h2>
 <p>The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.</p>
@@ -849,7 +852,7 @@ is identical to the specified output.</p>
 specified. Any custom settings are specified in a document settings list in the
 top of the example.</p>
 <h2 id="why-the-name-markua-" class="definition">
-<span class="number">1.9</span>Why the name “Markua”?
+<span class="number">1.10</span>Why the name “Markua”?
 </h2>
 <p>When I set out to specify Markua, I realized I needed a name. I wanted a name
 that conveyed the love that I have for Markdown while not implying endorsement
@@ -865,7 +868,7 @@ Markua and the Markua logo is a registered trademark of Ruboss Technology
 Corporation, the company which created, owns and operates Leanpub.</p>
 </div>
 <h2 id="what-is-markdown-" class="definition">
-<span class="number">1.10</span>What is Markdown?
+<span class="number">1.11</span>What is Markdown?
 </h2>
 <p>Markdown is a plain text format for writing structured documents,
 based on conventions for indicating formatting in email
@@ -951,7 +954,7 @@ to worry about indentation.  But the Markdown version is much easier
 to read.  The nesting of list items is apparent to the eye in the
 source, not just in the processed document.</p>
 <h2 id="why-is-a-spec-needed-" class="definition">
-<span class="number">1.11</span>Why is a spec needed?
+<span class="number">1.12</span>Why is a spec needed?
 </h2>
 <p>John Gruber’s <a href="http://daringfireball.net/projects/markdown/syntax">canonical description of Markdown’s
 syntax</a>
@@ -1090,7 +1093,7 @@ renders differently on another (say, converting to docbook using
 pandoc).  To make matters worse, because nothing in Markdown counts
 as a “syntax error,” the divergence often isn’t discovered right away.</p>
 <h2 id="about-this-document" class="definition">
-<span class="number">1.12</span>About this document
+<span class="number">1.13</span>About this document
 </h2>
 <p>This document attempts to specify Markdown syntax unambiguously.
 It contains many examples with side-by-side Markdown and
@@ -1885,8 +1888,8 @@ bar&lt;/p&gt;
 </div>
 </div>
 <div class="extension">
-<h2 id="emoji-markua-extension-" class="definition">
-<span class="number">2.6</span>Emoji (Markua extension)
+<h2 id="emoji-m-" class="definition">
+<span class="number">2.6</span>Emoji (M)
 </h2>
 <p>In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year
 <a href="http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/">was</a>,
@@ -1932,8 +1935,8 @@ Awesome</a> would be output as
 <code>:fa-leanpub:</code>.</p>
 </div>
 <div class="extension">
-<h1 id="document-semantics-markua-extension-" class="definition">
-<span class="number">3</span>Document semantics (Markua extension)
+<h1 id="document-semantics-m-" class="definition">
+<span class="number">3</span>Document semantics (M)
 </h1>
 <p>As discussed in the introduction, Markua is an extension to Markdown. The goal
 is for Markua to feel as though Markdown just magically grew a knowledge of
@@ -5466,8 +5469,8 @@ foo
 </div>
 </div>
 <div class="extension">
-<h2 id="no-html-blocks-markua-extension-" class="definition">
-<span class="number">5.6</span>No HTML blocks (Markua extension)
+<h2 id="no-html-blocks-m-" class="definition">
+<span class="number">5.6</span>No HTML blocks (M)
 </h2>
 <p>Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).</p>
@@ -6169,8 +6172,8 @@ aaa
 </div>
 </div>
 <div class="extension">
-<h2 id="tables-gfm-extension-" class="definition">
-<span class="number">5.10</span>Tables (GFM extension)
+<h2 id="tables-gfm-" class="definition">
+<span class="number">5.10</span>Tables (GFM)
 </h2>
 <p>GFM enables the <code>table</code> extension, where an additional leaf block type is
 available.</p>
@@ -9091,8 +9094,8 @@ two block elements in the list item:</p>
 </div>
 </div>
 <div class="extension">
-<h2 id="definition-lists-markua-extension-" class="definition">
-<span class="number">6.4</span>Definition lists (Markua extension)
+<h2 id="definition-lists-m-" class="definition">
+<span class="number">6.4</span>Definition lists (M)
 </h2>
 <p>Definition lists are also supported in Markua. To define a definition list, use
 the following syntax:</p>
@@ -9290,8 +9293,8 @@ bar{#bar}
 </div>
 </div>
 <div class="extension">
-<h2 id="asides-markua-extension-" class="definition">
-<span class="number">6.5</span>Asides (Markua extension)
+<h2 id="asides-m-" class="definition">
+<span class="number">6.5</span>Asides (M)
 </h2>
 <p>Since Markua is for writing books and courses, including technical books and
 courses, it needs not just a syntax for blockquotes–it also needs a syntax for
@@ -9378,8 +9381,8 @@ It<span class="space"> </span>can<span class="space"> </span>have<span class="sp
 </div>
 </div>
 <div class="extension">
-<h2 id="blurbs-markua-extension-" class="definition">
-<span class="number">6.6</span>Blurbs (Markua extension)
+<h2 id="blurbs-m-" class="definition">
+<span class="number">6.6</span>Blurbs (M)
 </h2>
 <p>Blurbs are like asides, but shorter. A blurb is not intended to span multiple
 pages of output.</p>
@@ -14471,8 +14474,8 @@ spec</a>:</p>
 </div>
 </div>
 <div class="extension">
-<h2 id="no-raw-html-markua-extension-" class="definition">
-<span class="number">7.6</span>No raw HTML (Markua extension)
+<h2 id="no-raw-html-m-" class="definition">
+<span class="number">7.6</span>No raw HTML (M)
 </h2>
 <p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
 <p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
@@ -14761,8 +14764,8 @@ line ending or as a space.</p>
 <p>A renderer may also provide an option to render soft line breaks
 as hard line breaks.</p>
 <div class="extension">
-<h2 id="resource-content-markua-extension-" class="definition">
-<span class="number">7.9</span>Resource content (Markua extension)
+<h2 id="resource-content-m-" class="definition">
+<span class="number">7.9</span>Resource content (M)
 </h2>
 <p>Markua defines the concept of resources, as well as inlines for a number of
 resources. This syntax is based on the image syntax.</p>
@@ -14791,8 +14794,8 @@ later, after the discussion of metadata.</p>
 not parsed as plain textual content.</p>
 </div>
 <div class="extension">
-<h2 id="character-substitutions-markua-extension-" class="definition">
-<span class="number">7.10</span>Character substitutions (Markua extension)
+<h2 id="character-substitutions-m-" class="definition">
+<span class="number">7.10</span>Character substitutions (M)
 </h2>
 <p>Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -14834,8 +14837,8 @@ doesn’t make straight quotes curly in a code span, it doesn’t make curly quo
 straight in a code span either.)</p>
 </div>
 <div class="extension">
-<h2 id="footnotes-and-endnotes-markua-extension-" class="definition">
-<span class="number">7.11</span>Footnotes and endnotes (Markua extension)
+<h2 id="footnotes-and-endnotes-m-" class="definition">
+<span class="number">7.11</span>Footnotes and endnotes (M)
 </h2>
 <p>Books often have footnotes and endnotes. So, Markua has them too.</p>
 <h3 id="footnotes" class="definition">
@@ -14922,8 +14925,8 @@ unless its documentation specifically states that it does. For example, Leanpub
 only supports inserting footnotes or endnotes in normal paragraph content.</p>
 </div>
 <div class="extension">
-<h2 id="underline-markua-extension-" class="definition">
-<span class="number">7.12</span>Underline (Markua extension)
+<h2 id="underline-m-" class="definition">
+<span class="number">7.12</span>Underline (M)
 </h2>
 <p>In Markdown as defined by John Gruber, and in CommonMark and GFM,
 <code>*one asterisk*</code> and <code>_one underscore_</code> both produce <em>italics</em>, and there is no
@@ -15075,8 +15078,8 @@ stuff
 </div>
 </div>
 <div class="extension">
-<h2 id="index-entries-markua-extension-" class="definition">
-<span class="number">7.13</span>Index entries (Markua extension)
+<h2 id="index-entries-m-" class="definition">
+<span class="number">7.13</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -15178,8 +15181,8 @@ reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to w
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
 </div>
 <div class="extension">
-<h1 id="resources-markua-extension-" class="definition">
-<span class="number">8</span>Resources (Markua extension)
+<h1 id="resources-m-" class="definition">
+<span class="number">8</span>Resources (M)
 </h1>
 <p>Markua documents are written in plain text, either in one text file or multiple
 text files. However, modern books and courses sometimes contain more than text.
@@ -16581,8 +16584,8 @@ Markua Processor.</p>
 {type: table, format: csv, header: true, footer: true, crop-start: 5, crop-end: 10}
 ![Canadian Census Data](census.csv)
 </code></pre>
-<h2 id="block-quotes-with-curly-braces-markua-extension-" class="definition">
-<span class="number">8.12</span>Block quotes with curly braces (Markua extension)
+<h2 id="block-quotes-with-curly-braces-m-" class="definition">
+<span class="number">8.12</span>Block quotes with curly braces (M)
 </h2>
 <p>Block quotes in Markua are created in one of two ways:</p>
 <ol>
@@ -16636,8 +16639,8 @@ This<span class="space"> </span>is<span class="space"> </span>the<span class="sp
 Processor differently than normal headings. Finally, if a Markua Processor is
 automatically generating a <a href="#toc">Table of Contents</a> from chapter and section
 headings, any headings inside blockquotes should be ignored.</p>
-<h2 id="list-attributes-markua-extension-" class="definition">
-<span class="number">8.13</span>List attributes (Markua extension)
+<h2 id="list-attributes-m-" class="definition">
+<span class="number">8.13</span>List attributes (M)
 </h2>
 <p>By default, Markua keeps the behaviour of lists to be identical to that in
 Markdown, as described by John Gruber and specified by CommonMark.
@@ -17558,8 +17561,8 @@ after
 </div>
 </div>
 <div class="extension">
-<h1 id="quizzes-and-exercises-markua-extension-" class="definition">
-<span class="number">9</span>Quizzes and exercises (Markua extension)
+<h1 id="quizzes-and-exercises-m-" class="definition">
+<span class="number">9</span>Quizzes and exercises (M)
 </h1>
 <p>Markua was initially designed for the writing of books, but it has been extended
 to support creating courses. For example, Leanpub authors can click a button to

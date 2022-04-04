@@ -124,7 +124,7 @@ There are three ways to write in plain text on Leanpub. These are their
 user manuals:
 
 1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
-   (LFM is obsolete, and is on long-term support)
+   (LFM was launched in 2011. It is now obsolete, and is on long-term support.)
 2. [Markua 0.10](https://leanpub.com/markua/read) (this is the default for
    books and courses on Leanpub)
 3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) (the user manual for
@@ -134,26 +134,23 @@ Not all features in the Markua spec are supported in the Markua 0.30 beta. If
 you want a stable experience and user manual, you currently need to use
 Leanpub's Markua 0.10 support (which is the default choice for new books).
 This is also true if you want to create courses. Leanpub's Markua 0.30
-implementation does not support courses yet.
+implementation does not support courses yet. (Also, LFM has never supported
+courses.)
 
 Leanpub's Markua 0.10 support is fully documented in its own [user
 manual](https://leanpub.com/markua/read). Everything documented in that
 manual should work as described, and our Markua 0.10 version will continue to be
 supported for years to come.
 
-Please note that Even though the Markua Spec is based on the CommonMark Spec,
-Leanpub's current Markua support is not based on CommonMark. Markua and
-CommonMark were both launched in 2014, within a few months of each other.
-Leanpub's Markua implementation was based on its Ruby-based implementation of
-LFM, which dates back to 2011.
+Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
+Markua support is not based on CommonMark. Markua and CommonMark were both
+launched in 2014, within a few months of each other. Leanpub's Markua
+implementation was based on its Ruby-based implementation of LFM, which dates
+back to 2011.
 
-
-#### Differences between LFM and Markua 0.10
-
-When considering converting between LFM and Markua, it's important to highlight
-all the differences between Markua and LFM.
-
-The following are the top 10 differences between Markua and LFM.
+If you are writing a new book or course on Leanpub, you should absolutely choose
+Markua over LFM. If you are familiar with LFM, the following list of the 10
+differences between Markua and LFM may be useful:
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
    attribute list on an atx or Setext heading.
@@ -193,11 +190,6 @@ The following are the top 10 differences between Markua and LFM.
    approaches, or could just support parsing single files or input streams.)
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
-
-#### Differences between Markua 0.10 and Markua 0.30 (this spec)
-
-TODO
-
 
 
 ### How to write a novel in Markua

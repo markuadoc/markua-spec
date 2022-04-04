@@ -164,13 +164,10 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-structure-markua-extension-"><span class="number">4</span>Document Structure (Markua extension)</a>
 <ul>
-<li><a href="#markdown-atx-header-mapping"><span class="number">4.1</span>Markdown “atx” Header Mapping</a></li>
-<li><a href="#markdown-setext-header-mapping"><span class="number">4.2</span>Markdown “Setext” Header Mapping</a></li>
-<li><a href="#part-heading-html-output"><span class="number">4.3</span>Part heading HTML output</a></li>
-<li><a href="#todo"><span class="number">4.4</span>TODO</a></li>
-<li><a href="#paragraph-continuations"><span class="number">4.5</span>Paragraph continuations</a></li>
-<li><a href="#span-attribute-lists"><span class="number">4.6</span>Span attribute lists</a></li>
-<li><a href="#concatenating-files-and-blank-lines"><span class="number">4.7</span>Concatenating files and blank lines</a></li>
+<li><a href="#todo"><span class="number">4.1</span>TODO</a></li>
+<li><a href="#paragraph-continuations"><span class="number">4.2</span>Paragraph continuations</a></li>
+<li><a href="#span-attribute-lists"><span class="number">4.3</span>Span attribute lists</a></li>
+<li><a href="#concatenating-files-and-blank-lines"><span class="number">4.4</span>Concatenating files and blank lines</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">5</span>Blocks and inlines</a>
@@ -491,7 +488,7 @@ This is a paragraph.
 ```
 
 Note the use of three backticks in the above example, to treat the Markua like
-inline code.
+inline code (instead of actually like headers).
 
 The other style of headers, called Setext headers, has the following headings:
 
@@ -519,9 +516,12 @@ least some of your headers. My advice is to just use atx headers all the time.
 (The `{class: part}` attribute list on a chapter header to make a part header
 does actually work with Setext headers, but it's really ugly.)
 
-Finally, note that while it is confusing and ugly to mix and match using Setext
-and atx headers for chapters and sections in the same document, you can do it.
-However, please don't.
+Note that while it is confusing and ugly to mix and match using atx and Setext
+headers for chapters and sections in the same document, you can do it. However,
+please don't.
+
+Finally, headers and their mapping to document structure concepts are discussed
+later in the Document Structure section.
 
 # Images
 
@@ -2766,12 +2766,12 @@ material book for the course.</p>
 </h1>
 <p>Markua is a way of writing books and courses. Books have things like chapters,
 sections and subsections. Courses typically call their chapters “modules”, but
-it’s the same idea.</p>
-<p>Sometimes books have parts, e.g. Part One and Part Two.</p>
-<p>Markua maps Markdown headings to document structure concepts:</p>
-<h2 id="markdown-atx-header-mapping" class="definition">
-<span class="number">4.1</span>Markdown “atx” Header Mapping
-</h2>
+it’s the same idea. Sometimes books or courses organize their chapters or
+modules in parts.</p>
+<p>Markdown defines two types of heading styles.</p>
+<p>Markua’s first innovation is to map both of these heading styles to document
+structure concepts.</p>
+<p>The preferred style, called atx headers, has the following meaning in Markua:</p>
 <pre><code>{class: part}
 # Part
 
@@ -2785,24 +2785,58 @@ This is a paragraph.
 
 This is a paragraph.
 
-### Sub-Section
+### Sub-section
 
 This is a paragraph.
 
-#### Sub-Sub-Section
+#### Sub-sub-section
 
 This is a paragraph.
 
-##### Sub-Sub-Sub-Section
+##### Sub-sub-sub-section
 
 This is a paragraph.
 
-###### Sub-Sub-Sub-Sub-Section
+###### Sub-sub-sub-sub-section
 
 This is a paragraph.
 </code></pre>
-<p>In the HTML output, the Part and Chapter heading both produce an <code>h1</code>.
-The <code>Section</code> heading produces an <code>h2</code>, etc:</p>
+<p>The other style of headers, called Setext headers, defines two levels of
+heading only. Here’s how those are used in Markua:</p>
+<pre><code>{class: part}
+Part
+====
+
+This is a paragraph.
+
+Chapter
+=======
+
+This is a paragraph.
+
+Section
+-------
+
+This is a paragraph.
+</code></pre>
+<p>Setext headers look nice, but only if you’re only using chapters and sections.
+If you want to add sub-sections (or lower), you’ll be using atx headers for at
+least some of your headers. My advice is to just use atx headers all the time.
+(The <code>{class: part}</code> attribute list on a chapter header to make a part header
+does actually work with Setext headers, but it’s really ugly.)</p>
+<p>Note that while it is confusing and ugly to mix and match using atx and Setext
+headers for chapters and sections in the same document, you can do it. However,
+please don’t.</p>
+<p>Now, regardless of whether you are using the atx or Setext header style of
+header, the key point is that Markua is mapping the headers to document
+structure concepts.</p>
+<p>The header defines the name of the part, chapter, section, etc., and the content
+underneath it becomes the content of that given thing (until the next header
+is reached).</p>
+<p>In the HTML output, the Part and Chapter heading (for atx or Setext headers)
+both produce an <code>h1</code>, the <code>Section</code> heading produces an <code>h2</code>, and the
+Sub-Section heading produces an <code>h3</code>. Lower levels go down to <code>h6</code>.</p>
+<p>To be clear, these are the Markdown “atx” header mappings:</p>
 <p><code>#</code>
 : Used for a Chapter heading when there is no <code>{class: part}</code> attribute list,
 and used for a Part heading when there is. This produces an <code>h1</code> in HTML.</p>
@@ -2820,80 +2854,98 @@ and used for a Part heading when there is. This produces an <code>h1</code> in H
 and are only differentiated by the presence of a <code>{class: part}</code> attribute list,
 is that not all books have parts, so it would be awkward to start chapters with
 the second-level heading.</p>
-<h2 id="markdown-setext-header-mapping" class="definition">
-<span class="number">4.2</span>Markdown “Setext” Header Mapping
-</h2>
-<p>Markdown also defines an alternate header syntax for producing h1 and h2 tags.
-This syntax, called Setext headers, looks like this when used in Markua:</p>
-<pre><code>{class: part}
-Part
-====
-
-This is a paragraph.
-
-Chapter
-======= 
-
-This is a paragraph.
-
-Section
--------
-
-This is a paragraph.
-</code></pre>
-<h2 id="part-heading-html-output" class="definition">
-<span class="number">4.3</span>Part heading HTML output
-</h2>
-<p>In the HTML output, the only difference between a part and chapter heading on
-the heading itself is that there is a <code>class=&quot;part&quot;</code> attribute shown. However,
-obviously, the part and chapter headings are treated differently elsewhere, such
-as in the table of contents of the book or the navigation structure of the
-course.</p>
-<h3 id="correct-usage" class="definition">
-<span class="number">4.3.1</span>Correct usage
-</h3>
-<p>Part heading, atx headers:</p>
 <div class="example" id="example-51">
 <div class="examplenum">
 <a href="#example-51">Example 51</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{class:<span class="space"> </span>part}
-#<span class="space"> </span>Part<span class="space"> </span>Heading
+#<span class="space"> </span>Part
 
-This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>start<span class="space"> </span>of<span class="space"> </span>a<span class="space"> </span>part.
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+#<span class="space"> </span>Chapter
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+##<span class="space"> </span>Section
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+###<span class="space"> </span>Sub-section
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+####<span class="space"> </span>Sub-sub-section
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+#####<span class="space"> </span>Sub-sub-sub-section
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+######<span class="space"> </span>Sub-sub-sub-sub-section
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;part&quot;&gt;Part<span class="space"> </span>Heading&lt;/h1&gt;
-&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>start<span class="space"> </span>of<span class="space"> </span>a<span class="space"> </span>part.&lt;/p&gt;
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;part&quot;&gt;Part&lt;/h1&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h1&gt;Chapter&lt;/h1&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h2&gt;Section&lt;/h2&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h3&gt;Sub-section&lt;/h3&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h4&gt;Sub-sub-section&lt;/h4&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h5&gt;Sub-sub-sub-section&lt;/h5&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h6&gt;Sub-sub-sub-sub-section&lt;/h6&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<p>Part heading, Setext headers:</p>
+<p>These are the Setext header mappings:</p>
 <div class="example" id="example-52">
 <div class="examplenum">
 <a href="#example-52">Example 52</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{class:<span class="space"> </span>part}
-Part<span class="space"> </span>Heading
-============
+Part
+====
 
-This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>start<span class="space"> </span>of<span class="space"> </span>a<span class="space"> </span>part.
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
+
+Chapter
+-------
+
+This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;part&quot;&gt;Part<span class="space"> </span>Heading&lt;/h1&gt;
-&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>start<span class="space"> </span>of<span class="space"> </span>a<span class="space"> </span>part.&lt;/p&gt;
+<pre><code class="language-html">&lt;h1<span class="space"> </span>class=&quot;part&quot;&gt;Part&lt;/h1&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
+&lt;h1&gt;Chapter&lt;/h1&gt;
+&lt;p&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph.&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<h3 id="incorrect-usage" class="definition">
-<span class="number">4.3.2</span>Incorrect usage
-</h3>
-<p>Adding <code>{class: part}</code> to any other heading level than an <code>h1</code> is ignored.</p>
-<p>Ignored on atx section headers:</p>
+<p>In the HTML output, the only difference between a part and chapter heading on
+the heading itself is that there is a <code>class=&quot;part&quot;</code> attribute shown. However,
+obviously, the part and chapter headings are treated differently elsewhere, such
+as in the table of contents of the book or the navigation structure of the
+course.</p>
+<p>The <code>{class: part}</code> is an example of an attribute list, which is another of
+Markua’s main additions to Markdown. There can be no blank line between the
+attribute list and the header it is attached to. Attribute lists are discussed
+in the Metadata section later.</p>
+<p>Note that adding a <code>{class: part}</code> attribute list to any other heading level
+than an <code>h1</code> is ignored by Markua.</p>
+<p>Here’s an example of this being incorrectly added to an atx section header,
+which will have no effect:</p>
 <div class="example" id="example-53">
 <div class="examplenum">
 <a href="#example-53">Example 53</a>
@@ -2911,7 +2963,8 @@ Foo
 </code></pre>
 </div>
 </div>
-<p>Ignored on Setext section headers:</p>
+<p>Here’s an example of this being incorrectly added to a Setext section header,
+which will also have no effect:</p>
 <div class="example" id="example-54">
 <div class="examplenum">
 <a href="#example-54">Example 54</a>
@@ -2933,10 +2986,10 @@ Foo
 </div>
 <div class="extension">
 <h2 id="todo" class="definition">
-<span class="number">4.4</span>TODO
+<span class="number">4.1</span>TODO
 </h2>
 <h3 id="thematic-break-semantics" class="definition">
-<span class="number">4.4.1</span>Thematic break semantics
+<span class="number">4.1.1</span>Thematic break semantics
 </h3>
 <p>Thematic breaks, as shown above, produce an <code>&lt;hr /&gt;</code> in HTML.</p>
 <p>Thematic breaks are treated as scene breaks by Markua.</p>
@@ -2945,14 +2998,14 @@ in a way appropriate for a scene break in fiction.</p>
 <p>There are no additional tests in this section, since this is just a note about
 semantics and about CSS.</p>
 <h3 id="css-note" class="definition">
-<span class="number">4.4.2</span>CSS Note
+<span class="number">4.1.2</span>CSS Note
 </h3>
 <p>Since Markua bans all inline HTML except HTML comments, the only way to produce
 an <code>&lt;hr /&gt;</code> is using the above thematic break syntax. So, designers can assume
 that all <code>&lt;hr /&gt;</code> elements are thematic breaks, and style them in a way
 appropriate for a scene break in fiction.</p>
 <h2 id="paragraph-continuations" class="definition">
-<span class="number">4.5</span>Paragraph continuations
+<span class="number">4.2</span>Paragraph continuations
 </h2>
 <p>In books, you can insert things like lists in the middle of paragraphs.</p>
 <p>Ideally, this would be one paragraph. However, it’s not:</p>
@@ -3110,7 +3163,7 @@ bar
 </div>
 <div class="extension">
 <h2 id="span-attribute-lists" class="definition">
-<span class="number">4.6</span>Span attribute lists
+<span class="number">4.3</span>Span attribute lists
 </h2>
 <p>Surrounding text in square brackets can be useful not just for giving it a URL
 to link to. If you wish to add attributes to an arbitrary span of text, you can
@@ -3146,7 +3199,7 @@ creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
 </div>
 <div class="extension">
 <h2 id="concatenating-files-and-blank-lines" class="definition">
-<span class="number">4.7</span>Concatenating files and blank lines
+<span class="number">4.4</span>Concatenating files and blank lines
 </h2>
 <p>A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by

@@ -2453,11 +2453,98 @@ material book for the course.
 
 # Document Structure (Markua extension)
 
-## Part headings
+Markua is a way of writing books and courses. Books have things like chapters,
+sections and subsections. Courses typically call their chapters "modules", but
+it's the same idea.
 
-As [discussed](#markua-heading-mapping-to-book-and-course-structures),
-Markua uses a `{class: part}` attribute on an `h1` heading to make a part
-heading from what would otherwise be a chapter heading.
+Sometimes books have parts, e.g. Part One and Part Two.
+
+Markua maps Markdown headings to document structure concepts:
+
+## Markdown "atx" Header Mapping
+
+```
+{class: part}
+# Part
+
+This is a paragraph.
+
+# Chapter
+
+This is a paragraph.
+
+## Section
+
+This is a paragraph.
+
+### Sub-Section
+
+This is a paragraph.
+
+#### Sub-Sub-Section
+
+This is a paragraph.
+
+##### Sub-Sub-Sub-Section
+
+This is a paragraph.
+
+###### Sub-Sub-Sub-Sub-Section
+
+This is a paragraph.
+```
+
+In the HTML output, the Part and Chapter heading both produce an `h1`.
+The `Section` heading produces an `h2`, etc:
+
+`#`
+: Used for a Chapter heading when there is no `{class: part}` attribute list,
+  and used for a Part heading when there is. This produces an `h1` in HTML.
+
+`##`
+: Used for a Section heading. This produces an `h2` in HTML.
+
+`###`
+: Used for a Sub-Section heading. This produces an `h3` in HTML.
+
+`####`
+: Used for a Sub-Sub-Section heading. This produces an `h4` in HTML.
+
+`#####`
+: Used for a Sub-Sub-Sub-Section heading. This produces an `h5` in HTML.
+
+`######`
+: Used for a Sub-Sub-Sub-Sub-Section heading. This produces an `h6` in HTML.
+
+The reason that a Part heading and a Chapter heading both use the `#` symbol,
+and are only differentiated by the presence of a `{class: part}` attribute list,
+is that not all books have parts, so it would be awkward to start chapters with
+the second-level heading.
+
+## Markdown "Setext" Header Mapping
+
+Markdown also defines an alternate header syntax for producing h1 and h2 tags.
+This syntax, called Setext headers, looks like this when used in Markua:
+
+```
+{class: part}
+Part
+====
+
+This is a paragraph.
+
+Chapter
+======= 
+
+This is a paragraph.
+
+Section
+-------
+
+This is a paragraph.
+```
+
+## Part heading HTML output
 
 In the HTML output, the only difference between a part and chapter heading on
 the heading itself is that there is a `class="part"` attribute shown. However,
@@ -2521,18 +2608,13 @@ Foo
 <p>Foo</p>
 ````````````````````````````````
 
-## Chapter and Section Headings
-
-Markua maps the Markdown headings... TODO
-
-
 </div>
 
 
 
 <div class="extension">
 
-## TODO
+# TODO
 
 ### Thematic break semantics
 

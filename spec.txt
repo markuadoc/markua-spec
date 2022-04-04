@@ -1547,8 +1547,9 @@ To recap, Markua's five main additions to Markdown are the following:
    automated marking and automated production of everything which is required
    for an online course.
 
-The first four of these five additions are discussed in this section. They
-concern the document structure and metadata.
+Items 1, 3 and 4 are discussed in this section. They concern the document
+structure and metadata. Resources (item 2) and courses (item 5) are both big
+enough to need their own sections.
 
 Markua adds a number of extensions to support metadata in a consistent way.
 These include attributes (on everything), settings (at the beginning of a

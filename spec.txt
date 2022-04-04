@@ -2614,7 +2614,7 @@ Foo
 
 <div class="extension">
 
-# TODO
+## TODO
 
 ### Thematic break semantics
 

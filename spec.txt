@@ -556,7 +556,8 @@ The other three GFM extensions are omitted:
 1. [Task list items](https://github.github.com/gfm/#task-list-items-extension-)
    is omitted since Markua is for books and courses, not todo lists.
 2. [Disallowed Raw HTML](https://github.github.com/gfm/#disallowed-raw-html-extension-)
-   is omitted since Markua goes farther and converts all raw HTML into text.
+   is omitted since Markua goes farther and **completely removes all raw HTML**,
+   both HTML added as HTML blocks or as raw HTML inlines.
 3. [Autolinks](https://github.github.com/gfm/#autolinks-extension-) is omitted,
    because the extra work to create a link is literally typing two characters
    (`<` and `>`), so the added complexity both in parsing and in documentation

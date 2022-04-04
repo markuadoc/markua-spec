@@ -4388,7 +4388,8 @@ treated as raw HTML (and will not be escaped in HTML output).
 Markua does not support HTML blocks. Instead, **all raw HTML is removed**.
 This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
 which is inserted as inlines. Neither of these are supported by Markua.
-In both cases, the HTML is removed by the Markua parser.
+
+**In both cases, the HTML must be completely removed by the Markua Processor.**
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) in Markua, and these comments will be removed
@@ -11055,7 +11056,7 @@ Instead, **all raw HTML is removed**. This is true both for raw HTML which is
 inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
 these are supported by Markua.
 
-In both cases, the HTML is removed by the Markua parser.
+**In both cases, the HTML must be completely removed by the Markua Processor.**
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) in Markua, and these comments will be removed

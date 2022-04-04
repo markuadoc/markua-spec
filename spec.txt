@@ -51,9 +51,8 @@ get a Word document.
 Your magical typewriter could even transform your completed book manuscript into
 a course that anyone in the world could take. All you'd need to do is to
 add some quizzes and exercises and then press a key for your magical typewriter
-to publish a massive open online course (MOOC) for you. The quizzes and exercises
-would mark themselves, and students would get certificates based on how well
-they did.
+to publish an online course for you. The quizzes and exercises would mark
+themselves, and students would get certificates based on how well they did.
 
 With your magical typewriter, you'd only have to do one thing:
 
@@ -106,7 +105,8 @@ Markua's three main contributions are the following:
    supports inline, local and web resource locations.
 3. The mapping of book structures to courses, and the creation of a plain-text
    based microformat for course quizzes and exercises, which supports automated
-   marking and automated production of everything which is required for a MOOC.
+   marking and automated production of everything which is required for an
+   online course.
 
 If you have written something (say blog posts or lecture notes) in Markdown, you
 can use a Markua Processor, such as Leanpub, to turn them into an ebook or
@@ -2209,7 +2209,7 @@ the `id` values of a quiz or quizzes, since this will affect current students.
 
 `default-exercise-show-answers`
 : This can be `all` (the default), `incorrect` or `none`. It affects how answers
-are shown after an exercise is completed, say in a MOOC.
+are shown after an exercise is completed, say in an online course.
 
 `default-quiz-attempts`
 : The default number of allowed attempts on a quiz. The default is `1`. Note
@@ -2227,7 +2227,7 @@ incomplete quiz counts as an attempt.
 
 `default-quiz-show-answers`
 : This can be `all`, `incorrect` (the default) or `none`. It affects how answers
-are shown after a quiz is completed, say in a MOOC.
+are shown after a quiz is completed, say in an online course.
 
 `default-quiz-use-result`
 : `best` or `latest`. The default is `best`. Whether the best result on the quiz
@@ -14189,15 +14189,15 @@ after
 
 Markua was initially designed for the writing of books, but it has been extended
 to support creating courses. For example, Leanpub authors can click a button to
-create a massive open online course (MOOC), complete with automated marking,
-entirely from a Markua document.
+create an online course, complete with automated marking, entirely from a Markua
+document.
 
 **To convert a Markua document from a book into a course, all you need to do is
 add quizzes and exercises.**
 
 Over the past decade, there has been a steady growth of interest in courses
-delivered over the internet at massive scale. These Massive Open Online Courses,
-or MOOCs, consist of essentially four things:
+delivered over the internet at massive scale. These courses consist of
+essentially four things:
 
 1. Reading material
 2. Video or audio lectures
@@ -14207,11 +14207,11 @@ or MOOCs, consist of essentially four things:
 It turns out the four things in this list all work perfectly in a Markua
 document. So, not only can Markua be used to easily create a textbook which
 includes video, audio, images and quizzes, it is also an amazingly simple and
-flexible way of creating a MOOC. A MOOC is essentially just a textbook which is
-executable, plus discussion forums and credentials. For example,
-[Leanpub](https://leanpub.com) authors can click one button to create a massive
-open online course (MOOC), complete with automated marking for all the quizzes
-in the course, entirely from one Markua document.
+flexible way of creating an online course. An online course is essentially just
+a textbook which is executable, plus discussion forums and credentials. For
+example, [Leanpub](https://leanpub.com) authors can click one button to create a
+course, complete with automated marking for all the quizzes in the course,
+entirely from one Markua document.
 
 Quizzes and exercises are essentially the same. The only difference is that
 quizzes are intended to be marked, and exercises are not. Because of their
@@ -14278,9 +14278,9 @@ course.
 
 
 A quiz or exercise can contain any Markua content, not just questions and
-answers. This is true regardless of whether the quiz or exercise is in a MOOC,
-an ebook or on paper. Note that video and audio resources don't work so well on
-paper, however.
+answers. This is true regardless of whether the quiz or exercise is in an online
+course, an ebook or on paper. Note that video and audio resources don't work so
+well on paper, however.
 
 If a quiz or exercise starts with any type of heading immediately after the
 `{quiz}` or `{exercise}` line, this heading's content should be considered the
@@ -14317,7 +14317,7 @@ Look at the Leanpub [website](https://leanpub.com/).
 
 ! Answers could include "bootstrapped startup", the spec evolving, etc.
 
-That's it for this quiz, and this MOOC!
+That's it for this quiz, and this course!
 
 **Thanks for taking my course!**
 {/quiz}
@@ -14341,13 +14341,13 @@ The exact way to create these types of questions is discussed further below.
 A Markua Processor has many degrees of freedom in terms of whether, and how,
 to output quizzes and exercises. As such, no HTML mapping is shown here.
 
-For example, when outputting an online course or MOOC, the Markua Processor
-can basically do whatever it wants. It can choose to output an ebook of the
-course material only, and put all quizzes and exercises only in the online
-version. Or it can choose to put all the quizzes only in the online version,
-and include the exercises in the ebook version as well. Or it can include the
-quizzes and exercises in the ebook version, but only include the answers for
-the exercises in the ebook version.
+For example, when outputting an online course, the Markua Processor can
+basically do whatever it wants. It can choose to output an ebook of the course
+material only, and put all quizzes and exercises only in the online version.
+Or it can choose to put all the quizzes only in the online version, and include
+the exercises in the ebook version as well. Or it can include the quizzes and
+exercises in the ebook version, but only include the answers for the exercises
+in the ebook version.
 
 If, on the other hand, a Markua Processor is outputting a textbook, it may
 choose to output the quizzes in an entirely separate ebook or print-ready PDF,
@@ -14497,7 +14497,7 @@ than the previous question.
 
 `show-answers`
 : This can be `all`, `incorrect` or `none`. It affects how answers are shown
-after a quiz or exercise is completed, say in a MOOC. For exercises, the
+after a quiz or exercise is completed, say in a course. For exercises, the
 default value is determined by the value of the `default-exercise-show-answers`
 document setting, with `all` being the default value of that attribute. For
 quizzes, the default value is determined by the value of the
@@ -14831,11 +14831,12 @@ means something different in the US and EU--does `123,456` mean `123456` or
 `123.456`?
 
 These questions are made worse by the fact that Markua can be used to create
-human-marked paper quizzes as well as automatically-marked MOOCs. So,
-specifying rules which made the syntax unambiguous for MOOCs would mean that
-the answers for human-marked paper quizzes could not be specified with a
-tolerable amount of ambiguity. So, the format of the answer values in a fill
-in the blank question is out of scope of the Markua Spec.
+human-marked paper quizzes as well as automatically-marked courses. So,
+specifying rules which made the syntax unambiguous for online courses with
+automated marking would mean that the answers for human-marked paper quizzes
+could not be specified with a tolerable amount of ambiguity. So, the format of
+the answer values in a fill in the blank question is out of scope of the Markua
+Spec.
 
 ### Supported attributes on fill in the blank questions
 
@@ -14871,8 +14872,9 @@ markers are underpaid graduate students or unpaid AIs. Markua does not specify
 any microformat for this note to markers: it is just Markua text, kind of like
 a blockquote (but with each line starting with `!` not `>`).
 
-A Markua Processor generating a MOOC may handle written questions at its own
-discretion, including not including them or giving them a `points` value of 0.
+A Markua Processor generating an online course may handle written questions at
+its own discretion, including not including them or giving them a `points` value
+of 0.
 
 Examples:
 
@@ -14939,8 +14941,8 @@ fill in the blank question, not a written question.
 
 `points`
 : The number of points the question is worth. This number can be 0 or higher.
-The default is 1. A Markua Processor generating a MOOC may override this. For
-example, when generating a MOOC, Leanpub overrides all written questions to
+The default is 1. A Markua Processor generating a course may override this. For
+example, when generating a course, Leanpub overrides all written questions to
 have a points attribute of 0, regardless of what (if anything) is specified for
 this attribute by the author.
 
@@ -15018,15 +15020,15 @@ For example, here's how Leanpub handles hints:
 
 ## Question alternates
 
-The fact that a Markua document can be used to create an online course or MOOC
-means that certain aspects of the syntax for quizzes and exercises are more
-robust than they would otherwise. One example of this is question alternates.
+The fact that a Markua document can be used to create an online course means
+that certain aspects of the syntax for quizzes and exercises are more robust
+than they would otherwise. One example of this is question alternates.
 
-In an online course or MOOC, some professors might not want every question the
-same, despite the fact that question order and answer order can be randomized.
-So, Markua supports question alternates, using a simple (if slightly ugly)
-syntax. Question alternates are only supported in quizzes, since they make no
-sense to include in exercises.
+In an online course, some professors might not want every question the same,
+despite the fact that question order and answer order can be randomized. So,
+Markua supports question alternates, using a simple (if slightly ugly) syntax.
+Question alternates are only supported in quizzes, since they make no sense to
+include in exercises.
 
 To create question alternates, every question in the quiz (not just those with
 alternates) must be numbered sequentially, starting from 1, using a `?#` syntax.

@@ -269,7 +269,7 @@ This is a paragraph.
 ```
 
 Note the use of three backticks in the above example, to treat the Markua like
-inline code.
+inline code (instead of actually like headers).
 
 The other style of headers, called Setext headers, has the following headings:
 
@@ -297,9 +297,12 @@ least some of your headers. My advice is to just use atx headers all the time.
 (The `{class: part}` attribute list on a chapter header to make a part header
 does actually work with Setext headers, but it's really ugly.)
 
-Finally, note that while it is confusing and ugly to mix and match using Setext
-and atx headers for chapters and sections in the same document, you can do it.
-However, please don't.
+Note that while it is confusing and ugly to mix and match using atx and Setext
+headers for chapters and sections in the same document, you can do it. However,
+please don't.
+
+Finally, headers and their mapping to document structure concepts are discussed
+later in the Document Structure section.
 
 # Images
 
@@ -2455,13 +2458,15 @@ material book for the course.
 
 Markua is a way of writing books and courses. Books have things like chapters,
 sections and subsections. Courses typically call their chapters "modules", but
-it's the same idea.
+it's the same idea. Sometimes books or courses organize their chapters or
+modules in parts.
 
-Sometimes books have parts, e.g. Part One and Part Two.
+Markdown defines two types of heading styles.
 
-Markua maps Markdown headings to document structure concepts:
+Markua's first innovation is to map both of these heading styles to document
+structure concepts.
 
-## Markdown "atx" Header Mapping
+The preferred style, called atx headers, has the following meaning in Markua:
 
 ```
 {class: part}
@@ -2477,25 +2482,67 @@ This is a paragraph.
 
 This is a paragraph.
 
-### Sub-Section
+### Sub-section
 
 This is a paragraph.
 
-#### Sub-Sub-Section
+#### Sub-sub-section
 
 This is a paragraph.
 
-##### Sub-Sub-Sub-Section
+##### Sub-sub-sub-section
 
 This is a paragraph.
 
-###### Sub-Sub-Sub-Sub-Section
+###### Sub-sub-sub-sub-section
 
 This is a paragraph.
 ```
 
-In the HTML output, the Part and Chapter heading both produce an `h1`.
-The `Section` heading produces an `h2`, etc:
+The other style of headers, called Setext headers, defines two levels of
+heading only. Here's how those are used in Markua:
+
+```
+{class: part}
+Part
+====
+
+This is a paragraph.
+
+Chapter
+=======
+
+This is a paragraph.
+
+Section
+-------
+
+This is a paragraph.
+```
+
+Setext headers look nice, but only if you're only using chapters and sections.
+If you want to add sub-sections (or lower), you'll be using atx headers for at
+least some of your headers. My advice is to just use atx headers all the time.
+(The `{class: part}` attribute list on a chapter header to make a part header
+does actually work with Setext headers, but it's really ugly.)
+
+Note that while it is confusing and ugly to mix and match using atx and Setext
+headers for chapters and sections in the same document, you can do it. However,
+please don't.
+
+Now, regardless of whether you are using the atx or Setext header style of
+header, the key point is that Markua is mapping the headers to document
+structure concepts.
+
+The header defines the name of the part, chapter, section, etc., and the content
+underneath it becomes the content of that given thing (until the next header
+is reached).
+
+In the HTML output, the Part and Chapter heading (for atx or Setext headers)
+both produce an `h1`, the `Section` heading produces an `h2`, and the
+Sub-Section heading produces an `h3`. Lower levels go down to `h6`.
+
+To be clear, these are the Markdown "atx" header mappings:
 
 `#`
 : Used for a Chapter heading when there is no `{class: part}` attribute list,
@@ -2521,12 +2568,55 @@ and are only differentiated by the presence of a `{class: part}` attribute list,
 is that not all books have parts, so it would be awkward to start chapters with
 the second-level heading.
 
-## Markdown "Setext" Header Mapping
+```````````````````````````````` example
+{class: part}
+# Part
 
-Markdown also defines an alternate header syntax for producing h1 and h2 tags.
-This syntax, called Setext headers, looks like this when used in Markua:
+This is a paragraph.
 
-```
+# Chapter
+
+This is a paragraph.
+
+## Section
+
+This is a paragraph.
+
+### Sub-section
+
+This is a paragraph.
+
+#### Sub-sub-section
+
+This is a paragraph.
+
+##### Sub-sub-sub-section
+
+This is a paragraph.
+
+###### Sub-sub-sub-sub-section
+
+This is a paragraph.
+.
+<h1 class="part">Part</h1>
+<p>This is a paragraph.</p>
+<h1>Chapter</h1>
+<p>This is a paragraph.</p>
+<h2>Section</h2>
+<p>This is a paragraph.</p>
+<h3>Sub-section</h3>
+<p>This is a paragraph.</p>
+<h4>Sub-sub-section</h4>
+<p>This is a paragraph.</p>
+<h5>Sub-sub-sub-section</h5>
+<p>This is a paragraph.</p>
+<h6>Sub-sub-sub-sub-section</h6>
+<p>This is a paragraph.</p>
+````````````````````````````````
+
+These are the Setext header mappings:
+
+```````````````````````````````` example
 {class: part}
 Part
 ====
@@ -2534,17 +2624,15 @@ Part
 This is a paragraph.
 
 Chapter
-======= 
-
-This is a paragraph.
-
-Section
 -------
 
 This is a paragraph.
-```
-
-## Part heading HTML output
+.
+<h1 class="part">Part</h1>
+<p>This is a paragraph.</p>
+<h1>Chapter</h1>
+<p>This is a paragraph.</p>
+````````````````````````````````
 
 In the HTML output, the only difference between a part and chapter heading on
 the heading itself is that there is a `class="part"` attribute shown. However,
@@ -2552,38 +2640,16 @@ obviously, the part and chapter headings are treated differently elsewhere, such
 as in the table of contents of the book or the navigation structure of the
 course.
 
-### Correct usage
+The `{class: part}` is an example of an attribute list, which is another of
+Markua's main additions to Markdown. There can be no blank line between the
+attribute list and the header it is attached to. Attribute lists are discussed
+in the Metadata section later.
 
-Part heading, atx headers:
+Note that adding a `{class: part}` attribute list to any other heading level
+than an `h1` is ignored by Markua.
 
-```````````````````````````````` example
-{class: part}
-# Part Heading
-
-This is a paragraph after the start of a part.
-.
-<h1 class="part">Part Heading</h1>
-<p>This is a paragraph after the start of a part.</p>
-````````````````````````````````
-
-Part heading, Setext headers:
-
-```````````````````````````````` example
-{class: part}
-Part Heading
-============
-
-This is a paragraph after the start of a part.
-.
-<h1 class="part">Part Heading</h1>
-<p>This is a paragraph after the start of a part.</p>
-````````````````````````````````
-
-### Incorrect usage
-
-Adding `{class: part}` to any other heading level than an `h1` is ignored.
-
-Ignored on atx section headers:
+Here's an example of this being incorrectly added to an atx section header,
+which will have no effect:
 
 ```````````````````````````````` example
 {class: part}
@@ -2595,7 +2661,8 @@ Foo
 <p>Foo</p>
 ````````````````````````````````
 
-Ignored on Setext section headers:
+Here's an example of this being incorrectly added to a Setext section header,
+which will also have no effect:
 
 ```````````````````````````````` example
 {class: part}

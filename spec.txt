@@ -3548,370 +3548,6 @@ Yada yada `puts "hi"`{format: ruby} yada yada.
 
 
 
-## Code resources (M)
-
-Code can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to code as to all other resources.
-
-As discussed, code cannot have alt text. It's just text. If any alt text is
-provided for a code resource, it is ignored.
-
-Markua specifies only one specific file extension to be associated with a type
-of `code`: the `.txt` extension, which is for the format of `text`. However,
-Markua Processors must interpret **all** unspecified file extensions as
-specifying a resource of type `code` with a format of `guess`.
-
-Regardless of whether syntax highlighting is supported and the programming
-language is detected, all code must be formatted as `monospaced text` by Markua
-Processors.
-
-The `text` format means to not do any syntax highlighting as well.
-
-The `guess` format is a request for the Markua Processor to guess at the
-programming language based on the file extension and/or the syntax of the code
-itself. Then, if the detected language corresponds to a particular programming
-language which the Markua Processor recognizes, and if the Markua Processor
-supports syntax highlighting, then it can format the resource as nicely
-syntax-highlighted code. Syntax highlighting is entirely optional in Markua
-Processors. If a Markua Processor does not support syntax highlighting, and/or
-if it cannot detect a matching supported programming language, then it must
-format the code as though the format was `text`--i.e. to format it as
-unformatted monospaced text.
-
-Besides the `text` and `guess` values of the format attribute, you can also
-specify the programming language by setting the format attribute to a specific
-programming language. This is more reliable than `guess`. Unlike other resource
-types, Markua does not specify the complete set of the values of the `format`
-attribute--there are so many programming languages in the world, and new ones
-are added so frequently, that doing so would be impractical.
-
-However, while a complete set of the values of the `format` attribute is not
-specified, Markua does specify the `console` value of the `format` attribute to
-indicate console input. A Markua Processor should format console input as such.
-(For example, Leanpub uses the open source Pygments library for its code
-formatting, and Pygments handles `console` format correctly, so Leanpub gets this
-for free.)
-
-The default value of the format attribute for code is complex:
-
-1. For code which is inserted as a span (which is only supported with inline
-   resources), the default format is `text`.
-2. For code which is inserted as a figure which is inserted as an inline
-   resource using three tildes, the default format is `text`.
-3. For all other code, the default format is `guess`. This includes local and web
-   resources inserted as figures, and code inserted as an inline figure using
-   three backticks.
-
-Note that the default format can be overridden by specifying it via an attribute
-list, or after the three backticks in syntactic sugar.
-
-### Supported Attributes for Code
-
-The following are the supported attributes for code resources, in addition to the
-`class`, `format`, `title` and `type` attributes which all resources support.
-
-`line-numbers`
-: This determines whether the code sample shows line numbers. Legal values are
-`true` or `false`. The default value is `false`. Any value other than `true` is
-interpreted as `false`.
-
-`number-from`
-: If line numbers are shown, this lets you override the starting number of the
-line numbers. The default value is `1`.
-
-`crop-start`
-: Sometimes it's desirable to only show part of a code resource defined in an
-external file as the code example. The `crop-start` and `crop-end` attributes let
-you accomplish this. The `crop-start` attribute defines the line which represents
-the first line included from the resource. For example, `{crop-start: 10,
-crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are
-shown and are numbered as lines 10-15. The default value is 1, which is the first
-line of the file.
-
-`crop-end`
-: This attribute ends the range started with crop-start. The default value of
-`crop-end` is to be omitted, which is equivalent to specifying the last line of
-the file.
-
-#### Default Value of the `format` attribute in Inline Code Samples
-
-The default value of the `format` attribute for a code resource inserted as a
-figure varies based on context.
-
-If the code resource is a local or web resource, it defaults to `guess`.
-
-If the code resource is an inline resource, the default varies based on the
-delimiter, and whether the code is inserted as a span or as a block.
-
-With three backticks the default format is `guess`, and with three tildes, the
-default format is `text`. This way, you can vary the default without having to
-type an attribute list: if you want the code language guessed at, use backticks;
-if you don't, use tildes. Of course, you can specify any attributes you wish
-with either delimiter, and specified attributes override default ones. The only
-reason there are different defaults are to make things easier to type.
-Programmers refer to such niceties as "syntactic sugar".
-
-The default value of block code resources inserted with three backticks can be
-overridden from `guess` to some other value by setting by the
-`default-code-language` attribute on the entire Markua document. (This attribute
-has no effect on resources inserted with three tildes.) The default value of
-code span resources inserted as spans with single backticks can be overridden
-from the default value of `text` to some other value by setting the
-`default-code-span-language` on the entire Markua document.
-
-### Local Code Resources
-
-Local code resources can be inserted as a figure.
-
-This first figure will be a type of code and a format of `guess`. A Markua
-Processor which associates `.rb` file extensions with Ruby code will treat this
-as Ruby code; a Markua Processor which has no association for `.rb` files will
-treat it as plain text:
-
-~~~
-Here's a paragraph before the figure.
-
-![](hello.rb "Hello World in Ruby")
-
-Here's a paragraph after the figure.
-~~~
-
-That is equivalent to:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: guess}
-![](hello.rb "Hello World in Ruby")
-
-Here's a paragraph after the figure.
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-Here's a paragraph before the figure.
-
-{format: ruby}
-![](hello.rb "Hello World in Ruby")
-
-Here's a paragraph after the figure.
-~~~
-
-Note that the title is optional in all figures:
-
-~~~
-Here's a paragraph before the figure.
-
-![](hello.rb)
-
-Here's a paragraph after the figure.
-~~~
-
-### Web Code Resources
-
-Web code resources function identically to how local code resources work,
-including the significance of file extensions. The only differences is that the
-files are on the web.
-
-This will be a type of code and a format of `guess` since the file extension is
-not specified:
-
-~~~
-![](http://markua.com/hello.rb "Hello World in Ruby")
-~~~
-
-That is equivalent to:
-
-~~~
-{format: guess}
-![](http://markua.com/hello.rb "Hello World in Ruby")
-~~~
-
-If you don't want to take chances you can do this:
-
-~~~
-{format: ruby}
-![](http://markua.com/hello.rb "Hello World in Ruby")
-~~~
-
-### Inline Code Resources
-
-Inline code resources are the most flexible way to insert code. They are the only
-way to insert code as a span resource, and the most straightforward way to add
-short code examples as figures.
-
-The great thing about inline code resources, either as spans or figures, is that
-they work the same way as they do in CommonMark and GFM, with small additions
-by Markua.
-
-#### No Attribute Lists or Format Specifiers on Indented Code Blocks
-
-Indented code blocks are supported for compatibility with CommonMark and GFM.
-However, no attribute lists or format specifiers can be used. If you want to use
-them, use a fenced code block.
-
-#### Attribute Lists and Format Specifiers on Fenced Code Blocks
-
-Fenced code blocks, discussed earlier, are how to insert inline code resources
-as figures. These can have attribute lists or format specifiers.
-
-This will be a type of code and a format of `guess` since three backticks are
-used and since the format is not specified:
-
-~~~
-Some paragraph.
-
-```
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-That is equivalent to:
-
-~~~
-Some paragraph.
-
-```guess
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-If you don't want to take chances you can do this to explicitly specify the
-format:
-
-~~~
-Some paragraph.
-
-```ruby
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-This Ruby code may be formatted as such if the Markua Processor understands
-`ruby`. If not, the `ruby` format will be ignored.
-
-If you don't like syntactic sugar you can do:
-
-~~~
-Some paragraph.
-
-{format: ruby}
-```
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-If you want a figure title, you can add it to the attribute list with any of
-the above. For example:
-
-~~~
-Some paragraph.
-
-{title: "Hello World in Ruby"}
-```ruby
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-Finally, if you want the code to definitely not get syntax highlighted, you can
-force format to be `text` in one of two ways.
-
-First, you can set it explicitly:
-
-~~~
-Some paragraph.
-
-```text
-puts "hello"
-```
-
-Some paragraph.
-~~~
-
-Second, you can use three tildes instead of three backticks, since the default
-with tildes is `text` not `guess`:
-
-```
-Some paragraph.
-
-~~~
-puts "hello"
-~~~
-
-Some paragraph.
-```
-
-As discussed previously, console input and output should be formatted as such by
-a Markua Processor:
-
-~~~
-```console
-$ git init
-Initialized empty Git repository in /path/to/repo
-```
-~~~
-
-Finally, it's important to note that when you are writing about other inline
-formats, such as SVG or AsciiMath, what you are really doing is creating a code
-resource. This is shown in the sections below, which discuss SVG and AsciiMath,
-but this applies more broadly.
-
-#### Attribute Lists on Code Spans
-
-Code spans are discussed later in the spec. While code spans are done just as in
-CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
-This serves as a hint to any syntax highlighter:
-
-~~~
-Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
-~~~
-
-### Marking Code as Added or Deleted
-
-Markua supports marking code as added or deleted, which can be helpful if you are
-writing a computer programming book and want to indicate what code should be
-added or removed to a larger program.
-
-The way to do this is to add special comment lines to your code.
-
-The magic words are `markua-start-insert`, `markua-end-insert`,
-`markua-start-delete` and `markua-end-delete`. Any line containing one of those
-words will be removed completely by a Markua Processor before being inserted into
-the output.
-
-The Markua Processor will then be able to determine which code is being deleted
-or inserted, and format it accordingly. The recommended way for a Markua
-Processor to do this is to make code which is being inserted get **`bolded`**,
-and to make code which is getting deleted to be put in ~~`strikethrough`~~.
-
-Finally, while syntax highlighting is optional in a Markua Processor, if a Markua
-Processor does support syntax highlighting it is allowed for the Markua Processor
-to not do any syntax highlighting when there is the presence of any of any
-special `markua-*` comments. Syntax highlighting may make it harder to notice the
-added and removed code, if they are formatted with bold and strikethrough
-respectively.
-
-### Line Wrapping in Code Resources
-
-Code resources should have newlines added by the author to ensure that automatic
-line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
-all code is visible on a page, and *may* add continuation characters (like the
-backslash `\` character) in the output to indicate that a line has been
-automatically wrapped. However, adding a continuation character is not a
-requirement, nor is the choice of which continuation character is used.
-
-
 ## Verbatim resources (M)
 
 TODO
@@ -6612,6 +6248,375 @@ Closing code fences cannot have [info strings]:
 <pre><code>``` aaa
 </code></pre>
 ````````````````````````````````
+
+
+
+<div class="extension">
+
+## Code resources (M)
+
+Code can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.
+
+As discussed, code cannot have alt text. It's just text. If any alt text is
+provided for a code resource, it is ignored.
+
+Markua specifies only one specific file extension to be associated with a type
+of `code`: the `.txt` extension, which is for the format of `text`. However,
+Markua Processors must interpret **all** unspecified file extensions as
+specifying a resource of type `code` with a format of `guess`.
+
+Regardless of whether syntax highlighting is supported and the programming
+language is detected, all code must be formatted as `monospaced text` by Markua
+Processors.
+
+The `text` format means to not do any syntax highlighting as well.
+
+The `guess` format is a request for the Markua Processor to guess at the
+programming language based on the file extension and/or the syntax of the code
+itself. Then, if the detected language corresponds to a particular programming
+language which the Markua Processor recognizes, and if the Markua Processor
+supports syntax highlighting, then it can format the resource as nicely
+syntax-highlighted code. Syntax highlighting is entirely optional in Markua
+Processors. If a Markua Processor does not support syntax highlighting, and/or
+if it cannot detect a matching supported programming language, then it must
+format the code as though the format was `text`--i.e. to format it as
+unformatted monospaced text.
+
+Besides the `text` and `guess` values of the format attribute, you can also
+specify the programming language by setting the format attribute to a specific
+programming language. This is more reliable than `guess`. Unlike other resource
+types, Markua does not specify the complete set of the values of the `format`
+attribute--there are so many programming languages in the world, and new ones
+are added so frequently, that doing so would be impractical.
+
+However, while a complete set of the values of the `format` attribute is not
+specified, Markua does specify the `console` value of the `format` attribute to
+indicate console input. A Markua Processor should format console input as such.
+(For example, Leanpub uses the open source Pygments library for its code
+formatting, and Pygments handles `console` format correctly, so Leanpub gets this
+for free.)
+
+The default value of the format attribute for code is complex:
+
+1. For code which is inserted as a span (which is only supported with inline
+   resources), the default format is `text`.
+2. For code which is inserted as a figure which is inserted as an inline
+   resource using three tildes, the default format is `text`.
+3. For all other code, the default format is `guess`. This includes local and web
+   resources inserted as figures, and code inserted as an inline figure using
+   three backticks.
+
+Note that the default format can be overridden by specifying it via an attribute
+list, or after the three backticks in syntactic sugar.
+
+### Supported Attributes for Code
+
+The following are the supported attributes for code resources, in addition to the
+`class`, `format`, `title` and `type` attributes which all resources support.
+
+`line-numbers`
+: This determines whether the code sample shows line numbers. Legal values are
+`true` or `false`. The default value is `false`. Any value other than `true` is
+interpreted as `false`.
+
+`number-from`
+: If line numbers are shown, this lets you override the starting number of the
+line numbers. The default value is `1`.
+
+`crop-start`
+: Sometimes it's desirable to only show part of a code resource defined in an
+external file as the code example. The `crop-start` and `crop-end` attributes let
+you accomplish this. The `crop-start` attribute defines the line which represents
+the first line included from the resource. For example, `{crop-start: 10,
+crop-end: 15, line-numbers: true, number-from: 10}` ensures that lines 10-15 are
+shown and are numbered as lines 10-15. The default value is 1, which is the first
+line of the file.
+
+`crop-end`
+: This attribute ends the range started with crop-start. The default value of
+`crop-end` is to be omitted, which is equivalent to specifying the last line of
+the file.
+
+#### Default Value of the `format` attribute in Inline Code Samples
+
+The default value of the `format` attribute for a code resource inserted as a
+figure varies based on context.
+
+If the code resource is a local or web resource, it defaults to `guess`.
+
+If the code resource is an inline resource, the default varies based on the
+delimiter, and whether the code is inserted as a span or as a block.
+
+With three backticks the default format is `guess`, and with three tildes, the
+default format is `text`. This way, you can vary the default without having to
+type an attribute list: if you want the code language guessed at, use backticks;
+if you don't, use tildes. Of course, you can specify any attributes you wish
+with either delimiter, and specified attributes override default ones. The only
+reason there are different defaults are to make things easier to type.
+Programmers refer to such niceties as "syntactic sugar".
+
+The default value of block code resources inserted with three backticks can be
+overridden from `guess` to some other value by setting by the
+`default-code-language` attribute on the entire Markua document. (This attribute
+has no effect on resources inserted with three tildes.) The default value of
+code span resources inserted as spans with single backticks can be overridden
+from the default value of `text` to some other value by setting the
+`default-code-span-language` on the entire Markua document.
+
+### Local Code Resources
+
+Local code resources can be inserted as a figure.
+
+This first figure will be a type of code and a format of `guess`. A Markua
+Processor which associates `.rb` file extensions with Ruby code will treat this
+as Ruby code; a Markua Processor which has no association for `.rb` files will
+treat it as plain text:
+
+~~~
+Here's a paragraph before the figure.
+
+![](hello.rb "Hello World in Ruby")
+
+Here's a paragraph after the figure.
+~~~
+
+That is equivalent to:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: guess}
+![](hello.rb "Hello World in Ruby")
+
+Here's a paragraph after the figure.
+~~~
+
+If you don't want to take chances you can do this:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: ruby}
+![](hello.rb "Hello World in Ruby")
+
+Here's a paragraph after the figure.
+~~~
+
+Note that the title is optional in all figures:
+
+~~~
+Here's a paragraph before the figure.
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+~~~
+
+### Web Code Resources
+
+Web code resources function identically to how local code resources work,
+including the significance of file extensions. The only differences is that the
+files are on the web.
+
+This will be a type of code and a format of `guess` since the file extension is
+not specified:
+
+~~~
+![](http://markua.com/hello.rb "Hello World in Ruby")
+~~~
+
+That is equivalent to:
+
+~~~
+{format: guess}
+![](http://markua.com/hello.rb "Hello World in Ruby")
+~~~
+
+If you don't want to take chances you can do this:
+
+~~~
+{format: ruby}
+![](http://markua.com/hello.rb "Hello World in Ruby")
+~~~
+
+### Inline Code Resources
+
+Inline code resources are the most flexible way to insert code. They are the only
+way to insert code as a span resource, and the most straightforward way to add
+short code examples as figures.
+
+The great thing about inline code resources, either as spans or figures, is that
+they work the same way as they do in CommonMark and GFM, with small additions
+by Markua.
+
+#### No Attribute Lists or Format Specifiers on Indented Code Blocks
+
+Indented code blocks are supported for compatibility with CommonMark and GFM.
+However, no attribute lists or format specifiers can be used. If you want to use
+them, use a fenced code block.
+
+#### Attribute Lists and Format Specifiers on Fenced Code Blocks
+
+Fenced code blocks, discussed earlier, are how to insert inline code resources
+as figures. These can have attribute lists or format specifiers.
+
+This will be a type of code and a format of `guess` since three backticks are
+used and since the format is not specified:
+
+~~~
+Some paragraph.
+
+```
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+That is equivalent to:
+
+~~~
+Some paragraph.
+
+```guess
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you don't want to take chances you can do this to explicitly specify the
+format:
+
+~~~
+Some paragraph.
+
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+This Ruby code may be formatted as such if the Markua Processor understands
+`ruby`. If not, the `ruby` format will be ignored.
+
+If you don't like syntactic sugar you can do:
+
+~~~
+Some paragraph.
+
+{format: ruby}
+```
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+If you want a figure title, you can add it to the attribute list with any of
+the above. For example:
+
+~~~
+Some paragraph.
+
+{title: "Hello World in Ruby"}
+```ruby
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Finally, if you want the code to definitely not get syntax highlighted, you can
+force format to be `text` in one of two ways.
+
+First, you can set it explicitly:
+
+~~~
+Some paragraph.
+
+```text
+puts "hello"
+```
+
+Some paragraph.
+~~~
+
+Second, you can use three tildes instead of three backticks, since the default
+with tildes is `text` not `guess`:
+
+```
+Some paragraph.
+
+~~~
+puts "hello"
+~~~
+
+Some paragraph.
+```
+
+As discussed previously, console input and output should be formatted as such by
+a Markua Processor:
+
+~~~
+```console
+$ git init
+Initialized empty Git repository in /path/to/repo
+```
+~~~
+
+Finally, it's important to note that when you are writing about other inline
+formats, such as SVG or AsciiMath, what you are really doing is creating a code
+resource. This is shown in the sections below, which discuss SVG and AsciiMath,
+but this applies more broadly.
+
+#### Attribute Lists on Code Spans
+
+Code spans are discussed later in the spec. While code spans are done just as in
+CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
+This serves as a hint to any syntax highlighter:
+
+~~~
+Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
+~~~
+
+### Marking Code as Added or Deleted
+
+Markua supports marking code as added or deleted, which can be helpful if you are
+writing a computer programming book and want to indicate what code should be
+added or removed to a larger program.
+
+The way to do this is to add special comment lines to your code.
+
+The magic words are `markua-start-insert`, `markua-end-insert`,
+`markua-start-delete` and `markua-end-delete`. Any line containing one of those
+words will be removed completely by a Markua Processor before being inserted into
+the output.
+
+The Markua Processor will then be able to determine which code is being deleted
+or inserted, and format it accordingly. The recommended way for a Markua
+Processor to do this is to make code which is being inserted get **`bolded`**,
+and to make code which is getting deleted to be put in ~~`strikethrough`~~.
+
+Finally, while syntax highlighting is optional in a Markua Processor, if a Markua
+Processor does support syntax highlighting it is allowed for the Markua Processor
+to not do any syntax highlighting when there is the presence of any of any
+special `markua-*` comments. Syntax highlighting may make it harder to notice the
+added and removed code, if they are formatted with bold and strikethrough
+respectively.
+
+### Line Wrapping in Code Resources
+
+Code resources should have newlines added by the author to ensure that automatic
+line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
+all code is visible on a page, and *may* add continuation characters (like the
+backslash `\` character) in the output to indicate that a line has been
+automatically wrapped. However, adding a continuation character is not a
+requirement, nor is the choice of which continuation character is used.
+
+</div>
 
 
 

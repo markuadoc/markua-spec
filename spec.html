@@ -182,11 +182,10 @@ $(document).ready(function() {
 <li><a href="#resource-attribute-lists-m-"><span class="number">4.5</span>Resource Attribute Lists (M)</a></li>
 <li><a href="#common-resource-attributes-m-"><span class="number">4.6</span>Common Resource Attributes (M)</a></li>
 <li><a href="#resource-insertion-methods-m-"><span class="number">4.7</span>Resource insertion methods (M)</a></li>
-<li><a href="#code-resources-m-"><span class="number">4.8</span>Code resources (M)</a></li>
-<li><a href="#verbatim-resources-m-"><span class="number">4.9</span>Verbatim resources (M)</a></li>
-<li><a href="#todo-complete-list-of-syntactic-sugar-m-"><span class="number">4.10</span>TODO Complete List of Syntactic Sugar (M)</a></li>
-<li><a href="#block-quotes-with-curly-braces-m-"><span class="number">4.11</span>Block quotes with curly braces (M)</a></li>
-<li><a href="#list-attributes-m-"><span class="number">4.12</span>List attributes (M)</a></li>
+<li><a href="#verbatim-resources-m-"><span class="number">4.8</span>Verbatim resources (M)</a></li>
+<li><a href="#todo-complete-list-of-syntactic-sugar-m-"><span class="number">4.9</span>TODO Complete List of Syntactic Sugar (M)</a></li>
+<li><a href="#block-quotes-with-curly-braces-m-"><span class="number">4.10</span>Block quotes with curly braces (M)</a></li>
+<li><a href="#list-attributes-m-"><span class="number">4.11</span>List attributes (M)</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">5</span>Blocks and inlines</a>
@@ -202,12 +201,13 @@ $(document).ready(function() {
 <li><a href="#setext-headings"><span class="number">6.3</span>Setext headings</a></li>
 <li><a href="#indented-code-blocks"><span class="number">6.4</span>Indented code blocks</a></li>
 <li><a href="#fenced-code-blocks"><span class="number">6.5</span>Fenced code blocks</a></li>
-<li><a href="#no-html-blocks-m-"><span class="number">6.6</span>No HTML blocks (M)</a></li>
-<li><a href="#link-reference-definitions"><span class="number">6.7</span>Link reference definitions</a></li>
-<li><a href="#paragraphs"><span class="number">6.8</span>Paragraphs</a></li>
-<li><a href="#blank-lines"><span class="number">6.9</span>Blank lines</a></li>
-<li><a href="#tables-gfm-"><span class="number">6.10</span>Tables (GFM)</a></li>
-<li><a href="#table-resources-and-csv-format-tables-m-"><span class="number">6.11</span>Table resources and CSV-format tables (M)</a></li>
+<li><a href="#code-resources-m-"><span class="number">6.6</span>Code resources (M)</a></li>
+<li><a href="#no-html-blocks-m-"><span class="number">6.7</span>No HTML blocks (M)</a></li>
+<li><a href="#link-reference-definitions"><span class="number">6.8</span>Link reference definitions</a></li>
+<li><a href="#paragraphs"><span class="number">6.9</span>Paragraphs</a></li>
+<li><a href="#blank-lines"><span class="number">6.10</span>Blank lines</a></li>
+<li><a href="#tables-gfm-"><span class="number">6.11</span>Tables (GFM)</a></li>
+<li><a href="#table-resources-and-csv-format-tables-m-"><span class="number">6.12</span>Table resources and CSV-format tables (M)</a></li>
 </ul>
 </li>
 <li><a href="#container-blocks"><span class="number">7</span>Container blocks</a>
@@ -3783,299 +3783,8 @@ Span attribute lists can be used to set the format explicitly.</p>
 <p>For example, this resource would be formatted as Ruby code:</p>
 <pre><code>Yada yada `puts &quot;hi&quot;`{format: ruby} yada yada.
 </code></pre>
-<h2 id="code-resources-m-" class="definition">
-<span class="number">4.8</span>Code resources (M)
-</h2>
-<p>Code can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to code as to all other resources.</p>
-<p>As discussed, code cannot have alt text. It’s just text. If any alt text is
-provided for a code resource, it is ignored.</p>
-<p>Markua specifies only one specific file extension to be associated with a type
-of <code>code</code>: the <code>.txt</code> extension, which is for the format of <code>text</code>. However,
-Markua Processors must interpret <strong>all</strong> unspecified file extensions as
-specifying a resource of type <code>code</code> with a format of <code>guess</code>.</p>
-<p>Regardless of whether syntax highlighting is supported and the programming
-language is detected, all code must be formatted as <code>monospaced text</code> by Markua
-Processors.</p>
-<p>The <code>text</code> format means to not do any syntax highlighting as well.</p>
-<p>The <code>guess</code> format is a request for the Markua Processor to guess at the
-programming language based on the file extension and/or the syntax of the code
-itself. Then, if the detected language corresponds to a particular programming
-language which the Markua Processor recognizes, and if the Markua Processor
-supports syntax highlighting, then it can format the resource as nicely
-syntax-highlighted code. Syntax highlighting is entirely optional in Markua
-Processors. If a Markua Processor does not support syntax highlighting, and/or
-if it cannot detect a matching supported programming language, then it must
-format the code as though the format was <code>text</code>–i.e. to format it as
-unformatted monospaced text.</p>
-<p>Besides the <code>text</code> and <code>guess</code> values of the format attribute, you can also
-specify the programming language by setting the format attribute to a specific
-programming language. This is more reliable than <code>guess</code>. Unlike other resource
-types, Markua does not specify the complete set of the values of the <code>format</code>
-attribute–there are so many programming languages in the world, and new ones
-are added so frequently, that doing so would be impractical.</p>
-<p>However, while a complete set of the values of the <code>format</code> attribute is not
-specified, Markua does specify the <code>console</code> value of the <code>format</code> attribute to
-indicate console input. A Markua Processor should format console input as such.
-(For example, Leanpub uses the open source Pygments library for its code
-formatting, and Pygments handles <code>console</code> format correctly, so Leanpub gets this
-for free.)</p>
-<p>The default value of the format attribute for code is complex:</p>
-<ol>
-<li>For code which is inserted as a span (which is only supported with inline
-resources), the default format is <code>text</code>.</li>
-<li>For code which is inserted as a figure which is inserted as an inline
-resource using three tildes, the default format is <code>text</code>.</li>
-<li>For all other code, the default format is <code>guess</code>. This includes local and web
-resources inserted as figures, and code inserted as an inline figure using
-three backticks.</li>
-</ol>
-<p>Note that the default format can be overridden by specifying it via an attribute
-list, or after the three backticks in syntactic sugar.</p>
-<h3 id="supported-attributes-for-code" class="definition">
-<span class="number">4.8.1</span>Supported Attributes for Code
-</h3>
-<p>The following are the supported attributes for code resources, in addition to the
-<code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
-<p><code>line-numbers</code>
-: This determines whether the code sample shows line numbers. Legal values are
-<code>true</code> or <code>false</code>. The default value is <code>false</code>. Any value other than <code>true</code> is
-interpreted as <code>false</code>.</p>
-<p><code>number-from</code>
-: If line numbers are shown, this lets you override the starting number of the
-line numbers. The default value is <code>1</code>.</p>
-<p><code>crop-start</code>
-: Sometimes it’s desirable to only show part of a code resource defined in an
-external file as the code example. The <code>crop-start</code> and <code>crop-end</code> attributes let
-you accomplish this. The <code>crop-start</code> attribute defines the line which represents
-the first line included from the resource. For example, <code>{crop-start: 10, crop-end: 15, line-numbers: true, number-from: 10}</code> ensures that lines 10-15 are
-shown and are numbered as lines 10-15. The default value is 1, which is the first
-line of the file.</p>
-<p><code>crop-end</code>
-: This attribute ends the range started with crop-start. The default value of
-<code>crop-end</code> is to be omitted, which is equivalent to specifying the last line of
-the file.</p>
-<h4 id="default-value-of-the-attribute-in-inline-code-samples" class="definition">
-<span class="number">4.8.1.1</span>Default Value of the <code>format</code> attribute in Inline Code Samples
-</h4>
-<p>The default value of the <code>format</code> attribute for a code resource inserted as a
-figure varies based on context.</p>
-<p>If the code resource is a local or web resource, it defaults to <code>guess</code>.</p>
-<p>If the code resource is an inline resource, the default varies based on the
-delimiter, and whether the code is inserted as a span or as a block.</p>
-<p>With three backticks the default format is <code>guess</code>, and with three tildes, the
-default format is <code>text</code>. This way, you can vary the default without having to
-type an attribute list: if you want the code language guessed at, use backticks;
-if you don’t, use tildes. Of course, you can specify any attributes you wish
-with either delimiter, and specified attributes override default ones. The only
-reason there are different defaults are to make things easier to type.
-Programmers refer to such niceties as “syntactic sugar”.</p>
-<p>The default value of block code resources inserted with three backticks can be
-overridden from <code>guess</code> to some other value by setting by the
-<code>default-code-language</code> attribute on the entire Markua document. (This attribute
-has no effect on resources inserted with three tildes.) The default value of
-code span resources inserted as spans with single backticks can be overridden
-from the default value of <code>text</code> to some other value by setting the
-<code>default-code-span-language</code> on the entire Markua document.</p>
-<h3 id="local-code-resources" class="definition">
-<span class="number">4.8.2</span>Local Code Resources
-</h3>
-<p>Local code resources can be inserted as a figure.</p>
-<p>This first figure will be a type of code and a format of <code>guess</code>. A Markua
-Processor which associates <code>.rb</code> file extensions with Ruby code will treat this
-as Ruby code; a Markua Processor which has no association for <code>.rb</code> files will
-treat it as plain text:</p>
-<pre><code>Here's a paragraph before the figure.
-
-![](hello.rb &quot;Hello World in Ruby&quot;)
-
-Here's a paragraph after the figure.
-</code></pre>
-<p>That is equivalent to:</p>
-<pre><code>Here's a paragraph before the figure.
-
-{format: guess}
-![](hello.rb &quot;Hello World in Ruby&quot;)
-
-Here's a paragraph after the figure.
-</code></pre>
-<p>If you don’t want to take chances you can do this:</p>
-<pre><code>Here's a paragraph before the figure.
-
-{format: ruby}
-![](hello.rb &quot;Hello World in Ruby&quot;)
-
-Here's a paragraph after the figure.
-</code></pre>
-<p>Note that the title is optional in all figures:</p>
-<pre><code>Here's a paragraph before the figure.
-
-![](hello.rb)
-
-Here's a paragraph after the figure.
-</code></pre>
-<h3 id="web-code-resources" class="definition">
-<span class="number">4.8.3</span>Web Code Resources
-</h3>
-<p>Web code resources function identically to how local code resources work,
-including the significance of file extensions. The only differences is that the
-files are on the web.</p>
-<p>This will be a type of code and a format of <code>guess</code> since the file extension is
-not specified:</p>
-<pre><code>![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
-</code></pre>
-<p>That is equivalent to:</p>
-<pre><code>{format: guess}
-![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
-</code></pre>
-<p>If you don’t want to take chances you can do this:</p>
-<pre><code>{format: ruby}
-![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
-</code></pre>
-<h3 id="inline-code-resources" class="definition">
-<span class="number">4.8.4</span>Inline Code Resources
-</h3>
-<p>Inline code resources are the most flexible way to insert code. They are the only
-way to insert code as a span resource, and the most straightforward way to add
-short code examples as figures.</p>
-<p>The great thing about inline code resources, either as spans or figures, is that
-they work the same way as they do in CommonMark and GFM, with small additions
-by Markua.</p>
-<h4 id="no-attribute-lists-or-format-specifiers-on-indented-code-blocks" class="definition">
-<span class="number">4.8.4.1</span>No Attribute Lists or Format Specifiers on Indented Code Blocks
-</h4>
-<p>Indented code blocks are supported for compatibility with CommonMark and GFM.
-However, no attribute lists or format specifiers can be used. If you want to use
-them, use a fenced code block.</p>
-<h4 id="attribute-lists-and-format-specifiers-on-fenced-code-blocks" class="definition">
-<span class="number">4.8.4.2</span>Attribute Lists and Format Specifiers on Fenced Code Blocks
-</h4>
-<p>Fenced code blocks, discussed earlier, are how to insert inline code resources
-as figures. These can have attribute lists or format specifiers.</p>
-<p>This will be a type of code and a format of <code>guess</code> since three backticks are
-used and since the format is not specified:</p>
-<pre><code>Some paragraph.
-
-```
-puts &quot;hello&quot;
-```
-
-Some paragraph.
-</code></pre>
-<p>That is equivalent to:</p>
-<pre><code>Some paragraph.
-
-```guess
-puts &quot;hello&quot;
-```
-
-Some paragraph.
-</code></pre>
-<p>If you don’t want to take chances you can do this to explicitly specify the
-format:</p>
-<pre><code>Some paragraph.
-
-```ruby
-puts &quot;hello&quot;
-```
-
-Some paragraph.
-</code></pre>
-<p>This Ruby code may be formatted as such if the Markua Processor understands
-<code>ruby</code>. If not, the <code>ruby</code> format will be ignored.</p>
-<p>If you don’t like syntactic sugar you can do:</p>
-<pre><code>Some paragraph.
-
-{format: ruby}
-```
-puts &quot;hello&quot;
-```
-
-Some paragraph.
-</code></pre>
-<p>If you want a figure title, you can add it to the attribute list with any of
-the above. For example:</p>
-<pre><code>Some paragraph.
-
-{title: &quot;Hello World in Ruby&quot;}
-```ruby
-puts &quot;hello&quot;
-```
-
-Some paragraph.
-</code></pre>
-<p>Finally, if you want the code to definitely not get syntax highlighted, you can
-force format to be <code>text</code> in one of two ways.</p>
-<p>First, you can set it explicitly:</p>
-<pre><code>Some paragraph.
-
-```text
-puts &quot;hello&quot;
-```
-
-Some paragraph.
-</code></pre>
-<p>Second, you can use three tildes instead of three backticks, since the default
-with tildes is <code>text</code> not <code>guess</code>:</p>
-<pre><code>Some paragraph.
-
-~~~
-puts &quot;hello&quot;
-~~~
-
-Some paragraph.
-</code></pre>
-<p>As discussed previously, console input and output should be formatted as such by
-a Markua Processor:</p>
-<pre><code>```console
-$ git init
-Initialized empty Git repository in /path/to/repo
-```
-</code></pre>
-<p>Finally, it’s important to note that when you are writing about other inline
-formats, such as SVG or AsciiMath, what you are really doing is creating a code
-resource. This is shown in the sections below, which discuss SVG and AsciiMath,
-but this applies more broadly.</p>
-<h4 id="attribute-lists-on-code-spans" class="definition">
-<span class="number">4.8.4.3</span>Attribute Lists on Code Spans
-</h4>
-<p>Code spans are discussed later in the spec. While code spans are done just as in
-CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
-This serves as a hint to any syntax highlighter:</p>
-<pre><code>Hello World in Ruby is a simple `puts &quot;hello world&quot;`{format: ruby} statement.
-</code></pre>
-<h3 id="marking-code-as-added-or-deleted" class="definition">
-<span class="number">4.8.5</span>Marking Code as Added or Deleted
-</h3>
-<p>Markua supports marking code as added or deleted, which can be helpful if you are
-writing a computer programming book and want to indicate what code should be
-added or removed to a larger program.</p>
-<p>The way to do this is to add special comment lines to your code.</p>
-<p>The magic words are <code>markua-start-insert</code>, <code>markua-end-insert</code>,
-<code>markua-start-delete</code> and <code>markua-end-delete</code>. Any line containing one of those
-words will be removed completely by a Markua Processor before being inserted into
-the output.</p>
-<p>The Markua Processor will then be able to determine which code is being deleted
-or inserted, and format it accordingly. The recommended way for a Markua
-Processor to do this is to make code which is being inserted get <strong><code>bolded</code></strong>,
-and to make code which is getting deleted to be put in ~~<code>strikethrough</code>~~.</p>
-<p>Finally, while syntax highlighting is optional in a Markua Processor, if a Markua
-Processor does support syntax highlighting it is allowed for the Markua Processor
-to not do any syntax highlighting when there is the presence of any of any
-special <code>markua-*</code> comments. Syntax highlighting may make it harder to notice the
-added and removed code, if they are formatted with bold and strikethrough
-respectively.</p>
-<h3 id="line-wrapping-in-code-resources" class="definition">
-<span class="number">4.8.6</span>Line Wrapping in Code Resources
-</h3>
-<p>Code resources should have newlines added by the author to ensure that automatic
-line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
-all code is visible on a page, and <em>may</em> add continuation characters (like the
-backslash <code>\</code> character) in the output to indicate that a line has been
-automatically wrapped. However, adding a continuation character is not a
-requirement, nor is the choice of which continuation character is used.</p>
 <h2 id="verbatim-resources-m-" class="definition">
-<span class="number">4.9</span>Verbatim resources (M)
+<span class="number">4.8</span>Verbatim resources (M)
 </h2>
 <p>TODO</p>
 <p>Since resources can…</p>
@@ -4154,7 +3863,7 @@ Markua Processor. Obviously, seeing a continuation character is in poetry is
 terrible, so the author should consider this a mistake that needs to be fixed by
 manually line wrapping.</p>
 <h3 id="local-verbatim-resources" class="definition">
-<span class="number">4.9.1</span>Local Verbatim resources
+<span class="number">4.8.1</span>Local Verbatim resources
 </h3>
 <p>Local Markua resources look like many other resources inserted as figures:</p>
 <pre><code>Here's a Shakespearean sonnet, which will not have a `class` and which will
@@ -4232,7 +3941,7 @@ Here's an E. E. Cummings poem:
 ![](iwillbe.txt &quot;I Will Be&quot;)
 </code></pre>
 <h3 id="web-verbatim-resources" class="definition">
-<span class="number">4.9.2</span>Web Verbatim resources
+<span class="number">4.8.2</span>Web Verbatim resources
 </h3>
 <p>Web Markua resources function identically to how local Markua resources work,
 including the significance of file extensions. The only difference is that the
@@ -4252,7 +3961,7 @@ Here's a Shakespearean sonnet:
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="inline-verbatim-resources" class="definition">
-<span class="number">4.9.3</span>Inline Verbatim resources
+<span class="number">4.8.3</span>Inline Verbatim resources
 </h3>
 <p>You might wonder why an inline resource of type <code>verbatim</code> would be supported at
 all. After all, isn’t it just Markua text?</p>
@@ -4370,7 +4079,7 @@ me   ow
 most lists are just lists, not resources, and do not need to be wrapped in a
 resource.</p>
 <h3 id="but-what-if-i-want-every-character-taken-literally-" class="definition">
-<span class="number">4.9.4</span>But what if I want every character taken literally?
+<span class="number">4.8.4</span>But what if I want every character taken literally?
 </h3>
 <p>If you want to type poetry where every character is taken exactly literally,
 instead of being potentially interpreted as Markua formatting, you need to use
@@ -4396,11 +4105,11 @@ and<span class="space"> </span>**this**<span class="space"> </span>is<span class
 </div>
 </div>
 <h2 id="todo-complete-list-of-syntactic-sugar-m-" class="definition">
-<span class="number">4.10</span>TODO Complete List of Syntactic Sugar (M)
+<span class="number">4.9</span>TODO Complete List of Syntactic Sugar (M)
 </h2>
 <p>TODO</p>
 <h2 id="block-quotes-with-curly-braces-m-" class="definition">
-<span class="number">4.11</span>Block quotes with curly braces (M)
+<span class="number">4.10</span>Block quotes with curly braces (M)
 </h2>
 <p>Block quotes in Markua are created in one of two ways:</p>
 <ol>
@@ -4455,7 +4164,7 @@ Processor differently than normal headings. Finally, if a Markua Processor is
 automatically generating a <a href="#toc">Table of Contents</a> from chapter and section
 headings, any headings inside blockquotes should be ignored.</p>
 <h2 id="list-attributes-m-" class="definition">
-<span class="number">4.12</span>List attributes (M)
+<span class="number">4.11</span>List attributes (M)
 </h2>
 <p>By default, Markua keeps the behaviour of lists to be identical to that in
 Markdown, as described by John Gruber and specified by CommonMark.
@@ -4546,7 +4255,7 @@ ability to have an <strong>attribute list</strong>, much like how resources can 
 attribute list. (Lists are not resources, however. That would not just be
 overkill, it would result in incompatibilites.)</p>
 <h3 id="supported-attributes-for-lists" class="definition">
-<span class="number">4.12.1</span>Supported Attributes for Lists
+<span class="number">4.11.1</span>Supported Attributes for Lists
 </h3>
 <p>The following are the supported attributes for lists.</p>
 <p><code>reversed</code>
@@ -4572,7 +4281,7 @@ delimiters. However, PDF and LaTeX are not subject to these limitations, and
 should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <p>The use of these attributes are shown in the following examples.</p>
 <h3 id="lists-with-attributes-good-style" class="definition">
-<span class="number">4.12.2</span>Lists with Attributes: Good Style
+<span class="number">4.11.2</span>Lists with Attributes: Good Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
 <div class="example" id="example-67">
@@ -4901,7 +4610,7 @@ after
 </div>
 </div>
 <h3 id="nested-lists-with-attributes" class="definition">
-<span class="number">4.12.3</span>Nested Lists with Attributes
+<span class="number">4.11.3</span>Nested Lists with Attributes
 </h3>
 <p>Everything which has been said about attribute lists on lists applies to nested
 lists as well. This example shows a nested list of the form 1, a, i, * (the
@@ -4979,7 +4688,7 @@ after
 after
 </code></pre>
 <h3 id="lists-with-attributes-lazy-style" class="definition">
-<span class="number">4.12.4</span>Lists with Attributes: Lazy Style
+<span class="number">4.11.4</span>Lists with Attributes: Lazy Style
 </h3>
 <p>It is acceptable to just use the number of the first label, and rely on list
 behaviour.</p>
@@ -5117,7 +4826,7 @@ after
 </div>
 </div>
 <h3 id="lists-with-attributes-redundant-style" class="definition">
-<span class="number">4.12.5</span>Lists with Attributes: Redundant Style
+<span class="number">4.11.5</span>Lists with Attributes: Redundant Style
 </h3>
 <p>This list will be numbered 1, 2, 3. This is just the default behaviour made
 explicit:</p>
@@ -5148,7 +4857,7 @@ after
 </div>
 </div>
 <h3 id="lists-with-attributes-bad-style" class="definition">
-<span class="number">4.12.6</span>Lists with Attributes: Bad Style
+<span class="number">4.11.6</span>Lists with Attributes: Bad Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>.
 The reason that this is bad style is that the specified delimiter and the
@@ -7450,8 +7159,301 @@ foo
 </div>
 </div>
 <div class="extension">
+<h2 id="code-resources-m-" class="definition">
+<span class="number">6.6</span>Code resources (M)
+</h2>
+<p>Code can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.</p>
+<p>As discussed, code cannot have alt text. It’s just text. If any alt text is
+provided for a code resource, it is ignored.</p>
+<p>Markua specifies only one specific file extension to be associated with a type
+of <code>code</code>: the <code>.txt</code> extension, which is for the format of <code>text</code>. However,
+Markua Processors must interpret <strong>all</strong> unspecified file extensions as
+specifying a resource of type <code>code</code> with a format of <code>guess</code>.</p>
+<p>Regardless of whether syntax highlighting is supported and the programming
+language is detected, all code must be formatted as <code>monospaced text</code> by Markua
+Processors.</p>
+<p>The <code>text</code> format means to not do any syntax highlighting as well.</p>
+<p>The <code>guess</code> format is a request for the Markua Processor to guess at the
+programming language based on the file extension and/or the syntax of the code
+itself. Then, if the detected language corresponds to a particular programming
+language which the Markua Processor recognizes, and if the Markua Processor
+supports syntax highlighting, then it can format the resource as nicely
+syntax-highlighted code. Syntax highlighting is entirely optional in Markua
+Processors. If a Markua Processor does not support syntax highlighting, and/or
+if it cannot detect a matching supported programming language, then it must
+format the code as though the format was <code>text</code>–i.e. to format it as
+unformatted monospaced text.</p>
+<p>Besides the <code>text</code> and <code>guess</code> values of the format attribute, you can also
+specify the programming language by setting the format attribute to a specific
+programming language. This is more reliable than <code>guess</code>. Unlike other resource
+types, Markua does not specify the complete set of the values of the <code>format</code>
+attribute–there are so many programming languages in the world, and new ones
+are added so frequently, that doing so would be impractical.</p>
+<p>However, while a complete set of the values of the <code>format</code> attribute is not
+specified, Markua does specify the <code>console</code> value of the <code>format</code> attribute to
+indicate console input. A Markua Processor should format console input as such.
+(For example, Leanpub uses the open source Pygments library for its code
+formatting, and Pygments handles <code>console</code> format correctly, so Leanpub gets this
+for free.)</p>
+<p>The default value of the format attribute for code is complex:</p>
+<ol>
+<li>For code which is inserted as a span (which is only supported with inline
+resources), the default format is <code>text</code>.</li>
+<li>For code which is inserted as a figure which is inserted as an inline
+resource using three tildes, the default format is <code>text</code>.</li>
+<li>For all other code, the default format is <code>guess</code>. This includes local and web
+resources inserted as figures, and code inserted as an inline figure using
+three backticks.</li>
+</ol>
+<p>Note that the default format can be overridden by specifying it via an attribute
+list, or after the three backticks in syntactic sugar.</p>
+<h3 id="supported-attributes-for-code" class="definition">
+<span class="number">6.6.1</span>Supported Attributes for Code
+</h3>
+<p>The following are the supported attributes for code resources, in addition to the
+<code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
+<p><code>line-numbers</code>
+: This determines whether the code sample shows line numbers. Legal values are
+<code>true</code> or <code>false</code>. The default value is <code>false</code>. Any value other than <code>true</code> is
+interpreted as <code>false</code>.</p>
+<p><code>number-from</code>
+: If line numbers are shown, this lets you override the starting number of the
+line numbers. The default value is <code>1</code>.</p>
+<p><code>crop-start</code>
+: Sometimes it’s desirable to only show part of a code resource defined in an
+external file as the code example. The <code>crop-start</code> and <code>crop-end</code> attributes let
+you accomplish this. The <code>crop-start</code> attribute defines the line which represents
+the first line included from the resource. For example, <code>{crop-start: 10, crop-end: 15, line-numbers: true, number-from: 10}</code> ensures that lines 10-15 are
+shown and are numbered as lines 10-15. The default value is 1, which is the first
+line of the file.</p>
+<p><code>crop-end</code>
+: This attribute ends the range started with crop-start. The default value of
+<code>crop-end</code> is to be omitted, which is equivalent to specifying the last line of
+the file.</p>
+<h4 id="default-value-of-the-attribute-in-inline-code-samples" class="definition">
+<span class="number">6.6.1.1</span>Default Value of the <code>format</code> attribute in Inline Code Samples
+</h4>
+<p>The default value of the <code>format</code> attribute for a code resource inserted as a
+figure varies based on context.</p>
+<p>If the code resource is a local or web resource, it defaults to <code>guess</code>.</p>
+<p>If the code resource is an inline resource, the default varies based on the
+delimiter, and whether the code is inserted as a span or as a block.</p>
+<p>With three backticks the default format is <code>guess</code>, and with three tildes, the
+default format is <code>text</code>. This way, you can vary the default without having to
+type an attribute list: if you want the code language guessed at, use backticks;
+if you don’t, use tildes. Of course, you can specify any attributes you wish
+with either delimiter, and specified attributes override default ones. The only
+reason there are different defaults are to make things easier to type.
+Programmers refer to such niceties as “syntactic sugar”.</p>
+<p>The default value of block code resources inserted with three backticks can be
+overridden from <code>guess</code> to some other value by setting by the
+<code>default-code-language</code> attribute on the entire Markua document. (This attribute
+has no effect on resources inserted with three tildes.) The default value of
+code span resources inserted as spans with single backticks can be overridden
+from the default value of <code>text</code> to some other value by setting the
+<code>default-code-span-language</code> on the entire Markua document.</p>
+<h3 id="local-code-resources" class="definition">
+<span class="number">6.6.2</span>Local Code Resources
+</h3>
+<p>Local code resources can be inserted as a figure.</p>
+<p>This first figure will be a type of code and a format of <code>guess</code>. A Markua
+Processor which associates <code>.rb</code> file extensions with Ruby code will treat this
+as Ruby code; a Markua Processor which has no association for <code>.rb</code> files will
+treat it as plain text:</p>
+<pre><code>Here's a paragraph before the figure.
+
+![](hello.rb &quot;Hello World in Ruby&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>That is equivalent to:</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: guess}
+![](hello.rb &quot;Hello World in Ruby&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>If you don’t want to take chances you can do this:</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: ruby}
+![](hello.rb &quot;Hello World in Ruby&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>Note that the title is optional in all figures:</p>
+<pre><code>Here's a paragraph before the figure.
+
+![](hello.rb)
+
+Here's a paragraph after the figure.
+</code></pre>
+<h3 id="web-code-resources" class="definition">
+<span class="number">6.6.3</span>Web Code Resources
+</h3>
+<p>Web code resources function identically to how local code resources work,
+including the significance of file extensions. The only differences is that the
+files are on the web.</p>
+<p>This will be a type of code and a format of <code>guess</code> since the file extension is
+not specified:</p>
+<pre><code>![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
+</code></pre>
+<p>That is equivalent to:</p>
+<pre><code>{format: guess}
+![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
+</code></pre>
+<p>If you don’t want to take chances you can do this:</p>
+<pre><code>{format: ruby}
+![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
+</code></pre>
+<h3 id="inline-code-resources" class="definition">
+<span class="number">6.6.4</span>Inline Code Resources
+</h3>
+<p>Inline code resources are the most flexible way to insert code. They are the only
+way to insert code as a span resource, and the most straightforward way to add
+short code examples as figures.</p>
+<p>The great thing about inline code resources, either as spans or figures, is that
+they work the same way as they do in CommonMark and GFM, with small additions
+by Markua.</p>
+<h4 id="no-attribute-lists-or-format-specifiers-on-indented-code-blocks" class="definition">
+<span class="number">6.6.4.1</span>No Attribute Lists or Format Specifiers on Indented Code Blocks
+</h4>
+<p>Indented code blocks are supported for compatibility with CommonMark and GFM.
+However, no attribute lists or format specifiers can be used. If you want to use
+them, use a fenced code block.</p>
+<h4 id="attribute-lists-and-format-specifiers-on-fenced-code-blocks" class="definition">
+<span class="number">6.6.4.2</span>Attribute Lists and Format Specifiers on Fenced Code Blocks
+</h4>
+<p>Fenced code blocks, discussed earlier, are how to insert inline code resources
+as figures. These can have attribute lists or format specifiers.</p>
+<p>This will be a type of code and a format of <code>guess</code> since three backticks are
+used and since the format is not specified:</p>
+<pre><code>Some paragraph.
+
+```
+puts &quot;hello&quot;
+```
+
+Some paragraph.
+</code></pre>
+<p>That is equivalent to:</p>
+<pre><code>Some paragraph.
+
+```guess
+puts &quot;hello&quot;
+```
+
+Some paragraph.
+</code></pre>
+<p>If you don’t want to take chances you can do this to explicitly specify the
+format:</p>
+<pre><code>Some paragraph.
+
+```ruby
+puts &quot;hello&quot;
+```
+
+Some paragraph.
+</code></pre>
+<p>This Ruby code may be formatted as such if the Markua Processor understands
+<code>ruby</code>. If not, the <code>ruby</code> format will be ignored.</p>
+<p>If you don’t like syntactic sugar you can do:</p>
+<pre><code>Some paragraph.
+
+{format: ruby}
+```
+puts &quot;hello&quot;
+```
+
+Some paragraph.
+</code></pre>
+<p>If you want a figure title, you can add it to the attribute list with any of
+the above. For example:</p>
+<pre><code>Some paragraph.
+
+{title: &quot;Hello World in Ruby&quot;}
+```ruby
+puts &quot;hello&quot;
+```
+
+Some paragraph.
+</code></pre>
+<p>Finally, if you want the code to definitely not get syntax highlighted, you can
+force format to be <code>text</code> in one of two ways.</p>
+<p>First, you can set it explicitly:</p>
+<pre><code>Some paragraph.
+
+```text
+puts &quot;hello&quot;
+```
+
+Some paragraph.
+</code></pre>
+<p>Second, you can use three tildes instead of three backticks, since the default
+with tildes is <code>text</code> not <code>guess</code>:</p>
+<pre><code>Some paragraph.
+
+~~~
+puts &quot;hello&quot;
+~~~
+
+Some paragraph.
+</code></pre>
+<p>As discussed previously, console input and output should be formatted as such by
+a Markua Processor:</p>
+<pre><code>```console
+$ git init
+Initialized empty Git repository in /path/to/repo
+```
+</code></pre>
+<p>Finally, it’s important to note that when you are writing about other inline
+formats, such as SVG or AsciiMath, what you are really doing is creating a code
+resource. This is shown in the sections below, which discuss SVG and AsciiMath,
+but this applies more broadly.</p>
+<h4 id="attribute-lists-on-code-spans" class="definition">
+<span class="number">6.6.4.3</span>Attribute Lists on Code Spans
+</h4>
+<p>Code spans are discussed later in the spec. While code spans are done just as in
+CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
+This serves as a hint to any syntax highlighter:</p>
+<pre><code>Hello World in Ruby is a simple `puts &quot;hello world&quot;`{format: ruby} statement.
+</code></pre>
+<h3 id="marking-code-as-added-or-deleted" class="definition">
+<span class="number">6.6.5</span>Marking Code as Added or Deleted
+</h3>
+<p>Markua supports marking code as added or deleted, which can be helpful if you are
+writing a computer programming book and want to indicate what code should be
+added or removed to a larger program.</p>
+<p>The way to do this is to add special comment lines to your code.</p>
+<p>The magic words are <code>markua-start-insert</code>, <code>markua-end-insert</code>,
+<code>markua-start-delete</code> and <code>markua-end-delete</code>. Any line containing one of those
+words will be removed completely by a Markua Processor before being inserted into
+the output.</p>
+<p>The Markua Processor will then be able to determine which code is being deleted
+or inserted, and format it accordingly. The recommended way for a Markua
+Processor to do this is to make code which is being inserted get <strong><code>bolded</code></strong>,
+and to make code which is getting deleted to be put in ~~<code>strikethrough</code>~~.</p>
+<p>Finally, while syntax highlighting is optional in a Markua Processor, if a Markua
+Processor does support syntax highlighting it is allowed for the Markua Processor
+to not do any syntax highlighting when there is the presence of any of any
+special <code>markua-*</code> comments. Syntax highlighting may make it harder to notice the
+added and removed code, if they are formatted with bold and strikethrough
+respectively.</p>
+<h3 id="line-wrapping-in-code-resources" class="definition">
+<span class="number">6.6.6</span>Line Wrapping in Code Resources
+</h3>
+<p>Code resources should have newlines added by the author to ensure that automatic
+line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
+all code is visible on a page, and <em>may</em> add continuation characters (like the
+backslash <code>\</code> character) in the output to indicate that a line has been
+automatically wrapped. However, adding a continuation character is not a
+requirement, nor is the choice of which continuation character is used.</p>
+</div>
+<div class="extension">
 <h2 id="no-html-blocks-m-" class="definition">
-<span class="number">6.6</span>No HTML blocks (M)
+<span class="number">6.7</span>No HTML blocks (M)
 </h2>
 <p>Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).</p>
@@ -7474,7 +7476,7 @@ From an implementation perspective, Markdown gets inline HTML support for free.
 This is not true in the case of Markua.</p>
 </div>
 <h2 id="link-reference-definitions" class="definition">
-<span class="number">6.7</span>Link reference definitions
+<span class="number">6.8</span>Link reference definitions
 </h2>
 <p>A <a id="link-reference-definition" href="#link-reference-definition" class="definition">link reference definition</a>
 consists of a <a href="#link-label">link label</a>, optionally preceded by up to three spaces of
@@ -7974,7 +7976,7 @@ are defined:</p>
 </div>
 </div>
 <h2 id="paragraphs" class="definition">
-<span class="number">6.8</span>Paragraphs
+<span class="number">6.9</span>Paragraphs
 </h2>
 <p>A sequence of non-blank lines that cannot be interpreted as other
 kinds of blocks forms a <a id="paragraph" href="#paragraph" class="definition">paragraph</a>.
@@ -8125,7 +8127,7 @@ bbb&lt;/p&gt;
 </div>
 </div>
 <h2 id="blank-lines" class="definition">
-<span class="number">6.9</span>Blank lines
+<span class="number">6.10</span>Blank lines
 </h2>
 <p><a href="#blank-line">Blank lines</a> between block-level elements are ignored,
 except for the role they play in determining whether a <a href="#list">list</a>
@@ -8154,7 +8156,7 @@ aaa
 </div>
 <div class="extension">
 <h2 id="tables-gfm-" class="definition">
-<span class="number">6.10</span>Tables (GFM)
+<span class="number">6.11</span>Tables (GFM)
 </h2>
 <p>GFM enables the <code>table</code> extension, where an additional leaf block type is
 available.</p>
@@ -8409,7 +8411,7 @@ cells are inserted.  If there are greater, the excess is ignored:</p>
 </div>
 <div class="extension">
 <h2 id="table-resources-and-csv-format-tables-m-" class="definition">
-<span class="number">6.11</span>Table resources and CSV-format tables (M)
+<span class="number">6.12</span>Table resources and CSV-format tables (M)
 </h2>
 <p>TODO - rewrite to better discuss CSV</p>
 <p>As shown in the Tables section, the syntax to insert a table in Markua is

@@ -3316,8 +3316,7 @@ documented for completeness:</p>
 </code></pre>
 <p>This is gross, but the reason it is supported is since resources can be inserted
 in a sentence, and attribute lists (e.g. for index entries) can be added this
-way. If this happens, TODO</p>
-<p>TODO</p>
+way.</p>
 <h2 id="a-resource-with-a-title-is-a-figure-a-resource-without-a-title-is-a-span-m-" class="definition">
 <span class="number">4.2</span>A resource with a title is a figure; a resource without a title is a span (M)
 </h2>
@@ -3338,6 +3337,39 @@ resource is called a <strong>figure</strong>.</li>
 approaches, the resource is called a <strong>span</strong>.</li>
 </ol>
 <p>All resource types can be inserted as figures.</p>
+<p>For example, you can add an image in an emoji style like this:</p>
+<pre><code>Here's a ![poop](poop.png) emoji.
+</code></pre>
+<p>Now, this image, like typical emoji, does not have a title, so (assuming that
+the <code>alt-title</code> document setting is not <code>all</code>) there is no figure caption.</p>
+<p>Now, if a title was added, things would be different:</p>
+<pre><code>Here's a ![poop](poop.png &quot;The Year 2022 So Far&quot;) emoji.
+</code></pre>
+<p>In this case, the image would be a figure, and it would flow in the text as
+such.</p>
+<p>But what if we wanted to specify image alignment? This could be done with an
+attribute list like this:</p>
+<pre><code>Here's a ![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left} emoji.
+</code></pre>
+<p>Finally, please note that this example is contrived. A much better way to write
+something like this is as follows, using the attribute list in its typical
+place above the resource:</p>
+<pre><code>Here's an emoji.
+
+{align: left}
+![poop](poop.png &quot;The Year 2022 So Far&quot;)
+
+Let's hope the year improves.
+</code></pre>
+<p>This is why almost all figures are added this way. But just because that’s the
+convention, it does not make it the rule. That is semantically identical to the
+following:</p>
+<pre><code>Here's an emoji.
+
+![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left}
+
+Let's hope the year improves.
+</code></pre>
 <h2 id="the-alt-title-document-setting-m-" class="definition">
 <span class="number">4.3</span>The alt-title document setting (M)
 </h2>

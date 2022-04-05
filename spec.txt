@@ -3008,9 +3008,7 @@ documented for completeness:
 
 This is gross, but the reason it is supported is since resources can be inserted
 in a sentence, and attribute lists (e.g. for index entries) can be added this
-way. If this happens, TODO
-
-TODO
+way.
 
 
 
@@ -3033,6 +3031,57 @@ resource is called a **figure**.
 approaches, the resource is called a **span**.
 
 All resource types can be inserted as figures.
+
+For example, you can add an image in an emoji style like this:
+
+```
+Here's a ![poop](poop.png) emoji.
+```
+
+Now, this image, like typical emoji, does not have a title, so (assuming that
+the `alt-title` document setting is not `all`) there is no figure caption.
+
+Now, if a title was added, things would be different:
+
+```
+Here's a ![poop](poop.png "The Year 2022 So Far") emoji.
+```
+
+In this case, the image would be a figure, and it would flow in the text as
+such.
+
+But what if we wanted to specify image alignment? This could be done with an
+attribute list like this:
+
+```
+Here's a ![poop](poop.png "The Year 2022 So Far"){align: left} emoji.
+```
+
+Finally, please note that this example is contrived. A much better way to write
+something like this is as follows, using the attribute list in its typical
+place above the resource:
+
+```
+Here's an emoji.
+
+{align: left}
+![poop](poop.png "The Year 2022 So Far")
+
+Let's hope the year improves.
+```
+
+This is why almost all figures are added this way. But just because that's the
+convention, it does not make it the rule. That is semantically identical to the
+following:
+
+```
+Here's an emoji.
+
+![poop](poop.png "The Year 2022 So Far"){align: left}
+
+Let's hope the year improves.
+```
+
 
 
 

@@ -2386,24 +2386,9 @@ The following settings apply to books and courses.
 : The authors of the Markua document.
 
 `alt-title`
-: `all`, `text` or `none`. The default is `text`. This controls whether the alt
-text on a resource is removed and used instead as the figure title if there is
-no figure title explicitly set. The possible values of this setting are `all`,
-`text` or `none`. If `all`, then if no title is provided for a given resource,
-regardless of the resource type, remove the alt text and use it as the figure
-title instead. (This setting is closest to the behaviour of LFM and of Markua
-version 0.10.) If `text`, then if no title is provided for a given **text-based**
-resource (such as an external code sample), remove the alt text and use it as
-the figure title instead. However, if the resource is not purely text-based,
-such as an image or a video, do not remove the remove the alt text and use it
-as the figure title if no figure title is provided. (This is the default value.
-It behaves like Markdown for images and like LFM for text-based resource types.)
-If `none`, then never use the alt text as the figure title, even for a
-text-based resource where no figure title is provided. (This is how Markdown
-behaves.) Note that if the alt text is converted into the figure title, it is
-NOT also provided as alt text. It would be very annoying to hear the same text
-spoken twice (once as the alt text and once as the figure title) when using a
-screen reader.
+: `all`, `text` or `none`. The default is `text`. This is central to how
+resources operate in Markua, so it is described in the Resources section
+[here](#the-alt-title-document-setting-m-).
 
 `contributors`
 : Any contributors to the Markua document who are not authors.
@@ -2963,6 +2948,133 @@ the addition of format specifiers and attribute lists. Furthermore, the standard
 Markdown image syntax is the inspiration for the syntax of all local and web
 resources.
 
+Before we consider how resources vary by type, format, class and location, we
+will consider what they have in common. Specifically, resources share the
+following things:
+
+1. Attributes and attribute list support
+2. Behaviour as a figure or a span based on the presence of title
+3. Support for a title to be provided from alt text based on the `alt-title`
+   document setting.
+
+
+
+## Resource attributes (M)
+
+
+Resources have attributes. Attributes can be specified in two ways:
+
+1. In attribute lists.
+2. In the syntax for the resource insertion.
+
+As you will see soon, resources can be local, web or inline.
+
+The syntax for a local or web resource inserted as a figure is as follows:
+
+~~~
+{key: value, comma: separated, optional: attribute_list}
+![optional alt text](resource_path_or_url "Optional Figure Title")
+~~~
+
+The syntax for an inline resource inserted as a figure is as follows:
+
+~~~
+{key: value, comma: separated, optional: attribute_list}
+```optional_format
+inline resource content (default format is `guess` with backticks)
+```
+~~~
+
+You can also insert an inline resource using three or more tildes (`~`) as the
+delimiter, instead of the more typical backticks (`):
+
+```
+{key: value, comma: separated, optional: attribute_list}
+~~~optional_format
+inline resource content (default format is `text` with tildes)
+~~~
+```
+
+To be clear, the number of backticks or tildes can be three or more. This is
+just the fenced code blocks syntax, which is discussed later.
+
+Finally, a local or web resource can also have attributes specified after the
+resource itself. This is a lot less common, and is discouraged, but it is
+documented for completeness:
+
+~~~
+![optional alt text](resource_path_or_url "Optional Figure Title"){key: value, comma: separated, optional: attribute_list}
+~~~
+
+This is gross, but the reason it is supported is since resources can be inserted
+in a sentence, and attribute lists (e.g. for index entries) can be added this
+way. If this happens, TODO
+
+TODO
+
+
+
+## A resource with a title is a figure; a resource without a title is a span (M)
+
+The title of a resource can be specified in three ways:
+
+1. In an attribute list: `{title: foo}`
+2. In quotes for a local or web resource:
+   `![](resource_path_or_url "Optional Figure Title")`
+3. In the alt text, assuming an appropriate value of the `alt-title` document
+   setting (described below)
+
+Whether the resource has a title determines whether it is called a figure or a
+span resource:
+
+1. If a resource has a title provided via any of these three approaches, the
+resource is called a **figure**.
+2. If a resource does not have a title provided via any of these three
+approaches, the resource is called a **span**.
+
+All resource types can be inserted as figures.
+
+
+
+## The alt-title document setting (M)
+
+The `alt-title` document setting can be `all`, `text` or `none`.
+
+This controls whether the alt text on a resource is removed and used instead as
+the figure title if there is no figure title explicitly set.
+
+The possible values of this setting are `all`, `text` or `none`. The default is
+`text`, for default compatibility with Markdown.
+
+(Leanpub authors with existing Markua 0.10 or LFM books will want to specify the
+`all` setting in their document settings, for compatibility with their existing
+manuscripts.)
+
+`all`
+: If no title is provided for a given resource, regardless of the resource type,
+remove the alt text and use it as the figure title instead. (This setting is
+closest to the behaviour of LFM and of Markua version 0.10.)
+
+`text`
+: If no title is provided for a given **text-based** resource (such as an
+external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the remove the alt text and use it as the figure title if
+no figure title is provided. (This is the default value. It behaves like
+Markdown for images and like LFM for text-based resource types.)
+
+`none`
+: With this setting, never use the alt text as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)
+
+Note that if the alt text is converted into the figure title, it is NOT also
+provided as alt text. It would be very annoying to hear the same text spoken
+twice (once as the alt text and once as the figure title) when using a screen
+reader.
+
+
+
 ## Resource types (M)
 
 There are eight types of resources:
@@ -3495,50 +3607,6 @@ Markua document. This is not true for binary resources like PNG or JPEG images
 or any type of audio or video file--these can only be local or web resources.
 
 The syntax for SVG images is discussed later.
-
-
-
-## Resource attribute lists (M)
-
-TODO
-
-All resources can be inserted as figures. Figures are the normal case for how a
-resource is inserted. In many Markua documents, they will be most or all of the
-resources.
-
-The syntax for a local or web resource inserted as a figure is as follows:
-
-~~~
-{key: value, comma: separated, optional: attribute_list}
-![optional alt text](resource_path_or_url "Optional Figure Title")
-~~~
-
-The syntax for an inline resource inserted as a figure is as follows:
-
-~~~
-{key: value, comma: separated, optional: attribute_list}
-```optional_format
-inline resource content (default format is `guess` with backticks)
-```
-~~~
-
-The number of backticks can be three or more. This is just the fenced code blocks
-syntax, which is discussed later.
-
-You can also insert an inline resource as a figure using three or more tildes
-(`~`) as the delimiter:
-
-```
-{key: value, comma: separated, optional: attribute_list}
-~~~optional_format
-inline resource content (default format is `text` with tildes)
-~~~
-```
-
-
-## Common resource attributes (M)
-
-TODO
 
 </div>
 
@@ -14367,38 +14435,6 @@ If you want a link after a literal `!`, backslash-escape the
 .
 <p>!<a href="/url" title="title">foo</a></p>
 ````````````````````````````````
-
-
-
-<div class="extension">
-
-## Configurable figure titles with the alt-title document setting (M)
-
-TODO - write this with examples
-
-this is pasted from above:
-
-`alt-title`
-: `all`, `text` or `none`. The default is `text`. This controls whether the alt
-text on a resource is removed and used instead as the figure title if there is
-no figure title explicitly set. The possible values of this setting are `all`,
-`text` or `none`. If `all`, then if no title is provided for a given resource,
-regardless of the resource type, remove the alt text and use it as the figure
-title instead. (This setting is closest to the behaviour of LFM and of Markua
-version 0.10.) If `text`, then if no title is provided for a given **text-based**
-resource (such as an external code sample), remove the alt text and use it as
-the figure title instead. However, if the resource is not purely text-based,
-such as an image or a video, do not remove the remove the alt text and use it
-as the figure title if no figure title is provided. (This is the default value.
-It behaves like Markdown for images and like LFM for text-based resource types.)
-If `none`, then never use the alt text as the figure title, even for a
-text-based resource where no figure title is provided. (This is how Markdown
-behaves.) Note that if the alt text is converted into the figure title, it is
-NOT also provided as alt text. It would be very annoying to hear the same text
-spoken twice (once as the alt text and once as the figure title) when using a
-screen reader.
-
-</div>
 
 
 

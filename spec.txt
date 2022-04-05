@@ -3197,64 +3197,6 @@ been inferred by the Markua Processor based on the file extension of the
 resource. This is done by specifying a type and/or format in the attribute list
 of the resource.
 
-The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.
-
-### Audio resource formats
-
-* `aac` - AAC audio - `.aac`, `.m4a`
-* `mp3` - MP3 audio - `.mp3`
-* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
-* `wav` - WAV audio - `.wav`, `.wave`
-
-### Image resource formats
-
-* `jpeg` - JPEG image - `.jpg` or `.jpeg`
-* `gif` - GIF image - `.gif`
-* `png` - PNG image - `.png`
-* `svg` - SVG image - `.svg`
-* `svgz` - SVG image (zipped) - `.svgz`
-
-### Math resource formats
-
-Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
-Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
-There is a simple reason for this: Markua needs LaTeX math for math, but only
-needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
-file with an extension of `.tex` that just contains LaTeX code and you want to
-display it, then add a `{type: code, format: latex}` attribute list.
-
-* `asciimath` - AsciiMath math - `.asciimath`
-* `latexmath` - LaTeX math - `.tex`
-
-Note that the assumption is that AsciiMath will almost always be used as an
-inline resource. So, the `.asciimath` file extension is deliberately verbose.
-
-### Table resource formats
-
-Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)
-
-* `markua` - Markua table - `.tbl`
-* `csv` - Comma-Separated Values table - `.csv`
-
-### Verbatim resource formats
-
-
-### Code resource formats
-
-Note that most code languages are not specified, and are guessed at with a format
-of `guess`. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.
-
-* `text` - Unformatted code (with no syntax highlighting)
-* `guess` - Formatted code, with the language guessed at - any other file
-  extension not listed previously in the sections above
-
 
 
 ## Resource classes (M)
@@ -3288,6 +3230,8 @@ figures. The `class` attribute is discussed further below.
 
 
 Resources can be inserted either as figures or as spans.
+
+TODO rewrite this
 
 ### Figures
 
@@ -5189,6 +5133,27 @@ Closing code fences cannot have [info strings]:
 
 ## Code resources (M)
 
+TODO
+
+### Code resource formats
+
+TODO 
+
+The following are the formats...
+
+The following sections list the various resource formats for each type of
+resource, along with the file extensions which make that format and type be
+inferred. Note that these file extensions are case-insensitive.
+
+Note that most code languages are not specified, and are guessed at with a format
+of `guess`. A Markua Processor typically leaves this decision about the language
+recognized to the syntax highlighter, such as Pygments.
+
+* `text` - Unformatted code (with no syntax highlighting)
+* `guess` - Formatted code, with the language guessed at - any other file
+  extension not listed previously in the sections above
+
+
 Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
 
@@ -6657,6 +6622,17 @@ If there are no rows in the body, no `<tbody>` is generated in HTML output:
 ## Table resources and CSV-format tables (M)
 
 TODO - rewrite to better discuss CSV
+
+### Table resource formats
+
+Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV-format tables. (CSV-format tables are not
+supported as inline resources, since they would result in too many
+false-positives.)
+
+* `markua` - Markua table - `.tbl`
+* `csv` - Comma-Separated Values table - `.csv`
+
 
 As shown in the Tables section, the syntax to insert a table in Markua is
 the identical syntax to that used by GFM. (That section is unchanged from the
@@ -14487,6 +14463,16 @@ If you want a link after a literal `!`, backslash-escape the
 
 ## Image resource attributes (M)
 
+TODO
+
+### Image resource formats
+
+* `jpeg` - JPEG image - `.jpg` or `.jpeg`
+* `gif` - GIF image - `.gif`
+* `png` - PNG image - `.png`
+* `svg` - SVG image - `.svg`
+* `svgz` - SVG image (zipped) - `.svgz`
+
 As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
 from the CommonMark spec.) It is, however, also consistent with the syntax that
@@ -15039,6 +15025,16 @@ Here's a paragraph after the figure.
 
 ## Audio resources (M)
 
+TODO 
+
+### Audio resource formats
+
+* `aac` - AAC audio - `.aac`, `.m4a`
+* `mp3` - MP3 audio - `.mp3`
+* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
+* `wav` - WAV audio - `.wav`, `.wave`
+
+
 The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
 for both audio formats; inline resource locations for audio are obviously not
@@ -15119,6 +15115,370 @@ The full version of the talk is here:
 <p class="title">Full Talk</p>
 </div>
 ````````````````````````````````
+
+</div>
+
+
+
+<div class="extension">
+
+## Math resources (M)
+
+TODO
+
+### Math resource formats
+
+Note that AsciiMath and LaTeX math are almost always contained as inline
+resources in a Markua document. They only have file extensions for completeness.
+Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
+There is a simple reason for this: Markua needs LaTeX math for math, but only
+needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
+file with an extension of `.tex` that just contains LaTeX code and you want to
+display it, then add a `{type: code, format: latex}` attribute list.
+
+* `asciimath` - AsciiMath math - `.asciimath`
+* `latexmath` - LaTeX math - `.tex`
+
+Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the `.asciimath` file extension is deliberately verbose.
+
+
+Math can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.
+
+Markua does not specify how math is output in HTML. It can be an image, or it
+can use something like MathJax. If MathJax is available, it is recommended for a
+Markua Processor to convert AsciiMath into MathML, and then use MathJax to
+format it.
+
+There are two formats of math resources supported by Markua:
+
+1. LaTeX math (`latexmath` or `$`)
+2. AsciiMath (`asciimath` or `@`)
+
+### Supported Attributes for Math
+
+The following is the supported attribute for math resources, in addition to the
+`class`, `format`, `title` and `type` attributes which all resources support:
+
+`alt`
+: The `alt` is the alt text, to be displayed when the mathematical equations
+cannot be shown. The default alt text for math is "math". This can be provided
+in the figure attribute list. This is primarily intended for Markua Processors
+that output math as images; there are no output requirements for the alt text.
+This attribute functions as it does for images. (In fact, a Markua Processor may
+choose to transform the math into an image, for maximum ebook reader
+compatibility.)
+
+Note that for math, the `format` is the name of the syntax used to write the
+mathematical equations. There are two special types of `format` for math baked
+into Markua: `latexmath` for LaTeX math and `asciimath` for AsciiMath. If a
+Markua Processor encounters one of these formats, it must assume the `type` of
+the resource is `math`, not `code`.
+
+### Local Math Resources
+
+Local math resources can be inserted as a figure.
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}
+![too large to fit in the alt text](fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+The alt text can also be set with an attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath, alt: "too large to fit in the alt text"}
+![](fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+### Web Math Resources
+
+This is identical to how local math resources work, including the significance
+of file extensions. The only difference is that the files are on the web.
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}
+![too large to fit in the alt text](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+The alt text can also be set with an attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath, alt: "too large to fit in the alt text"}
+![](http://markua.com/fermat-proof.tex "Proof of Fermat's Last Theorem")
+
+Here's a paragraph after the figure.
+~~~
+
+### Inline Math Resources
+
+Inline math resources are the most flexible way to insert math. They are the only
+way to insert math as a span resource, and the most straightforward way to add
+short math examples as figures. LaTeX math and AsciiMath can be inserted inline
+as a span or figure.
+
+#### Span
+
+Being able to insert a math resource as a span is important, as it lets you write
+things like one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside
+sentences. This can be done with LaTeX math or AsciiMath.
+
+To insert math as inline math, use a `$` after closing backtick for LaTeX math,
+an `@` after the closing backtick for AsciiMath, or an attribute list specifying
+a `format` of `latexmath` or `asciimath`. If none of these is done, the content
+of the backticks is treated as code and is output verbatim as monospaced text.
+
+##### LaTeX math span
+
+There is syntactic sugar for LaTeX math which is inserted as a span, using the
+`$` character after the closing backtick:
+
+~~~
+Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside a
+sentence.
+~~~
+
+The `$` character indicates the inline resource is LaTeX math.
+
+If you don't like syntactic sugar, you can also use `{format: latexmath}` or
+`{type: math, format: latexmath}` after the inline span resource:
+
+~~~
+Here's one of the kinematic equations
+`d = v_i t + \frac{1}{2} a t^2`{format: latexmath}
+inside a sentence.
+~~~
+
+##### AsciiMath span
+
+[AsciiMath](http://asciimath.org/) is a way of producing simple MathML equations,
+using about 1% of the typing. It's more terse than LaTeX math.
+
+There is syntactic sugar for AsciiMath which is inserted as a span, using the `@`
+character after the closing backtick:
+
+~~~
+Here's one of the kinematic equations `d = v_i t + 1/2 at^2`@ inside a sentence.
+~~~
+
+The `@` character indicates the inline resource is AsciiMath.
+
+If you don't like syntactic sugar, you can also use `{format: asciimath}` or
+`{type: math, format: asciimath}` after the inline span resource:
+
+~~~
+Here's one of the kinematic equations `d = v_i t + 1/2 at^2`{format: asciimath}
+inside a sentence.
+~~~
+
+#### Figure
+
+LaTeX math and AsciiMath can be inserted inline as a figure.
+
+* LaTeX math can be inserted by specifying either `latexmath` or `$` after three
+  backticks, or by specifying an attribute list of `{format: latexmath}`.
+* AsciiMath can be inserted by specifying either `asciimath` or `@` after three
+  backticks, or by specifying an attribute list of `{format: asciimath}`.
+
+##### LaTeX math figures
+
+Here's how you do this using LaTeX math...
+
+Here's the version with the syntactic sugar for the format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```$
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing, with the full format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```latexmath
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: latexmath}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+~~~
+
+##### AsciiMath figures
+
+Here's how you do this using AsciiMath...
+
+Here's the version with the syntactic sugar for the format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```@
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing, with the full format after the backticks:
+
+~~~
+Here's a paragraph before the figure.
+
+```asciimath
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+Here's the same thing again, with a full attribute list:
+
+~~~
+Here's a paragraph before the figure.
+
+{format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+~~~
+
+If you wonder why I'm a fan of AsciiMath: I actually got that right on the first
+try at the [AsciiMath website](http://asciimath.org/).
+
+Note that when you are writing about AsciiMath and want to display the AsciiMath
+text, what you are really doing is creating a code resource. This is essentially
+identical to what was shown earlier in writing about SVG images. It's also shown
+below.
+
+### Writing about Math
+
+If you want to write about math, and show the actual code (instead of the
+formatted output), it needs to be of a `format` of `code`, not `math`.
+
+Now, you can just be lazy and not provide `format` or `type` attributes at all,
+since guessing when neither is present always produces a type of `code`.
+
+This will be output as code:
+
+~~~
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+This isn't just true for AsciiMath code; it's true for any math. For example,
+this will be output as code, since there's no `$` or `latexmath` format specifier
+to indicate that it is LaTeX math:
+
+~~~
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+~~~
+
+However, you can also specify the type of `code`, to be explicit:
+
+~~~
+{type: code}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+Since specifying a type overrides the type inferred by the format, you can even
+specify the format of the math being used, while still keeping it code:
+
+~~~
+{type: code, format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+This also works with the syntactic sugar with the full format name:
+
+~~~
+{type: code}
+```asciimath
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+This also works with the syntactic sugar with the format shortcut:
+
+~~~
+{type: code}
+```@
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+Now, chances are a Markua Processor will not be doing syntax highlighting on
+AsciiMath.
+
+If you want to ensure that no syntax highlighting is done, you can just specify
+`text`:
+
+~~~
+```text
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+~~~
+
+Heck, you can even use tildes, since this defaults to `text` not `guess`:
+
+```
+~~~
+abs(sum_(i=1)^n a_i b_i) <= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+~~~
+```
 
 </div>
 

@@ -244,19 +244,20 @@ $(document).ready(function() {
 <li><a href="#video-resources-m-"><span class="number">9.8</span>Video resources (M)</a></li>
 <li><a href="#iframe-resources-m-"><span class="number">9.9</span>IFrame resources (M)</a></li>
 <li><a href="#audio-resources-m-"><span class="number">9.10</span>Audio resources (M)</a></li>
-<li><a href="#autolinks"><span class="number">9.11</span>Autolinks</a></li>
-<li><a href="#no-raw-html-m-"><span class="number">9.12</span>No raw HTML (M)</a></li>
-<li><a href="#hard-line-breaks"><span class="number">9.13</span>Hard line breaks</a></li>
-<li><a href="#soft-line-breaks"><span class="number">9.14</span>Soft line breaks</a></li>
-<li><a href="#configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-"><span class="number">9.15</span>Configurable soft line breaks with the soft-breaks document setting (M)</a></li>
-<li><a href="#character-substitutions-m-"><span class="number">9.16</span>Character substitutions (M)</a></li>
-<li><a href="#footnotes-and-endnotes-m-"><span class="number">9.17</span>Footnotes and endnotes (M)</a></li>
-<li><a href="#underline-m-"><span class="number">9.18</span>Underline (M)</a></li>
-<li><a href="#superscript-and-subscript-m-"><span class="number">9.19</span>Superscript and subscript (M)</a></li>
-<li><a href="#strikethrough-gfm-"><span class="number">9.20</span>Strikethrough (GFM)</a></li>
-<li><a href="#index-entries-m-"><span class="number">9.21</span>Index entries (M)</a></li>
-<li><a href="#the-complete-list-of-markua-syntactic-sugar-m-"><span class="number">9.22</span>The complete list of Markua syntactic sugar (M)</a></li>
-<li><a href="#textual-content"><span class="number">9.23</span>Textual content</a></li>
+<li><a href="#math-resources-m-"><span class="number">9.11</span>Math resources (M)</a></li>
+<li><a href="#autolinks"><span class="number">9.12</span>Autolinks</a></li>
+<li><a href="#no-raw-html-m-"><span class="number">9.13</span>No raw HTML (M)</a></li>
+<li><a href="#hard-line-breaks"><span class="number">9.14</span>Hard line breaks</a></li>
+<li><a href="#soft-line-breaks"><span class="number">9.15</span>Soft line breaks</a></li>
+<li><a href="#configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-"><span class="number">9.16</span>Configurable soft line breaks with the soft-breaks document setting (M)</a></li>
+<li><a href="#character-substitutions-m-"><span class="number">9.17</span>Character substitutions (M)</a></li>
+<li><a href="#footnotes-and-endnotes-m-"><span class="number">9.18</span>Footnotes and endnotes (M)</a></li>
+<li><a href="#underline-m-"><span class="number">9.19</span>Underline (M)</a></li>
+<li><a href="#superscript-and-subscript-m-"><span class="number">9.20</span>Superscript and subscript (M)</a></li>
+<li><a href="#strikethrough-gfm-"><span class="number">9.21</span>Strikethrough (GFM)</a></li>
+<li><a href="#index-entries-m-"><span class="number">9.22</span>Index entries (M)</a></li>
+<li><a href="#the-complete-list-of-markua-syntactic-sugar-m-"><span class="number">9.23</span>The complete list of Markua syntactic sugar (M)</a></li>
+<li><a href="#textual-content"><span class="number">9.24</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -1542,7 +1543,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>
@@ -3466,69 +3467,6 @@ type and format that are inferred.</p>
 been inferred by the Markua Processor based on the file extension of the
 resource. This is done by specifying a type and/or format in the attribute list
 of the resource.</p>
-<p>The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.</p>
-<h3 id="audio-resource-formats" class="definition">
-<span class="number">4.5.1</span>Audio resource formats
-</h3>
-<ul>
-<li><code>aac</code> - AAC audio - <code>.aac</code>, <code>.m4a</code></li>
-<li><code>mp3</code> - MP3 audio - <code>.mp3</code></li>
-<li><code>ogg</code> - Ogg Vorbis  - <code>.oga</code>, <code>.ogg</code></li>
-<li><code>wav</code> - WAV audio - <code>.wav</code>, <code>.wave</code></li>
-</ul>
-<h3 id="image-resource-formats" class="definition">
-<span class="number">4.5.2</span>Image resource formats
-</h3>
-<ul>
-<li><code>jpeg</code> - JPEG image - <code>.jpg</code> or <code>.jpeg</code></li>
-<li><code>gif</code> - GIF image - <code>.gif</code></li>
-<li><code>png</code> - PNG image - <code>.png</code></li>
-<li><code>svg</code> - SVG image - <code>.svg</code></li>
-<li><code>svgz</code> - SVG image (zipped) - <code>.svgz</code></li>
-</ul>
-<h3 id="math-resource-formats" class="definition">
-<span class="number">4.5.3</span>Math resource formats
-</h3>
-<p>Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
-Also, note that <code>.tex</code> is assumed to be LaTeX math, not a vanilla LaTeX file.
-There is a simple reason for this: Markua needs LaTeX math for math, but only
-needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
-file with an extension of <code>.tex</code> that just contains LaTeX code and you want to
-display it, then add a <code>{type: code, format: latex}</code> attribute list.</p>
-<ul>
-<li><code>asciimath</code> - AsciiMath math - <code>.asciimath</code></li>
-<li><code>latexmath</code> - LaTeX math - <code>.tex</code></li>
-</ul>
-<p>Note that the assumption is that AsciiMath will almost always be used as an
-inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
-<h3 id="table-resource-formats" class="definition">
-<span class="number">4.5.4</span>Table resource formats
-</h3>
-<p>Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)</p>
-<ul>
-<li><code>markua</code> - Markua table - <code>.tbl</code></li>
-<li><code>csv</code> - Comma-Separated Values table - <code>.csv</code></li>
-</ul>
-<h3 id="verbatim-resource-formats" class="definition">
-<span class="number">4.5.5</span>Verbatim resource formats
-</h3>
-<h3 id="code-resource-formats" class="definition">
-<span class="number">4.5.6</span>Code resource formats
-</h3>
-<p>Note that most code languages are not specified, and are guessed at with a format
-of <code>guess</code>. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.</p>
-<ul>
-<li><code>text</code> - Unformatted code (with no syntax highlighting)</li>
-<li><code>guess</code> - Formatted code, with the language guessed at - any other file
-extension not listed previously in the sections above</li>
-</ul>
 <h2 id="resource-classes-m-" class="definition">
 <span class="number">4.6</span>Resource classes (M)
 </h2>
@@ -3557,6 +3495,7 @@ image, list or table with no caption), the the <code>class</code> is implicitly 
 <code>span</code>. Resources with a class of <code>span</code> do not show up in any list of
 figures. The <code>class</code> attribute is discussed further below.</p>
 <p>Resources can be inserted either as figures or as spans.</p>
+<p>TODO rewrite this</p>
 <h3 id="figures" class="definition">
 <span class="number">4.6.1</span>Figures
 </h3>
@@ -5930,6 +5869,23 @@ foo
 <h2 id="code-resources-m-" class="definition">
 <span class="number">6.6</span>Code resources (M)
 </h2>
+<p>TODO</p>
+<h3 id="code-resource-formats" class="definition">
+<span class="number">6.6.1</span>Code resource formats
+</h3>
+<p>TODO</p>
+<p>The following are the formats…</p>
+<p>The following sections list the various resource formats for each type of
+resource, along with the file extensions which make that format and type be
+inferred. Note that these file extensions are case-insensitive.</p>
+<p>Note that most code languages are not specified, and are guessed at with a format
+of <code>guess</code>. A Markua Processor typically leaves this decision about the language
+recognized to the syntax highlighter, such as Pygments.</p>
+<ul>
+<li><code>text</code> - Unformatted code (with no syntax highlighting)</li>
+<li><code>guess</code> - Formatted code, with the language guessed at - any other file
+extension not listed previously in the sections above</li>
+</ul>
 <p>Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.</p>
 <p>As discussed, code cannot have alt text. It’s just text. If any alt text is
@@ -5977,7 +5933,7 @@ three backticks.</li>
 <p>Note that the default format can be overridden by specifying it via an attribute
 list, or after the three backticks in syntactic sugar.</p>
 <h3 id="supported-attributes-for-code" class="definition">
-<span class="number">6.6.1</span>Supported Attributes for Code
+<span class="number">6.6.2</span>Supported Attributes for Code
 </h3>
 <p>The following are the supported attributes for code resources, in addition to the
 <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
@@ -6000,7 +5956,7 @@ line of the file.</p>
 <code>crop-end</code> is to be omitted, which is equivalent to specifying the last line of
 the file.</p>
 <h4 id="default-value-of-the-attribute-in-inline-code-samples" class="definition">
-<span class="number">6.6.1.1</span>Default Value of the <code>format</code> attribute in Inline Code Samples
+<span class="number">6.6.2.1</span>Default Value of the <code>format</code> attribute in Inline Code Samples
 </h4>
 <p>The default value of the <code>format</code> attribute for a code resource inserted as a
 figure varies based on context.</p>
@@ -6022,7 +5978,7 @@ code span resources inserted as spans with single backticks can be overridden
 from the default value of <code>text</code> to some other value by setting the
 <code>default-code-span-language</code> on the entire Markua document.</p>
 <h3 id="local-code-resources" class="definition">
-<span class="number">6.6.2</span>Local Code Resources
+<span class="number">6.6.3</span>Local Code Resources
 </h3>
 <p>Local code resources can be inserted as a figure.</p>
 <p>This first figure will be a type of code and a format of <code>guess</code>. A Markua
@@ -6059,7 +6015,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="web-code-resources" class="definition">
-<span class="number">6.6.3</span>Web Code Resources
+<span class="number">6.6.4</span>Web Code Resources
 </h3>
 <p>Web code resources function identically to how local code resources work,
 including the significance of file extensions. The only differences is that the
@@ -6077,7 +6033,7 @@ not specified:</p>
 ![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
 </code></pre>
 <h3 id="inline-code-resources" class="definition">
-<span class="number">6.6.4</span>Inline Code Resources
+<span class="number">6.6.5</span>Inline Code Resources
 </h3>
 <p>Inline code resources are the most flexible way to insert code. They are the only
 way to insert code as a span resource, and the most straightforward way to add
@@ -6086,13 +6042,13 @@ short code examples as figures.</p>
 they work the same way as they do in CommonMark and GFM, with small additions
 by Markua.</p>
 <h4 id="no-attribute-lists-or-format-specifiers-on-indented-code-blocks" class="definition">
-<span class="number">6.6.4.1</span>No Attribute Lists or Format Specifiers on Indented Code Blocks
+<span class="number">6.6.5.1</span>No Attribute Lists or Format Specifiers on Indented Code Blocks
 </h4>
 <p>Indented code blocks are supported for compatibility with CommonMark and GFM.
 However, no attribute lists or format specifiers can be used. If you want to use
 them, use a fenced code block.</p>
 <h4 id="attribute-lists-and-format-specifiers-on-fenced-code-blocks" class="definition">
-<span class="number">6.6.4.2</span>Attribute Lists and Format Specifiers on Fenced Code Blocks
+<span class="number">6.6.5.2</span>Attribute Lists and Format Specifiers on Fenced Code Blocks
 </h4>
 <p>Fenced code blocks, discussed earlier, are how to insert inline code resources
 as figures. These can have attribute lists or format specifiers.</p>
@@ -6181,7 +6137,7 @@ formats, such as SVG or AsciiMath, what you are really doing is creating a code
 resource. This is shown in the sections below, which discuss SVG and AsciiMath,
 but this applies more broadly.</p>
 <h4 id="attribute-lists-on-code-spans" class="definition">
-<span class="number">6.6.4.3</span>Attribute Lists on Code Spans
+<span class="number">6.6.5.3</span>Attribute Lists on Code Spans
 </h4>
 <p>Code spans are discussed later in the spec. While code spans are done just as in
 CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
@@ -6189,7 +6145,7 @@ This serves as a hint to any syntax highlighter:</p>
 <pre><code>Hello World in Ruby is a simple `puts &quot;hello world&quot;`{format: ruby} statement.
 </code></pre>
 <h3 id="marking-code-as-added-or-deleted" class="definition">
-<span class="number">6.6.5</span>Marking Code as Added or Deleted
+<span class="number">6.6.6</span>Marking Code as Added or Deleted
 </h3>
 <p>Markua supports marking code as added or deleted, which can be helpful if you are
 writing a computer programming book and want to indicate what code should be
@@ -6210,7 +6166,7 @@ special <code>markua-*</code> comments. Syntax highlighting may make it harder t
 added and removed code, if they are formatted with bold and strikethrough
 respectively.</p>
 <h3 id="line-wrapping-in-code-resources" class="definition">
-<span class="number">6.6.6</span>Line Wrapping in Code Resources
+<span class="number">6.6.7</span>Line Wrapping in Code Resources
 </h3>
 <p>Code resources should have newlines added by the author to ensure that automatic
 line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
@@ -6588,7 +6544,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -7027,7 +6983,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -7051,7 +7007,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -7511,6 +7467,17 @@ cells are inserted.  If there are greater, the excess is ignored:</p>
 <span class="number">6.13</span>Table resources and CSV-format tables (M)
 </h2>
 <p>TODO - rewrite to better discuss CSV</p>
+<h3 id="table-resource-formats" class="definition">
+<span class="number">6.13.1</span>Table resource formats
+</h3>
+<p>Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV-format tables. (CSV-format tables are not
+supported as inline resources, since they would result in too many
+false-positives.)</p>
+<ul>
+<li><code>markua</code> - Markua table - <code>.tbl</code></li>
+<li><code>csv</code> - Comma-Separated Values table - <code>.csv</code></li>
+</ul>
 <p>As shown in the Tables section, the syntax to insert a table in Markua is
 the identical syntax to that used by GFM. (That section is unchanged from the
 GFM spec, which is built on top of the CommonMark spec.)</p>
@@ -16522,7 +16489,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">
@@ -17354,6 +17321,17 @@ backslash-escape the opening <code>[</code>:</p>
 <h2 id="image-resource-attributes-m-" class="definition">
 <span class="number">9.5</span>Image resource attributes (M)
 </h2>
+<p>TODO</p>
+<h3 id="image-resource-formats" class="definition">
+<span class="number">9.5.1</span>Image resource formats
+</h3>
+<ul>
+<li><code>jpeg</code> - JPEG image - <code>.jpg</code> or <code>.jpeg</code></li>
+<li><code>gif</code> - GIF image - <code>.gif</code></li>
+<li><code>png</code> - PNG image - <code>.png</code></li>
+<li><code>svg</code> - SVG image - <code>.svg</code></li>
+<li><code>svgz</code> - SVG image (zipped) - <code>.svgz</code></li>
+</ul>
 <p>As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
 from the CommonMark spec.) It is, however, also consistent with the syntax that
@@ -17845,6 +17823,16 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 <h2 id="audio-resources-m-" class="definition">
 <span class="number">9.10</span>Audio resources (M)
 </h2>
+<p>TODO</p>
+<h3 id="audio-resource-formats" class="definition">
+<span class="number">9.10.1</span>Audio resource formats
+</h3>
+<ul>
+<li><code>aac</code> - AAC audio - <code>.aac</code>, <code>.m4a</code></li>
+<li><code>mp3</code> - MP3 audio - <code>.mp3</code></li>
+<li><code>ogg</code> - Ogg Vorbis  - <code>.oga</code>, <code>.ogg</code></li>
+<li><code>wav</code> - WAV audio - <code>.wav</code>, <code>.wave</code></li>
+</ul>
 <p>The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
 for both audio formats; inline resource locations for audio are obviously not
@@ -17871,7 +17859,7 @@ and Ogg Vorbis.</p>
 <p>We will discuss the supported and the default attributes for audio files, and
 then show examples of audio being inserted for both local and web audio files.</p>
 <h3 id="supported-attributes-for-audio" class="definition">
-<span class="number">9.10.1</span>Supported Attributes for Audio
+<span class="number">9.10.2</span>Supported Attributes for Audio
 </h3>
 <p>The following are the supported attributes for audio resources, in addition to the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
 <p><code>poster</code>
@@ -17889,7 +17877,7 @@ this. See the Video resources section above for more information.</p>
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
 <h3 id="local-audio" class="definition">
-<span class="number">9.10.2</span>Local Audio
+<span class="number">9.10.3</span>Local Audio
 </h3>
 <div class="example" id="example-640">
 <div class="examplenum">
@@ -17911,7 +17899,7 @@ over how it handles the location of video resources and their display.</p>
 </div>
 </div>
 <h3 id="web-audio" class="definition">
-<span class="number">9.10.3</span>Web Audio
+<span class="number">9.10.4</span>Web Audio
 </h3>
 <div class="example" id="example-641">
 <div class="examplenum">
@@ -17933,8 +17921,294 @@ over how it handles the location of video resources and their display.</p>
 </div>
 </div>
 </div>
+<div class="extension">
+<h2 id="math-resources-m-" class="definition">
+<span class="number">9.11</span>Math resources (M)
+</h2>
+<p>TODO</p>
+<h3 id="math-resource-formats" class="definition">
+<span class="number">9.11.1</span>Math resource formats
+</h3>
+<p>Note that AsciiMath and LaTeX math are almost always contained as inline
+resources in a Markua document. They only have file extensions for completeness.
+Also, note that <code>.tex</code> is assumed to be LaTeX math, not a vanilla LaTeX file.
+There is a simple reason for this: Markua needs LaTeX math for math, but only
+needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
+file with an extension of <code>.tex</code> that just contains LaTeX code and you want to
+display it, then add a <code>{type: code, format: latex}</code> attribute list.</p>
+<ul>
+<li><code>asciimath</code> - AsciiMath math - <code>.asciimath</code></li>
+<li><code>latexmath</code> - LaTeX math - <code>.tex</code></li>
+</ul>
+<p>Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
+<p>Math can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.</p>
+<p>Markua does not specify how math is output in HTML. It can be an image, or it
+can use something like MathJax. If MathJax is available, it is recommended for a
+Markua Processor to convert AsciiMath into MathML, and then use MathJax to
+format it.</p>
+<p>There are two formats of math resources supported by Markua:</p>
+<ol>
+<li>LaTeX math (<code>latexmath</code> or <code>$</code>)</li>
+<li>AsciiMath (<code>asciimath</code> or <code>@</code>)</li>
+</ol>
+<h3 id="supported-attributes-for-math" class="definition">
+<span class="number">9.11.2</span>Supported Attributes for Math
+</h3>
+<p>The following is the supported attribute for math resources, in addition to the
+<code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support:</p>
+<p><code>alt</code>
+: The <code>alt</code> is the alt text, to be displayed when the mathematical equations
+cannot be shown. The default alt text for math is “math”. This can be provided
+in the figure attribute list. This is primarily intended for Markua Processors
+that output math as images; there are no output requirements for the alt text.
+This attribute functions as it does for images. (In fact, a Markua Processor may
+choose to transform the math into an image, for maximum ebook reader
+compatibility.)</p>
+<p>Note that for math, the <code>format</code> is the name of the syntax used to write the
+mathematical equations. There are two special types of <code>format</code> for math baked
+into Markua: <code>latexmath</code> for LaTeX math and <code>asciimath</code> for AsciiMath. If a
+Markua Processor encounters one of these formats, it must assume the <code>type</code> of
+the resource is <code>math</code>, not <code>code</code>.</p>
+<h3 id="local-math-resources" class="definition">
+<span class="number">9.11.3</span>Local Math Resources
+</h3>
+<p>Local math resources can be inserted as a figure.</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: latexmath}
+![too large to fit in the alt text](fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>The alt text can also be set with an attribute list:</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: latexmath, alt: &quot;too large to fit in the alt text&quot;}
+![](fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<h3 id="web-math-resources" class="definition">
+<span class="number">9.11.4</span>Web Math Resources
+</h3>
+<p>This is identical to how local math resources work, including the significance
+of file extensions. The only difference is that the files are on the web.</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: latexmath}
+![too large to fit in the alt text](http://markua.com/fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>The alt text can also be set with an attribute list:</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: latexmath, alt: &quot;too large to fit in the alt text&quot;}
+![](http://markua.com/fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<h3 id="inline-math-resources" class="definition">
+<span class="number">9.11.5</span>Inline Math Resources
+</h3>
+<p>Inline math resources are the most flexible way to insert math. They are the only
+way to insert math as a span resource, and the most straightforward way to add
+short math examples as figures. LaTeX math and AsciiMath can be inserted inline
+as a span or figure.</p>
+<h4 id="span" class="definition">
+<span class="number">9.11.5.1</span>Span
+</h4>
+<p>Being able to insert a math resource as a span is important, as it lets you write
+things like one of the kinematic equations <code>d = v_i t + \frac{1}{2} a t^2</code>$ inside
+sentences. This can be done with LaTeX math or AsciiMath.</p>
+<p>To insert math as inline math, use a <code>$</code> after closing backtick for LaTeX math,
+an <code>@</code> after the closing backtick for AsciiMath, or an attribute list specifying
+a <code>format</code> of <code>latexmath</code> or <code>asciimath</code>. If none of these is done, the content
+of the backticks is treated as code and is output verbatim as monospaced text.</p>
+<h5 id="latex-math-span" class="definition">
+<span class="number">9.11.5.1.1</span>LaTeX math span
+</h5>
+<p>There is syntactic sugar for LaTeX math which is inserted as a span, using the
+<code>$</code> character after the closing backtick:</p>
+<pre><code>Here's one of the kinematic equations `d = v_i t + \frac{1}{2} a t^2`$ inside a
+sentence.
+</code></pre>
+<p>The <code>$</code> character indicates the inline resource is LaTeX math.</p>
+<p>If you don’t like syntactic sugar, you can also use <code>{format: latexmath}</code> or
+<code>{type: math, format: latexmath}</code> after the inline span resource:</p>
+<pre><code>Here's one of the kinematic equations
+`d = v_i t + \frac{1}{2} a t^2`{format: latexmath}
+inside a sentence.
+</code></pre>
+<h5 id="asciimath-span" class="definition">
+<span class="number">9.11.5.1.2</span>AsciiMath span
+</h5>
+<p><a href="http://asciimath.org/">AsciiMath</a> is a way of producing simple MathML equations,
+using about 1% of the typing. It’s more terse than LaTeX math.</p>
+<p>There is syntactic sugar for AsciiMath which is inserted as a span, using the <code>@</code>
+character after the closing backtick:</p>
+<pre><code>Here's one of the kinematic equations `d = v_i t + 1/2 at^2`@ inside a sentence.
+</code></pre>
+<p>The <code>@</code> character indicates the inline resource is AsciiMath.</p>
+<p>If you don’t like syntactic sugar, you can also use <code>{format: asciimath}</code> or
+<code>{type: math, format: asciimath}</code> after the inline span resource:</p>
+<pre><code>Here's one of the kinematic equations `d = v_i t + 1/2 at^2`{format: asciimath}
+inside a sentence.
+</code></pre>
+<h4 id="figure" class="definition">
+<span class="number">9.11.5.2</span>Figure
+</h4>
+<p>LaTeX math and AsciiMath can be inserted inline as a figure.</p>
+<ul>
+<li>LaTeX math can be inserted by specifying either <code>latexmath</code> or <code>$</code> after three
+backticks, or by specifying an attribute list of <code>{format: latexmath}</code>.</li>
+<li>AsciiMath can be inserted by specifying either <code>asciimath</code> or <code>@</code> after three
+backticks, or by specifying an attribute list of <code>{format: asciimath}</code>.</li>
+</ul>
+<h5 id="latex-math-figures" class="definition">
+<span class="number">9.11.5.2.1</span>LaTeX math figures
+</h5>
+<p>Here’s how you do this using LaTeX math…</p>
+<p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
+<pre><code>Here's a paragraph before the figure.
+
+```$
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>Here’s the same thing, with the full format after the backticks:</p>
+<pre><code>Here's a paragraph before the figure.
+
+```latexmath
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>Here’s the same thing again, with a full attribute list:</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: latexmath}
+```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+
+Here's a paragraph after the figure.
+</code></pre>
+<h5 id="asciimath-figures" class="definition">
+<span class="number">9.11.5.2.2</span>AsciiMath figures
+</h5>
+<p>Here’s how you do this using AsciiMath…</p>
+<p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
+<pre><code>Here's a paragraph before the figure.
+
+```@
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>Here’s the same thing, with the full format after the backticks:</p>
+<pre><code>Here's a paragraph before the figure.
+
+```asciimath
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>Here’s the same thing again, with a full attribute list:</p>
+<pre><code>Here's a paragraph before the figure.
+
+{format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+
+Here's a paragraph after the figure.
+</code></pre>
+<p>If you wonder why I’m a fan of AsciiMath: I actually got that right on the first
+try at the <a href="http://asciimath.org/">AsciiMath website</a>.</p>
+<p>Note that when you are writing about AsciiMath and want to display the AsciiMath
+text, what you are really doing is creating a code resource. This is essentially
+identical to what was shown earlier in writing about SVG images. It’s also shown
+below.</p>
+<h3 id="writing-about-math" class="definition">
+<span class="number">9.11.6</span>Writing about Math
+</h3>
+<p>If you want to write about math, and show the actual code (instead of the
+formatted output), it needs to be of a <code>format</code> of <code>code</code>, not <code>math</code>.</p>
+<p>Now, you can just be lazy and not provide <code>format</code> or <code>type</code> attributes at all,
+since guessing when neither is present always produces a type of <code>code</code>.</p>
+<p>This will be output as code:</p>
+<pre><code>```
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+</code></pre>
+<p>This isn’t just true for AsciiMath code; it’s true for any math. For example,
+this will be output as code, since there’s no <code>$</code> or <code>latexmath</code> format specifier
+to indicate that it is LaTeX math:</p>
+<pre><code>```
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}
+```
+</code></pre>
+<p>However, you can also specify the type of <code>code</code>, to be explicit:</p>
+<pre><code>{type: code}
+```
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+</code></pre>
+<p>Since specifying a type overrides the type inferred by the format, you can even
+specify the format of the math being used, while still keeping it code:</p>
+<pre><code>{type: code, format: asciimath}
+```
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+</code></pre>
+<p>This also works with the syntactic sugar with the full format name:</p>
+<pre><code>{type: code}
+```asciimath
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+</code></pre>
+<p>This also works with the syntactic sugar with the format shortcut:</p>
+<pre><code>{type: code}
+```@
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+</code></pre>
+<p>Now, chances are a Markua Processor will not be doing syntax highlighting on
+AsciiMath.</p>
+<p>If you want to ensure that no syntax highlighting is done, you can just specify
+<code>text</code>:</p>
+<pre><code>```text
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+```
+</code></pre>
+<p>Heck, you can even use tildes, since this defaults to <code>text</code> not <code>guess</code>:</p>
+<pre><code>~~~
+abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/2)
+~~~
+</code></pre>
+</div>
 <h2 id="autolinks" class="definition">
-<span class="number">9.11</span>Autolinks
+<span class="number">9.12</span>Autolinks
 </h2>
 <p><a id="autolink" href="#autolink" class="definition">Autolink</a>s are absolute URIs and email addresses inside
 <code>&lt;</code> and <code>&gt;</code>. They are parsed as links, with the URL or email address
@@ -18223,7 +18497,7 @@ spec</a>:</p>
 </div>
 <div class="extension">
 <h2 id="no-raw-html-m-" class="definition">
-<span class="number">9.12</span>No raw HTML (M)
+<span class="number">9.13</span>No raw HTML (M)
 </h2>
 <p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
 <p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
@@ -18235,7 +18509,7 @@ comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments w
 from the output (along with any other raw HTML tags).</p>
 </div>
 <h2 id="hard-line-breaks" class="definition">
-<span class="number">9.13</span>Hard line breaks
+<span class="number">9.14</span>Hard line breaks
 </h2>
 <p>A line ending (not in a code span or HTML tag) that is preceded
 by two or more spaces and does not occur at the end of a block
@@ -18468,7 +18742,7 @@ other block element:</p>
 </div>
 </div>
 <h2 id="soft-line-breaks" class="definition">
-<span class="number">9.14</span>Soft line breaks
+<span class="number">9.15</span>Soft line breaks
 </h2>
 <p>A regular line ending (not in a code span or HTML tag) that is not
 preceded by two or more spaces or a backslash is parsed as a
@@ -18513,7 +18787,7 @@ line ending or as a space.</p>
 as hard line breaks.</p>
 <div class="extension">
 <h2 id="configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-" class="definition">
-<span class="number">9.15</span>Configurable soft line breaks with the soft-breaks document setting (M)
+<span class="number">9.16</span>Configurable soft line breaks with the soft-breaks document setting (M)
 </h2>
 <p>Note: the <code>soft-breaks</code> setting is an example of a document setting. Document
 settings are a Markua addition, and are discussed in general terms
@@ -18648,7 +18922,7 @@ paragraph-like contexts, such as definition list items.</p>
 </div>
 <div class="extension">
 <h2 id="character-substitutions-m-" class="definition">
-<span class="number">9.16</span>Character substitutions (M)
+<span class="number">9.17</span>Character substitutions (M)
 </h2>
 <p>Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -18674,7 +18948,7 @@ paragraph).</p>
 : To produce a horizontal ellipsis (…), you can just type <code>...</code>. You can also use
 the proper Unicode character, U+2026, of course.</p>
 <h3 id="optional-automatic-curly-quotes-outside-of-code-blocks-and-spans" class="definition">
-<span class="number">9.16.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
+<span class="number">9.17.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
 </h3>
 <p>A Markua Processor may replace the <code>&quot;</code> character with the appropriate “curly
 quote” at its discretion. This lets <code>&quot;typography&quot;</code> become <code>“typography”</code>, and
@@ -18691,11 +18965,11 @@ straight in a code span either.)</p>
 </div>
 <div class="extension">
 <h2 id="footnotes-and-endnotes-m-" class="definition">
-<span class="number">9.17</span>Footnotes and endnotes (M)
+<span class="number">9.18</span>Footnotes and endnotes (M)
 </h2>
 <p>Books often have footnotes and endnotes. So, Markua has them too.</p>
 <h3 id="footnotes" class="definition">
-<span class="number">9.17.1</span>Footnotes
+<span class="number">9.18.1</span>Footnotes
 </h3>
 <p>To add a footnote, you insert a footnote tag using square brackets, a caret and
 the tag, like this:</p>
@@ -18725,7 +18999,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="endnotes" class="definition">
-<span class="number">9.17.2</span>Endnotes
+<span class="number">9.18.2</span>Endnotes
 </h3>
 <p>Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
@@ -18751,7 +19025,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="single-reference-to-footnotes-and-endnotes" class="definition">
-<span class="number">9.17.3</span>Single reference to footnotes and endnotes
+<span class="number">9.18.3</span>Single reference to footnotes and endnotes
 </h3>
 <p>You can only refer to a footnote or endnote once. You can’t define a footnote or
 endnote in one place and refer to it multiple times in the same Markua document.
@@ -18760,7 +19034,7 @@ Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 <a href="#crosslinks">crosslink</a>.</p>
 <h3 id="footnote-and-endnote-support-is-required-for-paragraphs-only" class="definition">
-<span class="number">9.17.4</span>Footnote and endnote support is required for paragraphs only
+<span class="number">9.18.4</span>Footnote and endnote support is required for paragraphs only
 </h3>
 <p>A Markua Processor must support footnote and endnote references inserted in
 normal paragraph content. However, that’s it.</p>
@@ -18779,7 +19053,7 @@ only supports inserting footnotes or endnotes in normal paragraph content.</p>
 </div>
 <div class="extension">
 <h2 id="underline-m-" class="definition">
-<span class="number">9.18</span>Underline (M)
+<span class="number">9.19</span>Underline (M)
 </h2>
 <p>In Markdown as defined by John Gruber, and in CommonMark and GFM,
 <code>*one asterisk*</code> and <code>_one underscore_</code> both produce <em>italics</em>, and there is no
@@ -18932,7 +19206,7 @@ stuff
 </div>
 <div class="extension">
 <h2 id="superscript-and-subscript-m-" class="definition">
-<span class="number">9.19</span>Superscript and subscript (M)
+<span class="number">9.20</span>Superscript and subscript (M)
 </h2>
 <p>To produce superscript like the 3 in 5^3^ = 125, surround it with carets like <code>5^3^ = 125</code>.</p>
 <div class="example" id="example-686">
@@ -18965,7 +19239,7 @@ stuff
 </div>
 <div class="extension">
 <h2 id="strikethrough-gfm-" class="definition">
-<span class="number">9.20</span>Strikethrough (GFM)
+<span class="number">9.21</span>Strikethrough (GFM)
 </h2>
 <p>Markua enables the <code>strikethrough</code> extension, where an additional emphasis type is
 available.</p>
@@ -19004,7 +19278,7 @@ new<span class="space"> </span>paragraph~~.
 </div>
 <div class="extension">
 <h2 id="index-entries-m-" class="definition">
-<span class="number">9.21</span>Index entries (M)
+<span class="number">9.22</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -19107,7 +19381,7 @@ the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*He
 </div>
 <div class="extension">
 <h2 id="the-complete-list-of-markua-syntactic-sugar-m-" class="definition">
-<span class="number">9.22</span>The complete list of Markua syntactic sugar (M)
+<span class="number">9.23</span>The complete list of Markua syntactic sugar (M)
 </h2>
 <p>As discussed throughout the spec, Markua defines a number of elements which are
 syntactic sugar. Since the next section defines what is parsed as plain textual
@@ -19116,7 +19390,7 @@ reduce possible confusion.</p>
 <p>TODO</p>
 </div>
 <h2 id="textual-content" class="definition">
-<span class="number">9.23</span>Textual content
+<span class="number">9.24</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>

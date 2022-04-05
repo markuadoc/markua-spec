@@ -182,10 +182,9 @@ $(document).ready(function() {
 <li><a href="#resource-attribute-lists-m-"><span class="number">4.5</span>Resource Attribute Lists (M)</a></li>
 <li><a href="#common-resource-attributes-m-"><span class="number">4.6</span>Common Resource Attributes (M)</a></li>
 <li><a href="#resource-insertion-methods-m-"><span class="number">4.7</span>Resource insertion methods (M)</a></li>
-<li><a href="#verbatim-resources-m-"><span class="number">4.8</span>Verbatim resources (M)</a></li>
-<li><a href="#todo-complete-list-of-syntactic-sugar-m-"><span class="number">4.9</span>TODO Complete List of Syntactic Sugar (M)</a></li>
-<li><a href="#block-quotes-with-curly-braces-m-"><span class="number">4.10</span>Block quotes with curly braces (M)</a></li>
-<li><a href="#list-attributes-m-"><span class="number">4.11</span>List attributes (M)</a></li>
+<li><a href="#todo-complete-list-of-syntactic-sugar-m-"><span class="number">4.8</span>TODO Complete List of Syntactic Sugar (M)</a></li>
+<li><a href="#block-quotes-with-curly-braces-m-"><span class="number">4.9</span>Block quotes with curly braces (M)</a></li>
+<li><a href="#list-attributes-m-"><span class="number">4.10</span>List attributes (M)</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">5</span>Blocks and inlines</a>
@@ -202,12 +201,13 @@ $(document).ready(function() {
 <li><a href="#indented-code-blocks"><span class="number">6.4</span>Indented code blocks</a></li>
 <li><a href="#fenced-code-blocks"><span class="number">6.5</span>Fenced code blocks</a></li>
 <li><a href="#code-resources-m-"><span class="number">6.6</span>Code resources (M)</a></li>
-<li><a href="#no-html-blocks-m-"><span class="number">6.7</span>No HTML blocks (M)</a></li>
-<li><a href="#link-reference-definitions"><span class="number">6.8</span>Link reference definitions</a></li>
-<li><a href="#paragraphs"><span class="number">6.9</span>Paragraphs</a></li>
-<li><a href="#blank-lines"><span class="number">6.10</span>Blank lines</a></li>
-<li><a href="#tables-gfm-"><span class="number">6.11</span>Tables (GFM)</a></li>
-<li><a href="#table-resources-and-csv-format-tables-m-"><span class="number">6.12</span>Table resources and CSV-format tables (M)</a></li>
+<li><a href="#verbatim-resources-m-"><span class="number">6.7</span>Verbatim resources (M)</a></li>
+<li><a href="#no-html-blocks-m-"><span class="number">6.8</span>No HTML blocks (M)</a></li>
+<li><a href="#link-reference-definitions"><span class="number">6.9</span>Link reference definitions</a></li>
+<li><a href="#paragraphs"><span class="number">6.10</span>Paragraphs</a></li>
+<li><a href="#blank-lines"><span class="number">6.11</span>Blank lines</a></li>
+<li><a href="#tables-gfm-"><span class="number">6.12</span>Tables (GFM)</a></li>
+<li><a href="#table-resources-and-csv-format-tables-m-"><span class="number">6.13</span>Table resources and CSV-format tables (M)</a></li>
 </ul>
 </li>
 <li><a href="#container-blocks"><span class="number">7</span>Container blocks</a>
@@ -3783,333 +3783,12 @@ Span attribute lists can be used to set the format explicitly.</p>
 <p>For example, this resource would be formatted as Ruby code:</p>
 <pre><code>Yada yada `puts &quot;hi&quot;`{format: ruby} yada yada.
 </code></pre>
-<h2 id="verbatim-resources-m-" class="definition">
-<span class="number">4.8</span>Verbatim resources (M)
-</h2>
-<p>TODO</p>
-<p>Since resources can…</p>
-<p>In order to prevent cycles (and infinitely long books!), resources are <strong>NOT</strong>
-allowed to include other resources: only a Markua document in the root
-<code>manuscript</code> directory can include resources, and all resources must live inside
-the <code>resources</code> directory or in a subdirectory inside of it, with nested
-subdirectories permitted.</p>
-<p>Because of this limitation, a Markua Processor which is building an AST
-(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
-traversal of the AST, and when it encounters a resource of type <code>verbatim</code> it
-should then parse the resource as Markua and replace the Markua resource with
-the subtree which is the result of parsing the Markua resource, and there is no
-need to do this recursively.</p>
-<p>Verbatim resources (i.e. a resource with a <code>type</code> of <code>verbatim</code>) can be a local, web
-or inline resource, just like any other resource, and the same resource syntax
-applies to Markua resources as to all other resources.</p>
-<p>There are three main use cases for a Markua resource:</p>
-<ol>
-<li>Inserting a specific <code>class</code> of resource, such as a <code>poem</code>.</li>
-<li>Inserting boilerplate, such as a legal disclaimer, which may be needed to be
-used in many places and/or sourced from a third party.</li>
-<li>Controlling the behaviour of fonts or whitespace for specific types of
-text, such as poetry.</li>
-</ol>
-<p>The following are the supported attributes for resources of type <code>verbatim</code>:</p>
-<p><code>type</code>
-: For a Markua resource, the <code>type</code> is <code>verbatim</code>. This can be specified
-explicitly, and it can be inferred as the type for all files with a <code>.md</code>
-.extension.</p>
-<p><code>class</code>
-: This can define a specific <code>class</code> of resource, such as a <code>poem</code> or <code>list</code>.
-The default is <code>none</code>, which means that the resource is not inserted in any
-special way, but is just inserted as though the author typed it in the
-manuscript. This enables this class of <code>verbatim</code> resource to be used for text
-substitution, without showing up in some list of resources near the front of the
-book. There is semantic sugar to produce inline resources of type <code>verbatim</code> and
-class <code>poem</code>; see below for details.) A Markua Processor can produce a list of a
-given class of resource near the beginning of the document, such as a List of
-Poems or a List of Lists.</p>
-<p><code>monospaced</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, the Markua Processor
-must use a monospaced font to output the text in the resource. If false, the
-Markua Processor may use whatever font (proportional or monospaced) it is
-configured to use to output Markua text. The value of <code>true</code> can be useful for
-certain types of poetry, for example.</p>
-<p><code>format</code>
-: This is the resource format. For a Markua resource, the format is always
-just <code>verbatim</code>, and should be ignored by a Markua Processor.</p>
-<p><code>title</code>
-: This is text which is shown near the figure, typically above or below it. A
-Markua Processor can choose where to position titles based on any criteria it
-chooses. For example, a Markua Processor can position all titles above or
-below figures, or use a different behaviour based on the resource format (e.g.
-table titles above, image titles below). Note that the figure title itself
-may contain the Markua text formatting specified earlier (e.g. bold, italic).
-This text is also displayed for the figure wherever the figure is listed
-(e.g. List of Illustrations, Table of Tables, etc.).</p>
-<p><code>whitespace</code>
-: <code>semantic</code> or <code>verbatim</code>. The default is <code>semantic</code>. With the default value of
-<code>semantic</code>, whitespace is processed the way that Markua handles it. With the
-value of <code>verbatim</code>, leading whitespace, internal whitespace, trailing
-whitespace and newlines must all be preserved verbatim as typed. This can be
-useful for certain types of poetry, such as indenting the last two lines of a
-sonnet. To be clear, this includes all spaces and newlines, regardless
-of whether they are leading, internal or trailing spaces, and regardless of the
-number of consecutive leading, internal or trailing spaces or the number of
-newlines. Now, while the whitespace is preserved, it is rendered using either a
-proportional font or a monospaced one based on the value of the <code>monospaced</code>
-attribute. If whitespace is verbatim, the <code>verbatim</code> resource should have newlines
-added by the author to ensure that automatic line wrapping is not relied upon.
-Markua Processors may wrap lines to ensure that all the text is visible on a
-page, and <em>may</em> add continuation characters (like the backslash <code>\</code> character)
-in the output to indicate that a line has been automatically wrapped by the
-Markua Processor. Obviously, seeing a continuation character is in poetry is
-terrible, so the author should consider this a mistake that needs to be fixed by
-manually line wrapping.</p>
-<h3 id="local-verbatim-resources" class="definition">
-<span class="number">4.8.1</span>Local Verbatim resources
-</h3>
-<p>Local Markua resources look like many other resources inserted as figures:</p>
-<pre><code>Here's a Shakespearean sonnet, which will not have a `class` and which will
-default to semantic whitespace:
-
-![](sonnet130.md &quot;Sonnet 130&quot;)
-
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-have its whitespace preserved (for indenting the last two lines):
-
-{whitespace: verbatim}
-![](sonnet130.md &quot;Sonnet 130&quot;)
-
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
-
-{class: poem, whitespace: verbatim}
-![](sonnet130.md &quot;Sonnet 130&quot;)
-
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
-
-{monospaced: false, class: poem, whitespace: verbatim}
-![](sonnet130.md &quot;Sonnet 130&quot;)
-
-Here's a list of Canadian cities sorted by population. This implicitly has a
-`class` of `none`:
-
-![](cities.md &quot;Canadian Cities by Population&quot;)
-
-Here's that same list, but with an explicit class of `none`:
-
-{class: none}
-![](cities.md &quot;Canadian Cities by Population&quot;)
-
-Here's that same list, but with a class of `list` so it shows up in a List of
-Lists, if there is one:
-
-{class: list}
-![](cities.md &quot;Canadian Cities by Population&quot;)
-
-Here's some legal boilerplate:
-
-![](tos.md &quot;Terms and Conditions&quot;)
-
-Here's some legal boilerplate, with the explicit class of `none`:
-
-{class: none}
-![](tos.md &quot;Terms and Conditions&quot;)
-
-Here's an E. E. Cummings poem:
-
-{monospaced: true, class: poem, whitespace: verbatim}
-![](iwillbe.md &quot;I Will Be&quot;)
-</code></pre>
-<p>With a non-<code>.md</code> extension, the type of <code>verbatim</code> must be stated:</p>
-<pre><code>Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim}
-![](sonnet130.txt &quot;Sonnet 130&quot;)
-
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](sonnet130.txt &quot;Sonnet 130&quot;)
-
-Here's some legal boilerplate:
-
-{type: markua}
-![](tos.txt &quot;Terms and Conditions&quot;)
-
-Here's an E. E. Cummings poem:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-![](iwillbe.txt &quot;I Will Be&quot;)
-</code></pre>
-<h3 id="web-verbatim-resources" class="definition">
-<span class="number">4.8.2</span>Web Verbatim resources
-</h3>
-<p>Web Markua resources function identically to how local Markua resources work,
-including the significance of file extensions. The only difference is that the
-files are on the web.</p>
-<pre><code>Here's a Shakespearean sonnet:
-
-![](http://markua.com/sonnet130.md &quot;Sonnet 130&quot;)
-
-Here's a Shakespearean sonnet:
-
-{type: markua}
-![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
-
-Here's a paragraph after the figure.
-</code></pre>
-<h3 id="inline-verbatim-resources" class="definition">
-<span class="number">4.8.3</span>Inline Verbatim resources
-</h3>
-<p>You might wonder why an inline resource of type <code>verbatim</code> would be supported at
-all. After all, isn’t it just Markua text?</p>
-<p>There are three reasons it is supported:</p>
-<ol>
-<li>for consistency</li>
-<li>for the attribute lists, which allow configurable whitespace, etc.</li>
-<li>so that the resource can show up in a list of resources</li>
-</ol>
-<p>To create an inline resource of type <code>verbatim</code>, you use the fenced code block
-syntax, and you can use an attribute list to specify the type of resource.</p>
-<p>You can also use one of a handful of syntactic sugar options:</p>
-<p><code>&amp;</code>
-: equivalent to <code>{type: markua, whitespace: verbatim, monospaced: false}</code></p>
-<p><code>&amp;&amp;</code>
-: equivalent to <code>{type: markua, class: poem, whitespace: verbatim, monospaced: false}</code></p>
-<p><code>*</code>
-: equivalent to <code>{type: markua, whitespace: verbatim, monospaced: true}</code></p>
-<p><code>**</code>
-: equivalent to <code>{type: markua, class: poem, whitespace: verbatim, monospaced: true}</code></p>
-<p>This is made clear in the following example:</p>
-<pre><code>Here's part of a poem:
-
-```&amp;
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```&amp;&amp;
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```*
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-Here's part of a poem:
-
-```**
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-</code></pre>
-<p>I’m not a poet, but I know it.</p>
-<p>Finally, here’s an example of an inline Markua resource being used for a list:</p>
-<pre><code>{class: list, title: &quot;Canadian Cities by Population&quot;}
-```
-1. Toronto
-2. Vancouver
-```
-</code></pre>
-<p>Despite the seeming generality of this example, it’s actually fairly niche:
-most lists are just lists, not resources, and do not need to be wrapped in a
-resource.</p>
-<h3 id="but-what-if-i-want-every-character-taken-literally-" class="definition">
-<span class="number">4.8.4</span>But what if I want every character taken literally?
-</h3>
-<p>If you want to type poetry where every character is taken exactly literally,
-instead of being potentially interpreted as Markua formatting, you need to use
-a code block with a format of text for that:</p>
-<div class="example" id="example-63">
-<div class="examplenum">
-<a href="#example-63">Example 63</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">```text
-*this*<span class="space"> </span>isn't<span class="space"> </span>italic
-and<span class="space"> </span>**this**<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>bold
-*<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>cherry<span class="space"> </span>blossoms<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>*
-```
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;pre&gt;&lt;code&gt;*this*<span class="space"> </span>isn't<span class="space"> </span>italic
-and<span class="space"> </span>**this**<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>bold
-*<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>cherry<span class="space"> </span>blossoms<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>*
-&lt;/code&gt;&lt;/pre&gt;
-</code></pre>
-</div>
-</div>
 <h2 id="todo-complete-list-of-syntactic-sugar-m-" class="definition">
-<span class="number">4.9</span>TODO Complete List of Syntactic Sugar (M)
+<span class="number">4.8</span>TODO Complete List of Syntactic Sugar (M)
 </h2>
 <p>TODO</p>
 <h2 id="block-quotes-with-curly-braces-m-" class="definition">
-<span class="number">4.10</span>Block quotes with curly braces (M)
+<span class="number">4.9</span>Block quotes with curly braces (M)
 </h2>
 <p>Block quotes in Markua are created in one of two ways:</p>
 <ol>
@@ -4122,9 +3801,9 @@ really long quotes.</p>
 <p>Like figures and tables, blockquotes can be inserted in the middle of a
 paragraph or as a sibling of it.</p>
 <p>These are the two ways to make block quotes in Markua:</p>
-<div class="example" id="example-64">
+<div class="example" id="example-63">
 <div class="examplenum">
-<a href="#example-64">Example 64</a>
+<a href="#example-63">Example 63</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">This<span class="space"> </span>is<span class="space"> </span>the<span class="space"> </span>first<span class="space"> </span>paragraph.
@@ -4164,7 +3843,7 @@ Processor differently than normal headings. Finally, if a Markua Processor is
 automatically generating a <a href="#toc">Table of Contents</a> from chapter and section
 headings, any headings inside blockquotes should be ignored.</p>
 <h2 id="list-attributes-m-" class="definition">
-<span class="number">4.11</span>List attributes (M)
+<span class="number">4.10</span>List attributes (M)
 </h2>
 <p>By default, Markua keeps the behaviour of lists to be identical to that in
 Markdown, as described by John Gruber and specified by CommonMark.
@@ -4180,9 +3859,9 @@ biggest ones:</p>
 <p>This list gets rendered as 3,4,5 (not 3,2,1), since Markdown does not have a way
 of specifying that a list is descending, and it does not infer it from the order
 by default:</p>
-<div class="example" id="example-65">
+<div class="example" id="example-64">
 <div class="examplenum">
-<a href="#example-65">Example 65</a>
+<a href="#example-64">Example 64</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4207,9 +3886,9 @@ after
 </div>
 <p>This looks like a list, but it is in fact a paragraph. There are no break tags
 after the foo, bar and baz, just soft breaks:</p>
-<div class="example" id="example-66">
+<div class="example" id="example-65">
 <div class="examplenum">
-<a href="#example-66">Example 66</a>
+<a href="#example-65">Example 65</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4255,7 +3934,7 @@ ability to have an <strong>attribute list</strong>, much like how resources can 
 attribute list. (Lists are not resources, however. That would not just be
 overkill, it would result in incompatibilites.)</p>
 <h3 id="supported-attributes-for-lists" class="definition">
-<span class="number">4.11.1</span>Supported Attributes for Lists
+<span class="number">4.10.1</span>Supported Attributes for Lists
 </h3>
 <p>The following are the supported attributes for lists.</p>
 <p><code>reversed</code>
@@ -4281,12 +3960,12 @@ delimiters. However, PDF and LaTeX are not subject to these limitations, and
 should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <p>The use of these attributes are shown in the following examples.</p>
 <h3 id="lists-with-attributes-good-style" class="definition">
-<span class="number">4.11.2</span>Lists with Attributes: Good Style
+<span class="number">4.10.2</span>Lists with Attributes: Good Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
-<div class="example" id="example-67">
+<div class="example" id="example-66">
 <div class="examplenum">
-<a href="#example-67">Example 67</a>
+<a href="#example-66">Example 66</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4311,9 +3990,9 @@ after
 </div>
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>:</p>
-<div class="example" id="example-68">
+<div class="example" id="example-67">
 <div class="examplenum">
-<a href="#example-68">Example 68</a>
+<a href="#example-67">Example 67</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4339,9 +4018,9 @@ after
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>)</code> in
 output formats that support it (e.g. in PDF but not in HTML):</p>
-<div class="example" id="example-69">
+<div class="example" id="example-68">
 <div class="examplenum">
-<a href="#example-69">Example 69</a>
+<a href="#example-68">Example 68</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4367,9 +4046,9 @@ after
 </div>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>)</code> in
 output formats that support it (e.g. in PDF but not in HTML):</p>
-<div class="example" id="example-70">
+<div class="example" id="example-69">
 <div class="examplenum">
-<a href="#example-70">Example 70</a>
+<a href="#example-69">Example 69</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4394,9 +4073,9 @@ after
 </div>
 </div>
 <p>This list will be numbered A, B, C:</p>
-<div class="example" id="example-71">
+<div class="example" id="example-70">
 <div class="examplenum">
-<a href="#example-71">Example 71</a>
+<a href="#example-70">Example 70</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4421,9 +4100,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e:</p>
-<div class="example" id="example-72">
+<div class="example" id="example-71">
 <div class="examplenum">
-<a href="#example-72">Example 72</a>
+<a href="#example-71">Example 71</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4448,9 +4127,9 @@ after
 </div>
 </div>
 <p>This list will be numbered i, ii, iii:</p>
-<div class="example" id="example-73">
+<div class="example" id="example-72">
 <div class="examplenum">
-<a href="#example-73">Example 73</a>
+<a href="#example-72">Example 72</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4475,9 +4154,9 @@ after
 </div>
 </div>
 <p>This list will be numbered I, II, III:</p>
-<div class="example" id="example-74">
+<div class="example" id="example-73">
 <div class="examplenum">
-<a href="#example-74">Example 74</a>
+<a href="#example-73">Example 73</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4502,9 +4181,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, iv, v:</p>
-<div class="example" id="example-75">
+<div class="example" id="example-74">
 <div class="examplenum">
-<a href="#example-75">Example 75</a>
+<a href="#example-74">Example 74</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4529,9 +4208,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 2, 1:</p>
-<div class="example" id="example-76">
+<div class="example" id="example-75">
 <div class="examplenum">
-<a href="#example-76">Example 76</a>
+<a href="#example-75">Example 75</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4556,9 +4235,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, b, a:</p>
-<div class="example" id="example-77">
+<div class="example" id="example-76">
 <div class="examplenum">
-<a href="#example-77">Example 77</a>
+<a href="#example-76">Example 76</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4583,9 +4262,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, ii, i:</p>
-<div class="example" id="example-78">
+<div class="example" id="example-77">
 <div class="examplenum">
-<a href="#example-78">Example 78</a>
+<a href="#example-77">Example 77</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4610,14 +4289,14 @@ after
 </div>
 </div>
 <h3 id="nested-lists-with-attributes" class="definition">
-<span class="number">4.11.3</span>Nested Lists with Attributes
+<span class="number">4.10.3</span>Nested Lists with Attributes
 </h3>
 <p>Everything which has been said about attribute lists on lists applies to nested
 lists as well. This example shows a nested list of the form 1, a, i, * (the
 final nested list is an unordered list, not an ordered list):</p>
-<div class="example" id="example-79">
+<div class="example" id="example-78">
 <div class="examplenum">
-<a href="#example-79">Example 79</a>
+<a href="#example-78">Example 78</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4688,14 +4367,14 @@ after
 after
 </code></pre>
 <h3 id="lists-with-attributes-lazy-style" class="definition">
-<span class="number">4.11.4</span>Lists with Attributes: Lazy Style
+<span class="number">4.10.4</span>Lists with Attributes: Lazy Style
 </h3>
 <p>It is acceptable to just use the number of the first label, and rely on list
 behaviour.</p>
 <p>This list will be numbered 1, 2, 3:</p>
-<div class="example" id="example-80">
+<div class="example" id="example-79">
 <div class="examplenum">
-<a href="#example-80">Example 80</a>
+<a href="#example-79">Example 79</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4719,9 +4398,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 4, 5:</p>
-<div class="example" id="example-81">
+<div class="example" id="example-80">
 <div class="examplenum">
-<a href="#example-81">Example 81</a>
+<a href="#example-80">Example 80</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4745,9 +4424,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e:</p>
-<div class="example" id="example-82">
+<div class="example" id="example-81">
 <div class="examplenum">
-<a href="#example-82">Example 82</a>
+<a href="#example-81">Example 81</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4772,9 +4451,9 @@ after
 </div>
 </div>
 <p>This list will be numbered iii, iv, v:</p>
-<div class="example" id="example-83">
+<div class="example" id="example-82">
 <div class="examplenum">
-<a href="#example-83">Example 83</a>
+<a href="#example-82">Example 82</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4799,9 +4478,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 3, 2, 1:</p>
-<div class="example" id="example-84">
+<div class="example" id="example-83">
 <div class="examplenum">
-<a href="#example-84">Example 84</a>
+<a href="#example-83">Example 83</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4826,13 +4505,13 @@ after
 </div>
 </div>
 <h3 id="lists-with-attributes-redundant-style" class="definition">
-<span class="number">4.11.5</span>Lists with Attributes: Redundant Style
+<span class="number">4.10.5</span>Lists with Attributes: Redundant Style
 </h3>
 <p>This list will be numbered 1, 2, 3. This is just the default behaviour made
 explicit:</p>
-<div class="example" id="example-85">
+<div class="example" id="example-84">
 <div class="examplenum">
-<a href="#example-85">Example 85</a>
+<a href="#example-84">Example 84</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4857,14 +4536,14 @@ after
 </div>
 </div>
 <h3 id="lists-with-attributes-bad-style" class="definition">
-<span class="number">4.11.6</span>Lists with Attributes: Bad Style
+<span class="number">4.10.6</span>Lists with Attributes: Bad Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>.
 The reason that this is bad style is that the specified delimiter and the
 inferred delimiter do not match:</p>
-<div class="example" id="example-86">
+<div class="example" id="example-85">
 <div class="examplenum">
-<a href="#example-86">Example 86</a>
+<a href="#example-85">Example 85</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4892,9 +4571,9 @@ after
 output formats that support it (e.g. in PDF but not in HTML). The reason
 that this is bad style is that the specified delimiter and the inferred
 delimiter do not match:</p>
-<div class="example" id="example-87">
+<div class="example" id="example-86">
 <div class="examplenum">
-<a href="#example-87">Example 87</a>
+<a href="#example-86">Example 86</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4920,9 +4599,9 @@ after
 </div>
 <p>This list will be numbered 3, 2, 1, not 3, 4, 5. Only the first number matters
 since the reversed attribute is set:</p>
-<div class="example" id="example-88">
+<div class="example" id="example-87">
 <div class="examplenum">
-<a href="#example-88">Example 88</a>
+<a href="#example-87">Example 87</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4948,9 +4627,9 @@ after
 </div>
 <p>This list will be numbered 1, 0, -1, not 1, 2, 3. Only the first number matters
 since the reversed attribute is set:</p>
-<div class="example" id="example-89">
+<div class="example" id="example-88">
 <div class="examplenum">
-<a href="#example-89">Example 89</a>
+<a href="#example-88">Example 88</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -4975,9 +4654,9 @@ after
 </div>
 </div>
 <p>This list will be numbered c, d, e, regardless of the order of the numbers:</p>
-<div class="example" id="example-90">
+<div class="example" id="example-89">
 <div class="examplenum">
-<a href="#example-90">Example 90</a>
+<a href="#example-89">Example 89</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -5002,9 +4681,9 @@ after
 </div>
 </div>
 <p>This list will be numbered 1, 0, -1:</p>
-<div class="example" id="example-91">
+<div class="example" id="example-90">
 <div class="examplenum">
-<a href="#example-91">Example 91</a>
+<a href="#example-90">Example 90</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -5030,9 +4709,9 @@ after
 </div>
 <p>This list will be numbered i, 0, -1, since the Romans didn’t have the concept of
 zero or negative numbers (and thus neither do Roman numerals):</p>
-<div class="example" id="example-92">
+<div class="example" id="example-91">
 <div class="examplenum">
-<a href="#example-92">Example 92</a>
+<a href="#example-91">Example 91</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -5057,9 +4736,9 @@ after
 </div>
 </div>
 <p>This list will be numbered a, 0, -1, since there are no negative letters either:</p>
-<div class="example" id="example-93">
+<div class="example" id="example-92">
 <div class="examplenum">
-<a href="#example-93">Example 93</a>
+<a href="#example-92">Example 92</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">before
@@ -5099,9 +4778,9 @@ links, emphasized text, images, code spans, and so on.</p>
 <p>Indicators of block structure always take precedence over indicators
 of inline structure.  So, for example, the following is a list with
 two items, not a list with one item containing a code span:</p>
-<div class="example" id="example-94">
+<div class="example" id="example-93">
 <div class="examplenum">
-<a href="#example-94">Example 94</a>
+<a href="#example-93">Example 93</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>`one
@@ -5143,9 +4822,9 @@ Markdown document.</p>
 sequence of three or more matching <code>-</code>, <code>_</code>, or <code>*</code> characters, each followed
 optionally by any number of spaces or tabs, forms a
 <a id="thematic-break" href="#thematic-break" class="definition">thematic break</a>.</p>
-<div class="example" id="example-95">
+<div class="example" id="example-94">
 <div class="examplenum">
-<a href="#example-95">Example 95</a>
+<a href="#example-94">Example 94</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">***
@@ -5161,9 +4840,9 @@ ___
 </div>
 </div>
 <p>Wrong characters:</p>
-<div class="example" id="example-96">
+<div class="example" id="example-95">
 <div class="examplenum">
-<a href="#example-96">Example 96</a>
+<a href="#example-95">Example 95</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">+++
@@ -5174,9 +4853,9 @@ ___
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-97">
+<div class="example" id="example-96">
 <div class="examplenum">
-<a href="#example-97">Example 97</a>
+<a href="#example-96">Example 96</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">===
@@ -5188,9 +4867,9 @@ ___
 </div>
 </div>
 <p>Not enough characters:</p>
-<div class="example" id="example-98">
+<div class="example" id="example-97">
 <div class="examplenum">
-<a href="#example-98">Example 98</a>
+<a href="#example-97">Example 97</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">--
@@ -5206,9 +4885,9 @@ __&lt;/p&gt;
 </div>
 </div>
 <p>Up to three spaces of indentation are allowed:</p>
-<div class="example" id="example-99">
+<div class="example" id="example-98">
 <div class="examplenum">
-<a href="#example-99">Example 99</a>
+<a href="#example-98">Example 98</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span>***
@@ -5224,9 +4903,9 @@ __&lt;/p&gt;
 </div>
 </div>
 <p>Four spaces of indentation is too many:</p>
-<div class="example" id="example-100">
+<div class="example" id="example-99">
 <div class="examplenum">
-<a href="#example-100">Example 100</a>
+<a href="#example-99">Example 99</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>***
@@ -5238,9 +4917,9 @@ __&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-101">
+<div class="example" id="example-100">
 <div class="examplenum">
-<a href="#example-101">Example 101</a>
+<a href="#example-100">Example 100</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5254,9 +4933,9 @@ __&lt;/p&gt;
 </div>
 </div>
 <p>More than three characters may be used:</p>
-<div class="example" id="example-102">
+<div class="example" id="example-101">
 <div class="examplenum">
-<a href="#example-102">Example 102</a>
+<a href="#example-101">Example 101</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_____________________________________
@@ -5268,12 +4947,25 @@ __&lt;/p&gt;
 </div>
 </div>
 <p>Spaces and tabs are allowed between the characters:</p>
+<div class="example" id="example-102">
+<div class="examplenum">
+<a href="#example-102">Example 102</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown"><span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span>-
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;hr<span class="space"> </span>/&gt;
+</code></pre>
+</div>
+</div>
 <div class="example" id="example-103">
 <div class="examplenum">
 <a href="#example-103">Example 103</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown"><span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span>-
+<pre><code class="language-markdown"><span class="space"> </span>**<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>**<span class="space"> </span>*<span class="space"> </span>**<span class="space"> </span>*<span class="space"> </span>**
 </code></pre>
 </div>
 <div class="column">
@@ -5286,19 +4978,6 @@ __&lt;/p&gt;
 <a href="#example-104">Example 104</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown"><span class="space"> </span>**<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>**<span class="space"> </span>*<span class="space"> </span>**<span class="space"> </span>*<span class="space"> </span>**
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;hr<span class="space"> </span>/&gt;
-</code></pre>
-</div>
-</div>
-<div class="example" id="example-105">
-<div class="examplenum">
-<a href="#example-105">Example 105</a>
-</div>
-<div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>-
 </code></pre>
 </div>
@@ -5308,9 +4987,9 @@ __&lt;/p&gt;
 </div>
 </div>
 <p>Spaces and tabs are allowed at the end:</p>
-<div class="example" id="example-106">
+<div class="example" id="example-105">
 <div class="examplenum">
-<a href="#example-106">Example 106</a>
+<a href="#example-105">Example 105</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
@@ -5322,9 +5001,9 @@ __&lt;/p&gt;
 </div>
 </div>
 <p>However, no other characters may occur in the line:</p>
-<div class="example" id="example-107">
+<div class="example" id="example-106">
 <div class="examplenum">
-<a href="#example-107">Example 107</a>
+<a href="#example-106">Example 106</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_<span class="space"> </span>_<span class="space"> </span>_<span class="space"> </span>_<span class="space"> </span>a
@@ -5343,9 +5022,9 @@ a------
 </div>
 <p>It is required that all of the characters other than spaces or tabs be the same.
 So, this is not a thematic break:</p>
-<div class="example" id="example-108">
+<div class="example" id="example-107">
 <div class="examplenum">
-<a href="#example-108">Example 108</a>
+<a href="#example-107">Example 107</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span>*-*
@@ -5357,9 +5036,9 @@ So, this is not a thematic break:</p>
 </div>
 </div>
 <p>Thematic breaks do not need blank lines before or after:</p>
-<div class="example" id="example-109">
+<div class="example" id="example-108">
 <div class="examplenum">
-<a href="#example-109">Example 109</a>
+<a href="#example-108">Example 108</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>foo
@@ -5379,9 +5058,9 @@ So, this is not a thematic break:</p>
 </div>
 </div>
 <p>Thematic breaks can interrupt a paragraph:</p>
-<div class="example" id="example-110">
+<div class="example" id="example-109">
 <div class="examplenum">
-<a href="#example-110">Example 110</a>
+<a href="#example-109">Example 109</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5401,9 +5080,9 @@ thematic break could also be interpreted as the underline of a <a href="#setext-
 heading</a>, the interpretation as a
 <a href="#setext-heading">setext heading</a> takes precedence. Thus, for example,
 this is a setext heading, not a paragraph followed by a thematic break:</p>
-<div class="example" id="example-111">
+<div class="example" id="example-110">
 <div class="examplenum">
-<a href="#example-111">Example 111</a>
+<a href="#example-110">Example 110</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5419,9 +5098,9 @@ bar
 </div>
 <p>When both a thematic break and a list item are possible
 interpretations of a line, the thematic break takes precedence:</p>
-<div class="example" id="example-112">
+<div class="example" id="example-111">
 <div class="examplenum">
-<a href="#example-112">Example 112</a>
+<a href="#example-111">Example 111</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*<span class="space"> </span>Foo
@@ -5441,9 +5120,9 @@ interpretations of a line, the thematic break takes precedence:</p>
 </div>
 </div>
 <p>If you want a thematic break in a list item, use a different bullet:</p>
-<div class="example" id="example-113">
+<div class="example" id="example-112">
 <div class="examplenum">
-<a href="#example-113">Example 113</a>
+<a href="#example-112">Example 112</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>Foo
@@ -5475,9 +5154,9 @@ contents of the heading are stripped of leading and trailing space or tabs
 before being parsed as inline content.  The heading level is equal to the number
 of <code>#</code> characters in the opening sequence.</p>
 <p>Simple headings:</p>
-<div class="example" id="example-114">
+<div class="example" id="example-113">
 <div class="examplenum">
-<a href="#example-114">Example 114</a>
+<a href="#example-113">Example 113</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>foo
@@ -5499,9 +5178,9 @@ of <code>#</code> characters in the opening sequence.</p>
 </div>
 </div>
 <p>More than six <code>#</code> characters is not a heading:</p>
-<div class="example" id="example-115">
+<div class="example" id="example-114">
 <div class="examplenum">
-<a href="#example-115">Example 115</a>
+<a href="#example-114">Example 114</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#######<span class="space"> </span>foo
@@ -5519,9 +5198,9 @@ space was required by the
 <a href="http://www.aaronsw.com/2002/atx/atx.py">original ATX implementation</a>,
 and it helps prevent things like the following from being parsed as
 headings:</p>
-<div class="example" id="example-116">
+<div class="example" id="example-115">
 <div class="examplenum">
-<a href="#example-116">Example 116</a>
+<a href="#example-115">Example 115</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#5<span class="space"> </span>bolt
@@ -5536,9 +5215,9 @@ headings:</p>
 </div>
 </div>
 <p>This is not a heading, because the first <code>#</code> is escaped:</p>
-<div class="example" id="example-117">
+<div class="example" id="example-116">
 <div class="examplenum">
-<a href="#example-117">Example 117</a>
+<a href="#example-116">Example 116</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">\##<span class="space"> </span>foo
@@ -5550,9 +5229,9 @@ headings:</p>
 </div>
 </div>
 <p>Contents are parsed as inlines:</p>
-<div class="example" id="example-118">
+<div class="example" id="example-117">
 <div class="examplenum">
-<a href="#example-118">Example 118</a>
+<a href="#example-117">Example 117</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>foo<span class="space"> </span>*bar*<span class="space"> </span>\*baz\*
@@ -5564,9 +5243,9 @@ headings:</p>
 </div>
 </div>
 <p>Leading and trailing spaces or tabs are ignored in parsing inline content:</p>
-<div class="example" id="example-119">
+<div class="example" id="example-118">
 <div class="examplenum">
-<a href="#example-119">Example 119</a>
+<a href="#example-118">Example 118</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
@@ -5578,9 +5257,9 @@ headings:</p>
 </div>
 </div>
 <p>Up to three spaces of indentation are allowed:</p>
-<div class="example" id="example-120">
+<div class="example" id="example-119">
 <div class="examplenum">
-<a href="#example-120">Example 120</a>
+<a href="#example-119">Example 119</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span>###<span class="space"> </span>foo
@@ -5596,9 +5275,9 @@ headings:</p>
 </div>
 </div>
 <p>Four spaces of indentation is too many:</p>
-<div class="example" id="example-121">
+<div class="example" id="example-120">
 <div class="examplenum">
-<a href="#example-121">Example 121</a>
+<a href="#example-120">Example 120</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>#<span class="space"> </span>foo
@@ -5610,9 +5289,9 @@ headings:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-122">
+<div class="example" id="example-121">
 <div class="examplenum">
-<a href="#example-122">Example 122</a>
+<a href="#example-121">Example 121</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo
@@ -5626,9 +5305,9 @@ headings:</p>
 </div>
 </div>
 <p>A closing sequence of <code>#</code> characters is optional:</p>
-<div class="example" id="example-123">
+<div class="example" id="example-122">
 <div class="examplenum">
-<a href="#example-123">Example 123</a>
+<a href="#example-122">Example 122</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">##<span class="space"> </span>foo<span class="space"> </span>##
@@ -5642,9 +5321,9 @@ headings:</p>
 </div>
 </div>
 <p>It need not be the same length as the opening sequence:</p>
-<div class="example" id="example-124">
+<div class="example" id="example-123">
 <div class="examplenum">
-<a href="#example-124">Example 124</a>
+<a href="#example-123">Example 123</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>foo<span class="space"> </span>##################################
@@ -5658,9 +5337,9 @@ headings:</p>
 </div>
 </div>
 <p>Spaces or tabs are allowed after the closing sequence:</p>
-<div class="example" id="example-125">
+<div class="example" id="example-124">
 <div class="examplenum">
-<a href="#example-125">Example 125</a>
+<a href="#example-124">Example 124</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span>###<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
@@ -5674,9 +5353,9 @@ headings:</p>
 <p>A sequence of <code>#</code> characters with anything but spaces or tabs following it
 is not a closing sequence, but counts as part of the contents of the
 heading:</p>
-<div class="example" id="example-126">
+<div class="example" id="example-125">
 <div class="examplenum">
-<a href="#example-126">Example 126</a>
+<a href="#example-125">Example 125</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span>###<span class="space"> </span>b
@@ -5688,9 +5367,9 @@ heading:</p>
 </div>
 </div>
 <p>The closing sequence must be preceded by a space or tab:</p>
-<div class="example" id="example-127">
+<div class="example" id="example-126">
 <div class="examplenum">
-<a href="#example-127">Example 127</a>
+<a href="#example-126">Example 126</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>foo#
@@ -5703,9 +5382,9 @@ heading:</p>
 </div>
 <p>Backslash-escaped <code>#</code> characters do not count as part
 of the closing sequence:</p>
-<div class="example" id="example-128">
+<div class="example" id="example-127">
 <div class="examplenum">
-<a href="#example-128">Example 128</a>
+<a href="#example-127">Example 127</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span>\###
@@ -5722,9 +5401,9 @@ of the closing sequence:</p>
 </div>
 <p>ATX headings need not be separated from surrounding content by blank
 lines, and they can interrupt paragraphs:</p>
-<div class="example" id="example-129">
+<div class="example" id="example-128">
 <div class="examplenum">
-<a href="#example-129">Example 129</a>
+<a href="#example-128">Example 128</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">****
@@ -5739,9 +5418,9 @@ lines, and they can interrupt paragraphs:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-130">
+<div class="example" id="example-129">
 <div class="examplenum">
-<a href="#example-130">Example 130</a>
+<a href="#example-129">Example 129</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span>bar
@@ -5757,9 +5436,9 @@ Bar<span class="space"> </span>foo
 </div>
 </div>
 <p>ATX headings can be empty:</p>
-<div class="example" id="example-131">
+<div class="example" id="example-130">
 <div class="examplenum">
-<a href="#example-131">Example 131</a>
+<a href="#example-130">Example 130</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">##<span class="space"> </span>
@@ -5799,9 +5478,9 @@ blank line.  However, it cannot interrupt a paragraph, so when a
 setext heading comes after a paragraph, a blank line is needed between
 them.</p>
 <p>Simple examples:</p>
-<div class="example" id="example-132">
+<div class="example" id="example-131">
 <div class="examplenum">
-<a href="#example-132">Example 132</a>
+<a href="#example-131">Example 131</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span>*bar*
@@ -5818,9 +5497,9 @@ Foo<span class="space"> </span>*bar*
 </div>
 </div>
 <p>The content of the header may span more than one line:</p>
-<div class="example" id="example-133">
+<div class="example" id="example-132">
 <div class="examplenum">
-<a href="#example-133">Example 133</a>
+<a href="#example-132">Example 132</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span>*bar
@@ -5838,9 +5517,9 @@ baz&lt;/em&gt;&lt;/h1&gt;
 content as inlines.  The heading’s raw content is formed by
 concatenating the lines and removing initial and final
 spaces or tabs.</p>
-<div class="example" id="example-134">
+<div class="example" id="example-133">
 <div class="examplenum">
-<a href="#example-134">Example 134</a>
+<a href="#example-133">Example 133</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span>Foo<span class="space"> </span>*bar
@@ -5855,9 +5534,9 @@ baz&lt;/em&gt;&lt;/h1&gt;
 </div>
 </div>
 <p>The underlining can be any length:</p>
-<div class="example" id="example-135">
+<div class="example" id="example-134">
 <div class="examplenum">
-<a href="#example-135">Example 135</a>
+<a href="#example-134">Example 134</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5875,9 +5554,9 @@ Foo
 </div>
 <p>The heading content can be preceded by up to three spaces of indentation, and
 need not line up with the underlining:</p>
-<div class="example" id="example-136">
+<div class="example" id="example-135">
 <div class="examplenum">
-<a href="#example-136">Example 136</a>
+<a href="#example-135">Example 135</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span>Foo
@@ -5898,9 +5577,9 @@ need not line up with the underlining:</p>
 </div>
 </div>
 <p>Four spaces of indentation is too many:</p>
-<div class="example" id="example-137">
+<div class="example" id="example-136">
 <div class="examplenum">
-<a href="#example-137">Example 137</a>
+<a href="#example-136">Example 136</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>Foo
@@ -5922,9 +5601,9 @@ Foo
 </div>
 <p>The setext heading underline can be preceded by up to three spaces of
 indentation, and may have trailing spaces or tabs:</p>
-<div class="example" id="example-138">
+<div class="example" id="example-137">
 <div class="examplenum">
-<a href="#example-138">Example 138</a>
+<a href="#example-137">Example 137</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5937,9 +5616,9 @@ indentation, and may have trailing spaces or tabs:</p>
 </div>
 </div>
 <p>Four spaces of indentation is too many:</p>
-<div class="example" id="example-139">
+<div class="example" id="example-138">
 <div class="examplenum">
-<a href="#example-139">Example 139</a>
+<a href="#example-138">Example 138</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5953,9 +5632,9 @@ indentation, and may have trailing spaces or tabs:</p>
 </div>
 </div>
 <p>The setext heading underline cannot contain internal spaces or tabs:</p>
-<div class="example" id="example-140">
+<div class="example" id="example-139">
 <div class="examplenum">
-<a href="#example-140">Example 140</a>
+<a href="#example-139">Example 139</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -5974,9 +5653,9 @@ Foo
 </div>
 </div>
 <p>Trailing spaces or tabs in the content line do not cause a hard line break:</p>
-<div class="example" id="example-141">
+<div class="example" id="example-140">
 <div class="examplenum">
-<a href="#example-141">Example 141</a>
+<a href="#example-140">Example 140</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span><span class="space"> </span>
@@ -5989,9 +5668,9 @@ Foo
 </div>
 </div>
 <p>Nor does a backslash at the end:</p>
-<div class="example" id="example-142">
+<div class="example" id="example-141">
 <div class="examplenum">
-<a href="#example-142">Example 142</a>
+<a href="#example-141">Example 141</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo\
@@ -6005,9 +5684,9 @@ Foo
 </div>
 <p>Since indicators of block structure take precedence over
 indicators of inline structure, the following are setext headings:</p>
-<div class="example" id="example-143">
+<div class="example" id="example-142">
 <div class="examplenum">
-<a href="#example-143">Example 143</a>
+<a href="#example-142">Example 142</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">`Foo
@@ -6029,9 +5708,9 @@ of<span class="space"> </span>dashes&quot;/&gt;
 </div>
 <p>The setext heading underline cannot be a <a href="#lazy-continuation-line">lazy continuation
 line</a> in a list item or block quote:</p>
-<div class="example" id="example-144">
+<div class="example" id="example-143">
 <div class="examplenum">
-<a href="#example-144">Example 144</a>
+<a href="#example-143">Example 143</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&gt;<span class="space"> </span>Foo
@@ -6046,9 +5725,9 @@ line</a> in a list item or block quote:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-145">
+<div class="example" id="example-144">
 <div class="examplenum">
-<a href="#example-145">Example 145</a>
+<a href="#example-144">Example 144</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&gt;<span class="space"> </span>foo
@@ -6065,9 +5744,9 @@ bar
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-146">
+<div class="example" id="example-145">
 <div class="examplenum">
-<a href="#example-146">Example 146</a>
+<a href="#example-145">Example 145</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>Foo
@@ -6085,9 +5764,9 @@ bar
 <p>A blank line is needed between a paragraph and a following
 setext heading, since otherwise the paragraph becomes part
 of the heading’s content:</p>
-<div class="example" id="example-147">
+<div class="example" id="example-146">
 <div class="examplenum">
-<a href="#example-147">Example 147</a>
+<a href="#example-146">Example 146</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -6103,9 +5782,9 @@ Bar&lt;/h2&gt;
 </div>
 <p>But in general a blank line is not required before or after
 setext headings:</p>
-<div class="example" id="example-148">
+<div class="example" id="example-147">
 <div class="examplenum">
-<a href="#example-148">Example 148</a>
+<a href="#example-147">Example 147</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">---
@@ -6125,9 +5804,9 @@ Baz
 </div>
 </div>
 <p>Setext headings cannot be empty:</p>
-<div class="example" id="example-149">
+<div class="example" id="example-148">
 <div class="examplenum">
-<a href="#example-149">Example 149</a>
+<a href="#example-148">Example 148</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">
@@ -6142,9 +5821,9 @@ Baz
 <p>Setext heading text lines must not be interpretable as block
 constructs other than paragraphs.  So, the line of dashes
 in these examples gets interpreted as a thematic break:</p>
-<div class="example" id="example-150">
+<div class="example" id="example-149">
 <div class="examplenum">
-<a href="#example-150">Example 150</a>
+<a href="#example-149">Example 149</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">---
@@ -6157,9 +5836,9 @@ in these examples gets interpreted as a thematic break:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-151">
+<div class="example" id="example-150">
 <div class="examplenum">
-<a href="#example-151">Example 151</a>
+<a href="#example-150">Example 150</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>foo
@@ -6174,9 +5853,9 @@ in these examples gets interpreted as a thematic break:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-152">
+<div class="example" id="example-151">
 <div class="examplenum">
-<a href="#example-152">Example 152</a>
+<a href="#example-151">Example 151</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo
@@ -6190,9 +5869,9 @@ in these examples gets interpreted as a thematic break:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-153">
+<div class="example" id="example-152">
 <div class="examplenum">
-<a href="#example-153">Example 153</a>
+<a href="#example-152">Example 152</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&gt;<span class="space"> </span>foo
@@ -6209,9 +5888,9 @@ in these examples gets interpreted as a thematic break:</p>
 </div>
 <p>If you want a heading with <code>&gt; foo</code> as its literal text, you can
 use backslash escapes:</p>
-<div class="example" id="example-154">
+<div class="example" id="example-153">
 <div class="examplenum">
-<a href="#example-154">Example 154</a>
+<a href="#example-153">Example 153</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">\&gt;<span class="space"> </span>foo
@@ -6242,9 +5921,9 @@ baz
 increases the expressive power of CommonMark, by allowing
 multiline headings.  Authors who want interpretation 1 can
 put a blank line after the first paragraph:</p>
-<div class="example" id="example-155">
+<div class="example" id="example-154">
 <div class="examplenum">
-<a href="#example-155">Example 155</a>
+<a href="#example-154">Example 154</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -6263,9 +5942,9 @@ baz
 </div>
 <p>Authors who want interpretation 2 can put blank lines around
 the thematic break,</p>
-<div class="example" id="example-156">
+<div class="example" id="example-155">
 <div class="examplenum">
-<a href="#example-156">Example 156</a>
+<a href="#example-155">Example 155</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -6286,9 +5965,9 @@ bar&lt;/p&gt;
 </div>
 <p>or use a thematic break that cannot count as a <a href="#setext-heading-underline">setext heading
 underline</a>, such as</p>
-<div class="example" id="example-157">
+<div class="example" id="example-156">
 <div class="examplenum">
-<a href="#example-157">Example 157</a>
+<a href="#example-156">Example 156</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -6306,9 +5985,9 @@ bar&lt;/p&gt;
 </div>
 </div>
 <p>Authors who want interpretation 3 can use backslash escapes:</p>
-<div class="example" id="example-158">
+<div class="example" id="example-157">
 <div class="examplenum">
-<a href="#example-158">Example 158</a>
+<a href="#example-157">Example 157</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -6339,9 +6018,9 @@ An indented code block has no <a href="#info-string">info string</a>.</p>
 a blank line between a paragraph and a following indented code block.
 (A blank line is not needed, however, between a code block and a following
 paragraph.)</p>
-<div class="example" id="example-159">
+<div class="example" id="example-158">
 <div class="examplenum">
-<a href="#example-159">Example 159</a>
+<a href="#example-158">Example 158</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>a<span class="space"> </span>simple
@@ -6358,9 +6037,9 @@ paragraph.)</p>
 <p>If there is any ambiguity between an interpretation of indentation
 as a code block and as indicating that material belongs to a <a href="#list-items">list
 item</a>, the list item interpretation takes precedence:</p>
-<div class="example" id="example-160">
+<div class="example" id="example-159">
 <div class="examplenum">
-<a href="#example-160">Example 160</a>
+<a href="#example-159">Example 159</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span>-<span class="space"> </span>foo
@@ -6378,9 +6057,9 @@ item</a>, the list item interpretation takes precedence:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-161">
+<div class="example" id="example-160">
 <div class="examplenum">
-<a href="#example-161">Example 161</a>
+<a href="#example-160">Example 160</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">1.<span class="space"> </span><span class="space"> </span>foo
@@ -6402,9 +6081,9 @@ item</a>, the list item interpretation takes precedence:</p>
 </div>
 <p>The contents of a code block are literal text, and do not get parsed
 as Markdown:</p>
-<div class="example" id="example-162">
+<div class="example" id="example-161">
 <div class="examplenum">
-<a href="#example-162">Example 162</a>
+<a href="#example-161">Example 161</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>&lt;a/&gt;
@@ -6423,9 +6102,9 @@ as Markdown:</p>
 </div>
 </div>
 <p>Here we have three chunks separated by blank lines:</p>
-<div class="example" id="example-163">
+<div class="example" id="example-162">
 <div class="examplenum">
-<a href="#example-163">Example 163</a>
+<a href="#example-162">Example 162</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk1
@@ -6451,9 +6130,9 @@ chunk3
 </div>
 <p>Any initial spaces or tabs beyond four spaces of indentation will be included in
 the content, even in interior blank lines:</p>
-<div class="example" id="example-164">
+<div class="example" id="example-163">
 <div class="examplenum">
-<a href="#example-164">Example 164</a>
+<a href="#example-163">Example 163</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk1
@@ -6471,9 +6150,9 @@ the content, even in interior blank lines:</p>
 </div>
 <p>An indented code block cannot interrupt a paragraph.  (This
 allows hanging indents and the like.)</p>
-<div class="example" id="example-165">
+<div class="example" id="example-164">
 <div class="examplenum">
-<a href="#example-165">Example 165</a>
+<a href="#example-164">Example 164</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
@@ -6489,9 +6168,9 @@ bar&lt;/p&gt;
 <p>However, any non-blank line with fewer than four spaces of indentation ends
 the code block immediately.  So a paragraph may occur immediately
 after indented code:</p>
-<div class="example" id="example-166">
+<div class="example" id="example-165">
 <div class="examplenum">
-<a href="#example-166">Example 166</a>
+<a href="#example-165">Example 165</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo
@@ -6507,9 +6186,9 @@ bar
 </div>
 <p>And indented code can occur immediately before and after other kinds of
 blocks:</p>
-<div class="example" id="example-167">
+<div class="example" id="example-166">
 <div class="examplenum">
-<a href="#example-167">Example 167</a>
+<a href="#example-166">Example 166</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>Heading
@@ -6532,9 +6211,9 @@ Heading
 </div>
 </div>
 <p>The first line can be preceded by more than four spaces of indentation:</p>
-<div class="example" id="example-168">
+<div class="example" id="example-167">
 <div class="examplenum">
-<a href="#example-168">Example 168</a>
+<a href="#example-167">Example 167</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo
@@ -6550,9 +6229,9 @@ bar
 </div>
 <p>Blank lines preceding or following an indented code block
 are not included in it:</p>
-<div class="example" id="example-169">
+<div class="example" id="example-168">
 <div class="examplenum">
-<a href="#example-169">Example 169</a>
+<a href="#example-168">Example 168</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">
@@ -6568,9 +6247,9 @@ are not included in it:</p>
 </div>
 </div>
 <p>Trailing spaces or tabs are included in the code block’s content:</p>
-<div class="example" id="example-170">
+<div class="example" id="example-169">
 <div class="examplenum">
-<a href="#example-170">Example 170</a>
+<a href="#example-169">Example 169</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo<span class="space"> </span><span class="space"> </span>
@@ -6622,9 +6301,9 @@ specify the language of the code sample, and rendered in the <code>class</code>
 attribute of the <code>code</code> tag.  However, this spec does not mandate any
 particular treatment of the <a href="#info-string">info string</a>.</p>
 <p>Here is a simple example with backticks:</p>
-<div class="example" id="example-171">
+<div class="example" id="example-170">
 <div class="examplenum">
-<a href="#example-171">Example 171</a>
+<a href="#example-170">Example 170</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6641,9 +6320,9 @@ particular treatment of the <a href="#info-string">info string</a>.</p>
 </div>
 </div>
 <p>With tildes:</p>
-<div class="example" id="example-172">
+<div class="example" id="example-171">
 <div class="examplenum">
-<a href="#example-172">Example 172</a>
+<a href="#example-171">Example 171</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~~
@@ -6660,9 +6339,9 @@ particular treatment of the <a href="#info-string">info string</a>.</p>
 </div>
 </div>
 <p>Fewer than three backticks is not enough:</p>
-<div class="example" id="example-173">
+<div class="example" id="example-172">
 <div class="examplenum">
-<a href="#example-173">Example 173</a>
+<a href="#example-172">Example 172</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">``
@@ -6677,9 +6356,9 @@ foo
 </div>
 <p>The closing code fence must use the same character as the opening
 fence:</p>
-<div class="example" id="example-174">
+<div class="example" id="example-173">
 <div class="examplenum">
-<a href="#example-174">Example 174</a>
+<a href="#example-173">Example 173</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6695,9 +6374,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-175">
+<div class="example" id="example-174">
 <div class="examplenum">
-<a href="#example-175">Example 175</a>
+<a href="#example-174">Example 174</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~~
@@ -6714,9 +6393,9 @@ aaa
 </div>
 </div>
 <p>The closing code fence must be at least as long as the opening fence:</p>
-<div class="example" id="example-176">
+<div class="example" id="example-175">
 <div class="examplenum">
-<a href="#example-176">Example 176</a>
+<a href="#example-175">Example 175</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">````
@@ -6732,9 +6411,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-177">
+<div class="example" id="example-176">
 <div class="examplenum">
-<a href="#example-177">Example 177</a>
+<a href="#example-176">Example 176</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~~~
@@ -6752,9 +6431,9 @@ aaa
 </div>
 <p>Unclosed code blocks are closed by the end of the document
 (or the enclosing <a href="#block-quotes">block quote</a> or <a href="#list-items">list item</a>):</p>
-<div class="example" id="example-178">
+<div class="example" id="example-177">
 <div class="examplenum">
-<a href="#example-178">Example 178</a>
+<a href="#example-177">Example 177</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6765,9 +6444,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-179">
+<div class="example" id="example-178">
 <div class="examplenum">
-<a href="#example-179">Example 179</a>
+<a href="#example-178">Example 178</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">`````
@@ -6784,9 +6463,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-180">
+<div class="example" id="example-179">
 <div class="examplenum">
-<a href="#example-180">Example 180</a>
+<a href="#example-179">Example 179</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&gt;<span class="space"> </span>```
@@ -6805,9 +6484,9 @@ bbb
 </div>
 </div>
 <p>A code block can have all empty lines as its content:</p>
-<div class="example" id="example-181">
+<div class="example" id="example-180">
 <div class="examplenum">
-<a href="#example-181">Example 181</a>
+<a href="#example-180">Example 180</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6824,9 +6503,9 @@ bbb
 </div>
 </div>
 <p>A code block can be empty:</p>
-<div class="example" id="example-182">
+<div class="example" id="example-181">
 <div class="examplenum">
-<a href="#example-182">Example 182</a>
+<a href="#example-181">Example 181</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6841,9 +6520,9 @@ bbb
 <p>Fences can be indented.  If the opening fence is indented,
 content lines will have equivalent opening indentation removed,
 if present:</p>
-<div class="example" id="example-183">
+<div class="example" id="example-182">
 <div class="examplenum">
-<a href="#example-183">Example 183</a>
+<a href="#example-182">Example 182</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span>```
@@ -6859,9 +6538,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-184">
+<div class="example" id="example-183">
 <div class="examplenum">
-<a href="#example-184">Example 184</a>
+<a href="#example-183">Example 183</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span>```
@@ -6879,9 +6558,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-185">
+<div class="example" id="example-184">
 <div class="examplenum">
-<a href="#example-185">Example 185</a>
+<a href="#example-184">Example 184</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span>```
@@ -6900,9 +6579,9 @@ aaa
 </div>
 </div>
 <p>Four spaces of indentation is too many:</p>
-<div class="example" id="example-186">
+<div class="example" id="example-185">
 <div class="examplenum">
-<a href="#example-186">Example 186</a>
+<a href="#example-185">Example 185</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>```
@@ -6920,9 +6599,9 @@ aaa
 </div>
 <p>Closing fences may be preceded by up to three spaces of indentation, and their
 indentation need not match that of the opening fence:</p>
-<div class="example" id="example-187">
+<div class="example" id="example-186">
 <div class="examplenum">
-<a href="#example-187">Example 187</a>
+<a href="#example-186">Example 186</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6936,9 +6615,9 @@ aaa
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-188">
+<div class="example" id="example-187">
 <div class="examplenum">
-<a href="#example-188">Example 188</a>
+<a href="#example-187">Example 187</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span>```
@@ -6953,9 +6632,9 @@ aaa
 </div>
 </div>
 <p>This is not a closing fence, because it is indented 4 spaces:</p>
-<div class="example" id="example-189">
+<div class="example" id="example-188">
 <div class="examplenum">
-<a href="#example-189">Example 189</a>
+<a href="#example-188">Example 188</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -6971,9 +6650,9 @@ aaa
 </div>
 </div>
 <p>Code fences (opening and closing) cannot contain internal spaces or tabs:</p>
-<div class="example" id="example-190">
+<div class="example" id="example-189">
 <div class="examplenum">
-<a href="#example-190">Example 190</a>
+<a href="#example-189">Example 189</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```<span class="space"> </span>```
@@ -6986,9 +6665,9 @@ aaa&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-191">
+<div class="example" id="example-190">
 <div class="examplenum">
-<a href="#example-191">Example 191</a>
+<a href="#example-190">Example 190</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~~~~~
@@ -7005,9 +6684,9 @@ aaa
 </div>
 <p>Fenced code blocks can interrupt paragraphs, and can be followed
 directly by paragraphs, without a blank line between:</p>
-<div class="example" id="example-192">
+<div class="example" id="example-191">
 <div class="examplenum">
-<a href="#example-192">Example 192</a>
+<a href="#example-191">Example 191</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo
@@ -7027,9 +6706,9 @@ baz
 </div>
 <p>Other blocks can also occur before and after fenced code blocks
 without an intervening blank line:</p>
-<div class="example" id="example-193">
+<div class="example" id="example-192">
 <div class="examplenum">
-<a href="#example-193">Example 193</a>
+<a href="#example-192">Example 192</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo
@@ -7054,9 +6733,9 @@ the info string, the first word is typically used to specify
 the language of the code block. In HTML output, the language is
 normally indicated by adding a class to the <code>code</code> element consisting
 of <code>language-</code> followed by the language name.</p>
-<div class="example" id="example-194">
+<div class="example" id="example-193">
 <div class="examplenum">
-<a href="#example-194">Example 194</a>
+<a href="#example-193">Example 193</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```ruby
@@ -7074,9 +6753,9 @@ end
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-195">
+<div class="example" id="example-194">
 <div class="examplenum">
-<a href="#example-195">Example 195</a>
+<a href="#example-194">Example 194</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~~~<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>ruby<span class="space"> </span>startline=3<span class="space"> </span>$%@#$
@@ -7094,9 +6773,9 @@ end
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-196">
+<div class="example" id="example-195">
 <div class="examplenum">
-<a href="#example-196">Example 196</a>
+<a href="#example-195">Example 195</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">````;
@@ -7109,9 +6788,9 @@ end
 </div>
 </div>
 <p><a href="#info-string">Info strings</a> for backtick code blocks cannot contain backticks:</p>
-<div class="example" id="example-197">
+<div class="example" id="example-196">
 <div class="examplenum">
-<a href="#example-197">Example 197</a>
+<a href="#example-196">Example 196</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```<span class="space"> </span>aa<span class="space"> </span>```
@@ -7125,9 +6804,9 @@ foo&lt;/p&gt;
 </div>
 </div>
 <p><a href="#info-string">Info strings</a> for tilde code blocks can contain backticks and tildes:</p>
-<div class="example" id="example-198">
+<div class="example" id="example-197">
 <div class="examplenum">
-<a href="#example-198">Example 198</a>
+<a href="#example-197">Example 197</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~~<span class="space"> </span>aa<span class="space"> </span>```<span class="space"> </span>~~~
@@ -7142,9 +6821,9 @@ foo
 </div>
 </div>
 <p>Closing code fences cannot have <a href="#info-string">info strings</a>:</p>
-<div class="example" id="example-199">
+<div class="example" id="example-198">
 <div class="examplenum">
-<a href="#example-199">Example 199</a>
+<a href="#example-198">Example 198</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">```
@@ -7452,8 +7131,331 @@ automatically wrapped. However, adding a continuation character is not a
 requirement, nor is the choice of which continuation character is used.</p>
 </div>
 <div class="extension">
+<h2 id="verbatim-resources-m-" class="definition">
+<span class="number">6.7</span>Verbatim resources (M)
+</h2>
+<p>TODO rewrite</p>
+<p>Since resources can…</p>
+<p>In order to prevent cycles (and infinitely long books!), resources are <strong>NOT</strong>
+allowed to include other resources: only a Markua document in the root
+<code>manuscript</code> directory can include resources, and all resources must live inside
+the <code>resources</code> directory or in a subdirectory inside of it, with nested
+subdirectories permitted.</p>
+<p>Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type <code>verbatim</code> it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.</p>
+<p>Verbatim resources (i.e. a resource with a <code>type</code> of <code>verbatim</code>) can be a local, web
+or inline resource, just like any other resource, and the same resource syntax
+applies to Markua resources as to all other resources.</p>
+<p>There are three main use cases for a Markua resource:</p>
+<ol>
+<li>Inserting a specific <code>class</code> of resource, such as a <code>poem</code>.</li>
+<li>Inserting boilerplate, such as a legal disclaimer, which may be needed to be
+used in many places and/or sourced from a third party.</li>
+<li>Controlling the behaviour of fonts or whitespace for specific types of
+text, such as poetry.</li>
+</ol>
+<p>The following are the supported attributes for resources of type <code>verbatim</code>:</p>
+<p><code>type</code>
+: For a Markua resource, the <code>type</code> is <code>verbatim</code>. This can be specified
+explicitly, and it can be inferred as the type for all files with a <code>.md</code>
+.extension.</p>
+<p><code>class</code>
+: This can define a specific <code>class</code> of resource, such as a <code>poem</code> or <code>list</code>.
+The default is <code>none</code>, which means that the resource is not inserted in any
+special way, but is just inserted as though the author typed it in the
+manuscript. This enables this class of <code>verbatim</code> resource to be used for text
+substitution, without showing up in some list of resources near the front of the
+book. There is semantic sugar to produce inline resources of type <code>verbatim</code> and
+class <code>poem</code>; see below for details.) A Markua Processor can produce a list of a
+given class of resource near the beginning of the document, such as a List of
+Poems or a List of Lists.</p>
+<p><code>monospaced</code>
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, the Markua Processor
+must use a monospaced font to output the text in the resource. If false, the
+Markua Processor may use whatever font (proportional or monospaced) it is
+configured to use to output Markua text. The value of <code>true</code> can be useful for
+certain types of poetry, for example.</p>
+<p><code>format</code>
+: This is the resource format. For a Markua resource, the format is always
+just <code>verbatim</code>, and should be ignored by a Markua Processor.</p>
+<p><code>title</code>
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).</p>
+<p><code>whitespace</code>
+: <code>semantic</code> or <code>verbatim</code>. The default is <code>semantic</code>. With the default value of
+<code>semantic</code>, whitespace is processed the way that Markua handles it. With the
+value of <code>verbatim</code>, leading whitespace, internal whitespace, trailing
+whitespace and newlines must all be preserved verbatim as typed. This can be
+useful for certain types of poetry, such as indenting the last two lines of a
+sonnet. To be clear, this includes all spaces and newlines, regardless
+of whether they are leading, internal or trailing spaces, and regardless of the
+number of consecutive leading, internal or trailing spaces or the number of
+newlines. Now, while the whitespace is preserved, it is rendered using either a
+proportional font or a monospaced one based on the value of the <code>monospaced</code>
+attribute. If whitespace is verbatim, the <code>verbatim</code> resource should have newlines
+added by the author to ensure that automatic line wrapping is not relied upon.
+Markua Processors may wrap lines to ensure that all the text is visible on a
+page, and <em>may</em> add continuation characters (like the backslash <code>\</code> character)
+in the output to indicate that a line has been automatically wrapped by the
+Markua Processor. Obviously, seeing a continuation character is in poetry is
+terrible, so the author should consider this a mistake that needs to be fixed by
+manually line wrapping.</p>
+<h3 id="local-verbatim-resources" class="definition">
+<span class="number">6.7.1</span>Local Verbatim resources
+</h3>
+<p>Local Markua resources look like many other resources inserted as figures:</p>
+<pre><code>Here's a Shakespearean sonnet, which will not have a `class` and which will
+default to semantic whitespace:
+
+![](sonnet130.md &quot;Sonnet 130&quot;)
+
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+have its whitespace preserved (for indenting the last two lines):
+
+{whitespace: verbatim}
+![](sonnet130.md &quot;Sonnet 130&quot;)
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{class: poem, whitespace: verbatim}
+![](sonnet130.md &quot;Sonnet 130&quot;)
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{monospaced: false, class: poem, whitespace: verbatim}
+![](sonnet130.md &quot;Sonnet 130&quot;)
+
+Here's a list of Canadian cities sorted by population. This implicitly has a
+`class` of `none`:
+
+![](cities.md &quot;Canadian Cities by Population&quot;)
+
+Here's that same list, but with an explicit class of `none`:
+
+{class: none}
+![](cities.md &quot;Canadian Cities by Population&quot;)
+
+Here's that same list, but with a class of `list` so it shows up in a List of
+Lists, if there is one:
+
+{class: list}
+![](cities.md &quot;Canadian Cities by Population&quot;)
+
+Here's some legal boilerplate:
+
+![](tos.md &quot;Terms and Conditions&quot;)
+
+Here's some legal boilerplate, with the explicit class of `none`:
+
+{class: none}
+![](tos.md &quot;Terms and Conditions&quot;)
+
+Here's an E. E. Cummings poem:
+
+{monospaced: true, class: poem, whitespace: verbatim}
+![](iwillbe.md &quot;I Will Be&quot;)
+</code></pre>
+<p>With a non-<code>.md</code> extension, the type of <code>verbatim</code> must be stated:</p>
+<pre><code>Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim}
+![](sonnet130.txt &quot;Sonnet 130&quot;)
+
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](sonnet130.txt &quot;Sonnet 130&quot;)
+
+Here's some legal boilerplate:
+
+{type: markua}
+![](tos.txt &quot;Terms and Conditions&quot;)
+
+Here's an E. E. Cummings poem:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+![](iwillbe.txt &quot;I Will Be&quot;)
+</code></pre>
+<h3 id="web-verbatim-resources" class="definition">
+<span class="number">6.7.2</span>Web Verbatim resources
+</h3>
+<p>Web Markua resources function identically to how local Markua resources work,
+including the significance of file extensions. The only difference is that the
+files are on the web.</p>
+<pre><code>Here's a Shakespearean sonnet:
+
+![](http://markua.com/sonnet130.md &quot;Sonnet 130&quot;)
+
+Here's a Shakespearean sonnet:
+
+{type: markua}
+![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
+
+Here's a paragraph after the figure.
+</code></pre>
+<h3 id="inline-verbatim-resources" class="definition">
+<span class="number">6.7.3</span>Inline Verbatim resources
+</h3>
+<p>You might wonder why an inline resource of type <code>verbatim</code> would be supported at
+all. After all, isn’t it just Markua text?</p>
+<p>There are three reasons it is supported:</p>
+<ol>
+<li>for consistency</li>
+<li>for the attribute lists, which allow configurable whitespace, etc.</li>
+<li>so that the resource can show up in a list of resources</li>
+</ol>
+<p>To create an inline resource of type <code>verbatim</code>, you use the fenced code block
+syntax, and you can use an attribute list to specify the type of resource.</p>
+<p>You can also use one of a handful of syntactic sugar options:</p>
+<p><code>&amp;</code>
+: equivalent to <code>{type: markua, whitespace: verbatim, monospaced: false}</code></p>
+<p><code>&amp;&amp;</code>
+: equivalent to <code>{type: markua, class: poem, whitespace: verbatim, monospaced: false}</code></p>
+<p><code>*</code>
+: equivalent to <code>{type: markua, whitespace: verbatim, monospaced: true}</code></p>
+<p><code>**</code>
+: equivalent to <code>{type: markua, class: poem, whitespace: verbatim, monospaced: true}</code></p>
+<p>This is made clear in the following example:</p>
+<pre><code>Here's part of a poem:
+
+```&amp;
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
+
+```&amp;&amp;
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
+
+```*
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+Here's part of a poem:
+
+```**
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+</code></pre>
+<p>I’m not a poet, but I know it.</p>
+<p>Finally, here’s an example of an inline Markua resource being used for a list:</p>
+<pre><code>{class: list, title: &quot;Canadian Cities by Population&quot;}
+```
+1. Toronto
+2. Vancouver
+```
+</code></pre>
+<p>Despite the seeming generality of this example, it’s actually fairly niche:
+most lists are just lists, not resources, and do not need to be wrapped in a
+resource.</p>
+<h3 id="but-what-if-i-want-every-character-taken-literally-" class="definition">
+<span class="number">6.7.4</span>But what if I want every character taken literally?
+</h3>
+<p>If you want to type poetry where every character is taken exactly literally,
+instead of being potentially interpreted as Markua formatting, you need to use
+a code block with a format of text for that:</p>
+<div class="example" id="example-199">
+<div class="examplenum">
+<a href="#example-199">Example 199</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">```text
+*this*<span class="space"> </span>isn't<span class="space"> </span>italic
+and<span class="space"> </span>**this**<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>bold
+*<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>cherry<span class="space"> </span>blossoms<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>*
+```
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;pre&gt;&lt;code&gt;*this*<span class="space"> </span>isn't<span class="space"> </span>italic
+and<span class="space"> </span>**this**<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>bold
+*<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>cherry<span class="space"> </span>blossoms<span class="space"> </span>*<span class="space"> </span>*<span class="space"> </span>*
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</div>
+</div>
+</div>
+<div class="extension">
 <h2 id="no-html-blocks-m-" class="definition">
-<span class="number">6.7</span>No HTML blocks (M)
+<span class="number">6.8</span>No HTML blocks (M)
 </h2>
 <p>Markdown and CommonMark support HTML blocks, which are groups of lines that are
 treated as raw HTML (and will not be escaped in HTML output).</p>
@@ -7476,7 +7478,7 @@ From an implementation perspective, Markdown gets inline HTML support for free.
 This is not true in the case of Markua.</p>
 </div>
 <h2 id="link-reference-definitions" class="definition">
-<span class="number">6.8</span>Link reference definitions
+<span class="number">6.9</span>Link reference definitions
 </h2>
 <p>A <a id="link-reference-definition" href="#link-reference-definition" class="definition">link reference definition</a>
 consists of a <a href="#link-label">link label</a>, optionally preceded by up to three spaces of
@@ -7976,7 +7978,7 @@ are defined:</p>
 </div>
 </div>
 <h2 id="paragraphs" class="definition">
-<span class="number">6.9</span>Paragraphs
+<span class="number">6.10</span>Paragraphs
 </h2>
 <p>A sequence of non-blank lines that cannot be interpreted as other
 kinds of blocks forms a <a id="paragraph" href="#paragraph" class="definition">paragraph</a>.
@@ -8127,7 +8129,7 @@ bbb&lt;/p&gt;
 </div>
 </div>
 <h2 id="blank-lines" class="definition">
-<span class="number">6.10</span>Blank lines
+<span class="number">6.11</span>Blank lines
 </h2>
 <p><a href="#blank-line">Blank lines</a> between block-level elements are ignored,
 except for the role they play in determining whether a <a href="#list">list</a>
@@ -8156,7 +8158,7 @@ aaa
 </div>
 <div class="extension">
 <h2 id="tables-gfm-" class="definition">
-<span class="number">6.11</span>Tables (GFM)
+<span class="number">6.12</span>Tables (GFM)
 </h2>
 <p>GFM enables the <code>table</code> extension, where an additional leaf block type is
 available.</p>
@@ -8411,7 +8413,7 @@ cells are inserted.  If there are greater, the excess is ignored:</p>
 </div>
 <div class="extension">
 <h2 id="table-resources-and-csv-format-tables-m-" class="definition">
-<span class="number">6.12</span>Table resources and CSV-format tables (M)
+<span class="number">6.13</span>Table resources and CSV-format tables (M)
 </h2>
 <p>TODO - rewrite to better discuss CSV</p>
 <p>As shown in the Tables section, the syntax to insert a table in Markua is

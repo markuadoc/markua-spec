@@ -3548,354 +3548,6 @@ Yada yada `puts "hi"`{format: ruby} yada yada.
 
 
 
-## Verbatim resources (M)
-
-TODO
-
-Since resources can...
-
-In order to prevent cycles (and infinitely long books!), resources are **NOT**
-allowed to include other resources: only a Markua document in the root
-`manuscript` directory can include resources, and all resources must live inside
-the `resources` directory or in a subdirectory inside of it, with nested
-subdirectories permitted.
-
-Because of this limitation, a Markua Processor which is building an AST
-(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
-traversal of the AST, and when it encounters a resource of type `verbatim` it
-should then parse the resource as Markua and replace the Markua resource with
-the subtree which is the result of parsing the Markua resource, and there is no
-need to do this recursively.
-
-Verbatim resources (i.e. a resource with a `type` of `verbatim`) can be a local, web
-or inline resource, just like any other resource, and the same resource syntax
-applies to Markua resources as to all other resources.
-
-There are three main use cases for a Markua resource:
-
-1. Inserting a specific `class` of resource, such as a `poem`.
-2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
-   used in many places and/or sourced from a third party.
-3. Controlling the behaviour of fonts or whitespace for specific types of
-   text, such as poetry.
-
-The following are the supported attributes for resources of type `verbatim`:
-
-`type`
-: For a Markua resource, the `type` is `verbatim`. This can be specified
-explicitly, and it can be inferred as the type for all files with a `.md`
-.extension.
-
-`class`
-: This can define a specific `class` of resource, such as a `poem` or `list`.
-The default is `none`, which means that the resource is not inserted in any
-special way, but is just inserted as though the author typed it in the
-manuscript. This enables this class of `verbatim` resource to be used for text
-substitution, without showing up in some list of resources near the front of the
-book. There is semantic sugar to produce inline resources of type `verbatim` and
-class `poem`; see below for details.) A Markua Processor can produce a list of a
-given class of resource near the beginning of the document, such as a List of
-Poems or a List of Lists.
-
-`monospaced`
-: `true` or `false`. The default is `false`. If `true`, the Markua Processor
-must use a monospaced font to output the text in the resource. If false, the
-Markua Processor may use whatever font (proportional or monospaced) it is
-configured to use to output Markua text. The value of `true` can be useful for
-certain types of poetry, for example.
-
-`format`
-: This is the resource format. For a Markua resource, the format is always
-just `verbatim`, and should be ignored by a Markua Processor.
-
-`title`
-: This is text which is shown near the figure, typically above or below it. A
-Markua Processor can choose where to position titles based on any criteria it
-chooses. For example, a Markua Processor can position all titles above or
-below figures, or use a different behaviour based on the resource format (e.g.
-table titles above, image titles below). Note that the figure title itself
-may contain the Markua text formatting specified earlier (e.g. bold, italic).
-This text is also displayed for the figure wherever the figure is listed
-(e.g. List of Illustrations, Table of Tables, etc.).
-
-`whitespace`
-: `semantic` or `verbatim`. The default is `semantic`. With the default value of
-`semantic`, whitespace is processed the way that Markua handles it. With the
-value of `verbatim`, leading whitespace, internal whitespace, trailing
-whitespace and newlines must all be preserved verbatim as typed. This can be
-useful for certain types of poetry, such as indenting the last two lines of a
-sonnet. To be clear, this includes all spaces and newlines, regardless
-of whether they are leading, internal or trailing spaces, and regardless of the
-number of consecutive leading, internal or trailing spaces or the number of 
-newlines. Now, while the whitespace is preserved, it is rendered using either a
-proportional font or a monospaced one based on the value of the `monospaced`
-attribute. If whitespace is verbatim, the `verbatim` resource should have newlines
-added by the author to ensure that automatic line wrapping is not relied upon.
-Markua Processors may wrap lines to ensure that all the text is visible on a
-page, and *may* add continuation characters (like the backslash `\` character)
-in the output to indicate that a line has been automatically wrapped by the
-Markua Processor. Obviously, seeing a continuation character is in poetry is
-terrible, so the author should consider this a mistake that needs to be fixed by
-manually line wrapping.
-
-### Local Verbatim resources
-
-Local Markua resources look like many other resources inserted as figures:
-
-~~~
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-default to semantic whitespace:
-
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-have its whitespace preserved (for indenting the last two lines):
-
-{whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
-
-{class: poem, whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
-
-{monospaced: false, class: poem, whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
-
-Here's a list of Canadian cities sorted by population. This implicitly has a
-`class` of `none`:
-
-![](cities.md "Canadian Cities by Population")
-
-Here's that same list, but with an explicit class of `none`:
-
-{class: none}
-![](cities.md "Canadian Cities by Population")
-
-Here's that same list, but with a class of `list` so it shows up in a List of
-Lists, if there is one:
-
-{class: list}
-![](cities.md "Canadian Cities by Population")
-
-Here's some legal boilerplate:
-
-![](tos.md "Terms and Conditions")
-
-Here's some legal boilerplate, with the explicit class of `none`:
-
-{class: none}
-![](tos.md "Terms and Conditions")
-
-Here's an E. E. Cummings poem:
-
-{monospaced: true, class: poem, whitespace: verbatim}
-![](iwillbe.md "I Will Be")
-~~~
-
-With a non-`.md` extension, the type of `verbatim` must be stated:
-
-~~~
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim}
-![](sonnet130.txt "Sonnet 130")
-
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](sonnet130.txt "Sonnet 130")
-
-Here's some legal boilerplate:
-
-{type: markua}
-![](tos.txt "Terms and Conditions")
-
-Here's an E. E. Cummings poem:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-![](iwillbe.txt "I Will Be")
-~~~
-
-### Web Verbatim resources
-
-Web Markua resources function identically to how local Markua resources work,
-including the significance of file extensions. The only difference is that the
-files are on the web.
-
-~~~
-Here's a Shakespearean sonnet:
-
-![](http://markua.com/sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet:
-
-{type: markua}
-![](http://markua.com/sonnet130.txt "Sonnet 130")
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](http://markua.com/sonnet130.txt "Sonnet 130")
-
-Here's a paragraph after the figure.
-~~~
-
-### Inline Verbatim resources
-
-You might wonder why an inline resource of type `verbatim` would be supported at
-all. After all, isn't it just Markua text?
-
-
-
-There are three reasons it is supported:
-
-1. for consistency
-2. for the attribute lists, which allow configurable whitespace, etc.
-3. so that the resource can show up in a list of resources
-
-To create an inline resource of type `verbatim`, you use the fenced code block
-syntax, and you can use an attribute list to specify the type of resource.
-
-You can also use one of a handful of syntactic sugar options:
-
-`&`
-: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
-
-`&&`
-: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
-
-`*`
-: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
-
-`**`
-: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
-
-This is made clear in the following example:
-
-~~~
-Here's part of a poem:
-
-```&
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```&&
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```*
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-Here's part of a poem:
-
-```**
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-~~~
-
-I'm not a poet, but I know it.
-
-Finally, here's an example of an inline Markua resource being used for a list:
-
-~~~
-{class: list, title: "Canadian Cities by Population"}
-```
-1. Toronto
-2. Vancouver
-```
-~~~
-
-Despite the seeming generality of this example, it's actually fairly niche:
-most lists are just lists, not resources, and do not need to be wrapped in a
-resource.
-
-### But what if I want every character taken literally?
-
-If you want to type poetry where every character is taken exactly literally,
-instead of being potentially interpreted as Markua formatting, you need to use
-a code block with a format of text for that:
-
-```````````````````````````````` example
-```text
-*this* isn't italic
-and **this** is not bold
-* * * cherry blossoms * * *
-```
-.
-<pre><code>*this* isn't italic
-and **this** is not bold
-* * * cherry blossoms * * *
-</code></pre>
-````````````````````````````````
-
 ## TODO Complete List of Syntactic Sugar (M)
 
 TODO
@@ -6615,6 +6267,360 @@ all code is visible on a page, and *may* add continuation characters (like the
 backslash `\` character) in the output to indicate that a line has been
 automatically wrapped. However, adding a continuation character is not a
 requirement, nor is the choice of which continuation character is used.
+
+</div>
+
+
+
+<div class="extension">
+
+## Verbatim resources (M)
+
+TODO rewrite
+
+Since resources can...
+
+In order to prevent cycles (and infinitely long books!), resources are **NOT**
+allowed to include other resources: only a Markua document in the root
+`manuscript` directory can include resources, and all resources must live inside
+the `resources` directory or in a subdirectory inside of it, with nested
+subdirectories permitted.
+
+Because of this limitation, a Markua Processor which is building an AST
+(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
+traversal of the AST, and when it encounters a resource of type `verbatim` it
+should then parse the resource as Markua and replace the Markua resource with
+the subtree which is the result of parsing the Markua resource, and there is no
+need to do this recursively.
+
+Verbatim resources (i.e. a resource with a `type` of `verbatim`) can be a local, web
+or inline resource, just like any other resource, and the same resource syntax
+applies to Markua resources as to all other resources.
+
+There are three main use cases for a Markua resource:
+
+1. Inserting a specific `class` of resource, such as a `poem`.
+2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
+   used in many places and/or sourced from a third party.
+3. Controlling the behaviour of fonts or whitespace for specific types of
+   text, such as poetry.
+
+The following are the supported attributes for resources of type `verbatim`:
+
+`type`
+: For a Markua resource, the `type` is `verbatim`. This can be specified
+explicitly, and it can be inferred as the type for all files with a `.md`
+.extension.
+
+`class`
+: This can define a specific `class` of resource, such as a `poem` or `list`.
+The default is `none`, which means that the resource is not inserted in any
+special way, but is just inserted as though the author typed it in the
+manuscript. This enables this class of `verbatim` resource to be used for text
+substitution, without showing up in some list of resources near the front of the
+book. There is semantic sugar to produce inline resources of type `verbatim` and
+class `poem`; see below for details.) A Markua Processor can produce a list of a
+given class of resource near the beginning of the document, such as a List of
+Poems or a List of Lists.
+
+`monospaced`
+: `true` or `false`. The default is `false`. If `true`, the Markua Processor
+must use a monospaced font to output the text in the resource. If false, the
+Markua Processor may use whatever font (proportional or monospaced) it is
+configured to use to output Markua text. The value of `true` can be useful for
+certain types of poetry, for example.
+
+`format`
+: This is the resource format. For a Markua resource, the format is always
+just `verbatim`, and should be ignored by a Markua Processor.
+
+`title`
+: This is text which is shown near the figure, typically above or below it. A
+Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or
+below figures, or use a different behaviour based on the resource format (e.g.
+table titles above, image titles below). Note that the figure title itself
+may contain the Markua text formatting specified earlier (e.g. bold, italic).
+This text is also displayed for the figure wherever the figure is listed
+(e.g. List of Illustrations, Table of Tables, etc.).
+
+`whitespace`
+: `semantic` or `verbatim`. The default is `semantic`. With the default value of
+`semantic`, whitespace is processed the way that Markua handles it. With the
+value of `verbatim`, leading whitespace, internal whitespace, trailing
+whitespace and newlines must all be preserved verbatim as typed. This can be
+useful for certain types of poetry, such as indenting the last two lines of a
+sonnet. To be clear, this includes all spaces and newlines, regardless
+of whether they are leading, internal or trailing spaces, and regardless of the
+number of consecutive leading, internal or trailing spaces or the number of 
+newlines. Now, while the whitespace is preserved, it is rendered using either a
+proportional font or a monospaced one based on the value of the `monospaced`
+attribute. If whitespace is verbatim, the `verbatim` resource should have newlines
+added by the author to ensure that automatic line wrapping is not relied upon.
+Markua Processors may wrap lines to ensure that all the text is visible on a
+page, and *may* add continuation characters (like the backslash `\` character)
+in the output to indicate that a line has been automatically wrapped by the
+Markua Processor. Obviously, seeing a continuation character is in poetry is
+terrible, so the author should consider this a mistake that needs to be fixed by
+manually line wrapping.
+
+### Local Verbatim resources
+
+Local Markua resources look like many other resources inserted as figures:
+
+~~~
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+default to semantic whitespace:
+
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will not have a `class` and which will
+have its whitespace preserved (for indenting the last two lines):
+
+{whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
+will have its whitespace preserved (for indenting the last two lines):
+
+{monospaced: false, class: poem, whitespace: verbatim}
+![](sonnet130.md "Sonnet 130")
+
+Here's a list of Canadian cities sorted by population. This implicitly has a
+`class` of `none`:
+
+![](cities.md "Canadian Cities by Population")
+
+Here's that same list, but with an explicit class of `none`:
+
+{class: none}
+![](cities.md "Canadian Cities by Population")
+
+Here's that same list, but with a class of `list` so it shows up in a List of
+Lists, if there is one:
+
+{class: list}
+![](cities.md "Canadian Cities by Population")
+
+Here's some legal boilerplate:
+
+![](tos.md "Terms and Conditions")
+
+Here's some legal boilerplate, with the explicit class of `none`:
+
+{class: none}
+![](tos.md "Terms and Conditions")
+
+Here's an E. E. Cummings poem:
+
+{monospaced: true, class: poem, whitespace: verbatim}
+![](iwillbe.md "I Will Be")
+~~~
+
+With a non-`.md` extension, the type of `verbatim` must be stated:
+
+~~~
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim}
+![](sonnet130.txt "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](sonnet130.txt "Sonnet 130")
+
+Here's some legal boilerplate:
+
+{type: markua}
+![](tos.txt "Terms and Conditions")
+
+Here's an E. E. Cummings poem:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+![](iwillbe.txt "I Will Be")
+~~~
+
+### Web Verbatim resources
+
+Web Markua resources function identically to how local Markua resources work,
+including the significance of file extensions. The only difference is that the
+files are on the web.
+
+~~~
+Here's a Shakespearean sonnet:
+
+![](http://markua.com/sonnet130.md "Sonnet 130")
+
+Here's a Shakespearean sonnet:
+
+{type: markua}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+![](http://markua.com/sonnet130.txt "Sonnet 130")
+
+Here's a paragraph after the figure.
+~~~
+
+### Inline Verbatim resources
+
+You might wonder why an inline resource of type `verbatim` would be supported at
+all. After all, isn't it just Markua text?
+
+
+
+There are three reasons it is supported:
+
+1. for consistency
+2. for the attribute lists, which allow configurable whitespace, etc.
+3. so that the resource can show up in a list of resources
+
+To create an inline resource of type `verbatim`, you use the fenced code block
+syntax, and you can use an attribute list to specify the type of resource.
+
+You can also use one of a handful of syntactic sugar options:
+
+`&`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
+
+`&&`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
+
+`*`
+: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
+
+`**`
+: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
+
+This is made clear in the following example:
+
+~~~
+Here's part of a poem:
+
+```&
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
+
+```&&
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: false}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Here's part of a poem:
+
+```*
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+Here's part of a poem:
+
+```**
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+
+That is equivalent to:
+
+{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+```
+i
+  *am*
+      a        cat
+            a        **l a z y**          cat
+
+me   ow
+```
+~~~
+
+I'm not a poet, but I know it.
+
+Finally, here's an example of an inline Markua resource being used for a list:
+
+~~~
+{class: list, title: "Canadian Cities by Population"}
+```
+1. Toronto
+2. Vancouver
+```
+~~~
+
+Despite the seeming generality of this example, it's actually fairly niche:
+most lists are just lists, not resources, and do not need to be wrapped in a
+resource.
+
+### But what if I want every character taken literally?
+
+If you want to type poetry where every character is taken exactly literally,
+instead of being potentially interpreted as Markua formatting, you need to use
+a code block with a format of text for that:
+
+```````````````````````````````` example
+```text
+*this* isn't italic
+and **this** is not bold
+* * * cherry blossoms * * *
+```
+.
+<pre><code>*this* isn't italic
+and **this** is not bold
+* * * cherry blossoms * * *
+</code></pre>
+````````````````````````````````
 
 </div>
 

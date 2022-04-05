@@ -1,6 +1,6 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on Leanpub. The Markua 0.30 support in Leanpub is currently incomplete. For example, courses are not yet implemented in Markua 0.30, so you still need to use Markua 0.10 for them.<br/><br/><hr/><br/>'
+author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
 version: '0.30.13'
 date: '2022-04-03'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
@@ -552,19 +552,12 @@ So, for any given chapter or section of this document, it is either:
 2. written by GitHub employees about GFM, and ending with "(GFM)"
 3. written by Peter Armstrong about Markua, and ending with "(M)"
 
+To be clear: every chapter or section which does not end with (M) or (GFM) is
+from the original CommonMark Spec, and was written by John MacFarlane.
+
 Together, these sections combine to specify Markua, since Markua is CommonMark,
 minus HTML blocks and Raw HTML, plus two GFM extensions, plus many Markua
 extensions.
-
-To be clear about the origin of every chapter and section:
-
-* Where an entire chapter is added by the Markua spec, only the chapter name has
-(Markua extension) added to it, since it is obvious that every section in it is
-also a Markua extension.
-* Where a section inside an original CommonMark spec chapter is added by the
-Markua spec, that section has (M) added to its name.
-* Every chapter or section which does not end with (M) or (GFM) is from the
-original CommonMark Spec, and was written by John MacFarlane.
 
 While this hybrid approach of creating the Markua specification is somewhat odd,
 it has a number of significant benefits:
@@ -1562,29 +1555,12 @@ As discussed in the introduction, Markua is an extension to Markdown. The goal
 is for Markua to feel as though Markdown just magically grew a knowledge of
 how to produce books and courses.
 
-To recap, Markua's five main additions to Markdown are the following:
-
-1. The mapping of Markdown headings (h1, h2, h3, etc.) to book structures
-   (chapters, sections, sub-sections, etc.), which provides the ability for
-   Markua Processors like Leanpub to produce an ebook from a Markua manuscript
-   with one click.
-2. The unified resource syntax, which lets Markua handle audio, code, iframe,
-   math, verbatim and video resources in the same way that it does images and
-   tables, and which supports inline, local and web resource locations.
-3. The unified attribute list syntax, which lets Markua define properties for
-   resources using the same syntax that is used for other document elements,
-   such as part headings and index entries.
-4. A comprehensive definition of document settings, so that authors can use
-   Markua to produce documents which are styled via global switches, rather than
-   by tedious micromanagement.
-5. The mapping of book structures to online courses, and the creation of a
-   plain-text microformat for course quizzes and exercises, which supports
-   automated marking and automated production of everything which is required
-   for an online course.
-
-Items 1, 3 and 4 are discussed in this section. They concern the document
-structure and metadata. Resources (item 2) and courses (item 5) are both big
-enough to need their own sections.
+Recall that [Markua's five main additions to
+Markdown](#markua-s-five-key-additions-to-markdown-m-) include the mapping of
+Markdown headings to book structures, the unified attribute list syntax and a
+comprehensive definition of document settings. These three key additions are
+discussed in this section. (The other two key additions, resources and online
+courses, are both big enough to need their own sections.
 
 Markua adds a number of extensions to support metadata in a consistent way.
 These include attributes (on everything), settings (at the beginning of a
@@ -1926,6 +1902,12 @@ If a key is duplicated in an attribute list, the first key value is used and
 subsequent ones are ignored. A Markua Processor should add a warning in its
 list of warnings, which are *not* output in the output itself.
 
+To be clear, the keys of attributes have nothing to do with HTML attributes,
+even though HTML is one of the output formats of Markua. Markua does not have
+any particular knowledge of HTML attributes; Markua understands Markua
+attributes. Some Markua attributes, like `class`, happen to have the same name
+as some attributes in HTML. This is just coincidence, and many others do not.
+
 ### Attribute Values
 
 All attributes are text. Markua Processors should interpret text values of "true"
@@ -2040,12 +2022,12 @@ above a heading. You can't have a blank line below it (otherwise it would be a
 directive, and not be valid) and you can't attach it to anything other than a
 heading (like a paragraph, figure, etc.).
 
-### The lang attribute
+### The `lang` attribute
 
-A book has a global `lang` setting, which defaults to `eng`, for English.
-
-However, many books are written in more than one language. Switching between
-languages in accomplished using the `lang` attribute.
+A book can have a global `lang` setting, which is discussed later on in the
+Document Settings section. However, many books are written in more than one
+language. Switching between languages within a book or course is accomplished
+using the `lang` attribute.
 
 A `lang` attribute can be applied to a chapter, section, paragraph or even
 to a span.
@@ -2106,10 +2088,6 @@ possible for a Markua Processor to add extension attributes that only it
 understands. This encourages competition in the Markua ecosystem, while ensuring
 that Markua implementations do not choke on Markua input which goes beyond their
 capabilities.
-
-To be clear, Markua does not understand "HTML attributes". It understands Markua
-attributes. Some Markua attributes, like `class`, happen to correspond to
-attributes in HTML. This is just coincidence, and many others do not.
 
 For example, Leanpub supports an `icon` attribute on blurbs. If a different
 Markua processor does not support this attribute, there is no harm done: the
@@ -12071,7 +12049,7 @@ the book or course.
 
 TODO
 
-## Resource Types
+## Resource Types (M)
 
 There are eight types of resources:
 
@@ -12088,14 +12066,16 @@ Each type of resource has a number of supported formats. Any of the nine
 resource types can be inserted as a local resource or web resource, and many of
 the resource types can also be inserted as an inline resource.
 
-## Resource Formats
+
+## Resource Formats (M)
 
 The **Format** is the format of the resource. It can be specified with the
 `type` attribute, or inferred from the file extension (discussed below).
 This is important information to help the Markua Processor handle the
 resource correctly.
 
-## Resource Classes
+
+## Resource Classes (M)
 
 The **Class** determines whether, and how, the resource is presented in a
 particular list of resources near the beginning of the book. The `span`
@@ -12123,7 +12103,7 @@ image, list or table with no caption), the the `class` is implicitly set to
 figures. The `class` attribute is discussed further below.
 
 
-## Resource Locations
+## Resource Locations (M)
 
 The **Location** is the location of the resource, when encountered by the
 Markua Processor. There is no attribute for this; it is inferred from the
@@ -12219,7 +12199,7 @@ or any type of audio or video file--these can only be local or web resources.
 The syntax for SVG images is discussed later.
 
 
-## Verbatim Resources
+## Verbatim Resources (M)
 
 TODO
 
@@ -12239,7 +12219,7 @@ the subtree which is the result of parsing the Markua resource, and there is no
 need to do this recursively.
 
 
-## Resource Attribute Lists
+## Resource Attribute Lists (M)
 
 TODO
 
@@ -12277,12 +12257,14 @@ inline resource content (default format is `text` with tildes)
 ```
 
 
-## Common Resource Attributes
+## Common Resource Attributes (M)
 
 TODO
 
 
-### Resource insertion methods
+## Resource insertion methods (M)
+
+### TODO
 
 Resources can be inserted either as figures or as spans.
 
@@ -12546,7 +12528,9 @@ Yada yada `puts "hi"`{format: ruby} yada yada.
 ~~~
 
 
-### Resource formats
+## Resource formats (M)
+
+### TODO
 
 Both the type and the format can be specified in an attribute list, by the
 respective `type` and `format` attributes.
@@ -12655,7 +12639,7 @@ recognized to the syntax highlighter, such as Pygments.
   extension not listed previously in the sections above
 
 
-## Code resources
+## Code resources (M)
 
 Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
@@ -13019,9 +13003,11 @@ automatically wrapped. However, adding a continuation character is not a
 requirement, nor is the choice of which continuation character is used.
 
 
-## Markua Resources
+## Verbatim Resources (M)
 
-Markua resources (i.e. a resource with a `type` of `markua`) can be a local, web
+TODO
+
+Verbatim resources (i.e. a resource with a `type` of `verbatim`) can be a local, web
 or inline resource, just like any other resource, and the same resource syntax
 applies to Markua resources as to all other resources.
 
@@ -13092,7 +13078,7 @@ Markua Processor. Obviously, seeing a continuation character is in poetry is
 terrible, so the author should consider this a mistake that needs to be fixed by
 manually line wrapping.
 
-### Local Markua resources
+### Local Verbatim resources
 
 Local Markua resources look like many other resources inserted as figures:
 
@@ -13175,7 +13161,7 @@ Here's an E. E. Cummings poem:
 ![](iwillbe.txt "I Will Be")
 ~~~
 
-### Web Markua resources
+### Web Verbatim resources
 
 Web Markua resources function identically to how local Markua resources work,
 including the significance of file extensions. The only difference is that the
@@ -13197,17 +13183,10 @@ Here's a Shakespearean sonnet:
 Here's a paragraph after the figure.
 ~~~
 
-### Inline Markua resources
+### Inline Verbatim resources
 
 You might wonder why an inline resource of type `markua` would be supported at
 all. After all, isn't it just Markua text?
-
-Defaults:
-
-
-
-TODO
-
 
 
 
@@ -13357,8 +13336,12 @@ and **this** is not bold
 </code></pre>
 ````````````````````````````````
 
+## TODO Complete List of Syntactic Sugar (M)
 
-## Table resources
+
+TODO
+
+## Table resources (M)
 
 As shown in the Tables section, the syntax to insert a table in Markua is
 the identical syntax to that used by GFM. (That section is unchanged from the
@@ -13601,7 +13584,7 @@ clobbered by the title:
 
 
 
-## CSV-format Table resources
+## CSV-format Table resources (M)
 
 As discussed above, tables (i.e. resources of type `table`) which are local or
 web resources can have a `csv` format, instead of the default `markua` format.

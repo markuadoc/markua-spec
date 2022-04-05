@@ -2070,6 +2070,175 @@ the direction will switch to left-to-right even if the given language was not
 supported--there are a lot of languages, but most of them are left-to-right
 languages.
 
+
+
+### Paragraph continuations (M)
+
+In books, you can insert things like lists in the middle of paragraphs.
+
+Ideally, this would be one paragraph. However, it's not:
+
+```````````````````````````````` example
+foo
+  * lorem
+  * ipsum
+bar
+.
+<p>foo</p>
+<ul>
+<li>lorem</li>
+<li>ipsum
+bar</li>
+</ul>
+````````````````````````````````
+
+Here, you lose hard, because "bar" is considered to be part of the same list
+item as ipsum. I think this is a mistake, but it is more important to preserve
+Markdown compatibility than to fix this mistake.
+
+Ideally, it would also be possible to insert a list inside a paragraph.
+However, it's not:
+
+```````````````````````````````` example
+foo
+
+  * lorem
+  * ipsum
+
+bar
+.
+<p>foo</p>
+<ul>
+<li>lorem</li>
+<li>ipsum</li>
+</ul>
+<p>bar</p>
+````````````````````````````````
+
+The reason here is that HTML does not support inserting lists in paragraphs.
+Lists are always siblings to paragraphs, not contained within them.
+
+There is no way to fix this at the HTML tag level, since this is just how HTML
+works. It would be possible to just construct a fake list with a bunch of CSS
+and break tags inside a paragraph, but that would be far worse.
+
+From an HTML perspective, you cannot insert lists inside paragraphs. But if
+you are writing in Markua, you're not just writing HTML. You can also be
+generating a book in PDF and other non-HTML formats, which do support lists
+inside paragraphs just fine.
+
+So, there needs to be some way to indicate that the beginning of a paragraph
+after something like a list is actually a continuation of the previous
+paragraph.
+
+Now, this could have been done by just not adding blank lines, only single
+newlines, but that would involve fighting against existing Markdown behaviour.
+Worse, it would introduce an incompatibility just to fix something that many
+people don't consider broken.
+
+For authors who want a list to appear to be inside a paragraph, Markua does have
+two solutions. First, you can just add a `continued-para` class to the
+subsequent paragraph, via an attribute list:
+
+```````````````````````````````` example
+foo
+
+  * lorem
+  * ipsum
+
+{class: continued-para}
+bar
+.
+<p>foo</p>
+<ul>
+<li>lorem</li>
+<li>ipsum</li>
+</ul>
+<p class="continued-para">bar</p>
+````````````````````````````````
+
+It would then be up to the Markua Processor to use the appropriate CSS to make
+the paragraph with the `continued-para` class look like a continuation of the
+previous paragraph, such as by removing indentation or decreasing leading space.
+
+(Attribute lists, discussed later, are one of the main contributions of Markua.)
+
+However, if you are an author who cares about this feature, typing an attribute
+list whenever you want to continue a paragraph is really obnoxious. So, there
+needs to be some syntactic sugar, and there is, with the `^` symbol.
+
+A caret (`^`) on a line by itself above a paragraph functions as a
+`{class: continued-para}` attribute list for the following paragraph:
+
+```````````````````````````````` example
+foo
+
+  * lorem
+  * ipsum
+
+^
+bar
+.
+<p>foo</p>
+<ul>
+<li>lorem</li>
+<li>ipsum</li>
+</ul>
+<p class="continued-para">bar</p>
+````````````````````````````````
+
+
+Note that this works for more than just lists. In fact, it has nothing to do
+with lists, or even with images or other resources. It's all about the
+indentation behaviour of a paragraph, typically following some other block. So,
+you can use this whenever you want:
+
+```````````````````````````````` example
+foo
+
+> a block quote
+
+^
+bar
+.
+<p>foo</p>
+<blockquote>
+<p>a block quote</p>
+</blockquote>
+<p class="continued-para">bar</p>
+````````````````````````````````
+
+
+### Span attribute lists (M)
+
+Surrounding text in square brackets can be useful not just for giving it a URL
+to link to. If you wish to add attributes to an arbitrary span of text, you can
+create an arbitrary span of text using square brackets and then add an attribute
+list immediately afterward. You can use any attribute list on this span, and you
+can also just use the id syntactic sugar `{#theid}` on this span. The most
+common uses of this are to add `id` attributes or index entries. (Index entries
+are discussed later.)
+
+```````````````````````````````` example
+Some text [then a span]{foo: lorem, bar: ipsum} and more text.
+
+This [span has an id]{#hello}, so hooray!
+
+This span [also has an id]{id: world}. 
+
+This span contains [古池や蛙飛び込む水の音]{lang: jpn} Japanese text.
+.
+<p>Some text <span foo="lorem" bar="ipsum">then a span</span> and more text.</p>
+<p>This <span id="hello">span has an id</span>, so hooray!</p>
+<p>This span <span id="world">also has an id</span>.</p>
+<p>This span contains <span lang="jp">古池や蛙飛び込む水の音</span> Japanese text.</p>
+````````````````````````````````
+
+Note, however, that you cannot start a normal span with a caret (`^`): this
+creates a `[^footnote]` instead. (Footnotes are discussed below.)
+
+
+
 ### Extension attributes
 
 Markua Processors may encounter attributes which they do not understand.
@@ -2709,178 +2878,6 @@ regardless of the presence or position of the `quiz-answers` directive.
 For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
-
-
-
-## Paragraph continuations (M)
-
-In books, you can insert things like lists in the middle of paragraphs.
-
-Ideally, this would be one paragraph. However, it's not:
-
-```````````````````````````````` example
-foo
-  * lorem
-  * ipsum
-bar
-.
-<p>foo</p>
-<ul>
-<li>lorem</li>
-<li>ipsum
-bar</li>
-</ul>
-````````````````````````````````
-
-Here, you lose hard, because "bar" is considered to be part of the same list
-item as ipsum. I think this is a mistake, but it is more important to preserve
-Markdown compatibility than to fix this mistake.
-
-Ideally, it would also be possible to insert a list inside a paragraph.
-However, it's not:
-
-```````````````````````````````` example
-foo
-
-  * lorem
-  * ipsum
-
-bar
-.
-<p>foo</p>
-<ul>
-<li>lorem</li>
-<li>ipsum</li>
-</ul>
-<p>bar</p>
-````````````````````````````````
-
-The reason here is that HTML does not support inserting lists in paragraphs.
-Lists are always siblings to paragraphs, not contained within them.
-
-There is no way to fix this at the HTML tag level, since this is just how HTML
-works. It would be possible to just construct a fake list with a bunch of CSS
-and break tags inside a paragraph, but that would be far worse.
-
-From an HTML perspective, you cannot insert lists inside paragraphs. But if
-you are writing in Markua, you're not just writing HTML. You can also be
-generating a book in PDF and other non-HTML formats, which do support lists
-inside paragraphs just fine.
-
-So, there needs to be some way to indicate that the beginning of a paragraph
-after something like a list is actually a continuation of the previous
-paragraph.
-
-Now, this could have been done by just not adding blank lines, only single
-newlines, but that would involve fighting against existing Markdown behaviour.
-Worse, it would introduce an incompatibility just to fix something that many
-people don't consider broken.
-
-For authors who want a list to appear to be inside a paragraph, Markua does have
-two solutions. First, you can just add a `continued-para` class to the
-subsequent paragraph, via an attribute list:
-
-```````````````````````````````` example
-foo
-
-  * lorem
-  * ipsum
-
-{class: continued-para}
-bar
-.
-<p>foo</p>
-<ul>
-<li>lorem</li>
-<li>ipsum</li>
-</ul>
-<p class="continued-para">bar</p>
-````````````````````````````````
-
-It would then be up to the Markua Processor to use the appropriate CSS to make
-the paragraph with the `continued-para` class look like a continuation of the
-previous paragraph, such as by removing indentation or decreasing leading space.
-
-(Attribute lists, discussed later, are one of the main contributions of Markua.)
-
-However, if you are an author who cares about this feature, typing an attribute
-list whenever you want to continue a paragraph is really obnoxious. So, there
-needs to be some syntactic sugar, and there is, with the `^` symbol.
-
-A caret (`^`) on a line by itself above a paragraph functions as a
-`{class: continued-para}` attribute list for the following paragraph:
-
-```````````````````````````````` example
-foo
-
-  * lorem
-  * ipsum
-
-^
-bar
-.
-<p>foo</p>
-<ul>
-<li>lorem</li>
-<li>ipsum</li>
-</ul>
-<p class="continued-para">bar</p>
-````````````````````````````````
-
-
-Note that this works for more than just lists. In fact, it has nothing to do
-with lists, or even with images or other resources. It's all about the
-indentation behaviour of a paragraph, typically following some other block. So,
-you can use this whenever you want:
-
-```````````````````````````````` example
-foo
-
-> a block quote
-
-^
-bar
-.
-<p>foo</p>
-<blockquote>
-<p>a block quote</p>
-</blockquote>
-<p class="continued-para">bar</p>
-````````````````````````````````
-
-</div>
-
-
-
-<div class="extension">
-
-## Span attribute lists (M)
-
-Surrounding text in square brackets can be useful not just for giving it a URL
-to link to. If you wish to add attributes to an arbitrary span of text, you can
-create an arbitrary span of text using square brackets and then add an attribute
-list immediately afterward. You can use any attribute list on this span, and you
-can also just use the id syntactic sugar `{#theid}` on this span. The most
-common uses of this are to add `id` attributes or index entries. (Index entries
-are discussed later.)
-
-```````````````````````````````` example
-Some text [then a span]{foo: lorem, bar: ipsum} and more text.
-
-This [span has an id]{#hello}, so hooray!
-
-This span [also has an id]{id: world}. 
-
-This span contains [古池や蛙飛び込む水の音]{lang: jpn} Japanese text.
-.
-<p>Some text <span foo="lorem" bar="ipsum">then a span</span> and more text.</p>
-<p>This <span id="hello">span has an id</span>, so hooray!</p>
-<p>This span <span id="world">also has an id</span>.</p>
-<p>This span contains <span lang="jp">古池や蛙飛び込む水の音</span> Japanese text.</p>
-````````````````````````````````
-
-Note, however, that you cannot start a normal span with a caret (`^`): this
-creates a `[^footnote]` instead. (Footnotes are discussed below.)
 
 </div>
 

@@ -170,9 +170,7 @@ $(document).ready(function() {
 <li><a href="#attribute-lists-m-"><span class="number">3.2</span>Attribute lists (M)</a></li>
 <li><a href="#document-settings-m-"><span class="number">3.3</span>Document settings (M)</a></li>
 <li><a href="#directives-m-"><span class="number">3.4</span>Directives (M)</a></li>
-<li><a href="#paragraph-continuations-m-"><span class="number">3.5</span>Paragraph continuations (M)</a></li>
-<li><a href="#span-attribute-lists-m-"><span class="number">3.6</span>Span attribute lists (M)</a></li>
-<li><a href="#concatenating-files-and-blank-lines-m-"><span class="number">3.7</span>Concatenating files and blank lines (M)</a></li>
+<li><a href="#concatenating-files-and-blank-lines-m-"><span class="number">3.5</span>Concatenating files and blank lines (M)</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">4</span>Blocks and inlines</a>
@@ -2451,8 +2449,198 @@ Hebrew  (<code>{lang: heb}</code>), and know that when a different language is s
 the direction will switch to left-to-right even if the given language was not
 supported–there are a lot of languages, but most of them are left-to-right
 languages.</p>
+<h3 id="paragraph-continuations-m-" class="definition">
+<span class="number">3.2.9</span>Paragraph continuations (M)
+</h3>
+<p>In books, you can insert things like lists in the middle of paragraphs.</p>
+<p>Ideally, this would be one paragraph. However, it’s not:</p>
+<div class="example" id="example-51">
+<div class="examplenum">
+<a href="#example-51">Example 51</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">foo
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lorem&lt;/li&gt;
+&lt;li&gt;ipsum
+bar&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+</div>
+</div>
+<p>Here, you lose hard, because “bar” is considered to be part of the same list
+item as ipsum. I think this is a mistake, but it is more important to preserve
+Markdown compatibility than to fix this mistake.</p>
+<p>Ideally, it would also be possible to insert a list inside a paragraph.
+However, it’s not:</p>
+<div class="example" id="example-52">
+<div class="examplenum">
+<a href="#example-52">Example 52</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">foo
+
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
+
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lorem&lt;/li&gt;
+&lt;li&gt;ipsum&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>The reason here is that HTML does not support inserting lists in paragraphs.
+Lists are always siblings to paragraphs, not contained within them.</p>
+<p>There is no way to fix this at the HTML tag level, since this is just how HTML
+works. It would be possible to just construct a fake list with a bunch of CSS
+and break tags inside a paragraph, but that would be far worse.</p>
+<p>From an HTML perspective, you cannot insert lists inside paragraphs. But if
+you are writing in Markua, you’re not just writing HTML. You can also be
+generating a book in PDF and other non-HTML formats, which do support lists
+inside paragraphs just fine.</p>
+<p>So, there needs to be some way to indicate that the beginning of a paragraph
+after something like a list is actually a continuation of the previous
+paragraph.</p>
+<p>Now, this could have been done by just not adding blank lines, only single
+newlines, but that would involve fighting against existing Markdown behaviour.
+Worse, it would introduce an incompatibility just to fix something that many
+people don’t consider broken.</p>
+<p>For authors who want a list to appear to be inside a paragraph, Markua does have
+two solutions. First, you can just add a <code>continued-para</code> class to the
+subsequent paragraph, via an attribute list:</p>
+<div class="example" id="example-53">
+<div class="examplenum">
+<a href="#example-53">Example 53</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">foo
+
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
+
+{class:<span class="space"> </span>continued-para}
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lorem&lt;/li&gt;
+&lt;li&gt;ipsum&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p<span class="space"> </span>class=&quot;continued-para&quot;&gt;bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>It would then be up to the Markua Processor to use the appropriate CSS to make
+the paragraph with the <code>continued-para</code> class look like a continuation of the
+previous paragraph, such as by removing indentation or decreasing leading space.</p>
+<p>(Attribute lists, discussed later, are one of the main contributions of Markua.)</p>
+<p>However, if you are an author who cares about this feature, typing an attribute
+list whenever you want to continue a paragraph is really obnoxious. So, there
+needs to be some syntactic sugar, and there is, with the <code>^</code> symbol.</p>
+<p>A caret (<code>^</code>) on a line by itself above a paragraph functions as a
+<code>{class: continued-para}</code> attribute list for the following paragraph:</p>
+<div class="example" id="example-54">
+<div class="examplenum">
+<a href="#example-54">Example 54</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">foo
+
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
+<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
+
+^
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lorem&lt;/li&gt;
+&lt;li&gt;ipsum&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p<span class="space"> </span>class=&quot;continued-para&quot;&gt;bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Note that this works for more than just lists. In fact, it has nothing to do
+with lists, or even with images or other resources. It’s all about the
+indentation behaviour of a paragraph, typically following some other block. So,
+you can use this whenever you want:</p>
+<div class="example" id="example-55">
+<div class="examplenum">
+<a href="#example-55">Example 55</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">foo
+
+&gt;<span class="space"> </span>a<span class="space"> </span>block<span class="space"> </span>quote
+
+^
+bar
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a<span class="space"> </span>block<span class="space"> </span>quote&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p<span class="space"> </span>class=&quot;continued-para&quot;&gt;bar&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<h3 id="span-attribute-lists-m-" class="definition">
+<span class="number">3.2.10</span>Span attribute lists (M)
+</h3>
+<p>Surrounding text in square brackets can be useful not just for giving it a URL
+to link to. If you wish to add attributes to an arbitrary span of text, you can
+create an arbitrary span of text using square brackets and then add an attribute
+list immediately afterward. You can use any attribute list on this span, and you
+can also just use the id syntactic sugar <code>{#theid}</code> on this span. The most
+common uses of this are to add <code>id</code> attributes or index entries. (Index entries
+are discussed later.)</p>
+<div class="example" id="example-56">
+<div class="examplenum">
+<a href="#example-56">Example 56</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">Some<span class="space"> </span>text<span class="space"> </span>[then<span class="space"> </span>a<span class="space"> </span>span]{foo:<span class="space"> </span>lorem,<span class="space"> </span>bar:<span class="space"> </span>ipsum}<span class="space"> </span>and<span class="space"> </span>more<span class="space"> </span>text.
+
+This<span class="space"> </span>[span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{#hello},<span class="space"> </span>so<span class="space"> </span>hooray!
+
+This<span class="space"> </span>span<span class="space"> </span>[also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{id:<span class="space"> </span>world}.<span class="space"> </span>
+
+This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>[古池や蛙飛び込む水の音]{lang:<span class="space"> </span>jpn}<span class="space"> </span>Japanese<span class="space"> </span>text.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;Some<span class="space"> </span>text<span class="space"> </span>&lt;span<span class="space"> </span>foo=&quot;lorem&quot;<span class="space"> </span>bar=&quot;ipsum&quot;&gt;then<span class="space"> </span>a<span class="space"> </span>span&lt;/span&gt;<span class="space"> </span>and<span class="space"> </span>more<span class="space"> </span>text.&lt;/p&gt;
+&lt;p&gt;This<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;hello&quot;&gt;span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id&lt;/span&gt;,<span class="space"> </span>so<span class="space"> </span>hooray!&lt;/p&gt;
+&lt;p&gt;This<span class="space"> </span>span<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;world&quot;&gt;also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>&lt;span<span class="space"> </span>lang=&quot;jp&quot;&gt;古池や蛙飛び込む水の音&lt;/span&gt;<span class="space"> </span>Japanese<span class="space"> </span>text.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Note, however, that you cannot start a normal span with a caret (<code>^</code>): this
+creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
 <h3 id="extension-attributes" class="definition">
-<span class="number">3.2.9</span>Extension attributes
+<span class="number">3.2.11</span>Extension attributes
 </h3>
 <p>Markua Processors may encounter attributes which they do not understand.</p>
 <p>Whenever this happens, these attributes must be filtered from the output. A
@@ -2724,9 +2912,9 @@ as a newline in non-HTML-based output formats like PDF.)</li>
 <p><strong>To be clear: if <code>soft-breaks</code> has the value of <code>break</code>, all single newlines
 function as hard line breaks (i.e. as they would if they were using the “two
 space hack” to produce a hard line break in normal Markdown).</strong></p>
-<div class="example" id="example-51">
+<div class="example" id="example-57">
 <div class="examplenum">
-<a href="#example-51">Example 51</a>
+<a href="#example-57">Example 57</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
@@ -2744,9 +2932,9 @@ bar&lt;/p&gt;
 </div>
 <p>This can be made explicit by setting the <code>soft-breaks</code> document setting to
 <code>source</code>:</p>
-<div class="example" id="example-52">
+<div class="example" id="example-58">
 <div class="examplenum">
-<a href="#example-52">Example 52</a>
+<a href="#example-58">Example 58</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -2768,9 +2956,9 @@ bar&lt;/p&gt;
 </div>
 <p>This can be made shorter by setting the <code>soft-breaks</code> document setting to
 <code>space</code>:</p>
-<div class="example" id="example-53">
+<div class="example" id="example-59">
 <div class="examplenum">
-<a href="#example-53">Example 53</a>
+<a href="#example-59">Example 59</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -2791,9 +2979,9 @@ bar
 </div>
 <p>If you want your line breaks to actually, well, produce line breaks, you need to
 set the <code>soft-breaks</code> document setting to <code>break</code>:</p>
-<div class="example" id="example-54">
+<div class="example" id="example-60">
 <div class="examplenum">
-<a href="#example-54">Example 54</a>
+<a href="#example-60">Example 60</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -3023,202 +3211,10 @@ regardless of the presence or position of the <code>quiz-answers</code> directiv
 <p>For example, in Leanpub’s online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.</p>
-<h2 id="paragraph-continuations-m-" class="definition">
-<span class="number">3.5</span>Paragraph continuations (M)
-</h2>
-<p>In books, you can insert things like lists in the middle of paragraphs.</p>
-<p>Ideally, this would be one paragraph. However, it’s not:</p>
-<div class="example" id="example-55">
-<div class="examplenum">
-<a href="#example-55">Example 55</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">foo
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;lorem&lt;/li&gt;
-&lt;li&gt;ipsum
-bar&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-</div>
-</div>
-<p>Here, you lose hard, because “bar” is considered to be part of the same list
-item as ipsum. I think this is a mistake, but it is more important to preserve
-Markdown compatibility than to fix this mistake.</p>
-<p>Ideally, it would also be possible to insert a list inside a paragraph.
-However, it’s not:</p>
-<div class="example" id="example-56">
-<div class="examplenum">
-<a href="#example-56">Example 56</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">foo
-
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
-
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;lorem&lt;/li&gt;
-&lt;li&gt;ipsum&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>The reason here is that HTML does not support inserting lists in paragraphs.
-Lists are always siblings to paragraphs, not contained within them.</p>
-<p>There is no way to fix this at the HTML tag level, since this is just how HTML
-works. It would be possible to just construct a fake list with a bunch of CSS
-and break tags inside a paragraph, but that would be far worse.</p>
-<p>From an HTML perspective, you cannot insert lists inside paragraphs. But if
-you are writing in Markua, you’re not just writing HTML. You can also be
-generating a book in PDF and other non-HTML formats, which do support lists
-inside paragraphs just fine.</p>
-<p>So, there needs to be some way to indicate that the beginning of a paragraph
-after something like a list is actually a continuation of the previous
-paragraph.</p>
-<p>Now, this could have been done by just not adding blank lines, only single
-newlines, but that would involve fighting against existing Markdown behaviour.
-Worse, it would introduce an incompatibility just to fix something that many
-people don’t consider broken.</p>
-<p>For authors who want a list to appear to be inside a paragraph, Markua does have
-two solutions. First, you can just add a <code>continued-para</code> class to the
-subsequent paragraph, via an attribute list:</p>
-<div class="example" id="example-57">
-<div class="examplenum">
-<a href="#example-57">Example 57</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">foo
-
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
-
-{class:<span class="space"> </span>continued-para}
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;lorem&lt;/li&gt;
-&lt;li&gt;ipsum&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p<span class="space"> </span>class=&quot;continued-para&quot;&gt;bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>It would then be up to the Markua Processor to use the appropriate CSS to make
-the paragraph with the <code>continued-para</code> class look like a continuation of the
-previous paragraph, such as by removing indentation or decreasing leading space.</p>
-<p>(Attribute lists, discussed later, are one of the main contributions of Markua.)</p>
-<p>However, if you are an author who cares about this feature, typing an attribute
-list whenever you want to continue a paragraph is really obnoxious. So, there
-needs to be some syntactic sugar, and there is, with the <code>^</code> symbol.</p>
-<p>A caret (<code>^</code>) on a line by itself above a paragraph functions as a
-<code>{class: continued-para}</code> attribute list for the following paragraph:</p>
-<div class="example" id="example-58">
-<div class="examplenum">
-<a href="#example-58">Example 58</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">foo
-
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>lorem
-<span class="space"> </span><span class="space"> </span>*<span class="space"> </span>ipsum
-
-^
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;lorem&lt;/li&gt;
-&lt;li&gt;ipsum&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p<span class="space"> </span>class=&quot;continued-para&quot;&gt;bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>Note that this works for more than just lists. In fact, it has nothing to do
-with lists, or even with images or other resources. It’s all about the
-indentation behaviour of a paragraph, typically following some other block. So,
-you can use this whenever you want:</p>
-<div class="example" id="example-59">
-<div class="examplenum">
-<a href="#example-59">Example 59</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">foo
-
-&gt;<span class="space"> </span>a<span class="space"> </span>block<span class="space"> </span>quote
-
-^
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;foo&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;a<span class="space"> </span>block<span class="space"> </span>quote&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p<span class="space"> </span>class=&quot;continued-para&quot;&gt;bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-</div>
-<div class="extension">
-<h2 id="span-attribute-lists-m-" class="definition">
-<span class="number">3.6</span>Span attribute lists (M)
-</h2>
-<p>Surrounding text in square brackets can be useful not just for giving it a URL
-to link to. If you wish to add attributes to an arbitrary span of text, you can
-create an arbitrary span of text using square brackets and then add an attribute
-list immediately afterward. You can use any attribute list on this span, and you
-can also just use the id syntactic sugar <code>{#theid}</code> on this span. The most
-common uses of this are to add <code>id</code> attributes or index entries. (Index entries
-are discussed later.)</p>
-<div class="example" id="example-60">
-<div class="examplenum">
-<a href="#example-60">Example 60</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">Some<span class="space"> </span>text<span class="space"> </span>[then<span class="space"> </span>a<span class="space"> </span>span]{foo:<span class="space"> </span>lorem,<span class="space"> </span>bar:<span class="space"> </span>ipsum}<span class="space"> </span>and<span class="space"> </span>more<span class="space"> </span>text.
-
-This<span class="space"> </span>[span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{#hello},<span class="space"> </span>so<span class="space"> </span>hooray!
-
-This<span class="space"> </span>span<span class="space"> </span>[also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{id:<span class="space"> </span>world}.<span class="space"> </span>
-
-This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>[古池や蛙飛び込む水の音]{lang:<span class="space"> </span>jpn}<span class="space"> </span>Japanese<span class="space"> </span>text.
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;Some<span class="space"> </span>text<span class="space"> </span>&lt;span<span class="space"> </span>foo=&quot;lorem&quot;<span class="space"> </span>bar=&quot;ipsum&quot;&gt;then<span class="space"> </span>a<span class="space"> </span>span&lt;/span&gt;<span class="space"> </span>and<span class="space"> </span>more<span class="space"> </span>text.&lt;/p&gt;
-&lt;p&gt;This<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;hello&quot;&gt;span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id&lt;/span&gt;,<span class="space"> </span>so<span class="space"> </span>hooray!&lt;/p&gt;
-&lt;p&gt;This<span class="space"> </span>span<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;world&quot;&gt;also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>&lt;span<span class="space"> </span>lang=&quot;jp&quot;&gt;古池や蛙飛び込む水の音&lt;/span&gt;<span class="space"> </span>Japanese<span class="space"> </span>text.&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>Note, however, that you cannot start a normal span with a caret (<code>^</code>): this
-creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
 </div>
 <div class="extension">
 <h2 id="concatenating-files-and-blank-lines-m-" class="definition">
-<span class="number">3.7</span>Concatenating files and blank lines (M)
+<span class="number">3.5</span>Concatenating files and blank lines (M)
 </h2>
 <p>A Markua document can be written in one file or multiple manuscript files. If a
 manuscript is written in multiple files, these files are concatenated together by

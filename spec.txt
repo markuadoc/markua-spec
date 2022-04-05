@@ -3546,59 +3546,6 @@ For example, this resource would be formatted as Ruby code:
 Yada yada `puts "hi"`{format: ruby} yada yada.
 ~~~
 
-
-
-## Block quotes with curly braces (M)
-
-Block quotes in Markua are created in one of two ways:
-
-1. By prefacing lines with `> `, i.e. a greater than character followed by a
-space. This was shown above.
-2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
-
-Option #1 is preferable for short quotes; option #2 is easier on authors for
-really long quotes.
-
-Like figures and tables, blockquotes can be inserted in the middle of a
-paragraph or as a sibling of it.
-
-These are the two ways to make block quotes in Markua:
-
-```````````````````````````````` example
-This is the first paragraph.
-
-> This is a blockquote.
->
-> You saw this above.
-
-This is the second paragraph.
-
-{blockquote}
-This is also a blockquote.
-
-It is good for longer quotes.
-{/blockquote}
-
-This is the third paragraph.
-.
-<p>This is the first paragraph.</p>
-<blockquote>
-<p>This is a blockquote.</p>
-<p>You saw this above.</p>
-</blockquote>
-<p>This is the second paragraph.</p>
-<blockquote>
-<p>This is also a blockquote.</p>
-<p>It is good for longer quotes.</p>
-</blockquote>
-<p>This is the third paragraph.</p>
-````````````````````````````````
-
-If a blockquote contains headings, these headings may be formatted by a Markua
-Processor differently than normal headings. Finally, if a Markua Processor is
-automatically generating a [Table of Contents](#toc) from chapter and section
-headings, any headings inside blockquotes should be ignored.
-
 </div>
 
 
@@ -7327,6 +7274,63 @@ after the `>`:
 <p>not code</p>
 </blockquote>
 ````````````````````````````````
+
+
+
+<div class="extension">
+
+## Block quotes with curly braces (M)
+
+Block quotes in Markua are created in one of two ways:
+
+1. By prefacing lines with `> `, i.e. a greater than character followed by a
+space. This was shown above.
+2. By wrapping the blockquote in `{blockquote}` ... `{/blockquote}`
+
+Option #1 is preferable for short quotes; option #2 is easier on authors for
+really long quotes.
+
+Like figures and tables, blockquotes can be inserted in the middle of a
+paragraph or as a sibling of it.
+
+These are the two ways to make block quotes in Markua:
+
+```````````````````````````````` example
+This is the first paragraph.
+
+> This is a blockquote.
+>
+> You saw this above.
+
+This is the second paragraph.
+
+{blockquote}
+This is also a blockquote.
+
+It is good for longer quotes.
+{/blockquote}
+
+This is the third paragraph.
+.
+<p>This is the first paragraph.</p>
+<blockquote>
+<p>This is a blockquote.</p>
+<p>You saw this above.</p>
+</blockquote>
+<p>This is the second paragraph.</p>
+<blockquote>
+<p>This is also a blockquote.</p>
+<p>It is good for longer quotes.</p>
+</blockquote>
+<p>This is the third paragraph.</p>
+````````````````````````````````
+
+If a blockquote contains headings, these headings may be formatted by a Markua
+Processor differently than normal headings. Finally, if a Markua Processor is
+automatically generating a [Table of Contents](#toc) from chapter and section
+headings, any headings inside blockquotes should be ignored.
+
+</div>
 
 
 

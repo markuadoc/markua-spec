@@ -591,7 +591,7 @@ extension)" instead of "(extension)", to more clearly specify their provenance.
 The other three GFM extensions are omitted:
 
 1. [Task list items](https://github.github.com/gfm/#task-list-items-extension-)
-   is omitted since Markua is for books and courses, not todo lists.
+   is omitted since Markua is for books and courses, not task lists.
 2. [Disallowed Raw HTML](https://github.github.com/gfm/#disallowed-raw-html-extension-)
    is omitted since Markua goes farther and **completely removes all raw HTML**,
    both HTML added as HTML blocks or as raw HTML inlines.
@@ -2022,6 +2022,16 @@ above a heading. You can't have a blank line below it (otherwise it would be a
 directive, and not be valid) and you can't attach it to anything other than a
 heading (like a paragraph, figure, etc.).
 
+Finally, as discussed later, Markua supports "extension attributes", to allow
+implementations to add attributes for purposes which are not in the scope of the
+Markua spec. One such attribute added by Leanpub is the `{community: true}`
+attribute, which functions like a `{sample: true}` attribute to produce a sample
+book. However, the `{community: true}` attribute results in Leanpub producing a
+sample book which is only available if the reader provides an email address for
+the download. This type of feature obviously does not belong in the Markua
+spec; the point, however, is that extension attributes make it so easy to add
+these types of features that it is almost as though they were in the spec.
+
 ### The `lang` attribute
 
 A book can have a global `lang` setting, which is discussed later on in the
@@ -2921,52 +2931,37 @@ Books and courses may embed many kinds of [resources](@).
 
 Resources vary in four different ways:
 
-1. **Type**: `audio`, `code`, `iframe`, `image`, `list`, `math`, `table`,
-   `verbatim`, `video`
-2. **Format**: `mp3`, `ruby`, `png`, `latexmath`, `mp4`, etc.
-3. **Class**: `span`, `figure`, `equation`, `listing`, `table`, etc.
-4. **Location**: Inline, Local, and Web
+1. Type
+2. Format
+3. Class
+4. Location
 
-The list above may make it sound like Markua is somehow incompatible with
-Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
-this is not the case! The changes made by Markua are **purely additive**: the
-syntax for images, fenced code blocks, and tables is a superset of that
-specified by CommonMark and GFM. All images, fenced code blocks and tables
-supported by CommonMark and GFM work in Markua. Markua's changes here are
-additions, not modifications. Markua's resources are an extension, both
-conceptual and in features, of what was already in CommonMark and GFM.
+While resources are a very important addition that Markua makes to Markdown,
+they are exactly that: an addition.
 
-Specifically, the most important thing that resources do is to provide a
-consistent conceptual framework for thinking about all resources, instead of
-just a number of different, unrelated things.
+**Resources provide an important conceptual framework, while remaining purely
+additive to standard Markdown. Specifically, all images, fenced code blocks and
+tables supported by CommonMark or GFM work in Markua unchanged.**
 
-Besides that, resources also add add attribute lists, and type, format and class
-attributes for all resources, including the resources such as images, fenced
-code blocks and tables which are also found in other Markdown dialects.
+What resources do is provide consistency, both in the conceptual understanding,
+in adding support for attribute lists, and specifying standard `type`, `format`
+and `class` attributes for all resources, including the resources such as
+images, fenced code blocks and tables which are also found in other Markdown
+dialects.
 
-Attribute lists can be used to specify a figure title and alt text, set an id,
-specify the format, and do other useful things.
+We have already discussed attribute lists earlier for things like part headings
+and conditional inclusion attributes, but by far the most important use of
+attribute lists in Markua is with resources. For resources, attribute lists can
+be used to specify a figure title and alt text, set an id, specify the format,
+and do other useful things.
 
-If you're familiar with Markdown syntax, you'll note that the syntax for local
-and web resources is similar to Markdown's inline image insertion syntax, and
-that the syntax for inline resources is just the fenced code blocks syntax from
-CommonMark with the addition of format specifiers and attribute lists.
-Furthermore, the image syntax is the inspiration for the syntax of all local and
-web resources.
-
-Note that this section is conceptual, and does not contain HTML mapping which
-serves as tests. Those are contained in subsequent sections about each resource
-type.
-
-If any resource is missing during book or course generation, a Markua processor
-should insert something like the "missing image" often seen on web pages into
-the book or course.
-
-TODO
-
-Markua defines the concept of resources, as well as inlines for a number of
-resources. This syntax is based on the image syntax.
-
+While resources are an important addition that Markua makes to Markdown, they
+were not created in a vacuum. As you'll see, the syntax for local and web
+resources is similar to Markdown's inline image insertion syntax, and the syntax
+for inline resources is just the fenced code blocks syntax from CommonMark with
+the addition of format specifiers and attribute lists. Furthermore, the standard
+Markdown image syntax is the inspiration for the syntax of all local and web
+resources.
 
 ## Resource types (M)
 
@@ -2997,7 +2992,124 @@ To be clear: resources are not parsed as plain textual content.
 
 
 
-## Resource classes and insertion methods (M)
+## Resource formats (M)
+
+The **Format** is the format of the resource. It can be specified with the
+`type` attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.
+
+Both the type and the format can be specified in an attribute list, by the
+respective `type` and `format` attributes.
+
+The type and the format can also be inferred from the file extension and, in the
+case of web resources, the URL.
+
+Markua Processors must interpret all unspecified file extensions as specifying a
+resource of type `code` with a format of `guess`, unless the resource is a web
+resource.
+
+If the type and format are not specified and the resource is a web resource, the
+Markua Processor may use the domain to decide what type of resource to assume.
+For example, a domain of `youtube.com` may be assumed to be of type `video`, a
+domain of `instagram.com` may be assumed to be of type `image`, and a domain of
+`github.com` may be assumed to be of type `code`.
+
+If the type is not specified in the attribute list, the format determines the
+type. The formats can either be specified by the `format` attribute or (in most
+cases) inferred from the file extension for local and web resources. (Inline
+resources obviously have no file extension, since they are contained in the body
+of a Markua document.)
+
+As an author, all you typically do is provide the correct file extension for a
+local resource or set the format in the attribute list. Markua recognizes the
+format, and uses it to determine the type. If the format is unrecognized, then
+the resource is treated as a resource of type `code` and with a format of
+`guess`.
+
+It's important to emphasize that the type and format of a resource can be
+overridden using an attribute list. The file extensions just set the default
+type and format that are inferred.
+
+In rare instances, it is useful to override the `type` and `format` which have
+been inferred by the Markua Processor based on the file extension of the
+resource. This is done by specifying a type and/or format in the attribute list
+of the resource.
+
+The following sections list the various resource formats for each type of
+resource, along with the file extensions which make that format and type be
+inferred. Note that these file extensions are case-insensitive.
+
+### Audio resource formats
+
+* `aac` - AAC audio - `.aac`, `.m4a`
+* `mp3` - MP3 audio - `.mp3`
+* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
+* `wav` - WAV audio - `.wav`, `.wave`
+
+### Image resource formats
+
+* `jpeg` - JPEG image - `.jpg` or `.jpeg`
+* `gif` - GIF image - `.gif`
+* `png` - PNG image - `.png`
+* `svg` - SVG image - `.svg`
+* `svgz` - SVG image (zipped) - `.svgz`
+
+### Math resource formats
+
+Note that AsciiMath and LaTeX math are almost always contained as inline
+resources in a Markua document. They only have file extensions for completeness.
+Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
+There is a simple reason for this: Markua needs LaTeX math for math, but only
+needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
+file with an extension of `.tex` that just contains LaTeX code and you want to
+display it, then add a `{type: code, format: latex}` attribute list.
+
+* `asciimath` - AsciiMath math - `.asciimath`
+* `latexmath` - LaTeX math - `.tex`
+
+Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the `.asciimath` file extension is deliberately verbose.
+
+### Table resource formats
+
+Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV-format tables. (CSV-format tables are not
+supported as inline resources, since they would result in too many
+false-positives.)
+
+* `markua` - Markua table - `.tbl`
+* `csv` - Comma-Separated Values table - `.csv`
+
+### Verbatim resource formats
+
+TODO
+
+The `verbatim` resource type always has a format of `markua`. The way
+that `verbatim` resources are differentiated is via their `class` attribute.
+
+* `markua` - Markua - `.md`
+
+### Video resource formats
+
+Note that .mp4 is used for MP4 video, not MP4 AAC audio.
+
+* `mp4` - MP4 video - `.mp4`
+* `webm` - WebM video - `.webm`
+
+### Code resource formats
+
+Note that most code languages are not specified, and are guessed at with a format
+of `guess`. A Markua Processor typically leaves this decision about the language
+recognized to the syntax highlighter, such as Pygments.
+
+* `text` - Unformatted code (with no syntax highlighting)
+* `guess` - Formatted code, with the language guessed at - any other file
+  extension not listed previously in the sections above
+
+
+
+## Resource classes (M)
 
 TODO - explain how class is determined by insertion method or specified etc.
 
@@ -3286,123 +3398,6 @@ For example, this resource would be formatted as Ruby code:
 ~~~
 Yada yada `puts "hi"`{format: ruby} yada yada.
 ~~~
-
-
-
-## Resource formats (M)
-
-The **Format** is the format of the resource. It can be specified with the
-`type` attribute, or inferred from the file extension (discussed below).
-This is important information to help the Markua Processor handle the
-resource correctly.
-
-Both the type and the format can be specified in an attribute list, by the
-respective `type` and `format` attributes.
-
-The type and the format can also be inferred from the file extension and, in the
-case of web resources, the URL.
-
-Markua Processors must interpret all unspecified file extensions as specifying a
-resource of type `code` with a format of `guess`, unless the resource is a web
-resource.
-
-If the type and format are not specified and the resource is a web resource, the
-Markua Processor may use the domain to decide what type of resource to assume.
-For example, a domain of `youtube.com` may be assumed to be of type `video`, a
-domain of `instagram.com` may be assumed to be of type `image`, and a domain of
-`github.com` may be assumed to be of type `code`.
-
-If the type is not specified in the attribute list, the format determines the
-type. The formats can either be specified by the `format` attribute or (in most
-cases) inferred from the file extension for local and web resources. (Inline
-resources obviously have no file extension, since they are contained in the body
-of a Markua document.)
-
-As an author, all you typically do is provide the correct file extension for a
-local resource or set the format in the attribute list. Markua recognizes the
-format, and uses it to determine the type. If the format is unrecognized, then
-the resource is treated as a resource of type `code` and with a format of
-`guess`.
-
-It's important to emphasize that the type and format of a resource can be
-overridden using an attribute list. The file extensions just set the default
-type and format that are inferred.
-
-In rare instances, it is useful to override the `type` and `format` which have
-been inferred by the Markua Processor based on the file extension of the
-resource. This is done by specifying a type and/or format in the attribute list
-of the resource.
-
-The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.
-
-### Audio resource formats
-
-* `aac` - AAC audio - `.aac`, `.m4a`
-* `mp3` - MP3 audio - `.mp3`
-* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
-* `wav` - WAV audio - `.wav`, `.wave`
-
-### Image resource formats
-
-* `jpeg` - JPEG image - `.jpg` or `.jpeg`
-* `gif` - GIF image - `.gif`
-* `png` - PNG image - `.png`
-* `svg` - SVG image - `.svg`
-* `svgz` - SVG image (zipped) - `.svgz`
-
-### Math resource formats
-
-Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
-Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
-There is a simple reason for this: Markua needs LaTeX math for math, but only
-needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
-file with an extension of `.tex` that just contains LaTeX code and you want to
-display it, then add a `{type: code, format: latex}` attribute list.
-
-* `asciimath` - AsciiMath math - `.asciimath`
-* `latexmath` - LaTeX math - `.tex`
-
-Note that the assumption is that AsciiMath will almost always be used as an
-inline resource. So, the `.asciimath` file extension is deliberately verbose.
-
-### Table resource formats
-
-Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)
-
-* `markua` - Markua table - `.tbl`
-* `csv` - Comma-Separated Values table - `.csv`
-
-### Verbatim resource formats
-
-TODO
-
-The `verbatim` resource type always has a format of `markua`. The way
-that `verbatim` resources are differentiated is via their `class` attribute.
-
-* `markua` - Markua - `.md`
-
-### Video resource formats
-
-Note that .mp4 is used for MP4 video, not MP4 AAC audio.
-
-* `mp4` - MP4 video - `.mp4`
-* `webm` - WebM video - `.webm`
-
-### Code resource formats
-
-Note that most code languages are not specified, and are guessed at with a format
-of `guess`. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.
-
-* `text` - Unformatted code (with no syntax highlighting)
-* `guess` - Formatted code, with the language guessed at - any other file
-  extension not listed previously in the sections above
 
 
 

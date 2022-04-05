@@ -176,8 +176,8 @@ $(document).ready(function() {
 <li><a href="#resources-m-"><span class="number">4</span>Resources (M)</a>
 <ul>
 <li><a href="#resource-types-m-"><span class="number">4.1</span>Resource types (M)</a></li>
-<li><a href="#resource-classes-and-insertion-methods-m-"><span class="number">4.2</span>Resource classes and insertion methods (M)</a></li>
-<li><a href="#resource-formats-m-"><span class="number">4.3</span>Resource formats (M)</a></li>
+<li><a href="#resource-formats-m-"><span class="number">4.2</span>Resource formats (M)</a></li>
+<li><a href="#resource-classes-m-"><span class="number">4.3</span>Resource classes (M)</a></li>
 <li><a href="#resource-locations-m-"><span class="number">4.4</span>Resource locations (M)</a></li>
 <li><a href="#resource-attribute-lists-m-"><span class="number">4.5</span>Resource attribute lists (M)</a></li>
 <li><a href="#common-resource-attributes-m-"><span class="number">4.6</span>Common resource attributes (M)</a></li>
@@ -792,7 +792,7 @@ extension)” instead of “(extension)”, to more clearly specify their proven
 <p>The other three GFM extensions are omitted:</p>
 <ol>
 <li><a href="https://github.github.com/gfm/#task-list-items-extension-">Task list items</a>
-is omitted since Markua is for books and courses, not todo lists.</li>
+is omitted since Markua is for books and courses, not task lists.</li>
 <li><a href="https://github.github.com/gfm/#disallowed-raw-html-extension-">Disallowed Raw HTML</a>
 is omitted since Markua goes farther and <strong>completely removes all raw HTML</strong>,
 both HTML added as HTML blocks or as raw HTML inlines.</li>
@@ -3251,43 +3251,33 @@ text files. However, modern books and courses sometimes contain more than text.
 Books and courses may embed many kinds of <a id="resources" href="#resources" class="definition">resources</a>.</p>
 <p>Resources vary in four different ways:</p>
 <ol>
-<li><strong>Type</strong>: <code>audio</code>, <code>code</code>, <code>iframe</code>, <code>image</code>, <code>list</code>, <code>math</code>, <code>table</code>,
-<code>verbatim</code>, <code>video</code></li>
-<li><strong>Format</strong>: <code>mp3</code>, <code>ruby</code>, <code>png</code>, <code>latexmath</code>, <code>mp4</code>, etc.</li>
-<li><strong>Class</strong>: <code>span</code>, <code>figure</code>, <code>equation</code>, <code>listing</code>, <code>table</code>, etc.</li>
-<li><strong>Location</strong>: Inline, Local, and Web</li>
+<li>Type</li>
+<li>Format</li>
+<li>Class</li>
+<li>Location</li>
 </ol>
-<p>The list above may make it sound like Markua is somehow incompatible with
-Markdown, in either of its Standard Markdown, CommonMark or GFM forms, However,
-this is not the case! The changes made by Markua are <strong>purely additive</strong>: the
-syntax for images, fenced code blocks, and tables is a superset of that
-specified by CommonMark and GFM. All images, fenced code blocks and tables
-supported by CommonMark and GFM work in Markua. Markua’s changes here are
-additions, not modifications. Markua’s resources are an extension, both
-conceptual and in features, of what was already in CommonMark and GFM.</p>
-<p>Specifically, the most important thing that resources do is to provide a
-consistent conceptual framework for thinking about all resources, instead of
-just a number of different, unrelated things.</p>
-<p>Besides that, resources also add add attribute lists, and type, format and class
-attributes for all resources, including the resources such as images, fenced
-code blocks and tables which are also found in other Markdown dialects.</p>
-<p>Attribute lists can be used to specify a figure title and alt text, set an id,
-specify the format, and do other useful things.</p>
-<p>If you’re familiar with Markdown syntax, you’ll note that the syntax for local
-and web resources is similar to Markdown’s inline image insertion syntax, and
-that the syntax for inline resources is just the fenced code blocks syntax from
-CommonMark with the addition of format specifiers and attribute lists.
-Furthermore, the image syntax is the inspiration for the syntax of all local and
-web resources.</p>
-<p>Note that this section is conceptual, and does not contain HTML mapping which
-serves as tests. Those are contained in subsequent sections about each resource
-type.</p>
-<p>If any resource is missing during book or course generation, a Markua processor
-should insert something like the “missing image” often seen on web pages into
-the book or course.</p>
-<p>TODO</p>
-<p>Markua defines the concept of resources, as well as inlines for a number of
-resources. This syntax is based on the image syntax.</p>
+<p>While resources are a very important addition that Markua makes to Markdown,
+they are exactly that: an addition.</p>
+<p><strong>Resources provide an important conceptual framework, while remaining purely
+additive to standard Markdown. Specifically, all images, fenced code blocks and
+tables supported by CommonMark or GFM work in Markua unchanged.</strong></p>
+<p>What resources do is provide consistency, both in the conceptual understanding,
+in adding support for attribute lists, and specifying standard <code>type</code>, <code>format</code>
+and <code>class</code> attributes for all resources, including the resources such as
+images, fenced code blocks and tables which are also found in other Markdown
+dialects.</p>
+<p>We have already discussed attribute lists earlier for things like part headings
+and conditional inclusion attributes, but by far the most important use of
+attribute lists in Markua is with resources. For resources, attribute lists can
+be used to specify a figure title and alt text, set an id, specify the format,
+and do other useful things.</p>
+<p>While resources are an important addition that Markua makes to Markdown, they
+were not created in a vacuum. As you’ll see, the syntax for local and web
+resources is similar to Markdown’s inline image insertion syntax, and the syntax
+for inline resources is just the fenced code blocks syntax from CommonMark with
+the addition of format specifiers and attribute lists. Furthermore, the standard
+Markdown image syntax is the inspiration for the syntax of all local and web
+resources.</p>
 <h2 id="resource-types-m-" class="definition">
 <span class="number">4.1</span>Resource types (M)
 </h2>
@@ -3312,8 +3302,121 @@ generalization of what is already supported in Markdown; the <code>audio</code>,
 the resource types can be inserted as a local resource or web resource,
 and many of the resource types can also be inserted as an inline resource.</p>
 <p>To be clear: resources are not parsed as plain textual content.</p>
-<h2 id="resource-classes-and-insertion-methods-m-" class="definition">
-<span class="number">4.2</span>Resource classes and insertion methods (M)
+<h2 id="resource-formats-m-" class="definition">
+<span class="number">4.2</span>Resource formats (M)
+</h2>
+<p>The <strong>Format</strong> is the format of the resource. It can be specified with the
+<code>type</code> attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.</p>
+<p>Both the type and the format can be specified in an attribute list, by the
+respective <code>type</code> and <code>format</code> attributes.</p>
+<p>The type and the format can also be inferred from the file extension and, in the
+case of web resources, the URL.</p>
+<p>Markua Processors must interpret all unspecified file extensions as specifying a
+resource of type <code>code</code> with a format of <code>guess</code>, unless the resource is a web
+resource.</p>
+<p>If the type and format are not specified and the resource is a web resource, the
+Markua Processor may use the domain to decide what type of resource to assume.
+For example, a domain of <code>youtube.com</code> may be assumed to be of type <code>video</code>, a
+domain of <code>instagram.com</code> may be assumed to be of type <code>image</code>, and a domain of
+<code>github.com</code> may be assumed to be of type <code>code</code>.</p>
+<p>If the type is not specified in the attribute list, the format determines the
+type. The formats can either be specified by the <code>format</code> attribute or (in most
+cases) inferred from the file extension for local and web resources. (Inline
+resources obviously have no file extension, since they are contained in the body
+of a Markua document.)</p>
+<p>As an author, all you typically do is provide the correct file extension for a
+local resource or set the format in the attribute list. Markua recognizes the
+format, and uses it to determine the type. If the format is unrecognized, then
+the resource is treated as a resource of type <code>code</code> and with a format of
+<code>guess</code>.</p>
+<p>It’s important to emphasize that the type and format of a resource can be
+overridden using an attribute list. The file extensions just set the default
+type and format that are inferred.</p>
+<p>In rare instances, it is useful to override the <code>type</code> and <code>format</code> which have
+been inferred by the Markua Processor based on the file extension of the
+resource. This is done by specifying a type and/or format in the attribute list
+of the resource.</p>
+<p>The following sections list the various resource formats for each type of
+resource, along with the file extensions which make that format and type be
+inferred. Note that these file extensions are case-insensitive.</p>
+<h3 id="audio-resource-formats" class="definition">
+<span class="number">4.2.1</span>Audio resource formats
+</h3>
+<ul>
+<li><code>aac</code> - AAC audio - <code>.aac</code>, <code>.m4a</code></li>
+<li><code>mp3</code> - MP3 audio - <code>.mp3</code></li>
+<li><code>ogg</code> - Ogg Vorbis  - <code>.oga</code>, <code>.ogg</code></li>
+<li><code>wav</code> - WAV audio - <code>.wav</code>, <code>.wave</code></li>
+</ul>
+<h3 id="image-resource-formats" class="definition">
+<span class="number">4.2.2</span>Image resource formats
+</h3>
+<ul>
+<li><code>jpeg</code> - JPEG image - <code>.jpg</code> or <code>.jpeg</code></li>
+<li><code>gif</code> - GIF image - <code>.gif</code></li>
+<li><code>png</code> - PNG image - <code>.png</code></li>
+<li><code>svg</code> - SVG image - <code>.svg</code></li>
+<li><code>svgz</code> - SVG image (zipped) - <code>.svgz</code></li>
+</ul>
+<h3 id="math-resource-formats" class="definition">
+<span class="number">4.2.3</span>Math resource formats
+</h3>
+<p>Note that AsciiMath and LaTeX math are almost always contained as inline
+resources in a Markua document. They only have file extensions for completeness.
+Also, note that <code>.tex</code> is assumed to be LaTeX math, not a vanilla LaTeX file.
+There is a simple reason for this: Markua needs LaTeX math for math, but only
+needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
+file with an extension of <code>.tex</code> that just contains LaTeX code and you want to
+display it, then add a <code>{type: code, format: latex}</code> attribute list.</p>
+<ul>
+<li><code>asciimath</code> - AsciiMath math - <code>.asciimath</code></li>
+<li><code>latexmath</code> - LaTeX math - <code>.tex</code></li>
+</ul>
+<p>Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
+<h3 id="table-resource-formats" class="definition">
+<span class="number">4.2.4</span>Table resource formats
+</h3>
+<p>Tables can be formatted either as Markua tables or, for tables which are
+local or web resources, as CSV-format tables. (CSV-format tables are not
+supported as inline resources, since they would result in too many
+false-positives.)</p>
+<ul>
+<li><code>markua</code> - Markua table - <code>.tbl</code></li>
+<li><code>csv</code> - Comma-Separated Values table - <code>.csv</code></li>
+</ul>
+<h3 id="verbatim-resource-formats" class="definition">
+<span class="number">4.2.5</span>Verbatim resource formats
+</h3>
+<p>TODO</p>
+<p>The <code>verbatim</code> resource type always has a format of <code>markua</code>. The way
+that <code>verbatim</code> resources are differentiated is via their <code>class</code> attribute.</p>
+<ul>
+<li><code>markua</code> - Markua - <code>.md</code></li>
+</ul>
+<h3 id="video-resource-formats" class="definition">
+<span class="number">4.2.6</span>Video resource formats
+</h3>
+<p>Note that .mp4 is used for MP4 video, not MP4 AAC audio.</p>
+<ul>
+<li><code>mp4</code> - MP4 video - <code>.mp4</code></li>
+<li><code>webm</code> - WebM video - <code>.webm</code></li>
+</ul>
+<h3 id="code-resource-formats" class="definition">
+<span class="number">4.2.7</span>Code resource formats
+</h3>
+<p>Note that most code languages are not specified, and are guessed at with a format
+of <code>guess</code>. A Markua Processor typically leaves this decision about the language
+recognized to the syntax highlighter, such as Pygments.</p>
+<ul>
+<li><code>text</code> - Unformatted code (with no syntax highlighting)</li>
+<li><code>guess</code> - Formatted code, with the language guessed at - any other file
+extension not listed previously in the sections above</li>
+</ul>
+<h2 id="resource-classes-m-" class="definition">
+<span class="number">4.3</span>Resource classes (M)
 </h2>
 <p>TODO - explain how class is determined by insertion method or specified etc.</p>
 <p>The <strong>Class</strong> determines whether, and how, the resource is presented in a
@@ -3341,10 +3444,10 @@ image, list or table with no caption), the the <code>class</code> is implicitly 
 figures. The <code>class</code> attribute is discussed further below.</p>
 <p>Resources can be inserted either as figures or as spans.</p>
 <h3 id="figures" class="definition">
-<span class="number">4.2.1</span>Figures
+<span class="number">4.3.1</span>Figures
 </h3>
 <h4 id="figure-attributes" class="definition">
-<span class="number">4.2.1.1</span>Figure attributes
+<span class="number">4.3.1.1</span>Figure attributes
 </h4>
 <p>A figure can also have attributes. The supported attributes vary based on the
 type of resource, but <strong>all</strong> resources inserted as figures support the
@@ -3401,7 +3504,7 @@ Settings section for more information.</p>
 <p>Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.</p>
 <h5 id="figure-titles" class="definition">
-<span class="number">4.2.1.1.1</span>Figure titles
+<span class="number">4.3.1.1.1</span>Figure titles
 </h5>
 <p>A resource which is inserted as a figure can have a figure title.</p>
 <p>This title shows up in two places in the output:</p>
@@ -3434,7 +3537,7 @@ puts &quot;hello world&quot;
 ```
 </code></pre>
 <h5 id="figure-alt-text" class="definition">
-<span class="number">4.2.1.1.2</span>Figure alt text
+<span class="number">4.3.1.1.2</span>Figure alt text
 </h5>
 <p>A figure can have alt text, as long as the type of resource being inserted
 supports alt text. The resource location does not matter: local, web and inline
@@ -3464,7 +3567,7 @@ Crossing the Delaware” and the alt text could be “Denzel Washington on a boa
 a river.” Having good alt text would enable readers who cannot see the image to
 still get the joke which the figure title makes.</p>
 <h5 id="figure-titles-and-alt-text-together" class="definition">
-<span class="number">4.2.1.1.3</span>Figure titles and alt text together
+<span class="number">4.3.1.1.3</span>Figure titles and alt text together
 </h5>
 <p>These are some examples of figures with both alt text and a figure title:</p>
 <pre><code>![a red apple](mac.jpg &quot;The Original Mac&quot;)
@@ -3480,7 +3583,7 @@ still get the joke which the figure title makes.</p>
 ```
 </code></pre>
 <h5 id="the-figure-attribute-list-takes-precedence" class="definition">
-<span class="number">4.2.1.1.4</span>The figure attribute list takes precedence
+<span class="number">4.3.1.1.4</span>The figure attribute list takes precedence
 </h5>
 <p>It is always an error to specify an attribute both in the attribute list for a
 figure and in the syntactic sugar locations, either after the backticks or in the
@@ -3502,7 +3605,7 @@ puts &quot;hello world&quot;
 </code></pre>
 <p>Again, the Markua Processor should treat all of these as an error.</p>
 <h4 id="spans" class="definition">
-<span class="number">4.2.1.2</span>Spans
+<span class="number">4.3.1.2</span>Spans
 </h4>
 <p>Inserting a resource as a span means to continue the block context which it is
 in, instead of starting a new leaf block for the resource.</p>
@@ -3534,7 +3637,7 @@ figure. (Figure titles do not make sense inside of sentences.)</p>
 <pre><code>This is ![a red apple](mac.jpg &quot;The Original Mac&quot;) not a banana.
 </code></pre>
 <h5 id="span-attribute-lists-can-be-used-to-set-the-format" class="definition">
-<span class="number">4.2.1.2.1</span>Span attribute lists can be used to set the format
+<span class="number">4.3.1.2.1</span>Span attribute lists can be used to set the format
 </h5>
 <p>When a resource is inserted as a span, the resource is inserted as part of the
 flow of text of a paragraph with no newlines before or after it. A span resource
@@ -3547,119 +3650,6 @@ Span attribute lists can be used to set the format explicitly.</p>
 <p>For example, this resource would be formatted as Ruby code:</p>
 <pre><code>Yada yada `puts &quot;hi&quot;`{format: ruby} yada yada.
 </code></pre>
-<h2 id="resource-formats-m-" class="definition">
-<span class="number">4.3</span>Resource formats (M)
-</h2>
-<p>The <strong>Format</strong> is the format of the resource. It can be specified with the
-<code>type</code> attribute, or inferred from the file extension (discussed below).
-This is important information to help the Markua Processor handle the
-resource correctly.</p>
-<p>Both the type and the format can be specified in an attribute list, by the
-respective <code>type</code> and <code>format</code> attributes.</p>
-<p>The type and the format can also be inferred from the file extension and, in the
-case of web resources, the URL.</p>
-<p>Markua Processors must interpret all unspecified file extensions as specifying a
-resource of type <code>code</code> with a format of <code>guess</code>, unless the resource is a web
-resource.</p>
-<p>If the type and format are not specified and the resource is a web resource, the
-Markua Processor may use the domain to decide what type of resource to assume.
-For example, a domain of <code>youtube.com</code> may be assumed to be of type <code>video</code>, a
-domain of <code>instagram.com</code> may be assumed to be of type <code>image</code>, and a domain of
-<code>github.com</code> may be assumed to be of type <code>code</code>.</p>
-<p>If the type is not specified in the attribute list, the format determines the
-type. The formats can either be specified by the <code>format</code> attribute or (in most
-cases) inferred from the file extension for local and web resources. (Inline
-resources obviously have no file extension, since they are contained in the body
-of a Markua document.)</p>
-<p>As an author, all you typically do is provide the correct file extension for a
-local resource or set the format in the attribute list. Markua recognizes the
-format, and uses it to determine the type. If the format is unrecognized, then
-the resource is treated as a resource of type <code>code</code> and with a format of
-<code>guess</code>.</p>
-<p>It’s important to emphasize that the type and format of a resource can be
-overridden using an attribute list. The file extensions just set the default
-type and format that are inferred.</p>
-<p>In rare instances, it is useful to override the <code>type</code> and <code>format</code> which have
-been inferred by the Markua Processor based on the file extension of the
-resource. This is done by specifying a type and/or format in the attribute list
-of the resource.</p>
-<p>The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.</p>
-<h3 id="audio-resource-formats" class="definition">
-<span class="number">4.3.1</span>Audio resource formats
-</h3>
-<ul>
-<li><code>aac</code> - AAC audio - <code>.aac</code>, <code>.m4a</code></li>
-<li><code>mp3</code> - MP3 audio - <code>.mp3</code></li>
-<li><code>ogg</code> - Ogg Vorbis  - <code>.oga</code>, <code>.ogg</code></li>
-<li><code>wav</code> - WAV audio - <code>.wav</code>, <code>.wave</code></li>
-</ul>
-<h3 id="image-resource-formats" class="definition">
-<span class="number">4.3.2</span>Image resource formats
-</h3>
-<ul>
-<li><code>jpeg</code> - JPEG image - <code>.jpg</code> or <code>.jpeg</code></li>
-<li><code>gif</code> - GIF image - <code>.gif</code></li>
-<li><code>png</code> - PNG image - <code>.png</code></li>
-<li><code>svg</code> - SVG image - <code>.svg</code></li>
-<li><code>svgz</code> - SVG image (zipped) - <code>.svgz</code></li>
-</ul>
-<h3 id="math-resource-formats" class="definition">
-<span class="number">4.3.3</span>Math resource formats
-</h3>
-<p>Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
-Also, note that <code>.tex</code> is assumed to be LaTeX math, not a vanilla LaTeX file.
-There is a simple reason for this: Markua needs LaTeX math for math, but only
-needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
-file with an extension of <code>.tex</code> that just contains LaTeX code and you want to
-display it, then add a <code>{type: code, format: latex}</code> attribute list.</p>
-<ul>
-<li><code>asciimath</code> - AsciiMath math - <code>.asciimath</code></li>
-<li><code>latexmath</code> - LaTeX math - <code>.tex</code></li>
-</ul>
-<p>Note that the assumption is that AsciiMath will almost always be used as an
-inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
-<h3 id="table-resource-formats" class="definition">
-<span class="number">4.3.4</span>Table resource formats
-</h3>
-<p>Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)</p>
-<ul>
-<li><code>markua</code> - Markua table - <code>.tbl</code></li>
-<li><code>csv</code> - Comma-Separated Values table - <code>.csv</code></li>
-</ul>
-<h3 id="verbatim-resource-formats" class="definition">
-<span class="number">4.3.5</span>Verbatim resource formats
-</h3>
-<p>TODO</p>
-<p>The <code>verbatim</code> resource type always has a format of <code>markua</code>. The way
-that <code>verbatim</code> resources are differentiated is via their <code>class</code> attribute.</p>
-<ul>
-<li><code>markua</code> - Markua - <code>.md</code></li>
-</ul>
-<h3 id="video-resource-formats" class="definition">
-<span class="number">4.3.6</span>Video resource formats
-</h3>
-<p>Note that .mp4 is used for MP4 video, not MP4 AAC audio.</p>
-<ul>
-<li><code>mp4</code> - MP4 video - <code>.mp4</code></li>
-<li><code>webm</code> - WebM video - <code>.webm</code></li>
-</ul>
-<h3 id="code-resource-formats" class="definition">
-<span class="number">4.3.7</span>Code resource formats
-</h3>
-<p>Note that most code languages are not specified, and are guessed at with a format
-of <code>guess</code>. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.</p>
-<ul>
-<li><code>text</code> - Unformatted code (with no syntax highlighting)</li>
-<li><code>guess</code> - Formatted code, with the language guessed at - any other file
-extension not listed previously in the sections above</li>
-</ul>
 <h2 id="resource-locations-m-" class="definition">
 <span class="number">4.4</span>Resource locations (M)
 </h2>
@@ -6508,7 +6498,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6947,7 +6937,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6971,7 +6961,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16442,7 +16432,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

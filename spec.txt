@@ -2498,8 +2498,9 @@ at the end of a chapter.
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. Whether single newlines
 produce a space (with `space`), a newline in the HTML source (with `source`) or
-a break tag (with `break`). This is complex enough that it is discussed in a
-section below.
+a break tag (with `break`). This is complex and important enough that it is
+discussed its own sub-section of [the inlines section
+below](#configurable-soft-line-breaks-m-).
 
 `smart-punctuation`
 : If `smart` is `true`, use smart punctuation. Straight double and single quotes
@@ -2520,116 +2521,6 @@ Processor may override this setting.
 : The version of the Markua document. This is primarily intended for use when
 producing analytics for courses. The default is `0.10`.
 
-
-### Configurable soft line breaks
-
-There is a good argument to be made that single newlines at the end of a line
-should always be treated as a hard line break, not as a soft line break.
-
-In ancient history, some text editors did not automatically wrap lines of text,
-so manual wrapping of plain text files was a good thing to do. However, for
-writing, automatic wrapping of paragraphs is essential for staying in the flow
-while writing, and for being able to edit your text without needing to re-wrap
-every line in a paragraph. This is one decision that even Microsoft Word gets
-right.
-
-So, Markua used to treat single newlines at the end of a line as a hard line
-break, not as a soft line break.
-
-However, compatibility with Markdown by default is more than fixing things such
-as this which I consider to be mistakes, even though the Markdown two-space hack
-to force a hard line break makes me die a little inside every time I (don't) see
-it. As I've grown older, I've become more willing to compromise.
-
-So, Markua has a document setting called `soft-breaks`:
-
-* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
-  Markua produce single newlines in the HTML source. This will pretend to
-  break the line: while it does break the line in the HTML source, it does
-  not break the line when the HTML is rendered. So, this type of line break
-  only is a line break in the HTML source. In the output, it actually functions
-  like a space. (It should be rendered as a space in non-HTML-based output
-  formats like PDF.)
-* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
-  Markua document produce single spaces in the HTML output. This functions
-  identically to single newlines when rendered as HTML. (It should be rendered
-  as a space in non-HTML-based output formats like PDF.)
-* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
-  Markua document produce break tags in the HTML output. The reason this value
-  is `break` is to indicate that when you hit a newline to get a line break, you
-  get a real line break. In HTML, this means a break tag. (It should be rendered
-  as a newline in non-HTML-based output formats like PDF.)
-
-**To be clear: if `soft-breaks` has the value of `break`, all single newlines
-function as hard line breaks (i.e. as they would if they were using the "two
-space hack" to produce a hard line break in normal Markdown).**
-
-```````````````````````````````` example
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made explicit by setting the `soft-breaks` document setting to
-`source`:
-
-```````````````````````````````` example
-{
-soft-breaks: source
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made shorter by setting the `soft-breaks` document setting to
-`space`:
-
-```````````````````````````````` example
-{
-soft-breaks: space
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo bar</p>
-````````````````````````````````
-
-If you want your line breaks to actually, well, produce line breaks, you need to
-set the `soft-breaks` document setting to `break`:
-
-```````````````````````````````` example
-{
-soft-breaks: break
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo<br />
-bar</p>
-````````````````````````````````
-
-Finally, note that the `soft-breaks` document setting also applies to other
-paragraph-like contexts, such as definition list items.
 
 
 ### Settings which apply to courses only
@@ -11416,44 +11307,121 @@ as hard line breaks.
 
 <div class="extension">
 
-## Resource content (M)
+## Configurable soft line breaks (M)
 
-Markua defines the concept of resources, as well as inlines for a number of
-resources. This syntax is based on the image syntax.
+Note: the `soft-breaks` setting is an example of a document setting. Document
+settings are a Markua addition, and are discussed in general terms
+[here](#document-settings-m-).
 
-There are eight types of resources:
+There is a good argument to be made that single newlines at the end of a line
+should always be treated as a hard line break, not as a soft line break.
 
-1. `audio`
-2. `code`
-3. `iframe`
-4. `image`
-5. `math`
-6. `table`
-7. `verbatim`
-8. `video`
+In ancient history, some text editors did not automatically wrap lines of text,
+so manual wrapping of plain text files was a good thing to do. However, for
+writing, automatic wrapping of paragraphs is essential for staying in the flow
+while writing, and for being able to edit your text without needing to re-wrap
+every line in a paragraph. This is one decision that even Microsoft Word gets
+right.
 
-The `code`, `image` and `table` resource types are an extension of what is
-already supported in Markdown; the `audio`, `iframe`, `math`, `verbatim` and
-`video` resource types are new.
+So, Markua used to treat single newlines at the end of a line as a hard line
+break, not as a soft line break.
 
-Either way, each type of resource has a number of supported formats. Any of
-the eight resource types can be inserted as a local resource or web resource,
-and many of the resource types can also be inserted as an inline resource.
+However, compatibility with Markdown by default is more than fixing things such
+as this which I consider to be mistakes, even though the Markdown two-space hack
+to force a hard line break makes me die a little inside every time I (don't) see
+it. As I've grown older, I've become more willing to compromise.
 
-While it would be correct to discuss them all here (since all resources are
-inlines), it is more convenient to discuss them in a top-level section (since
-resources share a number of common characteristics). So, resources are discussed
-later, after the discussion of metadata.
+So, Markua has a document setting called `soft-breaks`:
 
-To be clear: even though they have not been fully described yet, resources are
-not parsed as plain textual content.
+* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
+  Markua produce single newlines in the HTML source. This will pretend to
+  break the line: while it does break the line in the HTML source, it does
+  not break the line when the HTML is rendered. So, this type of line break
+  only is a line break in the HTML source. In the output, it actually functions
+  like a space. (It should be rendered as a space in non-HTML-based output
+  formats like PDF.)
+* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
+  Markua document produce single spaces in the HTML output. This functions
+  identically to single newlines when rendered as HTML. (It should be rendered
+  as a space in non-HTML-based output formats like PDF.)
+* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
+  Markua document produce break tags in the HTML output. The reason this value
+  is `break` is to indicate that when you hit a newline to get a line break, you
+  get a real line break. In HTML, this means a break tag. (It should be rendered
+  as a newline in non-HTML-based output formats like PDF.)
+
+**To be clear: if `soft-breaks` has the value of `break`, all single newlines
+function as hard line breaks (i.e. as they would if they were using the "two
+space hack" to produce a hard line break in normal Markdown).**
+
+```````````````````````````````` example
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo
+bar</p>
+````````````````````````````````
+
+This can be made explicit by setting the `soft-breaks` document setting to
+`source`:
+
+```````````````````````````````` example
+{
+soft-breaks: source
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo
+bar</p>
+````````````````````````````````
+
+This can be made shorter by setting the `soft-breaks` document setting to
+`space`:
+
+```````````````````````````````` example
+{
+soft-breaks: space
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo bar</p>
+````````````````````````````````
+
+If you want your line breaks to actually, well, produce line breaks, you need to
+set the `soft-breaks` document setting to `break`:
+
+```````````````````````````````` example
+{
+soft-breaks: break
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo<br />
+bar</p>
+````````````````````````````````
+
+Finally, note that the `soft-breaks` document setting also applies to other
+paragraph-like contexts, such as definition list items.
 
 </div>
-
-
-
-
-
 
 
 
@@ -12046,6 +12014,10 @@ the book or course.
 
 TODO
 
+Markua defines the concept of resources, as well as inlines for a number of
+resources. This syntax is based on the image syntax.
+
+
 ## Resource Types (M)
 
 There are eight types of resources:
@@ -12059,9 +12031,19 @@ There are eight types of resources:
 7. `verbatim`
 8. `video`
 
-Each type of resource has a number of supported formats. Any of the nine
-resource types can be inserted as a local resource or web resource, and many of
-the resource types can also be inserted as an inline resource.
+Each type of resource has a number of supported formats. Any of the resource
+types can be inserted as a local resource or web resource, and many of the
+resource types can also be inserted as an inline resource.
+
+The `code`, `image` and `table` resource types are an extension and a
+generalization of what is already supported in Markdown; the `audio`, `iframe`,
+`math`, `verbatim` and `video` resource types are new.
+
+Either way, each type of resource has a number of supported formats. Any of
+the resource types can be inserted as a local resource or web resource,
+and many of the resource types can also be inserted as an inline resource.
+
+To be clear: resources are not parsed as plain textual content.
 
 
 ## Resource Formats (M)

@@ -3541,7 +3541,7 @@ inline resource content (default format is `text` with tildes)
 ```
 
 
-## Common Resource Attributes (M)
+## Common resource attributes (M)
 
 TODO
 

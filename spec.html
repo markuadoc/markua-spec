@@ -221,15 +221,15 @@ $(document).ready(function() {
 </li>
 <li><a href="#quizzes-and-exercises-m-"><span class="number">8</span>Quizzes and exercises (M)</a>
 <ul>
-<li><a href="#quiz-and-exercise-output"><span class="number">8.1</span>Quiz and exercise output</a></li>
-<li><a href="#quiz-and-exercise-validation"><span class="number">8.2</span>Quiz and exercise validation</a></li>
-<li><a href="#quiz-and-exercise-attributes"><span class="number">8.3</span>Quiz and exercise attributes</a></li>
-<li><a href="#multiple-choice-questions"><span class="number">8.4</span>Multiple choice questions</a></li>
-<li><a href="#multiple-selection-questions"><span class="number">8.5</span>Multiple selection questions</a></li>
-<li><a href="#fill-in-the-blank-questions"><span class="number">8.6</span>Fill in the blank questions</a></li>
-<li><a href="#written-questions"><span class="number">8.7</span>Written questions</a></li>
-<li><a href="#hints-on-questions"><span class="number">8.8</span>Hints on questions</a></li>
-<li><a href="#question-alternates"><span class="number">8.9</span>Question alternates</a></li>
+<li><a href="#quiz-and-exercise-output-m-"><span class="number">8.1</span>Quiz and exercise output (M)</a></li>
+<li><a href="#quiz-and-exercise-validation-m-"><span class="number">8.2</span>Quiz and exercise validation (M)</a></li>
+<li><a href="#quiz-and-exercise-attributes-m-"><span class="number">8.3</span>Quiz and exercise attributes (M)</a></li>
+<li><a href="#multiple-choice-questions-m-"><span class="number">8.4</span>Multiple choice questions (M)</a></li>
+<li><a href="#multiple-selection-questions-m-"><span class="number">8.5</span>Multiple selection questions (M)</a></li>
+<li><a href="#fill-in-the-blank-questions-m-"><span class="number">8.6</span>Fill in the blank questions (M)</a></li>
+<li><a href="#written-questions-m-"><span class="number">8.7</span>Written questions (M)</a></li>
+<li><a href="#hints-on-questions-m-"><span class="number">8.8</span>Hints on questions (M)</a></li>
+<li><a href="#question-alternates-m-"><span class="number">8.9</span>Question alternates (M)</a></li>
 </ul>
 </li>
 <li><a href="#inlines"><span class="number">9</span>Inlines</a>
@@ -12213,8 +12213,8 @@ That's it for this quiz, and this course!
 inferred from properties of the answers or from other attributes of the
 question.</p>
 <p>The exact way to create these types of questions is discussed further below.</p>
-<h2 id="quiz-and-exercise-output" class="definition">
-<span class="number">8.1</span>Quiz and exercise output
+<h2 id="quiz-and-exercise-output-m-" class="definition">
+<span class="number">8.1</span>Quiz and exercise output (M)
 </h2>
 <p>A Markua Processor has many degrees of freedom in terms of whether, and how,
 to output quizzes and exercises. As such, no HTML mapping is shown here.</p>
@@ -12252,8 +12252,8 @@ Converting all choice letters to lowercase is sufficient here.</li>
 questions, typically at the back of the book. This position can be controlled
 by the author using insert directives, discussed earlier.</li>
 </ol>
-<h2 id="quiz-and-exercise-validation" class="definition">
-<span class="number">8.2</span>Quiz and exercise validation
+<h2 id="quiz-and-exercise-validation-m-" class="definition">
+<span class="number">8.2</span>Quiz and exercise validation (M)
 </h2>
 <h3 id="an-empty-quiz-or-exercise-is-not-an-error" class="definition">
 <span class="number">8.2.1</span>An empty quiz or exercise is not an error
@@ -12275,8 +12275,8 @@ exercises are not something that should ever be produced in a broken state.</p>
 block. A Markua Processor must not parse lines starting with ? or ! as
 representing questions or answers unless those are contained in a quiz or
 exercise block.</p>
-<h2 id="quiz-and-exercise-attributes" class="definition">
-<span class="number">8.3</span>Quiz and exercise attributes
+<h2 id="quiz-and-exercise-attributes-m-" class="definition">
+<span class="number">8.3</span>Quiz and exercise attributes (M)
 </h2>
 <p>These are the supported attributes on quizzes and/or exercises:</p>
 <p><code>attempts</code>
@@ -12379,8 +12379,8 @@ more for use in analytics by the instructor. The default is <code>1</code>.</p>
 <p>As discussed above, there is no <code>title</code> or <code>title</code> attribute for a quiz–you can
 just add a heading inside the quiz or exercise itself, using the normal Markua
 formatting for a chapter heading.</p>
-<h2 id="multiple-choice-questions" class="definition">
-<span class="number">8.4</span>Multiple choice questions
+<h2 id="multiple-choice-questions-m-" class="definition">
+<span class="number">8.4</span>Multiple choice questions (M)
 </h2>
 <p>A multiple choice question has 2 or more answer choices, and 1 correct answer
 choice.</p>
@@ -12459,8 +12459,8 @@ the choices in the multiple choice question are randomly arranged; if <code>fals
 they are presented in the order written. If this attribute is omitted, its
 value is determined by the <code>random-choice-order</code> attribute on the quiz itself,
 which defaults to <code>false</code> if absent.</p>
-<h2 id="multiple-selection-questions" class="definition">
-<span class="number">8.5</span>Multiple selection questions
+<h2 id="multiple-selection-questions-m-" class="definition">
+<span class="number">8.5</span>Multiple selection questions (M)
 </h2>
 <p>A multiple selection question has 2 or more answer choices, and 1 or more <code>true</code>
 answer choices.</p>
@@ -12539,8 +12539,8 @@ points = 1.5 points. Since at least one choice was selected, you get just as
 much credit for correctly not selecting <code>cow</code> and <code>lettuce</code> as you do for
 correctly selecting <code>apple</code> and <code>peach</code>. If an instructor thinks this is too
 lenient, then <code>binary</code> is the choice for them!</p>
-<h2 id="fill-in-the-blank-questions" class="definition">
-<span class="number">8.6</span>Fill in the blank questions
+<h2 id="fill-in-the-blank-questions-m-" class="definition">
+<span class="number">8.6</span>Fill in the blank questions (M)
 </h2>
 <p>A fill in the blank question consists of a question and a set of answers. Each
 answer is specified by <code>!</code>, an optional points value, a space, and then a
@@ -12676,8 +12676,8 @@ acceptable answer values, this attribute applies to all of them. Note that this
 only applies to text string answers, not to regular expressions. For a regular
 expression to be case-insensitive, you must end it with an <code>i</code> after the
 closing backtick.</p>
-<h2 id="written-questions" class="definition">
-<span class="number">8.7</span>Written questions
+<h2 id="written-questions-m-" class="definition">
+<span class="number">8.7</span>Written questions (M)
 </h2>
 <p>A written question corresponds to short answer, long answer or essay questions
 in traditional tests. It looks the same as a fill in the blank question, except
@@ -12768,8 +12768,8 @@ or long answer question.</p>
 : The maximum number of pages the answer can be. Obviously this is more useful
 for paper quizzes than online ones. On paper, this is most useful for an essay
 question.</p>
-<h2 id="hints-on-questions" class="definition">
-<span class="number">8.8</span>Hints on questions
+<h2 id="hints-on-questions-m-" class="definition">
+<span class="number">8.8</span>Hints on questions (M)
 </h2>
 <p>Any question can contain a hint, regardless of question type or whether an
 answer is provided.</p>
@@ -12820,8 +12820,8 @@ crosslinks from each exercise.</li>
 <li>The answers page for a quiz or exercise will show the question, hint and
 answers for each question.</li>
 </ol>
-<h2 id="question-alternates" class="definition">
-<span class="number">8.9</span>Question alternates
+<h2 id="question-alternates-m-" class="definition">
+<span class="number">8.9</span>Question alternates (M)
 </h2>
 <p>The fact that a Markua document can be used to create an online course means
 that certain aspects of the syntax for quizzes and exercises are more robust

@@ -10646,7 +10646,9 @@ question.
 
 The exact way to create these types of questions is discussed further below.
 
-## Quiz and exercise output
+
+
+## Quiz and exercise output (M)
 
 A Markua Processor has many degrees of freedom in terms of whether, and how,
 to output quizzes and exercises. As such, no HTML mapping is shown here.
@@ -10689,7 +10691,9 @@ occur:
    questions, typically at the back of the book. This position can be controlled
    by the author using insert directives, discussed earlier.
 
-## Quiz and exercise validation
+
+
+## Quiz and exercise validation (M)
 
 ### An empty quiz or exercise is not an error
 
@@ -10713,7 +10717,9 @@ block. A Markua Processor must not parse lines starting with ? or ! as
 representing questions or answers unless those are contained in a quiz or
 exercise block.
 
-## Quiz and exercise attributes
+
+
+## Quiz and exercise attributes (M)
 
 These are the supported attributes on quizzes and/or exercises:
 
@@ -10831,7 +10837,9 @@ As discussed above, there is no `title` or `title` attribute for a quiz--you can
 just add a heading inside the quiz or exercise itself, using the normal Markua
 formatting for a chapter heading.
 
-## Multiple choice questions
+
+
+## Multiple choice questions (M)
 
 A multiple choice question has 2 or more answer choices, and 1 correct answer
 choice.
@@ -10924,7 +10932,9 @@ they are presented in the order written. If this attribute is omitted, its
 value is determined by the `random-choice-order` attribute on the quiz itself,
 which defaults to `false` if absent.
 
-## Multiple selection questions
+
+
+## Multiple selection questions (M)
 
 A multiple selection question has 2 or more answer choices, and 1 or more `true`
 answer choices.
@@ -11016,7 +11026,9 @@ much credit for correctly not selecting `cow` and `lettuce` as you do for
 correctly selecting `apple` and `peach`. If an instructor thinks this is too
 lenient, then `binary` is the choice for them!
 
-## Fill in the blank questions
+
+
+## Fill in the blank questions (M)
 
 A fill in the blank question consists of a question and a set of answers. Each
 answer is specified by `!`, an optional points value, a space, and then a
@@ -11165,7 +11177,9 @@ only applies to text string answers, not to regular expressions. For a regular
 expression to be case-insensitive, you must end it with an `i` after the
 closing backtick.
 
-## Written questions
+
+
+## Written questions (M)
 
 A written question corresponds to short answer, long answer or essay questions
 in traditional tests. It looks the same as a fill in the blank question, except
@@ -11270,7 +11284,9 @@ or long answer question.
 for paper quizzes than online ones. On paper, this is most useful for an essay
 question.
 
-## Hints on questions
+
+
+## Hints on questions (M)
 
 Any question can contain a hint, regardless of question type or whether an
 answer is provided.
@@ -11328,7 +11344,9 @@ For example, here's how Leanpub handles hints:
 6. The answers page for a quiz or exercise will show the question, hint and
    answers for each question.
 
-## Question alternates
+
+
+## Question alternates (M)
 
 The fact that a Markua document can be used to create an online course means
 that certain aspects of the syntax for quizzes and exercises are more robust

@@ -2404,6 +2404,15 @@ as an attribute list on headings. You can only say <code>{sample: true}</code> i
 above a heading. You can’t have a blank line below it (otherwise it would be a
 directive, and not be valid) and you can’t attach it to anything other than a
 heading (like a paragraph, figure, etc.).</p>
+<p>Finally, as discussed later, Markua supports “extension attributes”, to allow
+implementations to add attributes for purposes which are not in the scope of the
+Markua spec. One such attribute added by Leanpub is the <code>{community: true}</code>
+attribute, which functions like a <code>{sample: true}</code> attribute to produce a sample
+book. However, the <code>{community: true}</code> attribute results in Leanpub producing a
+sample book which is only available if the reader provides an email address for
+the download. This type of feature obviously does not belong in the Markua
+spec; the point, however, is that extension attributes make it so easy to add
+these types of features that it is almost as though they were in the spec.</p>
 <h3 id="the-attribute" class="definition">
 <span class="number">3.2.8</span>The <code>lang</code> attribute
 </h3>

@@ -209,18 +209,19 @@ $(document).ready(function() {
 <li><a href="#emphasis-and-strong-emphasis"><span class="number">7.2</span>Emphasis and strong emphasis</a></li>
 <li><a href="#links"><span class="number">7.3</span>Links</a></li>
 <li><a href="#images"><span class="number">7.4</span>Images</a></li>
-<li><a href="#autolinks"><span class="number">7.5</span>Autolinks</a></li>
-<li><a href="#no-raw-html-m-"><span class="number">7.6</span>No raw HTML (M)</a></li>
-<li><a href="#hard-line-breaks"><span class="number">7.7</span>Hard line breaks</a></li>
-<li><a href="#soft-line-breaks"><span class="number">7.8</span>Soft line breaks</a></li>
-<li><a href="#configurable-soft-line-breaks-m-"><span class="number">7.9</span>Configurable soft line breaks (M)</a></li>
-<li><a href="#character-substitutions-m-"><span class="number">7.10</span>Character substitutions (M)</a></li>
-<li><a href="#footnotes-and-endnotes-m-"><span class="number">7.11</span>Footnotes and endnotes (M)</a></li>
-<li><a href="#underline-m-"><span class="number">7.12</span>Underline (M)</a></li>
-<li><a href="#superscript-and-subscript-m-"><span class="number">7.13</span>Superscript and subscript (M)</a></li>
-<li><a href="#strikethrough-gfm-"><span class="number">7.14</span>Strikethrough (GFM)</a></li>
-<li><a href="#index-entries-m-"><span class="number">7.15</span>Index entries (M)</a></li>
-<li><a href="#textual-content"><span class="number">7.16</span>Textual content</a></li>
+<li><a href="#configurable-figure-titles-with-the-alt-title-document-setting-m-"><span class="number">7.5</span>Configurable figure titles with the alt-title document setting (M)</a></li>
+<li><a href="#autolinks"><span class="number">7.6</span>Autolinks</a></li>
+<li><a href="#no-raw-html-m-"><span class="number">7.7</span>No raw HTML (M)</a></li>
+<li><a href="#hard-line-breaks"><span class="number">7.8</span>Hard line breaks</a></li>
+<li><a href="#soft-line-breaks"><span class="number">7.9</span>Soft line breaks</a></li>
+<li><a href="#configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-"><span class="number">7.10</span>Configurable soft line breaks with the soft-breaks document setting (M)</a></li>
+<li><a href="#character-substitutions-m-"><span class="number">7.11</span>Character substitutions (M)</a></li>
+<li><a href="#footnotes-and-endnotes-m-"><span class="number">7.12</span>Footnotes and endnotes (M)</a></li>
+<li><a href="#underline-m-"><span class="number">7.13</span>Underline (M)</a></li>
+<li><a href="#superscript-and-subscript-m-"><span class="number">7.14</span>Superscript and subscript (M)</a></li>
+<li><a href="#strikethrough-gfm-"><span class="number">7.15</span>Strikethrough (GFM)</a></li>
+<li><a href="#index-entries-m-"><span class="number">7.16</span>Index entries (M)</a></li>
+<li><a href="#textual-content"><span class="number">7.17</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">8</span>Resources (M)</a>
@@ -14021,8 +14022,34 @@ backslash-escape the opening <code>[</code>:</p>
 </code></pre>
 </div>
 </div>
+<div class="extension">
+<h2 id="configurable-figure-titles-with-the-alt-title-document-setting-m-" class="definition">
+<span class="number">7.5</span>Configurable figure titles with the alt-title document setting (M)
+</h2>
+<p>TODO - write this with examples</p>
+<p>this is pasted from above:</p>
+<p><code>alt-title</code>
+: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This controls whether the alt
+text on a resource is removed and used instead as the figure title if there is
+no figure title explicitly set. The possible values of this setting are <code>all</code>,
+<code>text</code> or <code>none</code>. If <code>all</code>, then if no title is provided for a given resource,
+regardless of the resource type, remove the alt text and use it as the figure
+title instead. (This setting is closest to the behaviour of LFM and of Markua
+version 0.10.) If <code>text</code>, then if no title is provided for a given <strong>text-based</strong>
+resource (such as an external code sample), remove the alt text and use it as
+the figure title instead. However, if the resource is not purely text-based,
+such as an image or a video, do not remove the remove the alt text and use it
+as the figure title if no figure title is provided. (This is the default value.
+It behaves like Markdown for images and like LFM for text-based resource types.)
+If <code>none</code>, then never use the alt text as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.) Note that if the alt text is converted into the figure title, it is
+NOT also provided as alt text. It would be very annoying to hear the same text
+spoken twice (once as the alt text and once as the figure title) when using a
+screen reader.</p>
+</div>
 <h2 id="autolinks" class="definition">
-<span class="number">7.5</span>Autolinks
+<span class="number">7.6</span>Autolinks
 </h2>
 <p><a id="autolink" href="#autolink" class="definition">Autolink</a>s are absolute URIs and email addresses inside
 <code>&lt;</code> and <code>&gt;</code>. They are parsed as links, with the URL or email address
@@ -14311,7 +14338,7 @@ spec</a>:</p>
 </div>
 <div class="extension">
 <h2 id="no-raw-html-m-" class="definition">
-<span class="number">7.6</span>No raw HTML (M)
+<span class="number">7.7</span>No raw HTML (M)
 </h2>
 <p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
 <p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
@@ -14323,7 +14350,7 @@ comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments w
 from the output (along with any other raw HTML tags).</p>
 </div>
 <h2 id="hard-line-breaks" class="definition">
-<span class="number">7.7</span>Hard line breaks
+<span class="number">7.8</span>Hard line breaks
 </h2>
 <p>A line ending (not in a code span or HTML tag) that is preceded
 by two or more spaces and does not occur at the end of a block
@@ -14556,7 +14583,7 @@ other block element:</p>
 </div>
 </div>
 <h2 id="soft-line-breaks" class="definition">
-<span class="number">7.8</span>Soft line breaks
+<span class="number">7.9</span>Soft line breaks
 </h2>
 <p>A regular line ending (not in a code span or HTML tag) that is not
 preceded by two or more spaces or a backslash is parsed as a
@@ -14600,8 +14627,8 @@ line ending or as a space.</p>
 <p>A renderer may also provide an option to render soft line breaks
 as hard line breaks.</p>
 <div class="extension">
-<h2 id="configurable-soft-line-breaks-m-" class="definition">
-<span class="number">7.9</span>Configurable soft line breaks (M)
+<h2 id="configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-" class="definition">
+<span class="number">7.10</span>Configurable soft line breaks with the soft-breaks document setting (M)
 </h2>
 <p>Note: the <code>soft-breaks</code> setting is an example of a document setting. Document
 settings are a Markua addition, and are discussed in general terms
@@ -14736,7 +14763,7 @@ paragraph-like contexts, such as definition list items.</p>
 </div>
 <div class="extension">
 <h2 id="character-substitutions-m-" class="definition">
-<span class="number">7.10</span>Character substitutions (M)
+<span class="number">7.11</span>Character substitutions (M)
 </h2>
 <p>Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -14762,7 +14789,7 @@ paragraph).</p>
 : To produce a horizontal ellipsis (…), you can just type <code>...</code>. You can also use
 the proper Unicode character, U+2026, of course.</p>
 <h3 id="optional-automatic-curly-quotes-outside-of-code-blocks-and-spans" class="definition">
-<span class="number">7.10.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
+<span class="number">7.11.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
 </h3>
 <p>A Markua Processor may replace the <code>&quot;</code> character with the appropriate “curly
 quote” at its discretion. This lets <code>&quot;typography&quot;</code> become <code>“typography”</code>, and
@@ -14779,11 +14806,11 @@ straight in a code span either.)</p>
 </div>
 <div class="extension">
 <h2 id="footnotes-and-endnotes-m-" class="definition">
-<span class="number">7.11</span>Footnotes and endnotes (M)
+<span class="number">7.12</span>Footnotes and endnotes (M)
 </h2>
 <p>Books often have footnotes and endnotes. So, Markua has them too.</p>
 <h3 id="footnotes" class="definition">
-<span class="number">7.11.1</span>Footnotes
+<span class="number">7.12.1</span>Footnotes
 </h3>
 <p>To add a footnote, you insert a footnote tag using square brackets, a caret and
 the tag, like this:</p>
@@ -14813,7 +14840,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="endnotes" class="definition">
-<span class="number">7.11.2</span>Endnotes
+<span class="number">7.12.2</span>Endnotes
 </h3>
 <p>Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
@@ -14839,7 +14866,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="single-reference-to-footnotes-and-endnotes" class="definition">
-<span class="number">7.11.3</span>Single reference to footnotes and endnotes
+<span class="number">7.12.3</span>Single reference to footnotes and endnotes
 </h3>
 <p>You can only refer to a footnote or endnote once. You can’t define a footnote or
 endnote in one place and refer to it multiple times in the same Markua document.
@@ -14848,7 +14875,7 @@ Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 <a href="#crosslinks">crosslink</a>.</p>
 <h3 id="footnote-and-endnote-support-is-required-for-paragraphs-only" class="definition">
-<span class="number">7.11.4</span>Footnote and endnote support is required for paragraphs only
+<span class="number">7.12.4</span>Footnote and endnote support is required for paragraphs only
 </h3>
 <p>A Markua Processor must support footnote and endnote references inserted in
 normal paragraph content. However, that’s it.</p>
@@ -14867,7 +14894,7 @@ only supports inserting footnotes or endnotes in normal paragraph content.</p>
 </div>
 <div class="extension">
 <h2 id="underline-m-" class="definition">
-<span class="number">7.12</span>Underline (M)
+<span class="number">7.13</span>Underline (M)
 </h2>
 <p>In Markdown as defined by John Gruber, and in CommonMark and GFM,
 <code>*one asterisk*</code> and <code>_one underscore_</code> both produce <em>italics</em>, and there is no
@@ -15020,7 +15047,7 @@ stuff
 </div>
 <div class="extension">
 <h2 id="superscript-and-subscript-m-" class="definition">
-<span class="number">7.13</span>Superscript and subscript (M)
+<span class="number">7.14</span>Superscript and subscript (M)
 </h2>
 <p>To produce superscript like the 3 in 5^3^ = 125, surround it with carets like <code>5^3^ = 125</code>.</p>
 <div class="example" id="example-645">
@@ -15053,7 +15080,7 @@ stuff
 </div>
 <div class="extension">
 <h2 id="strikethrough-gfm-" class="definition">
-<span class="number">7.14</span>Strikethrough (GFM)
+<span class="number">7.15</span>Strikethrough (GFM)
 </h2>
 <p>Markua enables the <code>strikethrough</code> extension, where an additional emphasis type is
 available.</p>
@@ -15092,7 +15119,7 @@ new<span class="space"> </span>paragraph~~.
 </div>
 <div class="extension">
 <h2 id="index-entries-m-" class="definition">
-<span class="number">7.15</span>Index entries (M)
+<span class="number">7.16</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -15194,7 +15221,7 @@ reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to w
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
 </div>
 <h2 id="textual-content" class="definition">
-<span class="number">7.16</span>Textual content
+<span class="number">7.17</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>

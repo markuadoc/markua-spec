@@ -10911,6 +10911,39 @@ If you want a link after a literal `!`, backslash-escape the
 ````````````````````````````````
 
 
+
+<div class="extension">
+
+## Configurable figure titles with the alt-title document setting (M)
+
+TODO - write this with examples
+
+this is pasted from above:
+
+`alt-title`
+: `all`, `text` or `none`. The default is `text`. This controls whether the alt
+text on a resource is removed and used instead as the figure title if there is
+no figure title explicitly set. The possible values of this setting are `all`,
+`text` or `none`. If `all`, then if no title is provided for a given resource,
+regardless of the resource type, remove the alt text and use it as the figure
+title instead. (This setting is closest to the behaviour of LFM and of Markua
+version 0.10.) If `text`, then if no title is provided for a given **text-based**
+resource (such as an external code sample), remove the alt text and use it as
+the figure title instead. However, if the resource is not purely text-based,
+such as an image or a video, do not remove the remove the alt text and use it
+as the figure title if no figure title is provided. (This is the default value.
+It behaves like Markdown for images and like LFM for text-based resource types.)
+If `none`, then never use the alt text as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.) Note that if the alt text is converted into the figure title, it is
+NOT also provided as alt text. It would be very annoying to hear the same text
+spoken twice (once as the alt text and once as the figure title) when using a
+screen reader.
+
+</div>
+
+
+
 ## Autolinks
 
 [Autolink](@)s are absolute URIs and email addresses inside
@@ -11307,7 +11340,7 @@ as hard line breaks.
 
 <div class="extension">
 
-## Configurable soft line breaks (M)
+## Configurable soft line breaks with the soft-breaks document setting (M)
 
 Note: the `soft-breaks` setting is an example of a document setting. Document
 settings are a Markua addition, and are discussed in general terms

@@ -2776,17 +2776,35 @@ material book for the course.
 
 <div class="extension">
 
-## Concatenating files and blank lines (M)
+## Concatenating manuscript files inserts blank lines between them (M)
 
 A Markua document can be written in one file or multiple manuscript files. If a
-manuscript is written in multiple files, these files are concatenated together by
-the Markua Processor to produce one temporary manuscript file, and that one file
-is used as the input.
+manuscript is written in multiple files, these files are concatenated together
+by the Markua Processor to produce one temporary manuscript file, and that one
+file is used as the input.
+
+The way that the list of files that should be included in the book or course
+being generated from a Markua manuscript is defined is implementation-specific,
+and is not formally specified.
+
+For example, Leanpub enables authors to write books and courses either in a web
+browser or in local files on an author's computer. In the browser mode, the
+author chooses a file to edit via a web UI, which also allows the files to be
+reordered, etc. In the local files mode, the author creates a file called
+`Book.txt` which just lists the files in order. The reason that this is worth
+mentioning is that in both cases, what results is a simple list of files, and
+nothing more. All semantics about which content is included in, say, the full
+book or the sample book is determined by attribute lists, which are specified
+in the Markua specification.
+
+Now, even though the way that the list of files is defined is not part of the
+Markua spec, the way that the files are concatenated together to produce the
+full manuscript *is* part of the Markua spec.
 
 Importantly, in order to avoid a number of bugs, the files are not just
-concatenated together unchanged--they **must** be concatenated together by Markua
-Processors by adding **two newlines** between the end of each file and the
-beginning of the next file.
+concatenated together unchanged--they **must** be concatenated together by
+Markua Processors by adding **two newlines** (i.e. one blank line) between the
+end of each file and the beginning of the next file.
 
 So, after this process, exactly one blank line separates the contents of each
 manuscript file. Note that because of this rule, a paragraph (or any other block

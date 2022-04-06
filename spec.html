@@ -181,7 +181,8 @@ $(document).ready(function() {
 <li><a href="#resource-types-m-"><span class="number">4.4</span>Resource types (M)</a></li>
 <li><a href="#resource-formats-m-"><span class="number">4.5</span>Resource formats (M)</a></li>
 <li><a href="#resource-classes-m-"><span class="number">4.6</span>Resource classes (M)</a></li>
-<li><a href="#resource-locations-m-"><span class="number">4.7</span>Resource locations (M)</a></li>
+<li><a href="#todo-rewrite-this"><span class="number">4.7</span>TODO rewrite this</a></li>
+<li><a href="#resource-locations-m-"><span class="number">4.8</span>Resource locations (M)</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">5</span>Blocks and inlines</a>
@@ -3377,13 +3378,17 @@ following:</p>
 
 Let's hope the year improves.
 </code></pre>
+<p>Finally, when a resource is inserted with a title, it can show up in one of the
+lists of figures which can be generated near the start of the book or course.
+This can be further customized by the <code>class</code> attribute, discussed below.</p>
 <h2 id="the-alt-title-document-setting-m-" class="definition">
 <span class="number">4.3</span>The alt-title document setting (M)
 </h2>
-<p>The <code>alt-title</code> document setting can be <code>all</code>, <code>text</code> or <code>none</code>. The default is
-<code>text</code>.</p>
-<p>This controls whether, in cases where there is no figure title explicitly set,
-the alt text on a resource is removed and used instead as the figure title.</p>
+<p>The <code>alt-title</code> document setting controls whether, in the cases where there is
+no figure title explicitly set, the alt text on a resource is removed and used
+instead as the figure title.</p>
+<p>The <code>alt-title</code> can be <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>.</p>
+<p>This is what the values mean:</p>
 <p><code>all</code>
 : If no title is provided for a given resource, regardless of the resource type,
 remove the alt text and use it as the figure title instead. (This setting is
@@ -3400,7 +3405,9 @@ even for a text-based resource where no figure title is provided. (This is how
 Markdown behaves.)</p>
 <p>The default is <code>text</code> since it strikes a balance between preserving
 compatibility with Markdown for non-text-based resources like images, while
-still providing a sensible default for text-based resources like code samples.</p>
+still providing a sensible default for text-based resources like code samples.
+Since Markdown does not define support for external text-based resources, there
+is no conflict here.</p>
 <p>Note that if the alt text is converted into the figure title, it is NOT also
 provided as alt text. It would be very annoying to hear the same text spoken
 twice (once as the alt text and once as the figure title) when using a screen
@@ -3428,7 +3435,9 @@ generalization of what is already supported in Markdown; the <code>audio</code>,
 <p>Either way, each type of resource has a number of supported formats. Any of
 the resource types can be inserted as a local resource or web resource,
 and many of the resource types can also be inserted as an inline resource.</p>
-<p>To be clear: resources are not parsed as plain textual content.</p>
+<p>To be clear: resources are <em>not</em> parsed as plain <a href="#textual-content">textual
+content</a>; instead, they are parsed according to the rules that
+govern the parsing of resources.</p>
 <h2 id="resource-formats-m-" class="definition">
 <span class="number">4.5</span>Resource formats (M)
 </h2>
@@ -3468,7 +3477,31 @@ of the resource.</p>
 <h2 id="resource-classes-m-" class="definition">
 <span class="number">4.6</span>Resource classes (M)
 </h2>
-<p>TODO - explain how class is determined by insertion method or specified etc.</p>
+<p>As shown above, when a resource is inserted with a title, it is treated as a
+figure. Figures can show up in one of the lists of figures which can be
+generated near the start of the book or course.</p>
+<p>This can be further customized by the <code>class</code> attribute.</p>
+<p>There is a document setting called <code>list-figures-by-class</code> which determines
+whether the class is used to group figures appropriately. The default value of
+<code>list-figures-by-class</code> is true. If <code>list-figures-by-class</code> is true, then the
+Markua Processor should group figures by their class (with appropriate
+modifications to the class name for localization or for multiple words) when
+building the list(s) of figures near the beginning of the book. This can be used
+to automatically produce a List of Lemmas, List of Theorems, List of Poems,
+List of Code Samples, etc.</p>
+<p>If <code>list-figures-by-class</code> is false, then all figures (that is, all resources
+with titles) will be listed in a List of Figures.</p>
+<p>) This enables an author
+to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
+List of Sonnets, produced entirely dynamically based on the values of the
+<code>class</code> attribute, instead of just a <code>List of Figures</code>. See the Document
+Settings section for more information.</p>
+<p>To be clear: other than the <code>none</code> value, there is nothing magical about the
+values of the <code>class</code> attribute. An author can set it to whatever they want.</p>
+<p>list-figures-by-class : true or false. The default value is true.</p>
+<p>If no <code>class</code> attribute is provided and a list of figures is being generated,
+then</p>
+<p>determines</p>
 <p>The <strong>Class</strong> determines whether, and how, the resource is presented in a
 particular list of resources near the beginning of the book. The <code>span</code>
 class is special, in that it never shows up in a list of resources. All other
@@ -3493,12 +3526,11 @@ image, list or table with no caption), the the <code>class</code> is implicitly 
 <code>span</code>. Resources with a class of <code>span</code> do not show up in any list of
 figures. The <code>class</code> attribute is discussed further below.</p>
 <p>Resources can be inserted either as figures or as spans.</p>
-<p>TODO rewrite this</p>
-<h3 id="figures" class="definition">
-<span class="number">4.6.1</span>Figures
-</h3>
+<h2 id="todo-rewrite-this" class="definition">
+<span class="number">4.7</span>TODO rewrite this
+</h2>
 <h4 id="figure-attributes" class="definition">
-<span class="number">4.6.1.1</span>Figure attributes
+<span class="number">4.7</span>Figure attributes
 </h4>
 <p>A figure can also have attributes. The supported attributes vary based on the
 type of resource, but <strong>all</strong> resources inserted as figures support the
@@ -3554,9 +3586,7 @@ List of Sonnets, produced entirely dynamically based on the values of the
 Settings section for more information.</p>
 <p>Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.</p>
-<h5 id="figure-titles" class="definition">
-<span class="number">4.6.1.1.1</span>Figure titles
-</h5>
+<p>TODO</p>
 <p>A resource which is inserted as a figure can have a figure title.</p>
 <p>This title shows up in two places in the output:</p>
 <ol>
@@ -3588,7 +3618,7 @@ puts &quot;hello world&quot;
 ```
 </code></pre>
 <h5 id="figure-alt-text" class="definition">
-<span class="number">4.6.1.1.2</span>Figure alt text
+<span class="number">4.7</span>Figure alt text
 </h5>
 <p>A figure can have alt text, as long as the type of resource being inserted
 supports alt text. The resource location does not matter: local, web and inline
@@ -3618,7 +3648,7 @@ Crossing the Delaware” and the alt text could be “Denzel Washington on a boa
 a river.” Having good alt text would enable readers who cannot see the image to
 still get the joke which the figure title makes.</p>
 <h5 id="figure-titles-and-alt-text-together" class="definition">
-<span class="number">4.6.1.1.3</span>Figure titles and alt text together
+<span class="number">4.7</span>Figure titles and alt text together
 </h5>
 <p>These are some examples of figures with both alt text and a figure title:</p>
 <pre><code>![a red apple](mac.jpg &quot;The Original Mac&quot;)
@@ -3634,7 +3664,7 @@ still get the joke which the figure title makes.</p>
 ```
 </code></pre>
 <h5 id="the-figure-attribute-list-takes-precedence" class="definition">
-<span class="number">4.6.1.1.4</span>The figure attribute list takes precedence
+<span class="number">4.7</span>The figure attribute list takes precedence
 </h5>
 <p>It is always an error to specify an attribute both in the attribute list for a
 figure and in the syntactic sugar locations, either after the backticks or in the
@@ -3656,7 +3686,7 @@ puts &quot;hello world&quot;
 </code></pre>
 <p>Again, the Markua Processor should treat all of these as an error.</p>
 <h4 id="spans" class="definition">
-<span class="number">4.6.1.2</span>Spans
+<span class="number">4.7</span>Spans
 </h4>
 <p>Inserting a resource as a span means to continue the block context which it is
 in, instead of starting a new leaf block for the resource.</p>
@@ -3688,7 +3718,7 @@ figure. (Figure titles do not make sense inside of sentences.)</p>
 <pre><code>This is ![a red apple](mac.jpg &quot;The Original Mac&quot;) not a banana.
 </code></pre>
 <h5 id="span-attribute-lists-can-be-used-to-set-the-format" class="definition">
-<span class="number">4.6.1.2.1</span>Span attribute lists can be used to set the format
+<span class="number">4.7</span>Span attribute lists can be used to set the format
 </h5>
 <p>When a resource is inserted as a span, the resource is inserted as part of the
 flow of text of a paragraph with no newlines before or after it. A span resource
@@ -3702,7 +3732,7 @@ Span attribute lists can be used to set the format explicitly.</p>
 <pre><code>Yada yada `puts &quot;hi&quot;`{format: ruby} yada yada.
 </code></pre>
 <h2 id="resource-locations-m-" class="definition">
-<span class="number">4.7</span>Resource locations (M)
+<span class="number">4.8</span>Resource locations (M)
 </h2>
 <p>The <strong>Location</strong> is the location of the resource, when encountered by the
 Markua Processor. There is no attribute for this; it is inferred from the
@@ -3725,7 +3755,7 @@ Markua document is being written.</p>
 <p>Inline Resource
 : The resource is defined right in the body of a Markua document.</p>
 <h3 id="local-resources" class="definition">
-<span class="number">4.7.1</span>Local resources
+<span class="number">4.8.1</span>Local resources
 </h3>
 <p>If local resources are used, all local resources must be stored inside a
 <code>resources</code> directory, or one of its subdirectories. The <code>resources</code> directory
@@ -3767,13 +3797,13 @@ directory (e.g. as <code>images/foo.png</code>), then the zip file containing an
 should contain a <code>resources</code> directory which contains an <code>images</code> subdirectory
 with the images.</p>
 <h3 id="web-resources" class="definition">
-<span class="number">4.7.2</span>Web resources
+<span class="number">4.8.2</span>Web resources
 </h3>
 <p>If web resources are supported, both <code>http:</code> and <code>https:</code> resources should be
 supported.</p>
 <p>Web resources are identified by the absolute URL of the resource on the internet.</p>
 <h3 id="inline-resources" class="definition">
-<span class="number">4.7.3</span>Inline resources
+<span class="number">4.8.3</span>Inline resources
 </h3>
 <p>Certain types of resources can be inserted inline in a Markua document:</p>
 <ul>

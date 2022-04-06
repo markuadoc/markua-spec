@@ -3274,9 +3274,7 @@ figures. The `class` attribute is discussed further below.
 
 Resources can be inserted either as figures or as spans.
 
-TODO rewrite this
-
-### Figures
+## TODO rewrite this
 
 #### Figure attributes
 
@@ -3341,7 +3339,8 @@ Settings section for more information.
 Figures can have both alt text and a figure title. These are distinct things.
 We will discuss the figure title first and the alt text second.
 
-##### Figure titles
+
+TODO
 
 A resource which is inserted as a figure can have a figure title.
 

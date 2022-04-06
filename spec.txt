@@ -5135,10 +5135,6 @@ Closing code fences cannot have [info strings]:
 
 TODO
 
-### Code resource formats
-
-TODO 
-
 The following are the formats...
 
 The following sections list the various resource formats for each type of
@@ -5524,9 +5520,6 @@ requirement, nor is the choice of which continuation character is used.
 ## Verbatim resources (M)
 
 TODO rewrite
-
-
-TODO
 
 The `verbatim` resource type always has a format of `markua`. The way
 that `verbatim` resources are differentiated is via their `class` attribute.

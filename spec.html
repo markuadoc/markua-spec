@@ -5870,10 +5870,6 @@ foo
 <span class="number">6.6</span>Code resources (M)
 </h2>
 <p>TODO</p>
-<h3 id="code-resource-formats" class="definition">
-<span class="number">6.6.1</span>Code resource formats
-</h3>
-<p>TODO</p>
 <p>The following are the formats…</p>
 <p>The following sections list the various resource formats for each type of
 resource, along with the file extensions which make that format and type be
@@ -5933,7 +5929,7 @@ three backticks.</li>
 <p>Note that the default format can be overridden by specifying it via an attribute
 list, or after the three backticks in syntactic sugar.</p>
 <h3 id="supported-attributes-for-code" class="definition">
-<span class="number">6.6.2</span>Supported Attributes for Code
+<span class="number">6.6.1</span>Supported Attributes for Code
 </h3>
 <p>The following are the supported attributes for code resources, in addition to the
 <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
@@ -5956,7 +5952,7 @@ line of the file.</p>
 <code>crop-end</code> is to be omitted, which is equivalent to specifying the last line of
 the file.</p>
 <h4 id="default-value-of-the-attribute-in-inline-code-samples" class="definition">
-<span class="number">6.6.2.1</span>Default Value of the <code>format</code> attribute in Inline Code Samples
+<span class="number">6.6.1.1</span>Default Value of the <code>format</code> attribute in Inline Code Samples
 </h4>
 <p>The default value of the <code>format</code> attribute for a code resource inserted as a
 figure varies based on context.</p>
@@ -5978,7 +5974,7 @@ code span resources inserted as spans with single backticks can be overridden
 from the default value of <code>text</code> to some other value by setting the
 <code>default-code-span-language</code> on the entire Markua document.</p>
 <h3 id="local-code-resources" class="definition">
-<span class="number">6.6.3</span>Local Code Resources
+<span class="number">6.6.2</span>Local Code Resources
 </h3>
 <p>Local code resources can be inserted as a figure.</p>
 <p>This first figure will be a type of code and a format of <code>guess</code>. A Markua
@@ -6015,7 +6011,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="web-code-resources" class="definition">
-<span class="number">6.6.4</span>Web Code Resources
+<span class="number">6.6.3</span>Web Code Resources
 </h3>
 <p>Web code resources function identically to how local code resources work,
 including the significance of file extensions. The only differences is that the
@@ -6033,7 +6029,7 @@ not specified:</p>
 ![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
 </code></pre>
 <h3 id="inline-code-resources" class="definition">
-<span class="number">6.6.5</span>Inline Code Resources
+<span class="number">6.6.4</span>Inline Code Resources
 </h3>
 <p>Inline code resources are the most flexible way to insert code. They are the only
 way to insert code as a span resource, and the most straightforward way to add
@@ -6042,13 +6038,13 @@ short code examples as figures.</p>
 they work the same way as they do in CommonMark and GFM, with small additions
 by Markua.</p>
 <h4 id="no-attribute-lists-or-format-specifiers-on-indented-code-blocks" class="definition">
-<span class="number">6.6.5.1</span>No Attribute Lists or Format Specifiers on Indented Code Blocks
+<span class="number">6.6.4.1</span>No Attribute Lists or Format Specifiers on Indented Code Blocks
 </h4>
 <p>Indented code blocks are supported for compatibility with CommonMark and GFM.
 However, no attribute lists or format specifiers can be used. If you want to use
 them, use a fenced code block.</p>
 <h4 id="attribute-lists-and-format-specifiers-on-fenced-code-blocks" class="definition">
-<span class="number">6.6.5.2</span>Attribute Lists and Format Specifiers on Fenced Code Blocks
+<span class="number">6.6.4.2</span>Attribute Lists and Format Specifiers on Fenced Code Blocks
 </h4>
 <p>Fenced code blocks, discussed earlier, are how to insert inline code resources
 as figures. These can have attribute lists or format specifiers.</p>
@@ -6137,7 +6133,7 @@ formats, such as SVG or AsciiMath, what you are really doing is creating a code
 resource. This is shown in the sections below, which discuss SVG and AsciiMath,
 but this applies more broadly.</p>
 <h4 id="attribute-lists-on-code-spans" class="definition">
-<span class="number">6.6.5.3</span>Attribute Lists on Code Spans
+<span class="number">6.6.4.3</span>Attribute Lists on Code Spans
 </h4>
 <p>Code spans are discussed later in the spec. While code spans are done just as in
 CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
@@ -6145,7 +6141,7 @@ This serves as a hint to any syntax highlighter:</p>
 <pre><code>Hello World in Ruby is a simple `puts &quot;hello world&quot;`{format: ruby} statement.
 </code></pre>
 <h3 id="marking-code-as-added-or-deleted" class="definition">
-<span class="number">6.6.6</span>Marking Code as Added or Deleted
+<span class="number">6.6.5</span>Marking Code as Added or Deleted
 </h3>
 <p>Markua supports marking code as added or deleted, which can be helpful if you are
 writing a computer programming book and want to indicate what code should be
@@ -6166,7 +6162,7 @@ special <code>markua-*</code> comments. Syntax highlighting may make it harder t
 added and removed code, if they are formatted with bold and strikethrough
 respectively.</p>
 <h3 id="line-wrapping-in-code-resources" class="definition">
-<span class="number">6.6.7</span>Line Wrapping in Code Resources
+<span class="number">6.6.6</span>Line Wrapping in Code Resources
 </h3>
 <p>Code resources should have newlines added by the author to ensure that automatic
 line wrapping is not relied upon. Markua Processors may wrap lines to ensure that
@@ -6180,7 +6176,6 @@ requirement, nor is the choice of which continuation character is used.</p>
 <span class="number">6.7</span>Verbatim resources (M)
 </h2>
 <p>TODO rewrite</p>
-<p>TODO</p>
 <p>The <code>verbatim</code> resource type always has a format of <code>markua</code>. The way
 that <code>verbatim</code> resources are differentiated is via their <code>class</code> attribute.</p>
 <ul>
@@ -6544,7 +6539,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6983,7 +6978,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -7007,7 +7002,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16489,7 +16484,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

@@ -3258,10 +3258,10 @@ Books and courses may embed many kinds of <a id="resources" href="#resources" cl
 <li>Location</li>
 </ol>
 <p>While resources are a very important addition that Markua makes to Markdown,
-they are exactly that: an addition.</p>
-<p><strong>Resources provide an important conceptual framework, while remaining purely
-additive to standard Markdown. Specifically, all images, fenced code blocks and
-tables supported by CommonMark or GFM work in Markua unchanged.</strong></p>
+they are exactly that: an addition. Resources provide an important conceptual
+framework, while remaining purely additive to standard Markdown. Specifically,
+all images, fenced code blocks and tables supported by CommonMark or GFM work in
+Markua unchanged.</p>
 <p>What resources do is provide consistency, both in the conceptual understanding,
 in adding support for attribute lists, and specifying standard <code>type</code>, <code>format</code>
 and <code>class</code> attributes for all resources, including the resources such as
@@ -3343,17 +3343,17 @@ resource is called a <strong>figure</strong>.</li>
 <li>If a resource does not have a title provided via any of these three
 approaches, the resource is called a <strong>span</strong>.</li>
 </ol>
-<p>All resource types can be inserted as figures.</p>
 <p>For example, you can add an image in an emoji style like this:</p>
 <pre><code>Here's a ![poop](poop.png) emoji.
 </code></pre>
 <p>Now, this image, like typical emoji, does not have a title, so (assuming that
-the <code>alt-title</code> document setting is not <code>all</code>) there is no figure caption.</p>
+the <code>alt-title</code> document setting is not <code>all</code>) the resource is called a span.
+There is no figure caption.</p>
 <p>Now, if a title was added, things would be different:</p>
 <pre><code>Here's a ![poop](poop.png &quot;The Year 2022 So Far&quot;) emoji.
 </code></pre>
 <p>In this case, the image would be a figure, and it would flow in the text as
-such.</p>
+a figure.</p>
 <p>But what if we wanted to specify image alignment? This could be done with an
 attribute list like this:</p>
 <pre><code>Here's a ![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left} emoji.
@@ -3380,14 +3380,10 @@ Let's hope the year improves.
 <h2 id="the-alt-title-document-setting-m-" class="definition">
 <span class="number">4.3</span>The alt-title document setting (M)
 </h2>
-<p>The <code>alt-title</code> document setting can be <code>all</code>, <code>text</code> or <code>none</code>.</p>
-<p>This controls whether the alt text on a resource is removed and used instead as
-the figure title if there is no figure title explicitly set.</p>
-<p>The possible values of this setting are <code>all</code>, <code>text</code> or <code>none</code>. The default is
-<code>text</code>, for default compatibility with Markdown.</p>
-<p>(Leanpub authors with existing Markua 0.10 or LFM books will want to specify the
-<code>all</code> setting in their document settings, for compatibility with their existing
-manuscripts.)</p>
+<p>The <code>alt-title</code> document setting can be <code>all</code>, <code>text</code> or <code>none</code>. The default is
+<code>text</code>.</p>
+<p>This controls whether, in cases where there is no figure title explicitly set,
+the alt text on a resource is removed and used instead as the figure title.</p>
 <p><code>all</code>
 : If no title is provided for a given resource, regardless of the resource type,
 remove the alt text and use it as the figure title instead. (This setting is
@@ -3396,13 +3392,15 @@ closest to the behaviour of LFM and of Markua version 0.10.)</p>
 : If no title is provided for a given <strong>text-based</strong> resource (such as an
 external code sample), remove the alt text and use it as the figure title
 instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the remove the alt text and use it as the figure title if
-no figure title is provided. (This is the default value. It behaves like
-Markdown for images and like LFM for text-based resource types.)</p>
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. (This is arguably the most sensible choice.)</p>
 <p><code>none</code>
-: With this setting, never use the alt text as the figure title, even for a
-text-based resource where no figure title is provided. (This is how Markdown
-behaves.)</p>
+: With this setting, never remove the alt text to use it as the figure title,
+even for a text-based resource where no figure title is provided. (This is how
+Markdown behaves.)</p>
+<p>The default is <code>text</code> since it strikes a balance between preserving
+compatibility with Markdown for non-text-based resources like images, while
+still providing a sensible default for text-based resources like code samples.</p>
 <p>Note that if the alt text is converted into the figure title, it is NOT also
 provided as alt text. It would be very annoying to hear the same text spoken
 twice (once as the alt text and once as the figure title) when using a screen

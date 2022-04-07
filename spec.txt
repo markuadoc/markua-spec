@@ -2786,8 +2786,8 @@ The following settings apply to books and courses.
 
 `alt-title`
 : `all`, `text` or `none`. The default is `text`. This is central to how
-resources operate in Markua, so it is described in the Resources section
-[here](#the-alt-title-document-setting-m-).
+resources operate in Markua, so it is discussed
+[above](#the-alt-title-document-setting-m-).
 
 `contributors`
 : Any contributors to the Markua document who are not authors.
@@ -2857,7 +2857,8 @@ default is `eng`.
 
 `list-figures`
 : `combined`, `grouped` or `none`. The default value is `combined`. This is
-important enough that it is discussed in a separate section above.
+important enough that it is discussed in a separate section
+[above](#the-list-figures-document-setting-m-).
 
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.

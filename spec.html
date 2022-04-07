@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.13 (2022-04-03)</div>
+<div class="version">Version 0.30.13 (2022-04-07)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -264,8 +264,7 @@ $(document).ready(function() {
 <li><a href="#superscript-and-subscript-m-"><span class="number">10.20</span>Superscript and subscript (M)</a></li>
 <li><a href="#strikethrough-gfm-"><span class="number">10.21</span>Strikethrough (GFM)</a></li>
 <li><a href="#index-entries-m-"><span class="number">10.22</span>Index entries (M)</a></li>
-<li><a href="#the-complete-list-of-markua-syntactic-sugar-m-"><span class="number">10.23</span>The complete list of Markua syntactic sugar (M)</a></li>
-<li><a href="#textual-content"><span class="number">10.24</span>Textual content</a></li>
+<li><a href="#textual-content"><span class="number">10.23</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -5860,8 +5859,9 @@ list, or after the three backticks in syntactic sugar.</p>
 <h3 id="supported-attributes-for-code" class="definition">
 <span class="number">7.6.1</span>Supported Attributes for Code
 </h3>
-<p>The following are the supported attributes for code resources, in addition to the
-<code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
+<p>The following are the supported attributes for code resources, in addition to
+the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
+support.</p>
 <p><code>line-numbers</code>
 : This determines whether the code sample shows line numbers. Legal values are
 <code>true</code> or <code>false</code>. The default value is <code>false</code>. Any value other than <code>true</code> is
@@ -6101,27 +6101,35 @@ requirement, nor is the choice of which continuation character is used.</p>
 <h2 id="verbatim-resources-m-" class="definition">
 <span class="number">7.7</span>Verbatim resources (M)
 </h2>
-<p>TODO</p>
-<p>The <code>verbatim</code> resource type always has a format of <code>markua</code>. The way
-that <code>verbatim</code> resources are differentiated is via their <code>class</code> attribute.</p>
+<p>The <code>verbatim</code> resource type is used to preserve leading and internal whitespace
+while still supporting Markua text formatting.</p>
+<p>The primary use case is poetry, and the secondary use case is boilerplate legal
+text.</p>
+<p>If you don’t care about leading or internal whitespace, or about poetry or
+legalese, you can safely skip this section.</p>
+<p>For a verbatim resource, leading whitespace, internal whitespace, and newlines
+must all be preserved verbatim as typed. This can be useful for certain types of
+poetry, such as indenting the last two lines of a sonnet.</p>
+<p>To be clear:</p>
 <ul>
-<li><code>markua</code> - Markua - <code>.md</code></li>
+<li>Trailing whitespace before a newline does not need to be preserved.</li>
+<li>This includes all leading and internal spaces and newlines regardless of the
+number of consecutive leading, internal or trailing spaces or the number of
+newlines.</li>
 </ul>
-<p>Since resources can…</p>
-<p>In order to prevent cycles (and infinitely long books!), resources are <strong>NOT</strong>
-allowed to include other resources: only a Markua document in the root
-<code>manuscript</code> directory can include resources, and all resources must live inside
-the <code>resources</code> directory or in a subdirectory inside of it, with nested
-subdirectories permitted.</p>
-<p>Because of this limitation, a Markua Processor which is building an AST
-(Abstract Syntax Tree) from a Markua manuscript can then do exactly one
-traversal of the AST, and when it encounters a resource of type <code>verbatim</code> it
-should then parse the resource as Markua and replace the Markua resource with
-the subtree which is the result of parsing the Markua resource, and there is no
-need to do this recursively.</p>
-<p>Verbatim resources (i.e. a resource with a <code>type</code> of <code>verbatim</code>) can be a local, web
-or inline resource, just like any other resource, and the same resource syntax
-applies to Markua resources as to all other resources.</p>
+<p>Now, while the whitespace is preserved, it is rendered using either a
+proportional font or a monospaced one based on the value of the <code>monospaced</code>
+attribute.</p>
+<p>The <code>verbatim</code> resource should have newlines added by the author to ensure that
+automatic line wrapping is not relied upon. Markua Processors may wrap lines to
+ensure that all the text is visible on a page, and <em>may</em> add continuation
+characters (like the backslash <code>\</code> character) in the output to indicate that a
+line has been automatically wrapped by the Markua Processor. Obviously, seeing a
+continuation character is in poetry is terrible, so the author should consider
+this a mistake that needs to be fixed by manually line wrapping.</p>
+<p>Verbatim resources can be a local, web or inline resource, just like any other
+resource, and the same resource syntax applies to Markua resources as to all
+other resources.</p>
 <p>There are three main use cases for a Markua resource:</p>
 <ol>
 <li>Inserting a specific <code>class</code> of resource, such as a <code>poem</code>.</li>
@@ -6130,61 +6138,25 @@ used in many places and/or sourced from a third party.</li>
 <li>Controlling the behaviour of fonts or whitespace for specific types of
 text, such as poetry.</li>
 </ol>
-<p>The following are the supported attributes for resources of type <code>verbatim</code>:</p>
-<p><code>type</code>
-: For a Markua resource, the <code>type</code> is <code>verbatim</code>. This can be specified
-explicitly, and it can be inferred as the type for all files with a <code>.md</code>
-.extension.</p>
-<p><code>class</code>
-: This can define a specific <code>class</code> of resource, such as a <code>poem</code> or <code>list</code>.
-The default is <code>none</code>, which means that the resource is not inserted in any
-special way, but is just inserted as though the author typed it in the
-manuscript. This enables this class of <code>verbatim</code> resource to be used for text
-substitution, without showing up in some list of resources near the front of the
-book. There is semantic sugar to produce inline resources of type <code>verbatim</code> and
-class <code>poem</code>; see below for details.) A Markua Processor can produce a list of a
-given class of resource near the beginning of the document, such as a List of
-Poems or a List of Lists.</p>
+<p>The following are the supported attributes for verbatim resources, in addition
+to the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
+support.</p>
 <p><code>monospaced</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, the Markua Processor
 must use a monospaced font to output the text in the resource. If false, the
 Markua Processor may use whatever font (proportional or monospaced) it is
 configured to use to output Markua text. The value of <code>true</code> can be useful for
 certain types of poetry, for example.</p>
-<p><code>format</code>
-: This is the resource format. For a Markua resource, the format is always
-just <code>verbatim</code>, and should be ignored by a Markua Processor.</p>
-<p><code>title</code>
-: This is text which is shown near the figure, typically above or below it. A
-Markua Processor can choose where to position titles based on any criteria it
-chooses. For example, a Markua Processor can position all titles above or
-below figures, or use a different behaviour based on the resource format (e.g.
-table titles above, image titles below). Note that the figure title itself
-may contain the Markua text formatting specified earlier (e.g. bold, italic).
-This text is also displayed for the figure wherever the figure is listed
-(e.g. List of Illustrations, Table of Tables, etc.).</p>
-<p><code>whitespace</code>
-: <code>semantic</code> or <code>verbatim</code>. The default is <code>semantic</code>. With the default value of
-<code>semantic</code>, whitespace is processed the way that Markua handles it. With the
-value of <code>verbatim</code>, leading whitespace, internal whitespace, trailing
-whitespace and newlines must all be preserved verbatim as typed. This can be
-useful for certain types of poetry, such as indenting the last two lines of a
-sonnet. To be clear, this includes all spaces and newlines, regardless
-of whether they are leading, internal or trailing spaces, and regardless of the
-number of consecutive leading, internal or trailing spaces or the number of
-newlines. Now, while the whitespace is preserved, it is rendered using either a
-proportional font or a monospaced one based on the value of the <code>monospaced</code>
-attribute. If whitespace is verbatim, the <code>verbatim</code> resource should have newlines
-added by the author to ensure that automatic line wrapping is not relied upon.
-Markua Processors may wrap lines to ensure that all the text is visible on a
-page, and <em>may</em> add continuation characters (like the backslash <code>\</code> character)
-in the output to indicate that a line has been automatically wrapped by the
-Markua Processor. Obviously, seeing a continuation character is in poetry is
-terrible, so the author should consider this a mistake that needs to be fixed by
-manually line wrapping.</p>
+<p>Note that the standard <code>class</code> attribute should be used with a <code>verbatim</code> type
+resource to define a specific <code>class</code> of resource on verbatim resources which
+have titles, such as a <code>poem</code>. A List of Poems is a lot more poetic than a List
+of Verbatims.</p>
+<p>Also note that the standard resource <code>format</code> attribute does not matter for a
+<code>verbatim</code> resource, and should be ignored by a Markua Processor.</p>
 <h3 id="local-verbatim-resources" class="definition">
 <span class="number">7.7.1</span>Local Verbatim resources
 </h3>
+<p>TODO</p>
 <p>Local Markua resources look like many other resources inserted as figures:</p>
 <pre><code>Here's a Shakespearean sonnet, which will not have a `class` and which will
 default to semantic whitespace:
@@ -6194,7 +6166,7 @@ default to semantic whitespace:
 Here's a Shakespearean sonnet, which will not have a `class` and which will
 have its whitespace preserved (for indenting the last two lines):
 
-{whitespace: verbatim}
+{type: verbatim, class: poem}
 ![](sonnet130.md &quot;Sonnet 130&quot;)
 
 Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
@@ -17799,7 +17771,9 @@ then show examples of audio being inserted for both local and web audio files.</
 <h3 id="supported-attributes-for-audio" class="definition">
 <span class="number">10.10.1</span>Supported Attributes for Audio
 </h3>
-<p>The following are the supported attributes for audio resources, in addition to the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
+<p>The following are the supported attributes for audio resources, in addition to
+the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
+support.</p>
 <p><code>poster</code>
 : The <code>poster</code> is the URL or path to an image (such as an album cover or a
 photo of the artist) which should be shown to accompany the audio resource.
@@ -17897,7 +17871,7 @@ inline resource. So, the <code>.asciimath</code> file extension is deliberately 
 <h3 id="supported-attributes-for-math" class="definition">
 <span class="number">10.11.2</span>Supported Attributes for Math
 </h3>
-<p>The following is the supported attribute for math resources, in addition to the
+<p>The following are the supported attribute for math resources, in addition to the
 <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support:</p>
 <p><code>alt</code>
 : The <code>alt</code> is the alt text, to be displayed when the mathematical equations
@@ -19320,18 +19294,8 @@ as an attempt at creating a sub-entry. (This actually got me, when I tried to
 reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to write
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
 </div>
-<div class="extension">
-<h2 id="the-complete-list-of-markua-syntactic-sugar-m-" class="definition">
-<span class="number">10.23</span>The complete list of Markua syntactic sugar (M)
-</h2>
-<p>As discussed throughout the spec, Markua defines a number of elements which are
-syntactic sugar. Since the next section defines what is parsed as plain textual
-content, it is useful to summarize all the syntactic sugar in one place, to help
-reduce possible confusion.</p>
-<p>TODO</p>
-</div>
 <h2 id="textual-content" class="definition">
-<span class="number">10.24</span>Textual content
+<span class="number">10.23</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>

@@ -3184,9 +3184,10 @@ for images being added like an emoji, for example:
 Here's a ![poop](poop.png) emoji.
 ```
 
-Note that in this case, there is already a poop emoji. However, if you wanted
-to use an image of your favourite politician as a poop emoji, you wouldn't have
-an emoji for that built in, so this syntax would work in its stead.
+Note that in this case, there is already a poop emoji, so this is wasteful as
+the emoji syntax can just be used instead. However, if you wanted to use an
+image of your favourite politician as a poop emoji, you wouldn't have an emoji
+for that person built in, so this syntax would work in its stead.
 
 Again, if a title was added, things would be different:
 

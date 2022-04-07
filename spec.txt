@@ -14394,15 +14394,23 @@ the identical to that used by CommonMark and GFM. (That section is unchanged
 from the CommonMark spec.) It is, however, also consistent with the syntax that
 is used for other resource types.
 
-The following are the image resource formats and the file extensions which 
+The following are the image resource formats and the file extensions which
+choose them by default:
 
-| Image Format | Description | File Extensions   |
-|--------------|-------------|-------------------|
-| `jpeg`       | JPEG image  | `.jpg` or `.jpeg` |
-| `gif`        | GIF image   | `.gif`            |
-| `png`        | PNG image   | `.png`            |
-| `svg`        | SVG image   | `.svg`            |
-| `svgz`       | SVG image (zipped) | `.svgz`    |
+`jpeg`
+: JPEG image - `.jpg` or `.jpeg`
+
+`gif`
+: GIF image - `.gif`
+
+`png`
+: PNG image - `.png`
+
+`svg`
+: SVG image - `.svg`
+
+`svgz`
+: SVG image (zipped) - `.svgz`
 
 Markua uses the image syntax for all resource types. Markua also reinterprets
 images as being a resource. This is important for the following reason:

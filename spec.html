@@ -184,7 +184,7 @@ $(document).ready(function() {
 <ul>
 <li><a href="#resource-attributes-m-"><span class="number">5.1</span>Resource attributes (M)</a></li>
 <li><a href="#common-resource-attributes-m-"><span class="number">5.2</span>Common resource attributes (M)</a></li>
-<li><a href="#resource-titles-m-"><span class="number">5.3</span>Resource titles (M)</a></li>
+<li><a href="#resource-titles-make-figures-m-"><span class="number">5.3</span>Resource titles make figures (M)</a></li>
 <li><a href="#resource-alt-text-m-"><span class="number">5.4</span>Resource alt text (M)</a></li>
 <li><a href="#resource-types-m-"><span class="number">5.5</span>Resource types (M)</a></li>
 <li><a href="#resource-formats-m-"><span class="number">5.6</span>Resource formats (M)</a></li>
@@ -3423,23 +3423,24 @@ discussed extensively later.</p>
 values for format. Specific resource types and formats are discussed throughout
 the rest of the spec.</p>
 <p><code>title</code>
-: If a resource has a title, it is a figure. The title is text which is shown
-near the figure, typically above or below it. A Markua Processor can choose
-where to position titles based on any criteria it chooses. For example, a Markua
-Processor can position all titles above or below figures, or use a different
-behaviour based on the resource format (e.g. table titles above, image titles
-below). Note that the figure title itself may contain the Markua text formatting
-specified earlier (e.g. bold, italic). This text is also displayed for the
-figure wherever the figure is listed (e.g. List of Illustrations, Table of
-Tables, etc.).</p>
+: If a resource has a title, it is a figure. This is discussed in the next
+section.</p>
 <p><code>type</code>
 : This is the resource type. This is usually inferred from the format instead of
 being specified.</p>
-<h2 id="resource-titles-m-" class="definition">
-<span class="number">5.3</span>Resource titles (M)
+<h2 id="resource-titles-make-figures-m-" class="definition">
+<span class="number">5.3</span>Resource titles make figures (M)
 </h2>
-<p>As discussed, a resource with a <code>title</code> is a figure.</p>
-<p>This title shows up in two places in the output:</p>
+<p>A resource with a <code>title</code> is a figure.</p>
+<p>The title is text which is shown near the figure, typically above or below it.
+A Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or below
+figures, or use a different behaviour based on the resource format (e.g. table
+titles above, image titles below).</p>
+<p>Note that the figure title itself may contain Markua text formatting (e.g. bold,
+italic). This text is also displayed for the figure wherever the figure is
+listed (e.g. List of Illustrations, Table of Tables, etc.).</p>
+<p>The title of a resource shows up in two places in the output:</p>
 <ol>
 <li>Near the resource, typically above or below it, per the preference of the
 Markua Processor.</li>

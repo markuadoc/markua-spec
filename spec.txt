@@ -3114,15 +3114,8 @@ values for format. Specific resource types and formats are discussed throughout
 the rest of the spec.
 
 `title`
-: If a resource has a title, it is a figure. The title is text which is shown
-near the figure, typically above or below it. A Markua Processor can choose
-where to position titles based on any criteria it chooses. For example, a Markua
-Processor can position all titles above or below figures, or use a different
-behaviour based on the resource format (e.g. table titles above, image titles
-below). Note that the figure title itself may contain the Markua text formatting
-specified earlier (e.g. bold, italic). This text is also displayed for the
-figure wherever the figure is listed (e.g. List of Illustrations, Table of
-Tables, etc.).
+: If a resource has a title, it is a figure. This is discussed in the next
+section.
 
 `type`
 : This is the resource type. This is usually inferred from the format instead of
@@ -3130,11 +3123,21 @@ being specified.
 
 
 
-## Resource titles (M)
+## Resource titles make figures (M)
 
-As discussed, a resource with a `title` is a figure.
+A resource with a `title` is a figure.
 
-This title shows up in two places in the output:
+The title is text which is shown near the figure, typically above or below it.
+A Markua Processor can choose where to position titles based on any criteria it
+chooses. For example, a Markua Processor can position all titles above or below
+figures, or use a different behaviour based on the resource format (e.g. table
+titles above, image titles below).
+
+Note that the figure title itself may contain Markua text formatting (e.g. bold,
+italic). This text is also displayed for the figure wherever the figure is
+listed (e.g. List of Illustrations, Table of Tables, etc.).
+
+The title of a resource shows up in two places in the output:
 
 1. Near the resource, typically above or below it, per the preference of the
 Markua Processor.

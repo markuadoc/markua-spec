@@ -3056,7 +3056,7 @@ authors: Peter Armstrong and John MacFarlane
 generate-sample: true
 generate-community: true
 generate-network: true
-list-figures: combined
+list-figures: groups
 }
 
 # Chapter One
@@ -3141,11 +3141,11 @@ whether figures are listed in one or more lists near the beginning of the book.<
 list of figures (called List of Figures, but localized into the language of the
 book or course), for all figures in the manuscript, ordered by their appearance
 in the manuscript.</p>
-<p>If <code>list-figures</code> is <code>grouped</code>, the Markua Processor should group figures.
+<p>If <code>list-figures</code> is <code>groups</code>, the Markua Processor should group figures.
 Here’s how the grouping works:</p>
 <ol>
 <li>
-<p>If there is no <code>class</code> attribute, the figure is grouped in a list with other
+<p>If there is no <code>class</code> attribute, the figure is groups in a list with other
 resources of its <code>type</code>. This is a nice default, since it results in a List of
 Tables, List of Code Samples, List of Images, etc. The type of a resource can be
 specified by the type attribute, or inferred from the format of the resource.</p>
@@ -3228,15 +3228,15 @@ regardless of whether there are any <code>{sample: true}</code> directives.</p>
 language code of the language that the Markua document is written in. The
 default is <code>eng</code>.</p>
 <p><code>list-figures</code>
-: <code>combined</code>, <code>grouped</code> or <code>none</code>. The default value is <code>combined</code>. This is
+: <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This is
 important enough that it is discussed in a separate section
 <a href="#the-list-figures-document-setting-m-">above</a>.</p>
 <p><code>number-chapters</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
 <p><code>number-figures</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether resources are numbered when
-inserted as figures. Note that if figures are grouped by class, then each class
-will have different numbering.</p>
+inserted as figures. Note that if figures are listed in <code>groups</code>, then each
+list will have different numbering.</p>
 <p><code>number-sections</code>
 : <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
 are numbered.</p>

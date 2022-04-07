@@ -2665,7 +2665,7 @@ authors: Peter Armstrong and John MacFarlane
 generate-sample: true
 generate-community: true
 generate-network: true
-list-figures: combined
+list-figures: groups
 }
 
 # Chapter One
@@ -2772,10 +2772,10 @@ list of figures (called List of Figures, but localized into the language of the
 book or course), for all figures in the manuscript, ordered by their appearance
 in the manuscript.
 
-If `list-figures` is `grouped`, the Markua Processor should group figures.
+If `list-figures` is `groups`, the Markua Processor should group figures.
 Here's how the grouping works:
 
-1. If there is no `class` attribute, the figure is grouped in a list with other
+1. If there is no `class` attribute, the figure is groups in a list with other
 resources of its `type`. This is a nice default, since it results in a List of
 Tables, List of Code Samples, List of Images, etc. The type of a resource can be
 specified by the type attribute, or inferred from the format of the resource.
@@ -2869,7 +2869,7 @@ language code of the language that the Markua document is written in. The
 default is `eng`.
 
 `list-figures`
-: `combined`, `grouped` or `none`. The default value is `combined`. This is
+: `combined`, `groups` or `none`. The default value is `combined`. This is
 important enough that it is discussed in a separate section
 [above](#the-list-figures-document-setting-m-).
 
@@ -2878,8 +2878,8 @@ important enough that it is discussed in a separate section
 
 `number-figures`
 : `true` or `false`. Default `true`. Whether resources are numbered when
-inserted as figures. Note that if figures are grouped by class, then each class
-will have different numbering.
+inserted as figures. Note that if figures are listed in `groups`, then each
+list will have different numbering.
 
 `number-sections`
 : `true` or `false`. Default `false`. Whether the sections (and sub-sections)

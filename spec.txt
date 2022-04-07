@@ -3218,13 +3218,20 @@ As shown above, when a resource is inserted with a title, it is treated as a
 figure. Figures can show up in one of the lists of figures which can be
 generated near the start of the book or course.
 
-This can be further customized by the `class` attribute.
-
 If a resource has a `title` and thus is a figure, and if figures are listed
-grouped by classes (if the `list-figures` document setting is `grouped`), the
-`class` attribute determines which list the resource appears in.
+in groups (if the `list-figures` document setting is `groups`), the default is
+to group by the `type` of the resource. However, the `class` attribute
+can be used to override which list the resource appears in.
 
-So, for example, if you want all images in a book 
+
+
+
+
+
+
+
+
+
 
 </div>
 

@@ -732,6 +732,4 @@ Theorems, or List of Lemmas near the beginning of the document, much like any
 other resource types. The `class` attribute is especially handy when used with a
 resource of type `markua`.
 
-
-
 </div>

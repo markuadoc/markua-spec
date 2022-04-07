@@ -3017,8 +3017,9 @@ As you recall, resources vary in four ways:
 4. Location
 
 The first three of these ways that resources vary are specified via the
-`type`, `format` and `class` attributes. The fourth way, location, is discussed
-later.
+`type`, `format` and `class` attributes. These attributes are discussed briefly
+here, and in the sections below. The fourth way, location, is discussed in a
+later section below.
 
 These are the attributes that resources all share:
 

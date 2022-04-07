@@ -3512,9 +3512,36 @@ be done with an attribute list like this:</p>
 <pre><code>Here's a ![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left} emoji.
 </code></pre>
 <p>Since the image resource has a title, it is being inserted as a figure, and it
-would flow in the layout like any other figure. However, please note that this
-example is contrived. A much better way to write something like this is as
-follows, using the attribute list in its typical place above the resource:</p>
+would flow in the layout like any other figure.</p>
+<p>Specifically, this would be equivalent to the following:</p>
+<pre><code>Here's a
+![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left}
+emoji.
+</code></pre>
+<p>This would also be equivalent to the following:</p>
+<pre><code>Here's a
+
+![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left}
+
+{class: continued-para}
+emoji.
+</code></pre>
+<p>This would also be equivalent to the following:</p>
+<pre><code>Here's a
+
+![poop](poop.png &quot;The Year 2022 So Far&quot;){align: left}
+
+^
+emoji.
+</code></pre>
+<p><strong>To be clear: inserting a figure inline in a sentence is equivalent to adding
+a single line break before and after it, which is also equivalent to adding a
+blank line before and after it with a <code>class</code> of <code>continued-para</code> on the
+paragraph after it, which is also equivalent to the syntactic sugar equivalent
+with a caret <code>^</code> on the paragraph after it.</strong></p>
+<p>However, this example is both contrived and terrible.</p>
+<p>A much better way to write something like this is as follows, using the
+attribute list in its typical place above the resource:</p>
 <pre><code>Here's an emoji.
 
 {align: left}
@@ -3531,6 +3558,19 @@ semantically identical to the following:</p>
 
 Let's hope the year improves.
 </code></pre>
+<p>Finally, if you are implementing a Markua Processor and are trying to determine
+the <code>class</code> of a resource, the following pseudocode algorithm can help:</p>
+<pre><code>What's the `class`?
+
+if the class was explicitly set to something
+  that's the class
+elsif there is a title
+  the class is `figure`
+else
+  the class is undefined
+end
+</code></pre>
+<p>A resource with an undefined class has no title and is not a figure.</p>
 <h2 id="resource-alt-text-m-" class="definition">
 <span class="number">5.4</span>Resource alt text (M)
 </h2>
@@ -6106,7 +6146,9 @@ requirement, nor is the choice of which continuation character is used.</p>
 while still supporting Markua text formatting (things like <code>**bold**</code> and
 <code>*italic*</code>).</p>
 <p><strong>While Markua text formatting IS supported inside a verbatim resource, Markua
-resources (including images) ARE NOT supported inside a verbatim resource.</strong></p>
+resources (including images) ARE NOT supported inside a verbatim resource.
+While this may seem arbitrary and overly restrictive, we need to prevent a
+slippery slope of expanded scope.</strong></p>
 <p>The following are the verbatim resource formats and the file extensions which
 choose them by default:</p>
 <p><code>verbatim</code>

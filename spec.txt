@@ -3244,9 +3244,48 @@ Here's a ![poop](poop.png "The Year 2022 So Far"){align: left} emoji.
 ```
 
 Since the image resource has a title, it is being inserted as a figure, and it
-would flow in the layout like any other figure. However, please note that this
-example is contrived. A much better way to write something like this is as
-follows, using the attribute list in its typical place above the resource:
+would flow in the layout like any other figure.
+
+Specifically, this would be equivalent to the following:
+
+```
+Here's a
+![poop](poop.png "The Year 2022 So Far"){align: left}
+emoji.
+```
+
+This would also be equivalent to the following:
+
+```
+Here's a
+
+![poop](poop.png "The Year 2022 So Far"){align: left}
+
+{class: continued-para}
+emoji.
+```
+
+This would also be equivalent to the following:
+
+```
+Here's a
+
+![poop](poop.png "The Year 2022 So Far"){align: left}
+
+^
+emoji.
+```
+
+**To be clear: inserting a figure inline in a sentence is equivalent to adding
+a single line break before and after it, which is also equivalent to adding a
+blank line before and after it with a `class` of `continued-para` on the
+paragraph after it, which is also equivalent to the syntactic sugar equivalent
+with a caret `^` on the paragraph after it.**
+
+However, this example is both contrived and terrible.
+
+A much better way to write something like this is as follows, using the
+attribute list in its typical place above the resource:
 
 ```
 Here's an emoji.
@@ -3270,7 +3309,22 @@ Here's an emoji.
 Let's hope the year improves.
 ```
 
+Finally, if you are implementing a Markua Processor and are trying to determine
+the `class` of a resource, the following pseudocode algorithm can help:
 
+```
+What's the `class`?
+
+if the class was explicitly set to something
+  that's the class
+elsif there is a title
+  the class is `figure`
+else
+  the class is undefined
+end
+```
+
+A resource with an undefined class has no title and is not a figure.
 
 ## Resource alt text (M)
 
@@ -5433,7 +5487,9 @@ while still supporting Markua text formatting (things like `**bold**` and
 `*italic*`).
 
 **While Markua text formatting IS supported inside a verbatim resource, Markua
-resources (including images) ARE NOT supported inside a verbatim resource.**
+resources (including images) ARE NOT supported inside a verbatim resource.
+While this may seem arbitrary and overly restrictive, we need to prevent a
+slippery slope of expanded scope.**
 
 The following are the verbatim resource formats and the file extensions which
 choose them by default:

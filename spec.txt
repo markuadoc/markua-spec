@@ -6804,9 +6804,9 @@ For a `csv`-format table, the existence of a header and/or footer row cannot be
 inferred from the data, and must be specified in an attribute list. The default
 value of `header` is `true`, and the default value of `footer` is `false`.
 
-Also, as discussed, a `csv` table can have `crop-start` and `crop-end`
-attributes, for easily presenting a subset of a larger CSV. If `crop-start` and
-`crop-end` are used with `header` of true, the header should be displayed by the
+Also, as discussed, a `csv` table can have `rows` and `columns`
+attributes, for easily presenting a subset of a larger CSV. If `rows` and
+`columns` are used with `header` of true, the header should be displayed by the
 Markua Processor.
 
 Examples:
@@ -6827,7 +6827,7 @@ Examples:
 {type: table, format: csv, header: true, footer: true}
 ![Canadian Census Data](census.csv)
 
-{type: table, format: csv, header: true, footer: true, crop-start: 5, crop-end: 10}
+{type: table, format: csv, header: true, footer: true, rows: 1..5, columns: 2,3}
 ![Canadian Census Data](census.csv)
 ```
 

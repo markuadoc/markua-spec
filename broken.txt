@@ -15,25 +15,7 @@
 
 
 
-## Resource classes (M)
 
-As shown above, when a resource is inserted with a title, it is treated as a
-figure. Figures can show up in one of the lists of figures which can be
-generated near the start of the book or course.
-
-This can be further customized by the `class` attribute.
-
-There is a document setting called `list-figures-by-class` which determines
-whether the class is used to group figures appropriately. The default value of
-`list-figures-by-class` is true. If `list-figures-by-class` is true, then the
-Markua Processor should group figures by their class (with appropriate
-modifications to the class name for localization or for multiple words) when
-building the list(s) of figures near the beginning of the book. This can be used
-to automatically produce a List of Lemmas, List of Theorems, List of Poems,
-List of Code Samples, etc.
-
-If `list-figures-by-class` is false, then all figures (that is, all resources
-with titles) will be listed in a List of Figures.
 
 
 ) This enables an author

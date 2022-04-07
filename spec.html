@@ -3585,16 +3585,12 @@ supported.</p>
 <p>Certain types of resources can be inserted inline in a Markua document:</p>
 <ul>
 <li><code>code</code></li>
-<li><code>image</code> (of SVG format only)</li>
+<li><code>image</code> (of SVG format only, discussed later)</li>
 <li><code>list</code></li>
-<li><code>math</code> (either <code>latexmath</code> or <code>asciimath</code>)</li>
+<li><code>math</code> (either <code>latexmath</code> or <code>asciimath</code>, discussed later)</li>
 <li><code>table</code></li>
 <li><code>verbatim</code></li>
 </ul>
-<p>Since an SVG image is just XML text, it can be contained inline in the text of a
-Markua document. This is not true for binary resources like PNG or JPEG images
-or any type of audio or video file–these can only be local or web resources.</p>
-<p>The syntax for SVG images is discussed later.</p>
 </div>
 <div class="extension">
 <h1 id="figures-and-spans-m-" class="definition">
@@ -17345,6 +17341,9 @@ instead, involving a very real and very delicious apple pie:</p>
 </h2>
 <p>Local and web resource locations are supported for any type of image; inline
 resource locations are supported for SVG images only.</p>
+<p>Since an SVG image is just XML text, it can be contained inline in the text of a
+Markua document. This is not true for binary resources like PNG or JPEG images
+or any type of audio or video file–these can only be local or web resources.</p>
 <p>To add an inline SVG image, you create a fenced code block, and then you
 indicate that instead of code, you are inserting a resource of type image
 and of format SVG.</p>

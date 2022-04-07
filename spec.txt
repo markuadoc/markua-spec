@@ -3309,17 +3309,11 @@ Web resources are identified by the absolute URL of the resource on the internet
 Certain types of resources can be inserted inline in a Markua document:
 
 * `code`
-* `image` (of SVG format only)
+* `image` (of SVG format only, discussed later)
 * `list`
-* `math` (either `latexmath` or `asciimath`)
+* `math` (either `latexmath` or `asciimath`, discussed later)
 * `table`
 * `verbatim`
-
-Since an SVG image is just XML text, it can be contained inline in the text of a
-Markua document. This is not true for binary resources like PNG or JPEG images
-or any type of audio or video file--these can only be local or web resources.
-
-The syntax for SVG images is discussed later.
 
 </div>
 
@@ -14444,6 +14438,10 @@ instead, involving a very real and very delicious apple pie:
 
 Local and web resource locations are supported for any type of image; inline
 resource locations are supported for SVG images only.
+
+Since an SVG image is just XML text, it can be contained inline in the text of a
+Markua document. This is not true for binary resources like PNG or JPEG images
+or any type of audio or video file--these can only be local or web resources.
 
 To add an inline SVG image, you create a fenced code block, and then you
 indicate that instead of code, you are inserting a resource of type image

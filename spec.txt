@@ -16457,21 +16457,6 @@ the entry as `{i: "*Hello\! Flex 4*}` not as `{i: "*Hello! Flex 4*}`.
 
 
 
-<div class="extension">
-
-## The complete list of Markua syntactic sugar (M)
-
-As discussed throughout the spec, Markua defines a number of elements which are
-syntactic sugar. Since the next section defines what is parsed as plain textual
-content, it is useful to summarize all the syntactic sugar in one place, to help
-reduce possible confusion.
-
-TODO
-
-</div>
-
-
-
 ## Textual content
 
 Any characters not given an interpretation by the above rules will

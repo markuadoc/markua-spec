@@ -5057,33 +5057,20 @@ Closing code fences cannot have [info strings]:
 
 ## Code resources (M)
 
-TODO
-
-The following are the formats...
-
-The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.
-
-Note that most code languages are not specified, and are guessed at with a format
-of `guess`. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.
-
-* `text` - Unformatted code (with no syntax highlighting)
-* `guess` - Formatted code, with the language guessed at - any other file
-  extension not listed previously in the sections above
-
-
 Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.
 
-As discussed, code cannot have alt text. It's just text. If any alt text is
-provided for a code resource, it is ignored.
+Code cannot have alt text. It's just text. If any alt text is provided for a
+code resource, it is ignored.
 
 Markua specifies only one specific file extension to be associated with a type
 of `code`: the `.txt` extension, which is for the format of `text`. However,
 Markua Processors must interpret **all** unspecified file extensions as
 specifying a resource of type `code` with a format of `guess`.
+
+This way, the decision about the language recognized does not need to be done
+by the Markua Processor, but can instead be delegated to the syntax highlighter,
+such as Pygments.
 
 Regardless of whether syntax highlighting is supported and the programming
 language is detected, all code must be formatted as `monospaced text` by Markua
@@ -5440,7 +5427,7 @@ requirement, nor is the choice of which continuation character is used.
 
 ## Verbatim resources (M)
 
-TODO rewrite
+TODO
 
 The `verbatim` resource type always has a format of `markua`. The way
 that `verbatim` resources are differentiated is via their `class` attribute.
@@ -6535,18 +6522,43 @@ If there are no rows in the body, no `<tbody>` is generated in HTML output:
 
 ## Table resources and CSV-format tables (M)
 
-TODO - rewrite to better discuss CSV
+Tables can be formatted either as Markua tables or, for tables which are local
+or web resources, as CSV-format tables. (CSV-format tables are not supported as
+inline resources, since they would result in too many false-positives.)
 
-### Table resource formats
+The type and format of a table can be specified in an attribute list as follows:
 
-Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)
+```
+{type: table, format: markua}
+![](some_markua_table.txt)
 
-* `markua` - Markua table - `.tbl`
-* `csv` - Comma-Separated Values table - `.csv`
+{type: table, format: csv}
+![](some_markua_table.txt)
+```
 
+The default type of a `csv` format resource is table, so the second example
+could also be written like this:
+
+```
+{format: csv}
+![](some_markua_table.txt)
+```
+
+However, the `.csv` file extension can also be used to provide the default
+format of `csv`, so this can also be written like this:
+
+```
+![](some_markua_table.csv)
+```
+
+Also, if no format is specified but the type is specified to `table`, the
+default is to assume a format of `markua`. So, the first example from above
+could also be written like this:
+
+```
+{type: table}
+![](some_markua_table.txt)
+```
 
 As shown in the Tables section, the syntax to insert a table in Markua is
 the identical syntax to that used by GFM. (That section is unchanged from the

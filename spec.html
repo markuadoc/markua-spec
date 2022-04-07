@@ -5808,27 +5808,17 @@ foo
 <h2 id="code-resources-m-" class="definition">
 <span class="number">7.6</span>Code resources (M)
 </h2>
-<p>TODO</p>
-<p>The following are the formats…</p>
-<p>The following sections list the various resource formats for each type of
-resource, along with the file extensions which make that format and type be
-inferred. Note that these file extensions are case-insensitive.</p>
-<p>Note that most code languages are not specified, and are guessed at with a format
-of <code>guess</code>. A Markua Processor typically leaves this decision about the language
-recognized to the syntax highlighter, such as Pygments.</p>
-<ul>
-<li><code>text</code> - Unformatted code (with no syntax highlighting)</li>
-<li><code>guess</code> - Formatted code, with the language guessed at - any other file
-extension not listed previously in the sections above</li>
-</ul>
 <p>Code can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.</p>
-<p>As discussed, code cannot have alt text. It’s just text. If any alt text is
-provided for a code resource, it is ignored.</p>
+<p>Code cannot have alt text. It’s just text. If any alt text is provided for a
+code resource, it is ignored.</p>
 <p>Markua specifies only one specific file extension to be associated with a type
 of <code>code</code>: the <code>.txt</code> extension, which is for the format of <code>text</code>. However,
 Markua Processors must interpret <strong>all</strong> unspecified file extensions as
 specifying a resource of type <code>code</code> with a format of <code>guess</code>.</p>
+<p>This way, the decision about the language recognized does not need to be done
+by the Markua Processor, but can instead be delegated to the syntax highlighter,
+such as Pygments.</p>
 <p>Regardless of whether syntax highlighting is supported and the programming
 language is detected, all code must be formatted as <code>monospaced text</code> by Markua
 Processors.</p>
@@ -6111,7 +6101,7 @@ requirement, nor is the choice of which continuation character is used.</p>
 <h2 id="verbatim-resources-m-" class="definition">
 <span class="number">7.7</span>Verbatim resources (M)
 </h2>
-<p>TODO rewrite</p>
+<p>TODO</p>
 <p>The <code>verbatim</code> resource type always has a format of <code>markua</code>. The way
 that <code>verbatim</code> resources are differentiated is via their <code>class</code> attribute.</p>
 <ul>
@@ -7397,18 +7387,31 @@ cells are inserted.  If there are greater, the excess is ignored:</p>
 <h2 id="table-resources-and-csv-format-tables-m-" class="definition">
 <span class="number">7.13</span>Table resources and CSV-format tables (M)
 </h2>
-<p>TODO - rewrite to better discuss CSV</p>
-<h3 id="table-resource-formats" class="definition">
-<span class="number">7.13.1</span>Table resource formats
-</h3>
-<p>Tables can be formatted either as Markua tables or, for tables which are
-local or web resources, as CSV-format tables. (CSV-format tables are not
-supported as inline resources, since they would result in too many
-false-positives.)</p>
-<ul>
-<li><code>markua</code> - Markua table - <code>.tbl</code></li>
-<li><code>csv</code> - Comma-Separated Values table - <code>.csv</code></li>
-</ul>
+<p>Tables can be formatted either as Markua tables or, for tables which are local
+or web resources, as CSV-format tables. (CSV-format tables are not supported as
+inline resources, since they would result in too many false-positives.)</p>
+<p>The type and format of a table can be specified in an attribute list as follows:</p>
+<pre><code>{type: table, format: markua}
+![](some_markua_table.txt)
+
+{type: table, format: csv}
+![](some_markua_table.txt)
+</code></pre>
+<p>The default type of a <code>csv</code> format resource is table, so the second example
+could also be written like this:</p>
+<pre><code>{format: csv}
+![](some_markua_table.txt)
+</code></pre>
+<p>However, the <code>.csv</code> file extension can also be used to provide the default
+format of <code>csv</code>, so this can also be written like this:</p>
+<pre><code>![](some_markua_table.csv)
+</code></pre>
+<p>Also, if no format is specified but the type is specified to <code>table</code>, the
+default is to assume a format of <code>markua</code>. So, the first example from above
+could also be written like this:</p>
+<pre><code>{type: table}
+![](some_markua_table.txt)
+</code></pre>
 <p>As shown in the Tables section, the syntax to insert a table in Markua is
 the identical syntax to that used by GFM. (That section is unchanged from the
 GFM spec, which is built on top of the CommonMark spec.)</p>

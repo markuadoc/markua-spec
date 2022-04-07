@@ -187,6 +187,7 @@ $(document).ready(function() {
 <li><a href="#resource-types-m-"><span class="number">5.3</span>Resource types (M)</a></li>
 <li><a href="#resource-formats-m-"><span class="number">5.4</span>Resource formats (M)</a></li>
 <li><a href="#resource-classes-m-"><span class="number">5.5</span>Resource classes (M)</a></li>
+<li><a href="#resource-locations-m-"><span class="number">5.6</span>Resource locations (M)</a></li>
 </ul>
 </li>
 <li><a href="#figures-and-spans-m-"><span class="number">6</span>Figures and spans (M)</a>
@@ -3507,6 +3508,93 @@ generated near the start of the book or course.</p>
 in groups (if the <code>list-figures</code> document setting is <code>groups</code>), the default is
 to group by the <code>type</code> of the resource. However, the <code>class</code> attribute
 can be used to override which list the resource appears in.</p>
+<h2 id="resource-locations-m-" class="definition">
+<span class="number">5.6</span>Resource locations (M)
+</h2>
+<p>The <strong>Location</strong> is the location of the resource, when encountered by the
+Markua Processor. There is no attribute for this; it is inferred from the
+location.</p>
+<ul>
+<li>An inline resource is included directly in a Markua manuscript file.</li>
+<li>A local resource is located in the <code>resources</code> directory which accompanies
+the Markua manuscript (or in a similar conceptual location for a web-based
+Markua Processor).</li>
+<li>A web resource is on the web, accessed via <code>http://</code> or <code>https://</code>.</li>
+</ul>
+<p>A resource is either considered a local, web or inline resource based on its
+location:</p>
+<p>Local Resource
+: The resource is stored along with the manuscript–either in a <code>resources</code>
+directory on a local filesystem, or uploaded to the same web service where the
+Markua document is being written.</p>
+<p>Web Resource
+: The resource is referred to via an <code>http</code> or <code>https</code> URL.</p>
+<p>Inline Resource
+: The resource is defined right in the body of a Markua document.</p>
+<h3 id="local-resources" class="definition">
+<span class="number">5.6.1</span>Local resources
+</h3>
+<p>If local resources are used, all local resources must be stored inside a
+<code>resources</code> directory, or one of its subdirectories. The <code>resources</code> directory
+is not part of the path to the resource.</p>
+<p>Here’s how the paths to local resources work:</p>
+<ol>
+<li>An image called <code>foo.jpg</code> in the <code>resources</code> directory should be referred to
+as <code>![](foo.jpg)</code>, but can also be referred to as <code>![](resources/foo.jpg)</code>.</li>
+<li>An image called <code>bar.png</code> in a subdirectory <code>images</code> of the <code>resources</code>
+directory should be referred to as <code>![](images/bar.png)</code>, but can also be
+referred to as <code>![](resources/images/foo.jpg)</code>.</li>
+<li>For security reasons, leading slashes <code>/</code> and navigating upward (<code>../</code>) are
+not allowed: <code>![](/foo.jpg)</code>, <code>![](/images/bar.png)</code> and <code>![](../foo.jpg)</code>
+are all illegal.</li>
+</ol>
+<p>The reason that paths can either include or omit the resources directory is
+simple: including it makes it a simple relative path, which means that
+Markdown-aware tools that support, say, external images will just work. However,
+omitting it is nice to type, so this is something which should be supported as
+well. And the reason the resources directory exists is to keep the Markua
+manuscript file(s) separate from the resources, to reduce clutter.</p>
+<p>Nested directory trees work as well. A file called <code>foo.rb</code> in a
+<code>ch1/examples/ruby</code> directory tree inside the <code>resources</code> directory is referenced
+as <code>![](ch1/examples/ruby/foo.rb)</code> or as <code>![](resources/ch1/examples/ruby/foo.rb)</code>.</p>
+<p>Markua does not specify whether there are any subdirectories of the <code>resources</code>
+directory, or what their names are. Since any subdirectories have their names as
+part of the path to the resource, authors can do whatever they want. For example,
+you can create subdirectories of the <code>resources</code> directory for different types of
+resource, such as <code>audio</code>, <code>code</code>, <code>images</code>, etc., but you can also just put them
+all in the <code>resources</code> directory together. To be clear: the names of the
+directories have no meaning, and do not restrict the formats of what can go inside
+them.</p>
+<p>If you are using a hosted service to write in Markua, this service can store
+resources wherever it wants. However, if they provide a download (say as a zip
+file) they should create the resources directory and provide the uploaded
+resources in that directory. If a nested structure is used, it should be exported
+that way–if a web service produces paths which reference images inside an images
+directory (e.g. as <code>images/foo.png</code>), then the zip file containing an export
+should contain a <code>resources</code> directory which contains an <code>images</code> subdirectory
+with the images.</p>
+<h3 id="web-resources" class="definition">
+<span class="number">5.6.2</span>Web resources
+</h3>
+<p>If web resources are supported, both <code>http:</code> and <code>https:</code> resources should be
+supported.</p>
+<p>Web resources are identified by the absolute URL of the resource on the internet.</p>
+<h3 id="inline-resources" class="definition">
+<span class="number">5.6.3</span>Inline resources
+</h3>
+<p>Certain types of resources can be inserted inline in a Markua document:</p>
+<ul>
+<li><code>code</code></li>
+<li><code>image</code> (of SVG format only)</li>
+<li><code>list</code></li>
+<li><code>math</code> (either <code>latexmath</code> or <code>asciimath</code>)</li>
+<li><code>table</code></li>
+<li><code>verbatim</code></li>
+</ul>
+<p>Since an SVG image is just XML text, it can be contained inline in the text of a
+Markua document. This is not true for binary resources like PNG or JPEG images
+or any type of audio or video file–these can only be local or web resources.</p>
+<p>The syntax for SVG images is discussed later.</p>
 </div>
 <div class="extension">
 <h1 id="figures-and-spans-m-" class="definition">
@@ -6324,7 +6412,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6763,7 +6851,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6787,7 +6875,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16269,7 +16357,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

@@ -2666,6 +2666,7 @@ generate-sample: true
 generate-community: true
 generate-network: true
 list-figures: groups
+figure-number-format: chapter
 }
 
 # Chapter One
@@ -2788,6 +2789,33 @@ is not just useful to differentiate types of poetry, by the way: this approach
 can be used to automatically produce a `List of Lemmas`, `List of Theorems`,
 etc.
 
+The default document settings are:
+
+```
+{
+  list-figures: combined
+  figure-number-format: sequential
+  ...
+}
+```
+
+This produces figures named `Figure 1, Figure 2, Figure 3, ...`.
+
+Another good choice is the following document settings:
+
+```
+{
+  list-figures: groups
+  figure-number-format: chapter
+}
+```
+
+This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
+`Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1`.
+
+* When `list-figures` are listed in `groups`, they each have their own numbers.
+* When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
+
 
 
 ## Settings which apply to books and courses (M)
@@ -2826,19 +2854,11 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
-`include-page-numbers-in-references`
-: When a smart crosslink to a figure reference is inserted with `#f`, this
-setting determines how the reference is displayed. If true (the default), the
-text includes the page number (e.g. "Figure 8.2: Anatomy of a Squirrel on page
-42") when inserted in a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of
-a Squirrel". This setting has no effect on EPUB and MOBI, which never include
-page numbers in their references (since the text is resizable).
-
-`italicize-underlines`
-: `true` or `false`. The default value is `true`. If `italicize-underlines` is
-`true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
-`false`, then `_this_` is underlined while `*this*` is italic. This is discussed
-[here](#underline-markua-extension-).
+`figure-number-format`
+: `chapter` or `sequential`. The default is `sequential`. If `sequential`, you
+get numbering like `Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you 
+get numbering like `Figure 1.1, Figure 1.2, Figure 4.1, ...`. This setting is
+orthogonal to the `list-figures` setting.
 
 `generate-community`
 : `true` or `false`. The default value is `true`. If `generate-community` is
@@ -2862,6 +2882,20 @@ are any `{network: true}` directives.
 content which is included in the sample with `{sample: true}` directives.
 If `generate-sample` is `false`, then a sample book or course is not generated,
 regardless of whether there are any `{sample: true}` directives.
+
+`include-page-numbers-in-references`
+: When a smart crosslink to a figure reference is inserted with `#f`, this
+setting determines how the reference is displayed. If true (the default), the
+text includes the page number (e.g. "Figure 8.2: Anatomy of a Squirrel on page
+42") when inserted in a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of
+a Squirrel". This setting has no effect on EPUB and MOBI, which never include
+page numbers in their references (since the text is resizable).
+
+`italicize-underlines`
+: `true` or `false`. The default value is `true`. If `italicize-underlines` is
+`true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
+`false`, then `_this_` is underlined while `*this*` is italic. This is discussed
+[here](#underline-markua-extension-).
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
@@ -16453,6 +16487,11 @@ adds `{type: verbatim}` to the resource.
 : When used as the first character on a line by itself above a paragraph, adds
 a `{class: continued-para}`
 
+three backticks to start a resource
+: `{format: guess}`
+
+three tildes to start a resource
+: `{format: text}`
 </div>
 
 

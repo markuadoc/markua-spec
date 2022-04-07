@@ -3054,6 +3054,7 @@ generate-sample: true
 generate-community: true
 generate-network: true
 list-figures: groups
+figure-number-format: chapter
 }
 
 # Chapter One
@@ -3157,6 +3158,26 @@ can be used to automatically produce a <code>List of Lemmas</code>, <code>List o
 etc.</p>
 </li>
 </ol>
+<p>The default document settings are:</p>
+<pre><code>{
+  list-figures: combined
+  figure-number-format: sequential
+  ...
+}
+</code></pre>
+<p>This produces figures named <code>Figure 1, Figure 2, Figure 3, ...</code>.</p>
+<p>Another good choice is the following document settings:</p>
+<pre><code>{
+  list-figures: groups
+  figure-number-format: chapter
+}
+</code></pre>
+<p>This produces figures like <code>Listing 1.1, Listing 1.2, Listing 4.1</code> and
+<code>Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1</code>.</p>
+<ul>
+<li>When <code>list-figures</code> are listed in <code>groups</code>, they each have their own numbers.</li>
+<li>When the <code>figure-number-format</code> is <code>chapter</code>, the numbering is <code>chapter.n</code>.</li>
+</ul>
 <h2 id="settings-which-apply-to-books-and-courses-m-" class="definition">
 <span class="number">4.3</span>Settings which apply to books and courses (M)
 </h2>
@@ -3188,18 +3209,11 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
-<p><code>include-page-numbers-in-references</code>
-: When a smart crosslink to a figure reference is inserted with <code>#f</code>, this
-setting determines how the reference is displayed. If true (the default), the
-text includes the page number (e.g. “Figure 8.2: Anatomy of a Squirrel on page
-42”) when inserted in a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of
-a Squirrel”. This setting has no effect on EPUB and MOBI, which never include
-page numbers in their references (since the text is resizable).</p>
-<p><code>italicize-underlines</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
-<code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
-<code>false</code>, then <code>_this_</code> is underlined while <code>*this*</code> is italic. This is discussed
-<a href="#underline-markua-extension-">here</a>.</p>
+<p><code>figure-number-format</code>
+: <code>chapter</code> or <code>sequential</code>. The default is <code>sequential</code>. If <code>sequential</code>, you
+get numbering like <code>Figure 1, Figure 2, Figure 3, ...</code>. If <code>chapter</code>, you
+get numbering like <code>Figure 1.1, Figure 1.2, Figure 4.1, ...</code>. This setting is
+orthogonal to the <code>list-figures</code> setting.</p>
 <p><code>generate-community</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
 <code>true</code>, then a community edition book or course is generated, which is composed
@@ -3220,6 +3234,18 @@ are any <code>{network: true}</code> directives.</p>
 content which is included in the sample with <code>{sample: true}</code> directives.
 If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
 regardless of whether there are any <code>{sample: true}</code> directives.</p>
+<p><code>include-page-numbers-in-references</code>
+: When a smart crosslink to a figure reference is inserted with <code>#f</code>, this
+setting determines how the reference is displayed. If true (the default), the
+text includes the page number (e.g. “Figure 8.2: Anatomy of a Squirrel on page
+42”) when inserted in a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of
+a Squirrel”. This setting has no effect on EPUB and MOBI, which never include
+page numbers in their references (since the text is resizable).</p>
+<p><code>italicize-underlines</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
+<code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
+<code>false</code>, then <code>_this_</code> is underlined while <code>*this*</code> is italic. This is discussed
+<a href="#underline-markua-extension-">here</a>.</p>
 <p><code>lang</code>
 : The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
 language code of the language that the Markua document is written in. The
@@ -19298,6 +19324,10 @@ adds <code>{type: verbatim}</code> to the resource.</p>
 <p><code>^</code>
 : When used as the first character on a line by itself above a paragraph, adds
 a <code>{class: continued-para}</code></p>
+<p>three backticks to start a resource
+: <code>{format: guess}</code></p>
+<p>three tildes to start a resource
+: <code>{format: text}</code></p>
 </div>
 <h2 id="textual-content" class="definition">
 <span class="number">10.24</span>Textual content

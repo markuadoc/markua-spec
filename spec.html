@@ -3389,6 +3389,33 @@ documented for completeness:</p>
 <p>This is gross, but the reason it is supported is since resources can be inserted
 in a sentence, and attribute lists (e.g. for index entries) can be added this
 way.</p>
+<h3 id="the-attribute-list-takes-precedence" class="definition">
+<span class="number">5.1.1</span>The attribute list takes precedence
+</h3>
+<p>It is always an error to specify an attribute both in the attribute list for a
+resource and in the syntactic sugar locations, either after the backticks or in
+the square brackets.</p>
+<p>However, if this is done, then the value in the attribute list takes precedence,
+and the Markua Processor should report the error to the author in a list of
+errors and warnings. (Errors and warnings must never be output by a Markua
+Processor in the book or course itself, but must always presented in a separate
+list for the author’s use only.)</p>
+<p>In the following figure, the format is <code>text</code> not <code>ruby</code>:</p>
+<pre><code>{format: text}
+```ruby
+puts &quot;hello world&quot;
+```
+</code></pre>
+<p>In the following figure, the alt text would be “foo” not “bar”:</p>
+<pre><code>{alt: foo}
+![bar](foo.png)
+</code></pre>
+<p>In the following figure, the title text would be “foo” not “bar”:</p>
+<pre><code>{title: foo}
+![](foo.png &quot;bar&quot;)
+</code></pre>
+<p>Again, the Markua Processor should treat all of these as errors, and output them
+in a list of errors and warnings.</p>
 <h2 id="common-resource-attributes-m-" class="definition">
 <span class="number">5.2</span>Common resource attributes (M)
 </h2>
@@ -6448,7 +6475,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6887,7 +6914,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6911,7 +6938,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16393,7 +16420,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

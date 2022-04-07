@@ -3080,6 +3080,44 @@ This is gross, but the reason it is supported is since resources can be inserted
 in a sentence, and attribute lists (e.g. for index entries) can be added this
 way.
 
+### The attribute list takes precedence
+
+It is always an error to specify an attribute both in the attribute list for a
+resource and in the syntactic sugar locations, either after the backticks or in
+the square brackets.
+
+However, if this is done, then the value in the attribute list takes precedence,
+and the Markua Processor should report the error to the author in a list of
+errors and warnings. (Errors and warnings must never be output by a Markua
+Processor in the book or course itself, but must always presented in a separate
+list for the author's use only.)
+
+In the following figure, the format is `text` not `ruby`:
+
+~~~
+{format: text}
+```ruby
+puts "hello world"
+```
+~~~
+
+In the following figure, the alt text would be "foo" not "bar":
+
+~~~
+{alt: foo}
+![bar](foo.png)
+~~~
+
+In the following figure, the title text would be "foo" not "bar":
+
+~~~
+{title: foo}
+![](foo.png "bar")
+~~~
+
+Again, the Markua Processor should treat all of these as errors, and output them
+in a list of errors and warnings.
+
 
 
 ## Common resource attributes (M)

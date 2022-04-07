@@ -7,38 +7,7 @@ A resource which is inserted as a figure can have a figure title.
 
 ##### Figure alt text
 
-##### The figure attribute list takes precedence
 
-It is always an error to specify an attribute both in the attribute list for a
-figure and in the syntactic sugar locations, either after the backticks or in the
-square brackets.
-
-However, if this is done, then the value in the attribute list takes precedence.
-
-In the following figure, the format is `text` not `ruby`:
-
-~~~
-{format: text}
-```ruby
-puts "hello world"
-```
-~~~
-
-In the following figure, the alt text would be "foo" not "bar":
-
-~~~
-{alt: foo}
-![bar](foo.png)
-~~~
-
-In the following figure, the title text would be "foo" not "bar":
-
-~~~
-{title: foo}
-![](foo.png "bar")
-~~~
-
-Again, the Markua Processor should treat all of these as an error.
 
 #### Spans
 

@@ -176,7 +176,9 @@ $(document).ready(function() {
 <li><a href="#resources-m-"><span class="number">4</span>Resources (M)</a>
 <ul>
 <li><a href="#resource-attributes-m-"><span class="number">4.1</span>Resource attributes (M)</a></li>
-<li><a href="#common-resource-attributes-m-"><span class="number">4.2</span>Common Resource Attributes (M)</a></li>
+<li><a href="#common-resource-attributes-m-"><span class="number">4.2</span>Common resource attributes (M)</a></li>
+<li><a href="#resource-types-m-"><span class="number">4.3</span>Resource types (M)</a></li>
+<li><a href="#resource-formats-m-"><span class="number">4.4</span>Resource formats (M)</a></li>
 </ul>
 </li>
 <li><a href="#figures-and-spans-m-"><span class="number">5</span>Figures and spans (M)</a>
@@ -3322,7 +3324,7 @@ documented for completeness:</p>
 in a sentence, and attribute lists (e.g. for index entries) can be added this
 way.</p>
 <h2 id="common-resource-attributes-m-" class="definition">
-<span class="number">4.2</span>Common Resource Attributes (M)
+<span class="number">4.2</span>Common resource attributes (M)
 </h2>
 <p>The supported attributes vary based on the type of resource, but <strong>all</strong>
 resources support the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes.</p>
@@ -3349,6 +3351,68 @@ This text is also displayed for the figure wherever the figure is listed
 <p><code>type</code>
 : This is the resource type. This is usually inferred from the format instead of
 being specified.</p>
+<h2 id="resource-types-m-" class="definition">
+<span class="number">4.3</span>Resource types (M)
+</h2>
+<p>There are eight types of resources:</p>
+<ol>
+<li><code>audio</code></li>
+<li><code>code</code></li>
+<li><code>iframe</code></li>
+<li><code>image</code></li>
+<li><code>math</code></li>
+<li><code>table</code></li>
+<li><code>verbatim</code></li>
+<li><code>video</code></li>
+</ol>
+<p>Each type of resource has a number of supported formats. Any of the resource
+types can be inserted as a local resource or web resource, and many of the
+resource types can also be inserted as an inline resource.</p>
+<p>The <code>code</code>, <code>image</code> and <code>table</code> resource types are an extension and a
+generalization of what is already supported in Markdown; the <code>audio</code>, <code>iframe</code>,
+<code>math</code>, <code>verbatim</code> and <code>video</code> resource types are new.</p>
+<p>Either way, each type of resource has a number of supported formats. Any of
+the resource types can be inserted as a local resource or web resource,
+and many of the resource types can also be inserted as an inline resource.</p>
+<p>To be clear: resources are <em>not</em> parsed as plain <a href="#textual-content">textual
+content</a>; instead, they are parsed according to the rules that
+govern the parsing of resources.</p>
+<h2 id="resource-formats-m-" class="definition">
+<span class="number">4.4</span>Resource formats (M)
+</h2>
+<p>The <strong>Format</strong> is the format of the resource. It can be specified with the
+<code>type</code> attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.</p>
+<p>Both the type and the format can be specified in an attribute list, by the
+respective <code>type</code> and <code>format</code> attributes.</p>
+<p>The type and the format can also be inferred from the file extension and, in the
+case of web resources, the URL.</p>
+<p>Markua Processors must interpret all unspecified file extensions as specifying a
+resource of type <code>code</code> with a format of <code>guess</code>, unless the resource is a web
+resource.</p>
+<p>If the type and format are not specified and the resource is a web resource, the
+Markua Processor may use the domain to decide what type of resource to assume.
+For example, a domain of <code>youtube.com</code> may be assumed to be of type <code>video</code>, a
+domain of <code>instagram.com</code> may be assumed to be of type <code>image</code>, and a domain of
+<code>github.com</code> may be assumed to be of type <code>code</code>.</p>
+<p>If the type is not specified in the attribute list, the format determines the
+type. The formats can either be specified by the <code>format</code> attribute or (in most
+cases) inferred from the file extension for local and web resources. (Inline
+resources obviously have no file extension, since they are contained in the body
+of a Markua document.)</p>
+<p>As an author, all you typically do is provide the correct file extension for a
+local resource or set the format in the attribute list. Markua recognizes the
+format, and uses it to determine the type. If the format is unrecognized, then
+the resource is treated as a resource of type <code>code</code> and with a format of
+<code>guess</code>.</p>
+<p>It’s important to emphasize that the type and format of a resource can be
+overridden using an attribute list. The file extensions just set the default
+type and format that are inferred.</p>
+<p>In rare instances, it is useful to override the <code>type</code> and <code>format</code> which have
+been inferred by the Markua Processor based on the file extension of the
+resource. This is done by specifying a type and/or format in the attribute list
+of the resource.</p>
 </div>
 <div class="extension">
 <h1 id="figures-and-spans-m-" class="definition">

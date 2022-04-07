@@ -3004,7 +3004,7 @@ way.
 
 
 
-## Common Resource Attributes (M)
+## Common resource attributes (M)
 
 The supported attributes vary based on the type of resource, but **all**
 resources support the `class`, `format`, `title` and `type` attributes.
@@ -3036,6 +3036,86 @@ This text is also displayed for the figure wherever the figure is listed
 `type`
 : This is the resource type. This is usually inferred from the format instead of
 being specified.
+
+
+
+## Resource types (M)
+
+There are eight types of resources:
+
+1. `audio`
+2. `code`
+3. `iframe`
+4. `image`
+5. `math`
+6. `table`
+7. `verbatim`
+8. `video`
+
+Each type of resource has a number of supported formats. Any of the resource
+types can be inserted as a local resource or web resource, and many of the
+resource types can also be inserted as an inline resource.
+
+The `code`, `image` and `table` resource types are an extension and a
+generalization of what is already supported in Markdown; the `audio`, `iframe`,
+`math`, `verbatim` and `video` resource types are new.
+
+Either way, each type of resource has a number of supported formats. Any of
+the resource types can be inserted as a local resource or web resource,
+and many of the resource types can also be inserted as an inline resource.
+
+To be clear: resources are *not* parsed as plain [textual
+content](#textual-content); instead, they are parsed according to the rules that
+govern the parsing of resources.
+
+
+
+## Resource formats (M)
+
+The **Format** is the format of the resource. It can be specified with the
+`type` attribute, or inferred from the file extension (discussed below).
+This is important information to help the Markua Processor handle the
+resource correctly.
+
+Both the type and the format can be specified in an attribute list, by the
+respective `type` and `format` attributes.
+
+The type and the format can also be inferred from the file extension and, in the
+case of web resources, the URL.
+
+Markua Processors must interpret all unspecified file extensions as specifying a
+resource of type `code` with a format of `guess`, unless the resource is a web
+resource.
+
+If the type and format are not specified and the resource is a web resource, the
+Markua Processor may use the domain to decide what type of resource to assume.
+For example, a domain of `youtube.com` may be assumed to be of type `video`, a
+domain of `instagram.com` may be assumed to be of type `image`, and a domain of
+`github.com` may be assumed to be of type `code`.
+
+If the type is not specified in the attribute list, the format determines the
+type. The formats can either be specified by the `format` attribute or (in most
+cases) inferred from the file extension for local and web resources. (Inline
+resources obviously have no file extension, since they are contained in the body
+of a Markua document.)
+
+As an author, all you typically do is provide the correct file extension for a
+local resource or set the format in the attribute list. Markua recognizes the
+format, and uses it to determine the type. If the format is unrecognized, then
+the resource is treated as a resource of type `code` and with a format of
+`guess`.
+
+It's important to emphasize that the type and format of a resource can be
+overridden using an attribute list. The file extensions just set the default
+type and format that are inferred.
+
+In rare instances, it is useful to override the `type` and `format` which have
+been inferred by the Markua Processor based on the file extension of the
+resource. This is done by specifying a type and/or format in the attribute list
+of the resource.
+
+
+
 
 
 </div>

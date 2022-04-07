@@ -7620,9 +7620,9 @@ web resources can have a <code>csv</code> format, instead of the default <code>m
 <p>For a <code>csv</code>-format table, the existence of a header and/or footer row cannot be
 inferred from the data, and must be specified in an attribute list. The default
 value of <code>header</code> is <code>true</code>, and the default value of <code>footer</code> is <code>false</code>.</p>
-<p>Also, as discussed, a <code>csv</code> table can have <code>crop-start</code> and <code>crop-end</code>
-attributes, for easily presenting a subset of a larger CSV. If <code>crop-start</code> and
-<code>crop-end</code> are used with <code>header</code> of true, the header should be displayed by the
+<p>Also, as discussed, a <code>csv</code> table can have <code>rows</code> and <code>columns</code>
+attributes, for easily presenting a subset of a larger CSV. If <code>rows</code> and
+<code>columns</code> are used with <code>header</code> of true, the header should be displayed by the
 Markua Processor.</p>
 <p>Examples:</p>
 <pre><code>{type: table, format: csv}
@@ -7640,7 +7640,7 @@ Markua Processor.</p>
 {type: table, format: csv, header: true, footer: true}
 ![Canadian Census Data](census.csv)
 
-{type: table, format: csv, header: true, footer: true, crop-start: 5, crop-end: 10}
+{type: table, format: csv, header: true, footer: true, rows: 1..5, columns: 2,3}
 ![Canadian Census Data](census.csv)
 </code></pre>
 </div>

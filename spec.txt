@@ -3007,31 +3007,43 @@ way.
 ## Common resource attributes (M)
 
 The supported attributes vary based on the type of resource, but **all**
-resources support the `class`, `format`, `title` and `type` attributes.
+resources support the `type`, `format`, `class` and `title` attributes.
 
-As such, these four attributes are discussed here, instead of on the specific 
-resource types later.
+As you recall, resources vary in four ways:
+
+1. Type
+2. Format
+3. Class
+4. Location
+
+The first three of these ways that resources vary are specified via the
+`type`, `format` and `class` attributes. The fourth way, location, is discussed
+later.
+
+These are the attributes that resources all share:
 
 `class`
 : All attribute lists, including those for resources, support a `class`
-attribute. When used on resources, this is the class of the resources. This can
+attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
 figures by classes. Resources with titles are treated as figures; this is
-discussed extensively in the next section.
+discussed extensively later.
 
 `format`
 : This is the resource format. Different resource types have different legal
-values for format.
+values for format. Specific resource types and formats are discussed throughout
+the rest of the spec.
 
 `title`
-: This is text which is shown near the figure, typically above or below it. A
-Markua Processor can choose where to position titles based on any criteria it
-chooses. For example, a Markua Processor can position all titles above or
-below figures, or use a different behaviour based on the resource format (e.g.
-table titles above, image titles below). Note that the figure title itself
-may contain the Markua text formatting specified earlier (e.g. bold, italic).
-This text is also displayed for the figure wherever the figure is listed
-(e.g. List of Illustrations, Table of Tables, etc.).
+: If a resource has a title, it is a figure. The title is text which is shown
+near the figure, typically above or below it. A Markua Processor can choose
+where to position titles based on any criteria it chooses. For example, a Markua
+Processor can position all titles above or below figures, or use a different
+behaviour based on the resource format (e.g. table titles above, image titles
+below). Note that the figure title itself may contain the Markua text formatting
+specified earlier (e.g. bold, italic). This text is also displayed for the
+figure wherever the figure is listed (e.g. List of Illustrations, Table of
+Tables, etc.).
 
 `type`
 : This is the resource type. This is usually inferred from the format instead of

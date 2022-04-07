@@ -1551,7 +1551,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>
@@ -6465,7 +6465,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6904,7 +6904,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6928,7 +6928,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16423,7 +16423,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">
@@ -17255,24 +17255,20 @@ backslash-escape the opening <code>[</code>:</p>
 <h2 id="image-resource-attributes-m-" class="definition">
 <span class="number">10.5</span>Image resource attributes (M)
 </h2>
-<p>TODO</p>
-<h3 id="image-resource-formats" class="definition">
-<span class="number">10.5.1</span>Image resource formats
-</h3>
-<ul>
-<li><code>jpeg</code> - JPEG image - <code>.jpg</code> or <code>.jpeg</code></li>
-<li><code>gif</code> - GIF image - <code>.gif</code></li>
-<li><code>png</code> - PNG image - <code>.png</code></li>
-<li><code>svg</code> - SVG image - <code>.svg</code></li>
-<li><code>svgz</code> - SVG image (zipped) - <code>.svgz</code></li>
-</ul>
 <p>As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
 from the CommonMark spec.) It is, however, also consistent with the syntax that
 is used for other resource types.</p>
-<p>As discussed in the Resources section, Markua uses the image syntax for all
-resource types. Markua also reinterprets images as being a resource. This is
-important for the following reason:</p>
+<p>The following are the image resource formats and the file extensions which</p>
+<p>| Image Format | Description | File Extensions   |
+|–––––––|———––|—————––|
+| <code>jpeg</code>       | JPEG image  | <code>.jpg</code> or <code>.jpeg</code> |
+| <code>gif</code>        | GIF image   | <code>.gif</code>            |
+| <code>png</code>        | PNG image   | <code>.png</code>            |
+| <code>svg</code>        | SVG image   | <code>.svg</code>            |
+| <code>svgz</code>       | SVG image (zipped) | <code>.svgz</code>    |</p>
+<p>Markua uses the image syntax for all resource types. Markua also reinterprets
+images as being a resource. This is important for the following reason:</p>
 <p>Resources can have attribute lists.</p>
 <p>Therefore, since images are resources in Markua, images can have attribute
 lists. These attributes are used to do basic image formatting.</p>

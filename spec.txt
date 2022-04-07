@@ -14389,24 +14389,23 @@ If you want a link after a literal `!`, backslash-escape the
 
 ## Image resource attributes (M)
 
-TODO
-
-### Image resource formats
-
-* `jpeg` - JPEG image - `.jpg` or `.jpeg`
-* `gif` - GIF image - `.gif`
-* `png` - PNG image - `.png`
-* `svg` - SVG image - `.svg`
-* `svgz` - SVG image (zipped) - `.svgz`
-
 As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
 from the CommonMark spec.) It is, however, also consistent with the syntax that
 is used for other resource types.
 
-As discussed in the Resources section, Markua uses the image syntax for all
-resource types. Markua also reinterprets images as being a resource. This is
-important for the following reason:
+The following are the image resource formats and the file extensions which 
+
+| Image Format | Description | File Extensions   |
+|--------------|-------------|-------------------|
+| `jpeg`       | JPEG image  | `.jpg` or `.jpeg` |
+| `gif`        | GIF image   | `.gif`            |
+| `png`        | PNG image   | `.png`            |
+| `svg`        | SVG image   | `.svg`            |
+| `svgz`       | SVG image (zipped) | `.svgz`    |
+
+Markua uses the image syntax for all resource types. Markua also reinterprets
+images as being a resource. This is important for the following reason:
 
 Resources can have attribute lists.
 

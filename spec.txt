@@ -3142,7 +3142,7 @@ Markua Processor.
 Tables or Table of Figures, if they are generated for the book. This text
 should also be a crosslink to the title inserted near the figure itself.
 
-The title for a figure can provided in one of two ways:
+The title for a resource used as a figure can provided in one of two ways:
 
 1. In quotes after the filename or URL of a local or web resource.
    ~~~
@@ -3171,11 +3171,8 @@ puts "hello world"
 
 ## Resource alt text (M)
 
-TODO
-
-A figure can have alt text, as long as the type of resource being inserted
-supports alt text. The resource location does not matter: local, web and inline
-resources all support alt text.
+A resource can have alt text. The resource location does not matter: local, web
+and inline resources all support alt text.
 
 Alt text is text which is intended to take the place of the resource if the
 resource itself cannot be seen. In the case of images, the obvious use case is
@@ -3196,20 +3193,19 @@ You can also use an attribute list:
 ![](fruit.jpg)
 ~~~
 
-The alt text should **not** have the same content as the figure title, if the
-figure title is present. (Imagine the annoyance for someone with a visual
-disability having their screen reader read identical alt text and figure titles
-to them throughout an entire book!)
+The alt text should **not** have the same content as the resource figure title,
+if the resource title is present. (Imagine the annoyance for someone with a
+visual disability having their screen reader read identical alt text and figure
+titles to them throughout an entire book!)
 
-Instead, the alt text should be descriptive of the image content, while the figure
-title can be more creative. For example, a figure title may be "Washington
-Crossing the Delaware" and the alt text could be "Denzel Washington on a boat in
-a river." Having good alt text would enable readers who cannot see the image to
-still get the joke which the figure title makes.
+Instead, the alt text should be descriptive of the image content, while the
+resource figure title can be more creative. For example, a figure title may be
+"Washington Crossing the Delaware" and the alt text could be "Denzel Washington
+on a boat in a river." Having good alt text would enable readers who cannot see
+the image to still get the joke which the figure title makes.
 
-##### Figure titles and alt text together
-
-These are some examples of figures with both alt text and a figure title:
+Figure titles and alt text can, and should, be both added to resources. These
+are some examples of resources with both alt text and a figure title:
 
 ~~~
 ![a red apple](mac.jpg "The Original Mac")

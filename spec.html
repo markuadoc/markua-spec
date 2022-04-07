@@ -3447,7 +3447,7 @@ Markua Processor.</li>
 Tables or Table of Figures, if they are generated for the book. This text
 should also be a crosslink to the title inserted near the figure itself.</li>
 </ol>
-<p>The title for a figure can provided in one of two ways:</p>
+<p>The title for a resource used as a figure can provided in one of two ways:</p>
 <ol>
 <li>In quotes after the filename or URL of a local or web resource.
 <pre><code>![](algorithm.rb &quot;My Amazing Algorithm&quot;)
@@ -3471,10 +3471,8 @@ puts &quot;hello world&quot;
 <h2 id="resource-alt-text-m-" class="definition">
 <span class="number">5.4</span>Resource alt text (M)
 </h2>
-<p>TODO</p>
-<p>A figure can have alt text, as long as the type of resource being inserted
-supports alt text. The resource location does not matter: local, web and inline
-resources all support alt text.</p>
+<p>A resource can have alt text. The resource location does not matter: local, web
+and inline resources all support alt text.</p>
 <p>Alt text is text which is intended to take the place of the resource if the
 resource itself cannot be seen. In the case of images, the obvious use case is
 for readers with visual disabilities who are using a screen reader, but it also
@@ -3487,19 +3485,17 @@ images, audio and video, and which may have a hard time displaying math.</p>
 <pre><code>{alt: &quot;a red apple, possibly a McIntosh or Spartan&quot;}
 ![](fruit.jpg)
 </code></pre>
-<p>The alt text should <strong>not</strong> have the same content as the figure title, if the
-figure title is present. (Imagine the annoyance for someone with a visual
-disability having their screen reader read identical alt text and figure titles
-to them throughout an entire book!)</p>
-<p>Instead, the alt text should be descriptive of the image content, while the figure
-title can be more creative. For example, a figure title may be “Washington
-Crossing the Delaware” and the alt text could be “Denzel Washington on a boat in
-a river.” Having good alt text would enable readers who cannot see the image to
-still get the joke which the figure title makes.</p>
-<h5 id="figure-titles-and-alt-text-together" class="definition">
-<span class="number">5.4</span>Figure titles and alt text together
-</h5>
-<p>These are some examples of figures with both alt text and a figure title:</p>
+<p>The alt text should <strong>not</strong> have the same content as the resource figure title,
+if the resource title is present. (Imagine the annoyance for someone with a
+visual disability having their screen reader read identical alt text and figure
+titles to them throughout an entire book!)</p>
+<p>Instead, the alt text should be descriptive of the image content, while the
+resource figure title can be more creative. For example, a figure title may be
+“Washington Crossing the Delaware” and the alt text could be “Denzel Washington
+on a boat in a river.” Having good alt text would enable readers who cannot see
+the image to still get the joke which the figure title makes.</p>
+<p>Figure titles and alt text can, and should, be both added to resources. These
+are some examples of resources with both alt text and a figure title:</p>
 <pre><code>![a red apple](mac.jpg &quot;The Original Mac&quot;)
 
 {alt: &quot;a red apple&quot;, title: &quot;The Original Mac&quot;}
@@ -6487,7 +6483,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6926,7 +6922,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6950,7 +6946,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16432,7 +16428,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

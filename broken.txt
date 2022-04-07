@@ -2,44 +2,6 @@
 
 # Resources (M)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-) This enables an author
-to have, say, a List of Theorems, List of Code Samples, List of Poems, or a
-List of Sonnets, produced entirely dynamically based on the values of the
-`class` attribute, instead of just a `List of Figures`. See the Document
-Settings section for more information.
-
-
-
-To be clear: other than the `none` value, there is nothing magical about the
-values of the `class` attribute. An author can set it to whatever they want.
-
-
-list-figures-by-class : true or false. The default value is true. 
-
-If no `class` attribute is provided and a list of figures is being generated,
-then 
-
-
-
-determines
-
-
 The **Class** determines whether, and how, the resource is presented in a
 particular list of resources near the beginning of the book. The `span`
 class is special, in that it never shows up in a list of resources. All other

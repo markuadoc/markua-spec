@@ -2773,6 +2773,11 @@ localization or for multiple words) when building the list(s) of figures near
 the beginning of the book. This can be used to automatically produce a `List of
 Lemmas`, `List of Theorems`, `List of Poems`, `List of Code Samples`, etc.
 
+In this case, if a figure has no `class` attribute, it is included in a List of
+Figures (appropriately localized into the language of the book, of course).
+This way, you only need to provide a `class` attribute for resources where you
+want to include them in a specific class.
+
 If `list-figures` is `none`, then no lists of figures are produced.
 
 
@@ -3207,7 +3212,11 @@ generated near the start of the book or course.
 
 This can be further customized by the `class` attribute.
 
+If a resource has a `title` and thus is a figure, and if figures are listed
+grouped by classes (if the `list-figures` document setting is `grouped`), the
+`class` attribute determines which list the resource appears in.
 
+So, for example, if you want all images in a book 
 
 </div>
 

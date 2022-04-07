@@ -3142,6 +3142,10 @@ default, List of Figures, ordered by their appearance in the manuscript.</p>
 their <code>class</code> attribute (with appropriate modifications to the class name for
 localization or for multiple words) when building the list(s) of figures near
 the beginning of the book. This can be used to automatically produce a <code>List of Lemmas</code>, <code>List of Theorems</code>, <code>List of Poems</code>, <code>List of Code Samples</code>, etc.</p>
+<p>In this case, if a figure has no <code>class</code> attribute, it is included in a List of
+Figures (appropriately localized into the language of the book, of course).
+This way, you only need to provide a <code>class</code> attribute for resources where you
+want to include them in a specific class.</p>
 <p>If <code>list-figures</code> is <code>none</code>, then no lists of figures are produced.</p>
 <h2 id="settings-which-apply-to-books-and-courses-m-" class="definition">
 <span class="number">4.3</span>Settings which apply to books and courses (M)
@@ -3487,6 +3491,10 @@ of the resource.</p>
 figure. Figures can show up in one of the lists of figures which can be
 generated near the start of the book or course.</p>
 <p>This can be further customized by the <code>class</code> attribute.</p>
+<p>If a resource has a <code>title</code> and thus is a figure, and if figures are listed
+grouped by classes (if the <code>list-figures</code> document setting is <code>grouped</code>), the
+<code>class</code> attribute determines which list the resource appears in.</p>
+<p>So, for example, if you want all images in a book</p>
 </div>
 <div class="extension">
 <h1 id="figures-and-spans-m-" class="definition">

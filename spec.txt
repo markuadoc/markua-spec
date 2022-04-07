@@ -5750,7 +5750,7 @@ To summarize, what a `verbatim` resource type means is...
 2. no automatic indenting is done
 3. basic Markua text formatting (bold, italic, etc.) is applied
 4. Markua resources (e.g. tables, images, etc.) CANNOT be nested inside it
-5. you can add {monospaced: true | false} (default false)
+5. you can add `{monospaced: true | false}` (default `false`)
 6. it can be local, web, or inline resource
 7. the `format` is verbatim, which can be inferred from a `.text` extension
 8. the normal rules apply for the `class` attribute

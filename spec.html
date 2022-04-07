@@ -3135,18 +3135,31 @@ reader.</p>
 <span class="number">4.2</span>The list-figures document setting (M)
 </h2>
 <p>There is a document setting called <code>list-figures</code> which determines
-whether the class is used to group figures appropriately. The default value of
-<code>list-figures</code> is <code>combined</code>, which results in one combined list called, by
-default, List of Figures, ordered by their appearance in the manuscript.</p>
-<p>If <code>list-figures</code> is <code>grouped</code>, the Markua Processor should group figures by
-their <code>class</code> attribute (with appropriate modifications to the class name for
-localization or for multiple words) when building the list(s) of figures near
-the beginning of the book. This can be used to automatically produce a <code>List of Lemmas</code>, <code>List of Theorems</code>, <code>List of Poems</code>, <code>List of Code Samples</code>, etc.</p>
-<p>In this case, if a figure has no <code>class</code> attribute, it is included in a List of
-Figures (appropriately localized into the language of the book, of course).
-This way, you only need to provide a <code>class</code> attribute for resources where you
-want to include them in a specific class.</p>
+whether figures are listed in one or more lists near the beginning of the book.</p>
 <p>If <code>list-figures</code> is <code>none</code>, then no lists of figures are produced.</p>
+<p>If <code>list-figures</code> is <code>combined</code> (the default), this results in one combined
+list of figures (called List of Figures, but localized into the language of the
+book or course), for all figures in the manuscript, ordered by their appearance
+in the manuscript.</p>
+<p>If <code>list-figures</code> is <code>grouped</code>, the Markua Processor should group figures.
+Here’s how the grouping works:</p>
+<ol>
+<li>
+<p>If there is no <code>class</code> attribute, the figure is grouped in a list with other
+resources of its <code>type</code>. This is a nice default, since it results in a List of
+Tables, List of Code Samples, List of Images, etc. The type of a resource can be
+specified by the type attribute, or inferred from the format of the resource.</p>
+</li>
+<li>
+<p>If there is a <code>class</code> attribute, this overrides the type. For example, it is
+almost never a good idea to have a List of Verbatim, so if you add a <code>class</code> of
+<code>poem</code> you will get a List of Poems. (There is nothing special about <code>poem</code>, by
+the way: if you add a <code>class</code> of <code>sonnet</code>, you will get a List of Sonnets. This
+is not just useful to differentiate types of poetry, by the way: this approach
+can be used to automatically produce a <code>List of Lemmas</code>, <code>List of Theorems</code>,
+etc.</p>
+</li>
+</ol>
 <h2 id="settings-which-apply-to-books-and-courses-m-" class="definition">
 <span class="number">4.3</span>Settings which apply to books and courses (M)
 </h2>

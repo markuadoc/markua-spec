@@ -2763,22 +2763,30 @@ reader.
 ## The list-figures document setting (M)
 
 There is a document setting called `list-figures` which determines
-whether the class is used to group figures appropriately. The default value of
-`list-figures` is `combined`, which results in one combined list called, by
-default, List of Figures, ordered by their appearance in the manuscript.
-
-If `list-figures` is `grouped`, the Markua Processor should group figures by
-their `class` attribute (with appropriate modifications to the class name for
-localization or for multiple words) when building the list(s) of figures near
-the beginning of the book. This can be used to automatically produce a `List of
-Lemmas`, `List of Theorems`, `List of Poems`, `List of Code Samples`, etc.
-
-In this case, if a figure has no `class` attribute, it is included in a List of
-Figures (appropriately localized into the language of the book, of course).
-This way, you only need to provide a `class` attribute for resources where you
-want to include them in a specific class.
+whether figures are listed in one or more lists near the beginning of the book.
 
 If `list-figures` is `none`, then no lists of figures are produced.
+
+If `list-figures` is `combined` (the default), this results in one combined
+list of figures (called List of Figures, but localized into the language of the
+book or course), for all figures in the manuscript, ordered by their appearance
+in the manuscript.
+
+If `list-figures` is `grouped`, the Markua Processor should group figures.
+Here's how the grouping works:
+
+1. If there is no `class` attribute, the figure is grouped in a list with other
+resources of its `type`. This is a nice default, since it results in a List of
+Tables, List of Code Samples, List of Images, etc. The type of a resource can be
+specified by the type attribute, or inferred from the format of the resource.
+
+2. If there is a `class` attribute, this overrides the type. For example, it is
+almost never a good idea to have a List of Verbatim, so if you add a `class` of
+`poem` you will get a List of Poems. (There is nothing special about `poem`, by
+the way: if you add a `class` of `sonnet`, you will get a List of Sonnets. This
+is not just useful to differentiate types of poetry, by the way: this approach
+can be used to automatically produce a `List of Lemmas`, `List of Theorems`,
+etc.
 
 
 

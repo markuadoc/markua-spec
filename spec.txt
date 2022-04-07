@@ -14730,10 +14730,14 @@ GIF, PNG, JPEG, SVG and zipped SVG.
 
 Note that .mp4 is used for MP4 video, not MP4 AAC audio.
 
-* `mp4` - MP4 video - `.mp4`
-* `webm` - WebM video - `.webm`
+The following are the video resource formats and the file extensions which
+choose them by default:
 
-TODO
+`mp4`
+: MP4 video - `.mp4`
+
+`webm`
+: WebM video - `.webm`
 
 The syntax to insert a video is the same compact and consistent syntax that is
 used for any resource. Local and web resource locations are supported for both
@@ -14962,15 +14966,20 @@ Here's a paragraph after the figure.
 
 ## Audio resources (M)
 
-TODO 
+The following are the audio resource formats and the file extensions which
+choose them by default:
 
-### Audio resource formats
+`aac`
+: AAC  audio - `.aac`, `.m4a`
 
-* `aac` - AAC audio - `.aac`, `.m4a`
-* `mp3` - MP3 audio - `.mp3`
-* `ogg` - Ogg Vorbis  - `.oga`, `.ogg`
-* `wav` - WAV audio - `.wav`, `.wave`
+`mp3`
+: MP3 audio - `.mp3`
 
+`ogg`
+: Ogg Vorbis audio - `.oga`, `.ogg`
+
+`wav`
+: WAV audio - `.wav`, `.wave`
 
 The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
@@ -15061,37 +15070,43 @@ The full version of the talk is here:
 
 ## Math resources (M)
 
-TODO
+Math can be a local, web or inline resource, just like any other resource, and
+the same resource syntax applies to code as to all other resources.
+
+Markua does not specify how math is output in HTML. It can be an SVG or PNG
+image, with or without transparency, or it can use something like MathJax.
+After much research, Leanpub actually settled on using PNGs with a white
+background, for maximum compatibility with browsers, older devices and dark
+mode. However, a different Markua Processor could maake a different decision,
+like transparent SVGs with a dynamic foreground color, or MathJax or MathML.
+
+There are two formats of math resources supported by Markua:
+
+1. LaTeX math (`latexmath` or `$`)
+2. AsciiMath (`asciimath` or `@`)
 
 ### Math resource formats
 
+The following are the math resource formats and the file extensions which
+choose them by default:
+
+`asciimath`
+: AsciiMath math - `.asciimath`
+
+`latexmath`
+: LaTeX math - `.tex`
+
 Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
+resources in a Markua document, not in external files as local or web resources.
+
 Also, note that `.tex` is assumed to be LaTeX math, not a vanilla LaTeX file.
 There is a simple reason for this: Markua needs LaTeX math for math, but only
 needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
 file with an extension of `.tex` that just contains LaTeX code and you want to
 display it, then add a `{type: code, format: latex}` attribute list.
 
-* `asciimath` - AsciiMath math - `.asciimath`
-* `latexmath` - LaTeX math - `.tex`
-
 Note that the assumption is that AsciiMath will almost always be used as an
 inline resource. So, the `.asciimath` file extension is deliberately verbose.
-
-
-Math can be a local, web or inline resource, just like any other resource, and
-the same resource syntax applies to code as to all other resources.
-
-Markua does not specify how math is output in HTML. It can be an image, or it
-can use something like MathJax. If MathJax is available, it is recommended for a
-Markua Processor to convert AsciiMath into MathML, and then use MathJax to
-format it.
-
-There are two formats of math resources supported by Markua:
-
-1. LaTeX math (`latexmath` or `$`)
-2. AsciiMath (`asciimath` or `@`)
 
 ### Supported Attributes for Math
 

@@ -17536,11 +17536,12 @@ GIF, PNG, JPEG, SVG and zipped SVG.</p>
 <span class="number">10.8</span>Video resources (M)
 </h2>
 <p>Note that .mp4 is used for MP4 video, not MP4 AAC audio.</p>
-<ul>
-<li><code>mp4</code> - MP4 video - <code>.mp4</code></li>
-<li><code>webm</code> - WebM video - <code>.webm</code></li>
-</ul>
-<p>TODO</p>
+<p>The following are the video resource formats and the file extensions which
+choose them by default:</p>
+<p><code>mp4</code>
+: MP4 video - <code>.mp4</code></p>
+<p><code>webm</code>
+: WebM video - <code>.webm</code></p>
 <p>The syntax to insert a video is the same compact and consistent syntax that is
 used for any resource. Local and web resource locations are supported for both
 video formats; inline resource locations for video are obviously not supported.</p>
@@ -17760,16 +17761,16 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 <h2 id="audio-resources-m-" class="definition">
 <span class="number">10.10</span>Audio resources (M)
 </h2>
-<p>TODO</p>
-<h3 id="audio-resource-formats" class="definition">
-<span class="number">10.10.1</span>Audio resource formats
-</h3>
-<ul>
-<li><code>aac</code> - AAC audio - <code>.aac</code>, <code>.m4a</code></li>
-<li><code>mp3</code> - MP3 audio - <code>.mp3</code></li>
-<li><code>ogg</code> - Ogg Vorbis  - <code>.oga</code>, <code>.ogg</code></li>
-<li><code>wav</code> - WAV audio - <code>.wav</code>, <code>.wave</code></li>
-</ul>
+<p>The following are the audio resource formats and the file extensions which
+choose them by default:</p>
+<p><code>aac</code>
+: AAC  audio - <code>.aac</code>, <code>.m4a</code></p>
+<p><code>mp3</code>
+: MP3 audio - <code>.mp3</code></p>
+<p><code>ogg</code>
+: Ogg Vorbis audio - <code>.oga</code>, <code>.ogg</code></p>
+<p><code>wav</code>
+: WAV audio - <code>.wav</code>, <code>.wave</code></p>
 <p>The syntax to insert an audio resource is the same compact and consistent syntax
 that is used for any resource. Local and web resource locations are supported
 for both audio formats; inline resource locations for audio are obviously not
@@ -17796,7 +17797,7 @@ and Ogg Vorbis.</p>
 <p>We will discuss the supported and the default attributes for audio files, and
 then show examples of audio being inserted for both local and web audio files.</p>
 <h3 id="supported-attributes-for-audio" class="definition">
-<span class="number">10.10.2</span>Supported Attributes for Audio
+<span class="number">10.10.1</span>Supported Attributes for Audio
 </h3>
 <p>The following are the supported attributes for audio resources, in addition to the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support.</p>
 <p><code>poster</code>
@@ -17814,7 +17815,7 @@ this. See the Video resources section above for more information.</p>
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
 <h3 id="local-audio" class="definition">
-<span class="number">10.10.3</span>Local Audio
+<span class="number">10.10.2</span>Local Audio
 </h3>
 <div class="example" id="example-640">
 <div class="examplenum">
@@ -17836,7 +17837,7 @@ over how it handles the location of video resources and their display.</p>
 </div>
 </div>
 <h3 id="web-audio" class="definition">
-<span class="number">10.10.4</span>Web Audio
+<span class="number">10.10.3</span>Web Audio
 </h3>
 <div class="example" id="example-641">
 <div class="examplenum">
@@ -17862,34 +17863,37 @@ over how it handles the location of video resources and their display.</p>
 <h2 id="math-resources-m-" class="definition">
 <span class="number">10.11</span>Math resources (M)
 </h2>
-<p>TODO</p>
-<h3 id="math-resource-formats" class="definition">
-<span class="number">10.11.1</span>Math resource formats
-</h3>
-<p>Note that AsciiMath and LaTeX math are almost always contained as inline
-resources in a Markua document. They only have file extensions for completeness.
-Also, note that <code>.tex</code> is assumed to be LaTeX math, not a vanilla LaTeX file.
-There is a simple reason for this: Markua needs LaTeX math for math, but only
-needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
-file with an extension of <code>.tex</code> that just contains LaTeX code and you want to
-display it, then add a <code>{type: code, format: latex}</code> attribute list.</p>
-<ul>
-<li><code>asciimath</code> - AsciiMath math - <code>.asciimath</code></li>
-<li><code>latexmath</code> - LaTeX math - <code>.tex</code></li>
-</ul>
-<p>Note that the assumption is that AsciiMath will almost always be used as an
-inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
 <p>Math can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.</p>
-<p>Markua does not specify how math is output in HTML. It can be an image, or it
-can use something like MathJax. If MathJax is available, it is recommended for a
-Markua Processor to convert AsciiMath into MathML, and then use MathJax to
-format it.</p>
+<p>Markua does not specify how math is output in HTML. It can be an SVG or PNG
+image, with or without transparency, or it can use something like MathJax.
+After much research, Leanpub actually settled on using PNGs with a white
+background, for maximum compatibility with browsers, older devices and dark
+mode. However, a different Markua Processor could maake a different decision,
+like transparent SVGs with a dynamic foreground color, or MathJax or MathML.</p>
 <p>There are two formats of math resources supported by Markua:</p>
 <ol>
 <li>LaTeX math (<code>latexmath</code> or <code>$</code>)</li>
 <li>AsciiMath (<code>asciimath</code> or <code>@</code>)</li>
 </ol>
+<h3 id="math-resource-formats" class="definition">
+<span class="number">10.11.1</span>Math resource formats
+</h3>
+<p>The following are the math resource formats and the file extensions which
+choose them by default:</p>
+<p><code>asciimath</code>
+: AsciiMath math - <code>.asciimath</code></p>
+<p><code>latexmath</code>
+: LaTeX math - <code>.tex</code></p>
+<p>Note that AsciiMath and LaTeX math are almost always contained as inline
+resources in a Markua document, not in external files as local or web resources.</p>
+<p>Also, note that <code>.tex</code> is assumed to be LaTeX math, not a vanilla LaTeX file.
+There is a simple reason for this: Markua needs LaTeX math for math, but only
+needs to display LaTeX for people writing about LaTeX. So, if you have a LaTeX
+file with an extension of <code>.tex</code> that just contains LaTeX code and you want to
+display it, then add a <code>{type: code, format: latex}</code> attribute list.</p>
+<p>Note that the assumption is that AsciiMath will almost always be used as an
+inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
 <h3 id="supported-attributes-for-math" class="definition">
 <span class="number">10.11.2</span>Supported Attributes for Math
 </h3>

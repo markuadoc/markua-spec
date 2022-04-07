@@ -7423,6 +7423,12 @@ of <code>align</code>, a Markua Processor must interpret <code>left</code> as �
 page”, <code>right</code> as “on the right side of the page” and <code>middle</code> as “in the middle
 of the content area of the page, respecting margins” in all cases. Finally, note
 that <code>inside</code> and <code>outside</code> are not supported for <code>align</code>.</p>
+<p><code>columns</code>
+: Sometimes it’s desirable to only show part of a table resource defined in an
+external file. The <code>rows</code> and <code>columns</code> attributes let you accomplish this.
+The <code>columns</code> attribute can take a comma-separated list of values or ranges,
+such as <code>2, 4, 7..9</code>, which would ensure that columns 2, 4, 7, 8 and 9 were
+shown.</p>
 <p><code>column-widths</code>
 : The column widths are a whitespace-separated list of numbers (integers and/or
 floats) and/or * symbols, from left to right, as a percentage of the total table
@@ -7437,18 +7443,6 @@ there are any <code>*</code>s used). Every specified value must be at least 1, a
 match the number of columns. Like with the width attribute, the percentage sign
 (<code>%</code>) is required, to make it absolutely clear that these are not measurements
 in pixels or points.</p>
-<p><code>crop-start</code>
-: Sometimes it’s desirable to only show part of a table resource defined in an
-external file. The <code>crop-start</code> and <code>crop-end</code> attributes let you accomplish
-this. The <code>crop-start</code> attribute defines the line which represents the first
-line included from the resource. For example, <code>{crop-start: 10, crop-end: 15, line-numbers: true, number-from: 10}</code> ensures that lines 10-15 are shown. The
-default value is 1, which is the first line of the file. The <code>crop-start</code>
-attribute is only valid for <code>csv</code> format tables, not <code>markua</code> format tables.</p>
-<p><code>crop-end</code>
-: This attribute ends the range started with crop-start. The default value of
-<code>crop-end</code> is to be omitted, which is equivalent to specifying the last line of
-the file. The <code>crop-end</code> attribute is only valid for <code>csv</code> format tables, not
-<code>markua</code> format tables.</p>
 <p><code>footer</code>
 : <code>true</code>, <code>false</code> or <code>dynamic</code>. The default is <code>dynamic</code> for <code>markua</code> format
 tables, and <code>false</code> for <code>csv</code> format tables. If <code>dynamic</code>, the existence of a
@@ -7465,6 +7459,12 @@ tables, and <code>true</code> for <code>csv</code> format tables. If <code>dynam
 header is determined by whether the content of the table contains a header.
 For a <code>csv</code> format table, <code>true</code> means that the first row is treated as a header
 row, and <code>false</code> means that the first row is not treated as a header row.</p>
+<p><code>rows</code>
+: Sometimes it’s desirable to only show part of a table resource defined in an
+external file. The <code>rows</code> and <code>columns</code> attributes let you accomplish this.
+The <code>rows</code> attribute can take a comma-separated list of values or ranges, such
+as <code>1, 5, 13..18, 22</code>, which would ensure that rows 1, 5, 13, 14, 15, 16, 17,
+18 and 22 were shown.</p>
 <p><code>width</code>
 : The width of the table, in percentage of page content area width (respecting
 margins). This is specified as an number (integer or float) between 1 and 100
@@ -10472,7 +10472,8 @@ Any value other than <code>true</code> is interpreted as <code>false</code>.</p>
 : The type of the list marker to use. Valid choices are <code>1</code>, <code>A</code>, <code>a</code>, <code>I</code> or
 <code>i</code>. <code>A</code> and <code>a</code> mean uppercase or lowercase letters; <code>I</code> or <code>i</code> mean uppercase
 or lowercase Roman numerals. Note that lists are NOT resources, so it is fine
-to use <code>type</code> for the list marker: there is no <code>{type: list}</code> resource.</p>
+to use <code>type</code> for the list marker: there is no <code>{type: list}</code> resource, so there
+is no naming conflict.</p>
 <p><code>delimiter</code>
 : The type of the list delimiter to use, in output formats which allow custom
 list delimiters. Valid choices are <code>&quot;.&quot;</code> or <code>&quot;)&quot;</code>. The default value is inferred

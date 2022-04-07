@@ -3053,6 +3053,9 @@ being specified.
 
 ## Resource types (M)
 
+The type of a resource can be specified by the `type` attribute, or inferred
+from the format of the resource.
+
 There are eight types of resources:
 
 1. `audio`
@@ -3076,9 +3079,11 @@ Either way, each type of resource has a number of supported formats. Any of
 the resource types can be inserted as a local resource or web resource,
 and many of the resource types can also be inserted as an inline resource.
 
-To be clear: resources are *not* parsed as plain [textual
-content](#textual-content); instead, they are parsed according to the rules that
-govern the parsing of resources.
+Resources are *not* parsed as plain [textual content](#textual-content);
+instead, they are parsed according to the rules that govern the parsing of
+resources.
+
+All of these types of resources are discussed later.
 
 
 

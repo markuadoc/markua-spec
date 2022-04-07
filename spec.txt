@@ -2620,10 +2620,15 @@ Yada yada yada.
 
 # Document settings (M)
 
-The HTML which is output by a Markua Processor can be affected by certain global
-document settings. These can be overridden by one or more document settings
-hashes.
+The behaviour of a Markua Processor can be affected by certain global document
+settings. These settings are very important, since they have an effect on the
+entire book or course.
 
+Markua's philosophy is that non-semantic formatting is procrastination. Because
+of this, almost all formatting is done by global switches, that can be defined
+once at the beginning of the document in document settings.
+
+The document settings are defined by one or more document settings hashes.
 The document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash is encountered, no more
 document settings hashes can be defined.
@@ -2633,8 +2638,9 @@ information about the document and about the desired behaviour of the Markua
 Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
-`authors`, etc. Markua Processor behaviour includes things like
-`italicize-underlines`, `smart-punctuation`, etc.
+`authors`, etc. Markua Processor behaviour includes settings like `alt-title`,
+`list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
+
 
 The format of a document settings hash is as follows: Every non-blank line
 in the document settings hash must contain a key, a colon `:`, and a value.

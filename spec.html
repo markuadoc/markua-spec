@@ -3021,18 +3021,22 @@ Yada<span class="space"> </span>yada<span class="space"> </span>yada.
 <h1 id="document-settings-m-" class="definition">
 <span class="number">4</span>Document settings (M)
 </h1>
-<p>The HTML which is output by a Markua Processor can be affected by certain global
-document settings. These can be overridden by one or more document settings
-hashes.</p>
-<p>The document settings hash or hashes must be at the start of a Markua document.
+<p>The behaviour of a Markua Processor can be affected by certain global document
+settings. These settings are very important, since they have an effect on the
+entire book or course.</p>
+<p>Markua’s philosophy is that non-semantic formatting is procrastination. Because
+of this, almost all formatting is done by global switches, that can be defined
+once at the beginning of the document in document settings.</p>
+<p>The document settings are defined by one or more document settings hashes.
+The document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash is encountered, no more
 document settings hashes can be defined.</p>
 <p>The settings are newline-separated key-value pairs (<code>key: value</code>) which contain
 information about the document and about the desired behaviour of the Markua
 Processor.</p>
 <p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
-<code>authors</code>, etc. Markua Processor behaviour includes things like
-<code>italicize-underlines</code>, <code>smart-punctuation</code>, etc.</p>
+<code>authors</code>, etc. Markua Processor behaviour includes settings like <code>alt-title</code>,
+<code>list-figures</code>, <code>italicize-underlines</code>, <code>smart-punctuation</code>, etc.</p>
 <p>The format of a document settings hash is as follows: Every non-blank line
 in the document settings hash must contain a key, a colon <code>:</code>, and a value.
 Any whitespace at the beginning or end of the keys and values will be stripped.

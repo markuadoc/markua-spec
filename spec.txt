@@ -3508,7 +3508,7 @@ Certain types of resources can be inserted inline in a Markua document:
 * `code`
 * `image` (of SVG format only, discussed later)
 * `list`
-* `math` (either `latexmath` or `asciimath`, discussed later)
+* `math` (of `latexmath` or `asciimath` format, discussed later)
 * `table`
 * `verbatim`
 

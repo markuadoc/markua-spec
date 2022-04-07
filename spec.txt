@@ -3145,20 +3145,17 @@ Markua Processor.
 Tables or Table of Figures, if they are generated for the book. This text
 should also be a crosslink to the title inserted near the figure itself.
 
-The title for a resource used as a figure can provided in one of two ways:
+The title of a resource used as a figure can be specified in three ways:
 
-1. In quotes after the filename or URL of a local or web resource.
-   ~~~
-   ![](algorithm.rb "My Amazing Algorithm")
-   ~~~
-2. In the attribute list above the resource.
+1. In an attribute list:
    ~~~
    {title: "My Amazing Algorithm"}
    ![](algorithm.rb)
    ~~~
-
-The first choice is clearly shorter, as well as more pleasant to write and to
-read.
+2. In quotes after the filename or URL of a local or web resource:
+   `![](resource_path_or_url "Optional Figure Title")`
+3. In the alt text, assuming an appropriate value of the `alt-title` document
+   setting (described below)
 
 Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:
@@ -3169,6 +3166,70 @@ in the attribute list:
 puts "hello world"
 ```
 ~~~
+
+Note that an attribute list can also be provided after the resource, but this is
+discouraged since it is less readable:
+
+```
+![](algorithm.rb){title: "My Amazing Algorithm"}
+```
+
+If a resource has a title (provided by any of the above approaches), it is a
+figure.
+
+If a resource does not have a title, it is inserted as a span. This is useful
+for images being added like an emoji, for example:
+
+```
+Here's a ![poop](poop.png) emoji.
+```
+
+Note that in this case, there is already a poop emoji. However, if you wanted
+to use an image of your favourite politician as a poop emoji, you wouldn't have
+an emoji for that built in, so this syntax would work in its stead.
+
+Again, if a title was added, things would be different:
+
+```
+Here's a ![poop](poop.png "The Year 2022 So Far") emoji.
+```
+
+In this case, the resource would be a figure, and it would flow in the text as
+a figure.
+
+But what if we wanted to specify image alignment for this resource? This could
+be done with an attribute list like this:
+
+```
+Here's a ![poop](poop.png "The Year 2022 So Far"){align: left} emoji.
+```
+
+Since the image resource has a title, it is being inserted as a figure, and it
+would flow in the layout like any other figure. However, please note that this
+example is contrived. A much better way to write something like this is as
+follows, using the attribute list in its typical place above the resource:
+
+```
+Here's an emoji.
+
+{align: left}
+![poop](poop.png "The Year 2022 So Far")
+
+Let's hope the year improves.
+```
+
+This is why almost all figures are added this way.
+
+But just because that's the convention, it does not make it the rule. That is
+semantically identical to the following:
+
+```
+Here's an emoji.
+
+![poop](poop.png "The Year 2022 So Far"){align: left}
+
+Let's hope the year improves.
+```
 
 
 
@@ -3413,103 +3474,6 @@ Certain types of resources can be inserted inline in a Markua document:
 * `verbatim`
 
 </div>
-
-
-
-
-<div class="extension">
-
-# Figures and spans (M)
-
-Resources can be inserted in a Markua document as a figure or as a span.
-
-The rule about whether a resource is a figure or span is simple:
-
-## A resource with a title is a figure; a resource without a title is a span (M)
-
-The title of a resource can be specified in three ways:
-
-1. In an attribute list: `{title: foo}`
-2. In quotes for a local or web resource:
-   `![](resource_path_or_url "Optional Figure Title")`
-3. In the alt text, assuming an appropriate value of the `alt-title` document
-   setting (described below)
-
-Whether the resource has a title determines whether it is called a figure or a
-span resource:
-
-1. If a resource has a title provided via any of these three approaches, the
-resource is called a **figure**.
-2. If a resource does not have a title provided via any of these three
-approaches, the resource is called a **span**.
-
-For example, you can add an image in an emoji style like this:
-
-```
-Here's a ![poop](poop.png) emoji.
-```
-
-Now, this image, like typical emoji, does not have a title, so (assuming that
-the `alt-title` document setting is not `all`) the resource is called a span.
-There is no figure caption.
-
-Now, if a title was added, things would be different:
-
-```
-Here's a ![poop](poop.png "The Year 2022 So Far") emoji.
-```
-
-In this case, the image would be a figure, and it would flow in the text as
-a figure.
-
-But what if we wanted to specify image alignment? This could be done with an
-attribute list like this:
-
-```
-Here's a ![poop](poop.png "The Year 2022 So Far"){align: left} emoji.
-```
-
-Finally, please note that this example is contrived. A much better way to write
-something like this is as follows, using the attribute list in its typical
-place above the resource:
-
-```
-Here's an emoji.
-
-{align: left}
-![poop](poop.png "The Year 2022 So Far")
-
-Let's hope the year improves.
-```
-
-This is why almost all figures are added this way. But just because that's the
-convention, it does not make it the rule. That is semantically identical to the
-following:
-
-```
-Here's an emoji.
-
-![poop](poop.png "The Year 2022 So Far"){align: left}
-
-Let's hope the year improves.
-```
-
-Finally, when a resource is inserted with a title, it can show up in one of the
-lists of figures which can be generated near the start of the book or course.
-This can be further customized by the `class` attribute, discussed below.
-
-
-
-## TODO here
-
- Recommended values of the `class` attribute include `poem`, `theorem`, or `lemma`. A Markua Processor
-could recognize these class attributes and produce a List of Poems, List of
-Theorems, or List of Lemmas near the beginning of the document, much like any
-other resource types. The `class` attribute is especially handy when used with a
-resource of type `markua`.
-
-</div>
-
 
 
 

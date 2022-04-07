@@ -16153,6 +16153,7 @@ stuff
 </div>
 
 
+
 <div class="extension">
 
 ## Superscript and subscript (M)
@@ -16348,6 +16349,38 @@ index entry, you must backslash-escape it. Otherwise, it would be intepreted
 as an attempt at creating a sub-entry. (This actually got me, when I tried to
 reference *Hello! Flex 4*, one of my books. To do this, I would have to write
 the entry as `{i: "*Hello\! Flex 4*}` not as `{i: "*Hello! Flex 4*}`.
+
+</div>
+
+
+
+<div class="extension">
+
+## Syntactic sugar list (M)
+
+Markua has a handful of syntactic sugar that it relies on to make life nicer for
+authors. Here's a helpful summary list of the different syntactic sugar elements
+provided:
+
+`$`
+: When used following three backticks or tildes which start an inline resource,
+adds `{type: math, format: latexmath}` to the resource.
+
+`@`
+: When used following three backticks or tildes which start an inline resource,
+adds `{type: math, format: asciimath}` to the resource.
+
+`!`
+: When used following three backticks or tildes which start an inline resource,
+adds `{type: image, format: svg}` to the resource.
+
+`&`
+: When used following three backticks or tildes which start an inline resource,
+adds `{type: verbatim}` to the resource.
+
+`^`
+: When used as the first character on a line by itself above a paragraph, adds
+a `{class: continued-para}`
 
 </div>
 

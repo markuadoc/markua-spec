@@ -264,7 +264,8 @@ $(document).ready(function() {
 <li><a href="#superscript-and-subscript-m-"><span class="number">10.20</span>Superscript and subscript (M)</a></li>
 <li><a href="#strikethrough-gfm-"><span class="number">10.21</span>Strikethrough (GFM)</a></li>
 <li><a href="#index-entries-m-"><span class="number">10.22</span>Index entries (M)</a></li>
-<li><a href="#textual-content"><span class="number">10.23</span>Textual content</a></li>
+<li><a href="#syntactic-sugar-list-m-"><span class="number">10.23</span>Syntactic sugar list (M)</a></li>
+<li><a href="#textual-content"><span class="number">10.24</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -19221,8 +19222,31 @@ as an attempt at creating a sub-entry. (This actually got me, when I tried to
 reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to write
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
 </div>
+<div class="extension">
+<h2 id="syntactic-sugar-list-m-" class="definition">
+<span class="number">10.23</span>Syntactic sugar list (M)
+</h2>
+<p>Markua has a handful of syntactic sugar that it relies on to make life nicer for
+authors. Here’s a helpful summary list of the different syntactic sugar elements
+provided:</p>
+<p><code>$</code>
+: When used following three backticks or tildes which start an inline resource,
+adds <code>{type: math, format: latexmath}</code> to the resource.</p>
+<p><code>@</code>
+: When used following three backticks or tildes which start an inline resource,
+adds <code>{type: math, format: asciimath}</code> to the resource.</p>
+<p><code>!</code>
+: When used following three backticks or tildes which start an inline resource,
+adds <code>{type: image, format: svg}</code> to the resource.</p>
+<p><code>&amp;</code>
+: When used following three backticks or tildes which start an inline resource,
+adds <code>{type: verbatim}</code> to the resource.</p>
+<p><code>^</code>
+: When used as the first character on a line by itself above a paragraph, adds
+a <code>{class: continued-para}</code></p>
+</div>
 <h2 id="textual-content" class="definition">
-<span class="number">10.23</span>Textual content
+<span class="number">10.24</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>

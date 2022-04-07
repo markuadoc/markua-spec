@@ -10471,7 +10471,8 @@ Any value other than <code>true</code> is interpreted as <code>false</code>.</p>
 <p><code>type</code>
 : The type of the list marker to use. Valid choices are <code>1</code>, <code>A</code>, <code>a</code>, <code>I</code> or
 <code>i</code>. <code>A</code> and <code>a</code> mean uppercase or lowercase letters; <code>I</code> or <code>i</code> mean uppercase
-or lowercase Roman numerals.</p>
+or lowercase Roman numerals. Note that lists are NOT resources, so it is fine
+to use <code>type</code> for the list marker: there is no <code>{type: list}</code> resource.</p>
 <p><code>delimiter</code>
 : The type of the list delimiter to use, in output formats which allow custom
 list delimiters. Valid choices are <code>&quot;.&quot;</code> or <code>&quot;)&quot;</code>. The default value is inferred

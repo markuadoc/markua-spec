@@ -9196,7 +9196,8 @@ Any value other than `true` is interpreted as `false`.
 : The type of the list marker to use. Valid choices are `1`, `A`, `a`, `I` or
 `i`. `A` and `a` mean uppercase or lowercase letters; `I` or `i` mean uppercase
 or lowercase Roman numerals. Note that lists are NOT resources, so it is fine
-to use `type` for the list marker: there is no `{type: list}` resource.
+to use `type` for the list marker: there is no `{type: list}` resource, so there
+is no naming conflict.
 
 `delimiter`
 : The type of the list delimiter to use, in output formats which allow custom

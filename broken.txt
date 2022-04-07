@@ -2,16 +2,7 @@
 
 # Resources (M)
 
-The **Class** determines whether, and how, the resource is presented in a
-particular list of resources near the beginning of the book. The `span`
-class is special, in that it never shows up in a list of resources. All other
-classes of resource may show up in a list of resources, grouped by their
-class. The class is completely orthogonal to the type or format of a
-resource. For example, all resources in a book could just be categorized as
-in the `span` or `figure` class. This would result in a List of Figures
-near the beginning of the book, which listed all resources of class figure,
-regardless of their `type` (e.g. `image`, `code`, `table`, etc.) or their
-`format` (e.g. `jpg`, `ruby`, `csv`, etc.)
+
 
 Regardless of
 their type or format, resources can be listed in different lists of

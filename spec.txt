@@ -5429,12 +5429,20 @@ requirement, nor is the choice of which continuation character is used.
 ## Verbatim resources (M)
 
 The `verbatim` resource type is used to preserve leading and internal whitespace
-while still supporting Markua text formatting.
+while still supporting Markua text formatting (things like `**bold**` and
+`*italic*`).
+
+**While Markua text formatting IS supported inside a verbatim resource, Markua
+resources (including images) ARE NOT supported inside a verbatim resource.**
+
+The following are the verbatim resource formats and the file extensions which
+choose them by default:
+
+`verbatim`
+: verbatim text - `.text`
 
 The primary use case is poetry, and the secondary use case is boilerplate legal
-text.
-
-If you don't care about leading or internal whitespace, or about poetry or
+text. If you don't care about leading or internal whitespace, or about poetry or
 legalese, you can safely skip this section.
 
 For a verbatim resource, leading whitespace, internal whitespace, and newlines
@@ -5447,6 +5455,8 @@ To be clear:
 * This includes all leading and internal spaces and newlines regardless of the
 number of consecutive leading, internal or trailing spaces or the number of 
 newlines.
+* Again, to repeat, Markua text formatting is supported, but Markua resources
+are NOT supported inside a verbatim resource.
 
 Now, while the whitespace is preserved, it is rendered using either a
 proportional font or a monospaced one based on the value of the `monospaced`
@@ -5488,92 +5498,49 @@ resource to define a specific `class` of resource on verbatim resources which
 have titles, such as a `poem`. A List of Poems is a lot more poetic than a List
 of Verbatims.
 
-Also note that the standard resource `format` attribute does not matter for a
-`verbatim` resource, and should be ignored by a Markua Processor.
+Also note that the standard resource `format` attribute for a `verbatim` type
+resource must always be overridden to `verbatim` by a Markua Processor.
+Similarly, if a `format` of `verbatim` is specified, this must set the `type`
+to `verbatim`.
 
 ### Local Verbatim resources
 
-TODO
-
-Local Markua resources look like many other resources inserted as figures:
+Local and web resources with a `.text` extension default to being treated as a
+`verbatim` type of resource.
 
 ~~~
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-default to semantic whitespace:
-
-![](sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet, which will not have a `class` and which will
-have its whitespace preserved (for indenting the last two lines):
+Here's a Shakespearean sonnet, which has a type of `verbatim` and a class of
+`poem`:
 
 {type: verbatim, class: poem}
-![](sonnet130.md "Sonnet 130")
+![](sonnet130.txt "Sonnet 130")
 
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
+Here's a Shakespearean sonnet, which has a class of `poem` and will default to
+the `{type: verbatim}` because of the `.text` extension:
 
-{class: poem, whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
+{class: poem}
+![](sonnet130.text "Sonnet 130")
 
-Here's a Shakespearean sonnet, which will have a `class` of `poem` and which
-will have its whitespace preserved (for indenting the last two lines):
+Here's a Shakespearean sonnet, which has no class specified and which will
+default to the `{type: verbatim}` because of the `.text` extension:
 
-{monospaced: false, class: poem, whitespace: verbatim}
-![](sonnet130.md "Sonnet 130")
+![](sonnet130.text "Sonnet 130")
 
-Here's a list of Canadian cities sorted by population. This implicitly has a
-`class` of `none`:
+Here's some legal boilerplate, which has no class specified and which will
+default to the `{type: verbatim}` because of the `.text` extension:
 
-![](cities.md "Canadian Cities by Population")
-
-Here's that same list, but with an explicit class of `none`:
-
-{class: none}
-![](cities.md "Canadian Cities by Population")
-
-Here's that same list, but with a class of `list` so it shows up in a List of
-Lists, if there is one:
-
-{class: list}
-![](cities.md "Canadian Cities by Population")
-
-Here's some legal boilerplate:
-
-![](tos.md "Terms and Conditions")
-
-Here's some legal boilerplate, with the explicit class of `none`:
-
-{class: none}
-![](tos.md "Terms and Conditions")
+![](tos.text "Terms and Conditions")
 
 Here's an E. E. Cummings poem:
 
-{monospaced: true, class: poem, whitespace: verbatim}
-![](iwillbe.md "I Will Be")
-~~~
-
-With a non-`.md` extension, the type of `verbatim` must be stated:
-
-~~~
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim}
-![](sonnet130.txt "Sonnet 130")
-
-Here's a Shakespearean sonnet:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](sonnet130.txt "Sonnet 130")
-
-Here's some legal boilerplate:
-
-{type: markua}
-![](tos.txt "Terms and Conditions")
-
-Here's an E. E. Cummings poem:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
+{type: verbatim, class: poem, monospaced: true}
 ![](iwillbe.txt "I Will Be")
+
+Here's an E. E. Cummings poem which has no class specified and which will
+default to the `{type: verbatim}` because of the `.text` extension:
+
+{monospaced: true}
+![](iwillbe.text "I Will Be")
 ~~~
 
 ### Web Verbatim resources
@@ -5583,55 +5550,99 @@ including the significance of file extensions. The only difference is that the
 files are on the web.
 
 ~~~
-Here's a Shakespearean sonnet:
+Here's a Shakespearean sonnet, which has a type of `verbatim` and a class of
+`poem`:
 
-![](http://markua.com/sonnet130.md "Sonnet 130")
-
-Here's a Shakespearean sonnet:
-
-{type: markua}
+{type: verbatim, class: poem}
 ![](http://markua.com/sonnet130.txt "Sonnet 130")
 
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-![](http://markua.com/sonnet130.txt "Sonnet 130")
+Here's a Shakespearean sonnet, which has a class of `poem` and will default to
+the `{type: verbatim}` because of the `.text` extension:
 
-Here's a paragraph after the figure.
+{class: poem}
+![](http://markua.com/sonnet130.text "Sonnet 130")
+
+Here's a Shakespearean sonnet, which has no class specified and which will
+default to the `{type: verbatim}` because of the `.text` extension:
+
+![](http://markua.com/sonnet130.text "Sonnet 130")
+
+Here's some legal boilerplate, which has no class specified and which will
+default to the `{type: verbatim}` because of the `.text` extension:
+
+![](http://markua.com/tos.text "Terms and Conditions")
+
+Here's an E. E. Cummings poem:
+
+{type: verbatim, class: poem, monospaced: true}
+![](http://markua.com/iwillbe.txt "I Will Be")
+
+Here's an E. E. Cummings poem which has no class specified and which will
+default to the `{type: verbatim}` because of the `.text` extension:
+
+{monospaced: true}
+![](http://markua.com/iwillbe.text "I Will Be")
 ~~~
 
 ### Inline Verbatim resources
 
-You might wonder why an inline resource of type `verbatim` would be supported at
-all. After all, isn't it just Markua text?
+Inline verbatim resources are the easiest way to insert verbatim resources.
 
+These work just like fenced code blocks, discussed earlier, but with a
+`verbatim` format. (Recall from above that a `verbatim` format causes the `type`
+to also be `verbatim`.)
 
-
-There are three reasons it is supported:
-
-1. for consistency
-2. for the attribute lists, which allow configurable whitespace, etc.
-3. so that the resource can show up in a list of resources
-
-To create an inline resource of type `verbatim`, you use the fenced code block
-syntax, and you can use an attribute list to specify the type of resource.
-
-You can also use one of a handful of syntactic sugar options:
-
-`&`
-: equivalent to `{type: markua, whitespace: verbatim, monospaced: false}`
-
-`&&`
-: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: false}`
-
-`*`
-: equivalent to `{type: markua, whitespace: verbatim, monospaced: true}`
-
-`**`
-: equivalent to `{type: markua, class: poem, whitespace: verbatim, monospaced: true}`
-
-This is made clear in the following example:
+Here's what this looks like with backticks:
 
 ~~~
-Here's part of a poem:
+Some paragraph.
+
+```verbatim
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Some paragraph.
+~~~
+
+You can also use tildes:
+
+```
+Some paragraph.
+
+~~~verbatim
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+~~~
+
+Some paragraph.
+```
+
+You can also use an attribute list:
+
+~~~
+Some paragraph.
+
+{type: verbatim}
+```
+I grant I never saw a goddess go;
+My mistress when she walks treads on the ground.
+    And yet, by heaven, I think my love as rare
+    As any she belied with false compare.
+```
+
+Some paragraph.
+~~~
+
+But the best choice is to use the `&` syntactic sugar, which means
+`{type: verbatim}`:
+
+~~~
+Some paragraph.
 
 ```&
 I grant I never saw a goddess go;
@@ -5640,97 +5651,8 @@ My mistress when she walks treads on the ground.
     As any she belied with false compare.
 ```
 
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```&&
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: false}
-```
-I grant I never saw a goddess go;
-My mistress when she walks treads on the ground.
-    And yet, by heaven, I think my love as rare
-    As any she belied with false compare.
-```
-
-Here's part of a poem:
-
-```*
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-Here's part of a poem:
-
-```**
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
-
-That is equivalent to:
-
-{type: markua, class: poem, whitespace: verbatim, monospaced: true}
-```
-i
-  *am*
-      a        cat
-            a        **l a z y**          cat
-
-me   ow
-```
+Some paragraph.
 ~~~
-
-I'm not a poet, but I know it.
-
-Finally, here's an example of an inline Markua resource being used for a list:
-
-~~~
-{class: list, title: "Canadian Cities by Population"}
-```
-1. Toronto
-2. Vancouver
-```
-~~~
-
-Despite the seeming generality of this example, it's actually fairly niche:
-most lists are just lists, not resources, and do not need to be wrapped in a
-resource.
 
 ### But what if I want every character taken literally?
 

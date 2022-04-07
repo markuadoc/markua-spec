@@ -6340,6 +6340,17 @@ My mistress when she walks treads on the ground.
 
 Some paragraph.
 </code></pre>
+<p>To summarize, what a <code>verbatim</code> resource type means is…</p>
+<ol>
+<li>whitespace is preserved verbatim</li>
+<li>no automatic indenting is done</li>
+<li>basic Markua text formatting (bold, italic, etc.) is applied</li>
+<li>Markua resources (e.g. tables, images, etc.) CANNOT be nested inside it</li>
+<li>you can add {monospaced: true | false} (default false)</li>
+<li>it can be local, web, or inline resource</li>
+<li>the <code>format</code> is verbatim, which can be inferred from a <code>.text</code> extension</li>
+<li>the normal rules apply for the <code>class</code> attribute</li>
+</ol>
 <h3 id="but-what-if-i-want-every-character-taken-literally-" class="definition">
 <span class="number">7.7.4</span>But what if I want every character taken literally?
 </h3>
@@ -6366,6 +6377,7 @@ and<span class="space"> </span>**this**<span class="space"> </span>is<span class
 </code></pre>
 </div>
 </div>
+<p>I’m no poet, but at least I know it.</p>
 </div>
 <div class="extension">
 <h2 id="no-html-blocks-m-" class="definition">

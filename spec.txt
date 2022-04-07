@@ -5710,6 +5710,19 @@ My mistress when she walks treads on the ground.
 Some paragraph.
 ~~~
 
+To summarize, what a `verbatim` resource type means is...
+
+1. whitespace is preserved verbatim
+2. no automatic indenting is done
+3. basic Markua text formatting (bold, italic, etc.) is applied
+4. Markua resources (e.g. tables, images, etc.) CANNOT be nested inside it
+5. you can add {monospaced: true | false} (default false)
+6. it can be local, web, or inline resource
+7. the `format` is verbatim, which can be inferred from a `.text` extension
+8. the normal rules apply for the `class` attribute
+
+
+
 ### But what if I want every character taken literally?
 
 If you want to type poetry where every character is taken exactly literally,
@@ -5728,6 +5741,8 @@ and **this** is not bold
 * * * cherry blossoms * * *
 </code></pre>
 ````````````````````````````````
+
+I'm no poet, but at least I know it.
 
 </div>
 

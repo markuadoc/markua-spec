@@ -2667,6 +2667,7 @@ generate-community: true
 generate-network: true
 list-figures: groups
 figure-number-format: chapter
+figure-classes: equation, figure, image, listing
 }
 
 # Chapter One
@@ -2815,6 +2816,23 @@ This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 
 * When `list-figures` are listed in `groups`, they each have their own numbers.
 * When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
+
+
+## The `figure-classes` document setting (M)
+
+This is about whether it is listed.
+
+If number-figures is true, are all figure-classes numbered, even the ones which
+are not in list-figures?
+
+ALL GET NUMBERED. The list-figures just determines which lists are made, not which figures get numbered.
+
+There is a document setting called `figure-classes` which determines which
+classes of figures are listed in one or more lists near the beginning of the book.
+
+figure-classes: equation, figure, image, listing
+
+If it's not specified, then all figure classes are included, either in groups or...
 
 
 

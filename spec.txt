@@ -2722,7 +2722,11 @@ Markua Processors can understand their own extension attributes.
 
 
 
-## The alt-title document setting (M)
+## Document settings for figures: alt-title, figure-classes, figure-number-format and list-figures (M)
+
+There are four document settings which affect ... TODO
+
+### alt-title (M)
 
 The `alt-title` document setting controls whether, in the cases where there is
 no figure title explicitly set, the alt text on a resource is removed and used
@@ -2762,7 +2766,33 @@ reader.
 
 
 
-## The list-figures document setting (M)
+### figure-classes (M)
+
+This is about whether it is listed.
+
+If number-figures is true, are all figure-classes numbered, even the ones which
+are not in list-figures?
+
+ALL GET NUMBERED. The list-figures just determines which lists are made, not which figures get numbered.
+
+There is a document setting called `figure-classes` which determines which
+classes of figures are listed in one or more lists near the beginning of the book.
+
+figure-classes: equation, figure, image, listing
+
+If it's not specified, then all figure classes are included, either in groups or...
+
+TODO
+
+
+
+### figure-number-format (M)
+
+TODO
+
+
+
+### list-figures (M)
 
 There is a document setting called `list-figures` which determines
 whether figures are listed in one or more lists near the beginning of the book.
@@ -2818,25 +2848,8 @@ This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 * When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
 
 
-## The `figure-classes` document setting (M)
 
-This is about whether it is listed.
-
-If number-figures is true, are all figure-classes numbered, even the ones which
-are not in list-figures?
-
-ALL GET NUMBERED. The list-figures just determines which lists are made, not which figures get numbered.
-
-There is a document setting called `figure-classes` which determines which
-classes of figures are listed in one or more lists near the beginning of the book.
-
-figure-classes: equation, figure, image, listing
-
-If it's not specified, then all figure classes are included, either in groups or...
-
-
-
-## Settings which apply to books and courses (M)
+## Document settings which apply to books and courses (M)
 
 The following settings apply to books and courses.
 
@@ -2973,7 +2986,7 @@ producing analytics for courses. The default is `0.10`.
 
 
 
-## Settings which apply to courses only (M)
+## Document settings which apply to courses only (M)
 
 The following settings are defined by Markua, but only make sense in the context
 of a course. So, a Markua Processor which is not generating a course can ignore
@@ -3026,7 +3039,6 @@ the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
 
 </div>
-
 
 
 

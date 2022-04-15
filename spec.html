@@ -174,10 +174,9 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
-<li><a href="#the-alt-title-document-setting-m-"><span class="number">4.1</span>The alt-title document setting (M)</a></li>
-<li><a href="#the-list-figures-document-setting-m-"><span class="number">4.2</span>The list-figures document setting (M)</a></li>
-<li><a href="#settings-which-apply-to-books-and-courses-m-"><span class="number">4.3</span>Settings which apply to books and courses (M)</a></li>
-<li><a href="#settings-which-apply-to-courses-only-m-"><span class="number">4.4</span>Settings which apply to courses only (M)</a></li>
+<li><a href="#document-settings-for-figures-alt-title-figure-classes-figure-number-format-and-list-figures-m-"><span class="number">4.1</span>Document settings for figures: alt-title, figure-classes, figure-number-format and list-figures (M)</a></li>
+<li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.2</span>Document settings which apply to books and courses (M)</a></li>
+<li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.3</span>Document settings which apply to courses only (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -3055,6 +3054,7 @@ generate-community: true
 generate-network: true
 list-figures: groups
 figure-number-format: chapter
+figure-classes: equation, figure, image, listing
 }
 
 # Chapter One
@@ -3098,9 +3098,13 @@ database somewhere.</p>
 courses only.</p>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>
-<h2 id="the-alt-title-document-setting-m-" class="definition">
-<span class="number">4.1</span>The alt-title document setting (M)
+<h2 id="document-settings-for-figures-alt-title-figure-classes-figure-number-format-and-list-figures-m-" class="definition">
+<span class="number">4.1</span>Document settings for figures: alt-title, figure-classes, figure-number-format and list-figures (M)
 </h2>
+<p>There are four document settings which affect … TODO</p>
+<h3 id="alt-title-m-" class="definition">
+<span class="number">4.1.1</span>alt-title (M)
+</h3>
 <p>The <code>alt-title</code> document setting controls whether, in the cases where there is
 no figure title explicitly set, the alt text on a resource is removed and used
 instead as the figure title.</p>
@@ -3129,9 +3133,25 @@ is no conflict here.</p>
 provided as alt text. It would be very annoying to hear the same text spoken
 twice (once as the alt text and once as the figure title) when using a screen
 reader.</p>
-<h2 id="the-list-figures-document-setting-m-" class="definition">
-<span class="number">4.2</span>The list-figures document setting (M)
-</h2>
+<h3 id="figure-classes-m-" class="definition">
+<span class="number">4.1.2</span>figure-classes (M)
+</h3>
+<p>This is about whether it is listed.</p>
+<p>If number-figures is true, are all figure-classes numbered, even the ones which
+are not in list-figures?</p>
+<p>ALL GET NUMBERED. The list-figures just determines which lists are made, not which figures get numbered.</p>
+<p>There is a document setting called <code>figure-classes</code> which determines which
+classes of figures are listed in one or more lists near the beginning of the book.</p>
+<p>figure-classes: equation, figure, image, listing</p>
+<p>If it’s not specified, then all figure classes are included, either in groups or…</p>
+<p>TODO</p>
+<h3 id="figure-number-format-m-" class="definition">
+<span class="number">4.1.3</span>figure-number-format (M)
+</h3>
+<p>TODO</p>
+<h3 id="list-figures-m-" class="definition">
+<span class="number">4.1.4</span>list-figures (M)
+</h3>
 <p>There is a document setting called <code>list-figures</code> which determines
 whether figures are listed in one or more lists near the beginning of the book.</p>
 <p>If <code>list-figures</code> is <code>none</code>, then no lists of figures are produced.</p>
@@ -3178,8 +3198,8 @@ etc.</p>
 <li>When <code>list-figures</code> are listed in <code>groups</code>, they each have their own numbers.</li>
 <li>When the <code>figure-number-format</code> is <code>chapter</code>, the numbering is <code>chapter.n</code>.</li>
 </ul>
-<h2 id="settings-which-apply-to-books-and-courses-m-" class="definition">
-<span class="number">4.3</span>Settings which apply to books and courses (M)
+<h2 id="document-settings-which-apply-to-books-and-courses-m-" class="definition">
+<span class="number">4.2</span>Document settings which apply to books and courses (M)
 </h2>
 <p>The following settings apply to books and courses.</p>
 <p><code>authors</code>
@@ -3290,8 +3310,8 @@ Processor may override this setting.</p>
 <p><code>version</code>
 : The version of the Markua document. This is primarily intended for use when
 producing analytics for courses. The default is <code>0.10</code>.</p>
-<h2 id="settings-which-apply-to-courses-only-m-" class="definition">
-<span class="number">4.4</span>Settings which apply to courses only (M)
+<h2 id="document-settings-which-apply-to-courses-only-m-" class="definition">
+<span class="number">4.3</span>Document settings which apply to courses only (M)
 </h2>
 <p>The following settings are defined by Markua, but only make sense in the context
 of a course. So, a Markua Processor which is not generating a course can ignore

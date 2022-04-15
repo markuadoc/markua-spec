@@ -2753,15 +2753,10 @@ Another good choice is the following document settings:
 This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 `Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1`.
 
-## Document settings which apply to books and courses (M)
-
-The following settings apply to books and courses.
+## Document settings which control figures (M)
 
 * When `list-figures` are listed in `groups`, they each have their own numbers.
 * When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
-
-`authors`
-: The authors of the Markua document.
 
 `alt-title`
 : `all`, `text` or `none`. The default is `text`. This setting controls whether,
@@ -2771,6 +2766,210 @@ is used as the figure title, it is NOT also provided as alt text, since it would
 be very annoying to hear the same text spoken twice (once as the alt text and
 once as the figure title) when using a screen reader. This is what the values
 mean:
+
+`figure-classes`
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their `class` attribute. An example of this setting is:
+`figure-classes: equation, figure, image, listing`. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the `list-figures` setting. Note that the numbering of figures
+is controlled by the `number-figures` and `figure-number-format` settings.
+
+`list-figures`
+: `combined`, `groups` or `none`. The default value is `combined`. This setting
+controls whether figures are listed in one or more lists near the beginning of
+the book. Note that whether these figures are numbered is controlled by the
+`number-figures` setting. The `list-figures` setting respects the numbering
+decision specified there. This is what the values mean:
+
+* `none`: No lists of figures are produced.
+* `combined`: One combined list of figures is produced for all figures in the
+  manuscript, ordered by their appearance in the manuscript. This list is called
+  List of Figures for English books, and localized into the language of the book
+  or course.
+* `groups`: The Markua Processor should group figures by their classes or types.
+  Here's how the grouping works:
+  1. If there is no `class` attribute, the figure is groups in a list with other
+     resources of its `type`. This is a nice default, since it results in a List
+     of Tables, List of Code Samples, List of Images, etc. The type of a
+     resource can be specified by the type attribute, or inferred from the
+     format of the resource.
+  2. If there is a `class` attribute, this overrides the type. For example, it
+     is almost never a good idea to have a List of Verbatim, so if you add a
+     `class` of `poem` you will get a List of Poems. (There is nothing special
+     about `poem`, by the way: if you add a `class` of `sonnet`, you will get a
+     List of Sonnets. This is not just useful to differentiate types of poetry,
+     by the way: this approach can be used to automatically produce a
+     `List of Lemmas`, `List of Theorems`, etc.
+
+`number-figures`
+: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
+is `chapter` or `sequential`, then resources are numbered when they are inserted
+as figures. If `sequential`, you get numbering like
+`Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you get numbering like
+`Figure 1.1, Figure 1.2, Figure 4.1, ...`. If `none`, figures are not numbered.
+
+
+
+## Configurable soft line breaks (single newlines) with the soft-breaks document setting (M)
+
+The behaviour of single newlines (also called "soft line breaks" in the Markdown
+community) is determined by the `soft-breaks` setting:
+
+`soft-breaks`
+: `break`, `space` or `source`. Default `source`. Whether single newlines
+produce a space (with `space`), a newline in the HTML source (with `source`) or
+a break tag (with `break`). This is complex and important enough that it is
+discussed its own sub-section of [the inlines section
+below](#configurable-soft-line-breaks-m-).
+
+There is a good argument to be made that single newlines at the end of a line
+should always be treated as a hard line break, not as a soft line break.
+
+In ancient history, some text editors did not automatically wrap lines of text,
+so manual wrapping of plain text files was a good thing to do. However, for
+writing, automatic wrapping of paragraphs is essential for staying in the flow
+while writing, and for being able to edit your text without needing to re-wrap
+every line in a paragraph. This is one decision that even Microsoft Word gets
+right.
+
+So, Markua used to treat single newlines at the end of a line as a hard line
+break, not as a soft line break.
+
+However, compatibility with Markdown by default is more than fixing things such
+as this which I consider to be mistakes, even though the Markdown two-space hack
+to force a hard line break makes me die a little inside every time I (don't) see
+it. As I've grown older, I've become more willing to compromise.
+
+So, Markua has a document setting called `soft-breaks`:
+
+* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
+  Markua produce single newlines in the HTML source. This will pretend to
+  break the line: while it does break the line in the HTML source, it does
+  not break the line when the HTML is rendered. So, this type of line break
+  only is a line break in the HTML source. In the output, it actually functions
+  like a space. (It should be rendered as a space in non-HTML-based output
+  formats like PDF.)
+* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
+  Markua document produce single spaces in the HTML output. This functions
+  identically to single newlines when rendered as HTML. (It should be rendered
+  as a space in non-HTML-based output formats like PDF.)
+* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
+  Markua document produce break tags in the HTML output. The reason this value
+  is `break` is to indicate that when you hit a newline to get a line break, you
+  get a real line break. In HTML, this means a break tag. (It should be rendered
+  as a newline in non-HTML-based output formats like PDF.)
+
+**To be clear: if `soft-breaks` has the value of `break`, all single newlines
+function as hard line breaks (i.e. as they would if they were using the "two
+space hack" to produce a hard line break in normal Markdown).**
+
+```````````````````````````````` example
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo
+bar</p>
+````````````````````````````````
+
+This can be made explicit by setting the `soft-breaks` document setting to
+`source`:
+
+```````````````````````````````` example
+{
+soft-breaks: source
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo
+bar</p>
+````````````````````````````````
+
+This can be made shorter by setting the `soft-breaks` document setting to
+`space`:
+
+```````````````````````````````` example
+{
+soft-breaks: space
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo bar</p>
+````````````````````````````````
+
+If you want your line breaks to actually, well, produce line breaks, you need to
+set the `soft-breaks` document setting to `break`:
+
+```````````````````````````````` example
+{
+soft-breaks: break
+}
+
+# Chapter One
+
+foo
+bar
+.
+<h1>Chapter One</h1>
+<p>foo<br />
+bar</p>
+````````````````````````````````
+
+Finally, note that the `soft-breaks` document setting also applies to other
+paragraph-like contexts, such as definition list items.
+
+
+
+## Document settings which control which editions are generated (M)
+
+TODO
+
+`generate-community`
+: `true` or `false`. The default value is `true`. If `generate-community` is
+`true`, then a community edition book or course is generated, which is composed
+of the content which is included in the community edition with
+`{community: true}` directives. If `generate-community` is `false`, then a
+community edition book or course is not generated, regardless of whether there
+are any `{community: true}` directives.
+
+`generate-network`
+: `true` or `false`. The default value is `true`. If `generate-network` is
+`true`, then a network edition book or course is generated, which is composed
+of the content which is included in the network edition with
+`{network: true}` directives. If `generate-network` is `false`, then a
+network edition book or course is not generated, regardless of whether there
+are any `{network: true}` directives.
+
+`generate-sample`
+: `true` or `false`. The default value is `true`. If `generate-sample` is
+`true`, then a sample book or course is generated, which is composed of the
+content which is included in the sample with `{sample: true}` directives.
+If `generate-sample` is `false`, then a sample book or course is not generated,
+regardless of whether there are any `{sample: true}` directives.
+
+
+
+## Document settings which apply to books and courses (M)
+
+The following settings apply to books and courses.
+
+`authors`
+: The authors of the Markua document.
 
 * `all`: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
@@ -2812,39 +3011,6 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
-`figure-classes`
-: this is a comma-separated list of the figure classes which are included in the
-list(s) of figures near the beginning of the book or course. The default is
-undefined, which means that all figures are included, regardless of the value
-of their `class` attribute. An example of this setting is:
-`figure-classes: equation, figure, image, listing`. Note that whether the
-figures are listed, either grouped by their class or together in one big list,
-is controlled by the `list-figures` setting. Note that the numbering of figures
-is controlled by the `number-figures` and `figure-number-format` settings.
-
-`generate-community`
-: `true` or `false`. The default value is `true`. If `generate-community` is
-`true`, then a community edition book or course is generated, which is composed
-of the content which is included in the community edition with
-`{community: true}` directives. If `generate-community` is `false`, then a
-community edition book or course is not generated, regardless of whether there
-are any `{community: true}` directives.
-
-`generate-network`
-: `true` or `false`. The default value is `true`. If `generate-network` is
-`true`, then a network edition book or course is generated, which is composed
-of the content which is included in the network edition with
-`{network: true}` directives. If `generate-network` is `false`, then a
-network edition book or course is not generated, regardless of whether there
-are any `{network: true}` directives.
-
-`generate-sample`
-: `true` or `false`. The default value is `true`. If `generate-sample` is
-`true`, then a sample book or course is generated, which is composed of the
-content which is included in the sample with `{sample: true}` directives.
-If `generate-sample` is `false`, then a sample book or course is not generated,
-regardless of whether there are any `{sample: true}` directives.
-
 `include-page-numbers-in-references`
 : When a smart crosslink to a figure reference is inserted with `#f`, this
 setting determines how the reference is displayed. If true (the default), the
@@ -2864,42 +3030,8 @@ page numbers in their references (since the text is resizable).
 language code of the language that the Markua document is written in. The
 default is `eng`.
 
-`list-figures`
-: `combined`, `groups` or `none`. The default value is `combined`. This setting
-controls whether figures are listed in one or more lists near the beginning of
-the book. Note that whether these figures are numbered is controlled by the
-`number-figures` setting. The `list-figures` setting respects the numbering
-decision specified there. This is what the values mean:
-
-* `none`: No lists of figures are produced.
-* `combined`: One combined list of figures is produced for all figures in the
-  manuscript, ordered by their appearance in the manuscript. This list is called
-  List of Figures for English books, and localized into the language of the book
-  or course.
-* `groups`: The Markua Processor should group figures by their classes or types.
-  Here's how the grouping works:
-  1. If there is no `class` attribute, the figure is groups in a list with other
-     resources of its `type`. This is a nice default, since it results in a List
-     of Tables, List of Code Samples, List of Images, etc. The type of a
-     resource can be specified by the type attribute, or inferred from the
-     format of the resource.
-  2. If there is a `class` attribute, this overrides the type. For example, it
-     is almost never a good idea to have a List of Verbatim, so if you add a
-     `class` of `poem` you will get a List of Poems. (There is nothing special
-     about `poem`, by the way: if you add a `class` of `sonnet`, you will get a
-     List of Sonnets. This is not just useful to differentiate types of poetry,
-     by the way: this approach can be used to automatically produce a
-     `List of Lemmas`, `List of Theorems`, etc.
-
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.
-
-`number-figures`
-: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
-is `chapter` or `sequential`, then resources are numbered when they are inserted
-as figures. If `sequential`, you get numbering like
-`Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you get numbering like
-`Figure 1.1, Figure 1.2, Figure 4.1, ...`. If `none`, figures are not numbered.
 
 `number-sections`
 : `true` or `false`. Default `false`. Whether the sections (and sub-sections)
@@ -2912,13 +3044,6 @@ at the end of a chapter.
 `restart-footnote-numbering`
 : `true` or `false`. Default `true`. Whether the footnote numbering is restarted
 at the end of a chapter.
-
-`soft-breaks`
-: `break`, `space` or `source`. Default `source`. Whether single newlines
-produce a space (with `space`), a newline in the HTML source (with `source`) or
-a break tag (with `break`). This is complex and important enough that it is
-discussed its own sub-section of [the inlines section
-below](#configurable-soft-line-breaks-m-).
 
 `smart-punctuation`
 : If `smart` is `true`, use smart punctuation. Straight double and single quotes
@@ -2937,7 +3062,8 @@ Processor may override this setting.
 
 `version`
 : The version of the Markua document. This is primarily intended for use when
-producing analytics for courses. The default is `0.10`.
+producing analytics for courses. (This is not related to the version of the
+Markua specification being used; it is the )
 
 
 
@@ -15814,126 +15940,6 @@ line ending or as a space.
 
 A renderer may also provide an option to render soft line breaks
 as hard line breaks.
-
-
-
-<div class="extension">
-
-## Configurable soft line breaks with the soft-breaks document setting (M)
-
-Note: the `soft-breaks` setting is an example of a document setting. Document
-settings are a Markua addition, and are discussed in general terms
-[here](#document-settings-m-).
-
-There is a good argument to be made that single newlines at the end of a line
-should always be treated as a hard line break, not as a soft line break.
-
-In ancient history, some text editors did not automatically wrap lines of text,
-so manual wrapping of plain text files was a good thing to do. However, for
-writing, automatic wrapping of paragraphs is essential for staying in the flow
-while writing, and for being able to edit your text without needing to re-wrap
-every line in a paragraph. This is one decision that even Microsoft Word gets
-right.
-
-So, Markua used to treat single newlines at the end of a line as a hard line
-break, not as a soft line break.
-
-However, compatibility with Markdown by default is more than fixing things such
-as this which I consider to be mistakes, even though the Markdown two-space hack
-to force a hard line break makes me die a little inside every time I (don't) see
-it. As I've grown older, I've become more willing to compromise.
-
-So, Markua has a document setting called `soft-breaks`:
-
-* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
-  Markua produce single newlines in the HTML source. This will pretend to
-  break the line: while it does break the line in the HTML source, it does
-  not break the line when the HTML is rendered. So, this type of line break
-  only is a line break in the HTML source. In the output, it actually functions
-  like a space. (It should be rendered as a space in non-HTML-based output
-  formats like PDF.)
-* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
-  Markua document produce single spaces in the HTML output. This functions
-  identically to single newlines when rendered as HTML. (It should be rendered
-  as a space in non-HTML-based output formats like PDF.)
-* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
-  Markua document produce break tags in the HTML output. The reason this value
-  is `break` is to indicate that when you hit a newline to get a line break, you
-  get a real line break. In HTML, this means a break tag. (It should be rendered
-  as a newline in non-HTML-based output formats like PDF.)
-
-**To be clear: if `soft-breaks` has the value of `break`, all single newlines
-function as hard line breaks (i.e. as they would if they were using the "two
-space hack" to produce a hard line break in normal Markdown).**
-
-```````````````````````````````` example
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made explicit by setting the `soft-breaks` document setting to
-`source`:
-
-```````````````````````````````` example
-{
-soft-breaks: source
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made shorter by setting the `soft-breaks` document setting to
-`space`:
-
-```````````````````````````````` example
-{
-soft-breaks: space
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo bar</p>
-````````````````````````````````
-
-If you want your line breaks to actually, well, produce line breaks, you need to
-set the `soft-breaks` document setting to `break`:
-
-```````````````````````````````` example
-{
-soft-breaks: break
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo<br />
-bar</p>
-````````````````````````````````
-
-Finally, note that the `soft-breaks` document setting also applies to other
-paragraph-like contexts, such as definition list items.
-
-</div>
 
 
 

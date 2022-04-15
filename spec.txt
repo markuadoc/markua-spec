@@ -2817,14 +2817,9 @@ This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 
 The following settings apply to books and courses.
 
-Note that the behaviour of figures is controlled by four related settings:
-
-1. `alt-title`
-2. `figure-classes`
-3. `figure-number-format`
-4. `list-figures`
-
-These four settings should be understood together.
+Note that the behaviour of resources which are treated as figures is controlled
+by four related settings: `alt-title`, `figure-classes`, `figure-number-format`
+and `list-figures`. These need to be considered together.
 
 `authors`
 : The authors of the Markua document.

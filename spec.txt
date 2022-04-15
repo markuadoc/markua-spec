@@ -2720,40 +2720,11 @@ courses only.
 Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.
 
+## The default document settings (M)
 
-
-## Document settings for figures: alt-title, figure-classes, figure-number-format and list-figures (M)
-
-There are four document settings which affect ... TODO
-
-### alt-title (M)
-
-
-
-### figure-classes (M)
-
-This is about whether it is listed.
-
-If number-figures is true, are all figure-classes numbered, even the ones which
-are not in list-figures?
-
-ALL GET NUMBERED. The list-figures just determines which lists are made, not which figures get numbered.
-
-There is a document setting called `figure-classes` which determines which
-classes of figures are listed in one or more lists near the beginning of the book.
-
-figure-classes: equation, figure, image, listing
-
-If it's not specified, then all figure classes are included, either in groups or...
-
-TODO
-
-
-
-### figure-number-format (M)
-
-TODO
-
+Note that the behaviour of resources which are treated as figures is controlled
+by four related settings: `alt-title`, `figure-classes`, `list-figures` and
+`number-fgigures`. These need to be considered together.
 
 The default document settings are:
 
@@ -2765,7 +2736,10 @@ The default document settings are:
 }
 ```
 
-This produces figures named `Figure 1, Figure 2, Figure 3, ...`.
+This produces figures named Figure, and numbered sequentially: Figure 1,
+Figure 2, Figure 3, ...
+
+### Grouping figures with document settings
 
 Another good choice is the following document settings:
 
@@ -2779,18 +2753,12 @@ Another good choice is the following document settings:
 This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 `Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1`.
 
-* When `list-figures` are listed in `groups`, they each have their own numbers.
-* When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
-
-
-
 ## Document settings which apply to books and courses (M)
 
 The following settings apply to books and courses.
 
-Note that the behaviour of resources which are treated as figures is controlled
-by four related settings: `alt-title`, `figure-classes`, `figure-number-format`
-and `list-figures`. These need to be considered together.
+* When `list-figures` are listed in `groups`, they each have their own numbers.
+* When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
 
 `authors`
 : The authors of the Markua document.
@@ -2844,11 +2812,15 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
-`figure-number-format`
-: `chapter` or `sequential`. The default is `sequential`. If `sequential`, you
-get numbering like `Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you 
-get numbering like `Figure 1.1, Figure 1.2, Figure 4.1, ...`. This setting is
-orthogonal to the `list-figures` setting.
+`figure-classes`
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their `class` attribute. An example of this setting is:
+`figure-classes: equation, figure, image, listing`. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the `list-figures` setting. Note that the numbering of figures
+is controlled by the `number-figures` and `figure-number-format` settings.
 
 `generate-community`
 : `true` or `false`. The default value is `true`. If `generate-community` is
@@ -2895,7 +2867,9 @@ default is `eng`.
 `list-figures`
 : `combined`, `groups` or `none`. The default value is `combined`. This setting
 controls whether figures are listed in one or more lists near the beginning of
-the book. This is what the values mean:
+the book. Note that whether these figures are numbered is controlled by the
+`number-figures` setting. The `list-figures` setting respects the numbering
+decision specified there. This is what the values mean:
 
 * `none`: No lists of figures are produced.
 * `combined`: One combined list of figures is produced for all figures in the
@@ -2921,9 +2895,11 @@ the book. This is what the values mean:
 : `true` or `false`. Default `true`. Whether the chapters are numbered.
 
 `number-figures`
-: `true` or `false`. Default `true`. Whether resources are numbered when
-inserted as figures. Note that if figures are listed in `groups`, then each
-list will have different numbering.
+: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
+is `chapter` or `sequential`, then resources are numbered when they are inserted
+as figures. If `sequential`, you get numbering like
+`Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you get numbering like
+`Figure 1.1, Figure 1.2, Figure 4.1, ...`. If `none`, figures are not numbered.
 
 `number-sections`
 : `true` or `false`. Default `false`. Whether the sections (and sub-sections)

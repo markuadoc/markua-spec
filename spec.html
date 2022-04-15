@@ -174,7 +174,7 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
-<li><a href="#document-settings-for-figures-alt-title-figure-classes-figure-number-format-and-list-figures-m-"><span class="number">4.1</span>Document settings for figures: alt-title, figure-classes, figure-number-format and list-figures (M)</a></li>
+<li><a href="#the-default-document-settings-m-"><span class="number">4.1</span>The default document settings (M)</a></li>
 <li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.2</span>Document settings which apply to books and courses (M)</a></li>
 <li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.3</span>Document settings which apply to courses only (M)</a></li>
 </ul>
@@ -1550,7 +1550,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>
@@ -3098,29 +3098,12 @@ database somewhere.</p>
 courses only.</p>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>
-<h2 id="document-settings-for-figures-alt-title-figure-classes-figure-number-format-and-list-figures-m-" class="definition">
-<span class="number">4.1</span>Document settings for figures: alt-title, figure-classes, figure-number-format and list-figures (M)
+<h2 id="the-default-document-settings-m-" class="definition">
+<span class="number">4.1</span>The default document settings (M)
 </h2>
-<p>There are four document settings which affect … TODO</p>
-<h3 id="alt-title-m-" class="definition">
-<span class="number">4.1.1</span>alt-title (M)
-</h3>
-<h3 id="figure-classes-m-" class="definition">
-<span class="number">4.1.2</span>figure-classes (M)
-</h3>
-<p>This is about whether it is listed.</p>
-<p>If number-figures is true, are all figure-classes numbered, even the ones which
-are not in list-figures?</p>
-<p>ALL GET NUMBERED. The list-figures just determines which lists are made, not which figures get numbered.</p>
-<p>There is a document setting called <code>figure-classes</code> which determines which
-classes of figures are listed in one or more lists near the beginning of the book.</p>
-<p>figure-classes: equation, figure, image, listing</p>
-<p>If it’s not specified, then all figure classes are included, either in groups or…</p>
-<p>TODO</p>
-<h3 id="figure-number-format-m-" class="definition">
-<span class="number">4.1.3</span>figure-number-format (M)
-</h3>
-<p>TODO</p>
+<p>Note that the behaviour of resources which are treated as figures is controlled
+by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>list-figures</code> and
+<code>number-fgigures</code>. These need to be considered together.</p>
 <p>The default document settings are:</p>
 <pre><code>{
   list-figures: combined
@@ -3128,7 +3111,11 @@ classes of figures are listed in one or more lists near the beginning of the boo
   ...
 }
 </code></pre>
-<p>This produces figures named <code>Figure 1, Figure 2, Figure 3, ...</code>.</p>
+<p>This produces figures named Figure, and numbered sequentially: Figure 1,
+Figure 2, Figure 3, …</p>
+<h3 id="grouping-figures-with-document-settings" class="definition">
+<span class="number">4.1.1</span>Grouping figures with document settings
+</h3>
 <p>Another good choice is the following document settings:</p>
 <pre><code>{
   list-figures: groups
@@ -3137,17 +3124,14 @@ classes of figures are listed in one or more lists near the beginning of the boo
 </code></pre>
 <p>This produces figures like <code>Listing 1.1, Listing 1.2, Listing 4.1</code> and
 <code>Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1</code>.</p>
-<ul>
-<li>When <code>list-figures</code> are listed in <code>groups</code>, they each have their own numbers.</li>
-<li>When the <code>figure-number-format</code> is <code>chapter</code>, the numbering is <code>chapter.n</code>.</li>
-</ul>
 <h2 id="document-settings-which-apply-to-books-and-courses-m-" class="definition">
 <span class="number">4.2</span>Document settings which apply to books and courses (M)
 </h2>
 <p>The following settings apply to books and courses.</p>
-<p>Note that the behaviour of resources which are treated as figures is controlled
-by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>figure-number-format</code>
-and <code>list-figures</code>. These need to be considered together.</p>
+<ul>
+<li>When <code>list-figures</code> are listed in <code>groups</code>, they each have their own numbers.</li>
+<li>When the <code>figure-number-format</code> is <code>chapter</code>, the numbering is <code>chapter.n</code>.</li>
+</ul>
 <p><code>authors</code>
 : The authors of the Markua document.</p>
 <p><code>alt-title</code>
@@ -3196,11 +3180,15 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
-<p><code>figure-number-format</code>
-: <code>chapter</code> or <code>sequential</code>. The default is <code>sequential</code>. If <code>sequential</code>, you
-get numbering like <code>Figure 1, Figure 2, Figure 3, ...</code>. If <code>chapter</code>, you
-get numbering like <code>Figure 1.1, Figure 1.2, Figure 4.1, ...</code>. This setting is
-orthogonal to the <code>list-figures</code> setting.</p>
+<p><code>figure-classes</code>
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their <code>class</code> attribute. An example of this setting is:
+<code>figure-classes: equation, figure, image, listing</code>. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
+is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
 <p><code>generate-community</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
 <code>true</code>, then a community edition book or course is generated, which is composed
@@ -3240,7 +3228,9 @@ default is <code>eng</code>.</p>
 <p><code>list-figures</code>
 : <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This setting
 controls whether figures are listed in one or more lists near the beginning of
-the book. This is what the values mean:</p>
+the book. Note that whether these figures are numbered is controlled by the
+<code>number-figures</code> setting. The <code>list-figures</code> setting respects the numbering
+decision specified there. This is what the values mean:</p>
 <ul>
 <li><code>none</code>: No lists of figures are produced.</li>
 <li><code>combined</code>: One combined list of figures is produced for all figures in the
@@ -3268,9 +3258,11 @@ by the way: this approach can be used to automatically produce a
 <p><code>number-chapters</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
 <p><code>number-figures</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether resources are numbered when
-inserted as figures. Note that if figures are listed in <code>groups</code>, then each
-list will have different numbering.</p>
+: <code>chapter</code>, <code>none</code>, or <code>sequential</code>. The default is <code>sequential</code>. If the value
+is <code>chapter</code> or <code>sequential</code>, then resources are numbered when they are inserted
+as figures. If <code>sequential</code>, you get numbering like
+<code>Figure 1, Figure 2, Figure 3, ...</code>. If <code>chapter</code>, you get numbering like
+<code>Figure 1.1, Figure 1.2, Figure 4.1, ...</code>. If <code>none</code>, figures are not numbered.</p>
 <p><code>number-sections</code>
 : <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
 are numbered.</p>
@@ -6456,7 +6448,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6895,7 +6887,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6919,7 +6911,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16416,7 +16408,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

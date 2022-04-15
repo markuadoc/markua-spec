@@ -2728,42 +2728,6 @@ There are four document settings which affect ... TODO
 
 ### alt-title (M)
 
-The `alt-title` document setting controls whether, in the cases where there is
-no figure title explicitly set, the alt text on a resource is removed and used
-instead as the figure title.
-
-The `alt-title` can be `all`, `text` or `none`. The default is `text`.
-
-This is what the values mean:
-
-`all`
-: If no title is provided for a given resource, regardless of the resource type,
-remove the alt text and use it as the figure title instead. (This setting is
-closest to the behaviour of LFM and of Markua version 0.10.)
-
-`text`
-: If no title is provided for a given **text-based** resource (such as an
-external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. (This is arguably the most sensible choice.)
-
-`none`
-: With this setting, never remove the alt text to use it as the figure title,
-even for a text-based resource where no figure title is provided. (This is how
-Markdown behaves.)
-
-The default is `text` since it strikes a balance between preserving
-compatibility with Markdown for non-text-based resources like images, while
-still providing a sensible default for text-based resources like code samples.
-Since Markdown does not define support for external text-based resources, there
-is no conflict here.
-
-Note that if the alt text is converted into the figure title, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure title) when using a screen
-reader.
-
 
 
 ### figure-classes (M)
@@ -2853,13 +2817,54 @@ This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 
 The following settings apply to books and courses.
 
+Note that the behaviour of figures is controlled by four related settings:
+
+1. `alt-title`
+2. `figure-classes`
+3. `figure-number-format`
+4. `list-figures`
+
+These four settings should be understood together.
+
 `authors`
 : The authors of the Markua document.
 
 `alt-title`
-: `all`, `text` or `none`. The default is `text`. This is central to how
-resources operate in Markua, so it is discussed
-[above](#the-alt-title-document-setting-m-).
+: `all`, `text` or `none`. The default is `text`.
+
+The `alt-title` document setting controls whether, in the cases where there is
+no figure title explicitly set, the alt text on a resource is removed and used
+instead as the figure title.
+
+This is what the values mean:
+
+  `all`
+  : If no title is provided for a given resource, regardless of the resource type,
+  remove the alt text and use it as the figure title instead. (This setting is
+  closest to the behaviour of LFM and of Markua version 0.10.)
+
+  `text`
+  : If no title is provided for a given **text-based** resource (such as an
+  external code sample), remove the alt text and use it as the figure title
+  instead. However, if the resource is not purely text-based, such as an image or
+  a video, do not remove the alt text to use it as the figure title, even if
+  no figure title is provided. (This is arguably the most sensible choice.)
+
+  `none`
+  : With this setting, never remove the alt text to use it as the figure title,
+  even for a text-based resource where no figure title is provided. (This is how
+  Markdown behaves.)
+
+The default is `text` since it strikes a balance between preserving
+compatibility with Markdown for non-text-based resources like images, while
+still providing a sensible default for text-based resources like code samples.
+Since Markdown does not define support for external text-based resources, there
+is no conflict here.
+
+Note that if the alt text is converted into the figure title, it is NOT also
+provided as alt text. It would be very annoying to hear the same text spoken
+twice (once as the alt text and once as the figure title) when using a screen
+reader.
 
 `contributors`
 : Any contributors to the Markua document who are not authors.

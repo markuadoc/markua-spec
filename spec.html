@@ -3105,34 +3105,6 @@ Markua Processors can understand their own extension attributes.</p>
 <h3 id="alt-title-m-" class="definition">
 <span class="number">4.1.1</span>alt-title (M)
 </h3>
-<p>The <code>alt-title</code> document setting controls whether, in the cases where there is
-no figure title explicitly set, the alt text on a resource is removed and used
-instead as the figure title.</p>
-<p>The <code>alt-title</code> can be <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>.</p>
-<p>This is what the values mean:</p>
-<p><code>all</code>
-: If no title is provided for a given resource, regardless of the resource type,
-remove the alt text and use it as the figure title instead. (This setting is
-closest to the behaviour of LFM and of Markua version 0.10.)</p>
-<p><code>text</code>
-: If no title is provided for a given <strong>text-based</strong> resource (such as an
-external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. (This is arguably the most sensible choice.)</p>
-<p><code>none</code>
-: With this setting, never remove the alt text to use it as the figure title,
-even for a text-based resource where no figure title is provided. (This is how
-Markdown behaves.)</p>
-<p>The default is <code>text</code> since it strikes a balance between preserving
-compatibility with Markdown for non-text-based resources like images, while
-still providing a sensible default for text-based resources like code samples.
-Since Markdown does not define support for external text-based resources, there
-is no conflict here.</p>
-<p>Note that if the alt text is converted into the figure title, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure title) when using a screen
-reader.</p>
 <h3 id="figure-classes-m-" class="definition">
 <span class="number">4.1.2</span>figure-classes (M)
 </h3>
@@ -3202,12 +3174,41 @@ etc.</p>
 <span class="number">4.2</span>Document settings which apply to books and courses (M)
 </h2>
 <p>The following settings apply to books and courses.</p>
+<p>Note that the behaviour of figures is controlled by four related settings:</p>
+<ol>
+<li><code>alt-title</code></li>
+<li><code>figure-classes</code></li>
+<li><code>figure-number-format</code></li>
+<li><code>list-figures</code></li>
+</ol>
+<p>These four settings should be understood together.</p>
 <p><code>authors</code>
 : The authors of the Markua document.</p>
 <p><code>alt-title</code>
-: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This is central to how
-resources operate in Markua, so it is discussed
-<a href="#the-alt-title-document-setting-m-">above</a>.</p>
+: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used instead as the figure title instead. If alt text
+is used as the figure title, it is NOT also provided as alt text, since it would
+be very annoying to hear the same text spoken twice (once as the alt text and
+once as the figure title) when using a screen reader. This is what the values
+mean:</p>
+<ul>
+<li><code>all</code>: if no title is provided for a given resource, regardless of the
+resource type, remove the alt text and use it as the figure title instead. (This
+choice is closest to the behaviour of LFM and of Markua version 0.10.)</li>
+<li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
+an external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. This is arguably the most sensible choice, and it
+is the default since it strikes a balance between preserving compatibility with
+Markdown for non-text-based resources like images, while still providing a
+sensible default for text-based resources like code samples. Since Markdown does
+not define support for external text-based resources, there is no conflict here.</li>
+<li><code>none</code>: never remove the alt text to use it as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)</li>
+</ul>
 <p><code>contributors</code>
 : Any contributors to the Markua document who are not authors.</p>
 <p><code>copyright</code>

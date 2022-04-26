@@ -370,7 +370,7 @@ discussed next.
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behaviour of the Markua Processor. For example, you can set the
+affect the behavior of the Markua Processor. For example, you can set the
 `alt-title` setting to `all` to make images use the alt text as the figure
 title instead of as alt text:
 
@@ -388,7 +388,7 @@ This is an apple with a figure title but no alt text:
 
 This gets you the terseness of inserting images as figures in LFM, in a general
 way. Note that if the `alt-title` document setting is set to `text` (the
-default) this behaviour only happens for text-based resources like code samples.
+default) this behavior only happens for text-based resources like code samples.
 If the `alt-title` is set to `none`, it never happens.
 
 The generalization of the Markdown image syntax into resources, and the addition
@@ -1568,7 +1568,7 @@ document) and directives (at certain points throughout the document). All
 metadata is enclosed in curly braces `{` ... `}`.
 
 Metadata is not actually output in the Markua document itself. Instead, it
-changes the behaviour of the Markua Processor, sometimes dramatically.
+changes the behavior of the Markua Processor, sometimes dramatically.
 
 First, however, it is important to start with how Markua headers and metadata
 are used to define document structure.
@@ -1933,7 +1933,7 @@ as a figure, which specifies the text to use for the figure in the appropriate
 list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a
 heading does not have a title attribute, the text of the heading itself is
 used--which is quite often exactly what is desired. Use of a `title` attribute
-is always optional; it's only used when the default behaviour of using the
+is always optional; it's only used when the default behavior of using the
 heading text (or the `title` attribute for a resource) is not appropriate,
 say if it's too long.
 
@@ -2142,7 +2142,7 @@ after something like a list is actually a continuation of the previous
 paragraph.
 
 Now, this could have been done by just not adding blank lines, only single
-newlines, but that would involve fighting against existing Markdown behaviour.
+newlines, but that would involve fighting against existing Markdown behavior.
 Worse, it would introduce an incompatibility just to fix something that many
 people don't consider broken.
 
@@ -2200,7 +2200,7 @@ bar
 
 Note that this works for more than just lists. In fact, it has nothing to do
 with lists, or even with images or other resources. It's all about the
-indentation behaviour of a paragraph, typically following some other block. So,
+indentation behavior of a paragraph, typically following some other block. So,
 you can use this whenever you want:
 
 ```````````````````````````````` example
@@ -2287,7 +2287,7 @@ version of Markua without needing to specify anything special.
 
 ## Directives (M)
 
-Directives are switches which affect the behaviour of a Markua Processor.
+Directives are switches which affect the behavior of a Markua Processor.
 
 The syntax for directives is `{simple}`. A directive is surrounded in curly
 braces, and must have a blank line above and below it.
@@ -2620,7 +2620,7 @@ Yada yada yada.
 
 # Document settings (M)
 
-The behaviour of a Markua Processor can be affected by certain global document
+The behavior of a Markua Processor can be affected by certain global document
 settings. These settings are very important, since they have an effect on the
 entire book or course.
 
@@ -2634,11 +2634,11 @@ Once something other than a document settings hash is encountered, no more
 document settings hashes can be defined.
 
 The settings are newline-separated key-value pairs (`key: value`) which contain
-information about the document and about the desired behaviour of the Markua
+information about the document and about the desired behavior of the Markua
 Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
-`authors`, etc. Markua Processor behaviour includes settings like `alt-title`,
+`authors`, etc. Markua Processor behavior includes settings like `alt-title`,
 `list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
 
 
@@ -2722,7 +2722,7 @@ Markua Processors can understand their own extension attributes.
 
 ## The default document settings (M)
 
-Note that the behaviour of resources which are treated as figures is controlled
+Note that the behavior of resources which are treated as figures is controlled
 by four related settings: `alt-title`, `figure-classes`, `list-figures` and
 `number-fgigures`. These need to be considered together.
 
@@ -2813,128 +2813,6 @@ as figures. If `sequential`, you get numbering like
 
 
 
-## Configurable soft line breaks (single newlines) with the soft-breaks document setting (M)
-
-The behaviour of single newlines (also called "soft line breaks" in the Markdown
-community) is determined by the `soft-breaks` setting:
-
-`soft-breaks`
-: `break`, `space` or `source`. Default `source`. Whether single newlines
-produce a space (with `space`), a newline in the HTML source (with `source`) or
-a break tag (with `break`). This is complex and important enough that it is
-discussed its own sub-section of [the inlines section
-below](#configurable-soft-line-breaks-m-).
-
-There is a good argument to be made that single newlines at the end of a line
-should always be treated as a hard line break, not as a soft line break.
-
-In ancient history, some text editors did not automatically wrap lines of text,
-so manual wrapping of plain text files was a good thing to do. However, for
-writing, automatic wrapping of paragraphs is essential for staying in the flow
-while writing, and for being able to edit your text without needing to re-wrap
-every line in a paragraph. This is one decision that even Microsoft Word gets
-right.
-
-So, Markua used to treat single newlines at the end of a line as a hard line
-break, not as a soft line break.
-
-However, compatibility with Markdown by default is more than fixing things such
-as this which I consider to be mistakes, even though the Markdown two-space hack
-to force a hard line break makes me die a little inside every time I (don't) see
-it. As I've grown older, I've become more willing to compromise.
-
-So, Markua has a document setting called `soft-breaks`:
-
-* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
-  Markua produce single newlines in the HTML source. This will pretend to
-  break the line: while it does break the line in the HTML source, it does
-  not break the line when the HTML is rendered. So, this type of line break
-  only is a line break in the HTML source. In the output, it actually functions
-  like a space. (It should be rendered as a space in non-HTML-based output
-  formats like PDF.)
-* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
-  Markua document produce single spaces in the HTML output. This functions
-  identically to single newlines when rendered as HTML. (It should be rendered
-  as a space in non-HTML-based output formats like PDF.)
-* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
-  Markua document produce break tags in the HTML output. The reason this value
-  is `break` is to indicate that when you hit a newline to get a line break, you
-  get a real line break. In HTML, this means a break tag. (It should be rendered
-  as a newline in non-HTML-based output formats like PDF.)
-
-**To be clear: if `soft-breaks` has the value of `break`, all single newlines
-function as hard line breaks (i.e. as they would if they were using the "two
-space hack" to produce a hard line break in normal Markdown).**
-
-```````````````````````````````` example
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made explicit by setting the `soft-breaks` document setting to
-`source`:
-
-```````````````````````````````` example
-{
-soft-breaks: source
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made shorter by setting the `soft-breaks` document setting to
-`space`:
-
-```````````````````````````````` example
-{
-soft-breaks: space
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo bar</p>
-````````````````````````````````
-
-If you want your line breaks to actually, well, produce line breaks, you need to
-set the `soft-breaks` document setting to `break`:
-
-```````````````````````````````` example
-{
-soft-breaks: break
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo<br />
-bar</p>
-````````````````````````````````
-
-Finally, note that the `soft-breaks` document setting also applies to other
-paragraph-like contexts, such as definition list items.
-
-
-
 ## Document settings which control which editions are generated (M)
 
 TODO
@@ -2973,7 +2851,7 @@ The following settings apply to books and courses.
 
 * `all`: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
-choice is closest to the behaviour of LFM and of Markua version 0.10.)
+choice is closest to the behavior of LFM and of Markua version 0.10.)
 * `text`: if no title is provided for a given **text-based** resource (such as
 an external code sample), remove the alt text and use it as the figure title
 instead. However, if the resource is not purely text-based, such as an image or
@@ -3051,6 +2929,30 @@ will be rendered as curly quotes, depending on their position, `--` will be
 rendered as an en-dash, `---` will be rendered as an em-dash and `...` will be
 rendered as ellipses. If `smart` is `false`, do not use smart punctuation.
 
+`soft-breaks`
+: `break`, `space` or `source`. Default `source`. This setting determines the
+behaviour of single newlines in the output. The `source` option is arguably the
+worst option, but it is the default because Markua must be compatible with
+Markdown by default.
+  * If `soft-breaks` is `source`, then
+    single newlines inside paragraphs in the Markua source produce single newlines
+    in the HTML source. This will pretend to break the line: while it does break
+    the line in the HTML source, it does *not* break the line when the HTML is
+    rendered, since in HTML a single newline is equivalent to a single space. So,
+    this type of line break only is a line break in the HTML source--hence the name
+    `source`. For non-HTML output formats such as LaTeX or PDF, a value of `source`
+    has the same effect as `space`, discussed later.  
+  * If `soft-breaks` is `space`, then single newlines inside paragraphs in the
+    Markua document produce **single spaces** in the HTML output. This functions
+    identically to single newlines when rendered as HTML. (It should be rendered
+    as a space in non-HTML-based output formats like PDF.)
+  * If `soft-breaks` is `break`, then single newlines inside paragraphs in the
+    Markua document produce break tags in the HTML output and line breaks in
+    non-HTML output like LaTeX or PDF. The reason this value is called `break` is
+    to indicate that when you hit a newline to get a line break, you get a real line break. In HTML, this means a break tag. (It should be rendered
+    as a newline in non-HTML-based output formats like PDF.) **To be clear: if `soft-breaks` has the value of `break`, all single newlines
+function as hard line breaks (i.e. as they would if they were using the "two space hack" to produce a hard line break in normal Markdown).**
+
 `title`
 : The title of the Markua document.
 
@@ -3109,13 +3011,13 @@ are shown after a quiz is completed, say in an online course.
 is used, or the latest one.
 
 `default-random-choice-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of
+: `true` or `false`. The default is `false`. This sets the default behavior of
 multiple choice questions. If `true`, the choices in the multiple choice
 question are randomly arranged; if `false`, they are presented in the order
 written.
 
 `default-random-question-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of
+: `true` or `false`. The default is `false`. This sets the default behavior of
 the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
 
@@ -3169,7 +3071,7 @@ will consider what they have in common. Specifically, resources share the
 following things:
 
 1. Attributes and attribute list support
-2. Behaviour as a figure or a span based on the presence of title
+2. Behavior as a figure or a span based on the presence of title
 3. Support for a title to be provided from alt text based on the `alt-title`
    document setting.
 
@@ -3313,7 +3215,7 @@ A resource with a `title` is a figure.
 The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it
 chooses. For example, a Markua Processor can position all titles above or below
-figures, or use a different behaviour based on the resource format (e.g. table
+figures, or use a different behavior based on the resource format (e.g. table
 titles above, image titles below).
 
 Note that the figure title itself may contain Markua text formatting (e.g. bold,
@@ -5680,7 +5582,7 @@ There are three main use cases for a Markua resource:
 1. Inserting a specific `class` of resource, such as a `poem`.
 2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
    used in many places and/or sourced from a third party.
-3. Controlling the behaviour of fonts or whitespace for specific types of
+3. Controlling the behavior of fonts or whitespace for specific types of
    text, such as poetry.
 
 The following are the supported attributes for verbatim resources, in addition
@@ -9208,7 +9110,7 @@ Here the outer list is loose, the inner list tight:
 
 ## List attributes (M)
 
-By default, Markua keeps the behaviour of lists to be identical to that in
+By default, Markua keeps the behavior of lists to be identical to that in
 Markdown, as described by John Gruber and specified by CommonMark.
 The enhancements that Markua makes to lists are purely additive: if you use any
 CommonMark-compliant list in a Markua document, it will work exactly as it would
@@ -9261,7 +9163,7 @@ c. baz</p>
 <p>after</p>
 ````````````````````````````````
 
-Again, both of these behaviours are as defined in the CommonMark spec.
+Again, both of these behaviors are as defined in the CommonMark spec.
 
 Now, Markua can't change this by default, without being incompatibile with
 Markdown.
@@ -9658,7 +9560,7 @@ after
 ### Lists with Attributes: Lazy Style
 
 It is acceptable to just use the number of the first label, and rely on list
-behaviour.
+behavior.
 
 This list will be numbered 1, 2, 3:
 
@@ -9765,7 +9667,7 @@ after
 
 ### Lists with Attributes: Redundant Style
 
-This list will be numbered 1, 2, 3. This is just the default behaviour made
+This list will be numbered 1, 2, 3. This is just the default behavior made
 explicit:
 
 ```````````````````````````````` example
@@ -10581,7 +10483,7 @@ This is the only way to center text in Markua.
 
 Unlike other blurb types which have their origin in technical books, centering
 text has a wide range of uses. So, it could have been thought of as something
-different than a blurb. However, in terms of its behaviour and the way it's
+different than a blurb. However, in terms of its behavior and the way it's
 inserted, centered text is a blurb--whether it's inserted via syntactic sugar or
 via a class attribute on a normal blurb element.
 
@@ -10865,7 +10767,7 @@ submitted when the `time-limit` is expired. If false, it is not. Either way, an
 incomplete quiz counts as an attempt.
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the default behaviour of
+: `true` or `false`. The default is `true`. This sets the default behavior of
 fill in the blank questions. If `true`, the fill in the blank question answers
 are case-sensitive. If false, they are not.
 
@@ -10924,13 +10826,13 @@ a larger course context is determined as follows: its `points` are the
 numerator, and the total `points` in the quiz or exercise is the denominator.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of
+: `true` or `false`. The default is `false`. This sets the default behavior of
 multiple choice questions. If `true`, the choices in the multiple choice
 question are randomly arranged; if `false`, they are presented in the order
 written.
 
 `random-question-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour
+: `true` or `false`. The default is `false`. This sets the default behavior
 of the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
 
@@ -11054,7 +10956,7 @@ The default is 1.
 
 `random-choice-order`
 : `true` or `false`. The default is `false`, unless `choose-answers` is used.
-This sets the behaviour of the specific multiple choice question. If `true`,
+This sets the behavior of the specific multiple choice question. If `true`,
 the choices in the multiple choice question are randomly arranged; if `false`,
 they are presented in the order written. If this attribute is omitted, its
 value is determined by the `random-choice-order` attribute on the quiz itself,
@@ -11089,7 +10991,7 @@ in blank!
 ### Supported attributes on multiple selection questions
 
 `mark`
-: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour
+: `binary` or `ratio`. The default is `binary`. This sets the marking behavior
 of the specific multiple selection question. If `binary`, the question is all
 or nothing: you either get full points for the question, or a 0 on the question.
 To get full points, you must select every `true` choice and none of the `false`
@@ -11108,7 +11010,7 @@ computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a
 question which is left blank always earns 0 points.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the behaviour of the
+: `true` or `false`. The default is `false`. This sets the behavior of the
 specific multiple selection question. If `true`, the choices in the multiple
 choice question are randomly arranged; if `false`, they are presented in the
 order written. If this attribute is omitted, its value is determined by the
@@ -11297,7 +11199,7 @@ they are worth the full value of points that the question is worth), or they
 must specify points between 0 and the `points` value.
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the behaviour of the
+: `true` or `false`. The default is `true`. This sets the behavior of the
 specific fill in the blank question. If `true`, the fill in the blank question
 answer is case-sensitive. If false, it is not. In the case of multiple
 acceptable answer values, this attribute applies to all of them. Note that this
@@ -15980,7 +15882,7 @@ A Markua Processor may replace the `"` character with the appropriate "curly
 quote" at its discretion. This lets `"typography"` become `“typography”`, and
 `it's` become `it’s` as appropriate.
 
-Note that this is an optional behaviour: a Markua Processor may support this
+Note that this is an optional behavior: a Markua Processor may support this
 fully, only in some output formats, or not at all.
 
 Also, note that it is **NEVER** acceptable for a Markua Processor to do this,

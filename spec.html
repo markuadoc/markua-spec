@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.13 (2022-04-07)</div>
+<div class="version">Version 0.30.14 (2022-04-26)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -175,10 +175,9 @@ $(document).ready(function() {
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
 <li><a href="#the-default-document-settings-m-"><span class="number">4.1</span>The default document settings (M)</a></li>
-<li><a href="#document-settings-which-control-figures-m-"><span class="number">4.2</span>Document settings which control figures (M)</a></li>
-<li><a href="#document-settings-which-control-which-editions-are-generated-m-"><span class="number">4.3</span>Document settings which control which editions are generated (M)</a></li>
-<li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.4</span>Document settings which apply to books and courses (M)</a></li>
-<li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.5</span>Document settings which apply to courses only (M)</a></li>
+<li><a href="#document-settings-which-apply-to-books-only-m-"><span class="number">4.2</span>Document settings which apply to books only (M)</a></li>
+<li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.3</span>Document settings which apply to books and courses (M)</a></li>
+<li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.4</span>Document settings which apply to courses only (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -3102,9 +3101,6 @@ Markua Processors can understand their own extension attributes.</p>
 <h2 id="the-default-document-settings-m-" class="definition">
 <span class="number">4.1</span>The default document settings (M)
 </h2>
-<p>Note that the behavior of resources which are treated as figures is controlled
-by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>list-figures</code> and
-<code>number-fgigures</code>. These need to be considered together.</p>
 <p>The default document settings are:</p>
 <pre><code>{
   list-figures: combined
@@ -3125,70 +3121,17 @@ Figure 2, Figure 3, …</p>
 </code></pre>
 <p>This produces figures like <code>Listing 1.1, Listing 1.2, Listing 4.1</code> and
 <code>Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1</code>.</p>
-<h2 id="document-settings-which-control-figures-m-" class="definition">
-<span class="number">4.2</span>Document settings which control figures (M)
+<h2 id="document-settings-which-apply-to-books-only-m-" class="definition">
+<span class="number">4.2</span>Document settings which apply to books only (M)
 </h2>
-<ul>
-<li>When <code>list-figures</code> are listed in <code>groups</code>, they each have their own numbers.</li>
-<li>When the <code>figure-number-format</code> is <code>chapter</code>, the numbering is <code>chapter.n</code>.</li>
-</ul>
-<p><code>alt-title</code>
-: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
-in the cases where there is no figure title explicitly set, the alt text on a
-resource is removed and used instead as the figure title instead. If alt text
-is used as the figure title, it is NOT also provided as alt text, since it would
-be very annoying to hear the same text spoken twice (once as the alt text and
-once as the figure title) when using a screen reader. This is what the values
-mean:</p>
-<p><code>figure-classes</code>
-: this is a comma-separated list of the figure classes which are included in the
-list(s) of figures near the beginning of the book or course. The default is
-undefined, which means that all figures are included, regardless of the value
-of their <code>class</code> attribute. An example of this setting is:
-<code>figure-classes: equation, figure, image, listing</code>. Note that whether the
-figures are listed, either grouped by their class or together in one big list,
-is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
-is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
-<p><code>list-figures</code>
-: <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This setting
-controls whether figures are listed in one or more lists near the beginning of
-the book. Note that whether these figures are numbered is controlled by the
-<code>number-figures</code> setting. The <code>list-figures</code> setting respects the numbering
-decision specified there. This is what the values mean:</p>
-<ul>
-<li><code>none</code>: No lists of figures are produced.</li>
-<li><code>combined</code>: One combined list of figures is produced for all figures in the
-manuscript, ordered by their appearance in the manuscript. This list is called
-List of Figures for English books, and localized into the language of the book
-or course.</li>
-<li><code>groups</code>: The Markua Processor should group figures by their classes or types.
-Here’s how the grouping works:
-<ol>
-<li>If there is no <code>class</code> attribute, the figure is groups in a list with other
-resources of its <code>type</code>. This is a nice default, since it results in a List
-of Tables, List of Code Samples, List of Images, etc. The type of a
-resource can be specified by the type attribute, or inferred from the
-format of the resource.</li>
-<li>If there is a <code>class</code> attribute, this overrides the type. For example, it
-is almost never a good idea to have a List of Verbatim, so if you add a
-<code>class</code> of <code>poem</code> you will get a List of Poems. (There is nothing special
-about <code>poem</code>, by the way: if you add a <code>class</code> of <code>sonnet</code>, you will get a
-List of Sonnets. This is not just useful to differentiate types of poetry,
-by the way: this approach can be used to automatically produce a
-<code>List of Lemmas</code>, <code>List of Theorems</code>, etc.</li>
-</ol>
-</li>
-</ul>
-<p><code>number-figures</code>
-: <code>chapter</code>, <code>none</code>, or <code>sequential</code>. The default is <code>sequential</code>. If the value
-is <code>chapter</code> or <code>sequential</code>, then resources are numbered when they are inserted
-as figures. If <code>sequential</code>, you get numbering like
-<code>Figure 1, Figure 2, Figure 3, ...</code>. If <code>chapter</code>, you get numbering like
-<code>Figure 1.1, Figure 1.2, Figure 4.1, ...</code>. If <code>none</code>, figures are not numbered.</p>
-<h2 id="document-settings-which-control-which-editions-are-generated-m-" class="definition">
-<span class="number">4.3</span>Document settings which control which editions are generated (M)
-</h2>
-<p>TODO</p>
+<p>The following settings are defined by Markua, but only make sense in the
+context of a book. So, a Markua Processor which is not generating a book can
+ignore them.</p>
+<p>Note that while the idea of a sample book is pretty universal, the idea of a
+community or network edition could be argued to be somewhat Leanpub-specific.
+However, these are in the Markua spec instead of being left as extension
+attributes, since they are essentially different levels of sample or subset
+books, and I am convinced that this has a general use outside of Leanpub.</p>
 <p><code>generate-community</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
 <code>true</code>, then a community edition book or course is generated, which is composed
@@ -3210,11 +3153,23 @@ content which is included in the sample with <code>{sample: true}</code> directi
 If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
 regardless of whether there are any <code>{sample: true}</code> directives.</p>
 <h2 id="document-settings-which-apply-to-books-and-courses-m-" class="definition">
-<span class="number">4.4</span>Document settings which apply to books and courses (M)
+<span class="number">4.3</span>Document settings which apply to books and courses (M)
 </h2>
 <p>The following settings apply to books and courses.</p>
+<p>Note that the behavior of resources which are treated as figures is controlled
+by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>list-figures</code> and
+<code>number-figures</code>. These need to be considered together: the behavior of these
+settings are tightly coupled.</p>
 <p><code>authors</code>
 : The authors of the Markua document.</p>
+<p><code>alt-title</code>
+: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used instead as the figure title instead. If alt text
+is used as the figure title, it is NOT also provided as alt text, since it would
+be very annoying to hear the same text spoken twice (once as the alt text and
+once as the figure title) when using a screen reader. This is what the values
+mean:</p>
 <ul>
 <li><code>all</code>: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
@@ -3253,6 +3208,15 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
+<p><code>figure-classes</code>
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their <code>class</code> attribute. An example of this setting is:
+<code>figure-classes: equation, figure, image, listing</code>. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
+is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
 <p><code>include-page-numbers-in-references</code>
 : When a smart crosslink to a figure reference is inserted with <code>#f</code>, this
 setting determines how the reference is displayed. If true (the default), the
@@ -3269,8 +3233,45 @@ page numbers in their references (since the text is resizable).</p>
 : The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
 language code of the language that the Markua document is written in. The
 default is <code>eng</code>.</p>
+<p><code>list-figures</code>
+: <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This setting
+controls whether figures are listed in one or more lists near the beginning of
+the book. Note that whether these figures are numbered is controlled by the
+<code>number-figures</code> setting. The <code>list-figures</code> setting respects the numbering
+decision specified there. This is what the values mean:</p>
+<ul>
+<li><code>none</code>: No lists of figures are produced.</li>
+<li><code>combined</code>: One combined list of figures is produced for all figures in the
+manuscript, ordered by their appearance in the manuscript. This list is called
+List of Figures for English books, and localized into the language of the book
+or course.</li>
+<li><code>groups</code>: The Markua Processor should group figures by their classes or types.
+Here’s how the grouping works:
+<ol>
+<li>If there is no <code>class</code> attribute, the figure is groups in a list with other
+resources of its <code>type</code>. This is a nice default, since it results in a List
+of Tables, List of Code Samples, List of Images, etc. The type of a
+resource can be specified by the type attribute, or inferred from the
+format of the resource.</li>
+<li>If there is a <code>class</code> attribute, this overrides the type. For example, it
+is almost never a good idea to have a List of Verbatim, so if you add a
+<code>class</code> of <code>poem</code> you will get a List of Poems. (There is nothing special
+about <code>poem</code>, by the way: if you add a <code>class</code> of <code>sonnet</code>, you will get a
+List of Sonnets. This is not just useful to differentiate types of poetry,
+by the way: this approach can be used to automatically produce a
+<code>List of Lemmas</code>, <code>List of Theorems</code>, etc.</li>
+</ol>
+</li>
+</ul>
 <p><code>number-chapters</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
+<p><code>number-figures</code>
+: <code>chapter</code>, <code>none</code>, or <code>sequential</code>. The default is <code>sequential</code>. If the value
+is <code>chapter</code> or <code>sequential</code>, then resources are numbered when they are inserted
+as figures. If the value is <code>sequential</code>, you get numbering like <code>Figure 1</code>,
+<code>Figure 2</code>, <code>Figure 3</code>, etc. If the value is <code>chapter</code>, you get numbering like
+<code>Figure 1.1</code>, <code>Figure 1.2</code>, <code>Figure 4.1</code>, etc. If the value is <code>none</code>, figures
+are not numbered.</p>
 <p><code>number-sections</code>
 : <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
 are numbered.</p>
@@ -3287,31 +3288,48 @@ rendered as an en-dash, <code>---</code> will be rendered as an em-dash and <cod
 rendered as ellipses. If <code>smart</code> is <code>false</code>, do not use smart punctuation.</p>
 <p><code>soft-breaks</code>
 : <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
-behaviour of single newlines in the output. The <code>source</code> option is arguably the
-worst option, but it is the default because Markua must be compatible with
-Markdown by default.</p>
+behaviour of single newlines (i.e. a newline which is not followed by another
+newline) in the output. This is what the values mean:</p>
 <ul>
-<li>If <code>soft-breaks</code> is <code>source</code>, then
-single newlines inside paragraphs in the Markua source produce single newlines
-in the HTML source. This will pretend to break the line: while it does break
-the line in the HTML source, it does <em>not</em> break the line when the HTML is
-rendered, since in HTML a single newline is equivalent to a single space. So,
-this type of line break only is a line break in the HTML source–hence the name
-<code>source</code>. For non-HTML output formats such as LaTeX or PDF, a value of <code>source</code>
-has the same effect as <code>space</code>, discussed later.</li>
-<li>If <code>soft-breaks</code> is <code>space</code>, then single newlines inside paragraphs in the
-Markua document produce <strong>single spaces</strong> in the HTML output. This functions
-identically to single newlines when rendered as HTML. (It should be rendered
-as a space in non-HTML-based output formats like PDF.)</li>
-<li>If <code>soft-breaks</code> is <code>break</code>, then single newlines inside paragraphs in the
-Markua document produce break tags in the HTML output and line breaks in
-non-HTML output like LaTeX or PDF. The reason this value is called <code>break</code> is
-to indicate that when you hit a newline to get a line break, you get a real line break. In HTML, this means a break tag. (It should be rendered
-as a newline in non-HTML-based output formats like PDF.) <strong>To be clear: if <code>soft-breaks</code> has the value of <code>break</code>, all single newlines
-function as hard line breaks (i.e. as they would if they were using the “two space hack” to produce a hard line break in normal Markdown).</strong></li>
+<li><code>source</code>: Single newlines inside paragraphs in the Markua source produce
+single newlines in the HTML source. This will pretend to break the line
+while actually functioning like a single space in the output: all it
+actually does is break the line in the HTML source. It does <em>not</em> break the
+line when the HTML is rendered, since in HTML a single newline is
+equivalent to a single space. So, this type of line break only is a line
+break in the HTML source and not in any other output format–hence the
+name <code>source</code>. To be clear: for non-HTML output formats such as LaTeX or
+PDF, a value of <code>source</code> has the same effect as <code>space</code>, discussed next.
+The <code>source</code> option is arguably the worst option, but it is the default
+because Markua must be compatible with Markdown by default, even in the
+rare situations where it considers a Markdown decision to be suboptimal.</li>
+<li><code>space</code>: Single newlines inside paragraphs in the Markua document produce
+single spaces in the HTML output. This functions identically to single
+newlines when rendered as HTML. For non-HTML-based output formats like
+LaTex or PDF, a single space is rendered for a single newline.</li>
+<li><code>break</code>: Single newlines inside paragraphs in the Markua document produce
+break tags in the HTML output and line breaks in non-HTML output like
+LaTeX or PDF. The reason this value is called <code>break</code> is to indicate that
+when you hit a newline to get a line break, you get a real line break.
+If <code>soft-breaks</code> has the value of <code>break</code>, all single newlines function
+as though they were using the “two space hack” to produce a hard line
+break in normal Markdown. (Whether the “two space hack” is enabled in a
+Markua document is determined by the value of the <code>two-space-hack</code>
+setting, discussed below.)</li>
 </ul>
 <p><code>title</code>
 : The title of the Markua document.</p>
+<p><code>two-space-hack</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>, for compatibility with Markdown. If
+<code>true</code>, adding two spaces at the end of a line forces a hard line break.
+If <code>false</code>, spaces at the end of a line are ignored, and the single newline
+is treated as a single newline would be without those spaces, which is
+determined by the value of the <code>soft-breaks</code> setting. Since Markua allows
+the behavior of soft line breaks to be configured with the <code>soft-breaks</code>
+setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks</code> setting
+is <code>break</code>. However, even in this case, authors may wish for the two space
+hack to still function as it does in Markdown, in order to support existing
+Markdown text or in cases where there are multiple authors of a manuscript.</p>
 <p><code>validate</code>
 : If <code>validate</code> is <code>true</code>, the UTF-8 characters in the Markua document are
 validated, replacing illegal sequences with U+FFFD. If <code>validate</code> is <code>false</code>,
@@ -3322,7 +3340,7 @@ Processor may override this setting.</p>
 producing analytics for courses. (This is not related to the version of the
 Markua specification being used; it is the )</p>
 <h2 id="document-settings-which-apply-to-courses-only-m-" class="definition">
-<span class="number">4.5</span>Document settings which apply to courses only (M)
+<span class="number">4.4</span>Document settings which apply to courses only (M)
 </h2>
 <p>The following settings are defined by Markua, but only make sense in the context
 of a course. So, a Markua Processor which is not generating a course can ignore

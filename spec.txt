@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.13'
-date: '2022-04-07'
+version: '0.30.14'
+date: '2022-04-26'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2722,10 +2722,6 @@ Markua Processors can understand their own extension attributes.
 
 ## The default document settings (M)
 
-Note that the behavior of resources which are treated as figures is controlled
-by four related settings: `alt-title`, `figure-classes`, `list-figures` and
-`number-fgigures`. These need to be considered together.
-
 The default document settings are:
 
 ```
@@ -2753,69 +2749,17 @@ Another good choice is the following document settings:
 This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
 `Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1`.
 
-## Document settings which control figures (M)
+## Document settings which apply to books only (M)
 
-* When `list-figures` are listed in `groups`, they each have their own numbers.
-* When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
+The following settings are defined by Markua, but only make sense in the
+context of a book. So, a Markua Processor which is not generating a book can
+ignore them.
 
-`alt-title`
-: `all`, `text` or `none`. The default is `text`. This setting controls whether,
-in the cases where there is no figure title explicitly set, the alt text on a
-resource is removed and used instead as the figure title instead. If alt text
-is used as the figure title, it is NOT also provided as alt text, since it would
-be very annoying to hear the same text spoken twice (once as the alt text and
-once as the figure title) when using a screen reader. This is what the values
-mean:
-
-`figure-classes`
-: this is a comma-separated list of the figure classes which are included in the
-list(s) of figures near the beginning of the book or course. The default is
-undefined, which means that all figures are included, regardless of the value
-of their `class` attribute. An example of this setting is:
-`figure-classes: equation, figure, image, listing`. Note that whether the
-figures are listed, either grouped by their class or together in one big list,
-is controlled by the `list-figures` setting. Note that the numbering of figures
-is controlled by the `number-figures` and `figure-number-format` settings.
-
-`list-figures`
-: `combined`, `groups` or `none`. The default value is `combined`. This setting
-controls whether figures are listed in one or more lists near the beginning of
-the book. Note that whether these figures are numbered is controlled by the
-`number-figures` setting. The `list-figures` setting respects the numbering
-decision specified there. This is what the values mean:
-
-* `none`: No lists of figures are produced.
-* `combined`: One combined list of figures is produced for all figures in the
-  manuscript, ordered by their appearance in the manuscript. This list is called
-  List of Figures for English books, and localized into the language of the book
-  or course.
-* `groups`: The Markua Processor should group figures by their classes or types.
-  Here's how the grouping works:
-  1. If there is no `class` attribute, the figure is groups in a list with other
-     resources of its `type`. This is a nice default, since it results in a List
-     of Tables, List of Code Samples, List of Images, etc. The type of a
-     resource can be specified by the type attribute, or inferred from the
-     format of the resource.
-  2. If there is a `class` attribute, this overrides the type. For example, it
-     is almost never a good idea to have a List of Verbatim, so if you add a
-     `class` of `poem` you will get a List of Poems. (There is nothing special
-     about `poem`, by the way: if you add a `class` of `sonnet`, you will get a
-     List of Sonnets. This is not just useful to differentiate types of poetry,
-     by the way: this approach can be used to automatically produce a
-     `List of Lemmas`, `List of Theorems`, etc.
-
-`number-figures`
-: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
-is `chapter` or `sequential`, then resources are numbered when they are inserted
-as figures. If `sequential`, you get numbering like
-`Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you get numbering like
-`Figure 1.1, Figure 1.2, Figure 4.1, ...`. If `none`, figures are not numbered.
-
-
-
-## Document settings which control which editions are generated (M)
-
-TODO
+Note that while the idea of a sample book is pretty universal, the idea of a
+community or network edition could be argued to be somewhat Leanpub-specific.
+However, these are in the Markua spec instead of being left as extension
+attributes, since they are essentially different levels of sample or subset
+books, and I am convinced that this has a general use outside of Leanpub.
 
 `generate-community`
 : `true` or `false`. The default value is `true`. If `generate-community` is
@@ -2846,8 +2790,22 @@ regardless of whether there are any `{sample: true}` directives.
 
 The following settings apply to books and courses.
 
+Note that the behavior of resources which are treated as figures is controlled
+by four related settings: `alt-title`, `figure-classes`, `list-figures` and
+`number-figures`. These need to be considered together: the behavior of these
+settings are tightly coupled.
+
 `authors`
 : The authors of the Markua document.
+
+`alt-title`
+: `all`, `text` or `none`. The default is `text`. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used instead as the figure title instead. If alt text
+is used as the figure title, it is NOT also provided as alt text, since it would
+be very annoying to hear the same text spoken twice (once as the alt text and
+once as the figure title) when using a screen reader. This is what the values
+mean:
 
 * `all`: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
@@ -2889,6 +2847,16 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
+`figure-classes`
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their `class` attribute. An example of this setting is:
+`figure-classes: equation, figure, image, listing`. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the `list-figures` setting. Note that the numbering of figures
+is controlled by the `number-figures` and `figure-number-format` settings.
+
 `include-page-numbers-in-references`
 : When a smart crosslink to a figure reference is inserted with `#f`, this
 setting determines how the reference is displayed. If true (the default), the
@@ -2908,8 +2876,43 @@ page numbers in their references (since the text is resizable).
 language code of the language that the Markua document is written in. The
 default is `eng`.
 
+`list-figures`
+: `combined`, `groups` or `none`. The default value is `combined`. This setting
+controls whether figures are listed in one or more lists near the beginning of
+the book. Note that whether these figures are numbered is controlled by the
+`number-figures` setting. The `list-figures` setting respects the numbering
+decision specified there. This is what the values mean:
+
+* `none`: No lists of figures are produced.
+* `combined`: One combined list of figures is produced for all figures in the
+  manuscript, ordered by their appearance in the manuscript. This list is called
+  List of Figures for English books, and localized into the language of the book
+  or course.
+* `groups`: The Markua Processor should group figures by their classes or types.
+  Here's how the grouping works:
+  1. If there is no `class` attribute, the figure is groups in a list with other
+     resources of its `type`. This is a nice default, since it results in a List
+     of Tables, List of Code Samples, List of Images, etc. The type of a
+     resource can be specified by the type attribute, or inferred from the
+     format of the resource.
+  2. If there is a `class` attribute, this overrides the type. For example, it
+     is almost never a good idea to have a List of Verbatim, so if you add a
+     `class` of `poem` you will get a List of Poems. (There is nothing special
+     about `poem`, by the way: if you add a `class` of `sonnet`, you will get a
+     List of Sonnets. This is not just useful to differentiate types of poetry,
+     by the way: this approach can be used to automatically produce a
+     `List of Lemmas`, `List of Theorems`, etc.
+
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.
+
+`number-figures`
+: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
+is `chapter` or `sequential`, then resources are numbered when they are inserted
+as figures. If the value is `sequential`, you get numbering like `Figure 1`,
+`Figure 2`, `Figure 3`, etc. If the value is `chapter`, you get numbering like
+`Figure 1.1`, `Figure 1.2`, `Figure 4.1`, etc. If the value is `none`, figures
+are not numbered.
 
 `number-sections`
 : `true` or `false`. Default `false`. Whether the sections (and sub-sections)
@@ -2931,30 +2934,49 @@ rendered as ellipses. If `smart` is `false`, do not use smart punctuation.
 
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. This setting determines the
-behaviour of single newlines in the output. The `source` option is arguably the
-worst option, but it is the default because Markua must be compatible with
-Markdown by default.
-  * If `soft-breaks` is `source`, then
-    single newlines inside paragraphs in the Markua source produce single newlines
-    in the HTML source. This will pretend to break the line: while it does break
-    the line in the HTML source, it does *not* break the line when the HTML is
-    rendered, since in HTML a single newline is equivalent to a single space. So,
-    this type of line break only is a line break in the HTML source--hence the name
-    `source`. For non-HTML output formats such as LaTeX or PDF, a value of `source`
-    has the same effect as `space`, discussed later.  
-  * If `soft-breaks` is `space`, then single newlines inside paragraphs in the
-    Markua document produce **single spaces** in the HTML output. This functions
-    identically to single newlines when rendered as HTML. (It should be rendered
-    as a space in non-HTML-based output formats like PDF.)
-  * If `soft-breaks` is `break`, then single newlines inside paragraphs in the
-    Markua document produce break tags in the HTML output and line breaks in
-    non-HTML output like LaTeX or PDF. The reason this value is called `break` is
-    to indicate that when you hit a newline to get a line break, you get a real line break. In HTML, this means a break tag. (It should be rendered
-    as a newline in non-HTML-based output formats like PDF.) **To be clear: if `soft-breaks` has the value of `break`, all single newlines
-function as hard line breaks (i.e. as they would if they were using the "two space hack" to produce a hard line break in normal Markdown).**
+behaviour of single newlines (i.e. a newline which is not followed by another
+newline) in the output. This is what the values mean:
+
+  * `source`: Single newlines inside paragraphs in the Markua source produce
+    single newlines in the HTML source. This will pretend to break the line
+    while actually functioning like a single space in the output: all it
+    actually does is break the line in the HTML source. It does *not* break the
+    line when the HTML is rendered, since in HTML a single newline is
+    equivalent to a single space. So, this type of line break only is a line
+    break in the HTML source and not in any other output format--hence the
+    name `source`. To be clear: for non-HTML output formats such as LaTeX or
+    PDF, a value of `source` has the same effect as `space`, discussed next.
+    The `source` option is arguably the worst option, but it is the default
+    because Markua must be compatible with Markdown by default, even in the
+    rare situations where it considers a Markdown decision to be suboptimal.
+  * `space`: Single newlines inside paragraphs in the Markua document produce
+    single spaces in the HTML output. This functions identically to single
+    newlines when rendered as HTML. For non-HTML-based output formats like
+    LaTex or PDF, a single space is rendered for a single newline.
+  * `break`: Single newlines inside paragraphs in the Markua document produce
+    break tags in the HTML output and line breaks in non-HTML output like
+    LaTeX or PDF. The reason this value is called `break` is to indicate that
+    when you hit a newline to get a line break, you get a real line break.
+    If `soft-breaks` has the value of `break`, all single newlines function
+    as though they were using the "two space hack" to produce a hard line
+    break in normal Markdown. (Whether the "two space hack" is enabled in a
+    Markua document is determined by the value of the `two-space-hack`
+    setting, discussed below.)
 
 `title`
 : The title of the Markua document.
+
+`two-space-hack`
+: `true` or `false`. Default `true`, for compatibility with Markdown. If
+  `true`, adding two spaces at the end of a line forces a hard line break.
+  If `false`, spaces at the end of a line are ignored, and the single newline
+  is treated as a single newline would be without those spaces, which is
+  determined by the value of the `soft-breaks` setting. Since Markua allows
+  the behavior of soft line breaks to be configured with the `soft-breaks`
+  setting, the `two-space-hack` is not needed if the `soft-breaks` setting
+  is `break`. However, even in this case, authors may wish for the two space
+  hack to still function as it does in Markdown, in order to support existing
+  Markdown text or in cases where there are multiple authors of a manuscript.
 
 `validate`
 : If `validate` is `true`, the UTF-8 characters in the Markua document are

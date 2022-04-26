@@ -2625,11 +2625,12 @@ settings. These settings are very important, since they have an effect on the
 entire book or course.
 
 Markua's philosophy is that non-semantic formatting is procrastination. Because
-of this, almost all formatting is done by global switches, that can be defined
-once at the beginning of the document in document settings.
+of this, almost all formatting is done by global switches. These switches are
+called document settings, and they are defined once, at the beginning of the
+document.
 
-The document settings are defined by one or more document settings hashes.
-The document settings hash or hashes must be at the start of a Markua document.
+Document settings are defined by one or more document settings hashes. The
+document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash is encountered, no more
 document settings hashes can be defined.
 
@@ -2685,7 +2686,7 @@ In the case of a conflict between settings defined in a document and settings
 defined, say, in a web interface, the last setting definition should win.
 However, a Markua Processor may override settings whose values are unsupported
 or illegal. Also, a Markua processor should provide a warning if there are
-conflicts.
+multiple definitions of a document setting.
 
 Here's an example of a Markua document which could be generated if there is a
 settings block produced by a web interface, and then a settings block manually

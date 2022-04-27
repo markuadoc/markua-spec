@@ -91,6 +91,7 @@ that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
 successor to LFM. We have been iterating on our Markua support for many years.
 
 
+
 ## Markua's five key additions to Markdown (M)
 
 Markua's five main additions to Markdown are the following:
@@ -124,6 +125,7 @@ The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
 
+
 ## Markua's one key subtraction from Markdown: raw HTML is removed (M)
 
 Markua also has one key subtraction from Markdown: support for raw HTML, either
@@ -134,8 +136,9 @@ Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
 Instead, in Markua **all raw HTML elements are removed**.
 
 This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua. In both
-cases, **raw HTML must be completely removed by the Markua Processor.**
+which is inserted as inlines. Neither of these are supported by Markua.
+
+In both cases, **raw HTML must be completely removed by the Markua Processor.**
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) as comments in Markua: since these comments are
@@ -158,6 +161,7 @@ This is not true in the case of Markua.
 Note that besides raw HTML, Markua does not remove anything else from Markdown.
 (As is discussed later, the Markua spec is written with the CommonMark spec as a
 starting point, so that you can verify this for yourself.)
+
 
 
 ## How to write a novel in Markua (M)
@@ -203,6 +207,7 @@ Markdown dialects:
 
 In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
+
 
 
 ## How to write almost any book in Markua (M)
@@ -438,6 +443,7 @@ the rest of the spec!
 ~~~
 
 
+
 ## For Leanpub authors (M)
 
 There are three ways to write in plain text on Leanpub. These are their
@@ -510,6 +516,7 @@ differences between Markua and LFM may be useful:
    approaches, or could just support parsing single files or input streams.)
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
+
 
 
 ## Origin and structure of this document (M)
@@ -660,6 +667,7 @@ is identical to the specified output.
 Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.
+
 
 
 ## Why the name "Markua"? (M)
@@ -5829,31 +5837,10 @@ I'm no poet, but at least I know it.
 
 ## No HTML blocks (M)
 
-Markdown and CommonMark support HTML blocks, which are groups of lines that are
-treated as raw HTML (and will not be escaped in HTML output).
-
-Markua does not support HTML blocks. Instead, **all raw HTML is removed**.
-This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua.
-
-**In both cases, the HTML must be completely removed by the Markua Processor.**
-
-As a side effect of this, since HTML comments are HTML, authors can use HTML
-comments (`<!-- a comment -->`) in Markua, and these comments will be removed
-from the output (along with any other raw HTML tags).
-
-Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.
-
-HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
-were supported, a Markua Processor would have to support parsing and
-meaningfully outputting all of HTML syntax as well as all of Markua syntax.
-
-Since Markdown's only output format target is HTML, it might as well support
-HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.
+As [discussed](#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed-m-),
+Markua does not support raw HTML. **All raw HTML is removed**. As a side-effect,
+this means HTML comments can still be used, since they (like all HTML) will be
+removed from the output.
 
 </div>
 
@@ -15965,17 +15952,10 @@ foo@bar.example.com
 
 ## No raw HTML (M)
 
-Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
-
-Instead, **all raw HTML is removed**. This is true both for raw HTML which is
-inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
-these are supported by Markua.
-
-**In both cases, the HTML must be completely removed by the Markua Processor.**
-
-As a side effect of this, since HTML comments are HTML, authors can use HTML
-comments (`<!-- a comment -->`) in Markua, and these comments will be removed
-from the output (along with any other raw HTML tags).
+As [discussed](#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed-m-),
+Markua does not support raw HTML. **All raw HTML is removed**. As a side-effect,
+this means HTML comments can still be used, since they (like all HTML) will be
+removed from the output.
 
 </div>
 

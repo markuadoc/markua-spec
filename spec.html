@@ -6471,25 +6471,14 @@ and<span class="space"> </span>**this**<span class="space"> </span>is<span class
 <h2 id="no-html-blocks-m-" class="definition">
 <span class="number">7.8</span>No HTML blocks (M)
 </h2>
-<p>Markdown and CommonMark support HTML blocks, which are groups of lines that are
-treated as raw HTML (and will not be escaped in HTML output).</p>
-<p>Markua does not support HTML blocks. Instead, <strong>all raw HTML is removed</strong>.
-This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua.</p>
+<p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
+<p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
+inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
+these are supported by Markua.</p>
 <p><strong>In both cases, the HTML must be completely removed by the Markua Processor.</strong></p>
 <p>As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments will be removed
 from the output (along with any other raw HTML tags).</p>
-<p>Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.</p>
-<p>HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
-were supported, a Markua Processor would have to support parsing and
-meaningfully outputting all of HTML syntax as well as all of Markua syntax.</p>
-<p>Since Markdown’s only output format target is HTML, it might as well support
-HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.</p>
 </div>
 <h2 id="link-reference-definitions" class="definition">
 <span class="number">7.9</span>Link reference definitions

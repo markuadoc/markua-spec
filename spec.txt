@@ -91,7 +91,11 @@ Markua was started at Leanpub in 2014, and benefited from the years of lessons
 that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
 successor to LFM. We have been iterating on our Markua support for many years.
 
+</div>
 
+
+
+<div class="extension">
 
 ## Markua's five key additions to Markdown (M)
 
@@ -125,7 +129,11 @@ feel like decorating, not converting.
 The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
+</div>
 
+
+
+<div class="extension">
 
 ## Markua's one key subtraction from Markdown: raw HTML is removed (M)
 
@@ -163,7 +171,11 @@ Note that besides raw HTML, Markua does not remove anything else from Markdown.
 (As is discussed later, the Markua spec is written with the CommonMark spec as a
 starting point, so that you can verify this for yourself.)
 
+</div>
 
+
+
+<div class="extension">
 
 ## How to write a novel in Markua (M)
 
@@ -443,7 +455,11 @@ Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
 
+</div>
 
+
+
+<div class="extension">
 
 ## For Leanpub authors (M)
 
@@ -518,7 +534,11 @@ differences between Markua and LFM may be useful:
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
 
+</div>
 
+
+
+<div class="extension">
 
 ## Origin and structure of this document (M)
 
@@ -609,6 +629,11 @@ The other three GFM extensions are omitted:
    is not worth it. (It does make sense for, say, a discussion forum. It does
    not make sense for books and courses.)
 
+</div>
+
+
+
+<div class="extension">
 
 ## About the HTML output (M)
 
@@ -669,7 +694,11 @@ Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.
 
+</div>
 
+
+
+<div class="extension">
 
 ## Why the name "Markua"? (M)
 

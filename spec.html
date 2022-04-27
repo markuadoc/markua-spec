@@ -3017,14 +3017,11 @@ Yada<span class="space"> </span>yada<span class="space"> </span>yada.
 <h1 id="document-settings-m-" class="definition">
 <span class="number">4</span>Document settings (M)
 </h1>
-<p>The behavior of a Markua Processor can be affected by certain global document
-settings. These settings are very important, since they have an effect on the
-entire book or course.</p>
 <p>Markua’s philosophy is that non-semantic formatting is procrastination. Because
 of this, almost all formatting is done by global switches. These switches are
 called document settings, and they are defined once, at the beginning of the
-document.</p>
-<p>Document settings are defined by one or more document settings hashes. The
+document. Document settings affect the formatting of the entire book or course.</p>
+<p>Document settings are defined in one or more document settings hashes. The
 document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash is encountered, no more
 document settings hashes can be defined.</p>
@@ -3068,7 +3065,7 @@ The most straightforward thing to do in such a case is to just add another
 document settings hash at the beginning of the file, and then let the Markua
 Processor sort out any conflicts.</p>
 <p>In the case of a conflict between settings defined in a document and settings
-defined, say, in a web interface, the last setting definition should win.
+defined, say, in a web interface, the last setting definition must win.
 However, a Markua Processor may override settings whose values are unsupported
 or illegal. Also, a Markua processor should provide a warning if there are
 multiple definitions of a document setting.</p>
@@ -3091,12 +3088,9 @@ italicize-underlines: true
 
 Lorem ipsum dolor...
 </code></pre>
-<p>Thankfully, the only thing that would see this would be a Markua Processor,
-since it’s gross. To the author, they would just see their (second) settings
-block, and the first one would have been created from the values stored in a
-database somewhere.</p>
-<p>Note that each document setting either applies to books and courses, or to
-courses only.</p>
+<p>Thankfully, this would only be seen by a Markua Processor, since it’s ugly.
+The author would just see the second, manually-defined, settings block, and
+the first one would have been created from the values stored in a database.</p>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>
 <h2 id="the-default-document-settings-m-" class="definition">
@@ -3111,17 +3105,6 @@ Markua Processors can understand their own extension attributes.</p>
 </code></pre>
 <p>This produces figures named Figure, and numbered sequentially: Figure 1,
 Figure 2, Figure 3, …</p>
-<h3 id="grouping-figures-with-document-settings" class="definition">
-<span class="number">4.1.1</span>Grouping figures with document settings
-</h3>
-<p>Another good choice is the following document settings:</p>
-<pre><code>{
-  list-figures: groups
-  figure-number-format: chapter
-}
-</code></pre>
-<p>This produces figures like <code>Listing 1.1, Listing 1.2, Listing 4.1</code> and
-<code>Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1</code>.</p>
 <h2 id="document-settings-which-apply-to-books-only-m-" class="definition">
 <span class="number">4.2</span>Document settings which apply to books only (M)
 </h2>
@@ -3264,6 +3247,9 @@ by the way: this approach can be used to automatically produce a
 </ol>
 </li>
 </ul>
+<p>The combination of <code>list-figures: groups</code> and <code>figure-number-format: chapter</code>
+produces figures like <code>Listing 1.1</code>, <code>Listing 1.2</code>, <code>Listing 4.1</code> and
+<code>Image 1.1</code>, <code>Image 1.2</code>, <code>Image 2.1</code>, <code>Image 2.2</code>, <code>Image 4.1</code>, etc.</p>
 <p><code>number-chapters</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
 <p><code>number-figures</code>
@@ -6495,7 +6481,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6934,7 +6920,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6958,7 +6944,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16455,7 +16441,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

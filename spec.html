@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.13 (2022-04-07)</div>
+<div class="version">Version 0.30.14 (2022-04-27)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -174,10 +174,10 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
-<li><a href="#the-alt-title-document-setting-m-"><span class="number">4.1</span>The alt-title document setting (M)</a></li>
-<li><a href="#the-list-figures-document-setting-m-"><span class="number">4.2</span>The list-figures document setting (M)</a></li>
-<li><a href="#settings-which-apply-to-books-and-courses-m-"><span class="number">4.3</span>Settings which apply to books and courses (M)</a></li>
-<li><a href="#settings-which-apply-to-courses-only-m-"><span class="number">4.4</span>Settings which apply to courses only (M)</a></li>
+<li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.1</span>Document settings which apply to books and courses (M)</a></li>
+<li><a href="#document-settings-which-apply-to-books-only-m-"><span class="number">4.2</span>Document settings which apply to books only (M)</a></li>
+<li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.3</span>Document settings which apply to courses only (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -257,15 +257,14 @@ $(document).ready(function() {
 <li><a href="#no-raw-html-m-"><span class="number">10.13</span>No raw HTML (M)</a></li>
 <li><a href="#hard-line-breaks"><span class="number">10.14</span>Hard line breaks</a></li>
 <li><a href="#soft-line-breaks"><span class="number">10.15</span>Soft line breaks</a></li>
-<li><a href="#configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-"><span class="number">10.16</span>Configurable soft line breaks with the soft-breaks document setting (M)</a></li>
-<li><a href="#character-substitutions-m-"><span class="number">10.17</span>Character substitutions (M)</a></li>
-<li><a href="#footnotes-and-endnotes-m-"><span class="number">10.18</span>Footnotes and endnotes (M)</a></li>
-<li><a href="#underline-m-"><span class="number">10.19</span>Underline (M)</a></li>
-<li><a href="#superscript-and-subscript-m-"><span class="number">10.20</span>Superscript and subscript (M)</a></li>
-<li><a href="#strikethrough-gfm-"><span class="number">10.21</span>Strikethrough (GFM)</a></li>
-<li><a href="#index-entries-m-"><span class="number">10.22</span>Index entries (M)</a></li>
-<li><a href="#syntactic-sugar-list-m-"><span class="number">10.23</span>Syntactic sugar list (M)</a></li>
-<li><a href="#textual-content"><span class="number">10.24</span>Textual content</a></li>
+<li><a href="#character-substitutions-m-"><span class="number">10.16</span>Character substitutions (M)</a></li>
+<li><a href="#footnotes-and-endnotes-m-"><span class="number">10.17</span>Footnotes and endnotes (M)</a></li>
+<li><a href="#underline-m-"><span class="number">10.18</span>Underline (M)</a></li>
+<li><a href="#superscript-and-subscript-m-"><span class="number">10.19</span>Superscript and subscript (M)</a></li>
+<li><a href="#strikethrough-gfm-"><span class="number">10.20</span>Strikethrough (GFM)</a></li>
+<li><a href="#index-entries-m-"><span class="number">10.21</span>Index entries (M)</a></li>
+<li><a href="#syntactic-sugar-list-m-"><span class="number">10.22</span>Syntactic sugar list (M)</a></li>
+<li><a href="#textual-content"><span class="number">10.23</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -601,7 +600,7 @@ discussed next.
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behaviour of the Markua Processor. For example, you can set the
+affect the behavior of the Markua Processor. For example, you can set the
 `alt-title` setting to `all` to make images use the alt text as the figure
 title instead of as alt text:
 
@@ -619,7 +618,7 @@ This is an apple with a figure title but no alt text:
 
 This gets you the terseness of inserting images as figures in LFM, in a general
 way. Note that if the `alt-title` document setting is set to `text` (the
-default) this behaviour only happens for text-based resources like code samples.
+default) this behavior only happens for text-based resources like code samples.
 If the `alt-title` is set to `none`, it never happens.
 
 The generalization of the Markdown image syntax into resources, and the addition
@@ -1961,7 +1960,7 @@ These include attributes (on everything), settings (at the beginning of a
 document) and directives (at certain points throughout the document). All
 metadata is enclosed in curly braces <code>{</code> … <code>}</code>.</p>
 <p>Metadata is not actually output in the Markua document itself. Instead, it
-changes the behaviour of the Markua Processor, sometimes dramatically.</p>
+changes the behavior of the Markua Processor, sometimes dramatically.</p>
 <p>First, however, it is important to start with how Markua headers and metadata
 are used to define document structure.</p>
 <h2 id="how-headers-define-document-structure-m-" class="definition">
@@ -2339,7 +2338,7 @@ as a figure, which specifies the text to use for the figure in the appropriate
 list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a
 heading does not have a title attribute, the text of the heading itself is
 used–which is quite often exactly what is desired. Use of a <code>title</code> attribute
-is always optional; it’s only used when the default behaviour of using the
+is always optional; it’s only used when the default behavior of using the
 heading text (or the <code>title</code> attribute for a resource) is not appropriate,
 say if it’s too long.</p>
 <h3 id="class-attributes" class="definition">
@@ -2537,7 +2536,7 @@ inside paragraphs just fine.</p>
 after something like a list is actually a continuation of the previous
 paragraph.</p>
 <p>Now, this could have been done by just not adding blank lines, only single
-newlines, but that would involve fighting against existing Markdown behaviour.
+newlines, but that would involve fighting against existing Markdown behavior.
 Worse, it would introduce an incompatibility just to fix something that many
 people don’t consider broken.</p>
 <p>For authors who want a list to appear to be inside a paragraph, Markua does have
@@ -2602,7 +2601,7 @@ bar
 </div>
 <p>Note that this works for more than just lists. In fact, it has nothing to do
 with lists, or even with images or other resources. It’s all about the
-indentation behaviour of a paragraph, typically following some other block. So,
+indentation behavior of a paragraph, typically following some other block. So,
 you can use this whenever you want:</p>
 <div class="example" id="example-55">
 <div class="examplenum">
@@ -2691,7 +2690,7 @@ version of Markua without needing to specify anything special.</p>
 <h2 id="directives-m-" class="definition">
 <span class="number">3.3</span>Directives (M)
 </h2>
-<p>Directives are switches which affect the behaviour of a Markua Processor.</p>
+<p>Directives are switches which affect the behavior of a Markua Processor.</p>
 <p>The syntax for directives is <code>{simple}</code>. A directive is surrounded in curly
 braces, and must have a blank line above and below it.</p>
 <p>Directives do not have a value. Instead, their presence is all that is
@@ -3018,180 +3017,110 @@ Yada<span class="space"> </span>yada<span class="space"> </span>yada.
 <h1 id="document-settings-m-" class="definition">
 <span class="number">4</span>Document settings (M)
 </h1>
-<p>The behaviour of a Markua Processor can be affected by certain global document
-settings. These settings are very important, since they have an effect on the
-entire book or course.</p>
 <p>Markua’s philosophy is that non-semantic formatting is procrastination. Because
-of this, almost all formatting is done by global switches, that can be defined
-once at the beginning of the document in document settings.</p>
-<p>The document settings are defined by one or more document settings hashes.
-The document settings hash or hashes must be at the start of a Markua document.
-Once something other than a document settings hash is encountered, no more
-document settings hashes can be defined.</p>
+of this, almost all formatting is done by global switches. These switches are
+called document settings, and they are defined once, at the beginning of the
+document. Document settings affect the formatting of the entire book or course.</p>
+<p>Document settings are defined in one or more document settings hashes. The
+document settings hash or hashes must be at the start of a Markua document.
+Once something other than a document settings hash or a blank line is
+encountered, no more document settings hashes can be defined. (Document
+settings hashes can be separated with single or multiple newlines, but once the
+first thing which is not a document setting or blank line is encountered, no
+more document settings hashes can be defined.)</p>
 <p>The settings are newline-separated key-value pairs (<code>key: value</code>) which contain
-information about the document and about the desired behaviour of the Markua
+information about the document and about the desired behavior of the Markua
 Processor.</p>
 <p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
-<code>authors</code>, etc. Markua Processor behaviour includes settings like <code>alt-title</code>,
+<code>authors</code>, etc. Markua Processor behavior includes settings like <code>alt-title</code>,
 <code>list-figures</code>, <code>italicize-underlines</code>, <code>smart-punctuation</code>, etc.</p>
 <p>The format of a document settings hash is as follows: Every non-blank line
 in the document settings hash must contain a key, a colon <code>:</code>, and a value.
 Any whitespace at the beginning or end of the keys and values will be stripped.
 Only the first colon is important; subsequent colons on a line will just be
 part of the value.</p>
-<p>There must be at least one blank line between the end of the settings block and
-the start of any other document content other than another document settings
-hash.</p>
-<p>Here’s an example of a document settings block at the start of a book:</p>
-<pre><code>{
-italicize-underlines: false
-soft-breaks: space
-alt-title: all
-smart-punctuation: true
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
-generate-sample: true
-generate-community: true
-generate-network: true
-list-figures: groups
-figure-number-format: chapter
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-</code></pre>
-<p>The reason that more than one document settings hash is permitted is that a
-Markua Processor may also get settings from elsewhere, like a web interface.
-The most straightforward thing to do in such a case is to just add another
-document settings hash at the beginning of the file, and then let the Markua
-Processor sort out any conflicts.</p>
-<p>In the case of a conflict between settings defined in a document and settings
-defined, say, in a web interface, the last setting definition should win.
-However, a Markua Processor may override settings whose values are unsupported
-or illegal. Also, a Markua processor should provide a warning if there are
-conflicts.</p>
-<p>Here’s an example of a Markua document which could be generated if there is a
-settings block produced by a web interface, and then a settings block manually
-added at the start of a book:</p>
-<pre><code>{
-italicize-underlines: false
-soft-breaks: space
-alt-title: all
-smart-punctuation: true
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
-}
-{
-italicize-underlines: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-</code></pre>
-<p>Thankfully, the only thing that would see this would be a Markua Processor,
-since it’s gross. To the author, they would just see their (second) settings
-block, and the first one would have been created from the values stored in a
-database somewhere.</p>
-<p>Note that each document setting either applies to books and courses, or to
-courses only.</p>
-<p>Finally, Markua Processors can also add their own document settings, just as
-Markua Processors can understand their own extension attributes.</p>
-<h2 id="the-alt-title-document-setting-m-" class="definition">
-<span class="number">4.1</span>The alt-title document setting (M)
-</h2>
-<p>The <code>alt-title</code> document setting controls whether, in the cases where there is
-no figure title explicitly set, the alt text on a resource is removed and used
-instead as the figure title.</p>
-<p>The <code>alt-title</code> can be <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>.</p>
-<p>This is what the values mean:</p>
-<p><code>all</code>
-: If no title is provided for a given resource, regardless of the resource type,
-remove the alt text and use it as the figure title instead. (This setting is
-closest to the behaviour of LFM and of Markua version 0.10.)</p>
-<p><code>text</code>
-: If no title is provided for a given <strong>text-based</strong> resource (such as an
-external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. (This is arguably the most sensible choice.)</p>
-<p><code>none</code>
-: With this setting, never remove the alt text to use it as the figure title,
-even for a text-based resource where no figure title is provided. (This is how
-Markdown behaves.)</p>
-<p>The default is <code>text</code> since it strikes a balance between preserving
-compatibility with Markdown for non-text-based resources like images, while
-still providing a sensible default for text-based resources like code samples.
-Since Markdown does not define support for external text-based resources, there
-is no conflict here.</p>
-<p>Note that if the alt text is converted into the figure title, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure title) when using a screen
-reader.</p>
-<h2 id="the-list-figures-document-setting-m-" class="definition">
-<span class="number">4.2</span>The list-figures document setting (M)
-</h2>
-<p>There is a document setting called <code>list-figures</code> which determines
-whether figures are listed in one or more lists near the beginning of the book.</p>
-<p>If <code>list-figures</code> is <code>none</code>, then no lists of figures are produced.</p>
-<p>If <code>list-figures</code> is <code>combined</code> (the default), this results in one combined
-list of figures (called List of Figures, but localized into the language of the
-book or course), for all figures in the manuscript, ordered by their appearance
-in the manuscript.</p>
-<p>If <code>list-figures</code> is <code>groups</code>, the Markua Processor should group figures.
-Here’s how the grouping works:</p>
-<ol>
-<li>
-<p>If there is no <code>class</code> attribute, the figure is groups in a list with other
-resources of its <code>type</code>. This is a nice default, since it results in a List of
-Tables, List of Code Samples, List of Images, etc. The type of a resource can be
-specified by the type attribute, or inferred from the format of the resource.</p>
-</li>
-<li>
-<p>If there is a <code>class</code> attribute, this overrides the type. For example, it is
-almost never a good idea to have a List of Verbatim, so if you add a <code>class</code> of
-<code>poem</code> you will get a List of Poems. (There is nothing special about <code>poem</code>, by
-the way: if you add a <code>class</code> of <code>sonnet</code>, you will get a List of Sonnets. This
-is not just useful to differentiate types of poetry, by the way: this approach
-can be used to automatically produce a <code>List of Lemmas</code>, <code>List of Theorems</code>,
-etc.</p>
-</li>
-</ol>
-<p>The default document settings are:</p>
+<p>Since Markua defines a number of document settings, it is helpful to see what
+the defaults are in one list. These defaults are listed below; note that
+undefined means that the value is not set, not the literal string undefined.</p>
 <pre><code>{
   list-figures: combined
   figure-number-format: sequential
-  ...
+  authors: undefined
+  alt-title: text
+  contributors: undefined
+  copyright: undefined
+  default-code-language: guess
+  figure-classes: undefined
+  include-page-numbers-in-references: true
+  italicize-underlines: true
+  lang: eng
+  list-figures: combined
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  smart-punctuation: true
+  soft-breaks: source
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  course-attempts: 1
+  course-completeness: 0
+  default-exercise-show-answers: all
+  default-quiz-attempts: 1
+  default-quiz-auto-submit: true
+  default-quiz-show-answers: incorrect
+  default-quiz-use-result: best
+  default-random-choice-order: false
+  default-random-question-order: false
 }
 </code></pre>
-<p>This produces figures named <code>Figure 1, Figure 2, Figure 3, ...</code>.</p>
-<p>Another good choice is the following document settings:</p>
-<pre><code>{
-  list-figures: groups
-  figure-number-format: chapter
-}
-</code></pre>
-<p>This produces figures like <code>Listing 1.1, Listing 1.2, Listing 4.1</code> and
-<code>Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1</code>.</p>
-<ul>
-<li>When <code>list-figures</code> are listed in <code>groups</code>, they each have their own numbers.</li>
-<li>When the <code>figure-number-format</code> is <code>chapter</code>, the numbering is <code>chapter.n</code>.</li>
-</ul>
-<h2 id="settings-which-apply-to-books-and-courses-m-" class="definition">
-<span class="number">4.3</span>Settings which apply to books and courses (M)
+<p>What these settings all mean is explained in the rest of this section.</p>
+<h2 id="document-settings-which-apply-to-books-and-courses-m-" class="definition">
+<span class="number">4.1</span>Document settings which apply to books and courses (M)
 </h2>
 <p>The following settings apply to books and courses.</p>
+<p>Note that the behavior of resources which are treated as figures is controlled
+by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>list-figures</code> and
+<code>number-figures</code>. These need to be considered together: the behavior of these
+settings are tightly coupled.</p>
 <p><code>authors</code>
-: The authors of the Markua document.</p>
+: The authors of the Markua document. The default is undefined.</p>
 <p><code>alt-title</code>
-: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This is central to how
-resources operate in Markua, so it is discussed
-<a href="#the-alt-title-document-setting-m-">above</a>.</p>
+: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used instead as the figure title instead. If alt text
+is used as the figure title, it is NOT also provided as alt text, since it would
+be very annoying to hear the same text spoken twice (once as the alt text and
+once as the figure title) when using a screen reader. This is what the values
+mean:</p>
+<ul>
+<li><code>all</code>: if no title is provided for a given resource, regardless of the
+resource type, remove the alt text and use it as the figure title instead. (This
+choice is closest to the behavior of LFM and of Markua version 0.10.)</li>
+<li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
+an external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. This is arguably the most sensible choice, and it
+is the default since it strikes a balance between preserving compatibility with
+Markdown for non-text-based resources like images, while still providing a
+sensible default for text-based resources like code samples. Since Markdown does
+not define support for external text-based resources, there is no conflict here.</li>
+<li><code>none</code>: never remove the alt text to use it as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)</li>
+</ul>
 <p><code>contributors</code>
-: Any contributors to the Markua document who are not authors.</p>
+: Any contributors to the Markua document who are not authors. The default is
+undefined.</p>
 <p><code>copyright</code>
-: The owner of the copyright.</p>
+: The owner of the copyright. The default is undefined.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3209,11 +3138,156 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
-<p><code>figure-number-format</code>
-: <code>chapter</code> or <code>sequential</code>. The default is <code>sequential</code>. If <code>sequential</code>, you
-get numbering like <code>Figure 1, Figure 2, Figure 3, ...</code>. If <code>chapter</code>, you
-get numbering like <code>Figure 1.1, Figure 1.2, Figure 4.1, ...</code>. This setting is
-orthogonal to the <code>list-figures</code> setting.</p>
+<p><code>figure-classes</code>
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their <code>class</code> attribute. An example of this setting is:
+<code>figure-classes: equation, figure, image, listing</code>. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
+is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
+<p><code>include-page-numbers-in-references</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. When a smart crosslink to a
+figure reference is inserted with <code>#f</code>, this setting determines how the
+reference is displayed. If true (the default), the text includes the page
+number (e.g. “Figure 8.2: Anatomy of a Squirrel on page 42”) when inserted in
+a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of a Squirrel”. This
+setting has no effect on EPUB and MOBI, which never include page numbers in
+their references (since the text is resizable).</p>
+<p><code>italicize-underlines</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
+<code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
+<code>false</code>, then <code>_this_</code> is underlined while <code>*this*</code> is italic. This is discussed
+<a href="#underline-markua-extension-">here</a>.</p>
+<p><code>lang</code>
+: The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
+language code of the language that the Markua document is written in. The
+default is <code>eng</code>.</p>
+<p><code>list-figures</code>
+: <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This setting
+controls whether figures are listed in one or more lists near the beginning of
+the book. Note that whether these figures are numbered is controlled by the
+<code>number-figures</code> setting. The <code>list-figures</code> setting respects the numbering
+decision specified there. This is what the values mean:</p>
+<ul>
+<li><code>none</code>: No lists of figures are produced.</li>
+<li><code>combined</code>: One combined list of figures is produced for all figures in the
+manuscript, ordered by their appearance in the manuscript. This list is called
+List of Figures for English books, and localized into the language of the book
+or course. This produces figures named Figure, and (by default) numbered
+sequentially: Figure 1, Figure 2, Figure 3, etc. The numbering is defined by
+the <code>number-figures</code> document setting, specified below.</li>
+<li><code>groups</code>: The Markua Processor should group figures by their classes or types.
+Here’s how the grouping works:
+<ol>
+<li>If there is no <code>class</code> attribute, the figure is groups in a list with other
+resources of its <code>type</code>. This is a nice default, since it results in a List
+of Tables, List of Code Samples, List of Images, etc. The type of a
+resource can be specified by the type attribute, or inferred from the
+format of the resource.</li>
+<li>If there is a <code>class</code> attribute, this overrides the type. For example, it
+is almost never a good idea to have a List of Verbatim, so if you add a
+<code>class</code> of <code>poem</code> you will get a List of Poems. (There is nothing special
+about <code>poem</code>, by the way: if you add a <code>class</code> of <code>sonnet</code>, you will get a
+List of Sonnets. This is not just useful to differentiate types of poetry,
+by the way: this approach can be used to automatically produce a
+List of Lemmas, List of Theorems, etc.</li>
+</ol>
+</li>
+</ul>
+<p>The combination of <code>list-figures: groups</code> and <code>figure-number-format: chapter</code>
+produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
+Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
+document settings for books like computer programming books.</p>
+<p><code>number-chapters</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
+<p><code>number-figures</code>
+: <code>chapter</code>, <code>none</code>, or <code>sequential</code>. The default is <code>sequential</code>. If the value
+is <code>chapter</code> or <code>sequential</code>, then resources are numbered when they are inserted
+as figures. If the value is <code>sequential</code>, you get numbering like <code>Figure 1</code>,
+<code>Figure 2</code>, <code>Figure 3</code>, etc. If the value is <code>chapter</code>, you get numbering like
+<code>Figure 1.1</code>, <code>Figure 1.2</code>, <code>Figure 4.1</code>, etc. If the value is <code>none</code>, figures
+are not numbered.</p>
+<p><code>number-sections</code>
+: <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
+are numbered.</p>
+<p><code>restart-endnote-numbering</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the endnote numbering is restarted
+at the end of a chapter.</p>
+<p><code>restart-footnote-numbering</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the footnote numbering is restarted
+at the end of a chapter.</p>
+<p><code>smart-punctuation</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. If <code>smart</code> is <code>true</code>, use smart
+punctuation. Straight double and single quotes will be rendered as curly
+quotes, depending on their position, <code>--</code> will be rendered as an en-dash,
+<code>---</code> will be rendered as an em-dash and <code>...</code> will be rendered as ellipses.
+If <code>smart</code> is <code>false</code>, do not use smart punctuation.</p>
+<p><code>soft-breaks</code>
+: <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
+behaviour of single newlines (i.e. a newline which is not followed by another
+newline) in the output. This is what the values mean:</p>
+<ul>
+<li><code>source</code>: Single newlines inside paragraphs in the Markua source produce
+single newlines in the HTML source. This will pretend to break the line
+while actually functioning like a single space in the output: all it
+actually does is break the line in the HTML source. It does <em>not</em> break the
+line when the HTML is rendered, since in HTML a single newline is
+equivalent to a single space. So, this type of line break only is a line
+break in the HTML source and not in any other output format–hence the
+name <code>source</code>. To be clear: for non-HTML output formats such as LaTeX or
+PDF, a value of <code>source</code> has the same effect as <code>space</code>, discussed next.
+The <code>source</code> option is arguably the worst option, but it is the default
+because Markua must be compatible with Markdown by default, even in the
+rare situations where it considers a Markdown decision to be suboptimal.</li>
+<li><code>space</code>: Single newlines inside paragraphs in the Markua document produce
+single spaces in the HTML output. This functions identically to single
+newlines when rendered as HTML. For non-HTML-based output formats like
+LaTex or PDF, a single space is rendered for a single newline.</li>
+<li><code>break</code>: Single newlines inside paragraphs in the Markua document produce
+break tags in the HTML output and line breaks in non-HTML output like
+LaTeX or PDF. The reason this value is called <code>break</code> is to indicate that
+when you hit a newline to get a line break, you get a real line break.
+If <code>soft-breaks</code> has the value of <code>break</code>, all single newlines function
+as though they were using the “two space hack” to produce a hard line
+break in normal Markdown. (Whether the “two space hack” is enabled in a
+Markua document is determined by the value of the <code>two-space-hack</code>
+setting, discussed below.)</li>
+</ul>
+<p><code>title</code>
+: The title of the Markua document.</p>
+<p><code>two-space-hack</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>, for compatibility with Markdown. If
+<code>true</code>, adding two spaces at the end of a line forces a hard line break.
+If <code>false</code>, spaces at the end of a line are ignored, and the single newline
+is treated as a single newline would be without those spaces, which is
+determined by the value of the <code>soft-breaks</code> setting. Since Markua allows
+the behavior of soft line breaks to be configured with the <code>soft-breaks</code>
+setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks</code> setting
+is <code>break</code>. However, even in this case, authors may wish for the two space
+hack to still function as it does in Markdown, in order to support existing
+Markdown text or in cases where there are multiple authors of a manuscript.</p>
+<p><code>validate</code>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. If <code>validate</code> is <code>true</code>, UTF-8 characters
+in the Markua document are validated, replacing illegal sequences with U+FFFD.
+If <code>validate</code> is <code>false</code>, the UTF-8 characters in the Markua document are not
+validated.</p>
+<p><code>version</code>
+: The version of the Markua document. This is primarily intended for use when
+producing analytics for courses. (This is not related to the version of the
+Markua specification being used; it is the version of the book or course.)</p>
+<h2 id="document-settings-which-apply-to-books-only-m-" class="definition">
+<span class="number">4.2</span>Document settings which apply to books only (M)
+</h2>
+<p>The following settings are defined by Markua, but only make sense in the
+context of a book. So, a Markua Processor which is not generating a book can
+ignore them.</p>
+<p>Note that while the idea of a sample book is pretty universal, the idea of a
+community or network edition could be argued to be somewhat Leanpub-specific.
+However, these are in the Markua spec instead of being left as extension
+attributes, since they are essentially different levels of sample or subset
+books, and I am convinced that this has a general use outside of Leanpub.</p>
 <p><code>generate-community</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
 <code>true</code>, then a community edition book or course is generated, which is composed
@@ -3234,64 +3308,8 @@ are any <code>{network: true}</code> directives.</p>
 content which is included in the sample with <code>{sample: true}</code> directives.
 If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
 regardless of whether there are any <code>{sample: true}</code> directives.</p>
-<p><code>include-page-numbers-in-references</code>
-: When a smart crosslink to a figure reference is inserted with <code>#f</code>, this
-setting determines how the reference is displayed. If true (the default), the
-text includes the page number (e.g. “Figure 8.2: Anatomy of a Squirrel on page
-42”) when inserted in a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of
-a Squirrel”. This setting has no effect on EPUB and MOBI, which never include
-page numbers in their references (since the text is resizable).</p>
-<p><code>italicize-underlines</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
-<code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
-<code>false</code>, then <code>_this_</code> is underlined while <code>*this*</code> is italic. This is discussed
-<a href="#underline-markua-extension-">here</a>.</p>
-<p><code>lang</code>
-: The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
-language code of the language that the Markua document is written in. The
-default is <code>eng</code>.</p>
-<p><code>list-figures</code>
-: <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This is
-important enough that it is discussed in a separate section
-<a href="#the-list-figures-document-setting-m-">above</a>.</p>
-<p><code>number-chapters</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
-<p><code>number-figures</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether resources are numbered when
-inserted as figures. Note that if figures are listed in <code>groups</code>, then each
-list will have different numbering.</p>
-<p><code>number-sections</code>
-: <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
-are numbered.</p>
-<p><code>restart-endnote-numbering</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the endnote numbering is restarted
-at the end of a chapter.</p>
-<p><code>restart-footnote-numbering</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the footnote numbering is restarted
-at the end of a chapter.</p>
-<p><code>soft-breaks</code>
-: <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. Whether single newlines
-produce a space (with <code>space</code>), a newline in the HTML source (with <code>source</code>) or
-a break tag (with <code>break</code>). This is complex and important enough that it is
-discussed its own sub-section of <a href="#configurable-soft-line-breaks-m-">the inlines section
-below</a>.</p>
-<p><code>smart-punctuation</code>
-: If <code>smart</code> is <code>true</code>, use smart punctuation. Straight double and single quotes
-will be rendered as curly quotes, depending on their position, <code>--</code> will be
-rendered as an en-dash, <code>---</code> will be rendered as an em-dash and <code>...</code> will be
-rendered as ellipses. If <code>smart</code> is <code>false</code>, do not use smart punctuation.</p>
-<p><code>title</code>
-: The title of the Markua document.</p>
-<p><code>validate</code>
-: If <code>validate</code> is <code>true</code>, the UTF-8 characters in the Markua document are
-validated, replacing illegal sequences with U+FFFD. If <code>validate</code> is <code>false</code>,
-the UTF-8 characters in the Markua document are not validated. A Markua
-Processor may override this setting.</p>
-<p><code>version</code>
-: The version of the Markua document. This is primarily intended for use when
-producing analytics for courses. The default is <code>0.10</code>.</p>
-<h2 id="settings-which-apply-to-courses-only-m-" class="definition">
-<span class="number">4.4</span>Settings which apply to courses only (M)
+<h2 id="document-settings-which-apply-to-courses-only-m-" class="definition">
+<span class="number">4.3</span>Document settings which apply to courses only (M)
 </h2>
 <p>The following settings are defined by Markua, but only make sense in the context
 of a course. So, a Markua Processor which is not generating a course can ignore
@@ -3325,14 +3343,56 @@ are shown after a quiz is completed, say in an online course.</p>
 : <code>best</code> or <code>latest</code>. The default is <code>best</code>. Whether the best result on the quiz
 is used, or the latest one.</p>
 <p><code>default-random-choice-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behaviour of
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
 multiple choice questions. If <code>true</code>, the choices in the multiple choice
 question are randomly arranged; if <code>false</code>, they are presented in the order
 written.</p>
 <p><code>default-random-question-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behaviour of
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
 the quiz or exercise. If <code>true</code>, the questions are randomly arranged; if
 <code>false</code>, they are presented in the order written.</p>
+<h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
+<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
+</h2>
+<p>A Markua document can define multiple document settings hashes.</p>
+<p>There must be at least one blank line between the end of the settings block and
+the start of any other document content other than another document settings
+hash.</p>
+<p>The reason that more than one document settings hash is permitted is that a
+Markua Processor may also get settings from elsewhere, like a web interface.
+The most straightforward thing to do in such a case is to just add another
+document settings hash at the beginning of the file, and then let the Markua
+Processor sort out any conflicts.</p>
+<p>In the case of a conflict between settings defined in a document and settings
+defined, say, in a web interface, the last setting definition must win.
+However, a Markua Processor may override settings whose values are unsupported
+or illegal. Also, a Markua processor should provide a warning if there are
+multiple definitions of a document setting.</p>
+<p>Here’s an example of a Markua document which could be generated if there is a
+settings block produced by a web interface, and then a settings block manually
+added at the start of a book:</p>
+<pre><code>{
+soft-breaks: space
+alt-title: all
+title: Markua Spec
+authors: Peter Armstrong and John MacFarlane
+list-figures: groups
+figure-number-format: chapter
+figure-classes: equation, figure, image, listing
+}
+{
+italicize-underlines: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+</code></pre>
+<p>Thankfully, this would only be seen by a Markua Processor, since it’s ugly.
+The author would just see the second, manually-defined, settings block, and
+the first one would have been created from the values stored in a database.</p>
+<p>Finally, Markua Processors can also add their own document settings, just as
+Markua Processors can understand their own extension attributes.</p>
 </div>
 <div class="extension">
 <h1 id="resources-m-" class="definition">
@@ -3375,7 +3435,7 @@ will consider what they have in common. Specifically, resources share the
 following things:</p>
 <ol>
 <li>Attributes and attribute list support</li>
-<li>Behaviour as a figure or a span based on the presence of title</li>
+<li>Behavior as a figure or a span based on the presence of title</li>
 <li>Support for a title to be provided from alt text based on the <code>alt-title</code>
 document setting.</li>
 </ol>
@@ -3482,7 +3542,7 @@ being specified.</p>
 <p>The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it
 chooses. For example, a Markua Processor can position all titles above or below
-figures, or use a different behaviour based on the resource format (e.g. table
+figures, or use a different behavior based on the resource format (e.g. table
 titles above, image titles below).</p>
 <p>Note that the figure title itself may contain Markua text formatting (e.g. bold,
 italic). This text is also displayed for the figure wherever the figure is
@@ -6212,7 +6272,7 @@ other resources.</p>
 <li>Inserting a specific <code>class</code> of resource, such as a <code>poem</code>.</li>
 <li>Inserting boilerplate, such as a legal disclaimer, which may be needed to be
 used in many places and/or sourced from a third party.</li>
-<li>Controlling the behaviour of fonts or whitespace for specific types of
+<li>Controlling the behavior of fonts or whitespace for specific types of
 text, such as poetry.</li>
 </ol>
 <p>The following are the supported attributes for verbatim resources, in addition
@@ -10372,7 +10432,7 @@ two block elements in the list item:</p>
 <h2 id="list-attributes-m-" class="definition">
 <span class="number">8.5</span>List attributes (M)
 </h2>
-<p>By default, Markua keeps the behaviour of lists to be identical to that in
+<p>By default, Markua keeps the behavior of lists to be identical to that in
 Markdown, as described by John Gruber and specified by CommonMark.
 The enhancements that Markua makes to lists are purely additive: if you use any
 CommonMark-compliant list in a Markua document, it will work exactly as it would
@@ -10436,7 +10496,7 @@ c.<span class="space"> </span>baz&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<p>Again, both of these behaviours are as defined in the CommonMark spec.</p>
+<p>Again, both of these behaviors are as defined in the CommonMark spec.</p>
 <p>Now, Markua can’t change this by default, without being incompatibile with
 Markdown.</p>
 <p>Also, CommonMark allows <a href="#example-295">slight inconsistency</a> in the amount of
@@ -10899,7 +10959,7 @@ after
 <span class="number">8.5.4</span>Lists with Attributes: Lazy Style
 </h3>
 <p>It is acceptable to just use the number of the first label, and rely on list
-behaviour.</p>
+behavior.</p>
 <p>This list will be numbered 1, 2, 3:</p>
 <div class="example" id="example-332">
 <div class="examplenum">
@@ -11036,7 +11096,7 @@ after
 <h3 id="lists-with-attributes-redundant-style" class="definition">
 <span class="number">8.5.5</span>Lists with Attributes: Redundant Style
 </h3>
-<p>This list will be numbered 1, 2, 3. This is just the default behaviour made
+<p>This list will be numbered 1, 2, 3. This is just the default behavior made
 explicit:</p>
 <div class="example" id="example-337">
 <div class="examplenum">
@@ -12015,7 +12075,7 @@ B&gt;<span class="space"> </span>This<span class="space"> </span>is<span class="
 <p>This is the only way to center text in Markua.</p>
 <p>Unlike other blurb types which have their origin in technical books, centering
 text has a wide range of uses. So, it could have been thought of as something
-different than a blurb. However, in terms of its behaviour and the way it’s
+different than a blurb. However, in terms of its behavior and the way it’s
 inserted, centered text is a blurb–whether it’s inserted via syntactic sugar or
 via a class attribute on a normal blurb element.</p>
 <h3 id="blurb-icons-with-extension-attributes" class="definition">
@@ -12252,7 +12312,7 @@ of attempts.</p>
 submitted when the <code>time-limit</code> is expired. If false, it is not. Either way, an
 incomplete quiz counts as an attempt.</p>
 <p><code>case-sensitive</code>
-: <code>true</code> or <code>false</code>. The default is <code>true</code>. This sets the default behaviour of
+: <code>true</code> or <code>false</code>. The default is <code>true</code>. This sets the default behavior of
 fill in the blank questions. If <code>true</code>, the fill in the blank question answers
 are case-sensitive. If false, they are not.</p>
 <p><code>id</code>
@@ -12307,12 +12367,12 @@ and its questions also have <code>points</code> attributes, the worth of each qu
 a larger course context is determined as follows: its <code>points</code> are the
 numerator, and the total <code>points</code> in the quiz or exercise is the denominator.</p>
 <p><code>random-choice-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behaviour of
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
 multiple choice questions. If <code>true</code>, the choices in the multiple choice
 question are randomly arranged; if <code>false</code>, they are presented in the order
 written.</p>
 <p><code>random-question-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behaviour
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior
 of the quiz or exercise. If <code>true</code>, the questions are randomly arranged; if
 <code>false</code>, they are presented in the order written.</p>
 <p><code>start-at</code>
@@ -12415,7 +12475,7 @@ is forced to true.</p>
 The default is 1.</p>
 <p><code>random-choice-order</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>, unless <code>choose-answers</code> is used.
-This sets the behaviour of the specific multiple choice question. If <code>true</code>,
+This sets the behavior of the specific multiple choice question. If <code>true</code>,
 the choices in the multiple choice question are randomly arranged; if <code>false</code>,
 they are presented in the order written. If this attribute is omitted, its
 value is determined by the <code>random-choice-order</code> attribute on the quiz itself,
@@ -12444,7 +12504,7 @@ in blank!</p>
 <span class="number">9.5.1</span>Supported attributes on multiple selection questions
 </h3>
 <p><code>mark</code>
-: <code>binary</code> or <code>ratio</code>. The default is <code>binary</code>. This sets the marking behaviour
+: <code>binary</code> or <code>ratio</code>. The default is <code>binary</code>. This sets the marking behavior
 of the specific multiple selection question. If <code>binary</code>, the question is all
 or nothing: you either get full points for the question, or a 0 on the question.
 To get full points, you must select every <code>true</code> choice and none of the <code>false</code>
@@ -12459,7 +12519,7 @@ The default is 1. The <code>mark</code> attribute is used to determine how the p
 computed. Again, regardless of whether the <code>mark</code> is <code>binary</code> or <code>ratio</code>, a
 question which is left blank always earns 0 points.</p>
 <p><code>random-choice-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the behaviour of the
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the behavior of the
 specific multiple selection question. If <code>true</code>, the choices in the multiple
 choice question are randomly arranged; if <code>false</code>, they are presented in the
 order written. If this attribute is omitted, its value is determined by the
@@ -12630,7 +12690,7 @@ The default is the 1. The answers must either not specify points (in which case
 they are worth the full value of points that the question is worth), or they
 must specify points between 0 and the <code>points</code> value.</p>
 <p><code>case-sensitive</code>
-: <code>true</code> or <code>false</code>. The default is <code>true</code>. This sets the behaviour of the
+: <code>true</code> or <code>false</code>. The default is <code>true</code>. This sets the behavior of the
 specific fill in the blank question. If <code>true</code>, the fill in the blank question
 answer is case-sensitive. If false, it is not. In the case of multiple
 acceptable answer values, this attribute applies to all of them. Note that this
@@ -18711,143 +18771,8 @@ line ending or as a space.</p>
 <p>A renderer may also provide an option to render soft line breaks
 as hard line breaks.</p>
 <div class="extension">
-<h2 id="configurable-soft-line-breaks-with-the-soft-breaks-document-setting-m-" class="definition">
-<span class="number">10.16</span>Configurable soft line breaks with the soft-breaks document setting (M)
-</h2>
-<p>Note: the <code>soft-breaks</code> setting is an example of a document setting. Document
-settings are a Markua addition, and are discussed in general terms
-<a href="#document-settings-m-">here</a>.</p>
-<p>There is a good argument to be made that single newlines at the end of a line
-should always be treated as a hard line break, not as a soft line break.</p>
-<p>In ancient history, some text editors did not automatically wrap lines of text,
-so manual wrapping of plain text files was a good thing to do. However, for
-writing, automatic wrapping of paragraphs is essential for staying in the flow
-while writing, and for being able to edit your text without needing to re-wrap
-every line in a paragraph. This is one decision that even Microsoft Word gets
-right.</p>
-<p>So, Markua used to treat single newlines at the end of a line as a hard line
-break, not as a soft line break.</p>
-<p>However, compatibility with Markdown by default is more than fixing things such
-as this which I consider to be mistakes, even though the Markdown two-space hack
-to force a hard line break makes me die a little inside every time I (don’t) see
-it. As I’ve grown older, I’ve become more willing to compromise.</p>
-<p>So, Markua has a document setting called <code>soft-breaks</code>:</p>
-<ul>
-<li>If <code>soft-breaks</code> is <code>source</code>, then single newlines inside paragraphs in the
-Markua produce single newlines in the HTML source. This will pretend to
-break the line: while it does break the line in the HTML source, it does
-not break the line when the HTML is rendered. So, this type of line break
-only is a line break in the HTML source. In the output, it actually functions
-like a space. (It should be rendered as a space in non-HTML-based output
-formats like PDF.)</li>
-<li>If <code>soft-breaks</code> is <code>space</code>, then single newlines inside paragraphs in the
-Markua document produce single spaces in the HTML output. This functions
-identically to single newlines when rendered as HTML. (It should be rendered
-as a space in non-HTML-based output formats like PDF.)</li>
-<li>If <code>soft-breaks</code> is <code>break</code>, then single newlines inside paragraphs in the
-Markua document produce break tags in the HTML output. The reason this value
-is <code>break</code> is to indicate that when you hit a newline to get a line break, you
-get a real line break. In HTML, this means a break tag. (It should be rendered
-as a newline in non-HTML-based output formats like PDF.)</li>
-</ul>
-<p><strong>To be clear: if <code>soft-breaks</code> has the value of <code>break</code>, all single newlines
-function as hard line breaks (i.e. as they would if they were using the “two
-space hack” to produce a hard line break in normal Markdown).</strong></p>
-<div class="example" id="example-678">
-<div class="examplenum">
-<a href="#example-678">Example 678</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
-
-foo
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
-&lt;p&gt;foo
-bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>This can be made explicit by setting the <code>soft-breaks</code> document setting to
-<code>source</code>:</p>
-<div class="example" id="example-679">
-<div class="examplenum">
-<a href="#example-679">Example 679</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">{
-soft-breaks:<span class="space"> </span>source
-}
-
-#<span class="space"> </span>Chapter<span class="space"> </span>One
-
-foo
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
-&lt;p&gt;foo
-bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>This can be made shorter by setting the <code>soft-breaks</code> document setting to
-<code>space</code>:</p>
-<div class="example" id="example-680">
-<div class="examplenum">
-<a href="#example-680">Example 680</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">{
-soft-breaks:<span class="space"> </span>space
-}
-
-#<span class="space"> </span>Chapter<span class="space"> </span>One
-
-foo
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
-&lt;p&gt;foo<span class="space"> </span>bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>If you want your line breaks to actually, well, produce line breaks, you need to
-set the <code>soft-breaks</code> document setting to <code>break</code>:</p>
-<div class="example" id="example-681">
-<div class="examplenum">
-<a href="#example-681">Example 681</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">{
-soft-breaks:<span class="space"> </span>break
-}
-
-#<span class="space"> </span>Chapter<span class="space"> </span>One
-
-foo
-bar
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;h1&gt;Chapter<span class="space"> </span>One&lt;/h1&gt;
-&lt;p&gt;foo&lt;br<span class="space"> </span>/&gt;
-bar&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>Finally, note that the <code>soft-breaks</code> document setting also applies to other
-paragraph-like contexts, such as definition list items.</p>
-</div>
-<div class="extension">
 <h2 id="character-substitutions-m-" class="definition">
-<span class="number">10.17</span>Character substitutions (M)
+<span class="number">10.16</span>Character substitutions (M)
 </h2>
 <p>Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -18873,12 +18798,12 @@ paragraph).</p>
 : To produce a horizontal ellipsis (…), you can just type <code>...</code>. You can also use
 the proper Unicode character, U+2026, of course.</p>
 <h3 id="optional-automatic-curly-quotes-outside-of-code-blocks-and-spans" class="definition">
-<span class="number">10.17.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
+<span class="number">10.16.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
 </h3>
 <p>A Markua Processor may replace the <code>&quot;</code> character with the appropriate “curly
 quote” at its discretion. This lets <code>&quot;typography&quot;</code> become <code>“typography”</code>, and
 <code>it's</code> become <code>it’s</code> as appropriate.</p>
-<p>Note that this is an optional behaviour: a Markua Processor may support this
+<p>Note that this is an optional behavior: a Markua Processor may support this
 fully, only in some output formats, or not at all.</p>
 <p>Also, note that it is <strong>NEVER</strong> acceptable for a Markua Processor to do this,
 or <em>any</em> character substitution, to text inside a code block or code span. In
@@ -18890,11 +18815,11 @@ straight in a code span either.)</p>
 </div>
 <div class="extension">
 <h2 id="footnotes-and-endnotes-m-" class="definition">
-<span class="number">10.18</span>Footnotes and endnotes (M)
+<span class="number">10.17</span>Footnotes and endnotes (M)
 </h2>
 <p>Books often have footnotes and endnotes. So, Markua has them too.</p>
 <h3 id="footnotes" class="definition">
-<span class="number">10.18.1</span>Footnotes
+<span class="number">10.17.1</span>Footnotes
 </h3>
 <p>To add a footnote, you insert a footnote tag using square brackets, a caret and
 the tag, like this:</p>
@@ -18924,7 +18849,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="endnotes" class="definition">
-<span class="number">10.18.2</span>Endnotes
+<span class="number">10.17.2</span>Endnotes
 </h3>
 <p>Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
@@ -18950,7 +18875,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="single-reference-to-footnotes-and-endnotes" class="definition">
-<span class="number">10.18.3</span>Single reference to footnotes and endnotes
+<span class="number">10.17.3</span>Single reference to footnotes and endnotes
 </h3>
 <p>You can only refer to a footnote or endnote once. You can’t define a footnote or
 endnote in one place and refer to it multiple times in the same Markua document.
@@ -18959,7 +18884,7 @@ Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 <a href="#crosslinks">crosslink</a>.</p>
 <h3 id="footnote-and-endnote-support-is-required-for-paragraphs-only" class="definition">
-<span class="number">10.18.4</span>Footnote and endnote support is required for paragraphs only
+<span class="number">10.17.4</span>Footnote and endnote support is required for paragraphs only
 </h3>
 <p>A Markua Processor must support footnote and endnote references inserted in
 normal paragraph content. However, that’s it.</p>
@@ -18978,7 +18903,7 @@ only supports inserting footnotes or endnotes in normal paragraph content.</p>
 </div>
 <div class="extension">
 <h2 id="underline-m-" class="definition">
-<span class="number">10.19</span>Underline (M)
+<span class="number">10.18</span>Underline (M)
 </h2>
 <p>In Markdown as defined by John Gruber, and in CommonMark and GFM,
 <code>*one asterisk*</code> and <code>_one underscore_</code> both produce <em>italics</em>, and there is no
@@ -19009,9 +18934,9 @@ this is much less of an issue for them!</p>
 issue. While underline does have legitimate uses, they are more niche than
 italic.)</p>
 <p>So, by default, <code>italicize-underlines</code> is <code>true</code>:</p>
-<div class="example" id="example-682">
+<div class="example" id="example-678">
 <div class="examplenum">
-<a href="#example-682">Example 682</a>
+<a href="#example-678">Example 678</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
@@ -19036,9 +18961,9 @@ stuff
 </div>
 <p>This can be made explicit by setting the <code>italicize-underlines</code> document setting
 to <code>true</code>:</p>
-<div class="example" id="example-683">
+<div class="example" id="example-679">
 <div class="examplenum">
-<a href="#example-683">Example 683</a>
+<a href="#example-679">Example 679</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19066,9 +18991,9 @@ stuff
 </div>
 </div>
 <p>Set the <code>italicize-underlines</code> document setting to <code>false</code> to produce underline:</p>
-<div class="example" id="example-684">
+<div class="example" id="example-680">
 <div class="examplenum">
-<a href="#example-684">Example 684</a>
+<a href="#example-680">Example 680</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19096,9 +19021,9 @@ stuff
 </div>
 </div>
 <p>To produce text which is underlined as well as other bolded and/or italicized, you combine the underscores for underlining with the asterisks for bold and italics:</p>
-<div class="example" id="example-685">
+<div class="example" id="example-681">
 <div class="examplenum">
-<a href="#example-685">Example 685</a>
+<a href="#example-681">Example 681</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19131,12 +19056,12 @@ stuff
 </div>
 <div class="extension">
 <h2 id="superscript-and-subscript-m-" class="definition">
-<span class="number">10.20</span>Superscript and subscript (M)
+<span class="number">10.19</span>Superscript and subscript (M)
 </h2>
 <p>To produce superscript like the 3 in 5^3^ = 125, surround it with carets like <code>5^3^ = 125</code>.</p>
-<div class="example" id="example-686">
+<div class="example" id="example-682">
 <div class="examplenum">
-<a href="#example-686">Example 686</a>
+<a href="#example-682">Example 682</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Superscript:<span class="space"> </span>5^3^<span class="space"> </span>=<span class="space"> </span>125
@@ -19148,9 +19073,9 @@ stuff
 </div>
 </div>
 <p>To produce subscript like the 2 in H~2~O, surround it with single tildes like <code>H~2~O</code>.</p>
-<div class="example" id="example-687">
+<div class="example" id="example-683">
 <div class="examplenum">
-<a href="#example-687">Example 687</a>
+<a href="#example-683">Example 683</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Subscript:<span class="space"> </span>H~2~O
@@ -19164,14 +19089,14 @@ stuff
 </div>
 <div class="extension">
 <h2 id="strikethrough-gfm-" class="definition">
-<span class="number">10.21</span>Strikethrough (GFM)
+<span class="number">10.20</span>Strikethrough (GFM)
 </h2>
 <p>Markua enables the <code>strikethrough</code> extension, where an additional emphasis type is
 available.</p>
 <p>Strikethrough text is any text wrapped in two tildes (<code>~</code>).</p>
-<div class="example" id="example-688">
+<div class="example" id="example-684">
 <div class="examplenum">
-<a href="#example-688">Example 688</a>
+<a href="#example-684">Example 684</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~Hi~~<span class="space"> </span>Hello,<span class="space"> </span>world!
@@ -19184,9 +19109,9 @@ available.</p>
 </div>
 <p>As with regular emphasis delimiters, a new paragraph will cause strikethrough
 parsing to cease:</p>
-<div class="example" id="example-689">
+<div class="example" id="example-685">
 <div class="examplenum">
-<a href="#example-689">Example 689</a>
+<a href="#example-685">Example 685</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">This<span class="space"> </span>~~has<span class="space"> </span>a
@@ -19203,7 +19128,7 @@ new<span class="space"> </span>paragraph~~.
 </div>
 <div class="extension">
 <h2 id="index-entries-m-" class="definition">
-<span class="number">10.22</span>Index entries (M)
+<span class="number">10.21</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -19306,7 +19231,7 @@ the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*He
 </div>
 <div class="extension">
 <h2 id="syntactic-sugar-list-m-" class="definition">
-<span class="number">10.23</span>Syntactic sugar list (M)
+<span class="number">10.22</span>Syntactic sugar list (M)
 </h2>
 <p>Markua has a handful of syntactic sugar that it relies on to make life nicer for
 authors. Here’s a helpful summary list of the different syntactic sugar elements
@@ -19332,13 +19257,13 @@ a <code>{class: continued-para}</code></p>
 : <code>{format: text}</code></p>
 </div>
 <h2 id="textual-content" class="definition">
-<span class="number">10.24</span>Textual content
+<span class="number">10.23</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>
-<div class="example" id="example-690">
+<div class="example" id="example-686">
 <div class="examplenum">
-<a href="#example-690">Example 690</a>
+<a href="#example-686">Example 686</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">hello<span class="space"> </span>$.;'there
@@ -19349,9 +19274,9 @@ be parsed as plain textual content.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-691">
+<div class="example" id="example-687">
 <div class="examplenum">
-<a href="#example-691">Example 691</a>
+<a href="#example-687">Example 687</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span>χρῆν
@@ -19363,9 +19288,9 @@ be parsed as plain textual content.</p>
 </div>
 </div>
 <p>Internal spaces are preserved verbatim:</p>
-<div class="example" id="example-692">
+<div class="example" id="example-688">
 <div class="examplenum">
-<a href="#example-692">Example 692</a>
+<a href="#example-688">Example 688</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces

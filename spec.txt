@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.13'
-date: '2022-04-07'
+version: '0.30.14'
+date: '2022-04-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -370,7 +370,7 @@ discussed next.
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behaviour of the Markua Processor. For example, you can set the
+affect the behavior of the Markua Processor. For example, you can set the
 `alt-title` setting to `all` to make images use the alt text as the figure
 title instead of as alt text:
 
@@ -388,7 +388,7 @@ This is an apple with a figure title but no alt text:
 
 This gets you the terseness of inserting images as figures in LFM, in a general
 way. Note that if the `alt-title` document setting is set to `text` (the
-default) this behaviour only happens for text-based resources like code samples.
+default) this behavior only happens for text-based resources like code samples.
 If the `alt-title` is set to `none`, it never happens.
 
 The generalization of the Markdown image syntax into resources, and the addition
@@ -1568,7 +1568,7 @@ document) and directives (at certain points throughout the document). All
 metadata is enclosed in curly braces `{` ... `}`.
 
 Metadata is not actually output in the Markua document itself. Instead, it
-changes the behaviour of the Markua Processor, sometimes dramatically.
+changes the behavior of the Markua Processor, sometimes dramatically.
 
 First, however, it is important to start with how Markua headers and metadata
 are used to define document structure.
@@ -1933,7 +1933,7 @@ as a figure, which specifies the text to use for the figure in the appropriate
 list of figures (e.g. List of Illustrations, Table of Tables, etc.). If a
 heading does not have a title attribute, the text of the heading itself is
 used--which is quite often exactly what is desired. Use of a `title` attribute
-is always optional; it's only used when the default behaviour of using the
+is always optional; it's only used when the default behavior of using the
 heading text (or the `title` attribute for a resource) is not appropriate,
 say if it's too long.
 
@@ -2142,7 +2142,7 @@ after something like a list is actually a continuation of the previous
 paragraph.
 
 Now, this could have been done by just not adding blank lines, only single
-newlines, but that would involve fighting against existing Markdown behaviour.
+newlines, but that would involve fighting against existing Markdown behavior.
 Worse, it would introduce an incompatibility just to fix something that many
 people don't consider broken.
 
@@ -2200,7 +2200,7 @@ bar
 
 Note that this works for more than just lists. In fact, it has nothing to do
 with lists, or even with images or other resources. It's all about the
-indentation behaviour of a paragraph, typically following some other block. So,
+indentation behavior of a paragraph, typically following some other block. So,
 you can use this whenever you want:
 
 ```````````````````````````````` example
@@ -2287,7 +2287,7 @@ version of Markua without needing to specify anything special.
 
 ## Directives (M)
 
-Directives are switches which affect the behaviour of a Markua Processor.
+Directives are switches which affect the behavior of a Markua Processor.
 
 The syntax for directives is `{simple}`. A directive is surrounded in curly
 braces, and must have a blank line above and below it.
@@ -2620,27 +2620,26 @@ Yada yada yada.
 
 # Document settings (M)
 
-The behaviour of a Markua Processor can be affected by certain global document
-settings. These settings are very important, since they have an effect on the
-entire book or course.
-
 Markua's philosophy is that non-semantic formatting is procrastination. Because
-of this, almost all formatting is done by global switches, that can be defined
-once at the beginning of the document in document settings.
+of this, almost all formatting is done by global switches. These switches are
+called document settings, and they are defined once, at the beginning of the
+document. Document settings affect the formatting of the entire book or course.
 
-The document settings are defined by one or more document settings hashes.
-The document settings hash or hashes must be at the start of a Markua document.
-Once something other than a document settings hash is encountered, no more
-document settings hashes can be defined.
+Document settings are defined in one or more document settings hashes. The
+document settings hash or hashes must be at the start of a Markua document.
+Once something other than a document settings hash or a blank line is
+encountered, no more document settings hashes can be defined. (Document
+settings hashes can be separated with single or multiple newlines, but once the
+first thing which is not a document setting or blank line is encountered, no
+more document settings hashes can be defined.)
 
 The settings are newline-separated key-value pairs (`key: value`) which contain
-information about the document and about the desired behaviour of the Markua
+information about the document and about the desired behavior of the Markua
 Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
-`authors`, etc. Markua Processor behaviour includes settings like `alt-title`,
+`authors`, etc. Markua Processor behavior includes settings like `alt-title`,
 `list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
-
 
 The format of a document settings hash is as follows: Every non-blank line
 in the document settings hash must contain a key, a colon `:`, and a value.
@@ -2648,193 +2647,97 @@ Any whitespace at the beginning or end of the keys and values will be stripped.
 Only the first colon is important; subsequent colons on a line will just be
 part of the value.
 
-There must be at least one blank line between the end of the settings block and
-the start of any other document content other than another document settings
-hash.
-
-Here's an example of a document settings block at the start of a book:
-
-~~~
-{
-italicize-underlines: false
-soft-breaks: space
-alt-title: all
-smart-punctuation: true
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
-generate-sample: true
-generate-community: true
-generate-network: true
-list-figures: groups
-figure-number-format: chapter
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-~~~
-
-The reason that more than one document settings hash is permitted is that a
-Markua Processor may also get settings from elsewhere, like a web interface.
-The most straightforward thing to do in such a case is to just add another
-document settings hash at the beginning of the file, and then let the Markua
-Processor sort out any conflicts.
-
-In the case of a conflict between settings defined in a document and settings
-defined, say, in a web interface, the last setting definition should win.
-However, a Markua Processor may override settings whose values are unsupported
-or illegal. Also, a Markua processor should provide a warning if there are
-conflicts.
-
-Here's an example of a Markua document which could be generated if there is a
-settings block produced by a web interface, and then a settings block manually
-added at the start of a book:
-
-~~~
-{
-italicize-underlines: false
-soft-breaks: space
-alt-title: all
-smart-punctuation: true
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
-}
-{
-italicize-underlines: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-~~~
-
-Thankfully, the only thing that would see this would be a Markua Processor,
-since it's gross. To the author, they would just see their (second) settings
-block, and the first one would have been created from the values stored in a
-database somewhere.
-
-Note that each document setting either applies to books and courses, or to
-courses only.
-
-Finally, Markua Processors can also add their own document settings, just as
-Markua Processors can understand their own extension attributes.
-
-
-
-## The alt-title document setting (M)
-
-The `alt-title` document setting controls whether, in the cases where there is
-no figure title explicitly set, the alt text on a resource is removed and used
-instead as the figure title.
-
-The `alt-title` can be `all`, `text` or `none`. The default is `text`.
-
-This is what the values mean:
-
-`all`
-: If no title is provided for a given resource, regardless of the resource type,
-remove the alt text and use it as the figure title instead. (This setting is
-closest to the behaviour of LFM and of Markua version 0.10.)
-
-`text`
-: If no title is provided for a given **text-based** resource (such as an
-external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. (This is arguably the most sensible choice.)
-
-`none`
-: With this setting, never remove the alt text to use it as the figure title,
-even for a text-based resource where no figure title is provided. (This is how
-Markdown behaves.)
-
-The default is `text` since it strikes a balance between preserving
-compatibility with Markdown for non-text-based resources like images, while
-still providing a sensible default for text-based resources like code samples.
-Since Markdown does not define support for external text-based resources, there
-is no conflict here.
-
-Note that if the alt text is converted into the figure title, it is NOT also
-provided as alt text. It would be very annoying to hear the same text spoken
-twice (once as the alt text and once as the figure title) when using a screen
-reader.
-
-
-
-## The list-figures document setting (M)
-
-There is a document setting called `list-figures` which determines
-whether figures are listed in one or more lists near the beginning of the book.
-
-If `list-figures` is `none`, then no lists of figures are produced.
-
-If `list-figures` is `combined` (the default), this results in one combined
-list of figures (called List of Figures, but localized into the language of the
-book or course), for all figures in the manuscript, ordered by their appearance
-in the manuscript.
-
-If `list-figures` is `groups`, the Markua Processor should group figures.
-Here's how the grouping works:
-
-1. If there is no `class` attribute, the figure is groups in a list with other
-resources of its `type`. This is a nice default, since it results in a List of
-Tables, List of Code Samples, List of Images, etc. The type of a resource can be
-specified by the type attribute, or inferred from the format of the resource.
-
-2. If there is a `class` attribute, this overrides the type. For example, it is
-almost never a good idea to have a List of Verbatim, so if you add a `class` of
-`poem` you will get a List of Poems. (There is nothing special about `poem`, by
-the way: if you add a `class` of `sonnet`, you will get a List of Sonnets. This
-is not just useful to differentiate types of poetry, by the way: this approach
-can be used to automatically produce a `List of Lemmas`, `List of Theorems`,
-etc.
-
-The default document settings are:
+Since Markua defines a number of document settings, it is helpful to see what
+the defaults are in one list. These defaults are listed below; note that
+undefined means that the value is not set, not the literal string undefined.
 
 ```
 {
   list-figures: combined
   figure-number-format: sequential
-  ...
+  authors: undefined
+  alt-title: text
+  contributors: undefined
+  copyright: undefined
+  default-code-language: guess
+  figure-classes: undefined
+  include-page-numbers-in-references: true
+  italicize-underlines: true
+  lang: eng
+  list-figures: combined
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  smart-punctuation: true
+  soft-breaks: source
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  course-attempts: 1
+  course-completeness: 0
+  default-exercise-show-answers: all
+  default-quiz-attempts: 1
+  default-quiz-auto-submit: true
+  default-quiz-show-answers: incorrect
+  default-quiz-use-result: best
+  default-random-choice-order: false
+  default-random-question-order: false
 }
 ```
 
-This produces figures named `Figure 1, Figure 2, Figure 3, ...`.
-
-Another good choice is the following document settings:
-
-```
-{
-  list-figures: groups
-  figure-number-format: chapter
-}
-```
-
-This produces figures like `Listing 1.1, Listing 1.2, Listing 4.1` and
-`Image 1.1, Image 1.2, Image 2.1, Image 2.2, Image 4.1`.
-
-* When `list-figures` are listed in `groups`, they each have their own numbers.
-* When the `figure-number-format` is `chapter`, the numbering is `chapter.n`.
+What these settings all mean is explained in the rest of this section.
 
 
 
-## Settings which apply to books and courses (M)
+## Document settings which apply to books and courses (M)
 
 The following settings apply to books and courses.
 
+Note that the behavior of resources which are treated as figures is controlled
+by four related settings: `alt-title`, `figure-classes`, `list-figures` and
+`number-figures`. These need to be considered together: the behavior of these
+settings are tightly coupled.
+
 `authors`
-: The authors of the Markua document.
+: The authors of the Markua document. The default is undefined.
 
 `alt-title`
-: `all`, `text` or `none`. The default is `text`. This is central to how
-resources operate in Markua, so it is discussed
-[above](#the-alt-title-document-setting-m-).
+: `all`, `text` or `none`. The default is `text`. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used instead as the figure title instead. If alt text
+is used as the figure title, it is NOT also provided as alt text, since it would
+be very annoying to hear the same text spoken twice (once as the alt text and
+once as the figure title) when using a screen reader. This is what the values
+mean:
+
+* `all`: if no title is provided for a given resource, regardless of the
+resource type, remove the alt text and use it as the figure title instead. (This
+choice is closest to the behavior of LFM and of Markua version 0.10.)
+* `text`: if no title is provided for a given **text-based** resource (such as
+an external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. This is arguably the most sensible choice, and it
+is the default since it strikes a balance between preserving compatibility with
+Markdown for non-text-based resources like images, while still providing a
+sensible default for text-based resources like code samples. Since Markdown does
+not define support for external text-based resources, there is no conflict here.
+* `none`: never remove the alt text to use it as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)
 
 `contributors`
-: Any contributors to the Markua document who are not authors.
+: Any contributors to the Markua document who are not authors. The default is
+undefined.
 
 `copyright`
-: The owner of the copyright.
+: The owner of the copyright. The default is undefined.
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -2854,11 +2757,170 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
-`figure-number-format`
-: `chapter` or `sequential`. The default is `sequential`. If `sequential`, you
-get numbering like `Figure 1, Figure 2, Figure 3, ...`. If `chapter`, you 
-get numbering like `Figure 1.1, Figure 1.2, Figure 4.1, ...`. This setting is
-orthogonal to the `list-figures` setting.
+`figure-classes`
+: this is a comma-separated list of the figure classes which are included in the
+list(s) of figures near the beginning of the book or course. The default is
+undefined, which means that all figures are included, regardless of the value
+of their `class` attribute. An example of this setting is:
+`figure-classes: equation, figure, image, listing`. Note that whether the
+figures are listed, either grouped by their class or together in one big list,
+is controlled by the `list-figures` setting. Note that the numbering of figures
+is controlled by the `number-figures` and `figure-number-format` settings.
+
+`include-page-numbers-in-references`
+: `true` or `false`. The default value is `true`. When a smart crosslink to a
+figure reference is inserted with `#f`, this setting determines how the
+reference is displayed. If true (the default), the text includes the page
+number (e.g. "Figure 8.2: Anatomy of a Squirrel on page 42") when inserted in
+a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of a Squirrel". This
+setting has no effect on EPUB and MOBI, which never include page numbers in
+their references (since the text is resizable).
+
+`italicize-underlines`
+: `true` or `false`. The default value is `true`. If `italicize-underlines` is
+`true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
+`false`, then `_this_` is underlined while `*this*` is italic. This is discussed
+[here](#underline-markua-extension-).
+
+`lang`
+: The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
+language code of the language that the Markua document is written in. The
+default is `eng`.
+
+`list-figures`
+: `combined`, `groups` or `none`. The default value is `combined`. This setting
+controls whether figures are listed in one or more lists near the beginning of
+the book. Note that whether these figures are numbered is controlled by the
+`number-figures` setting. The `list-figures` setting respects the numbering
+decision specified there. This is what the values mean:
+
+* `none`: No lists of figures are produced.
+* `combined`: One combined list of figures is produced for all figures in the
+  manuscript, ordered by their appearance in the manuscript. This list is called
+  List of Figures for English books, and localized into the language of the book
+  or course. This produces figures named Figure, and (by default) numbered
+  sequentially: Figure 1, Figure 2, Figure 3, etc. The numbering is defined by
+  the `number-figures` document setting, specified below.
+* `groups`: The Markua Processor should group figures by their classes or types.
+  Here's how the grouping works:
+  1. If there is no `class` attribute, the figure is groups in a list with other
+     resources of its `type`. This is a nice default, since it results in a List
+     of Tables, List of Code Samples, List of Images, etc. The type of a
+     resource can be specified by the type attribute, or inferred from the
+     format of the resource.
+  2. If there is a `class` attribute, this overrides the type. For example, it
+     is almost never a good idea to have a List of Verbatim, so if you add a
+     `class` of `poem` you will get a List of Poems. (There is nothing special
+     about `poem`, by the way: if you add a `class` of `sonnet`, you will get a
+     List of Sonnets. This is not just useful to differentiate types of poetry,
+     by the way: this approach can be used to automatically produce a
+     List of Lemmas, List of Theorems, etc.
+
+The combination of `list-figures: groups` and `figure-number-format: chapter`
+produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
+Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
+document settings for books like computer programming books.
+
+`number-chapters`
+: `true` or `false`. Default `true`. Whether the chapters are numbered.
+
+`number-figures`
+: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
+is `chapter` or `sequential`, then resources are numbered when they are inserted
+as figures. If the value is `sequential`, you get numbering like `Figure 1`,
+`Figure 2`, `Figure 3`, etc. If the value is `chapter`, you get numbering like
+`Figure 1.1`, `Figure 1.2`, `Figure 4.1`, etc. If the value is `none`, figures
+are not numbered.
+
+`number-sections`
+: `true` or `false`. Default `false`. Whether the sections (and sub-sections)
+are numbered.
+
+`restart-endnote-numbering`
+: `true` or `false`. Default `true`. Whether the endnote numbering is restarted
+at the end of a chapter.
+
+`restart-footnote-numbering`
+: `true` or `false`. Default `true`. Whether the footnote numbering is restarted
+at the end of a chapter.
+
+`smart-punctuation`
+: `true` or `false`. Default `true`. If `smart` is `true`, use smart
+punctuation. Straight double and single quotes will be rendered as curly
+quotes, depending on their position, `--` will be rendered as an en-dash,
+`---` will be rendered as an em-dash and `...` will be rendered as ellipses.
+If `smart` is `false`, do not use smart punctuation.
+
+`soft-breaks`
+: `break`, `space` or `source`. Default `source`. This setting determines the
+behaviour of single newlines (i.e. a newline which is not followed by another
+newline) in the output. This is what the values mean:
+
+  * `source`: Single newlines inside paragraphs in the Markua source produce
+    single newlines in the HTML source. This will pretend to break the line
+    while actually functioning like a single space in the output: all it
+    actually does is break the line in the HTML source. It does *not* break the
+    line when the HTML is rendered, since in HTML a single newline is
+    equivalent to a single space. So, this type of line break only is a line
+    break in the HTML source and not in any other output format--hence the
+    name `source`. To be clear: for non-HTML output formats such as LaTeX or
+    PDF, a value of `source` has the same effect as `space`, discussed next.
+    The `source` option is arguably the worst option, but it is the default
+    because Markua must be compatible with Markdown by default, even in the
+    rare situations where it considers a Markdown decision to be suboptimal.
+  * `space`: Single newlines inside paragraphs in the Markua document produce
+    single spaces in the HTML output. This functions identically to single
+    newlines when rendered as HTML. For non-HTML-based output formats like
+    LaTex or PDF, a single space is rendered for a single newline.
+  * `break`: Single newlines inside paragraphs in the Markua document produce
+    break tags in the HTML output and line breaks in non-HTML output like
+    LaTeX or PDF. The reason this value is called `break` is to indicate that
+    when you hit a newline to get a line break, you get a real line break.
+    If `soft-breaks` has the value of `break`, all single newlines function
+    as though they were using the "two space hack" to produce a hard line
+    break in normal Markdown. (Whether the "two space hack" is enabled in a
+    Markua document is determined by the value of the `two-space-hack`
+    setting, discussed below.)
+
+`title`
+: The title of the Markua document.
+
+`two-space-hack`
+: `true` or `false`. Default `true`, for compatibility with Markdown. If
+  `true`, adding two spaces at the end of a line forces a hard line break.
+  If `false`, spaces at the end of a line are ignored, and the single newline
+  is treated as a single newline would be without those spaces, which is
+  determined by the value of the `soft-breaks` setting. Since Markua allows
+  the behavior of soft line breaks to be configured with the `soft-breaks`
+  setting, the `two-space-hack` is not needed if the `soft-breaks` setting
+  is `break`. However, even in this case, authors may wish for the two space
+  hack to still function as it does in Markdown, in order to support existing
+  Markdown text or in cases where there are multiple authors of a manuscript.
+
+`validate`
+: `true` or `false`. Default `true`. If `validate` is `true`, UTF-8 characters
+in the Markua document are validated, replacing illegal sequences with U+FFFD.
+If `validate` is `false`, the UTF-8 characters in the Markua document are not
+validated.
+
+`version`
+: The version of the Markua document. This is primarily intended for use when
+producing analytics for courses. (This is not related to the version of the
+Markua specification being used; it is the version of the book or course.)
+
+
+
+## Document settings which apply to books only (M)
+
+The following settings are defined by Markua, but only make sense in the
+context of a book. So, a Markua Processor which is not generating a book can
+ignore them.
+
+Note that while the idea of a sample book is pretty universal, the idea of a
+community or network edition could be argued to be somewhat Leanpub-specific.
+However, these are in the Markua spec instead of being left as extension
+attributes, since they are essentially different levels of sample or subset
+books, and I am convinced that this has a general use outside of Leanpub.
 
 `generate-community`
 : `true` or `false`. The default value is `true`. If `generate-community` is
@@ -2883,79 +2945,9 @@ content which is included in the sample with `{sample: true}` directives.
 If `generate-sample` is `false`, then a sample book or course is not generated,
 regardless of whether there are any `{sample: true}` directives.
 
-`include-page-numbers-in-references`
-: When a smart crosslink to a figure reference is inserted with `#f`, this
-setting determines how the reference is displayed. If true (the default), the
-text includes the page number (e.g. "Figure 8.2: Anatomy of a Squirrel on page
-42") when inserted in a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of
-a Squirrel". This setting has no effect on EPUB and MOBI, which never include
-page numbers in their references (since the text is resizable).
-
-`italicize-underlines`
-: `true` or `false`. The default value is `true`. If `italicize-underlines` is
-`true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
-`false`, then `_this_` is underlined while `*this*` is italic. This is discussed
-[here](#underline-markua-extension-).
-
-`lang`
-: The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
-language code of the language that the Markua document is written in. The
-default is `eng`.
-
-`list-figures`
-: `combined`, `groups` or `none`. The default value is `combined`. This is
-important enough that it is discussed in a separate section
-[above](#the-list-figures-document-setting-m-).
-
-`number-chapters`
-: `true` or `false`. Default `true`. Whether the chapters are numbered.
-
-`number-figures`
-: `true` or `false`. Default `true`. Whether resources are numbered when
-inserted as figures. Note that if figures are listed in `groups`, then each
-list will have different numbering.
-
-`number-sections`
-: `true` or `false`. Default `false`. Whether the sections (and sub-sections)
-are numbered.
-
-`restart-endnote-numbering`
-: `true` or `false`. Default `true`. Whether the endnote numbering is restarted
-at the end of a chapter.
-
-`restart-footnote-numbering`
-: `true` or `false`. Default `true`. Whether the footnote numbering is restarted
-at the end of a chapter.
-
-`soft-breaks`
-: `break`, `space` or `source`. Default `source`. Whether single newlines
-produce a space (with `space`), a newline in the HTML source (with `source`) or
-a break tag (with `break`). This is complex and important enough that it is
-discussed its own sub-section of [the inlines section
-below](#configurable-soft-line-breaks-m-).
-
-`smart-punctuation`
-: If `smart` is `true`, use smart punctuation. Straight double and single quotes
-will be rendered as curly quotes, depending on their position, `--` will be
-rendered as an en-dash, `---` will be rendered as an em-dash and `...` will be
-rendered as ellipses. If `smart` is `false`, do not use smart punctuation.
-
-`title`
-: The title of the Markua document.
-
-`validate`
-: If `validate` is `true`, the UTF-8 characters in the Markua document are
-validated, replacing illegal sequences with U+FFFD. If `validate` is `false`,
-the UTF-8 characters in the Markua document are not validated. A Markua
-Processor may override this setting.
-
-`version`
-: The version of the Markua document. This is primarily intended for use when
-producing analytics for courses. The default is `0.10`.
 
 
-
-## Settings which apply to courses only (M)
+## Document settings which apply to courses only (M)
 
 The following settings are defined by Markua, but only make sense in the context
 of a course. So, a Markua Processor which is not generating a course can ignore
@@ -2997,18 +2989,69 @@ are shown after a quiz is completed, say in an online course.
 is used, or the latest one.
 
 `default-random-choice-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of
+: `true` or `false`. The default is `false`. This sets the default behavior of
 multiple choice questions. If `true`, the choices in the multiple choice
 question are randomly arranged; if `false`, they are presented in the order
 written.
 
 `default-random-question-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of
+: `true` or `false`. The default is `false`. This sets the default behavior of
 the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
 
-</div>
 
+
+## Multiple document settings hashes are permitted (M)
+
+A Markua document can define multiple document settings hashes.
+
+There must be at least one blank line between the end of the settings block and
+the start of any other document content other than another document settings
+hash.
+
+The reason that more than one document settings hash is permitted is that a
+Markua Processor may also get settings from elsewhere, like a web interface.
+The most straightforward thing to do in such a case is to just add another
+document settings hash at the beginning of the file, and then let the Markua
+Processor sort out any conflicts.
+
+In the case of a conflict between settings defined in a document and settings
+defined, say, in a web interface, the last setting definition must win.
+However, a Markua Processor may override settings whose values are unsupported
+or illegal. Also, a Markua processor should provide a warning if there are
+multiple definitions of a document setting.
+
+Here's an example of a Markua document which could be generated if there is a
+settings block produced by a web interface, and then a settings block manually
+added at the start of a book:
+
+~~~
+{
+soft-breaks: space
+alt-title: all
+title: Markua Spec
+authors: Peter Armstrong and John MacFarlane
+list-figures: groups
+figure-number-format: chapter
+figure-classes: equation, figure, image, listing
+}
+{
+italicize-underlines: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+~~~
+
+Thankfully, this would only be seen by a Markua Processor, since it's ugly.
+The author would just see the second, manually-defined, settings block, and
+the first one would have been created from the values stored in a database.
+
+Finally, Markua Processors can also add their own document settings, just as
+Markua Processors can understand their own extension attributes.
+
+</div>
 
 
 
@@ -3058,7 +3101,7 @@ will consider what they have in common. Specifically, resources share the
 following things:
 
 1. Attributes and attribute list support
-2. Behaviour as a figure or a span based on the presence of title
+2. Behavior as a figure or a span based on the presence of title
 3. Support for a title to be provided from alt text based on the `alt-title`
    document setting.
 
@@ -3202,7 +3245,7 @@ A resource with a `title` is a figure.
 The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it
 chooses. For example, a Markua Processor can position all titles above or below
-figures, or use a different behaviour based on the resource format (e.g. table
+figures, or use a different behavior based on the resource format (e.g. table
 titles above, image titles below).
 
 Note that the figure title itself may contain Markua text formatting (e.g. bold,
@@ -5569,7 +5612,7 @@ There are three main use cases for a Markua resource:
 1. Inserting a specific `class` of resource, such as a `poem`.
 2. Inserting boilerplate, such as a legal disclaimer, which may be needed to be
    used in many places and/or sourced from a third party.
-3. Controlling the behaviour of fonts or whitespace for specific types of
+3. Controlling the behavior of fonts or whitespace for specific types of
    text, such as poetry.
 
 The following are the supported attributes for verbatim resources, in addition
@@ -9097,7 +9140,7 @@ Here the outer list is loose, the inner list tight:
 
 ## List attributes (M)
 
-By default, Markua keeps the behaviour of lists to be identical to that in
+By default, Markua keeps the behavior of lists to be identical to that in
 Markdown, as described by John Gruber and specified by CommonMark.
 The enhancements that Markua makes to lists are purely additive: if you use any
 CommonMark-compliant list in a Markua document, it will work exactly as it would
@@ -9150,7 +9193,7 @@ c. baz</p>
 <p>after</p>
 ````````````````````````````````
 
-Again, both of these behaviours are as defined in the CommonMark spec.
+Again, both of these behaviors are as defined in the CommonMark spec.
 
 Now, Markua can't change this by default, without being incompatibile with
 Markdown.
@@ -9547,7 +9590,7 @@ after
 ### Lists with Attributes: Lazy Style
 
 It is acceptable to just use the number of the first label, and rely on list
-behaviour.
+behavior.
 
 This list will be numbered 1, 2, 3:
 
@@ -9654,7 +9697,7 @@ after
 
 ### Lists with Attributes: Redundant Style
 
-This list will be numbered 1, 2, 3. This is just the default behaviour made
+This list will be numbered 1, 2, 3. This is just the default behavior made
 explicit:
 
 ```````````````````````````````` example
@@ -10470,7 +10513,7 @@ This is the only way to center text in Markua.
 
 Unlike other blurb types which have their origin in technical books, centering
 text has a wide range of uses. So, it could have been thought of as something
-different than a blurb. However, in terms of its behaviour and the way it's
+different than a blurb. However, in terms of its behavior and the way it's
 inserted, centered text is a blurb--whether it's inserted via syntactic sugar or
 via a class attribute on a normal blurb element.
 
@@ -10754,7 +10797,7 @@ submitted when the `time-limit` is expired. If false, it is not. Either way, an
 incomplete quiz counts as an attempt.
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the default behaviour of
+: `true` or `false`. The default is `true`. This sets the default behavior of
 fill in the blank questions. If `true`, the fill in the blank question answers
 are case-sensitive. If false, they are not.
 
@@ -10813,13 +10856,13 @@ a larger course context is determined as follows: its `points` are the
 numerator, and the total `points` in the quiz or exercise is the denominator.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour of
+: `true` or `false`. The default is `false`. This sets the default behavior of
 multiple choice questions. If `true`, the choices in the multiple choice
 question are randomly arranged; if `false`, they are presented in the order
 written.
 
 `random-question-order`
-: `true` or `false`. The default is `false`. This sets the default behaviour
+: `true` or `false`. The default is `false`. This sets the default behavior
 of the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
 
@@ -10943,7 +10986,7 @@ The default is 1.
 
 `random-choice-order`
 : `true` or `false`. The default is `false`, unless `choose-answers` is used.
-This sets the behaviour of the specific multiple choice question. If `true`,
+This sets the behavior of the specific multiple choice question. If `true`,
 the choices in the multiple choice question are randomly arranged; if `false`,
 they are presented in the order written. If this attribute is omitted, its
 value is determined by the `random-choice-order` attribute on the quiz itself,
@@ -10978,7 +11021,7 @@ in blank!
 ### Supported attributes on multiple selection questions
 
 `mark`
-: `binary` or `ratio`. The default is `binary`. This sets the marking behaviour
+: `binary` or `ratio`. The default is `binary`. This sets the marking behavior
 of the specific multiple selection question. If `binary`, the question is all
 or nothing: you either get full points for the question, or a 0 on the question.
 To get full points, you must select every `true` choice and none of the `false`
@@ -10997,7 +11040,7 @@ computed. Again, regardless of whether the `mark` is `binary` or `ratio`, a
 question which is left blank always earns 0 points.
 
 `random-choice-order`
-: `true` or `false`. The default is `false`. This sets the behaviour of the
+: `true` or `false`. The default is `false`. This sets the behavior of the
 specific multiple selection question. If `true`, the choices in the multiple
 choice question are randomly arranged; if `false`, they are presented in the
 order written. If this attribute is omitted, its value is determined by the
@@ -11186,7 +11229,7 @@ they are worth the full value of points that the question is worth), or they
 must specify points between 0 and the `points` value.
 
 `case-sensitive`
-: `true` or `false`. The default is `true`. This sets the behaviour of the
+: `true` or `false`. The default is `true`. This sets the behavior of the
 specific fill in the blank question. If `true`, the fill in the blank question
 answer is case-sensitive. If false, it is not. In the case of multiple
 acceptable answer values, this attribute applies to all of them. Note that this
@@ -15834,126 +15877,6 @@ as hard line breaks.
 
 <div class="extension">
 
-## Configurable soft line breaks with the soft-breaks document setting (M)
-
-Note: the `soft-breaks` setting is an example of a document setting. Document
-settings are a Markua addition, and are discussed in general terms
-[here](#document-settings-m-).
-
-There is a good argument to be made that single newlines at the end of a line
-should always be treated as a hard line break, not as a soft line break.
-
-In ancient history, some text editors did not automatically wrap lines of text,
-so manual wrapping of plain text files was a good thing to do. However, for
-writing, automatic wrapping of paragraphs is essential for staying in the flow
-while writing, and for being able to edit your text without needing to re-wrap
-every line in a paragraph. This is one decision that even Microsoft Word gets
-right.
-
-So, Markua used to treat single newlines at the end of a line as a hard line
-break, not as a soft line break.
-
-However, compatibility with Markdown by default is more than fixing things such
-as this which I consider to be mistakes, even though the Markdown two-space hack
-to force a hard line break makes me die a little inside every time I (don't) see
-it. As I've grown older, I've become more willing to compromise.
-
-So, Markua has a document setting called `soft-breaks`:
-
-* If `soft-breaks` is `source`, then single newlines inside paragraphs in the
-  Markua produce single newlines in the HTML source. This will pretend to
-  break the line: while it does break the line in the HTML source, it does
-  not break the line when the HTML is rendered. So, this type of line break
-  only is a line break in the HTML source. In the output, it actually functions
-  like a space. (It should be rendered as a space in non-HTML-based output
-  formats like PDF.)
-* If `soft-breaks` is `space`, then single newlines inside paragraphs in the
-  Markua document produce single spaces in the HTML output. This functions
-  identically to single newlines when rendered as HTML. (It should be rendered
-  as a space in non-HTML-based output formats like PDF.)
-* If `soft-breaks` is `break`, then single newlines inside paragraphs in the
-  Markua document produce break tags in the HTML output. The reason this value
-  is `break` is to indicate that when you hit a newline to get a line break, you
-  get a real line break. In HTML, this means a break tag. (It should be rendered
-  as a newline in non-HTML-based output formats like PDF.)
-
-**To be clear: if `soft-breaks` has the value of `break`, all single newlines
-function as hard line breaks (i.e. as they would if they were using the "two
-space hack" to produce a hard line break in normal Markdown).**
-
-```````````````````````````````` example
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made explicit by setting the `soft-breaks` document setting to
-`source`:
-
-```````````````````````````````` example
-{
-soft-breaks: source
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo
-bar</p>
-````````````````````````````````
-
-This can be made shorter by setting the `soft-breaks` document setting to
-`space`:
-
-```````````````````````````````` example
-{
-soft-breaks: space
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo bar</p>
-````````````````````````````````
-
-If you want your line breaks to actually, well, produce line breaks, you need to
-set the `soft-breaks` document setting to `break`:
-
-```````````````````````````````` example
-{
-soft-breaks: break
-}
-
-# Chapter One
-
-foo
-bar
-.
-<h1>Chapter One</h1>
-<p>foo<br />
-bar</p>
-````````````````````````````````
-
-Finally, note that the `soft-breaks` document setting also applies to other
-paragraph-like contexts, such as definition list items.
-
-</div>
-
-
-
-<div class="extension">
-
 ## Character substitutions (M)
 
 Markua documents can be written in UTF-8, so to produce any Unicode character, it
@@ -15989,7 +15912,7 @@ A Markua Processor may replace the `"` character with the appropriate "curly
 quote" at its discretion. This lets `"typography"` become `“typography”`, and
 `it's` become `it’s` as appropriate.
 
-Note that this is an optional behaviour: a Markua Processor may support this
+Note that this is an optional behavior: a Markua Processor may support this
 fully, only in some output formats, or not at all.
 
 Also, note that it is **NEVER** acceptable for a Markua Processor to do this,

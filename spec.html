@@ -3078,6 +3078,7 @@ undefined means that the value is not set, not the literal string undefined.</p>
   restart-footnote-numbering: true
   smart-punctuation: true
   soft-breaks: source
+  strikethrough-format: dynamic
   title: undefined
   two-space-hack: true
   validate: true
@@ -3271,6 +3272,13 @@ break in normal Markdown. (Whether the “two space hack” is enabled in a
 Markua document is determined by the value of the <code>two-space-hack</code>
 setting, discussed below.)</li>
 </ul>
+<p><code>strikethrough-format</code>
+: <code>dynamic</code>, <code>horizontal</code> or <code>diagonal</code>. Default <code>dynamic</code>. This determines
+the format of the strikethrough line, when used in math blocks. A <code>horizontal</code>
+value means to make a horizontal line; a <code>diagonal</code> value means to make a
+diagonal line, and a <code>dynamic</code> value (the default) means to make a horizontal
+line when the equation is about a line of text high, and a diagonal line when
+the equation is meaningfully taller.</p>
 <p><code>title</code>
 : The title of the Markua document.</p>
 <p><code>two-space-hack</code>
@@ -18216,8 +18224,16 @@ mathematical equations. There are two special types of <code>format</code> for m
 into Markua: <code>latexmath</code> for LaTeX math and <code>asciimath</code> for AsciiMath. If a
 Markua Processor encounters one of these formats, it must assume the <code>type</code> of
 the resource is <code>math</code>, not <code>code</code>.</p>
+<h3 id="using-bold-and-strikethrough-formatting-with-math" class="definition">
+<span class="number">10.13.3</span>Using bold and strikethrough formatting with math
+</h3>
+<p>Markua supports formatting math as bold or strikethrough.</p>
+<p>Math can be <code>**bolded**</code> by being wrapped with two asterisks, and can be
+formatted in <code>~~strikethrough~~</code> by being wrapped with two tildes. Note that
+the format of the strikethrough line is controlled by the
+<code>strikethrough-format</code> document setting.</p>
 <h3 id="local-math-resources" class="definition">
-<span class="number">10.13.3</span>Local Math Resources
+<span class="number">10.13.4</span>Local math resources
 </h3>
 <p>Local math resources can be inserted as a figure.</p>
 <pre><code>Here's a paragraph before the figure.
@@ -18236,7 +18252,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="web-math-resources" class="definition">
-<span class="number">10.13.4</span>Web Math Resources
+<span class="number">10.13.5</span>Web math resources
 </h3>
 <p>This is identical to how local math resources work, including the significance
 of file extensions. The only difference is that the files are on the web.</p>
@@ -18256,14 +18272,14 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="inline-math-resources" class="definition">
-<span class="number">10.13.5</span>Inline Math Resources
+<span class="number">10.13.6</span>Inline math resources
 </h3>
 <p>Inline math resources are the most flexible way to insert math. They are the only
 way to insert math as a span resource, and the most straightforward way to add
 short math examples as figures. LaTeX math and AsciiMath can be inserted inline
 as a span or figure.</p>
 <h4 id="span" class="definition">
-<span class="number">10.13.5.1</span>Span
+<span class="number">10.13.6.1</span>Span
 </h4>
 <p>Being able to insert a math resource as a span is important, as it lets you write
 things like one of the kinematic equations <code>d = v_i t + \frac{1}{2} a t^2</code>$ inside
@@ -18273,7 +18289,7 @@ an <code>@</code> after the closing backtick for AsciiMath, or an attribute list
 a <code>format</code> of <code>latexmath</code> or <code>asciimath</code>. If none of these is done, the content
 of the backticks is treated as code and is output verbatim as monospaced text.</p>
 <h5 id="latex-math-span" class="definition">
-<span class="number">10.13.5.1.1</span>LaTeX math span
+<span class="number">10.13.6.1.1</span>LaTeX math span
 </h5>
 <p>There is syntactic sugar for LaTeX math which is inserted as a span, using the
 <code>$</code> character after the closing backtick:</p>
@@ -18288,7 +18304,7 @@ sentence.
 inside a sentence.
 </code></pre>
 <h5 id="asciimath-span" class="definition">
-<span class="number">10.13.5.1.2</span>AsciiMath span
+<span class="number">10.13.6.1.2</span>AsciiMath span
 </h5>
 <p><a href="http://asciimath.org/">AsciiMath</a> is a way of producing simple MathML equations,
 using about 1% of the typing. It’s more terse than LaTeX math.</p>
@@ -18303,7 +18319,7 @@ character after the closing backtick:</p>
 inside a sentence.
 </code></pre>
 <h4 id="figure" class="definition">
-<span class="number">10.13.5.2</span>Figure
+<span class="number">10.13.6.2</span>Figure
 </h4>
 <p>LaTeX math and AsciiMath can be inserted inline as a figure.</p>
 <ul>
@@ -18313,7 +18329,7 @@ backticks, or by specifying an attribute list of <code>{format: latexmath}</code
 backticks, or by specifying an attribute list of <code>{format: asciimath}</code>.</li>
 </ul>
 <h5 id="latex-math-figures" class="definition">
-<span class="number">10.13.5.2.1</span>LaTeX math figures
+<span class="number">10.13.6.2.1</span>LaTeX math figures
 </h5>
 <p>Here’s how you do this using LaTeX math…</p>
 <p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
@@ -18354,7 +18370,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h5 id="asciimath-figures" class="definition">
-<span class="number">10.13.5.2.2</span>AsciiMath figures
+<span class="number">10.13.6.2.2</span>AsciiMath figures
 </h5>
 <p>Here’s how you do this using AsciiMath…</p>
 <p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
@@ -18392,7 +18408,7 @@ text, what you are really doing is creating a code resource. This is essentially
 identical to what was shown earlier in writing about SVG images. It’s also shown
 below.</p>
 <h3 id="writing-about-math" class="definition">
-<span class="number">10.13.6</span>Writing about Math
+<span class="number">10.13.7</span>Writing about Math
 </h3>
 <p>If you want to write about math, and show the actual code (instead of the
 formatted output), it needs to be of a <code>format</code> of <code>code</code>, not <code>math</code>.</p>

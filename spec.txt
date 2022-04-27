@@ -2710,6 +2710,7 @@ undefined means that the value is not set, not the literal string undefined.
   restart-footnote-numbering: true
   smart-punctuation: true
   soft-breaks: source
+  strikethrough-format: dynamic
   title: undefined
   two-space-hack: true
   validate: true
@@ -2919,6 +2920,14 @@ newline) in the output. This is what the values mean:
     break in normal Markdown. (Whether the "two space hack" is enabled in a
     Markua document is determined by the value of the `two-space-hack`
     setting, discussed below.)
+
+`strikethrough-format`
+: `dynamic`, `horizontal` or `diagonal`. Default `dynamic`. This determines
+the format of the strikethrough line, when used with math resources. A
+`horizontal` value means to make a horizontal line; a `diagonal` value means
+to make a diagonal line, and a `dynamic` value (the default) means to make a
+horizontal line when the equation is about a line of text high, and a diagonal
+line when the equation is meaningfully taller.
 
 `title`
 : The title of the Markua document.
@@ -15463,6 +15472,7 @@ display it, then add a `{type: code, format: latex}` attribute list.
 Note that the assumption is that AsciiMath will almost always be used as an
 inline resource. So, the `.asciimath` file extension is deliberately verbose.
 
+
 ### Supported Attributes for Math
 
 The following are the supported attribute for math resources, in addition to the
@@ -15483,7 +15493,18 @@ into Markua: `latexmath` for LaTeX math and `asciimath` for AsciiMath. If a
 Markua Processor encounters one of these formats, it must assume the `type` of
 the resource is `math`, not `code`.
 
-### Local Math Resources
+
+### Using bold and strikethrough formatting with math
+
+Markua supports formatting math as bold or strikethrough.
+
+Math can be `**bolded**` by being wrapped with two asterisks, and can be
+formatted in `~~strikethrough~~` by being wrapped with two tildes. Note that
+the format of the strikethrough line is controlled by the
+`strikethrough-format` document setting.
+
+
+### Local math resources
 
 Local math resources can be inserted as a figure.
 
@@ -15507,7 +15528,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Web Math Resources
+### Web math resources
 
 This is identical to how local math resources work, including the significance
 of file extensions. The only difference is that the files are on the web.
@@ -15532,7 +15553,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Inline Math Resources
+### Inline math resources
 
 Inline math resources are the most flexible way to insert math. They are the only
 way to insert math as a span resource, and the most straightforward way to add

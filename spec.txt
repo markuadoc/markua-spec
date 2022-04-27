@@ -2879,11 +2879,12 @@ decision specified there. This is what the values mean:
      about `poem`, by the way: if you add a `class` of `sonnet`, you will get a
      List of Sonnets. This is not just useful to differentiate types of poetry,
      by the way: this approach can be used to automatically produce a
-     `List of Lemmas`, `List of Theorems`, etc.
+     List of Lemmas, List of Theorems, etc.
 
 The combination of `list-figures: groups` and `figure-number-format: chapter`
-produces figures like `Listing 1.1`, `Listing 1.2`, `Listing 4.1` and
-`Image 1.1`, `Image 1.2`, `Image 2.1`, `Image 2.2`, `Image 4.1`, etc.
+produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
+Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
+document settings for books like computer programming books.
 
 `number-chapters`
 : `true` or `false`. Default `true`. Whether the chapters are numbered.

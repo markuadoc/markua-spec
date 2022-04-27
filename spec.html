@@ -381,8 +381,8 @@ as inlines or blocks, is completely removed.</p>
 <p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
 <p>Instead, in Markua <strong>all raw HTML elements are removed</strong>.</p>
 <p>This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua. In both
-cases, <strong>raw HTML must be completely removed by the Markua Processor.</strong></p>
+which is inserted as inlines. Neither of these are supported by Markua.</p>
+<p>In both cases, <strong>raw HTML must be completely removed by the Markua Processor.</strong></p>
 <p>As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (<code>&lt;!-- a comment --&gt;</code>) as comments in Markua: since these comments are
 HTML, they will be completely removed from the output (along with any other
@@ -6471,14 +6471,10 @@ and<span class="space"> </span>**this**<span class="space"> </span>is<span class
 <h2 id="no-html-blocks-m-" class="definition">
 <span class="number">7.8</span>No HTML blocks (M)
 </h2>
-<p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
-<p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
-inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
-these are supported by Markua.</p>
-<p><strong>In both cases, the HTML must be completely removed by the Markua Processor.</strong></p>
-<p>As a side effect of this, since HTML comments are HTML, authors can use HTML
-comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments will be removed
-from the output (along with any other raw HTML tags).</p>
+<p>As <a href="#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed-m-">discussed</a>,
+Markua does not support raw HTML. <strong>All raw HTML is removed</strong>. As a side-effect,
+this means HTML comments can still be used, since they (like all HTML) will be
+removed from the output.</p>
 </div>
 <h2 id="link-reference-definitions" class="definition">
 <span class="number">7.9</span>Link reference definitions
@@ -18734,14 +18730,10 @@ spec</a>:</p>
 <h2 id="no-raw-html-m-" class="definition">
 <span class="number">10.15</span>No raw HTML (M)
 </h2>
-<p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
-<p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
-inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
-these are supported by Markua.</p>
-<p><strong>In both cases, the HTML must be completely removed by the Markua Processor.</strong></p>
-<p>As a side effect of this, since HTML comments are HTML, authors can use HTML
-comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments will be removed
-from the output (along with any other raw HTML tags).</p>
+<p>As <a href="#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed-m-">discussed</a>,
+Markua does not support raw HTML. <strong>All raw HTML is removed</strong>. As a side-effect,
+this means HTML comments can still be used, since they (like all HTML) will be
+removed from the output.</p>
 </div>
 <h2 id="hard-line-breaks" class="definition">
 <span class="number">10.16</span>Hard line breaks

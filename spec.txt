@@ -2714,18 +2714,49 @@ Markua Processors can understand their own extension attributes.
 
 ## The default document settings (M)
 
-The default document settings are:
+Since Markua defines a number of document settings, it is helpful to see what
+the defaults are in one list. These defaults are listed below; note that
+undefined means that the value is not set, not the literal string undefined.
 
 ```
 {
   list-figures: combined
   figure-number-format: sequential
-  ...
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  authors: undefined
+  alt-title: text
+  contributors: undefined
+  copyright: undefined
+  default-code-language: guess
+  figure-classes: undefined
+  include-page-numbers-in-references: true
+  italicize-underlines: true
+  lang: eng
+  list-figures: combined
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  smart-punctuation: true
+  soft-breaks: source
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+  course-attempts: 1
+  course-completeness: 0
+  default-exercise-show-answers: all
+  default-quiz-attempts: 1
+  default-quiz-auto-submit: true
+  default-quiz-show-answers: incorrect
+  default-quiz-use-result: best
+  default-random-choice-order: false
+  default-random-question-order: false
 }
 ```
-
-This produces figures named Figure, and numbered sequentially: Figure 1,
-Figure 2, Figure 3, ...
 
 ## Document settings which apply to books only (M)
 
@@ -2774,7 +2805,7 @@ by four related settings: `alt-title`, `figure-classes`, `list-figures` and
 settings are tightly coupled.
 
 `authors`
-: The authors of the Markua document.
+: The authors of the Markua document. The default is undefined.
 
 `alt-title`
 : `all`, `text` or `none`. The default is `text`. This setting controls whether,
@@ -2802,10 +2833,11 @@ text-based resource where no figure title is provided. (This is how Markdown
 behaves.)
 
 `contributors`
-: Any contributors to the Markua document who are not authors.
+: Any contributors to the Markua document who are not authors. The default is
+undefined.
 
 `copyright`
-: The owner of the copyright.
+: The owner of the copyright. The default is undefined.
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -2836,12 +2868,13 @@ is controlled by the `list-figures` setting. Note that the numbering of figures
 is controlled by the `number-figures` and `figure-number-format` settings.
 
 `include-page-numbers-in-references`
-: When a smart crosslink to a figure reference is inserted with `#f`, this
-setting determines how the reference is displayed. If true (the default), the
-text includes the page number (e.g. "Figure 8.2: Anatomy of a Squirrel on page
-42") when inserted in a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of
-a Squirrel". This setting has no effect on EPUB and MOBI, which never include
-page numbers in their references (since the text is resizable).
+: `true` or `false`. The default value is `true`. When a smart crosslink to a
+figure reference is inserted with `#f`, this setting determines how the
+reference is displayed. If true (the default), the text includes the page
+number (e.g. "Figure 8.2: Anatomy of a Squirrel on page 42") when inserted in
+a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of a Squirrel". This
+setting has no effect on EPUB and MOBI, which never include page numbers in
+their references (since the text is resizable).
 
 `italicize-underlines`
 : `true` or `false`. The default value is `true`. If `italicize-underlines` is
@@ -2865,7 +2898,9 @@ decision specified there. This is what the values mean:
 * `combined`: One combined list of figures is produced for all figures in the
   manuscript, ordered by their appearance in the manuscript. This list is called
   List of Figures for English books, and localized into the language of the book
-  or course.
+  or course. This produces figures named Figure, and (by default) numbered
+  sequentially: Figure 1, Figure 2, Figure 3, etc. The numbering is defined by
+  the `number-figures` document setting, specified below.
 * `groups`: The Markua Processor should group figures by their classes or types.
   Here's how the grouping works:
   1. If there is no `class` attribute, the figure is groups in a list with other
@@ -2910,10 +2945,11 @@ at the end of a chapter.
 at the end of a chapter.
 
 `smart-punctuation`
-: If `smart` is `true`, use smart punctuation. Straight double and single quotes
-will be rendered as curly quotes, depending on their position, `--` will be
-rendered as an en-dash, `---` will be rendered as an em-dash and `...` will be
-rendered as ellipses. If `smart` is `false`, do not use smart punctuation.
+: `true` or `false`. Default `true`. If `smart` is `true`, use smart
+punctuation. Straight double and single quotes will be rendered as curly
+quotes, depending on their position, `--` will be rendered as an en-dash,
+`---` will be rendered as an em-dash and `...` will be rendered as ellipses.
+If `smart` is `false`, do not use smart punctuation.
 
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. This setting determines the
@@ -2962,15 +2998,15 @@ newline) in the output. This is what the values mean:
   Markdown text or in cases where there are multiple authors of a manuscript.
 
 `validate`
-: If `validate` is `true`, the UTF-8 characters in the Markua document are
-validated, replacing illegal sequences with U+FFFD. If `validate` is `false`,
-the UTF-8 characters in the Markua document are not validated. A Markua
-Processor may override this setting.
+: `true` or `false`. Default `true`. If `validate` is `true`, UTF-8 characters
+in the Markua document are validated, replacing illegal sequences with U+FFFD.
+If `validate` is `false`, the UTF-8 characters in the Markua document are not
+validated.
 
 `version`
 : The version of the Markua document. This is primarily intended for use when
 producing analytics for courses. (This is not related to the version of the
-Markua specification being used; it is the )
+Markua specification being used; it is the version of the book or course.)
 
 
 

@@ -3096,15 +3096,47 @@ Markua Processors can understand their own extension attributes.</p>
 <h2 id="the-default-document-settings-m-" class="definition">
 <span class="number">4.1</span>The default document settings (M)
 </h2>
-<p>The default document settings are:</p>
+<p>Since Markua defines a number of document settings, it is helpful to see what
+the defaults are in one list. These defaults are listed below; note that
+undefined means that the value is not set, not the literal string undefined.</p>
 <pre><code>{
   list-figures: combined
   figure-number-format: sequential
-  ...
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  authors: undefined
+  alt-title: text
+  contributors: undefined
+  copyright: undefined
+  default-code-language: guess
+  figure-classes: undefined
+  include-page-numbers-in-references: true
+  italicize-underlines: true
+  lang: eng
+  list-figures: combined
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  smart-punctuation: true
+  soft-breaks: source
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+  course-attempts: 1
+  course-completeness: 0
+  default-exercise-show-answers: all
+  default-quiz-attempts: 1
+  default-quiz-auto-submit: true
+  default-quiz-show-answers: incorrect
+  default-quiz-use-result: best
+  default-random-choice-order: false
+  default-random-question-order: false
 }
 </code></pre>
-<p>This produces figures named Figure, and numbered sequentially: Figure 1,
-Figure 2, Figure 3, …</p>
 <h2 id="document-settings-which-apply-to-books-only-m-" class="definition">
 <span class="number">4.2</span>Document settings which apply to books only (M)
 </h2>
@@ -3145,7 +3177,7 @@ by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <
 <code>number-figures</code>. These need to be considered together: the behavior of these
 settings are tightly coupled.</p>
 <p><code>authors</code>
-: The authors of the Markua document.</p>
+: The authors of the Markua document. The default is undefined.</p>
 <p><code>alt-title</code>
 : <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
@@ -3172,9 +3204,10 @@ text-based resource where no figure title is provided. (This is how Markdown
 behaves.)</li>
 </ul>
 <p><code>contributors</code>
-: Any contributors to the Markua document who are not authors.</p>
+: Any contributors to the Markua document who are not authors. The default is
+undefined.</p>
 <p><code>copyright</code>
-: The owner of the copyright.</p>
+: The owner of the copyright. The default is undefined.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3202,12 +3235,13 @@ figures are listed, either grouped by their class or together in one big list,
 is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
 is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
 <p><code>include-page-numbers-in-references</code>
-: When a smart crosslink to a figure reference is inserted with <code>#f</code>, this
-setting determines how the reference is displayed. If true (the default), the
-text includes the page number (e.g. “Figure 8.2: Anatomy of a Squirrel on page
-42”) when inserted in a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of
-a Squirrel”. This setting has no effect on EPUB and MOBI, which never include
-page numbers in their references (since the text is resizable).</p>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. When a smart crosslink to a
+figure reference is inserted with <code>#f</code>, this setting determines how the
+reference is displayed. If true (the default), the text includes the page
+number (e.g. “Figure 8.2: Anatomy of a Squirrel on page 42”) when inserted in
+a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of a Squirrel”. This
+setting has no effect on EPUB and MOBI, which never include page numbers in
+their references (since the text is resizable).</p>
 <p><code>italicize-underlines</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
@@ -3228,7 +3262,9 @@ decision specified there. This is what the values mean:</p>
 <li><code>combined</code>: One combined list of figures is produced for all figures in the
 manuscript, ordered by their appearance in the manuscript. This list is called
 List of Figures for English books, and localized into the language of the book
-or course.</li>
+or course. This produces figures named Figure, and (by default) numbered
+sequentially: Figure 1, Figure 2, Figure 3, etc. The numbering is defined by
+the <code>number-figures</code> document setting, specified below.</li>
 <li><code>groups</code>: The Markua Processor should group figures by their classes or types.
 Here’s how the grouping works:
 <ol>
@@ -3270,10 +3306,11 @@ at the end of a chapter.</p>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the footnote numbering is restarted
 at the end of a chapter.</p>
 <p><code>smart-punctuation</code>
-: If <code>smart</code> is <code>true</code>, use smart punctuation. Straight double and single quotes
-will be rendered as curly quotes, depending on their position, <code>--</code> will be
-rendered as an en-dash, <code>---</code> will be rendered as an em-dash and <code>...</code> will be
-rendered as ellipses. If <code>smart</code> is <code>false</code>, do not use smart punctuation.</p>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. If <code>smart</code> is <code>true</code>, use smart
+punctuation. Straight double and single quotes will be rendered as curly
+quotes, depending on their position, <code>--</code> will be rendered as an en-dash,
+<code>---</code> will be rendered as an em-dash and <code>...</code> will be rendered as ellipses.
+If <code>smart</code> is <code>false</code>, do not use smart punctuation.</p>
 <p><code>soft-breaks</code>
 : <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
 behaviour of single newlines (i.e. a newline which is not followed by another
@@ -3319,14 +3356,14 @@ is <code>break</code>. However, even in this case, authors may wish for the two 
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
 <p><code>validate</code>
-: If <code>validate</code> is <code>true</code>, the UTF-8 characters in the Markua document are
-validated, replacing illegal sequences with U+FFFD. If <code>validate</code> is <code>false</code>,
-the UTF-8 characters in the Markua document are not validated. A Markua
-Processor may override this setting.</p>
+: <code>true</code> or <code>false</code>. Default <code>true</code>. If <code>validate</code> is <code>true</code>, UTF-8 characters
+in the Markua document are validated, replacing illegal sequences with U+FFFD.
+If <code>validate</code> is <code>false</code>, the UTF-8 characters in the Markua document are not
+validated.</p>
 <p><code>version</code>
 : The version of the Markua document. This is primarily intended for use when
 producing analytics for courses. (This is not related to the version of the
-Markua specification being used; it is the )</p>
+Markua specification being used; it is the version of the book or course.)</p>
 <h2 id="document-settings-which-apply-to-courses-only-m-" class="definition">
 <span class="number">4.4</span>Document settings which apply to courses only (M)
 </h2>

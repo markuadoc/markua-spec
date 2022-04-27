@@ -245,28 +245,26 @@ $(document).ready(function() {
 <li><a href="#code-spans"><span class="number">10.1</span>Code spans</a></li>
 <li><a href="#emphasis-and-strong-emphasis"><span class="number">10.2</span>Emphasis and strong emphasis</a></li>
 <li><a href="#links"><span class="number">10.3</span>Links</a></li>
-<li><a href="#crosslinks-and-ids-m-"><span class="number">10.4</span>Crosslinks and ids (M)</a></li>
-<li><a href="#smart-crosslinks-m-"><span class="number">10.5</span>Smart crosslinks (M)</a></li>
-<li><a href="#images"><span class="number">10.6</span>Images</a></li>
-<li><a href="#image-resource-attributes-m-"><span class="number">10.7</span>Image resource attributes (M)</a></li>
-<li><a href="#inline-svg-images-m-"><span class="number">10.8</span>Inline SVG images (M)</a></li>
-<li><a href="#image-locations-and-embedding-m-"><span class="number">10.9</span>Image locations and embedding (M)</a></li>
-<li><a href="#video-resources-m-"><span class="number">10.10</span>Video resources (M)</a></li>
-<li><a href="#iframe-resources-m-"><span class="number">10.11</span>IFrame resources (M)</a></li>
-<li><a href="#audio-resources-m-"><span class="number">10.12</span>Audio resources (M)</a></li>
-<li><a href="#math-resources-m-"><span class="number">10.13</span>Math resources (M)</a></li>
-<li><a href="#autolinks"><span class="number">10.14</span>Autolinks</a></li>
-<li><a href="#no-raw-html-m-"><span class="number">10.15</span>No raw HTML (M)</a></li>
-<li><a href="#hard-line-breaks"><span class="number">10.16</span>Hard line breaks</a></li>
-<li><a href="#soft-line-breaks"><span class="number">10.17</span>Soft line breaks</a></li>
-<li><a href="#character-substitutions-m-"><span class="number">10.18</span>Character substitutions (M)</a></li>
-<li><a href="#footnotes-and-endnotes-m-"><span class="number">10.19</span>Footnotes and endnotes (M)</a></li>
-<li><a href="#underline-m-"><span class="number">10.20</span>Underline (M)</a></li>
-<li><a href="#superscript-and-subscript-m-"><span class="number">10.21</span>Superscript and subscript (M)</a></li>
-<li><a href="#strikethrough-gfm-"><span class="number">10.22</span>Strikethrough (GFM)</a></li>
-<li><a href="#index-entries-m-"><span class="number">10.23</span>Index entries (M)</a></li>
-<li><a href="#syntactic-sugar-list-m-"><span class="number">10.24</span>Syntactic sugar list (M)</a></li>
-<li><a href="#textual-content"><span class="number">10.25</span>Textual content</a></li>
+<li><a href="#images"><span class="number">10.4</span>Images</a></li>
+<li><a href="#image-resource-attributes-m-"><span class="number">10.5</span>Image resource attributes (M)</a></li>
+<li><a href="#inline-svg-images-m-"><span class="number">10.6</span>Inline SVG images (M)</a></li>
+<li><a href="#image-locations-and-embedding-m-"><span class="number">10.7</span>Image locations and embedding (M)</a></li>
+<li><a href="#video-resources-m-"><span class="number">10.8</span>Video resources (M)</a></li>
+<li><a href="#iframe-resources-m-"><span class="number">10.9</span>IFrame resources (M)</a></li>
+<li><a href="#audio-resources-m-"><span class="number">10.10</span>Audio resources (M)</a></li>
+<li><a href="#math-resources-m-"><span class="number">10.11</span>Math resources (M)</a></li>
+<li><a href="#autolinks"><span class="number">10.12</span>Autolinks</a></li>
+<li><a href="#no-raw-html-m-"><span class="number">10.13</span>No raw HTML (M)</a></li>
+<li><a href="#hard-line-breaks"><span class="number">10.14</span>Hard line breaks</a></li>
+<li><a href="#soft-line-breaks"><span class="number">10.15</span>Soft line breaks</a></li>
+<li><a href="#character-substitutions-m-"><span class="number">10.16</span>Character substitutions (M)</a></li>
+<li><a href="#footnotes-and-endnotes-m-"><span class="number">10.17</span>Footnotes and endnotes (M)</a></li>
+<li><a href="#underline-m-"><span class="number">10.18</span>Underline (M)</a></li>
+<li><a href="#superscript-and-subscript-m-"><span class="number">10.19</span>Superscript and subscript (M)</a></li>
+<li><a href="#strikethrough-gfm-"><span class="number">10.20</span>Strikethrough (GFM)</a></li>
+<li><a href="#index-entries-m-"><span class="number">10.21</span>Index entries (M)</a></li>
+<li><a href="#syntactic-sugar-list-m-"><span class="number">10.22</span>Syntactic sugar list (M)</a></li>
+<li><a href="#textual-content"><span class="number">10.23</span>Textual content</a></li>
 </ul>
 </li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
@@ -1552,7 +1550,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>
@@ -16947,267 +16945,8 @@ is followed by a link label (even though <code>[bar]</code> is not defined):</p>
 </code></pre>
 </div>
 </div>
-<div class="extension">
-<h2 id="crosslinks-and-ids-m-" class="definition">
-<span class="number">10.4</span>Crosslinks and ids (M)
-</h2>
-<p>There are two parts to making a crosslink.</p>
-<ol>
-<li>Define an id.</li>
-<li>Reference that id with a crosslink.</li>
-</ol>
-<h3 id="defining-an-id" class="definition">
-<span class="number">10.4.1</span>Defining an id
-</h3>
-<p>There are two ways to define an id:</p>
-<ol>
-<li>Using an id attribute <code>{id: some-id}</code></li>
-<li>Using a shorter “syntactic sugar” approach: <code>{#some-id}</code></li>
-</ol>
-<p>The shorter “syntactic sugar” approach is usually preferred. However, it can
-look a bit odd in an attribute list with other attributes in it. So, when other
-attributes are present in an attribute list, the <code>{id: some-id}</code> syntax is
-preferred.</p>
-<p>In terms of the value of an <code>id</code>, it has some special restrictions:</p>
-<ol>
-<li>The first character in the <code>id</code> has to be a lowercase or uppercase letter,
-i.e. <code>[a-zA-Z]</code> if you think in regular expressions.</li>
-<li>The remaining characters in the <code>id</code> have to be a lowercase or uppercase
-letter or a digit or a hyphen (-) or an underscore (_).</li>
-<li>You can only define an <code>id</code> value once in an entire Markua document, even
-one that is split over multiple files.</li>
-</ol>
-<p>These restrictions ensure that your <code>id</code>s can then be linked to by a crosslink
-from anywhere in the Markua document.</p>
-<p>Also, note that id attributes need to be defined on either a block or span
-element. Finally, if an id is defined with an invalid name, the Markua Processor
-must ignore it and log an error.</p>
-<h4 id="defining-an-id-on-a-block-element" class="definition">
-<span class="number">10.4.1.1</span>Defining an id on a block element
-</h4>
-<p>To define an id on a block element like a paragraph, figure, heading or even a
-definition list item, you simply stick the id definition on a line above the
-start of the block element. Note that exactly one newline must separate the
-attribute list from the block element–if two newlines are used, the attribute
-list will be interpreted as a directive, and the id won’t be correctly applied.</p>
-<p>Here’s how to use the attribute list syntax to define an id attribute:</p>
-<pre><code>{id: some-id}
-This is a paragraph with the id of `some-id`.
-</code></pre>
-<p>Here’s how to use the shorter “syntactic sugar” approach to define an id
-attribute:</p>
-<pre><code>{#some-id}
-This is a paragraph with the id of `some-id`.
-</code></pre>
-<h4 id="defining-an-id-on-a-span-element" class="definition">
-<span class="number">10.4.1.2</span>Defining an id on a span element
-</h4>
-<p>To define an id on a span element you simply add the id definition immediately
-after the span element.</p>
-<p>Here’s how to use the attribute list syntax to define an id attribute on a span
-element:</p>
-<pre><code>The word Markua{id: markua} has an id.
-
-Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
-</code></pre>
-<p>Here’s how to use the shorter “syntactic sugar” approach to define an id
-attribute:</p>
-<pre><code>The word Markua{#markua} has an id.
-
-Leanpub is based in **Victoria, BC, Canada**{#victoria}.
-</code></pre>
-<p>Here’s how to define an id on a custom span:</p>
-<pre><code>The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
-</code></pre>
-<p>If you want to define an id on a span while also defining other attributes like
-index entries, the <code>id:</code> syntax must be used in a full attribute list:</p>
-<pre><code>The [quick sly fox]{id: quick_sly, i: &quot;Fox, Sly and Quick&quot;} jumped over the lazy
-dogs.
-</code></pre>
-<h3 id="referencing-an-with-a-crosslink" class="definition">
-<span class="number">10.4.2</span>Referencing an <code>id</code> With a Crosslink
-</h3>
-<p>Regardless of how you defined the id, you then link to it to create a crosslink.
-To do this, you use the <code>#</code> character and the id in a link:</p>
-<pre><code>[link text](#some-id)
-</code></pre>
-<p>This syntax is intended to be reminiscent of HTML anchor tags.</p>
-<p>Note that order of definition and use does not matter: crosslinks will work
-regardless of whether the <code>id</code> is defined before or after the use of it.</p>
-<div class="example" id="example-613">
-<div class="examplenum">
-<a href="#example-613">Example 613</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">{id:<span class="space"> </span>id1}
-This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>with<span class="space"> </span>an<span class="space"> </span>id<span class="space"> </span>of<span class="space"> </span>`id1`.
-
-{#id2}
-This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>with<span class="space"> </span>an<span class="space"> </span>id<span class="space"> </span>of<span class="space"> </span>`id2`.
-
-This<span class="space"> </span>link<span class="space"> </span>to<span class="space"> </span>[Markua](#markua)<span class="space"> </span>is<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>id<span class="space"> </span>definition.
-
-The<span class="space"> </span>word<span class="space"> </span>Markua{id:<span class="space"> </span>markua}<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id<span class="space"> </span>of<span class="space"> </span>`markua`.
-
-This<span class="space"> </span>link<span class="space"> </span>to<span class="space"> </span>[Markua](#markua)<span class="space"> </span>is<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>id<span class="space"> </span>definition.
-
-Leanpub<span class="space"> </span>is<span class="space"> </span>based<span class="space"> </span>in<span class="space"> </span>**Victoria,<span class="space"> </span>BC,<span class="space"> </span>Canada**{#victoria}.
-
-The<span class="space"> </span>[quick<span class="space"> </span>sly<span class="space"> </span>fox]{#quick_sly}<span class="space"> </span>jumped<span class="space"> </span>over<span class="space"> </span>the<span class="space"> </span>lazy<span class="space"> </span>dogs.
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p<span class="space"> </span>id=&quot;id1&quot;&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>with<span class="space"> </span>an<span class="space"> </span>id<span class="space"> </span>of<span class="space"> </span>&lt;code&gt;id1&lt;/code&gt;.&lt;/p&gt;
-&lt;p<span class="space"> </span>id=&quot;id2&quot;&gt;This<span class="space"> </span>is<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>with<span class="space"> </span>an<span class="space"> </span>id<span class="space"> </span>of<span class="space"> </span>&lt;code&gt;id2&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This<span class="space"> </span>link<span class="space"> </span>to<span class="space"> </span>&lt;a<span class="space"> </span>href=&quot;#markua&quot;&gt;Markua&lt;/a&gt;<span class="space"> </span>is<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>id<span class="space"> </span>definition.&lt;/p&gt;
-&lt;p&gt;The<span class="space"> </span>word<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;markua&quot;&gt;Markua&lt;/span&gt;<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id<span class="space"> </span>of<span class="space"> </span>&lt;code&gt;markua&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This<span class="space"> </span>link<span class="space"> </span>to<span class="space"> </span>&lt;a<span class="space"> </span>href=&quot;#markua&quot;&gt;Markua&lt;/a&gt;<span class="space"> </span>is<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>id<span class="space"> </span>definition.&lt;/p&gt;
-&lt;p&gt;Leanpub<span class="space"> </span>is<span class="space"> </span>based<span class="space"> </span>in<span class="space"> </span>&lt;strong<span class="space"> </span>id=&quot;victoria&quot;&gt;Victoria,<span class="space"> </span>BC,<span class="space"> </span>Canada&lt;/strong&gt;.
-&lt;p&gt;The<span class="space"> </span>&lt;span<span class="space"> </span>id=&quot;quick_sly&quot;&gt;quick<span class="space"> </span>sly<span class="space"> </span>fox&lt;/span&gt;<span class="space"> </span>jumped<span class="space"> </span>over<span class="space"> </span>the<span class="space"> </span>lazy<span class="space"> </span>dogs.&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<h3 id="rules-for-s-and-crosslinks" class="definition">
-<span class="number">10.4.3</span>Rules for <code>id</code>s and Crosslinks
-</h3>
-<ul>
-<li>If a Markua document contains duplicate <code>id</code> attribute values, the <strong>first</strong>
-one is used and the subsequent ones are ignored. A Markua Processor should log
-an error about duplicate <code>id</code>s.</li>
-<li>Crosslinks that reference an unused <code>id</code> may either be created as a (broken,
-non-functional) link or be created as normal text (not a link) by a Markua
-Processor. The Markua Processor should also log an error.</li>
-</ul>
-</div>
-<div class="extension">
-<h2 id="smart-crosslinks-m-" class="definition">
-<span class="number">10.5</span>Smart crosslinks (M)
-</h2>
-<p>Chapters, sections and figures with titles often have two useful properties for
-writers:</p>
-<ol>
-<li>A name which is often short and useful to reference.</li>
-<li>A number, if numbering is turned on.</li>
-</ol>
-<p>Whether the numbers exist is determined by the <code>number-chapters</code>, <code>number-parts</code>
-and <code>number-figures</code> document settings.</p>
-<p>Whether page numbers are output in smart crosslinks in a PDF is determined by
-the <code>include-page-numbers-in-references</code> document setting, which defaults to
-<code>true</code>.  EPUB and MOBI do not support outputting page numbers in references,
-because they have resizable text (and thus the page numbers vary).</p>
-<p>In your writing, it’s often desirable to refer to these figures from elsewhere
-in your book. When creating such a reference, it’s helpful to be able to
-reference the title and number of the chapter, section or figure.</p>
-<p>Here’s how these references to titles and numbers work:</p>
-<ul>
-<li><code>#t</code> is for “title”</li>
-<li><code>#n</code> is for “number”</li>
-<li><code>#d</code> is for “description” (e.g. “Figure”, “Chapter”, “Section”)</li>
-<li><code>#s</code> is for “short title” (e.g. “Figure 5”, “Chapter 3”, “Section 3.2”)</li>
-<li><code>#f</code> is for “full title”</li>
-</ul>
-<p>So, for a “Figure 8.2: Anatomy of a Squirrel” on page 42, these are:</p>
-<ul>
-<li><code>#t</code> is “Anatomy of a Squirrel”</li>
-<li><code>#n</code> is “8.2”</li>
-<li><code>#d</code> is “Figure”</li>
-<li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF,
-if <code>include-page-numbers-in-references</code> is true (the default), it is
-“Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
-<code>include-page-numbers-in-references</code> is false, it is “Figure 8.2:
-Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
-</ul>
-<p>Note that for a book which is in English:</p>
-<ul>
-<li><code>#s</code> is the equivalent of the author typing <code>#d #n</code></li>
-<li><code>#f</code> is equivalent to the author typing: <code>#s: #t</code></li>
-</ul>
-<p>In other languages, the Markua Processor should do the right thing.</p>
-<p>Note that in this example, “Anatomy of a Squirrel” was typed by the author,
-whereas “Figure 8.2: “ was generated by the Markua Processor. It does not
-matter; both can be referenced.</p>
-<p>Also, note that regardless of section level, sections referenced in <code>#d</code> or <code>#f</code>
-are all called “Section” (not “Sub-Section”, “Sub-Sub-Section”, etc.)</p>
-<p>The expectation is that <code>#f</code> will be used by authors who don’t mind verbosity,
-and <code>#t</code> and <code>#n</code> will be used by authors who prefer control and brevity.
-The #d is for very lazy authors who like saving keystrokes and/or who don’t know
-whether their publisher will call the code samples “Listing”, “Example” or some
-other word and want to protect themselves against extra work.</p>
-<p>Finally, note that you can make a smart crosslink to any id, including that of
-a paragraph or span inside some chapter, section or sub-section. What the
-Markua Processor should do is the following:</p>
-<ul>
-<li><code>#t</code> is the title (descriptive name) of the most specific containing block
-(eg. “chapter”, “section”). The Markua Processor is free to use “section”
-for all sections and sub-sections, regardless of depth, since
-“section 5.4.3.2.1” reads better than “sub-sub-section 5.4.3.2.1”.</li>
-<li><code>#n</code> is for “number”, which is the number of the most specific containing
-block (eg. “3”, “3.2”, “5.4.3.2.1”, etc.).</li>
-<li><code>#d</code> is for “description” (e.g. “Figure”, “Chapter”, “Section”) of the
-nearest containing addressable block (a block that can be referenced by name
-and/or number, i.e. “chapter”, “section”, “figure”, “table” but not “span” or
-“paragraph”)</li>
-<li><code>#s</code> is for “short title”, which uses the output of <code>#d</code> and <code>#n</code> in a
-language-specific way (in English, <code>#d #n</code>)</li>
-<li><code>#f</code> is for “full title”, which uses the output of <code>#d</code>, <code>#n</code> and <code>#t</code> in a
-language-specific way (in English, <code>#d #n: #t</code>), as well as adding the page
-number in a language-specific way (in English <code>#d #n: #t  on page &lt;number&gt;</code>
-[without the <code>&lt;&gt;</code>] if the <code>include-page-numbers-in-references</code> document
-setting is true, and <code>#d #n: #t</code> if the <code>include-page-numbers-in-references</code>
-document setting is false.</li>
-</ul>
-<p>So, for a “Figure 8.2: Anatomy of a Squirrel” on page 42, these are:</p>
-<ul>
-<li><code>#t</code> is “Anatomy of a Squirrel”</li>
-<li><code>#n</code> is “8.2”</li>
-<li><code>#d</code> is “Figure”</li>
-<li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if
-<code>include-page-numbers-in-references</code> is true (the default), it is
-“Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
-<code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy
-of a Squirrel” (just like EPUB and MOBI).</li>
-</ul>
-<p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
-words used to name things.</p>
-<p>Examples:</p>
-<pre><code>This is discussed in [section #n, #t](#crosslinks).
-
-This is discussed in [#f](#crosslinks).
-
-This is discussed in a [#d](#crosslinks) above.
-
-See [chapter #n](#metadata), which is the best chapter in this book.
-
-See [#d #n](#metadata), which is the best chapter in this book.
-
-See [#s](#metadata), which is the best chapter in this book.
-
-See [section #n](#span-elements), which is the best section in this book.
-
-This is in [#f](#fancy-diagram), arguably the fanciest diagram in this
-document.
-
-This is in [#s](#fancy-diagram), arguably the fanciest diagram in this
-document.
-
-This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this
-document.
-
-</code></pre>
-<p>The only way to reference the title and numbers is in crosslinks. There’s no
-syntax to do so without creating a crosslink–a crosslink is more helpful,
-since it is clickable, and adding another syntax simply to be less helpful to
-the reader is a bad idea. Markua has enough syntax as it is.</p>
-<p>Note that resources, chapters and sections all have implicit numbering. So,
-<code>#n</code> always works even if numbering is off. However, you will confuse readers
-if you refer to numbering they cannot see. Also, if numbering is off, the <code>#f</code>
-must not include either the <code>#d</code> or <code>#n</code> parts: it will be “Anatomy of a
-Squirrel” not “Figure 8.2: Anatomy of a Squirrel”.</p>
-</div>
 <h2 id="images" class="definition">
-<span class="number">10.6</span>Images
+<span class="number">10.4</span>Images
 </h2>
 <p>Syntax for images is like the syntax for links, with one
 difference. Instead of <a href="#link-text">link text</a>, we have an
@@ -17218,9 +16957,9 @@ image description starts with <code>![</code> rather than <code>[</code>, and
 An image description has inline elements
 as its contents.  When an image is rendered to HTML,
 this is standardly used as the image’s <code>alt</code> attribute.</p>
-<div class="example" id="example-614">
+<div class="example" id="example-613">
 <div class="examplenum">
-<a href="#example-614">Example 614</a>
+<a href="#example-613">Example 613</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](/url<span class="space"> </span>&quot;title&quot;)
@@ -17231,9 +16970,9 @@ this is standardly used as the image’s <code>alt</code> attribute.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-615">
+<div class="example" id="example-614">
 <div class="examplenum">
-<a href="#example-615">Example 615</a>
+<a href="#example-614">Example 614</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>*bar*]
@@ -17246,9 +16985,9 @@ this is standardly used as the image’s <code>alt</code> attribute.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-616">
+<div class="example" id="example-615">
 <div class="examplenum">
-<a href="#example-616">Example 616</a>
+<a href="#example-615">Example 615</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>![bar](/url)](/url2)
@@ -17259,9 +16998,9 @@ this is standardly used as the image’s <code>alt</code> attribute.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-617">
+<div class="example" id="example-616">
 <div class="examplenum">
-<a href="#example-617">Example 617</a>
+<a href="#example-616">Example 616</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>[bar](/url)](/url2)
@@ -17277,9 +17016,9 @@ recommended that in rendering to HTML, only the plain string content
 of the <a href="#image-description">image description</a> be used.  Note that in
 the above example, the alt attribute’s value is <code>foo bar</code>, not <code>foo [bar](/url)</code> or <code>foo &lt;a href=&quot;/url&quot;&gt;bar&lt;/a&gt;</code>.  Only the plain string
 content is rendered, without formatting.</p>
-<div class="example" id="example-618">
+<div class="example" id="example-617">
 <div class="examplenum">
-<a href="#example-618">Example 618</a>
+<a href="#example-617">Example 617</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>*bar*][]
@@ -17292,9 +17031,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-619">
+<div class="example" id="example-618">
 <div class="examplenum">
-<a href="#example-619">Example 619</a>
+<a href="#example-618">Example 618</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>*bar*][foobar]
@@ -17307,9 +17046,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-620">
+<div class="example" id="example-619">
 <div class="examplenum">
-<a href="#example-620">Example 620</a>
+<a href="#example-619">Example 619</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](train.jpg)
@@ -17320,9 +17059,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-621">
+<div class="example" id="example-620">
 <div class="examplenum">
-<a href="#example-621">Example 621</a>
+<a href="#example-620">Example 620</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">My<span class="space"> </span>![foo<span class="space"> </span>bar](/path/to/train.jpg<span class="space"> </span><span class="space"> </span>&quot;title&quot;<span class="space"> </span><span class="space"> </span><span class="space"> </span>)
@@ -17333,9 +17072,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-622">
+<div class="example" id="example-621">
 <div class="examplenum">
-<a href="#example-622">Example 622</a>
+<a href="#example-621">Example 621</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](&lt;url&gt;)
@@ -17346,9 +17085,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-623">
+<div class="example" id="example-622">
 <div class="examplenum">
-<a href="#example-623">Example 623</a>
+<a href="#example-622">Example 622</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![](/url)
@@ -17360,9 +17099,9 @@ content is rendered, without formatting.</p>
 </div>
 </div>
 <p>Reference-style:</p>
-<div class="example" id="example-624">
+<div class="example" id="example-623">
 <div class="examplenum">
-<a href="#example-624">Example 624</a>
+<a href="#example-623">Example 623</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo][bar]
@@ -17375,9 +17114,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-625">
+<div class="example" id="example-624">
 <div class="examplenum">
-<a href="#example-625">Example 625</a>
+<a href="#example-624">Example 624</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo][bar]
@@ -17391,9 +17130,9 @@ content is rendered, without formatting.</p>
 </div>
 </div>
 <p>Collapsed:</p>
-<div class="example" id="example-626">
+<div class="example" id="example-625">
 <div class="examplenum">
-<a href="#example-626">Example 626</a>
+<a href="#example-625">Example 625</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo][]
@@ -17406,9 +17145,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-627">
+<div class="example" id="example-626">
 <div class="examplenum">
-<a href="#example-627">Example 627</a>
+<a href="#example-626">Example 626</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![*foo*<span class="space"> </span>bar][]
@@ -17422,9 +17161,9 @@ content is rendered, without formatting.</p>
 </div>
 </div>
 <p>The labels are case-insensitive:</p>
-<div class="example" id="example-628">
+<div class="example" id="example-627">
 <div class="examplenum">
-<a href="#example-628">Example 628</a>
+<a href="#example-627">Example 627</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![Foo][]
@@ -17439,9 +17178,9 @@ content is rendered, without formatting.</p>
 </div>
 <p>As with reference links, spaces, tabs, and line endings, are not allowed
 between the two sets of brackets:</p>
-<div class="example" id="example-629">
+<div class="example" id="example-628">
 <div class="examplenum">
-<a href="#example-629">Example 629</a>
+<a href="#example-628">Example 628</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo]<span class="space"> </span>
@@ -17457,9 +17196,9 @@ between the two sets of brackets:</p>
 </div>
 </div>
 <p>Shortcut:</p>
-<div class="example" id="example-630">
+<div class="example" id="example-629">
 <div class="examplenum">
-<a href="#example-630">Example 630</a>
+<a href="#example-629">Example 629</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo]
@@ -17472,9 +17211,9 @@ between the two sets of brackets:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-631">
+<div class="example" id="example-630">
 <div class="examplenum">
-<a href="#example-631">Example 631</a>
+<a href="#example-630">Example 630</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![*foo*<span class="space"> </span>bar]
@@ -17488,9 +17227,9 @@ between the two sets of brackets:</p>
 </div>
 </div>
 <p>Note that link labels cannot contain unescaped brackets:</p>
-<div class="example" id="example-632">
+<div class="example" id="example-631">
 <div class="examplenum">
-<a href="#example-632">Example 632</a>
+<a href="#example-631">Example 631</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![[foo]]
@@ -17505,9 +17244,9 @@ between the two sets of brackets:</p>
 </div>
 </div>
 <p>The link labels are case-insensitive:</p>
-<div class="example" id="example-633">
+<div class="example" id="example-632">
 <div class="examplenum">
-<a href="#example-633">Example 633</a>
+<a href="#example-632">Example 632</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![Foo]
@@ -17522,9 +17261,9 @@ between the two sets of brackets:</p>
 </div>
 <p>If you just want a literal <code>!</code> followed by bracketed text, you can
 backslash-escape the opening <code>[</code>:</p>
-<div class="example" id="example-634">
+<div class="example" id="example-633">
 <div class="examplenum">
-<a href="#example-634">Example 634</a>
+<a href="#example-633">Example 633</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">!\[foo]
@@ -17539,9 +17278,9 @@ backslash-escape the opening <code>[</code>:</p>
 </div>
 <p>If you want a link after a literal <code>!</code>, backslash-escape the
 <code>!</code>:</p>
-<div class="example" id="example-635">
+<div class="example" id="example-634">
 <div class="examplenum">
-<a href="#example-635">Example 635</a>
+<a href="#example-634">Example 634</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">\![foo]
@@ -17556,7 +17295,7 @@ backslash-escape the opening <code>[</code>:</p>
 </div>
 <div class="extension">
 <h2 id="image-resource-attributes-m-" class="definition">
-<span class="number">10.7</span>Image resource attributes (M)
+<span class="number">10.5</span>Image resource attributes (M)
 </h2>
 <p>As shown in the Images section, the syntax to insert an image in Markua is
 the identical to that used by CommonMark and GFM. (That section is unchanged
@@ -17647,9 +17386,9 @@ Processor should scale the image proportionally if possible (again, respecting
 margins). If both <code>width</code> and <code>height</code> are specified, the Markua Processor
 should scale the image accordingly, ignoring the aspect ratio. (So, it’s almost
 always a bad idea to specify both <code>width</code> and <code>height</code>.)</p>
-<div class="example" id="example-636">
+<div class="example" id="example-635">
 <div class="examplenum">
-<a href="#example-636">Example 636</a>
+<a href="#example-635">Example 635</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](pie.jpg)
@@ -17668,9 +17407,9 @@ always a bad idea to specify both <code>width</code> and <code>height</code>.)</
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-637">
+<div class="example" id="example-636">
 <div class="examplenum">
-<a href="#example-637">Example 637</a>
+<a href="#example-636">Example 636</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](pie.jpg<span class="space"> </span>&quot;bar&quot;)
@@ -17710,7 +17449,7 @@ instead, involving a very real and very delicious apple pie:</p>
 </div>
 <div class="extension">
 <h2 id="inline-svg-images-m-" class="definition">
-<span class="number">10.8</span>Inline SVG images (M)
+<span class="number">10.6</span>Inline SVG images (M)
 </h2>
 <p>Local and web resource locations are supported for any type of image; inline
 resource locations are supported for SVG images only.</p>
@@ -17757,7 +17496,7 @@ the SVG image.</p>
 <p>Note that when you are writing about SVG and want to display the SVG text, what
 you are really doing is creating a code resource. This is discussed below.</p>
 <h3 id="writing-about-svg" class="definition">
-<span class="number">10.8.1</span>Writing about SVG
+<span class="number">10.6.1</span>Writing about SVG
 </h3>
 <p>If you want to write about the SVG format, and show the actual SVG source
 (instead of the image produced), it needs to be of a <code>format</code> of <code>code</code>, not
@@ -17818,7 +17557,7 @@ since guessing when neither is present always produces a type of <code>code</cod
 </div>
 <div class="extension">
 <h2 id="image-locations-and-embedding-m-" class="definition">
-<span class="number">10.9</span>Image locations and embedding (M)
+<span class="number">10.7</span>Image locations and embedding (M)
 </h2>
 <p>Note that regardless of the image location, a Markua Processor can handle images
 in the following ways:</p>
@@ -17836,7 +17575,7 @@ GIF, PNG, JPEG, SVG and zipped SVG.</p>
 </div>
 <div class="extension">
 <h2 id="video-resources-m-" class="definition">
-<span class="number">10.10</span>Video resources (M)
+<span class="number">10.8</span>Video resources (M)
 </h2>
 <p>Note that .mp4 is used for MP4 video, not MP4 AAC audio.</p>
 <p>The following are the video resource formats and the file extensions which
@@ -17865,7 +17604,7 @@ work in some Markua Processors, like Leanpub, without specifying either the
 <p>We will discuss the supported and the default attributes for videos, and then
 show examples of videos being inserted for both local and web videos.</p>
 <h3 id="supported-attributes-for-video" class="definition">
-<span class="number">10.10.1</span>Supported Attributes for Video
+<span class="number">10.8.1</span>Supported Attributes for Video
 </h3>
 <p>The following are the supported attributes for video resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
@@ -17935,11 +17674,11 @@ with images.</p>
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
 <h3 id="local-video" class="definition">
-<span class="number">10.10.2</span>Local Video
+<span class="number">10.8.2</span>Local Video
 </h3>
-<div class="example" id="example-638">
+<div class="example" id="example-637">
 <div class="examplenum">
-<a href="#example-638">Example 638</a>
+<a href="#example-637">Example 637</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.
@@ -17960,11 +17699,11 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 </div>
 </div>
 <h3 id="web-video" class="definition">
-<span class="number">10.10.3</span>Web Video
+<span class="number">10.8.3</span>Web Video
 </h3>
-<div class="example" id="example-639">
+<div class="example" id="example-638">
 <div class="examplenum">
-<a href="#example-639">Example 639</a>
+<a href="#example-638">Example 638</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.
@@ -17989,7 +17728,7 @@ poster=&quot;http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg&quot;/&gt;
 </div>
 <div class="extension">
 <h2 id="iframe-resources-m-" class="definition">
-<span class="number">10.11</span>IFrame resources (M)
+<span class="number">10.9</span>IFrame resources (M)
 </h2>
 <p>The syntax to insert an IFrame is almost identical to that is used for video
 resources.</p>
@@ -18001,7 +17740,7 @@ are created in Markua.</p>
 <p>The only resource location which is supported for an IFrame resource is the
 web resource location, for obvious reasons.</p>
 <h3 id="supported-attributes-for-resources" class="definition">
-<span class="number">10.11.1</span>Supported Attributes for <code>iframe</code> Resources
+<span class="number">10.9.1</span>Supported Attributes for <code>iframe</code> Resources
 </h3>
 <p>The following are the supported attributes for IFrame resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
@@ -18032,9 +17771,9 @@ ADA compliance. For example, what Leanpub does with an <code>iframe</code> resou
 <p>In the following sections, please note that while the examples are shown with
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
-<div class="example" id="example-640">
+<div class="example" id="example-639">
 <div class="examplenum">
-<a href="#example-640">Example 640</a>
+<a href="#example-639">Example 639</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.
@@ -18062,7 +17801,7 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 </div>
 <div class="extension">
 <h2 id="audio-resources-m-" class="definition">
-<span class="number">10.12</span>Audio resources (M)
+<span class="number">10.10</span>Audio resources (M)
 </h2>
 <p>The following are the audio resource formats and the file extensions which
 choose them by default:</p>
@@ -18100,7 +17839,7 @@ and Ogg Vorbis.</p>
 <p>We will discuss the supported and the default attributes for audio files, and
 then show examples of audio being inserted for both local and web audio files.</p>
 <h3 id="supported-attributes-for-audio" class="definition">
-<span class="number">10.12.1</span>Supported Attributes for Audio
+<span class="number">10.10.1</span>Supported Attributes for Audio
 </h3>
 <p>The following are the supported attributes for audio resources, in addition to
 the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources
@@ -18120,11 +17859,11 @@ this. See the Video resources section above for more information.</p>
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
 <h3 id="local-audio" class="definition">
-<span class="number">10.12.2</span>Local Audio
+<span class="number">10.10.2</span>Local Audio
 </h3>
-<div class="example" id="example-641">
+<div class="example" id="example-640">
 <div class="examplenum">
-<a href="#example-641">Example 641</a>
+<a href="#example-640">Example 640</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">The<span class="space"> </span>full<span class="space"> </span>version<span class="space"> </span>of<span class="space"> </span>the<span class="space"> </span>talk<span class="space"> </span>is<span class="space"> </span>here:
@@ -18142,11 +17881,11 @@ over how it handles the location of video resources and their display.</p>
 </div>
 </div>
 <h3 id="web-audio" class="definition">
-<span class="number">10.12.3</span>Web Audio
+<span class="number">10.10.3</span>Web Audio
 </h3>
-<div class="example" id="example-642">
+<div class="example" id="example-641">
 <div class="examplenum">
-<a href="#example-642">Example 642</a>
+<a href="#example-641">Example 641</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">The<span class="space"> </span>full<span class="space"> </span>version<span class="space"> </span>of<span class="space"> </span>the<span class="space"> </span>talk<span class="space"> </span>is<span class="space"> </span>here:
@@ -18166,7 +17905,7 @@ over how it handles the location of video resources and their display.</p>
 </div>
 <div class="extension">
 <h2 id="math-resources-m-" class="definition">
-<span class="number">10.13</span>Math resources (M)
+<span class="number">10.11</span>Math resources (M)
 </h2>
 <p>Math can be a local, web or inline resource, just like any other resource, and
 the same resource syntax applies to code as to all other resources.</p>
@@ -18182,7 +17921,7 @@ like transparent SVGs with a dynamic foreground color, or MathJax or MathML.</p>
 <li>AsciiMath (<code>asciimath</code> or <code>@</code>)</li>
 </ol>
 <h3 id="math-resource-formats" class="definition">
-<span class="number">10.13.1</span>Math resource formats
+<span class="number">10.11.1</span>Math resource formats
 </h3>
 <p>The following are the math resource formats and the file extensions which
 choose them by default:</p>
@@ -18200,7 +17939,7 @@ display it, then add a <code>{type: code, format: latex}</code> attribute list.<
 <p>Note that the assumption is that AsciiMath will almost always be used as an
 inline resource. So, the <code>.asciimath</code> file extension is deliberately verbose.</p>
 <h3 id="supported-attributes-for-math" class="definition">
-<span class="number">10.13.2</span>Supported Attributes for Math
+<span class="number">10.11.2</span>Supported Attributes for Math
 </h3>
 <p>The following are the supported attribute for math resources, in addition to the
 <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes which all resources support:</p>
@@ -18218,7 +17957,7 @@ into Markua: <code>latexmath</code> for LaTeX math and <code>asciimath</code> fo
 Markua Processor encounters one of these formats, it must assume the <code>type</code> of
 the resource is <code>math</code>, not <code>code</code>.</p>
 <h3 id="local-math-resources" class="definition">
-<span class="number">10.13.3</span>Local Math Resources
+<span class="number">10.11.3</span>Local Math Resources
 </h3>
 <p>Local math resources can be inserted as a figure.</p>
 <pre><code>Here's a paragraph before the figure.
@@ -18237,7 +17976,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="web-math-resources" class="definition">
-<span class="number">10.13.4</span>Web Math Resources
+<span class="number">10.11.4</span>Web Math Resources
 </h3>
 <p>This is identical to how local math resources work, including the significance
 of file extensions. The only difference is that the files are on the web.</p>
@@ -18257,14 +17996,14 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h3 id="inline-math-resources" class="definition">
-<span class="number">10.13.5</span>Inline Math Resources
+<span class="number">10.11.5</span>Inline Math Resources
 </h3>
 <p>Inline math resources are the most flexible way to insert math. They are the only
 way to insert math as a span resource, and the most straightforward way to add
 short math examples as figures. LaTeX math and AsciiMath can be inserted inline
 as a span or figure.</p>
 <h4 id="span" class="definition">
-<span class="number">10.13.5.1</span>Span
+<span class="number">10.11.5.1</span>Span
 </h4>
 <p>Being able to insert a math resource as a span is important, as it lets you write
 things like one of the kinematic equations <code>d = v_i t + \frac{1}{2} a t^2</code>$ inside
@@ -18274,7 +18013,7 @@ an <code>@</code> after the closing backtick for AsciiMath, or an attribute list
 a <code>format</code> of <code>latexmath</code> or <code>asciimath</code>. If none of these is done, the content
 of the backticks is treated as code and is output verbatim as monospaced text.</p>
 <h5 id="latex-math-span" class="definition">
-<span class="number">10.13.5.1.1</span>LaTeX math span
+<span class="number">10.11.5.1.1</span>LaTeX math span
 </h5>
 <p>There is syntactic sugar for LaTeX math which is inserted as a span, using the
 <code>$</code> character after the closing backtick:</p>
@@ -18289,7 +18028,7 @@ sentence.
 inside a sentence.
 </code></pre>
 <h5 id="asciimath-span" class="definition">
-<span class="number">10.13.5.1.2</span>AsciiMath span
+<span class="number">10.11.5.1.2</span>AsciiMath span
 </h5>
 <p><a href="http://asciimath.org/">AsciiMath</a> is a way of producing simple MathML equations,
 using about 1% of the typing. It’s more terse than LaTeX math.</p>
@@ -18304,7 +18043,7 @@ character after the closing backtick:</p>
 inside a sentence.
 </code></pre>
 <h4 id="figure" class="definition">
-<span class="number">10.13.5.2</span>Figure
+<span class="number">10.11.5.2</span>Figure
 </h4>
 <p>LaTeX math and AsciiMath can be inserted inline as a figure.</p>
 <ul>
@@ -18314,7 +18053,7 @@ backticks, or by specifying an attribute list of <code>{format: latexmath}</code
 backticks, or by specifying an attribute list of <code>{format: asciimath}</code>.</li>
 </ul>
 <h5 id="latex-math-figures" class="definition">
-<span class="number">10.13.5.2.1</span>LaTeX math figures
+<span class="number">10.11.5.2.1</span>LaTeX math figures
 </h5>
 <p>Here’s how you do this using LaTeX math…</p>
 <p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
@@ -18355,7 +18094,7 @@ Here's a paragraph after the figure.
 Here's a paragraph after the figure.
 </code></pre>
 <h5 id="asciimath-figures" class="definition">
-<span class="number">10.13.5.2.2</span>AsciiMath figures
+<span class="number">10.11.5.2.2</span>AsciiMath figures
 </h5>
 <p>Here’s how you do this using AsciiMath…</p>
 <p>Here’s the version with the syntactic sugar for the format after the backticks:</p>
@@ -18393,7 +18132,7 @@ text, what you are really doing is creating a code resource. This is essentially
 identical to what was shown earlier in writing about SVG images. It’s also shown
 below.</p>
 <h3 id="writing-about-math" class="definition">
-<span class="number">10.13.6</span>Writing about Math
+<span class="number">10.11.6</span>Writing about Math
 </h3>
 <p>If you want to write about math, and show the actual code (instead of the
 formatted output), it needs to be of a <code>format</code> of <code>code</code>, not <code>math</code>.</p>
@@ -18454,7 +18193,7 @@ abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/
 </code></pre>
 </div>
 <h2 id="autolinks" class="definition">
-<span class="number">10.14</span>Autolinks
+<span class="number">10.12</span>Autolinks
 </h2>
 <p><a id="autolink" href="#autolink" class="definition">Autolink</a>s are absolute URIs and email addresses inside
 <code>&lt;</code> and <code>&gt;</code>. They are parsed as links, with the URL or email address
@@ -18473,9 +18212,9 @@ of 2–32 characters beginning with an ASCII letter and followed
 by any combination of ASCII letters, digits, or the symbols plus
 (”+”), period (”.”), or hyphen (”-”).</p>
 <p>Here are some valid autolinks:</p>
-<div class="example" id="example-643">
+<div class="example" id="example-642">
 <div class="examplenum">
-<a href="#example-643">Example 643</a>
+<a href="#example-642">Example 642</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;http://foo.bar.baz&gt;
@@ -18486,9 +18225,9 @@ by any combination of ASCII letters, digits, or the symbols plus
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-644">
+<div class="example" id="example-643">
 <div class="examplenum">
-<a href="#example-644">Example 644</a>
+<a href="#example-643">Example 643</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;http://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean&gt;
@@ -18499,9 +18238,9 @@ by any combination of ASCII letters, digits, or the symbols plus
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-645">
+<div class="example" id="example-644">
 <div class="examplenum">
-<a href="#example-645">Example 645</a>
+<a href="#example-644">Example 644</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;irc://foo.bar:2233/baz&gt;
@@ -18513,9 +18252,9 @@ by any combination of ASCII letters, digits, or the symbols plus
 </div>
 </div>
 <p>Uppercase is also fine:</p>
-<div class="example" id="example-646">
+<div class="example" id="example-645">
 <div class="examplenum">
-<a href="#example-646">Example 646</a>
+<a href="#example-645">Example 645</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;MAILTO:FOO@BAR.BAZ&gt;
@@ -18530,9 +18269,9 @@ by any combination of ASCII letters, digits, or the symbols plus
 purposes of this spec are not valid URIs, because their
 schemes are not registered or because of other problems
 with their syntax:</p>
-<div class="example" id="example-647">
+<div class="example" id="example-646">
 <div class="examplenum">
-<a href="#example-647">Example 647</a>
+<a href="#example-646">Example 646</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;a+b+c:d&gt;
@@ -18543,9 +18282,9 @@ with their syntax:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-648">
+<div class="example" id="example-647">
 <div class="examplenum">
-<a href="#example-648">Example 648</a>
+<a href="#example-647">Example 647</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;made-up-scheme://foo,bar&gt;
@@ -18556,9 +18295,9 @@ with their syntax:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-649">
+<div class="example" id="example-648">
 <div class="examplenum">
-<a href="#example-649">Example 649</a>
+<a href="#example-648">Example 648</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;http://../&gt;
@@ -18569,9 +18308,9 @@ with their syntax:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-650">
+<div class="example" id="example-649">
 <div class="examplenum">
-<a href="#example-650">Example 650</a>
+<a href="#example-649">Example 649</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;localhost:5001/foo&gt;
@@ -18583,9 +18322,9 @@ with their syntax:</p>
 </div>
 </div>
 <p>Spaces are not allowed in autolinks:</p>
-<div class="example" id="example-651">
+<div class="example" id="example-650">
 <div class="examplenum">
-<a href="#example-651">Example 651</a>
+<a href="#example-650">Example 650</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;http://foo.bar/baz<span class="space"> </span>bim&gt;
@@ -18597,9 +18336,9 @@ with their syntax:</p>
 </div>
 </div>
 <p>Backslash-escapes do not work inside autolinks:</p>
-<div class="example" id="example-652">
+<div class="example" id="example-651">
 <div class="examplenum">
-<a href="#example-652">Example 652</a>
+<a href="#example-651">Example 651</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;http://example.com/\[\&gt;
@@ -18622,9 +18361,9 @@ spec</a>:</p>
 (?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 </code></pre>
 <p>Examples of email autolinks:</p>
-<div class="example" id="example-653">
+<div class="example" id="example-652">
 <div class="examplenum">
-<a href="#example-653">Example 653</a>
+<a href="#example-652">Example 652</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo@bar.example.com&gt;
@@ -18635,9 +18374,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-654">
+<div class="example" id="example-653">
 <div class="examplenum">
-<a href="#example-654">Example 654</a>
+<a href="#example-653">Example 653</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo+special@Bar.baz-bar0.com&gt;
@@ -18649,9 +18388,9 @@ spec</a>:</p>
 </div>
 </div>
 <p>Backslash-escapes do not work inside email autolinks:</p>
-<div class="example" id="example-655">
+<div class="example" id="example-654">
 <div class="examplenum">
-<a href="#example-655">Example 655</a>
+<a href="#example-654">Example 654</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo\+@bar.example.com&gt;
@@ -18663,9 +18402,9 @@ spec</a>:</p>
 </div>
 </div>
 <p>These are not autolinks:</p>
-<div class="example" id="example-656">
+<div class="example" id="example-655">
 <div class="examplenum">
-<a href="#example-656">Example 656</a>
+<a href="#example-655">Example 655</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;&gt;
@@ -18676,9 +18415,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-657">
+<div class="example" id="example-656">
 <div class="examplenum">
-<a href="#example-657">Example 657</a>
+<a href="#example-656">Example 656</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;<span class="space"> </span>http://foo.bar<span class="space"> </span>&gt;
@@ -18689,9 +18428,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-658">
+<div class="example" id="example-657">
 <div class="examplenum">
-<a href="#example-658">Example 658</a>
+<a href="#example-657">Example 657</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;m:abc&gt;
@@ -18702,9 +18441,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-659">
+<div class="example" id="example-658">
 <div class="examplenum">
-<a href="#example-659">Example 659</a>
+<a href="#example-658">Example 658</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo.bar.baz&gt;
@@ -18715,9 +18454,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-660">
+<div class="example" id="example-659">
 <div class="examplenum">
-<a href="#example-660">Example 660</a>
+<a href="#example-659">Example 659</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">http://example.com
@@ -18728,9 +18467,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-661">
+<div class="example" id="example-660">
 <div class="examplenum">
-<a href="#example-661">Example 661</a>
+<a href="#example-660">Example 660</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo@bar.example.com
@@ -18743,7 +18482,7 @@ spec</a>:</p>
 </div>
 <div class="extension">
 <h2 id="no-raw-html-m-" class="definition">
-<span class="number">10.15</span>No raw HTML (M)
+<span class="number">10.13</span>No raw HTML (M)
 </h2>
 <p>Markdown and CommonMark support raw HTML. Markua does not support raw HTML.</p>
 <p>Instead, <strong>all raw HTML is removed</strong>. This is true both for raw HTML which is
@@ -18755,15 +18494,15 @@ comments (<code>&lt;!-- a comment --&gt;</code>) in Markua, and these comments w
 from the output (along with any other raw HTML tags).</p>
 </div>
 <h2 id="hard-line-breaks" class="definition">
-<span class="number">10.16</span>Hard line breaks
+<span class="number">10.14</span>Hard line breaks
 </h2>
 <p>A line ending (not in a code span or HTML tag) that is preceded
 by two or more spaces and does not occur at the end of a block
 is parsed as a <a id="hard-line-break" href="#hard-line-break" class="definition">hard line break</a> (rendered
 in HTML as a <code>&lt;br /&gt;</code> tag):</p>
-<div class="example" id="example-662">
+<div class="example" id="example-661">
 <div class="examplenum">
-<a href="#example-662">Example 662</a>
+<a href="#example-661">Example 661</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
@@ -18778,9 +18517,9 @@ baz&lt;/p&gt;
 </div>
 <p>For a more visible alternative, a backslash before the
 <a href="#line-ending">line ending</a> may be used instead of two or more spaces:</p>
-<div class="example" id="example-663">
+<div class="example" id="example-662">
 <div class="examplenum">
-<a href="#example-663">Example 663</a>
+<a href="#example-662">Example 662</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo\
@@ -18794,9 +18533,9 @@ baz&lt;/p&gt;
 </div>
 </div>
 <p>More than two spaces can be used:</p>
-<div class="example" id="example-664">
+<div class="example" id="example-663">
 <div class="examplenum">
-<a href="#example-664">Example 664</a>
+<a href="#example-663">Example 663</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
@@ -18810,9 +18549,9 @@ baz&lt;/p&gt;
 </div>
 </div>
 <p>Leading spaces at the beginning of the next line are ignored:</p>
-<div class="example" id="example-665">
+<div class="example" id="example-664">
 <div class="examplenum">
-<a href="#example-665">Example 665</a>
+<a href="#example-664">Example 664</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
@@ -18825,9 +18564,9 @@ bar&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-666">
+<div class="example" id="example-665">
 <div class="examplenum">
-<a href="#example-666">Example 666</a>
+<a href="#example-665">Example 665</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo\
@@ -18842,9 +18581,9 @@ bar&lt;/p&gt;
 </div>
 <p>Hard line breaks can occur inside emphasis, links, and other constructs
 that allow inline content:</p>
-<div class="example" id="example-667">
+<div class="example" id="example-666">
 <div class="examplenum">
-<a href="#example-667">Example 667</a>
+<a href="#example-666">Example 666</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span><span class="space"> </span>
@@ -18857,9 +18596,9 @@ bar&lt;/em&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-668">
+<div class="example" id="example-667">
 <div class="examplenum">
-<a href="#example-668">Example 668</a>
+<a href="#example-667">Example 667</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo\
@@ -18873,9 +18612,9 @@ bar&lt;/em&gt;&lt;/p&gt;
 </div>
 </div>
 <p>Hard line breaks do not occur inside code spans</p>
-<div class="example" id="example-669">
+<div class="example" id="example-668">
 <div class="examplenum">
-<a href="#example-669">Example 669</a>
+<a href="#example-668">Example 668</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">`code<span class="space"> </span><span class="space"> </span>
@@ -18887,9 +18626,9 @@ span`
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-670">
+<div class="example" id="example-669">
 <div class="examplenum">
-<a href="#example-670">Example 670</a>
+<a href="#example-669">Example 669</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">`code\
@@ -18902,9 +18641,9 @@ span`
 </div>
 </div>
 <p>or HTML tags:</p>
-<div class="example" id="example-671">
+<div class="example" id="example-670">
 <div class="examplenum">
-<a href="#example-671">Example 671</a>
+<a href="#example-670">Example 670</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;a<span class="space"> </span>href=&quot;foo<span class="space"> </span><span class="space"> </span>
@@ -18917,9 +18656,9 @@ bar&quot;&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-672">
+<div class="example" id="example-671">
 <div class="examplenum">
-<a href="#example-672">Example 672</a>
+<a href="#example-671">Example 671</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;a<span class="space"> </span>href=&quot;foo\
@@ -18935,9 +18674,9 @@ bar&quot;&gt;&lt;/p&gt;
 <p>Hard line breaks are for separating inline content within a block.
 Neither syntax for hard line breaks works at the end of a paragraph or
 other block element:</p>
-<div class="example" id="example-673">
+<div class="example" id="example-672">
 <div class="examplenum">
-<a href="#example-673">Example 673</a>
+<a href="#example-672">Example 672</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo\
@@ -18948,9 +18687,9 @@ other block element:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-674">
+<div class="example" id="example-673">
 <div class="examplenum">
-<a href="#example-674">Example 674</a>
+<a href="#example-673">Example 673</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
@@ -18961,9 +18700,9 @@ other block element:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-675">
+<div class="example" id="example-674">
 <div class="examplenum">
-<a href="#example-675">Example 675</a>
+<a href="#example-674">Example 674</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo\
@@ -18974,9 +18713,9 @@ other block element:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-676">
+<div class="example" id="example-675">
 <div class="examplenum">
-<a href="#example-676">Example 676</a>
+<a href="#example-675">Example 675</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span><span class="space"> </span>
@@ -18988,16 +18727,16 @@ other block element:</p>
 </div>
 </div>
 <h2 id="soft-line-breaks" class="definition">
-<span class="number">10.17</span>Soft line breaks
+<span class="number">10.15</span>Soft line breaks
 </h2>
 <p>A regular line ending (not in a code span or HTML tag) that is not
 preceded by two or more spaces or a backslash is parsed as a
 <a id="softbreak" href="#softbreak" class="definition">softbreak</a>.  (A soft line break may be rendered in HTML either as a
 <a href="#line-ending">line ending</a> or as a space. The result will be the same in
 browsers. In the examples here, a <a href="#line-ending">line ending</a> will be used.)</p>
-<div class="example" id="example-677">
+<div class="example" id="example-676">
 <div class="examplenum">
-<a href="#example-677">Example 677</a>
+<a href="#example-676">Example 676</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo
@@ -19012,9 +18751,9 @@ baz&lt;/p&gt;
 </div>
 <p>Spaces at the end of the line and beginning of the next line are
 removed:</p>
-<div class="example" id="example-678">
+<div class="example" id="example-677">
 <div class="examplenum">
-<a href="#example-678">Example 678</a>
+<a href="#example-677">Example 677</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>
@@ -19033,7 +18772,7 @@ line ending or as a space.</p>
 as hard line breaks.</p>
 <div class="extension">
 <h2 id="character-substitutions-m-" class="definition">
-<span class="number">10.18</span>Character substitutions (M)
+<span class="number">10.16</span>Character substitutions (M)
 </h2>
 <p>Markua documents can be written in UTF-8, so to produce any Unicode character, it
 is possible to just use the proper Unicode characters. However, in certain cases,
@@ -19059,7 +18798,7 @@ paragraph).</p>
 : To produce a horizontal ellipsis (…), you can just type <code>...</code>. You can also use
 the proper Unicode character, U+2026, of course.</p>
 <h3 id="optional-automatic-curly-quotes-outside-of-code-blocks-and-spans" class="definition">
-<span class="number">10.18.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
+<span class="number">10.16.1</span>Optional Automatic Curly Quotes Outside of Code Blocks and Spans
 </h3>
 <p>A Markua Processor may replace the <code>&quot;</code> character with the appropriate “curly
 quote” at its discretion. This lets <code>&quot;typography&quot;</code> become <code>“typography”</code>, and
@@ -19076,11 +18815,11 @@ straight in a code span either.)</p>
 </div>
 <div class="extension">
 <h2 id="footnotes-and-endnotes-m-" class="definition">
-<span class="number">10.19</span>Footnotes and endnotes (M)
+<span class="number">10.17</span>Footnotes and endnotes (M)
 </h2>
 <p>Books often have footnotes and endnotes. So, Markua has them too.</p>
 <h3 id="footnotes" class="definition">
-<span class="number">10.19.1</span>Footnotes
+<span class="number">10.17.1</span>Footnotes
 </h3>
 <p>To add a footnote, you insert a footnote tag using square brackets, a caret and
 the tag, like this:</p>
@@ -19110,7 +18849,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="endnotes" class="definition">
-<span class="number">10.19.2</span>Endnotes
+<span class="number">10.17.2</span>Endnotes
 </h3>
 <p>Sometimes endnotes are used instead of footnotes, but other times, these are in
 addition to footnotes. So, it makes sense for Markua to define separate syntaxes
@@ -19136,7 +18875,7 @@ should output them <em>somewhere</em>, but the details are not specified. This i
 deliberate, in order to maximize implementation flexibility for Markua
 Processors.</p>
 <h3 id="single-reference-to-footnotes-and-endnotes" class="definition">
-<span class="number">10.19.3</span>Single reference to footnotes and endnotes
+<span class="number">10.17.3</span>Single reference to footnotes and endnotes
 </h3>
 <p>You can only refer to a footnote or endnote once. You can’t define a footnote or
 endnote in one place and refer to it multiple times in the same Markua document.
@@ -19145,7 +18884,7 @@ Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 <a href="#crosslinks">crosslink</a>.</p>
 <h3 id="footnote-and-endnote-support-is-required-for-paragraphs-only" class="definition">
-<span class="number">10.19.4</span>Footnote and endnote support is required for paragraphs only
+<span class="number">10.17.4</span>Footnote and endnote support is required for paragraphs only
 </h3>
 <p>A Markua Processor must support footnote and endnote references inserted in
 normal paragraph content. However, that’s it.</p>
@@ -19164,7 +18903,7 @@ only supports inserting footnotes or endnotes in normal paragraph content.</p>
 </div>
 <div class="extension">
 <h2 id="underline-m-" class="definition">
-<span class="number">10.20</span>Underline (M)
+<span class="number">10.18</span>Underline (M)
 </h2>
 <p>In Markdown as defined by John Gruber, and in CommonMark and GFM,
 <code>*one asterisk*</code> and <code>_one underscore_</code> both produce <em>italics</em>, and there is no
@@ -19195,9 +18934,9 @@ this is much less of an issue for them!</p>
 issue. While underline does have legitimate uses, they are more niche than
 italic.)</p>
 <p>So, by default, <code>italicize-underlines</code> is <code>true</code>:</p>
-<div class="example" id="example-679">
+<div class="example" id="example-678">
 <div class="examplenum">
-<a href="#example-679">Example 679</a>
+<a href="#example-678">Example 678</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
@@ -19222,9 +18961,9 @@ stuff
 </div>
 <p>This can be made explicit by setting the <code>italicize-underlines</code> document setting
 to <code>true</code>:</p>
-<div class="example" id="example-680">
+<div class="example" id="example-679">
 <div class="examplenum">
-<a href="#example-680">Example 680</a>
+<a href="#example-679">Example 679</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19252,9 +18991,9 @@ stuff
 </div>
 </div>
 <p>Set the <code>italicize-underlines</code> document setting to <code>false</code> to produce underline:</p>
-<div class="example" id="example-681">
+<div class="example" id="example-680">
 <div class="examplenum">
-<a href="#example-681">Example 681</a>
+<a href="#example-680">Example 680</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19282,9 +19021,9 @@ stuff
 </div>
 </div>
 <p>To produce text which is underlined as well as other bolded and/or italicized, you combine the underscores for underlining with the asterisks for bold and italics:</p>
-<div class="example" id="example-682">
+<div class="example" id="example-681">
 <div class="examplenum">
-<a href="#example-682">Example 682</a>
+<a href="#example-681">Example 681</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19317,12 +19056,12 @@ stuff
 </div>
 <div class="extension">
 <h2 id="superscript-and-subscript-m-" class="definition">
-<span class="number">10.21</span>Superscript and subscript (M)
+<span class="number">10.19</span>Superscript and subscript (M)
 </h2>
 <p>To produce superscript like the 3 in 5^3^ = 125, surround it with carets like <code>5^3^ = 125</code>.</p>
-<div class="example" id="example-683">
+<div class="example" id="example-682">
 <div class="examplenum">
-<a href="#example-683">Example 683</a>
+<a href="#example-682">Example 682</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Superscript:<span class="space"> </span>5^3^<span class="space"> </span>=<span class="space"> </span>125
@@ -19334,9 +19073,9 @@ stuff
 </div>
 </div>
 <p>To produce subscript like the 2 in H~2~O, surround it with single tildes like <code>H~2~O</code>.</p>
-<div class="example" id="example-684">
+<div class="example" id="example-683">
 <div class="examplenum">
-<a href="#example-684">Example 684</a>
+<a href="#example-683">Example 683</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Subscript:<span class="space"> </span>H~2~O
@@ -19350,14 +19089,14 @@ stuff
 </div>
 <div class="extension">
 <h2 id="strikethrough-gfm-" class="definition">
-<span class="number">10.22</span>Strikethrough (GFM)
+<span class="number">10.20</span>Strikethrough (GFM)
 </h2>
 <p>Markua enables the <code>strikethrough</code> extension, where an additional emphasis type is
 available.</p>
 <p>Strikethrough text is any text wrapped in two tildes (<code>~</code>).</p>
-<div class="example" id="example-685">
+<div class="example" id="example-684">
 <div class="examplenum">
-<a href="#example-685">Example 685</a>
+<a href="#example-684">Example 684</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~Hi~~<span class="space"> </span>Hello,<span class="space"> </span>world!
@@ -19370,9 +19109,9 @@ available.</p>
 </div>
 <p>As with regular emphasis delimiters, a new paragraph will cause strikethrough
 parsing to cease:</p>
-<div class="example" id="example-686">
+<div class="example" id="example-685">
 <div class="examplenum">
-<a href="#example-686">Example 686</a>
+<a href="#example-685">Example 685</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">This<span class="space"> </span>~~has<span class="space"> </span>a
@@ -19389,7 +19128,7 @@ new<span class="space"> </span>paragraph~~.
 </div>
 <div class="extension">
 <h2 id="index-entries-m-" class="definition">
-<span class="number">10.23</span>Index entries (M)
+<span class="number">10.21</span>Index entries (M)
 </h2>
 <p>Markua supports adding index entries via the attribute list syntax. Index
 entries let authors or indexers produce professional-looking indexes in
@@ -19492,7 +19231,7 @@ the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*He
 </div>
 <div class="extension">
 <h2 id="syntactic-sugar-list-m-" class="definition">
-<span class="number">10.24</span>Syntactic sugar list (M)
+<span class="number">10.22</span>Syntactic sugar list (M)
 </h2>
 <p>Markua has a handful of syntactic sugar that it relies on to make life nicer for
 authors. Here’s a helpful summary list of the different syntactic sugar elements
@@ -19518,13 +19257,13 @@ a <code>{class: continued-para}</code></p>
 : <code>{format: text}</code></p>
 </div>
 <h2 id="textual-content" class="definition">
-<span class="number">10.25</span>Textual content
+<span class="number">10.23</span>Textual content
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>
-<div class="example" id="example-687">
+<div class="example" id="example-686">
 <div class="examplenum">
-<a href="#example-687">Example 687</a>
+<a href="#example-686">Example 686</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">hello<span class="space"> </span>$.;'there
@@ -19535,9 +19274,9 @@ be parsed as plain textual content.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-688">
+<div class="example" id="example-687">
 <div class="examplenum">
-<a href="#example-688">Example 688</a>
+<a href="#example-687">Example 687</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span>χρῆν
@@ -19549,9 +19288,9 @@ be parsed as plain textual content.</p>
 </div>
 </div>
 <p>Internal spaces are preserved verbatim:</p>
-<div class="example" id="example-689">
+<div class="example" id="example-688">
 <div class="examplenum">
-<a href="#example-689">Example 689</a>
+<a href="#example-688">Example 688</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces

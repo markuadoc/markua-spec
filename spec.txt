@@ -8,6 +8,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 # Introduction
 
+
 <div class="extension">
 
 ## The magical typewriter (M)
@@ -90,6 +91,11 @@ Markua was started at Leanpub in 2014, and benefited from the years of lessons
 that Leanpub had learned from Leanpub Flavoured Markdown (LFM). Markua is the
 successor to LFM. We have been iterating on our Markua support for many years.
 
+</div>
+
+
+
+<div class="extension">
 
 ## Markua's five key additions to Markdown (M)
 
@@ -123,6 +129,11 @@ feel like decorating, not converting.
 The goal is for writers who are familiar with Markdown to feel that with Markua,
 Markdown just grew an understanding of book and course concepts.
 
+</div>
+
+
+
+<div class="extension">
 
 ## Markua's one key subtraction from Markdown: raw HTML is removed (M)
 
@@ -134,8 +145,9 @@ Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
 Instead, in Markua **all raw HTML elements are removed**.
 
 This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua. In both
-cases, **raw HTML must be completely removed by the Markua Processor.**
+which is inserted as inlines. Neither of these are supported by Markua.
+
+In both cases, **raw HTML must be completely removed by the Markua Processor.**
 
 As a side effect of this, since HTML comments are HTML, authors can use HTML
 comments (`<!-- a comment -->`) as comments in Markua: since these comments are
@@ -159,6 +171,11 @@ Note that besides raw HTML, Markua does not remove anything else from Markdown.
 (As is discussed later, the Markua spec is written with the CommonMark spec as a
 starting point, so that you can verify this for yourself.)
 
+</div>
+
+
+
+<div class="extension">
 
 ## How to write a novel in Markua (M)
 
@@ -203,6 +220,7 @@ Markdown dialects:
 
 In the simple case, Markua is just a mapping from Markdown concepts to book
 concepts. This is deliberate.
+
 
 
 ## How to write almost any book in Markua (M)
@@ -437,6 +455,11 @@ Markua has lots of features not discussed in this example. Read the manual or
 the rest of the spec!
 ~~~
 
+</div>
+
+
+
+<div class="extension">
 
 ## For Leanpub authors (M)
 
@@ -511,6 +534,11 @@ differences between Markua and LFM may be useful:
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
 
+</div>
+
+
+
+<div class="extension">
 
 ## Origin and structure of this document (M)
 
@@ -601,6 +629,11 @@ The other three GFM extensions are omitted:
    is not worth it. (It does make sense for, say, a discussion forum. It does
    not make sense for books and courses.)
 
+</div>
+
+
+
+<div class="extension">
 
 ## About the HTML output (M)
 
@@ -661,6 +694,11 @@ Every example uses the default Markua document settings, unless otherwise
 specified. Any custom settings are specified in a document settings list in the
 top of the example.
 
+</div>
+
+
+
+<div class="extension">
 
 ## Why the name "Markua"? (M)
 
@@ -2672,6 +2710,7 @@ undefined means that the value is not set, not the literal string undefined.
   restart-footnote-numbering: true
   smart-punctuation: true
   soft-breaks: source
+  strikethrough-format: dynamic
   title: undefined
   two-space-hack: true
   validate: true
@@ -2881,6 +2920,14 @@ newline) in the output. This is what the values mean:
     break in normal Markdown. (Whether the "two space hack" is enabled in a
     Markua document is determined by the value of the `two-space-hack`
     setting, discussed below.)
+
+`strikethrough-format`
+: `dynamic`, `horizontal` or `diagonal`. Default `dynamic`. This determines
+the format of the strikethrough line, when used with math resources. A
+`horizontal` value means to make a horizontal line; a `diagonal` value means
+to make a diagonal line, and a `dynamic` value (the default) means to make a
+horizontal line when the equation is about a line of text high, and a diagonal
+line when the equation is meaningfully taller.
 
 `title`
 : The title of the Markua document.
@@ -5829,31 +5876,10 @@ I'm no poet, but at least I know it.
 
 ## No HTML blocks (M)
 
-Markdown and CommonMark support HTML blocks, which are groups of lines that are
-treated as raw HTML (and will not be escaped in HTML output).
-
-Markua does not support HTML blocks. Instead, **all raw HTML is removed**.
-This is true both for raw HTML which is inserted as leaf blocks, and raw HTML
-which is inserted as inlines. Neither of these are supported by Markua.
-
-**In both cases, the HTML must be completely removed by the Markua Processor.**
-
-As a side effect of this, since HTML comments are HTML, authors can use HTML
-comments (`<!-- a comment -->`) in Markua, and these comments will be removed
-from the output (along with any other raw HTML tags).
-
-Markua and Markdown have different use cases. Markdown is a better way to write
-HTML; Markua is a better way to write a book or course.
-
-HTML is just one possible output format of Markua, and other possible Markua
-output formats (such as LaTeX and PDF) are not based on HTML. If HTML blocks
-were supported, a Markua Processor would have to support parsing and
-meaningfully outputting all of HTML syntax as well as all of Markua syntax.
-
-Since Markdown's only output format target is HTML, it might as well support
-HTML blocks: generating HTML from HTML is as simple as passing the HTML through.
-From an implementation perspective, Markdown gets inline HTML support for free.
-This is not true in the case of Markua.
+As [discussed](#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed-m-),
+Markua does not support raw HTML. **All raw HTML is removed**. As a side-effect,
+this means HTML comments can still be used, since they (like all HTML) will be
+removed from the output.
 
 </div>
 
@@ -14199,6 +14225,299 @@ is followed by a link label (even though `[bar]` is not defined):
 ````````````````````````````````
 
 
+<div class="extension">
+
+## Crosslinks and ids (M)
+
+There are two parts to making a crosslink.
+
+1. Define an id.
+2. Reference that id with a crosslink.
+
+### Defining an id
+
+There are two ways to define an id:
+
+1. Using an id attribute `{id: some-id}`
+2. Using a shorter "syntactic sugar" approach: `{#some-id}`
+
+The shorter "syntactic sugar" approach is usually preferred. However, it can
+look a bit odd in an attribute list with other attributes in it. So, when other
+attributes are present in an attribute list, the `{id: some-id}` syntax is
+preferred.
+
+In terms of the value of an `id`, it has some special restrictions:
+
+1. The first character in the `id` has to be a lowercase or uppercase letter,
+   i.e. `[a-zA-Z]` if you think in regular expressions.
+2. The remaining characters in the `id` have to be a lowercase or uppercase
+   letter or a digit or a hyphen (-) or an underscore (_).
+3. You can only define an `id` value once in an entire Markua document, even
+   one that is split over multiple files.
+
+These restrictions ensure that your `id`s can then be linked to by a crosslink
+from anywhere in the Markua document.
+
+Also, note that id attributes need to be defined on either a block or span
+element. Finally, if an id is defined with an invalid name, the Markua Processor
+must ignore it and log an error.
+
+#### Defining an id on a block element
+
+To define an id on a block element like a paragraph, figure, heading or even a
+definition list item, you simply stick the id definition on a line above the
+start of the block element. Note that exactly one newline must separate the
+attribute list from the block element--if two newlines are used, the attribute
+list will be interpreted as a directive, and the id won't be correctly applied.
+
+Here's how to use the attribute list syntax to define an id attribute:
+
+~~~
+{id: some-id}
+This is a paragraph with the id of `some-id`.
+~~~
+
+Here's how to use the shorter "syntactic sugar" approach to define an id
+attribute:
+
+~~~
+{#some-id}
+This is a paragraph with the id of `some-id`.
+~~~
+
+#### Defining an id on a span element
+
+To define an id on a span element you simply add the id definition immediately
+after the span element.
+
+Here's how to use the attribute list syntax to define an id attribute on a span
+element:
+
+~~~
+The word Markua{id: markua} has an id.
+
+Leanpub is based in **Victoria, BC, Canada**{id: victoria}.
+~~~
+
+Here's how to use the shorter "syntactic sugar" approach to define an id
+attribute:
+
+~~~
+The word Markua{#markua} has an id.
+
+Leanpub is based in **Victoria, BC, Canada**{#victoria}.
+~~~
+
+Here's how to define an id on a custom span:
+
+~~~
+The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
+~~~
+
+If you want to define an id on a span while also defining other attributes like
+index entries, the `id:` syntax must be used in a full attribute list:
+
+~~~
+The [quick sly fox]{id: quick_sly, i: "Fox, Sly and Quick"} jumped over the lazy
+dogs.
+~~~
+
+### Referencing an `id` With a Crosslink
+
+Regardless of how you defined the id, you then link to it to create a crosslink.
+To do this, you use the `#` character and the id in a link:
+
+~~~
+[link text](#some-id)
+~~~
+
+This syntax is intended to be reminiscent of HTML anchor tags.
+
+Note that order of definition and use does not matter: crosslinks will work
+regardless of whether the `id` is defined before or after the use of it.
+
+
+```````````````````````````````` example
+{id: id1}
+This is a paragraph with an id of `id1`.
+
+{#id2}
+This is a paragraph with an id of `id2`.
+
+This link to [Markua](#markua) is before the id definition.
+
+The word Markua{id: markua} has an id of `markua`.
+
+This link to [Markua](#markua) is after the id definition.
+
+Leanpub is based in **Victoria, BC, Canada**{#victoria}.
+
+The [quick sly fox]{#quick_sly} jumped over the lazy dogs.
+.
+<p id="id1">This is a paragraph with an id of <code>id1</code>.</p>
+<p id="id2">This is a paragraph with an id of <code>id2</code>.</p>
+<p>This link to <a href="#markua">Markua</a> is before the id definition.</p>
+<p>The word <span id="markua">Markua</span> has an id of <code>markua</code>.</p>
+<p>This link to <a href="#markua">Markua</a> is after the id definition.</p>
+<p>Leanpub is based in <strong id="victoria">Victoria, BC, Canada</strong>.
+<p>The <span id="quick_sly">quick sly fox</span> jumped over the lazy dogs.</p>
+````````````````````````````````
+
+### Rules for `id`s and Crosslinks
+
+* If a Markua document contains duplicate `id` attribute values, the **first**
+one is used and the subsequent ones are ignored. A Markua Processor should log
+an error about duplicate `id`s.
+* Crosslinks that reference an unused `id` may either be created as a (broken,
+non-functional) link or be created as normal text (not a link) by a Markua
+Processor. The Markua Processor should also log an error.
+
+</div>
+
+
+
+<div class="extension">
+
+## Smart crosslinks (M)
+
+Chapters, sections and figures with titles often have two useful properties for
+writers:
+
+1. A name which is often short and useful to reference.
+2. A number, if numbering is turned on.
+
+Whether the numbers exist is determined by the `number-chapters`, `number-parts`
+and `number-figures` document settings.
+
+Whether page numbers are output in smart crosslinks in a PDF is determined by
+the `include-page-numbers-in-references` document setting, which defaults to
+`true`.  EPUB and MOBI do not support outputting page numbers in references,
+because they have resizable text (and thus the page numbers vary).
+
+In your writing, it's often desirable to refer to these figures from elsewhere
+in your book. When creating such a reference, it's helpful to be able to
+reference the title and number of the chapter, section or figure.
+
+Here's how these references to titles and numbers work:
+
+* `#t` is for "title"
+* `#n` is for "number"
+* `#d` is for "description" (e.g. "Figure", "Chapter", "Section")
+* `#s` is for "short title" (e.g. "Figure 5", "Chapter 3", "Section 3.2")
+* `#f` is for "full title"
+
+So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
+
+* `#t` is "Anatomy of a Squirrel"
+* `#n` is "8.2"
+* `#d` is "Figure"
+* `#s` is "Figure 8.2"
+* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF,
+  if `include-page-numbers-in-references` is true (the default), it is
+  "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if
+  `include-page-numbers-in-references` is false, it is "Figure 8.2:
+  Anatomy of a Squirrel" (just like EPUB and MOBI).
+
+Note that for a book which is in English:
+
+* `#s` is the equivalent of the author typing `#d #n`
+* `#f` is equivalent to the author typing: `#s: #t`
+
+In other languages, the Markua Processor should do the right thing.
+
+Note that in this example, "Anatomy of a Squirrel" was typed by the author,
+whereas "Figure 8.2: " was generated by the Markua Processor. It does not
+matter; both can be referenced.
+
+Also, note that regardless of section level, sections referenced in `#d` or `#f`
+are all called "Section" (not "Sub-Section", "Sub-Sub-Section", etc.)
+
+The expectation is that `#f` will be used by authors who don't mind verbosity,
+and `#t` and `#n` will be used by authors who prefer control and brevity.
+The #d is for very lazy authors who like saving keystrokes and/or who don't know
+whether their publisher will call the code samples "Listing", "Example" or some
+other word and want to protect themselves against extra work.
+
+Finally, note that you can make a smart crosslink to any id, including that of
+a paragraph or span inside some chapter, section or sub-section. What the
+Markua Processor should do is the following:
+
+* `#t` is the title (descriptive name) of the most specific containing block
+  (eg. "chapter", "section"). The Markua Processor is free to use "section"
+  for all sections and sub-sections, regardless of depth, since
+  "section 5.4.3.2.1" reads better than "sub-sub-section 5.4.3.2.1".
+* `#n` is for "number", which is the number of the most specific containing
+  block (eg. "3", "3.2", "5.4.3.2.1", etc.).
+* `#d` is for "description" (e.g. "Figure", "Chapter", "Section") of the
+  nearest containing addressable block (a block that can be referenced by name
+  and/or number, i.e. "chapter", "section", "figure", "table" but not "span" or
+  "paragraph")
+* `#s` is for "short title", which uses the output of `#d` and `#n` in a
+  language-specific way (in English, `#d #n`)
+* `#f` is for "full title", which uses the output of `#d`, `#n` and `#t` in a
+  language-specific way (in English, `#d #n: #t`), as well as adding the page
+  number in a language-specific way (in English `#d #n: #t  on page <number>`
+  [without the `<>`] if the `include-page-numbers-in-references` document
+  setting is true, and `#d #n: #t` if the `include-page-numbers-in-references`
+  document setting is false.
+
+So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
+
+* `#t` is "Anatomy of a Squirrel"
+* `#n` is "8.2"
+* `#d` is "Figure"
+* `#s` is "Figure 8.2"
+* `#f` is "Figure 8.2: Anatomy of a Squirrel" in EPUB and MOBI. In PDF, if
+  `include-page-numbers-in-references` is true (the default), it is
+  "Figure 8.2: Anatomy of a Squirrel on page 42". In PDF, if
+  `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy
+  of a Squirrel" (just like EPUB and MOBI).
+
+The `code-sample-names`, `figure-names` and `table-names` settings control the
+words used to name things.
+
+Examples:
+
+~~~
+This is discussed in [section #n, #t](#crosslinks).
+
+This is discussed in [#f](#crosslinks).
+
+This is discussed in a [#d](#crosslinks) above.
+
+See [chapter #n](#metadata), which is the best chapter in this book.
+
+See [#d #n](#metadata), which is the best chapter in this book.
+
+See [#s](#metadata), which is the best chapter in this book.
+
+See [section #n](#span-elements), which is the best section in this book.
+
+This is in [#f](#fancy-diagram), arguably the fanciest diagram in this
+document.
+
+This is in [#s](#fancy-diagram), arguably the fanciest diagram in this
+document.
+
+This is in figure [#n](#fancy-diagram), arguably the fanciest diagram in this
+document.
+
+~~~
+
+The only way to reference the title and numbers is in crosslinks. There's no
+syntax to do so without creating a crosslink--a crosslink is more helpful,
+since it is clickable, and adding another syntax simply to be less helpful to
+the reader is a bad idea. Markua has enough syntax as it is.
+
+Note that resources, chapters and sections all have implicit numbering. So,
+`#n` always works even if numbering is off. However, you will confuse readers
+if you refer to numbering they cannot see. Also, if numbering is off, the `#f`
+must not include either the `#d` or `#n` parts: it will be "Anatomy of a
+Squirrel" not "Figure 8.2: Anatomy of a Squirrel".
+
+</div>
+
+
 
 ## Images
 
@@ -15153,6 +15472,7 @@ display it, then add a `{type: code, format: latex}` attribute list.
 Note that the assumption is that AsciiMath will almost always be used as an
 inline resource. So, the `.asciimath` file extension is deliberately verbose.
 
+
 ### Supported Attributes for Math
 
 The following are the supported attribute for math resources, in addition to the
@@ -15173,7 +15493,18 @@ into Markua: `latexmath` for LaTeX math and `asciimath` for AsciiMath. If a
 Markua Processor encounters one of these formats, it must assume the `type` of
 the resource is `math`, not `code`.
 
-### Local Math Resources
+
+### Using bold and strikethrough formatting with math
+
+Markua supports formatting math as bold or strikethrough.
+
+Math can be `**bolded**` by being wrapped with two asterisks, and can be
+formatted in `~~strikethrough~~` by being wrapped with two tildes. Note that
+the format of the strikethrough line is controlled by the
+`strikethrough-format` document setting.
+
+
+### Local math resources
 
 Local math resources can be inserted as a figure.
 
@@ -15197,7 +15528,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Web Math Resources
+### Web math resources
 
 This is identical to how local math resources work, including the significance
 of file extensions. The only difference is that the files are on the web.
@@ -15222,7 +15553,7 @@ Here's a paragraph before the figure.
 Here's a paragraph after the figure.
 ~~~
 
-### Inline Math Resources
+### Inline math resources
 
 Inline math resources are the most flexible way to insert math. They are the only
 way to insert math as a span resource, and the most straightforward way to add
@@ -15672,17 +16003,10 @@ foo@bar.example.com
 
 ## No raw HTML (M)
 
-Markdown and CommonMark support raw HTML. Markua does not support raw HTML.
-
-Instead, **all raw HTML is removed**. This is true both for raw HTML which is
-inserted as leaf blocks, and raw HTML which is inserted as inlines. Neither of
-these are supported by Markua.
-
-**In both cases, the HTML must be completely removed by the Markua Processor.**
-
-As a side effect of this, since HTML comments are HTML, authors can use HTML
-comments (`<!-- a comment -->`) in Markua, and these comments will be removed
-from the output (along with any other raw HTML tags).
+As [discussed](#markua-s-one-key-subtraction-from-markdown-raw-html-is-removed-m-),
+Markua does not support raw HTML. **All raw HTML is removed**. As a side-effect,
+this means HTML comments can still be used, since they (like all HTML) will be
+removed from the output.
 
 </div>
 

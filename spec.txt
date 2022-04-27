@@ -2758,6 +2758,8 @@ undefined means that the value is not set, not the literal string undefined.
 }
 ```
 
+What these settings all mean is explained in the rest of this section.
+
 ## Document settings which apply to books only (M)
 
 The following settings are defined by Markua, but only make sense in the

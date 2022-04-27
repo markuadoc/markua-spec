@@ -2,7 +2,7 @@
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
 version: '0.30.14'
-date: '2022-04-26'
+date: '2022-04-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2627,8 +2627,11 @@ document. Document settings affect the formatting of the entire book or course.
 
 Document settings are defined in one or more document settings hashes. The
 document settings hash or hashes must be at the start of a Markua document.
-Once something other than a document settings hash is encountered, no more
-document settings hashes can be defined.
+Once something other than a document settings hash or a blank line is
+encountered, no more document settings hashes can be defined. (Document
+settings hashes can be separated with single or multiple newlines, but once the
+first thing which is not a document setting or blank line is encountered, no
+more document settings hashes can be defined.)
 
 The settings are newline-separated key-value pairs (`key: value`) which contain
 information about the document and about the desired behavior of the Markua
@@ -2644,76 +2647,6 @@ Any whitespace at the beginning or end of the keys and values will be stripped.
 Only the first colon is important; subsequent colons on a line will just be
 part of the value.
 
-There must be at least one blank line between the end of the settings block and
-the start of any other document content other than another document settings
-hash.
-
-Here's an example of a document settings block at the start of a book:
-
-~~~
-{
-italicize-underlines: false
-soft-breaks: space
-alt-title: all
-smart-punctuation: true
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
-generate-sample: true
-generate-community: true
-generate-network: true
-list-figures: groups
-figure-number-format: chapter
-figure-classes: equation, figure, image, listing
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-~~~
-
-The reason that more than one document settings hash is permitted is that a
-Markua Processor may also get settings from elsewhere, like a web interface.
-The most straightforward thing to do in such a case is to just add another
-document settings hash at the beginning of the file, and then let the Markua
-Processor sort out any conflicts.
-
-In the case of a conflict between settings defined in a document and settings
-defined, say, in a web interface, the last setting definition must win.
-However, a Markua Processor may override settings whose values are unsupported
-or illegal. Also, a Markua processor should provide a warning if there are
-multiple definitions of a document setting.
-
-Here's an example of a Markua document which could be generated if there is a
-settings block produced by a web interface, and then a settings block manually
-added at the start of a book:
-
-~~~
-{
-italicize-underlines: false
-soft-breaks: space
-alt-title: all
-smart-punctuation: true
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
-}
-{
-italicize-underlines: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-~~~
-
-Thankfully, this would only be seen by a Markua Processor, since it's ugly.
-The author would just see the second, manually-defined, settings block, and
-the first one would have been created from the values stored in a database.
-
-Finally, Markua Processors can also add their own document settings, just as
-Markua Processors can understand their own extension attributes.
-
-## The default document settings (M)
-
 Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
 undefined means that the value is not set, not the literal string undefined.
@@ -2722,9 +2655,6 @@ undefined means that the value is not set, not the literal string undefined.
 {
   list-figures: combined
   figure-number-format: sequential
-  generate-community: true
-  generate-network: true
-  generate-sample: true
   authors: undefined
   alt-title: text
   contributors: undefined
@@ -2746,6 +2676,9 @@ undefined means that the value is not set, not the literal string undefined.
   two-space-hack: true
   validate: true
   version: undefined
+  generate-community: true
+  generate-network: true
+  generate-sample: true
   course-attempts: 1
   course-completeness: 0
   default-exercise-show-answers: all
@@ -2759,41 +2692,6 @@ undefined means that the value is not set, not the literal string undefined.
 ```
 
 What these settings all mean is explained in the rest of this section.
-
-## Document settings which apply to books only (M)
-
-The following settings are defined by Markua, but only make sense in the
-context of a book. So, a Markua Processor which is not generating a book can
-ignore them.
-
-Note that while the idea of a sample book is pretty universal, the idea of a
-community or network edition could be argued to be somewhat Leanpub-specific.
-However, these are in the Markua spec instead of being left as extension
-attributes, since they are essentially different levels of sample or subset
-books, and I am convinced that this has a general use outside of Leanpub.
-
-`generate-community`
-: `true` or `false`. The default value is `true`. If `generate-community` is
-`true`, then a community edition book or course is generated, which is composed
-of the content which is included in the community edition with
-`{community: true}` directives. If `generate-community` is `false`, then a
-community edition book or course is not generated, regardless of whether there
-are any `{community: true}` directives.
-
-`generate-network`
-: `true` or `false`. The default value is `true`. If `generate-network` is
-`true`, then a network edition book or course is generated, which is composed
-of the content which is included in the network edition with
-`{network: true}` directives. If `generate-network` is `false`, then a
-network edition book or course is not generated, regardless of whether there
-are any `{network: true}` directives.
-
-`generate-sample`
-: `true` or `false`. The default value is `true`. If `generate-sample` is
-`true`, then a sample book or course is generated, which is composed of the
-content which is included in the sample with `{sample: true}` directives.
-If `generate-sample` is `false`, then a sample book or course is not generated,
-regardless of whether there are any `{sample: true}` directives.
 
 
 
@@ -3012,6 +2910,43 @@ Markua specification being used; it is the version of the book or course.)
 
 
 
+## Document settings which apply to books only (M)
+
+The following settings are defined by Markua, but only make sense in the
+context of a book. So, a Markua Processor which is not generating a book can
+ignore them.
+
+Note that while the idea of a sample book is pretty universal, the idea of a
+community or network edition could be argued to be somewhat Leanpub-specific.
+However, these are in the Markua spec instead of being left as extension
+attributes, since they are essentially different levels of sample or subset
+books, and I am convinced that this has a general use outside of Leanpub.
+
+`generate-community`
+: `true` or `false`. The default value is `true`. If `generate-community` is
+`true`, then a community edition book or course is generated, which is composed
+of the content which is included in the community edition with
+`{community: true}` directives. If `generate-community` is `false`, then a
+community edition book or course is not generated, regardless of whether there
+are any `{community: true}` directives.
+
+`generate-network`
+: `true` or `false`. The default value is `true`. If `generate-network` is
+`true`, then a network edition book or course is generated, which is composed
+of the content which is included in the network edition with
+`{network: true}` directives. If `generate-network` is `false`, then a
+network edition book or course is not generated, regardless of whether there
+are any `{network: true}` directives.
+
+`generate-sample`
+: `true` or `false`. The default value is `true`. If `generate-sample` is
+`true`, then a sample book or course is generated, which is composed of the
+content which is included in the sample with `{sample: true}` directives.
+If `generate-sample` is `false`, then a sample book or course is not generated,
+regardless of whether there are any `{sample: true}` directives.
+
+
+
 ## Document settings which apply to courses only (M)
 
 The following settings are defined by Markua, but only make sense in the context
@@ -3063,6 +2998,58 @@ written.
 : `true` or `false`. The default is `false`. This sets the default behavior of
 the quiz or exercise. If `true`, the questions are randomly arranged; if
 `false`, they are presented in the order written.
+
+
+
+## Multiple document settings hashes are permitted (M)
+
+A Markua document can define multiple document settings hashes.
+
+There must be at least one blank line between the end of the settings block and
+the start of any other document content other than another document settings
+hash.
+
+The reason that more than one document settings hash is permitted is that a
+Markua Processor may also get settings from elsewhere, like a web interface.
+The most straightforward thing to do in such a case is to just add another
+document settings hash at the beginning of the file, and then let the Markua
+Processor sort out any conflicts.
+
+In the case of a conflict between settings defined in a document and settings
+defined, say, in a web interface, the last setting definition must win.
+However, a Markua Processor may override settings whose values are unsupported
+or illegal. Also, a Markua processor should provide a warning if there are
+multiple definitions of a document setting.
+
+Here's an example of a Markua document which could be generated if there is a
+settings block produced by a web interface, and then a settings block manually
+added at the start of a book:
+
+~~~
+{
+soft-breaks: space
+alt-title: all
+title: Markua Spec
+authors: Peter Armstrong and John MacFarlane
+list-figures: groups
+figure-number-format: chapter
+figure-classes: equation, figure, image, listing
+}
+{
+italicize-underlines: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+~~~
+
+Thankfully, this would only be seen by a Markua Processor, since it's ugly.
+The author would just see the second, manually-defined, settings block, and
+the first one would have been created from the values stored in a database.
+
+Finally, Markua Processors can also add their own document settings, just as
+Markua Processors can understand their own extension attributes.
 
 </div>
 

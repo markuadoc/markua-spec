@@ -2749,7 +2749,7 @@ settings are tightly coupled.
 `alt-title`
 : `all`, `text` or `none`. The default is `text`. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
-resource is removed and used instead as the figure title instead. If alt text
+resource is removed and used as the figure title instead. If alt text
 is used as the figure title, it is NOT also provided as alt text, since it would
 be very annoying to hear the same text spoken twice (once as the alt text and
 once as the figure title) when using a screen reader. This is what the values
@@ -2842,7 +2842,7 @@ decision specified there. This is what the values mean:
   the `number-figures` document setting, specified below.
 * `groups`: The Markua Processor should group figures by their classes or types.
   Here's how the grouping works:
-  1. If there is no `class` attribute, the figure is groups in a list with other
+  1. If there is no `class` attribute, the figure is grouped in a list with other
      resources of its `type`. This is a nice default, since it results in a List
      of Tables, List of Code Samples, List of Images, etc. The type of a
      resource can be specified by the type attribute, or inferred from the

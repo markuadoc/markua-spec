@@ -12492,8 +12492,8 @@ which defaults to <code>false</code> if absent.</p>
 <h2 id="multiple-selection-questions-m-" class="definition">
 <span class="number">9.5</span>Multiple selection questions (M)
 </h2>
-<p>A multiple selection question has 2 or more answer choices, and 1 or more <code>true</code>
-answer choices.</p>
+<p>A multiple selection question has 2 or more answer choices, and any number of
+<code>true</code> answer choices.</p>
 <p>(Leanpub authors: This question type is not yet supported in Leanpub.)</p>
 <p>The <code>true</code> answer choices are specified with <code>T</code>; <code>false</code> answer choices are
 specified with <code>F</code>.</p>
@@ -12543,6 +12543,16 @@ F) apple
 T) cow
 F) lettuce
 
+? Which of these are animals?
+
+F) apple
+F) lettuce
+
+? Which of these are animals?
+
+T) cat
+T) dog
+
 {mark: ratio, points: 2}
 ? Which of these are fruits?
 
@@ -12557,7 +12567,13 @@ F) rice
 is <code>ratio</code> and 2 points.</p>
 <p>To get the first question correct, you must select <code>cow</code>, and neither of
 <code>apple</code> or <code>lettuce</code>.</p>
-<p>To get this second question 100% correct, you must select all of <code>apple</code>,
+<p>To get the second question correct, you must select nothing. This means that
+by default someone who is skipping the question gets it right, which some
+instructors may consider suboptimal. However, other instructors may consider it
+amusing or philosophically interesting.</p>
+<p>To get the third question correct, you must select everything. This is equally
+controversial, but also valid.</p>
+<p>To get this last question 100% correct, you must select all of <code>apple</code>,
 <code>peach</code> and <code>pear</code>, and none of <code>cow</code>, <code>lettuce</code> or <code>rice</code>. For this question,
 if the <code>mark</code> attribute had been <code>binary</code>, the only way to get any points for it
 would be to select <code>apple</code>, <code>peach</code> and <code>pear</code>, and to leave <code>cow</code>, <code>lettuce</code>

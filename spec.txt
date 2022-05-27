@@ -11022,8 +11022,8 @@ which defaults to `false` if absent.
 
 ## Multiple selection questions (M)
 
-A multiple selection question has 2 or more answer choices, and 1 or more `true`
-answer choices.
+A multiple selection question has 2 or more answer choices, and any number of
+`true` answer choices.
 
 (Leanpub authors: This question type is not yet supported in Leanpub.)
 
@@ -11082,6 +11082,16 @@ F) apple
 T) cow
 F) lettuce
 
+? Which of these are animals?
+
+F) apple
+F) lettuce
+
+? Which of these are animals?
+
+T) cat
+T) dog
+
 {mark: ratio, points: 2}
 ? Which of these are fruits?
 
@@ -11099,7 +11109,15 @@ is `ratio` and 2 points.
 To get the first question correct, you must select `cow`, and neither of
 `apple` or `lettuce`.
 
-To get this second question 100% correct, you must select all of `apple`,
+To get the second question correct, you must select nothing. This means that
+by default someone who is skipping the question gets it right, which some
+instructors may consider suboptimal. However, other instructors may consider it
+amusing or philosophically interesting.
+
+To get the third question correct, you must select everything. This is equally
+controversial, but also valid.
+
+To get this last question 100% correct, you must select all of `apple`,
 `peach` and `pear`, and none of `cow`, `lettuce` or `rice`. For this question,
 if the `mark` attribute had been `binary`, the only way to get any points for it
 would be to select `apple`, `peach` and `pear`, and to leave `cow`, `lettuce`

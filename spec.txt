@@ -6661,7 +6661,10 @@ of the entire table, not to the cells within it. In terms of the specific values
 of `align`, a Markua Processor must interpret `left` as "on the left side of the
 page", `right` as "on the right side of the page" and `middle` as "in the middle
 of the content area of the page, respecting margins" in all cases. Finally, note
-that `inside` and `outside` are not supported for `align`.
+that `inside` and `outside` are not supported for `align`, and that a Markua
+Processor may interpret `center` and/or `centre` as aliases for `middle`.
+(The value of `middle` was chosen because of the `center` vs. `centre` spelling
+issue.)
 
 `columns`
 : Sometimes it's desirable to only show part of a table resource defined in an

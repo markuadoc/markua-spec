@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.16'
-date: '2022-05-26'
+version: '0.30.17'
+date: '2022-06-20'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2695,8 +2695,11 @@ undefined means that the value is not set, not the literal string undefined.
   figure-number-format: sequential
   authors: undefined
   alt-title: text
+  cc-license: undefined
   contributors: undefined
   copyright: undefined
+  dedication: undefined
+  dedication-align: middle
   default-code-language: guess
   figure-classes: undefined
   include-page-numbers-in-references: true
@@ -2711,6 +2714,7 @@ undefined means that the value is not set, not the literal string undefined.
   smart-punctuation: true
   soft-breaks: source
   strikethrough-format: dynamic
+  subtitle: undefined
   title: undefined
   two-space-hack: true
   validate: true
@@ -2771,12 +2775,28 @@ not define support for external text-based resources, there is no conflict here.
 text-based resource where no figure title is provided. (This is how Markdown
 behaves.)
 
+* `cc-license`
+: The Creative Commons license applied to the Markua document, if any. The
+default is undefined, meaning that standard copyright rules apply.
+
 `contributors`
 : Any contributors to the Markua document who are not authors. The default is
 undefined.
 
 `copyright`
 : The owner of the copyright. The default is undefined.
+
+`dedication`
+: The dedication for the book or course. The default is undefined. Text here
+does not support any Markua formatting; it is interpreted verbatim. If this
+is not desired, then a dedication can be authored using Markua in the content
+of the document itself.
+
+`dedication-align`
+: The `dedication-align` can be `left`, `right` or `middle`. The default is
+`middle`. Note that a Markua Processor may interpret `center` and/or `centre`
+as aliases for `middle`. (The value of `middle` was chosen because of the
+`center` vs. `centre` spelling issue.)
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -2796,8 +2816,11 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
+`footer-text`
+: TODO
+
 `figure-classes`
-: this is a comma-separated list of the figure classes which are included in the
+: This is a comma-separated list of the figure classes which are included in the
 list(s) of figures near the beginning of the book or course. The default is
 undefined, which means that all figures are included, regardless of the value
 of their `class` attribute. An example of this setting is:
@@ -2975,7 +2998,9 @@ books, and I am convinced that this has a general use outside of Leanpub.
 of the content which is included in the community edition with
 `{community: true}` directives. If `generate-community` is `false`, then a
 community edition book or course is not generated, regardless of whether there
-are any `{community: true}` directives.
+are any `{community: true}` directives. The idea of a "community edition" is a
+version of the book which is given away in exchange for email addresses, for
+marketing purposes.
 
 `generate-network`
 : `true` or `false`. The default value is `true`. If `generate-network` is
@@ -2983,7 +3008,9 @@ are any `{community: true}` directives.
 of the content which is included in the network edition with
 `{network: true}` directives. If `generate-network` is `false`, then a
 network edition book or course is not generated, regardless of whether there
-are any `{network: true}` directives.
+are any `{network: true}` directives. The idea of a "network edition" is a
+version of the book which is available as part of a subscription service,
+either on the original service or via a partner network.
 
 `generate-sample`
 : `true` or `false`. The default value is `true`. If `generate-sample` is

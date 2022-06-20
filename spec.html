@@ -7491,7 +7491,10 @@ of the entire table, not to the cells within it. In terms of the specific values
 of <code>align</code>, a Markua Processor must interpret <code>left</code> as “on the left side of the
 page”, <code>right</code> as “on the right side of the page” and <code>middle</code> as “in the middle
 of the content area of the page, respecting margins” in all cases. Finally, note
-that <code>inside</code> and <code>outside</code> are not supported for <code>align</code>.</p>
+that <code>inside</code> and <code>outside</code> are not supported for <code>align</code>, and that a Markua
+Processor may interpret <code>center</code> and/or <code>centre</code> as aliases for <code>middle</code>.
+(The value of <code>middle</code> was chosen because of the <code>center</code> vs. <code>centre</code> spelling
+issue.)</p>
 <p><code>columns</code>
 : Sometimes it’s desirable to only show part of a table resource defined in an
 external file. The <code>rows</code> and <code>columns</code> attributes let you accomplish this.

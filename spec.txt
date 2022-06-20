@@ -2703,9 +2703,16 @@ undefined means that the value is not set, not the literal string undefined.
   default-code-language: guess
   figure-classes: undefined
   include-page-numbers-in-references: true
+  isbn-epub: undefined
+  isbn-hardcover: undefined
+  isbn-mobi: undefined
+  isbn-paperback: undefined
+  isbn-pdf: undefined
   italicize-underlines: true
   lang: eng
+  links: footnotes
   list-figures: combined
+  note-type: footnotes-or-endnotes
   number-chapters: true
   number-figures: sequential
   number-sections: false
@@ -2741,6 +2748,11 @@ What these settings all mean is explained in the rest of this section.
 ## Document settings which apply to books and courses (M)
 
 The following settings apply to books and courses.
+
+Some of these settings may appear to only apply to books. However, with Markua
+Processors such as Leanpub which also generate an ebook of course material when
+generating a course, these settings may apply to the generated material ebook.
+So, they are included here.
 
 Note that the behavior of resources which are treated as figures is controlled
 by four related settings: `alt-title`, `figure-classes`, `list-figures` and
@@ -2816,10 +2828,6 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
-`footer-text`
-: Custom footer text for the book. The default is undefined. Text here does not
-support any Markua formatting; it is interpreted verbatim.
-
 `figure-classes`
 : This is a comma-separated list of the figure classes which are included in the
 list(s) of figures near the beginning of the book or course. The default is
@@ -2829,6 +2837,19 @@ of their `class` attribute. An example of this setting is:
 figures are listed, either grouped by their class or together in one big list,
 is controlled by the `list-figures` setting. Note that the numbering of figures
 is controlled by the `number-figures` and `figure-number-format` settings.
+
+`note-type`
+: `endnotes`, `footnotes` or `footnotes-or-endnotes`. The default is
+`footnotes-or-endnotes`. If `note-type` is `footnotes-or-endnotes`, then notes
+are inserted as footnotes when inserted with `^`, and as endnotes when inserted
+with ^^. If `note-type` is `footnotes`, then all notes are inserted as
+footnotes, regardless of whether `^` or `^^` was used to insert it. If
+`note-type` is `endnotes`, then all notes are inserted as endnotes, regardless
+of whether `^` or `^^` was used to insert it.
+
+`footer-text`
+: Custom footer text for the book. The default is undefined. Text here does not
+support any Markua formatting; it is interpreted verbatim.
 
 `include-page-numbers-in-references`
 : `true` or `false`. The default value is `true`. When a smart crosslink to a
@@ -2849,6 +2870,11 @@ their references (since the text is resizable).
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
 language code of the language that the Markua document is written in. The
 default is `eng`.
+
+`links`
+: `endnotes`, `footnotes` or `links`. The default is `footnotes`. This setting
+controls whether hyperlinks to web resources (e.g. with `http://` or `https://`)
+are shown as endnotes, footnotes or as links.
 
 `list-figures`
 : `combined`, `groups` or `none`. The default value is `combined`. This setting
@@ -3019,6 +3045,38 @@ either on the original service or via a partner network.
 content which is included in the sample with `{sample: true}` directives.
 If `generate-sample` is `false`, then a sample book or course is not generated,
 regardless of whether there are any `{sample: true}` directives.
+
+`isbn-epub`
+: The ISBN for the EPUB, if any. The default is undefined. Some countries
+require different ISBNs for each ebook format; others do not. A Markua
+Processor must assume that the author knows what they are doing, and not
+enforce a requirement that this ISBN be different than that of other formats.
+
+`isbn-hardcover`
+: The ISBN for the print-ready PDF exported for a hardcover print book, if any.
+The default is undefined. Some countries require different ISBNs for each print
+book format; others do not. A Markua Processor must assume that the author
+knows what they are doing, and not enforce a requirement that this ISBN be
+different than that of other formats.
+
+`isbn-mobi`
+: The ISBN for the MOBI, if any. The default is undefined. Some countries
+require different ISBNs for each ebook format; others do not. A Markua
+Processor must assume that the author knows what they are doing, and not
+enforce a requirement that this ISBN be different than that of other formats.
+
+`isbn-paperback`
+: The ISBN for the print-ready PDF exported for a paperback print book, if any.
+The default is undefined. Some countries require different ISBNs for each print
+book format; others do not. A Markua Processor must assume that the author
+knows what they are doing, and not enforce a requirement that this ISBN be
+different than that of other formats.
+
+`isbn-pdf`
+: The ISBN for the ebook PDF, if any. The default is undefined. Some countries
+require different ISBNs for each ebook format; others do not. A Markua
+Processor must assume that the author knows what they are doing, and not
+enforce a requirement that this ISBN be different than that of other formats.
 
 
 

@@ -2828,6 +2828,12 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
+`endnote-location`
+: `chapter-end` or `book-end`. The default is `book-end`. If `endnote-location`
+is `book-end`, any endnotes are inserted near the end of the book, grouped by
+chapter. If `endnote-location` is `chapter-end`, any endnotes are inserted at
+the end of each chapter.
+
 `figure-classes`
 : This is a comma-separated list of the figure classes which are included in the
 list(s) of figures near the beginning of the book or course. The default is

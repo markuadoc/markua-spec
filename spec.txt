@@ -2817,7 +2817,8 @@ resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
 `footer-text`
-: TODO
+: Custom footer text for the book. The default is undefined. Text here does not
+support any Markua formatting; it is interpreted verbatim.
 
 `figure-classes`
 : This is a comma-separated list of the figure classes which are included in the

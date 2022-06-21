@@ -2768,7 +2768,7 @@ undefined means that the value is not set, not the literal string undefined.
 
 What these settings all mean is explained in the rest of this section.
 
-  
+
 
 ## Complete list of document settings
 
@@ -2936,6 +2936,15 @@ settings.
 `footer-text`
 : Custom footer text for the book. The default is undefined. Text here does not
 support any Markua formatting; it is interpreted verbatim.
+
+`footnote-font`
+: The font of the footnote text in the Markua document. The default is
+undefined, which means the Markua Processor will use the font of the
+`body-font`.
+
+`footnote-font-size`
+: The font size of the footnote text in the Markua document. This is measured
+in points. The default is 7.
 
 `generate-community`
 : *(Books Only)* - `true` or `false`. The default value is `true`. If

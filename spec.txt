@@ -2700,7 +2700,6 @@ undefined means that the value is not set, not the literal string undefined.
   body-font: undefined
   body-font-size: 12
   cc-license: undefined
-  chapter-heading-font-size: 18
   contributors: undefined
   copyright: undefined
   course-attempts: 1
@@ -2719,10 +2718,26 @@ undefined means that the value is not set, not the literal string undefined.
   figure-classes: undefined
   figure-number-format: sequential
   footer-text: undefined
+  footnote-font: undefined
+  footnote-font-size: 7
   generate-community: true
   generate-network: true
   generate-sample: true
   heading-font: undefined
+  heading-font-for-chapters: undefined
+  heading-font-for-parts: undefined
+  heading-font-for-sections: undefined
+  heading-font-for-sub-sections: undefined
+  heading-font-for-sub-sub-sections: undefined
+  heading-font-for-sub-sub-sub-sections: undefined
+  heading-font-for-sub-sub-sub-sub-sections: undefined
+  heading-font-size-for-chapters: 18
+  heading-font-size-for-parts: 18
+  heading-font-size-for-sections: 16
+  heading-font-size-for-sub-sections: 15
+  heading-font-size-for-sub-sub-sections: 14
+  heading-font-size-for-sub-sub-sub-sections: 13
+  heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
   isbn-epub: undefined
   isbn-hardcover: undefined
@@ -2738,14 +2753,8 @@ undefined means that the value is not set, not the literal string undefined.
   number-chapters: true
   number-figures: sequential
   number-sections: false
-  part-heading-font-size: 24
   restart-endnote-numbering: true
   restart-footnote-numbering: true
-  section-heading-font-size: 16
-  sub-section-heading-font-size: 15
-  sub-sub-section-heading-font-size: 14
-  sub-sub-sub-section-heading-font-size: 13
-  sub-sub-sub-sub-section-heading-font-size: 12
   smart-punctuation: true
   soft-breaks: source
   strikethrough-format: dynamic
@@ -2808,10 +2817,6 @@ The default is undefined, which lets the Markua Processor choose what it wants.
 `body-font-size`
 : The font size of the body text (e.g. paragraph text) in the Markua document.
 This is measured in points. The default is 12.
-
-`chapter-heading-font-size`
-: The font size of a chapter heading (`# Foo`) in the Markua document. This is
-measured in points. The default is 18.
 
 `cc-license`
 : The Creative Commons license applied to the Markua document, if any. The
@@ -2962,13 +2967,71 @@ If `generate-sample` is `false`, then a sample book or course is not generated,
 regardless of whether there are any `{sample: true}` directives.
 
 `heading-font`
-: The font of the heading text (e.g. part, chapter and section titles) in the
-Markua document. The default is undefined, which lets the Markua Processor
-choose what it wants.
+: The default font of all the heading text (e.g. part, chapter and section
+titles) in the Markua document. The default is undefined, which lets the Markua
+Processor choose what it wants.
 
-`part-heading-font-size`
-: The font size of a part heading in the Markua document. This is measured
-in points. The default is 24.
+`heading-font-for-chapters`
+: The font of a chapter heading (`# Foo`) in the Markua document. The default is
+undefined, which means the Markua Processor uses the font specified by the
+`heading-font` (if any), or to choose what it wants otherwise.
+
+`heading-font-for-parts`
+: The font of a part heading (`# Foo` with `{class: part}`) in the Markua
+document. The default is undefined, which means the Markua Processor uses the
+font specified by the `heading-font` (if any), or to choose what it wants
+otherwise.
+
+`heading-font-for-sections`
+: The font of a section heading (`## Foo`) in the Markua document. This is
+measured in points. The default is 16.
+
+`heading-font-for-sub-sections`
+: The font of a section heading (`### Foo`) in the Markua document.
+This is measured in points. The default is 15.
+
+`heading-font-for-sub-sub-sections`
+: The font of a section heading (`#### Foo`) in the Markua document.
+This is measured in points. The default is 14.
+
+`heading-font-for-sub-sub-sub-sections`
+: The font of a section heading (`##### Foo`) in the Markua document.
+This is measured in points. The default is 13.
+
+`heading-font-for-sub-sub-sub-sub-sections`
+: The font of a section heading (`###### Foo`) in the Markua document.
+This is measured in points. The default is 12.
+
+`heading-font-size-for-chapters`
+: The font size of a chapter heading (`# Foo`) in the Markua document. This is
+measured in points. The default is 18.
+
+`heading-font-size-for-parts`
+: The font size of a part heading (`# Foo` with `{class: part}`) in the Markua
+document. This is measured in points. The default is 24.
+document. The default is undefined, which means the Markua Processor uses the
+font specified by the `heading-font` (if any), or to choose what it wants
+otherwise.
+
+`heading-font-size-for-sections`
+: The font size of a section heading (`## Foo`) in the Markua document. This is
+measured in points. The default is 16.
+
+`heading-font-size-for-sub-sections`
+: The font size of a section heading (`### Foo`) in the Markua document.
+This is measured in points. The default is 15.
+
+`heading-font-size-for-sub-sub-sections`
+: The font size of a section heading (`#### Foo`) in the Markua document.
+This is measured in points. The default is 14.
+
+`heading-font-size-for-sub-sub-sub-sections`
+: The font size of a section heading (`##### Foo`) in the Markua document.
+This is measured in points. The default is 13.
+
+`heading-font-size-for-sub-sub-sub-sub-sections`
+: The font size of a section heading (`###### Foo`) in the Markua document.
+This is measured in points. The default is 12.
 
 `include-page-numbers-in-references`
 : `true` or `false`. The default value is `true`. When a smart crosslink to a
@@ -3100,10 +3163,6 @@ at the end of a chapter.
 : `true` or `false`. Default `true`. Whether the footnote numbering is restarted
 at the end of a chapter.
 
-`section-heading-font-size`
-: The font size of a section heading (`## Foo`) in the Markua document. This is
-measured in points. The default is 16.
-
 `smart-punctuation`
 : `true` or `false`. Default `true`. If `smart` is `true`, use smart
 punctuation. Straight double and single quotes will be rendered as curly
@@ -3149,22 +3208,6 @@ the format of the strikethrough line, when used with math resources. A
 to make a diagonal line, and a `dynamic` value (the default) means to make a
 horizontal line when the equation is about a line of text high, and a diagonal
 line when the equation is meaningfully taller.
-
-`sub-section-heading-font-size`
-: The font size of a section heading (`### Foo`) in the Markua document.
-This is measured in points. The default is 15.
-
-`sub-sub-section-heading-font-size`
-: The font size of a section heading (`#### Foo`) in the Markua document.
-This is measured in points. The default is 14.
-
-`sub-sub-sub-section-heading-font-size`
-: The font size of a section heading (`##### Foo`) in the Markua document.
-This is measured in points. The default is 13.
-
-`sub-sub-sub-sub-section-heading-font-size`
-: The font size of a section heading (`###### Foo`) in the Markua document.
-This is measured in points. The default is 12.
 
 `subtitle`
 : The subtitle of the Markua document.

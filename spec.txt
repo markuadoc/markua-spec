@@ -3012,8 +3012,23 @@ content which is included in the sample with `{sample: true}` directives.
 If `generate-sample` is `false`, then a sample book or course is not generated,
 regardless of whether there are any `{sample: true}` directives.
 
-`header-content`
-: chapter
+`header-ebook`
+: This is a comma-separated string containing the elements which should be
+output in the ebook header, in order. The default value is undefined, which
+means to output nothing. The legal choices to include in the string are the
+same as for `footer-ebook`.
+
+`header-print-left`
+: This is a comma-separated string containing the elements which should be
+output in the header of the left-facing page for a print-ready PDF, in order.
+The default value is undefined, which means to output nothing. The legal
+choices to include in the string are the same as for `footer-ebook`.
+
+`header-print-right`
+: This is a comma-separated string containing the elements which should be
+output in the header of the right-facing page for a print-ready PDF, in order.
+The default value is undefined, which means to output nothing. The legal
+choices to include in the string are the same as for `footer-ebook`.
 
 `heading-font`
 : The default font of all the heading text (e.g. part, chapter and section
@@ -3211,7 +3226,7 @@ with the default value of `page-size-units`).
 `page-size-units`
 : `in`, `cm` or `mm`. The default is `in`, for inches. Other choices are `cm`
 for centimetres, and mm for millimetres. These are the units used to define the
-size of the page and its margins.
+size of the page and of its margins.
 
 `part-heading-font-size`
 : The font size of a part heading (`# Foo` with `{class: part}`) in the Markua

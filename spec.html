@@ -3344,8 +3344,21 @@ either on the original service or via a partner network.</p>
 content which is included in the sample with <code>{sample: true}</code> directives.
 If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
 regardless of whether there are any <code>{sample: true}</code> directives.</p>
-<p><code>header-content</code>
-: chapter</p>
+<p><code>header-ebook</code>
+: This is a comma-separated string containing the elements which should be
+output in the ebook header, in order. The default value is undefined, which
+means to output nothing. The legal choices to include in the string are the
+same as for <code>footer-ebook</code>.</p>
+<p><code>header-print-left</code>
+: This is a comma-separated string containing the elements which should be
+output in the header of the left-facing page for a print-ready PDF, in order.
+The default value is undefined, which means to output nothing. The legal
+choices to include in the string are the same as for <code>footer-ebook</code>.</p>
+<p><code>header-print-right</code>
+: This is a comma-separated string containing the elements which should be
+output in the header of the right-facing page for a print-ready PDF, in order.
+The default value is undefined, which means to output nothing. The legal
+choices to include in the string are the same as for <code>footer-ebook</code>.</p>
 <p><code>heading-font</code>
 : The default font of all the heading text (e.g. part, chapter and section
 titles) in the Markua document. The default is undefined, which lets the Markua

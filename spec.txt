@@ -2717,12 +2717,17 @@ undefined means that the value is not set, not the literal string undefined.
   endnote-location: book-end
   figure-classes: undefined
   figure-number-format: sequential
-  footer-text: undefined
+  footer-ebook: chapter-title, page-number
+  footer-print-left: page-number, chapter-title
+  footer-print-right: section-title, page-number
   footnote-font: undefined
   footnote-font-size: 7
   generate-community: true
   generate-network: true
   generate-sample: true
+  header-ebook: undefined
+  header-print-left: undefined
+  header-print-right: undefined
   heading-font: undefined
   heading-font-for-chapters: undefined
   heading-font-for-parts: undefined
@@ -2753,6 +2758,9 @@ undefined means that the value is not set, not the literal string undefined.
   number-chapters: true
   number-figures: sequential
   number-sections: false
+  page-height: 11.0
+  page-size-units: in
+  page-width: 8.5
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   smart-punctuation: true
@@ -2933,6 +2941,35 @@ number, followed by a period (`.`), followed by a sequential number. This
 attribute is used in conjunction with the `list-figures` and `number-figures`
 settings.
 
+`footer-ebook`
+: This is a comma-separated string containing the elements which should be
+output in the ebook footer, in order. The default value is
+`chapter-title, page-number`, which means to output the current chapter title,
+followed by the page number. Other choices to include in the string are:
+
+* `book-title`
+* `closest-title` (for the nearest title, whether that is a chapter, section,
+sub-section, sub-sub-section, etc.)
+* `author-full-names` (the given names of all the authors)
+* `author-last-names` (the family names of all the authors)
+* `primary-author-full-name` (the full name of the main book author)
+* `primary-author-last-name` (the family name of the main book author)
+* `section-title`
+
+`footer-print-left`
+: This is a comma-separated string containing the elements which should be
+output in the footer of the left-facing page for a print-ready PDF, in order.
+The default value is `page-number, chapter-title`, which means to output the
+current page number, followed by the chapter title. The legal choices to
+include in the string are the same as for `footer-ebook`.
+
+`footer-print-right`
+: This is a comma-separated string containing the elements which should be
+output in the footer of the right-facing page for a print-ready PDF, in order.
+The default value is `section-title, page-number`, which means to output the
+current page number, followed by the chapter title. The legal choices to
+include in the string are the same as for `footer-ebook`.
+
 `footer-text`
 : Custom footer text for the book. The default is undefined. Text here does not
 support any Markua formatting; it is interpreted verbatim.
@@ -2974,6 +3011,9 @@ either on the original service or via a partner network.
 content which is included in the sample with `{sample: true}` directives.
 If `generate-sample` is `false`, then a sample book or course is not generated,
 regardless of whether there are any `{sample: true}` directives.
+
+`header-content`
+: chapter
 
 `heading-font`
 : The default font of all the heading text (e.g. part, chapter and section
@@ -3159,6 +3199,19 @@ are not numbered.
 `number-sections`
 : `true` or `false`. Default `false`. Whether the sections (and sub-sections)
 are numbered.
+
+`page-height`
+: The height of the page. The default is "11.0", for 11.0 inches (when combined
+with the default value of `page-size-units`).
+
+`page-width`
+: The width of the page. The default is "8.5", for 8.5 inches (when combined
+with the default value of `page-size-units`).
+
+`page-size-units`
+: `in`, `cm` or `mm`. The default is `in`, for inches. Other choices are `cm`
+for centimetres, and mm for millimetres. These are the units used to define the
+size of the page and its margins.
 
 `part-heading-font-size`
 : The font size of a part heading (`# Foo` with `{class: part}`) in the Markua

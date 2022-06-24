@@ -2744,22 +2744,26 @@ undefined means that the value is not set, not the literal string undefined.
   heading-font-size-for-sub-sub-sub-sections: 13
   heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
+
   isbn-epub: undefined
   isbn-hardcover: undefined
   isbn-mobi: undefined
   isbn-paperback: undefined
   isbn-pdf: undefined
+
   italicize-underlines: true
   lang: eng
   line-spacing: 1.0
   links: footnotes
   list-figures: combined
-  margin-bottom-ebook: 1.0
-  margin-left-ebook: 1.0
-  margin-right-ebook: 1.0
-  margin-top-ebook: 1.0
-  margin-bottom-ebook: 1.0
 
+  margin-bottom-ebook: 1.0
+  margin-left-ebook: 1.0
+  margin-right-ebook: 1.0
+  margin-top-ebook: 1.0
+
+
+  margin-bottom-ebook: 1.0
   margin-left-ebook: 1.0
   margin-right-ebook: 1.0
   margin-top-ebook: 1.0
@@ -2767,6 +2771,8 @@ undefined means that the value is not set, not the literal string undefined.
   margin-left-ebook: 1.0
   margin-right-ebook: 1.0
   margin-top-ebook: 1.0
+
+  measurement-units: in
 
   note-type: footnotes-or-endnotes
   number-chapters: true
@@ -2774,8 +2780,9 @@ undefined means that the value is not set, not the literal string undefined.
   number-sections: false
 
   page-height: 11.0
-  page-size-units: in
   page-width: 8.5
+
+
 
   restart-endnote-numbering: true
   restart-footnote-numbering: true

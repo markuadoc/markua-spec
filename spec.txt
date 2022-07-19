@@ -2744,25 +2744,15 @@ undefined means that the value is not set, not the literal string undefined.
   heading-font-size-for-sub-sub-sub-sections: 13
   heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
-
   isbn-epub: undefined
   isbn-hardcover: undefined
-  isbn-mobi: undefined
   isbn-paperback: undefined
   isbn-pdf: undefined
-
   italicize-underlines: true
   lang: eng
   line-spacing: 1.0
   links: footnotes
   list-figures: combined
-
-  margin-bottom-ebook: 1.0
-  margin-left-ebook: 1.0
-  margin-right-ebook: 1.0
-  margin-top-ebook: 1.0
-
-
   margin-bottom-ebook: 1.0
   margin-left-ebook: 1.0
   margin-right-ebook: 1.0
@@ -2771,19 +2761,17 @@ undefined means that the value is not set, not the literal string undefined.
   margin-left-ebook: 1.0
   margin-right-ebook: 1.0
   margin-top-ebook: 1.0
-
+  margin-bottom-ebook: 1.0
+  margin-left-ebook: 1.0
+  margin-right-ebook: 1.0
+  margin-top-ebook: 1.0
   measurement-units: in
-
   note-type: footnotes-or-endnotes
   number-chapters: true
   number-figures: sequential
   number-sections: false
-
   page-height: 11.0
   page-width: 8.5
-
-
-
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   smart-punctuation: true
@@ -3141,12 +3129,6 @@ The default is undefined. Some countries require different ISBNs for each print
 book format; others do not. A Markua Processor must assume that the author
 knows what they are doing, and not enforce a requirement that this ISBN be
 different than that of other formats.
-
-`isbn-mobi`
-: The ISBN for the MOBI, if any. The default is undefined. Some countries
-require different ISBNs for each ebook format; others do not. A Markua
-Processor must assume that the author knows what they are doing, and not
-enforce a requirement that this ISBN be different than that of other formats.
 
 `isbn-paperback`
 : The ISBN for the print-ready PDF exported for a paperback print book, if any.

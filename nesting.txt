@@ -2,7 +2,7 @@
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
 version: '0.30.17'
-date: '2022-07-19'
+date: '2022-06-20'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2693,37 +2693,15 @@ Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
 undefined means that the value is not set, not the literal string undefined.
 
-### JSON Settings
+DEFAULT ALL FORMATS:
 
-Book.txt:
-
-foo
-bar
-baz
-
-foo:
-
+```
 {
-  a: b
-  c: d
-  e: f
+  alt-title: text
 }
+```
 
-bar:
-
-# Hi Greg
-
-yay
-
-
-
-
-defaults not as ...
-
-things that affect the meaning of the AST cannot be overridden
-things that affect output only can
-
-all JSON with quotes
+INDIVIDUAL FORMATS:
 
 ```
 {
@@ -2739,105 +2717,36 @@ all JSON with quotes
   dedication: undefined
   dedication-align: middle
   default-code-language: guess
-
-  course: {
-    default-exercise-show-answers: all,
-    default-quiz-attempts": "1",
-    "default-quiz-auto-submit": true,
-    "default-quiz-show-answers": "incorrect",
-    "default-quiz-use-result": "best",
-    "default-random-choice-order": false,
-    "default-random-question-order": false
-  },
-  "ebook-pdf": {
-    overrides
-
-    margin-bottom: 1.0,
-    margin-left: 1.0,
-    margin-right: 1.0,
-    margin-top: 1.0,
-    page-height: 11.0,
-    page-width: 8.5
-  },
-  hardcover: {
-    measurement-units: mm
-    margin-bottom: 0.8
-    margin-left: 1.50
-    margin-right: 1.0
-    margin-top: 33.2
-    page-height: 9.0
-    page-width: 6.0
-    isbn: bar
-  },
+  ebook: {
+    body-font-size: 12
+    cc-license: undefined
+  }
   paperback: {
-    margin-bottom: 1.0
-    margin-left: 1.0
-    margin-right: 1.0
-    margin-top: 1.0
-  },
-
-  measurement-units: in
-  isbn: foo
-
-
-  endnote-location: book-end
-  figure-classes: undefined
-  figure-number-format: sequential
-  footer-ebook: chapter-title, page-number
-  footer-print-left: page-number, chapter-title
-  footer-print-right: section-title, page-number
-  footnote-font: undefined
-  footnote-font-size: 7
-  generate-community: true
-  generate-network: true
-  generate-sample: true
-  header-ebook: undefined
-  header-print-left: undefined
-  header-print-right: undefined
-  heading-font: undefined
-  heading-font-for-chapters: undefined
-  heading-font-for-parts: undefined
-  heading-font-for-sections: undefined
-  heading-font-for-sub-sections: undefined
-  heading-font-for-sub-sub-sections: undefined
-  heading-font-for-sub-sub-sub-sections: undefined
-  heading-font-for-sub-sub-sub-sub-sections: undefined
-  heading-font-size-for-chapters: 18
-  heading-font-size-for-parts: 24
-  heading-font-size-for-sections: 16
-  heading-font-size-for-sub-sections: 15
-  heading-font-size-for-sub-sub-sections: 14
-  heading-font-size-for-sub-sub-sub-sections: 13
-  heading-font-size-for-sub-sub-sub-sub-sections: 12
-  include-page-numbers-in-references: true
-  isbn-epub: undefined
-  isbn-hardcover: undefined
-  isbn-paperback: undefined
-  isbn-pdf: undefined
-  italicize-underlines: true
-  lang: eng
-  line-spacing: 1.0
-  links: footnotes
-  list-figures: combined
-  note-type: footnotes-or-endnotes
-  number-chapters: true
-  number-figures: sequential
-  number-sections: false
-  restart-endnote-numbering: true
-  restart-footnote-numbering: true
-  smart-punctuation: true
-  soft-breaks: source
-  strikethrough-format: dynamic
-  subtitle: undefined
-  title: undefined
-  two-space-hack: true
-  validate: true
-  version: undefined
+    alt-title: text
+    body-font: undefined
+    body-font-size: 13
+  }
 }
 ```
 
+vs.
 
-### Previous Settings
+{
+  ebook: {
+    alt-title: text
+    authors: undefined
+    body-font: undefined
+    body-font-size: 12
+  }
+  paperback: {
+    alt-title: text
+    authors: undefined
+    body-font: undefined
+    body-font-size: 12
+  }
+}
+
+
 
 ```
 {
@@ -2890,26 +2799,53 @@ all JSON with quotes
   heading-font-size-for-sub-sub-sub-sections: 13
   heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
+
   isbn-epub: undefined
   isbn-hardcover: undefined
+  isbn-mobi: undefined
   isbn-paperback: undefined
   isbn-pdf: undefined
+
   italicize-underlines: true
   lang: eng
   line-spacing: 1.0
   links: footnotes
   list-figures: combined
+
   margin-bottom-ebook: 1.0
   margin-left-ebook: 1.0
   margin-right-ebook: 1.0
   margin-top-ebook: 1.0
+
+
+  margin-bottom-ebook: 1.0
+  margin-left-ebook: 1.0
+  margin-right-ebook: 1.0
+  margin-top-ebook: 1.0
+
+  margin-bottom-ebook: 1.0
+  margin-left-ebook: 1.0
+  margin-right-ebook: 1.0
+  margin-top-ebook: 1.0
+
   measurement-units: in
+
   note-type: footnotes-or-endnotes
   number-chapters: true
   number-figures: sequential
   number-sections: false
+
   page-height: 11.0
   page-width: 8.5
+
+  page-height-ebook: 11.0
+  page-width-ebook: 8.5
+
+  page-height-ebook: 11.0
+  page-width-ebook: 8.5
+
+
+
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   smart-punctuation: true
@@ -3267,6 +3203,12 @@ The default is undefined. Some countries require different ISBNs for each print
 book format; others do not. A Markua Processor must assume that the author
 knows what they are doing, and not enforce a requirement that this ISBN be
 different than that of other formats.
+
+`isbn-mobi`
+: The ISBN for the MOBI, if any. The default is undefined. Some countries
+require different ISBNs for each ebook format; others do not. A Markua
+Processor must assume that the author knows what they are doing, and not
+enforce a requirement that this ISBN be different than that of other formats.
 
 `isbn-paperback`
 : The ISBN for the print-ready PDF exported for a paperback print book, if any.
@@ -5967,23 +5909,15 @@ formats, such as SVG or AsciiMath, what you are really doing is creating a code
 resource. This is shown in the sections below, which discuss SVG and AsciiMath,
 but this applies more broadly.
 
-#### No Attribute Lists on Code Spans
+#### Attribute Lists on Code Spans
 
-Code spans (like `puts foo`) are discussed later in the spec. Code spans work
-just as in CommonMark and GFM. Since Markua adds attribute lists to code
-blocks, you may wonder whether Markua adds attribute lists to code spans.
-
-**So, to be clear: Markua does NOT support attribute lists on code spans.**
-
-So, in an example like the following, the attribute list is simply ignored:
+Code spans are discussed later in the spec. While code spans are done just as in
+CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
+This serves as a hint to any syntax highlighter:
 
 ~~~
 Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
 ~~~
-
-The reason for this is simple: it does not make sense to run a syntax
-highlighter to format two or three words of code. If you want syntax
-highlighting, use a code block.
 
 ### Marking Code as Added or Deleted
 

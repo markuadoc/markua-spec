@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.16'
-date: '2022-05-26'
+version: '0.30.17'
+date: '2022-07-19'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -5554,15 +5554,23 @@ formats, such as SVG or AsciiMath, what you are really doing is creating a code
 resource. This is shown in the sections below, which discuss SVG and AsciiMath,
 but this applies more broadly.
 
-#### Attribute Lists on Code Spans
+#### No Attribute Lists on Code Spans
 
-Code spans are discussed later in the spec. While code spans are done just as in
-CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
-This serves as a hint to any syntax highlighter:
+Code spans (like `puts foo`) are discussed later in the spec. Code spans work
+just as in CommonMark and GFM. Since Markua adds attribute lists to code
+blocks, you may wonder whether Markua adds attribute lists to code spans.
+
+**So, to be clear: Markua does NOT support attribute lists on code spans.**
+
+So, in an example like the following, the attribute list is simply ignored:
 
 ~~~
 Hello World in Ruby is a simple `puts "hello world"`{format: ruby} statement.
 ~~~
+
+The reason for this is simple: it does not make sense to run a syntax
+highlighter to format two or three words of code. If you want syntax
+highlighting, use a code block.
 
 ### Marking Code as Added or Deleted
 

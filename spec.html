@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.16 (2022-05-26)</div>
+<div class="version">Version 0.30.17 (2022-07-19)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -6209,14 +6209,19 @@ Initialized empty Git repository in /path/to/repo
 formats, such as SVG or AsciiMath, what you are really doing is creating a code
 resource. This is shown in the sections below, which discuss SVG and AsciiMath,
 but this applies more broadly.</p>
-<h4 id="attribute-lists-on-code-spans" class="definition">
-<span class="number">7.6.4.3</span>Attribute Lists on Code Spans
+<h4 id="no-attribute-lists-on-code-spans" class="definition">
+<span class="number">7.6.4.3</span>No Attribute Lists on Code Spans
 </h4>
-<p>Code spans are discussed later in the spec. While code spans are done just as in
-CommonMark and GFM, Markua adds one thing: attribute lists to specify the format.
-This serves as a hint to any syntax highlighter:</p>
+<p>Code spans (like <code>puts foo</code>) are discussed later in the spec. Code spans work
+just as in CommonMark and GFM. Since Markua adds attribute lists to code
+blocks, you may wonder whether Markua adds attribute lists to code spans.</p>
+<p><strong>So, to be clear: Markua does NOT support attribute lists on code spans.</strong></p>
+<p>So, in an example like the following, the attribute list is simply ignored:</p>
 <pre><code>Hello World in Ruby is a simple `puts &quot;hello world&quot;`{format: ruby} statement.
 </code></pre>
+<p>The reason for this is simple: it does not make sense to run a syntax
+highlighter to format two or three words of code. If you want syntax
+highlighting, use a code block.</p>
 <h3 id="marking-code-as-added-or-deleted" class="definition">
 <span class="number">7.6.5</span>Marking Code as Added or Deleted
 </h3>
@@ -6514,7 +6519,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6953,7 +6958,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6977,7 +6982,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16493,7 +16498,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

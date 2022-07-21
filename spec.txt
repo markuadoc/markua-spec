@@ -2671,27 +2671,77 @@ settings hashes can be separated with single or multiple newlines, but once the
 first thing which is not a document setting or blank line is encountered, no
 more document settings hashes can be defined.)
 
-The settings are newline-separated key-value pairs (`key: value`) which contain
-information about the document and about the desired behavior of the Markua
-Processor.
+There are two ways of creating document settings:
+
+1. As newline-separated key-value pairs, with the key and value separated by a
+colon (`key: value`). With this format, the document settings hash is flat, and
+every non-blank line in the document settings hash must contain a key, a colon
+(`:`), and a value. Any whitespace at the beginning or end of the keys and
+values will be stripped. Only the first colon is important; subsequent colons
+on a line will just be part of the value. Finally, with this format, quotes are
+not used to surround the keys or the values.
+2. As [JSON](https://www.json.org/json-en.html). JSON supports nested
+structures, and is a very popular standard.
+
+Either way, the document settings contain information about the document and
+about the desired behavior of the Markua Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
 `authors`, etc. Markua Processor behavior includes settings like `alt-title`,
 `list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
 
-The format of a document settings hash is as follows: Every non-blank line
-in the document settings hash must contain a key, a colon `:`, and a value.
-Any whitespace at the beginning or end of the keys and values will be stripped.
-Only the first colon is important; subsequent colons on a line will just be
-part of the value.
+## Flat Document Settings
 
+For very simple use cases, defining the document settings in a flat list is
+easiest to type. This also preserves compatibility with older versions of
+Markua, which did not support JSON document settings.
 
+This is an example of specifying all the document settings in one flat list of
+key-value pairs:
+
+```
+{
+  alt-title: text
+  endnote-location: book-end
+  lang: eng
+  two-space-hack: true
+}
+```
+
+## JSON Document Settings
+
+Only JSON document settings support nested structures, which can be used to
+override the defaults defined at the top level.
+
+This is an example of specifying all the document settings in one flat list of
+key-value pairs:
+
+```
+{
+  "alt-title": "text",
+  "endnote-location": "book-end",
+  "lang": "eng",
+  "two-space-hack": true,
+  "margin-left": 2.0,
+  "margin-right": 2.0,
+  "units": "cm",
+  "hardcover": {
+    "units": "in",
+    "margin-inner": 1.5,
+    "margin-outer": 0.75
+  }
+}
+```
 
 ## Default values of document settings
 
 Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
-undefined means that the value is not set, not the literal string undefined.
+null means that the value is not set, not the literal string null.
+
+These settings will be shown in JSON, which is the preferred way of defining
+document settings because of the support for nested structures, and the broader
+support in software libraries.
 
 ### JSON Settings
 
@@ -2709,21 +2759,10 @@ foo:
   e: f
 }
 
-bar:
-
-# Hi Greg
-
-yay
-
-
-
-
-defaults not as ...
 
 things that affect the meaning of the AST cannot be overridden
 things that affect output only can
 
-all JSON with quotes
 
 ```
 {
@@ -2734,15 +2773,15 @@ all JSON with quotes
   cc-license: undefined
   contributors: undefined
   copyright: undefined
-  course-attempts: 1
-  course-completeness: 0
   dedication: undefined
   dedication-align: middle
   default-code-language: guess
 
-  course: {
-    default-exercise-show-answers: all,
-    default-quiz-attempts": "1",
+  "course": {
+    "course-attempts": 1
+    "course-completeness": 0
+    "default-exercise-show-answers": "all",
+    "default-quiz-attempts": "1",
     "default-quiz-auto-submit": true,
     "default-quiz-show-answers": "incorrect",
     "default-quiz-use-result": "best",

@@ -2708,6 +2708,21 @@ key-value pairs:
 }
 ```
 
+document this, say also json
+```
+{
+  alt-title: text
+  endnote-location: book-end
+  lang: eng
+  two-space-hack: true
+  hardcover: {
+    units: in
+    margin-inner: 1.5
+  }
+}
+```
+
+
 ## JSON Document Settings
 
 Only JSON document settings support nested structures, which can be used to

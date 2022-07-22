@@ -174,9 +174,11 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
-<li><a href="#default-values-of-document-settings"><span class="number">4.1</span>Default values of document settings</a></li>
-<li><a href="#complete-list-of-document-settings"><span class="number">4.2</span>Complete list of document settings</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.3</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#flat-document-settings"><span class="number">4.1</span>Flat Document Settings</a></li>
+<li><a href="#json-document-settings"><span class="number">4.2</span>JSON Document Settings</a></li>
+<li><a href="#default-values-of-document-settings"><span class="number">4.3</span>Default values of document settings</a></li>
+<li><a href="#complete-list-of-document-settings"><span class="number">4.4</span>Complete list of document settings</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.5</span>Multiple document settings hashes are permitted (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -3043,23 +3045,196 @@ encountered, no more document settings hashes can be defined. (Document
 settings hashes can be separated with single or multiple newlines, but once the
 first thing which is not a document setting or blank line is encountered, no
 more document settings hashes can be defined.)</p>
-<p>The settings are newline-separated key-value pairs (<code>key: value</code>) which contain
-information about the document and about the desired behavior of the Markua
-Processor.</p>
+<p>There are two ways of creating document settings:</p>
+<ol>
+<li>As newline-separated key-value pairs, with the key and value separated by a
+colon (<code>key: value</code>). With this format, the document settings hash is flat, and
+every non-blank line in the document settings hash must contain a key, a colon
+(<code>:</code>), and a value. Any whitespace at the beginning or end of the keys and
+values will be stripped. Only the first colon is important; subsequent colons
+on a line will just be part of the value. Finally, with this format, quotes are
+not used to surround the keys or the values.</li>
+<li>As <a href="https://www.json.org/json-en.html">JSON</a>. JSON supports nested
+structures, and is a very popular standard.</li>
+</ol>
+<p>Either way, the document settings contain information about the document and
+about the desired behavior of the Markua Processor.</p>
 <p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
 <code>authors</code>, etc. Markua Processor behavior includes settings like <code>alt-title</code>,
 <code>list-figures</code>, <code>italicize-underlines</code>, <code>smart-punctuation</code>, etc.</p>
-<p>The format of a document settings hash is as follows: Every non-blank line
-in the document settings hash must contain a key, a colon <code>:</code>, and a value.
-Any whitespace at the beginning or end of the keys and values will be stripped.
-Only the first colon is important; subsequent colons on a line will just be
-part of the value.</p>
+<h2 id="flat-document-settings" class="definition">
+<span class="number">4.1</span>Flat Document Settings
+</h2>
+<p>For very simple use cases, defining the document settings in a flat list is
+easiest to type. This also preserves compatibility with older versions of
+Markua, which did not support JSON document settings.</p>
+<p>This is an example of specifying all the document settings in one flat list of
+key-value pairs:</p>
+<pre><code>{
+  alt-title: text
+  endnote-location: book-end
+  lang: eng
+  two-space-hack: true
+}
+</code></pre>
+<h2 id="json-document-settings" class="definition">
+<span class="number">4.2</span>JSON Document Settings
+</h2>
+<p>Only JSON document settings support nested structures, which can be used to
+override the defaults defined at the top level.</p>
+<p>This is an example of specifying all the document settings in one flat list of
+key-value pairs:</p>
+<pre><code>{
+  &quot;alt-title&quot;: &quot;text&quot;,
+  &quot;endnote-location&quot;: &quot;book-end&quot;,
+  &quot;lang&quot;: &quot;eng&quot;,
+  &quot;two-space-hack&quot;: true,
+  &quot;margin-left&quot;: 2.0,
+  &quot;margin-right&quot;: 2.0,
+  &quot;units&quot;: &quot;cm&quot;,
+  &quot;hardcover&quot;: {
+    &quot;units&quot;: &quot;in&quot;,
+    &quot;margin-inner&quot;: 1.5,
+    &quot;margin-outer&quot;: 0.75
+  }
+}
+</code></pre>
 <h2 id="default-values-of-document-settings" class="definition">
-<span class="number">4.1</span>Default values of document settings
+<span class="number">4.3</span>Default values of document settings
 </h2>
 <p>Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
-undefined means that the value is not set, not the literal string undefined.</p>
+null means that the value is not set, not the literal string null.</p>
+<p>These settings will be shown in JSON, which is the preferred way of defining
+document settings because of the support for nested structures, and the broader
+support in software libraries.</p>
+<h3 id="json-settings" class="definition">
+<span class="number">4.3.1</span>JSON Settings
+</h3>
+<p>Book.txt:</p>
+<p>foo
+bar
+baz</p>
+<p>foo:</p>
+<p>{
+a: b
+c: d
+e: f
+}</p>
+<p>things that affect the meaning of the AST cannot be overridden
+things that affect output only can</p>
+<pre><code>{
+  alt-title: text
+  authors: undefined
+  body-font: undefined
+  body-font-size: 12
+  cc-license: undefined
+  contributors: undefined
+  copyright: undefined
+  dedication: undefined
+  dedication-align: middle
+  default-code-language: guess
+
+  &quot;course&quot;: {
+    &quot;course-attempts&quot;: 1
+    &quot;course-completeness&quot;: 0
+    &quot;default-exercise-show-answers&quot;: &quot;all&quot;,
+    &quot;default-quiz-attempts&quot;: &quot;1&quot;,
+    &quot;default-quiz-auto-submit&quot;: true,
+    &quot;default-quiz-show-answers&quot;: &quot;incorrect&quot;,
+    &quot;default-quiz-use-result&quot;: &quot;best&quot;,
+    &quot;default-random-choice-order&quot;: false,
+    &quot;default-random-question-order&quot;: false
+  },
+  &quot;ebook-pdf&quot;: {
+    overrides
+
+    margin-bottom: 1.0,
+    margin-left: 1.0,
+    margin-right: 1.0,
+    margin-top: 1.0,
+    page-height: 11.0,
+    page-width: 8.5
+  },
+  hardcover: {
+    measurement-units: mm
+    margin-bottom: 0.8
+    margin-left: 1.50
+    margin-right: 1.0
+    margin-top: 33.2
+    page-height: 9.0
+    page-width: 6.0
+    isbn: bar
+  },
+  paperback: {
+    margin-bottom: 1.0
+    margin-left: 1.0
+    margin-right: 1.0
+    margin-top: 1.0
+  },
+
+  measurement-units: in
+  isbn: foo
+
+
+  endnote-location: book-end
+  figure-classes: undefined
+  figure-number-format: sequential
+  footer-ebook: chapter-title, page-number
+  footer-print-left: page-number, chapter-title
+  footer-print-right: section-title, page-number
+  footnote-font: undefined
+  footnote-font-size: 7
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  header-ebook: undefined
+  header-print-left: undefined
+  header-print-right: undefined
+  heading-font: undefined
+  heading-font-for-chapters: undefined
+  heading-font-for-parts: undefined
+  heading-font-for-sections: undefined
+  heading-font-for-sub-sections: undefined
+  heading-font-for-sub-sub-sections: undefined
+  heading-font-for-sub-sub-sub-sections: undefined
+  heading-font-for-sub-sub-sub-sub-sections: undefined
+  heading-font-size-for-chapters: 18
+  heading-font-size-for-parts: 24
+  heading-font-size-for-sections: 16
+  heading-font-size-for-sub-sections: 15
+  heading-font-size-for-sub-sub-sections: 14
+  heading-font-size-for-sub-sub-sub-sections: 13
+  heading-font-size-for-sub-sub-sub-sub-sections: 12
+  include-page-numbers-in-references: true
+  isbn-epub: undefined
+  isbn-hardcover: undefined
+  isbn-paperback: undefined
+  isbn-pdf: undefined
+  italicize-underlines: true
+  lang: eng
+  line-spacing: 1.0
+  links: footnotes
+  list-figures: combined
+  note-type: footnotes-or-endnotes
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  smart-punctuation: true
+  soft-breaks: source
+  strikethrough-format: dynamic
+  subtitle: undefined
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+}
+</code></pre>
+<h3 id="previous-settings" class="definition">
+<span class="number">4.3.2</span>Previous Settings
+</h3>
 <pre><code>{
   alt-title: text
   authors: undefined
@@ -3110,46 +3285,26 @@ undefined means that the value is not set, not the literal string undefined.</p>
   heading-font-size-for-sub-sub-sub-sections: 13
   heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
-
   isbn-epub: undefined
   isbn-hardcover: undefined
-  isbn-mobi: undefined
   isbn-paperback: undefined
   isbn-pdf: undefined
-
   italicize-underlines: true
   lang: eng
   line-spacing: 1.0
   links: footnotes
   list-figures: combined
-
   margin-bottom-ebook: 1.0
   margin-left-ebook: 1.0
   margin-right-ebook: 1.0
   margin-top-ebook: 1.0
-
-
-  margin-bottom-ebook: 1.0
-  margin-left-ebook: 1.0
-  margin-right-ebook: 1.0
-  margin-top-ebook: 1.0
-  margin-bottom-ebook: 1.0
-  margin-left-ebook: 1.0
-  margin-right-ebook: 1.0
-  margin-top-ebook: 1.0
-
   measurement-units: in
-
   note-type: footnotes-or-endnotes
   number-chapters: true
   number-figures: sequential
   number-sections: false
-
   page-height: 11.0
   page-width: 8.5
-
-
-
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   smart-punctuation: true
@@ -3164,7 +3319,7 @@ undefined means that the value is not set, not the literal string undefined.</p>
 </code></pre>
 <p>What these settings all mean is explained in the rest of this section.</p>
 <h2 id="complete-list-of-document-settings" class="definition">
-<span class="number">4.2</span>Complete list of document settings
+<span class="number">4.4</span>Complete list of document settings
 </h2>
 <p>Some of these settings may appear to only apply to books. However, with Markua
 Processors such as Leanpub which also generate an ebook of course material when
@@ -3453,11 +3608,6 @@ The default is undefined. Some countries require different ISBNs for each print
 book format; others do not. A Markua Processor must assume that the author
 knows what they are doing, and not enforce a requirement that this ISBN be
 different than that of other formats.</p>
-<p><code>isbn-mobi</code>
-: The ISBN for the MOBI, if any. The default is undefined. Some countries
-require different ISBNs for each ebook format; others do not. A Markua
-Processor must assume that the author knows what they are doing, and not
-enforce a requirement that this ISBN be different than that of other formats.</p>
 <p><code>isbn-paperback</code>
 : The ISBN for the print-ready PDF exported for a paperback print book, if any.
 The default is undefined. Some countries require different ISBNs for each print
@@ -3629,7 +3779,7 @@ validated.</p>
 producing analytics for courses. (This is not related to the version of the
 Markua specification being used; it is the version of the book or course.)</p>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.3</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.5</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -6772,7 +6922,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -7211,7 +7361,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -7235,7 +7385,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16751,7 +16901,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

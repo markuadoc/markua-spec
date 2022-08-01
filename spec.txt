@@ -2663,6 +2663,16 @@ of this, almost all formatting is done by global switches. These switches are
 called document settings, and they are defined once, at the beginning of the
 document. Document settings affect the formatting of the entire book or course.
 
+Document settings include both document information and switches which affect
+the Markua Processor behavior. Document information includes settings like the
+`title`, `subtitle`, `copyright`, `authors`, etc. Markua Processor behavior
+includes settings like `alt-title`, `list-figures`, `italicize-underlines`,
+`smart-punctuation`, etc.
+
+
+
+## Document Settings are written in Relaxed JSON
+
 Document settings are defined in one or more document settings hashes. The
 document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash or a blank line is
@@ -2671,59 +2681,91 @@ settings hashes can be separated with single or multiple newlines, but once the
 first thing which is not part of a document settings hash or blank line is
 encountered, no more document settings hashes can be defined.)
 
-## TODO - Do I really actually want to do this? Really?
+The specific format of the document settings hashes is
+[Relaxed JSON](http://www.relaxedjson.org/), also known as RJSON or
+Relaxed Javascript Object Notation.
 
-The document settings hashes can either be created using JSON format, or by
-using a very JSON-inspired syntax.
+JSON has a perfectly good [syntax](https://www.json.org/json-en.html), and even
+a very good and very short [spec](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/),
+so it does not need to be explained here.
 
-JSON has a perfectly good [spec](https://www.json.org/json-en.html), so it does
-not need to be explained here. This spec will show the custom Markua document
-settings hash syntax, which is basically JSON without the required quotes and
-commas, with no array support, and with less flexibility around the names of
-keys.
+JSON is valid Relaxed JSON, and Relaxed JSON can be easily converted into JSON.
+Since JSON is valid Relaxed JSON data, **either Relaxed JSON or JSON can be
+used to specify the document settings in a Markua document**.
 
-With the Markua document settings hash syntax, every setting is specified as
-`key: value` pairs. The value can be a scalar or a nested object. If it is a
-nested object, the object starts with an opening curly brace on that line; if
-is a scalar, the value is defined on that line. This will make a lot more sense
-in the examples below.
+To be clear: while JSON format data is legal Relaxed JSON format data, the
+reverse is not true: **Relaxed JSON is not JSON**. However, Relaxed JSON can be
+converted into JSON easily, since Relaxed JSON is basically JSON without almost
+all of the quotes and commas.
 
-In this format, any whitespace at the beginning or end of the keys and values
-will be stripped. Only the first colon is important; subsequent colons on a
-line will just be part of the value. Finally, with this format, quotes are
-not used to surround the keys or the values.
-
-Document information includes things like the `title`, `subtitle`, `copyright`,
-`authors`, etc. Markua Processor behavior includes settings like `alt-title`,
-`list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
-
-This is an example of specifying a handful of document settings:
+This is an example of a single document settings hash defined in Relaxed JSON:
 
 ```
 {
   alt-title: text
+  cc-license: null
   endnote-location: book-end
   lang: eng
+  footer-ebook: [chapter-title page-number]
+  footer-print-left: [page-number chapter-title]
+  footer-print-right: [section-title page-number]
+  hardcover: {
+    margin-inner: 1.5
+    margin-outer: 0.75
+  }
+  margin-left: 1.0
+  margin-right: 1.0
+  paperback: {
+    margin-inner: 1.0
+    margin-outer: 0.5
+  }
   two-space-hack: true
+  units: in
 }
 ```
 
-The same document settings defined in JSON would look like this:
+Converted to JSON, this becomes:
 
 ```
 {
   "alt-title": "text",
+  "cc-license": null,
   "endnote-location": "book-end",
   "lang": "eng",
-  "two-space-hack": true
+  "footer-ebook": [
+    "chapter-title",
+    "page-number"
+  ],
+  "footer-print-left": [
+    "page-number",
+    "chapter-title"
+  ],
+  "footer-print-right": [
+    "section-title",
+    "page-number"
+  ],
+  "hardcover": {
+    "margin-inner": 1,
+    "margin-outer": 0
+  },
+  "margin-left": 1,
+  "margin-right": 1,
+  "paperback": {
+    "margin-inner": 1,
+    "margin-outer": 0
+  },
+  "two-space-hack": true,
+  "units": "in"
 }
 ```
 
-Markua supports JSON since it is easier for tools to produce, and Markua
-supports its own custom JSON-inspired syntax since it is easier for authors
-to type and more pleasant to read. This puts a bit more burden on the
-developers of Markua Processors, but it's worth it since there are far more
-authors that write in Markua than there are developers of Markua Processors.
+There are considerably fewer parsing libraries for Relaxed JSON than for JSON,
+so this puts a bit more burden on the developers of Markua Processors. However,
+it's worth it, since Relaxed JSON is much more pleasant to write, and does not
+look out-of-place in a Markua document the way that JSON does. Also, the author
+experience is always more important than the developer experience: there are
+far more authors that write in Markua than there are developers of Markua
+Processors.
 
 
 
@@ -2747,54 +2789,8 @@ So, for example, it would be invalid to override the value of `two-space-hack`
 for a particular output format, since that would change the meaning of the
 Markua document.
 
-This is an example of specifying most of the document settings in a flat list
-of key-value pairs, but overriding some of them for the `paperback` and
-`hardcover` output formats:
-
-```
-{
-  alt-title: text
-  endnote-location: book-end
-  lang: eng
-  margin-left: 1.0
-  margin-right: 1.0
-  two-space-hack: true
-  units: in
-  paperback: {
-    margin-inner: 1.0
-    margin-outer: 0.5
-  }
-  hardcover: {
-    margin-inner: 1.5
-    margin-outer: 0.75
-  }
-}
-```
-
-The same document settings defined in JSON would look like this:
-
-```
-{
-  "alt-title": "text",
-  "endnote-location": "book-end",
-  "lang": "eng",
-  "margin-left": 1.0,
-  "margin-right": 1.0,
-  "two-space-hack": true,
-  "units": "in",
-  "paperback": {
-    "margin-inner": 1.0,
-    "margin-outer": 0.5
-  },
-  "hardcover": {
-    "margin-inner": 1.5,
-    "margin-outer": 0.75
-  }
-}
-```
-
-For the rest of the Markua spec, document settings will be shown in Markua's
-JSON-inspired syntax, not in JSON, but both work fine for everything.
+In the above example, most of the document settings applied to all formats, but
+some of them were overridden for the `paperback` and `hardcover` formats.
 
 
 

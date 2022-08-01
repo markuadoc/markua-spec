@@ -2812,6 +2812,10 @@ null means that the value is not set, not the literal string null.
   endnote-location: book-end
   figure-classes: null
   figure-number-format: sequential
+  generate-community: true
+  generate-member: true
+  generate-sample: true
+
   course: {
     attempts: 1
     completeness: 0
@@ -2825,25 +2829,39 @@ null means that the value is not set, not the literal string null.
     default-random-question-order: false
   }
   ebook: {
-    body-font: null
-    body-font-size: 12
-    footer: [chapter-title page-number]
+    body {
+      font: {
+        face: null
+        size: 12
+        weight: null
+      }
+    }
+    header: null
+    footer: {
+      text: [chapter-title page-number]
+      font: {
+        face: null
+        size: 9
+        weight: null
+      }
+    }
+    footnotes: {
+      font: {
+        face: null
+        size: 9
+        weight: null
+      }
+    }
   }
   paperback: {
+    header-left: null
+    header-right: null
     footer-left: [page-number chapter-title]
     footer-right: [section-title page-number]
   }
   hardcover: {
   }
 
-  footnote-font: null
-  footnote-font-size: 7
-  generate-community: true
-  generate-member: true
-  generate-sample: true
-  header-ebook: null
-  header-print-left: null
-  header-print-right: null
   heading-font: null
   heading-font-for-chapters: null
   heading-font-for-parts: null

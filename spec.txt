@@ -2804,11 +2804,14 @@ null means that the value is not set, not the literal string null.
 {
   alt-title: text
   authors: null
-  body-font: null
-  body-font-size: 12
   cc-license: null
   contributors: null
   copyright: null
+  dedication: null
+  dedication-align: middle
+  endnote-location: book-end
+  figure-classes: null
+  figure-number-format: sequential
   course: {
     attempts: 1
     completeness: 0
@@ -2821,12 +2824,9 @@ null means that the value is not set, not the literal string null.
     default-random-choice-order: false
     default-random-question-order: false
   }
-  dedication: null
-  dedication-align: middle
-  endnote-location: book-end
-  figure-classes: null
-  figure-number-format: sequential
   ebook: {
+    body-font: null
+    body-font-size: 12
     footer: [chapter-title page-number]
   }
   paperback: {
@@ -2839,7 +2839,7 @@ null means that the value is not set, not the literal string null.
   footnote-font: null
   footnote-font-size: 7
   generate-community: true
-  generate-network: true
+  generate-member: true
   generate-sample: true
   header-ebook: null
   header-print-left: null
@@ -3140,16 +3140,16 @@ of whether there are any `{community: true}` directives. The idea of a
 "community edition" is a version of the book which is given away in exchange
 for email addresses, for marketing purposes.
 
-`generate-network`
+`generate-member`
 : *(Books Only)* - `true` or `false`. The default value is `true`. If
-`generate-network` is `true` and if there are any chapters or sections with
-`{network: true}` directives, then a network edition book or course is
-generated, which is composed of the content which is included in the network
-edition with `{network: true}` directives. If `generate-network` is `false`,
-then a network edition book or course is not generated, regardless of whether
-there are any `{network: true}` directives. The idea of a "network edition" is
+`generate-member` is `true` and if there are any chapters or sections with
+`{member: true}` directives, then a member edition book or course is
+generated, which is composed of the content which is included in the member
+edition with `{member: true}` directives. If `generate-member` is `false`,
+then a member edition book or course is not generated, regardless of whether
+there are any `{member: true}` directives. The idea of a "member edition" is
 a version of the book which is available as part of a subscription service,
-either on the original service or via a partner network.
+either on the original service or via a third-party partner service.
 
 `generate-sample`
 : `true` or `false`. The default value is `true`. If `generate-sample` is

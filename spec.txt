@@ -2677,7 +2677,8 @@ using a very JSON-inspired syntax.
 JSON has a perfectly good [spec](https://www.json.org/json-en.html), so it does
 not need to be explained here. This spec will show the custom Markua document
 settings hash syntax, which is basically JSON without the required quotes and
-commas, and with less flexibility around the names of keys.
+commas, with no array support, and with less flexibility around the names of
+keys.
 
 With the Markua document settings hash syntax, every setting is specified as
 `key: value` pairs. The value can be a scalar or a nested object. If it is a
@@ -2714,12 +2715,15 @@ of key-value pairs, but overriding them for the `hardcover` format:
   alt-title: text
   endnote-location: book-end
   lang: eng
-  margin-left: 2.0
-  margin-right: 2.0
+  margin-left: 1.0
+  margin-right: 1.0
   two-space-hack: true
-  units: cm
+  units: in
+  paperback: {
+    margin-inner: 1.0
+    margin-outer: 0.5
+  }
   hardcover: {
-    units: in
     margin-inner: 1.5
     margin-outer: 0.75
   }
@@ -2733,12 +2737,15 @@ The same document settings defined in JSON would look like this:
   "alt-title": "text",
   "endnote-location": "book-end",
   "lang": "eng",
-  "margin-left": 2.0,
-  "margin-right": 2.0,
+  "margin-left": 1.0,
+  "margin-right": 1.0,
   "two-space-hack": true,
-  "units": "cm",
+  "units": "in",
+  "paperback": {
+    "margin-inner": 1.0,
+    "margin-outer": 0.5
+  },
   "hardcover": {
-    "units": "in",
     "margin-inner": 1.5,
     "margin-outer": 0.75
   }
@@ -2747,37 +2754,35 @@ The same document settings defined in JSON would look like this:
 
 Markua supports JSON since it is easier for tools to produce, and Markua
 supports its own custom JSON-inspired syntax since it is easier for authors
-to type and more pleasant to read.
+to type and more pleasant to read. This puts a bit more burden on the
+developers of Markua Processors, but it's worth it.
+
+## Overriding Settings
+
+Since Markua's origin is in Leanpub, which is primarily used to produce ebooks,
+the default output format is considered the ebook. This can either be both the
+ebook PDF and EPUB file, or (in cases where a setting does not apply to EPUB)
+just the ebook PDF.
+
+As shown in the above example, some settings can be overridden for specific
+output formats. Two notable output formats that settings can be overridden for
+are `paperback` (for a print-ready PDF used to produce a paperback book) and
+`hardcover` (for a print-ready PDF used to produce a hardcover book).
+
+The basic idea here is that overrides can modify the format of the output (say,
+to change the margin), but not the meaning of the document.
+
+So, for example, it would be invalid to override the value of `two-space-hack`
+for a particular output format, since that would change the meaning of the
+Markua document.
+
+This is shown more in the examples below.
 
 ## Default values of document settings
 
 Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
 null means that the value is not set, not the literal string null.
-
-These settings will be shown in JSON, which is the preferred way of defining
-document settings because of the support for nested structures, and the broader
-support in software libraries.
-
-### JSON Settings
-
-Book.txt:
-
-foo
-bar
-baz
-
-foo:
-
-{
-  a: b
-  c: d
-  e: f
-}
-
-
-things that affect the meaning of the AST cannot be overridden
-things that affect output only can
 
 
 ```

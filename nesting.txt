@@ -2717,6 +2717,7 @@ INDIVIDUAL FORMATS:
   dedication: undefined
   dedication-align: middle
   default-code-language: guess
+  margin-left: 1
   ebook: {
     body-font-size: 12
     cc-license: undefined
@@ -2725,6 +2726,7 @@ INDIVIDUAL FORMATS:
     alt-title: text
     body-font: undefined
     body-font-size: 13
+    margin-left: 0.8
   }
 }
 ```

@@ -2671,31 +2671,29 @@ settings hashes can be separated with single or multiple newlines, but once the
 first thing which is not a document setting or blank line is encountered, no
 more document settings hashes can be defined.)
 
-There are two ways of creating document settings:
+The document settings hashes can either be created using JSON format, or by
+using a very JSON-inspired syntax.
 
-1. As newline-separated key-value pairs, with the key and value separated by a
-colon (`key: value`). With this format, the document settings hash is flat, and
-every non-blank line in the document settings hash must contain a key, a colon
-(`:`), and a value. Any whitespace at the beginning or end of the keys and
-values will be stripped. Only the first colon is important; subsequent colons
-on a line will just be part of the value. Finally, with this format, quotes are
+JSON has a perfectly good [spec](https://www.json.org/json-en.html), so it does
+not need to be explained here. This spec will show the custom Markua document
+settings hash syntax, which is basically JSON without the required quotes and
+commas, and with less flexibility around the names of keys.
+
+With the Markua document settings hash syntax, every setting is specified as
+`key: value` pairs. The value can be a scalar or a nested object. If it is a
+nested object, the object starts with an opening curly brace on that line; if
+is a scalar, the value is defined on that line. This will make a lot more sense
+in the examples below.
+
+In this format, any whitespace at the beginning or end of the keys and values
+will be stripped. Only the first colon is important; subsequent colons on a
+line will just be part of the value. Finally, with this format, quotes are
 not used to surround the keys or the values.
-2. As [JSON](https://www.json.org/json-en.html). JSON supports nested
-structures, and is a very popular standard.
-
-Either way, the document settings contain information about the document and
-about the desired behavior of the Markua Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
 `authors`, etc. Markua Processor behavior includes settings like `alt-title`,
 `list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
 
-## Flat Document Settings
-
-For very simple use cases, defining the document settings in a flat list is
-easiest to type. This also preserves compatibility with older versions of
-Markua, which did not support JSON document settings.
-
 This is an example of specifying all the document settings in one flat list of
 key-value pairs:
 
@@ -2708,37 +2706,36 @@ key-value pairs:
 }
 ```
 
-document this, say also json
+This is an example of specifying most of the document settings in a flat list
+of key-value pairs, but overriding them for the `hardcover` format:
+
 ```
 {
   alt-title: text
   endnote-location: book-end
   lang: eng
+  margin-left: 2.0
+  margin-right: 2.0
   two-space-hack: true
+  units: cm
   hardcover: {
     units: in
     margin-inner: 1.5
+    margin-outer: 0.75
   }
 }
 ```
 
-
-## JSON Document Settings
-
-Only JSON document settings support nested structures, which can be used to
-override the defaults defined at the top level.
-
-This is an example of specifying all the document settings in one flat list of
-key-value pairs:
+The same document settings defined in JSON would look like this:
 
 ```
 {
   "alt-title": "text",
   "endnote-location": "book-end",
   "lang": "eng",
-  "two-space-hack": true,
   "margin-left": 2.0,
   "margin-right": 2.0,
+  "two-space-hack": true,
   "units": "cm",
   "hardcover": {
     "units": "in",
@@ -2747,6 +2744,10 @@ key-value pairs:
   }
 }
 ```
+
+Markua supports JSON since it is easier for tools to produce, and Markua
+supports its own custom JSON-inspired syntax since it is easier for authors
+to type and more pleasant to read.
 
 ## Default values of document settings
 

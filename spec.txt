@@ -2803,12 +2803,12 @@ null means that the value is not set, not the literal string null.
 ```
 {
   alt-title: text
-  authors: undefined
-  body-font: undefined
+  authors: null
+  body-font: null
   body-font-size: 12
-  cc-license: undefined
-  contributors: undefined
-  copyright: undefined
+  cc-license: null
+  contributors: null
+  copyright: null
   course: {
     attempts: 1
     completeness: 0
@@ -2821,30 +2821,37 @@ null means that the value is not set, not the literal string null.
     default-random-choice-order: false
     default-random-question-order: false
   }
-  dedication: undefined
+  dedication: null
   dedication-align: middle
   endnote-location: book-end
-  figure-classes: undefined
+  figure-classes: null
   figure-number-format: sequential
-  footer-ebook: chapter-title, page-number
-  footer-print-left: page-number, chapter-title
-  footer-print-right: section-title, page-number
-  footnote-font: undefined
+  ebook: {
+    footer: [chapter-title page-number]
+  }
+  paperback: {
+    footer-left: [page-number chapter-title]
+    footer-right: [section-title page-number]
+  }
+  hardcover: {
+  }
+
+  footnote-font: null
   footnote-font-size: 7
   generate-community: true
   generate-network: true
   generate-sample: true
-  header-ebook: undefined
-  header-print-left: undefined
-  header-print-right: undefined
-  heading-font: undefined
-  heading-font-for-chapters: undefined
-  heading-font-for-parts: undefined
-  heading-font-for-sections: undefined
-  heading-font-for-sub-sections: undefined
-  heading-font-for-sub-sub-sections: undefined
-  heading-font-for-sub-sub-sub-sections: undefined
-  heading-font-for-sub-sub-sub-sub-sections: undefined
+  header-ebook: null
+  header-print-left: null
+  header-print-right: null
+  heading-font: null
+  heading-font-for-chapters: null
+  heading-font-for-parts: null
+  heading-font-for-sections: null
+  heading-font-for-sub-sections: null
+  heading-font-for-sub-sub-sections: null
+  heading-font-for-sub-sub-sub-sections: null
+  heading-font-for-sub-sub-sub-sub-sections: null
   heading-font-size-for-chapters: 18
   heading-font-size-for-parts: 24
   heading-font-size-for-sections: 16
@@ -2853,10 +2860,10 @@ null means that the value is not set, not the literal string null.
   heading-font-size-for-sub-sub-sub-sections: 13
   heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
-  isbn-epub: undefined
-  isbn-hardcover: undefined
-  isbn-paperback: undefined
-  isbn-pdf: undefined
+  isbn-epub: null
+  isbn-hardcover: null
+  isbn-paperback: null
+  isbn-pdf: null
   italicize-underlines: true
   lang: eng
   line-spacing: 1.0
@@ -2871,11 +2878,11 @@ null means that the value is not set, not the literal string null.
   smart-punctuation: true
   soft-breaks: source
   strikethrough-format: dynamic
-  subtitle: undefined
-  title: undefined
+  subtitle: null
+  title: null
   two-space-hack: true
   validate: true
-  version: undefined
+  version: null
 }
 
 
@@ -2955,11 +2962,11 @@ text-based resource where no figure title is provided. (This is how Markdown
 behaves.)
 
 `authors`
-: The authors of the Markua document. The default is undefined.
+: The authors of the Markua document. The default is null.
 
 `body-font`
 : The font of the body text (e.g. paragraph text) in the Markua document.
-The default is undefined, which lets the Markua Processor choose what it wants.
+The default is null, which lets the Markua Processor choose what it wants.
 
 `body-font-size`
 : The font size of the body text (e.g. paragraph text) in the Markua document.
@@ -2967,14 +2974,14 @@ This is measured in points. The default is 12.
 
 `cc-license`
 : The Creative Commons license applied to the Markua document, if any. The
-default is undefined, meaning that standard copyright rules apply.
+default is null, meaning that standard copyright rules apply.
 
 `contributors`
 : Any contributors to the Markua document who are not authors. The default is
-undefined.
+null.
 
 `copyright`
-: The owner of the copyright. The default is undefined.
+: The owner of the copyright. The default is null.
 
 `course-attempts`
 : *(Courses Only)* - The number of allowed attempts on the course itself. The
@@ -2988,7 +2995,7 @@ is 100% complete changes the `id` values of a quiz or quizzes, since this will
 affect current students.
 
 `dedication`
-: The dedication for the book or course. The default is undefined. Text here
+: The dedication for the book or course. The default is null. Text here
 does not support any Markua formatting; it is interpreted verbatim. If this
 is not desired, then a dedication can be authored using Markua in the content
 of the document itself.
@@ -3065,7 +3072,7 @@ the end of each chapter.
 `figure-classes`
 : This is a comma-separated list of the figure classes which are included in the
 list(s) of figures near the beginning of the book or course. The default is
-undefined, which means that all figures are included, regardless of the value
+null, which means that all figures are included, regardless of the value
 of their `class` attribute. An example of this setting is:
 `figure-classes: equation, figure, image, listing`. Note that whether the
 figures are listed, either grouped by their class or together in one big list,
@@ -3110,12 +3117,12 @@ current page number, followed by the chapter title. The legal choices to
 include in the string are the same as for `footer-ebook`.
 
 `footer-text`
-: Custom footer text for the book. The default is undefined. Text here does not
+: Custom footer text for the book. The default is null. Text here does not
 support any Markua formatting; it is interpreted verbatim.
 
 `footnote-font`
 : The font of the footnote text in the Markua document. The default is
-undefined, which means the Markua Processor will use the font of the
+null, which means the Markua Processor will use the font of the
 `body-font`.
 
 `footnote-font-size`
@@ -3153,35 +3160,35 @@ regardless of whether there are any `{sample: true}` directives.
 
 `header-ebook`
 : This is a comma-separated string containing the elements which should be
-output in the ebook header, in order. The default value is undefined, which
+output in the ebook header, in order. The default value is null, which
 means to output nothing. The legal choices to include in the string are the
 same as for `footer-ebook`.
 
 `header-print-left`
 : This is a comma-separated string containing the elements which should be
 output in the header of the left-facing page for a print-ready PDF, in order.
-The default value is undefined, which means to output nothing. The legal
+The default value is null, which means to output nothing. The legal
 choices to include in the string are the same as for `footer-ebook`.
 
 `header-print-right`
 : This is a comma-separated string containing the elements which should be
 output in the header of the right-facing page for a print-ready PDF, in order.
-The default value is undefined, which means to output nothing. The legal
+The default value is null, which means to output nothing. The legal
 choices to include in the string are the same as for `footer-ebook`.
 
 `heading-font`
 : The default font of all the heading text (e.g. part, chapter and section
-titles) in the Markua document. The default is undefined, which lets the Markua
+titles) in the Markua document. The default is null, which lets the Markua
 Processor choose what it wants.
 
 `heading-font-for-chapters`
 : The font of a chapter heading (`# Foo`) in the Markua document. The default is
-undefined, which means the Markua Processor uses the font specified by the
+null, which means the Markua Processor uses the font specified by the
 `heading-font` (if any), or to choose what it wants otherwise.
 
 `heading-font-for-parts`
 : The font of a part heading (`# Foo` with `{class: part}`) in the Markua
-document. The default is undefined, which means the Markua Processor uses the
+document. The default is null, which means the Markua Processor uses the
 font specified by the `heading-font` (if any), or to choose what it wants
 otherwise.
 
@@ -3212,7 +3219,7 @@ measured in points. The default is 18.
 `heading-font-size-for-parts`
 : The font size of a part heading (`# Foo` with `{class: part}`) in the Markua
 document. This is measured in points. The default is 24.
-document. The default is undefined, which means the Markua Processor uses the
+document. The default is null, which means the Markua Processor uses the
 font specified by the `heading-font` (if any), or to choose what it wants
 otherwise.
 
@@ -3246,27 +3253,27 @@ setting has no effect on EPUB and MOBI, which never include page numbers in
 their references (since the text is resizable).
 
 `isbn-epub`
-: The ISBN for the EPUB, if any. The default is undefined. Some countries
+: The ISBN for the EPUB, if any. The default is null. Some countries
 require different ISBNs for each ebook format; others do not. A Markua
 Processor must assume that the author knows what they are doing, and not
 enforce a requirement that this ISBN be different than that of other formats.
 
 `isbn-hardcover`
 : The ISBN for the print-ready PDF exported for a hardcover print book, if any.
-The default is undefined. Some countries require different ISBNs for each print
+The default is null. Some countries require different ISBNs for each print
 book format; others do not. A Markua Processor must assume that the author
 knows what they are doing, and not enforce a requirement that this ISBN be
 different than that of other formats.
 
 `isbn-paperback`
 : The ISBN for the print-ready PDF exported for a paperback print book, if any.
-The default is undefined. Some countries require different ISBNs for each print
+The default is null. Some countries require different ISBNs for each print
 book format; others do not. A Markua Processor must assume that the author
 knows what they are doing, and not enforce a requirement that this ISBN be
 different than that of other formats.
 
 `isbn-pdf`
-: The ISBN for the ebook PDF, if any. The default is undefined. Some countries
+: The ISBN for the ebook PDF, if any. The default is null. Some countries
 require different ISBNs for each ebook format; others do not. A Markua
 Processor must assume that the author knows what they are doing, and not
 enforce a requirement that this ISBN be different than that of other formats.
@@ -3847,11 +3854,11 @@ if the class was explicitly set to something
 elsif there is a title
   the class is `figure`
 else
-  the class is undefined
+  the class is null
 end
 ```
 
-A resource with an undefined class has no title and is not a figure.
+A resource with an null class has no title and is not a figure.
 
 ## Resource alt text (M)
 

@@ -2671,6 +2671,8 @@ settings hashes can be separated with single or multiple newlines, but once the
 first thing which is not part of a document settings hash or blank line is
 encountered, no more document settings hashes can be defined.)
 
+## TODO - Do I really actually want to do this? Really?
+
 The document settings hashes can either be created using JSON format, or by
 using a very JSON-inspired syntax.
 

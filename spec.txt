@@ -2722,6 +2722,8 @@ to type and more pleasant to read. This puts a bit more burden on the
 developers of Markua Processors, but it's worth it since there are far more
 authors that write in Markua than there are developers of Markua Processors.
 
+
+
 ## Overriding Settings
 
 Since Markua's origin is in Leanpub, which is primarily used to produce ebooks,
@@ -2788,13 +2790,16 @@ The same document settings defined in JSON would look like this:
 }
 ```
 
+For the rest of the Markua spec, document settings will be shown in Markua's
+JSON-esque syntax, not in JSON, but both work fine for everything.
+
+
 
 ## Default values of document settings
 
 Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
 null means that the value is not set, not the literal string null.
-
 
 ```
 {

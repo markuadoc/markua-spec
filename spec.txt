@@ -2715,6 +2715,7 @@ The same document settings defined in JSON would look like this:
   "lang": "eng",
   "two-space-hack": true
 }
+```
 
 Markua supports JSON since it is easier for tools to produce, and Markua
 supports its own custom JSON-inspired syntax since it is easier for authors
@@ -2733,8 +2734,9 @@ just the ebook PDF.
 
 As shown in the above example, some settings can be overridden for specific
 output formats. Two notable output formats that settings can be overridden for
-are `paperback` (for a print-ready PDF used to produce a paperback book) and
-`hardcover` (for a print-ready PDF used to produce a hardcover book).
+are `paperback` (for a file in a format such as a print-ready PDF or PostScript
+file used to produce a paperback book) and `hardcover` (for a similar file used
+to produce a hardcover book).
 
 The basic idea here is that overrides can modify the format of the output (say,
 to change the margin), but not the meaning of the document.
@@ -2742,8 +2744,6 @@ to change the margin), but not the meaning of the document.
 So, for example, it would be invalid to override the value of `two-space-hack`
 for a particular output format, since that would change the meaning of the
 Markua document.
-
-This is shown more in the examples below.
 
 This is an example of specifying most of the document settings in a flat list
 of key-value pairs, but overriding some of them for the `paperback` and
@@ -2811,11 +2811,11 @@ null means that the value is not set, not the literal string null.
   cc-license: undefined
   contributors: undefined
   copyright: undefined
+  course-attempts: 1
+  course-completeness: 0
   dedication: undefined
   dedication-align: middle
   default-code-language: guess
-  course-attempts: 1
-  course-completeness: 0
   default-exercise-show-answers: all
   default-quiz-attempts: 1
   default-quiz-auto-submit: true
@@ -2825,8 +2825,6 @@ null means that the value is not set, not the literal string null.
   default-random-question-order: false
   }
   ebook-pdf: {
-    overrides
-
     margin-bottom: 1.0
     margin-left: 1.0
     margin-right: 1.0

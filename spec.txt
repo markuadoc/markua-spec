@@ -2809,18 +2809,20 @@ null means that the value is not set, not the literal string null.
   cc-license: undefined
   contributors: undefined
   copyright: undefined
-  course-attempts: 1
-  course-completeness: 0
+  course: {
+    attempts: 1
+    completeness: 0
+    default-code-language: guess
+    default-exercise-show-answers: all
+    default-quiz-attempts: 1
+    default-quiz-auto-submit: true
+    default-quiz-show-answers: incorrect
+    default-quiz-use-result: best
+    default-random-choice-order: false
+    default-random-question-order: false
+  }
   dedication: undefined
   dedication-align: middle
-  default-code-language: guess
-  default-exercise-show-answers: all
-  default-quiz-attempts: 1
-  default-quiz-auto-submit: true
-  default-quiz-show-answers: incorrect
-  default-quiz-use-result: best
-  default-random-choice-order: false
-  default-random-question-order: false
   endnote-location: book-end
   figure-classes: undefined
   figure-number-format: sequential

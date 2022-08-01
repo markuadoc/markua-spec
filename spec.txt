@@ -2695,8 +2695,7 @@ Document information includes things like the `title`, `subtitle`, `copyright`,
 `authors`, etc. Markua Processor behavior includes settings like `alt-title`,
 `list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
 
-This is an example of specifying all the document settings in one flat list of
-key-value pairs:
+This is an example of specifying a handful of document settings:
 
 ```
 {
@@ -2706,6 +2705,43 @@ key-value pairs:
   two-space-hack: true
 }
 ```
+
+The same document settings defined in JSON would look like this:
+
+```
+{
+  "alt-title": "text",
+  "endnote-location": "book-end",
+  "lang": "eng",
+  "two-space-hack": true
+}
+
+Markua supports JSON since it is easier for tools to produce, and Markua
+supports its own custom JSON-inspired syntax since it is easier for authors
+to type and more pleasant to read. This puts a bit more burden on the
+developers of Markua Processors, but it's worth it since there are far more
+authors that write in Markua than there are developers of Markua Processors.
+
+## Overriding Settings
+
+Since Markua's origin is in Leanpub, which is primarily used to produce ebooks,
+the default output format is considered the ebook. This can either be both the
+ebook PDF and EPUB file, or (in cases where a setting does not apply to EPUB)
+just the ebook PDF.
+
+As shown in the above example, some settings can be overridden for specific
+output formats. Two notable output formats that settings can be overridden for
+are `paperback` (for a print-ready PDF used to produce a paperback book) and
+`hardcover` (for a print-ready PDF used to produce a hardcover book).
+
+The basic idea here is that overrides can modify the format of the output (say,
+to change the margin), but not the meaning of the document.
+
+So, for example, it would be invalid to override the value of `two-space-hack`
+for a particular output format, since that would change the meaning of the
+Markua document.
+
+This is shown more in the examples below.
 
 This is an example of specifying most of the document settings in a flat list
 of key-value pairs, but overriding them for the `hardcover` format:
@@ -2752,31 +2788,6 @@ The same document settings defined in JSON would look like this:
 }
 ```
 
-Markua supports JSON since it is easier for tools to produce, and Markua
-supports its own custom JSON-inspired syntax since it is easier for authors
-to type and more pleasant to read. This puts a bit more burden on the
-developers of Markua Processors, but it's worth it.
-
-## Overriding Settings
-
-Since Markua's origin is in Leanpub, which is primarily used to produce ebooks,
-the default output format is considered the ebook. This can either be both the
-ebook PDF and EPUB file, or (in cases where a setting does not apply to EPUB)
-just the ebook PDF.
-
-As shown in the above example, some settings can be overridden for specific
-output formats. Two notable output formats that settings can be overridden for
-are `paperback` (for a print-ready PDF used to produce a paperback book) and
-`hardcover` (for a print-ready PDF used to produce a hardcover book).
-
-The basic idea here is that overrides can modify the format of the output (say,
-to change the margin), but not the meaning of the document.
-
-So, for example, it would be invalid to override the value of `two-space-hack`
-for a particular output format, since that would change the meaning of the
-Markua document.
-
-This is shown more in the examples below.
 
 ## Default values of document settings
 

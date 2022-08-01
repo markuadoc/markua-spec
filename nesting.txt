@@ -2861,6 +2861,95 @@ vs.
 }
 ```
 
+
+
+
+### Previous Settings
+
+```
+{
+  alt-title: text
+  authors: undefined
+  body-font: undefined
+  body-font-size: 12
+  cc-license: undefined
+  contributors: undefined
+  copyright: undefined
+  course-attempts: 1
+  course-completeness: 0
+  dedication: undefined
+  dedication-align: middle
+  default-code-language: guess
+  default-exercise-show-answers: all
+  default-quiz-attempts: 1
+  default-quiz-auto-submit: true
+  default-quiz-show-answers: incorrect
+  default-quiz-use-result: best
+  default-random-choice-order: false
+  default-random-question-order: false
+  endnote-location: book-end
+  figure-classes: undefined
+  figure-number-format: sequential
+  footer-ebook: chapter-title, page-number
+  footer-print-left: page-number, chapter-title
+  footer-print-right: section-title, page-number
+  footnote-font: undefined
+  footnote-font-size: 7
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  header-ebook: undefined
+  header-print-left: undefined
+  header-print-right: undefined
+  heading-font: undefined
+  heading-font-for-chapters: undefined
+  heading-font-for-parts: undefined
+  heading-font-for-sections: undefined
+  heading-font-for-sub-sections: undefined
+  heading-font-for-sub-sub-sections: undefined
+  heading-font-for-sub-sub-sub-sections: undefined
+  heading-font-for-sub-sub-sub-sub-sections: undefined
+  heading-font-size-for-chapters: 18
+  heading-font-size-for-parts: 24
+  heading-font-size-for-sections: 16
+  heading-font-size-for-sub-sections: 15
+  heading-font-size-for-sub-sub-sections: 14
+  heading-font-size-for-sub-sub-sub-sections: 13
+  heading-font-size-for-sub-sub-sub-sub-sections: 12
+  include-page-numbers-in-references: true
+  isbn-epub: undefined
+  isbn-hardcover: undefined
+  isbn-paperback: undefined
+  isbn-pdf: undefined
+  italicize-underlines: true
+  lang: eng
+  line-spacing: 1.0
+  links: footnotes
+  list-figures: combined
+  margin-bottom-ebook: 1.0
+  margin-left-ebook: 1.0
+  margin-right-ebook: 1.0
+  margin-top-ebook: 1.0
+  measurement-units: in
+  note-type: footnotes-or-endnotes
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  page-height: 11.0
+  page-width: 8.5
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  smart-punctuation: true
+  soft-breaks: source
+  strikethrough-format: dynamic
+  subtitle: undefined
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+}
+```
+
 What these settings all mean is explained in the rest of this section.
 
 

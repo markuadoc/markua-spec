@@ -4,6 +4,7 @@ COPY package.json .
 RUN apt-get update
 RUN apt-get install lua5.1 luarocks -y
 RUN luarocks install lcmark
+RUN luarocks install lua-yaml
 
 COPY . .
 EXPOSE 3000

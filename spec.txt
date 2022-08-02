@@ -2671,6 +2671,13 @@ includes settings like `alt-title`, `list-figures`, `italicize-underlines`,
 
 
 
+# TODO: JSON, Relaxed JSON / JSON5 or custom?
+
+Even though I prefer the Relaxed JSON look, should I do JSON, Relaxed JSON or a custom thing similar to Relaxed JSON?
+
+YAML is too complex. Relaxed JSON and JSON5 are not widely adopted. JSON is ubiquitous but has the annoying quotes and commas...
+
+
 ## Document Settings are written in Relaxed JSON
 
 Document settings are defined in one or more document settings hashes. The

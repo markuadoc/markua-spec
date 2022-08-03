@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,10 +174,11 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
-<li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.1</span>Document settings which apply to books and courses (M)</a></li>
-<li><a href="#document-settings-which-apply-to-books-only-m-"><span class="number">4.2</span>Document settings which apply to books only (M)</a></li>
-<li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.3</span>Document settings which apply to courses only (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#document-settings-are-written-in-relaxed-json"><span class="number">4.1</span>Document Settings are written in Relaxed JSON</a></li>
+<li><a href="#overriding-settings"><span class="number">4.2</span>Overriding Settings</a></li>
+<li><a href="#default-values-of-document-settings"><span class="number">4.3</span>Default values of document settings</a></li>
+<li><a href="#complete-list-of-document-settings"><span class="number">4.4</span>Complete list of document settings</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.5</span>Multiple document settings hashes are permitted (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -2662,7 +2661,7 @@ are discussed later.)</p>
 
 This<span class="space"> </span>[span<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{#hello},<span class="space"> </span>so<span class="space"> </span>hooray!
 
-This<span class="space"> </span>span<span class="space"> </span>[also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{id:<span class="space"> </span>world}.<span class="space"> </span>
+This<span class="space"> </span>span<span class="space"> </span>[also<span class="space"> </span>has<span class="space"> </span>an<span class="space"> </span>id]{id:<span class="space"> </span>world}.
 
 This<span class="space"> </span>span<span class="space"> </span>contains<span class="space"> </span>[古池や蛙飛び込む水の音]{lang:<span class="space"> </span>jpn}<span class="space"> </span>Japanese<span class="space"> </span>text.
 </code></pre>
@@ -3039,40 +3038,236 @@ Yada<span class="space"> </span>yada<span class="space"> </span>yada.
 of this, almost all formatting is done by global switches. These switches are
 called document settings, and they are defined once, at the beginning of the
 document. Document settings affect the formatting of the entire book or course.</p>
+<p>Document settings include both document information and switches which affect
+the Markua Processor behavior. Document information includes settings like the
+<code>title</code>, <code>subtitle</code>, <code>copyright</code>, <code>authors</code>, etc. Markua Processor behavior
+includes settings like <code>alt-title</code>, <code>list-figures</code>, <code>italicize-underlines</code>,
+<code>smart-punctuation</code>, etc.</p>
+<h2 id="document-settings-are-written-in-relaxed-json" class="definition">
+<span class="number">4.1</span>Document Settings are written in Relaxed JSON
+</h2>
 <p>Document settings are defined in one or more document settings hashes. The
 document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash or a blank line is
 encountered, no more document settings hashes can be defined. (Document
 settings hashes can be separated with single or multiple newlines, but once the
-first thing which is not a document setting or blank line is encountered, no
-more document settings hashes can be defined.)</p>
-<p>The settings are newline-separated key-value pairs (<code>key: value</code>) which contain
-information about the document and about the desired behavior of the Markua
-Processor.</p>
-<p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
-<code>authors</code>, etc. Markua Processor behavior includes settings like <code>alt-title</code>,
-<code>list-figures</code>, <code>italicize-underlines</code>, <code>smart-punctuation</code>, etc.</p>
-<p>The format of a document settings hash is as follows: Every non-blank line
-in the document settings hash must contain a key, a colon <code>:</code>, and a value.
-Any whitespace at the beginning or end of the keys and values will be stripped.
-Only the first colon is important; subsequent colons on a line will just be
-part of the value.</p>
+first thing which is not part of a document settings hash or blank line is
+encountered, no more document settings hashes can be defined.)</p>
+<p>The specific format of the document settings hashes is
+<a href="http://www.relaxedjson.org/">Relaxed JSON</a>. JSON is valid Relaxed JSON, and
+Relaxed JSON can be easily converted into JSON. So, either Relaxed JSON or
+JSON can be used to specify the document settings in a Markua document.</p>
+<p>JSON has a perfectly good <a href="https://www.json.org/json-en.html">syntax</a>, and is a
+<a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">standard</a>,
+so it does not need to be explained here.</p>
+<p>If you are using a tool to generate your document settings, chances are the
+tool will output them in JSON.</p>
+<p>However, if you want to write some or all of your document settings by hand,
+typing all the quotes and commas can get annoying. So, in this case, you can
+write Relaxed JSON.</p>
+<p>(To be clear: while JSON format data is legal Relaxed JSON format data, the
+reverse is not true: <strong>Relaxed JSON is not valid JSON</strong>. However, Relaxed JSON
+can be converted into JSON easily, since Relaxed JSON is basically JSON without
+almost all of the quotes and commas.)</p>
+<p>Since Markua supports multiple document settings hashes, the most common case
+is a combination: a tool such as Leanpub will define allow the author to
+specify most or all of the document settings via a UI, and then it will output
+JSON (which will never be shown to the author) for these settings. However,
+the author can override any of these settings by writing their own document
+settings hash at the start of their manuscript (either at the top of their
+first manuscript file, or preferably in its own file before any real manuscript
+files). Since any document settings hash which is generated by a tool will be
+output before the actual content of the manuscript itself, this means that any
+document settings defined by the author will override those defined by the
+tool.</p>
+<p>This is an example of a single document settings hash defined in Relaxed JSON:</p>
+<pre><code>{
+  alt-title: text
+  cc-license: null
+  endnote-location: book-end
+  lang: eng
+  footer-ebook: [chapter-title page-number]
+  footer-print-left: [page-number chapter-title]
+  footer-print-right: [section-title page-number]
+  hardcover: {
+    margin-inner: 1.5
+    margin-outer: 0.75
+  }
+  margin-left: 1.0
+  margin-right: 1.0
+  paperback: {
+    margin-inner: 1.0
+    margin-outer: 0.5
+  }
+  two-space-hack: true
+  units: in
+}
+</code></pre>
+<p>Converted to JSON, this becomes:</p>
+<pre><code>{
+  &quot;alt-title&quot;: &quot;text&quot;,
+  &quot;cc-license&quot;: null,
+  &quot;endnote-location&quot;: &quot;book-end&quot;,
+  &quot;lang&quot;: &quot;eng&quot;,
+  &quot;footer-ebook&quot;: [
+    &quot;chapter-title&quot;,
+    &quot;page-number&quot;
+  ],
+  &quot;footer-print-left&quot;: [
+    &quot;page-number&quot;,
+    &quot;chapter-title&quot;
+  ],
+  &quot;footer-print-right&quot;: [
+    &quot;section-title&quot;,
+    &quot;page-number&quot;
+  ],
+  &quot;hardcover&quot;: {
+    &quot;margin-inner&quot;: 1,
+    &quot;margin-outer&quot;: 0
+  },
+  &quot;margin-left&quot;: 1,
+  &quot;margin-right&quot;: 1,
+  &quot;paperback&quot;: {
+    &quot;margin-inner&quot;: 1,
+    &quot;margin-outer&quot;: 0
+  },
+  &quot;two-space-hack&quot;: true,
+  &quot;units&quot;: &quot;in&quot;
+}
+</code></pre>
+<p>There are considerably fewer parsing libraries for Relaxed JSON than for JSON,
+so this puts a bit more burden on the developers of Markua Processors. However,
+it’s worth it, since Relaxed JSON is much more pleasant to write, and does not
+look out-of-place in a Markua document the way that JSON does. Also, the author
+experience is always more important than the developer experience: there are
+far more authors that write in Markua than there are developers of Markua
+Processors.</p>
+<h2 id="overriding-settings" class="definition">
+<span class="number">4.2</span>Overriding Settings
+</h2>
+<p>Since Markua’s origin is in Leanpub, which is primarily used to produce ebooks,
+the default output format is considered the ebook. This can either be both the
+ebook PDF and EPUB file, or (in cases where a setting does not apply to EPUB)
+just the ebook PDF.</p>
+<p>As shown in the above example, some settings can be overridden for specific
+output formats. Two notable output formats that settings can be overridden for
+are <code>paperback</code> (for a file in a format such as a print-ready PDF or PostScript
+file used to produce a paperback book) and <code>hardcover</code> (for a similar file used
+to produce a hardcover book).</p>
+<p>The basic idea here is that overrides can modify the format of the output (say,
+to change the margin), but not the meaning of the document.</p>
+<p>So, for example, it would be invalid to override the value of <code>two-space-hack</code>
+for a particular output format, since that would change the meaning of the
+Markua document.</p>
+<p>In the above example, most of the document settings applied to all formats, but
+some of them were overridden for the <code>paperback</code> and <code>hardcover</code> formats.</p>
+<h2 id="default-values-of-document-settings" class="definition">
+<span class="number">4.3</span>Default values of document settings
+</h2>
 <p>Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
-undefined means that the value is not set, not the literal string undefined.</p>
+null means that the value is not set, not the literal string null.</p>
 <pre><code>{
-  list-figures: combined
-  figure-number-format: sequential
-  authors: undefined
   alt-title: text
-  contributors: undefined
-  copyright: undefined
-  default-code-language: guess
-  figure-classes: undefined
+  authors: null
+  cc-license: null
+  contributors: null
+  copyright: null
+  dedication: null
+  dedication-align: middle
+  endnote-location: book-end
+  figure-classes: null
+  figure-number-format: sequential
+  generate-community: true
+  generate-member: true
+  generate-sample: true
+
+  course: {
+    attempts: 1
+    completeness: 0
+    default-code-language: guess
+    default-exercise-show-answers: all
+    default-quiz-attempts: 1
+    default-quiz-auto-submit: true
+    default-quiz-show-answers: incorrect
+    default-quiz-use-result: best
+    default-random-choice-order: false
+    default-random-question-order: false
+  }
+  ebook: {
+    body: {
+      font: {
+        face: null
+        size: 12
+        weight: null
+      }
+    }
+    header: null
+    footer: {
+      text: [chapter-title page-number]
+      font: {
+        face: null
+        size: 9
+        weight: null
+      }
+    }
+    footnotes: {
+      font: {
+        face: null
+        size: 9
+        weight: null
+      }
+    }
+  }
+  paperback: {
+    header-left: null
+    header-right: null
+    footer: {
+      font: {
+        face: null
+        size: 9
+        weight: null
+      }
+      left: {
+        text: [page-number chapter-title]
+      }
+    }
+    footer-right: {
+      [section-title page-number]
+
+  }
+  hardcover: {
+    header-left: null
+    header-right: null
+    footer-left: [page-number chapter-title]
+    footer-right: [section-title page-number]
+  }
+  heading-font: null
+  heading-font-for-chapters: null
+  heading-font-for-parts: null
+  heading-font-for-sections: null
+  heading-font-for-sub-sections: null
+  heading-font-for-sub-sub-sections: null
+  heading-font-for-sub-sub-sub-sections: null
+  heading-font-for-sub-sub-sub-sub-sections: null
+  heading-font-size-for-chapters: 18
+  heading-font-size-for-parts: 24
+  heading-font-size-for-sections: 16
+  heading-font-size-for-sub-sections: 15
+  heading-font-size-for-sub-sub-sections: 14
+  heading-font-size-for-sub-sub-sub-sections: 13
+  heading-font-size-for-sub-sub-sub-sub-sections: 12
   include-page-numbers-in-references: true
+  isbn-epub: null
+  isbn-hardcover: null
+  isbn-paperback: null
+  isbn-pdf: null
   italicize-underlines: true
   lang: eng
+  line-spacing: 1.0
+  links: footnotes
   list-figures: combined
+  note-type: footnotes-or-endnotes
   number-chapters: true
   number-figures: sequential
   number-sections: false
@@ -3081,35 +3276,57 @@ undefined means that the value is not set, not the literal string undefined.</p>
   smart-punctuation: true
   soft-breaks: source
   strikethrough-format: dynamic
-  title: undefined
+  subtitle: null
+  title: null
   two-space-hack: true
   validate: true
-  version: undefined
-  generate-community: true
-  generate-network: true
-  generate-sample: true
-  course-attempts: 1
-  course-completeness: 0
-  default-exercise-show-answers: all
-  default-quiz-attempts: 1
-  default-quiz-auto-submit: true
-  default-quiz-show-answers: incorrect
-  default-quiz-use-result: best
-  default-random-choice-order: false
-  default-random-question-order: false
+  version: null
 }
+
+
+
+  ebook-pdf: {
+    margin-bottom: 1.0
+    margin-left: 1.0
+    margin-right: 1.0
+    margin-top: 1.0
+    page-height: 11.0
+    page-width: 8.5
+  }
+  hardcover: {
+    measurement-units: mm
+    margin-bottom: 0.8
+    margin-left: 1.50
+    margin-right: 1.0
+    margin-top: 33.2
+    page-height: 9.0
+    page-width: 6.0
+    isbn: bar
+  }
+  paperback: {
+    margin-bottom: 1.0
+    margin-left: 1.0
+    margin-right: 1.0
+    margin-top: 1.0
+  }
+
+  measurement-units: in
+  isbn: foo
+
+
 </code></pre>
 <p>What these settings all mean is explained in the rest of this section.</p>
-<h2 id="document-settings-which-apply-to-books-and-courses-m-" class="definition">
-<span class="number">4.1</span>Document settings which apply to books and courses (M)
+<h2 id="complete-list-of-document-settings" class="definition">
+<span class="number">4.4</span>Complete list of document settings
 </h2>
-<p>The following settings apply to books and courses.</p>
+<p>Some of these settings may appear to only apply to books. However, with Markua
+Processors such as Leanpub which also generate an ebook of course material when
+generating a course, these settings may apply to the generated material ebook.
+So, they are included here.</p>
 <p>Note that the behavior of resources which are treated as figures is controlled
 by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>list-figures</code> and
 <code>number-figures</code>. These need to be considered together: the behavior of these
 settings are tightly coupled.</p>
-<p><code>authors</code>
-: The authors of the Markua document. The default is undefined.</p>
 <p><code>alt-title</code>
 : <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
@@ -3135,11 +3352,41 @@ not define support for external text-based resources, there is no conflict here.
 text-based resource where no figure title is provided. (This is how Markdown
 behaves.)</li>
 </ul>
+<p><code>authors</code>
+: The authors of the Markua document. The default is null.</p>
+<p><code>body-font</code>
+: The font of the body text (e.g. paragraph text) in the Markua document.
+The default is null, which lets the Markua Processor choose what it wants.</p>
+<p><code>body-font-size</code>
+: The font size of the body text (e.g. paragraph text) in the Markua document.
+This is measured in points. The default is 12.</p>
+<p><code>cc-license</code>
+: The Creative Commons license applied to the Markua document, if any. The
+default is null, meaning that standard copyright rules apply.</p>
 <p><code>contributors</code>
 : Any contributors to the Markua document who are not authors. The default is
-undefined.</p>
+null.</p>
 <p><code>copyright</code>
-: The owner of the copyright. The default is undefined.</p>
+: The owner of the copyright. The default is null.</p>
+<p><code>course-attempts</code>
+: <em>(Courses Only)</em> - The number of allowed attempts on the course itself. The
+default is <code>1</code>.</p>
+<p><code>course-completeness</code>
+: <em>(Courses Only)</em> - How “done” the course itself is. Expressed as a
+percentage, in decimal value. The default is <code>0</code>. A value of <code>100</code> or <code>100.0</code>
+is the maximum. A Markua Processor may do something smart when a course which
+is 100% complete changes the <code>id</code> values of a quiz or quizzes, since this will
+affect current students.</p>
+<p><code>dedication</code>
+: The dedication for the book or course. The default is null. Text here
+does not support any Markua formatting; it is interpreted verbatim. If this
+is not desired, then a dedication can be authored using Markua in the content
+of the document itself.</p>
+<p><code>dedication-align</code>
+: The <code>dedication-align</code> can be <code>left</code>, <code>right</code> or <code>middle</code>. The default is
+<code>middle</code>. Note that a Markua Processor may interpret <code>center</code> and/or <code>centre</code>
+as aliases for <code>middle</code>. (The value of <code>middle</code> was chosen because of the
+<code>center</code> vs. <code>centre</code> spelling issue.)</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3157,15 +3404,189 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
+<p><code>default-exercise-show-answers</code>
+: <em>(Courses Only)</em> - This can be <code>all</code> (the default), <code>incorrect</code> or <code>none</code>. It
+affects how answers are shown after an exercise is completed, say in an online
+course.</p>
+<p><code>default-quiz-attempts</code>
+: <em>(Courses Only)</em> - The default number of allowed attempts on a quiz. The
+default is <code>1</code>. Note that for quizzes, a value of <code>0</code> means the quiz cannot be
+taken (yet). A value of <code>-1</code> means the quiz has an unlimited number of
+attempts. Setting either of these as the value of <code>default-quiz-attempts</code> is a
+legitimate value, and has the effect of changing the default value for all
+quizzes. Again, an exercise always has an unlimited number of attempts, so
+there is no corresponding <code>default-exercise-attempts</code> value.</p>
+<p><code>default-quiz-auto-submit</code>
+: <em>(Courses Only)</em> - <code>true</code> or <code>false</code>. The default is <code>true</code>. If true, an
+incomplete quiz is submitted when the <code>time-limit</code> is expired. If false, it is
+not. Either way, an incomplete quiz counts as an attempt.</p>
+<p><code>default-quiz-show-answers</code>
+: <em>(Courses Only)</em> - This can be <code>all</code>, <code>incorrect</code> (the default) or <code>none</code>.
+It affects how answers are shown after a quiz is completed, say in an online
+course.</p>
+<p><code>default-quiz-use-result</code>
+: <em>(Courses Only)</em> - <code>best</code> or <code>latest</code>. The default is <code>best</code>. Whether the
+best result on the quiz is used, or the latest one.</p>
+<p><code>default-random-choice-order</code>
+: <em>(Courses Only)</em> - <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the
+default behavior of multiple choice questions. If <code>true</code>, the choices in the
+multiple choice question are randomly arranged; if <code>false</code>, they are presented
+in the order written.</p>
+<p><code>default-random-question-order</code>
+: <em>(Courses Only)</em> - <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the
+default behavior of the quiz or exercise. If <code>true</code>, the questions are randomly
+arranged; if <code>false</code>, they are presented in the order written.</p>
+<p><code>endnote-location</code>
+: <code>chapter-end</code> or <code>book-end</code>. The default is <code>book-end</code>. If <code>endnote-location</code>
+is <code>book-end</code>, any endnotes are inserted near the end of the book, grouped by
+chapter. If <code>endnote-location</code> is <code>chapter-end</code>, any endnotes are inserted at
+the end of each chapter.</p>
 <p><code>figure-classes</code>
-: this is a comma-separated list of the figure classes which are included in the
+: This is a comma-separated list of the figure classes which are included in the
 list(s) of figures near the beginning of the book or course. The default is
-undefined, which means that all figures are included, regardless of the value
+null, which means that all figures are included, regardless of the value
 of their <code>class</code> attribute. An example of this setting is:
 <code>figure-classes: equation, figure, image, listing</code>. Note that whether the
 figures are listed, either grouped by their class or together in one big list,
 is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
 is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
+<p><code>figure-number-format</code>
+: <code>chapter</code> or <code>sequential</code>. The default is <code>sequential</code>. If <code>sequential</code>, all
+figures in the book or course are numbered starting from 1; if <code>chapter</code>, all
+figures in each chapter of the book or course are numbered using the chapter
+number, followed by a period (<code>.</code>), followed by a sequential number. This
+attribute is used in conjunction with the <code>list-figures</code> and <code>number-figures</code>
+settings.</p>
+<p><code>footer-ebook</code>
+: This is a comma-separated string containing the elements which should be
+output in the ebook footer, in order. The default value is
+<code>chapter-title, page-number</code>, which means to output the current chapter title,
+followed by the page number. Other choices to include in the string are:</p>
+<ul>
+<li><code>book-title</code></li>
+<li><code>closest-title</code> (for the nearest title, whether that is a chapter, section,
+sub-section, sub-sub-section, etc.)</li>
+<li><code>author-full-names</code> (the given names of all the authors)</li>
+<li><code>author-last-names</code> (the family names of all the authors)</li>
+<li><code>primary-author-full-name</code> (the full name of the main book author)</li>
+<li><code>primary-author-last-name</code> (the family name of the main book author)</li>
+<li><code>section-title</code></li>
+</ul>
+<p><code>footer-print-left</code>
+: This is a comma-separated string containing the elements which should be
+output in the footer of the left-facing page for a print-ready PDF, in order.
+The default value is <code>page-number, chapter-title</code>, which means to output the
+current page number, followed by the chapter title. The legal choices to
+include in the string are the same as for <code>footer-ebook</code>.</p>
+<p><code>footer-print-right</code>
+: This is a comma-separated string containing the elements which should be
+output in the footer of the right-facing page for a print-ready PDF, in order.
+The default value is <code>section-title, page-number</code>, which means to output the
+current page number, followed by the chapter title. The legal choices to
+include in the string are the same as for <code>footer-ebook</code>.</p>
+<p><code>footer-text</code>
+: Custom footer text for the book. The default is null. Text here does not
+support any Markua formatting; it is interpreted verbatim.</p>
+<p><code>footnote-font</code>
+: The font of the footnote text in the Markua document. The default is
+null, which means the Markua Processor will use the font of the
+<code>body-font</code>.</p>
+<p><code>footnote-font-size</code>
+: The font size of the footnote text in the Markua document. This is measured
+in points. The default is 7.</p>
+<p><code>generate-community</code>
+: <em>(Books Only)</em> - <code>true</code> or <code>false</code>. The default value is <code>true</code>. If
+<code>generate-community</code> is <code>true</code> and if there are any chapters or sections with
+<code>{community: true}</code> directives, then a community edition book or course is
+generated, which is composed of the content which is included in the community
+edition with <code>{community: true}</code> directives. If <code>generate-community</code> is
+<code>false</code>, then a community edition book or course is not generated, regardless
+of whether there are any <code>{community: true}</code> directives. The idea of a
+“community edition” is a version of the book which is given away in exchange
+for email addresses, for marketing purposes.</p>
+<p><code>generate-member</code>
+: <em>(Books Only)</em> - <code>true</code> or <code>false</code>. The default value is <code>true</code>. If
+<code>generate-member</code> is <code>true</code> and if there are any chapters or sections with
+<code>{member: true}</code> directives, then a member edition book or course is
+generated, which is composed of the content which is included in the member
+edition with <code>{member: true}</code> directives. If <code>generate-member</code> is <code>false</code>,
+then a member edition book or course is not generated, regardless of whether
+there are any <code>{member: true}</code> directives. The idea of a “member edition” is
+a version of the book which is available as part of a subscription service,
+either on the original service or via a third-party partner service.</p>
+<p><code>generate-sample</code>
+: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-sample</code> is
+<code>true</code>, then a sample book or course is generated, which is composed of the
+content which is included in the sample with <code>{sample: true}</code> directives.
+If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
+regardless of whether there are any <code>{sample: true}</code> directives.</p>
+<p><code>header-ebook</code>
+: This is a comma-separated string containing the elements which should be
+output in the ebook header, in order. The default value is null, which
+means to output nothing. The legal choices to include in the string are the
+same as for <code>footer-ebook</code>.</p>
+<p><code>header-print-left</code>
+: This is a comma-separated string containing the elements which should be
+output in the header of the left-facing page for a print-ready PDF, in order.
+The default value is null, which means to output nothing. The legal
+choices to include in the string are the same as for <code>footer-ebook</code>.</p>
+<p><code>header-print-right</code>
+: This is a comma-separated string containing the elements which should be
+output in the header of the right-facing page for a print-ready PDF, in order.
+The default value is null, which means to output nothing. The legal
+choices to include in the string are the same as for <code>footer-ebook</code>.</p>
+<p><code>heading-font</code>
+: The default font of all the heading text (e.g. part, chapter and section
+titles) in the Markua document. The default is null, which lets the Markua
+Processor choose what it wants.</p>
+<p><code>heading-font-for-chapters</code>
+: The font of a chapter heading (<code># Foo</code>) in the Markua document. The default is
+null, which means the Markua Processor uses the font specified by the
+<code>heading-font</code> (if any), or to choose what it wants otherwise.</p>
+<p><code>heading-font-for-parts</code>
+: The font of a part heading (<code># Foo</code> with <code>{class: part}</code>) in the Markua
+document. The default is null, which means the Markua Processor uses the
+font specified by the <code>heading-font</code> (if any), or to choose what it wants
+otherwise.</p>
+<p><code>heading-font-for-sections</code>
+: The font of a section heading (<code>## Foo</code>) in the Markua document. This is
+measured in points. The default is 16.</p>
+<p><code>heading-font-for-sub-sections</code>
+: The font of a section heading (<code>### Foo</code>) in the Markua document.
+This is measured in points. The default is 15.</p>
+<p><code>heading-font-for-sub-sub-sections</code>
+: The font of a section heading (<code>#### Foo</code>) in the Markua document.
+This is measured in points. The default is 14.</p>
+<p><code>heading-font-for-sub-sub-sub-sections</code>
+: The font of a section heading (<code>##### Foo</code>) in the Markua document.
+This is measured in points. The default is 13.</p>
+<p><code>heading-font-for-sub-sub-sub-sub-sections</code>
+: The font of a section heading (<code>###### Foo</code>) in the Markua document.
+This is measured in points. The default is 12.</p>
+<p><code>heading-font-size-for-chapters</code>
+: The font size of a chapter heading (<code># Foo</code>) in the Markua document. This is
+measured in points. The default is 18.</p>
+<p><code>heading-font-size-for-parts</code>
+: The font size of a part heading (<code># Foo</code> with <code>{class: part}</code>) in the Markua
+document. This is measured in points. The default is 24.
+document. The default is null, which means the Markua Processor uses the
+font specified by the <code>heading-font</code> (if any), or to choose what it wants
+otherwise.</p>
+<p><code>heading-font-size-for-sections</code>
+: The font size of a section heading (<code>## Foo</code>) in the Markua document. This is
+measured in points. The default is 16.</p>
+<p><code>heading-font-size-for-sub-sections</code>
+: The font size of a section heading (<code>### Foo</code>) in the Markua document.
+This is measured in points. The default is 15.</p>
+<p><code>heading-font-size-for-sub-sub-sections</code>
+: The font size of a section heading (<code>#### Foo</code>) in the Markua document.
+This is measured in points. The default is 14.</p>
+<p><code>heading-font-size-for-sub-sub-sub-sections</code>
+: The font size of a section heading (<code>##### Foo</code>) in the Markua document.
+This is measured in points. The default is 13.</p>
+<p><code>heading-font-size-for-sub-sub-sub-sub-sections</code>
+: The font size of a section heading (<code>###### Foo</code>) in the Markua document.
+This is measured in points. The default is 12.</p>
 <p><code>include-page-numbers-in-references</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. When a smart crosslink to a
 figure reference is inserted with <code>#f</code>, this setting determines how the
@@ -3174,6 +3595,28 @@ number (e.g. “Figure 8.2: Anatomy of a Squirrel on page 42”) when inserted i
 a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of a Squirrel”. This
 setting has no effect on EPUB and MOBI, which never include page numbers in
 their references (since the text is resizable).</p>
+<p><code>isbn-epub</code>
+: The ISBN for the EPUB, if any. The default is null. Some countries
+require different ISBNs for each ebook format; others do not. A Markua
+Processor must assume that the author knows what they are doing, and not
+enforce a requirement that this ISBN be different than that of other formats.</p>
+<p><code>isbn-hardcover</code>
+: The ISBN for the print-ready PDF exported for a hardcover print book, if any.
+The default is null. Some countries require different ISBNs for each print
+book format; others do not. A Markua Processor must assume that the author
+knows what they are doing, and not enforce a requirement that this ISBN be
+different than that of other formats.</p>
+<p><code>isbn-paperback</code>
+: The ISBN for the print-ready PDF exported for a paperback print book, if any.
+The default is null. Some countries require different ISBNs for each print
+book format; others do not. A Markua Processor must assume that the author
+knows what they are doing, and not enforce a requirement that this ISBN be
+different than that of other formats.</p>
+<p><code>isbn-pdf</code>
+: The ISBN for the ebook PDF, if any. The default is null. Some countries
+require different ISBNs for each ebook format; others do not. A Markua
+Processor must assume that the author knows what they are doing, and not
+enforce a requirement that this ISBN be different than that of other formats.</p>
 <p><code>italicize-underlines</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
@@ -3183,6 +3626,13 @@ their references (since the text is resizable).</p>
 : The <a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
 language code of the language that the Markua document is written in. The
 default is <code>eng</code>.</p>
+<p><code>line-spacing</code>
+: The line spacing for PDF output. The default is <code>1.0</code>, for single-spaced.
+2.0 is double-spaced, 1.5 is in-between, etc.</p>
+<p><code>links</code>
+: <code>endnotes</code>, <code>footnotes</code> or <code>links</code>. The default is <code>footnotes</code>. This setting
+controls whether hyperlinks to web resources (e.g. with <code>http://</code> or <code>https://</code>)
+are shown as endnotes, footnotes or as links.</p>
 <p><code>list-figures</code>
 : <code>combined</code>, <code>groups</code> or <code>none</code>. The default value is <code>combined</code>. This setting
 controls whether figures are listed in one or more lists near the beginning of
@@ -3219,6 +3669,14 @@ List of Lemmas, List of Theorems, etc.</li>
 produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
 Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
 document settings for books like computer programming books.</p>
+<p><code>note-type</code>
+: <code>endnotes</code>, <code>footnotes</code> or <code>footnotes-or-endnotes</code>. The default is
+<code>footnotes-or-endnotes</code>. If <code>note-type</code> is <code>footnotes-or-endnotes</code>, then notes
+are inserted as footnotes when inserted with <code>^</code>, and as endnotes when inserted
+with ^^. If <code>note-type</code> is <code>footnotes</code>, then all notes are inserted as
+footnotes, regardless of whether <code>^</code> or <code>^^</code> was used to insert it. If
+<code>note-type</code> is <code>endnotes</code>, then all notes are inserted as endnotes, regardless
+of whether <code>^</code> or <code>^^</code> was used to insert it.</p>
 <p><code>number-chapters</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
 <p><code>number-figures</code>
@@ -3231,6 +3689,19 @@ are not numbered.</p>
 <p><code>number-sections</code>
 : <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
 are numbered.</p>
+<p><code>page-height</code>
+: The height of the page. The default is “11.0”, for 11.0 inches (when combined
+with the default value of <code>page-size-units</code>).</p>
+<p><code>page-width</code>
+: The width of the page. The default is “8.5”, for 8.5 inches (when combined
+with the default value of <code>page-size-units</code>).</p>
+<p><code>page-size-units</code>
+: <code>in</code>, <code>cm</code> or <code>mm</code>. The default is <code>in</code>, for inches. Other choices are <code>cm</code>
+for centimetres, and mm for millimetres. These are the units used to define the
+size of the page and of its margins.</p>
+<p><code>part-heading-font-size</code>
+: The font size of a part heading (<code># Foo</code> with <code>{class: part}</code>) in the Markua
+document. This is measured in points. The default is 24.</p>
 <p><code>restart-endnote-numbering</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the endnote numbering is restarted
 at the end of a chapter.</p>
@@ -3281,6 +3752,8 @@ the format of the strikethrough line, when used with math resources. A
 to make a diagonal line, and a <code>dynamic</code> value (the default) means to make a
 horizontal line when the equation is about a line of text high, and a diagonal
 line when the equation is meaningfully taller.</p>
+<p><code>subtitle</code>
+: The subtitle of the Markua document.</p>
 <p><code>title</code>
 : The title of the Markua document.</p>
 <p><code>two-space-hack</code>
@@ -3303,82 +3776,8 @@ validated.</p>
 : The version of the Markua document. This is primarily intended for use when
 producing analytics for courses. (This is not related to the version of the
 Markua specification being used; it is the version of the book or course.)</p>
-<h2 id="document-settings-which-apply-to-books-only-m-" class="definition">
-<span class="number">4.2</span>Document settings which apply to books only (M)
-</h2>
-<p>The following settings are defined by Markua, but only make sense in the
-context of a book. So, a Markua Processor which is not generating a book can
-ignore them.</p>
-<p>Note that while the idea of a sample book is pretty universal, the idea of a
-community or network edition could be argued to be somewhat Leanpub-specific.
-However, these are in the Markua spec instead of being left as extension
-attributes, since they are essentially different levels of sample or subset
-books, and I am convinced that this has a general use outside of Leanpub.</p>
-<p><code>generate-community</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
-<code>true</code>, then a community edition book or course is generated, which is composed
-of the content which is included in the community edition with
-<code>{community: true}</code> directives. If <code>generate-community</code> is <code>false</code>, then a
-community edition book or course is not generated, regardless of whether there
-are any <code>{community: true}</code> directives.</p>
-<p><code>generate-network</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-network</code> is
-<code>true</code>, then a network edition book or course is generated, which is composed
-of the content which is included in the network edition with
-<code>{network: true}</code> directives. If <code>generate-network</code> is <code>false</code>, then a
-network edition book or course is not generated, regardless of whether there
-are any <code>{network: true}</code> directives.</p>
-<p><code>generate-sample</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-sample</code> is
-<code>true</code>, then a sample book or course is generated, which is composed of the
-content which is included in the sample with <code>{sample: true}</code> directives.
-If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
-regardless of whether there are any <code>{sample: true}</code> directives.</p>
-<h2 id="document-settings-which-apply-to-courses-only-m-" class="definition">
-<span class="number">4.3</span>Document settings which apply to courses only (M)
-</h2>
-<p>The following settings are defined by Markua, but only make sense in the context
-of a course. So, a Markua Processor which is not generating a course can ignore
-them.</p>
-<p><code>course-attempts</code>
-: The number of allowed attempts on the course itself. The default is <code>1</code>.</p>
-<p><code>course-completeness</code>
-: How “done” the course itself is. Expressed as a percentage, in decimal value.
-The default is <code>0</code>. A value of <code>100</code> or <code>100.0</code> is the maximum. A Markua
-Processor may do something smart when a course which is 100% complete changes
-the <code>id</code> values of a quiz or quizzes, since this will affect current students.</p>
-<p><code>default-exercise-show-answers</code>
-: This can be <code>all</code> (the default), <code>incorrect</code> or <code>none</code>. It affects how answers
-are shown after an exercise is completed, say in an online course.</p>
-<p><code>default-quiz-attempts</code>
-: The default number of allowed attempts on a quiz. The default is <code>1</code>. Note
-that for quizzes, a value of <code>0</code> means the quiz cannot be taken (yet). A value
-of <code>-1</code> means the quiz has an unlimited number of attempts. Setting either of
-these as the value of <code>default-quiz-attempts</code> is a legitimate value, and has
-the effect of changing the default value for all quizzes. Again, an exercise
-always has an unlimited number of attempts, so there is no corresponding
-<code>default-exercise-attempts</code> value.</p>
-<p><code>default-quiz-auto-submit</code>
-: <code>true</code> or <code>false</code>. The default is <code>true</code>. If true, an incomplete quiz is
-submitted when the <code>time-limit</code> is expired. If false, it is not. Either way, an
-incomplete quiz counts as an attempt.</p>
-<p><code>default-quiz-show-answers</code>
-: This can be <code>all</code>, <code>incorrect</code> (the default) or <code>none</code>. It affects how answers
-are shown after a quiz is completed, say in an online course.</p>
-<p><code>default-quiz-use-result</code>
-: <code>best</code> or <code>latest</code>. The default is <code>best</code>. Whether the best result on the quiz
-is used, or the latest one.</p>
-<p><code>default-random-choice-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
-multiple choice questions. If <code>true</code>, the choices in the multiple choice
-question are randomly arranged; if <code>false</code>, they are presented in the order
-written.</p>
-<p><code>default-random-question-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
-the quiz or exercise. If <code>true</code>, the questions are randomly arranged; if
-<code>false</code>, they are presented in the order written.</p>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.5</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3679,10 +4078,10 @@ if the class was explicitly set to something
 elsif there is a title
   the class is `figure`
 else
-  the class is undefined
+  the class is null
 end
 </code></pre>
-<p>A resource with an undefined class has no title and is not a figure.</p>
+<p>A resource with an null class has no title and is not a figure.</p>
 <h2 id="resource-alt-text-m-" class="definition">
 <span class="number">5.4</span>Resource alt text (M)
 </h2>
@@ -4111,7 +4510,7 @@ __&lt;/p&gt;
 <a href="#example-75">Example 75</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">-<span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">-<span class="space"> </span>-<span class="space"> </span>-<span class="space"> </span>-
 </code></pre>
 </div>
 <div class="column">
@@ -4367,7 +4766,7 @@ headings:</p>
 <a href="#example-88">Example 88</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">#<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">#<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo
 </code></pre>
 </div>
 <div class="column">
@@ -4461,7 +4860,7 @@ headings:</p>
 <a href="#example-94">Example 94</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span>###<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span>###
 </code></pre>
 </div>
 <div class="column">
@@ -4560,7 +4959,7 @@ Bar<span class="space"> </span>foo
 <a href="#example-100">Example 100</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">##<span class="space"> </span>
+<pre><code class="language-markdown">##
 #
 ###<span class="space"> </span>###
 </code></pre>
@@ -4726,7 +5125,7 @@ indentation, and may have trailing spaces or tabs:</p>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo
-<span class="space"> </span><span class="space"> </span><span class="space"> </span>----<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<span class="space"> </span><span class="space"> </span><span class="space"> </span>----
 </code></pre>
 </div>
 <div class="column">
@@ -4777,7 +5176,7 @@ Foo
 <a href="#example-110">Example 110</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">Foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">Foo
 -----
 </code></pre>
 </div>
@@ -5229,9 +5628,9 @@ as Markdown:</p>
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk1
 
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk2
-<span class="space"> </span><span class="space"> </span>
-<span class="space"> </span>
-<span class="space"> </span>
+
+
+
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk3
 </code></pre>
 </div>
@@ -5255,13 +5654,13 @@ the content, even in interior blank lines:</p>
 </div>
 <div class="column">
 <pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk1
-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>chunk2
 </code></pre>
 </div>
 <div class="column">
 <pre><code class="language-html">&lt;pre&gt;&lt;code&gt;chunk1
-<span class="space"> </span><span class="space"> </span>
+
 <span class="space"> </span><span class="space"> </span>chunk2
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre>
@@ -5354,9 +5753,8 @@ are not included in it:</p>
 </div>
 <div class="column">
 <pre><code class="language-markdown">
-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo
-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
 </code></pre>
 </div>
 <div class="column">
@@ -5371,11 +5769,11 @@ are not included in it:</p>
 <a href="#example-139">Example 139</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>foo
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;pre&gt;&lt;code&gt;foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-html">&lt;pre&gt;&lt;code&gt;foo
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre>
 </div>
@@ -5610,13 +6008,13 @@ bbb
 <div class="column">
 <pre><code class="language-markdown">```
 
-<span class="space"> </span><span class="space"> </span>
+
 ```
 </code></pre>
 </div>
 <div class="column">
 <pre><code class="language-html">&lt;pre&gt;&lt;code&gt;
-<span class="space"> </span><span class="space"> </span>
+
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre>
 </div>
@@ -6544,9 +6942,9 @@ them.</p>
 <a href="#example-171">Example 171</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span>[foo]:<span class="space"> </span>
-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>/url<span class="space"> </span><span class="space"> </span>
-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>'the<span class="space"> </span>title'<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span><span class="space"> </span>[foo]:
+<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>/url
+<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>'the<span class="space"> </span>title'
 
 [foo]
 </code></pre>
@@ -7146,8 +7544,8 @@ break</a>:</p>
 <a href="#example-204">Example 204</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">aaa<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
-bbb<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">aaa
+bbb
 </code></pre>
 </div>
 <div class="column">
@@ -7168,14 +7566,12 @@ is <a href="#tight">tight</a> or <a href="#loose">loose</a>.</p>
 <a href="#example-205">Example 205</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown"><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">
 
 aaa
-<span class="space"> </span><span class="space"> </span>
+
 
 #<span class="space"> </span>aaa
-
-<span class="space"> </span><span class="space"> </span>
 </code></pre>
 </div>
 <div class="column">
@@ -8033,8 +8429,8 @@ interrupt paragraphs, so it is <a href="#paragraph-continuation-text">paragraph 
 </div>
 <div class="column">
 <pre><code class="language-markdown">&gt;
-&gt;<span class="space"> </span><span class="space"> </span>
-&gt;<span class="space"> </span>
+&gt;
+&gt;
 </code></pre>
 </div>
 <div class="column">
@@ -8051,7 +8447,7 @@ interrupt paragraphs, so it is <a href="#paragraph-continuation-text">paragraph 
 <div class="column">
 <pre><code class="language-markdown">&gt;
 &gt;<span class="space"> </span>foo
-&gt;<span class="space"> </span><span class="space"> </span>
+&gt;
 </code></pre>
 </div>
 <div class="column">
@@ -9012,7 +9408,7 @@ following the list marker doesn’t change the required indentation:</p>
 <a href="#example-269">Example 269</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">-<span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">-
 <span class="space"> </span><span class="space"> </span>foo
 </code></pre>
 </div>
@@ -9071,7 +9467,7 @@ item:</p>
 </div>
 <div class="column">
 <pre><code class="language-markdown">-<span class="space"> </span>foo
--<span class="space"> </span><span class="space"> </span><span class="space"> </span>
+-
 -<span class="space"> </span>bar
 </code></pre>
 </div>
@@ -9672,7 +10068,7 @@ as a list item with a subparagraph, even though the paragraph <code>bar</code>
 is not indented as far as the first paragraph <code>foo</code>:</p>
 <pre><code class="language-markdown"> 10. foo
 
-   bar  
+   bar
 </code></pre>
 <p>Arguably this text does read like a list item with <code>bar</code> as a subparagraph,
 which may count in favor of the proposal.  However, on this proposal indented
@@ -13142,7 +13538,7 @@ stripped in this way:</p>
 <div class="column">
 <pre><code class="language-markdown">``
 foo
-bar<span class="space"> </span><span class="space"> </span>
+bar
 baz
 ``
 </code></pre>
@@ -13158,7 +13554,7 @@ baz
 </div>
 <div class="column">
 <pre><code class="language-markdown">``
-foo<span class="space"> </span>
+foo
 ``
 </code></pre>
 </div>
@@ -13173,7 +13569,7 @@ foo<span class="space"> </span>
 <a href="#example-379">Example 379</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">`foo<span class="space"> </span><span class="space"> </span><span class="space"> </span>bar<span class="space"> </span>
+<pre><code class="language-markdown">`foo<span class="space"> </span><span class="space"> </span><span class="space"> </span>bar
 baz`
 </code></pre>
 </div>
@@ -16717,7 +17113,7 @@ allowed between the two sets of brackets:</p>
 <a href="#example-597">Example 597</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">[foo]<span class="space"> </span>
+<pre><code class="language-markdown">[foo]
 []
 
 [foo]:<span class="space"> </span>/url<span class="space"> </span>&quot;title&quot;
@@ -17477,7 +17873,7 @@ between the two sets of brackets:</p>
 <a href="#example-629">Example 629</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">![foo]<span class="space"> </span>
+<pre><code class="language-markdown">![foo]
 []
 
 [foo]:<span class="space"> </span>/url<span class="space"> </span>&quot;title&quot;
@@ -18803,7 +19199,7 @@ in HTML as a <code>&lt;br /&gt;</code> tag):</p>
 <a href="#example-662">Example 662</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">foo
 baz
 </code></pre>
 </div>
@@ -18836,7 +19232,7 @@ baz&lt;/p&gt;
 <a href="#example-664">Example 664</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">foo
 baz
 </code></pre>
 </div>
@@ -18852,7 +19248,7 @@ baz&lt;/p&gt;
 <a href="#example-665">Example 665</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">foo
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>bar
 </code></pre>
 </div>
@@ -18884,7 +19280,7 @@ that allow inline content:</p>
 <a href="#example-667">Example 667</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">*foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">*foo
 bar*
 </code></pre>
 </div>
@@ -18915,7 +19311,7 @@ bar&lt;/em&gt;&lt;/p&gt;
 <a href="#example-669">Example 669</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">`code<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">`code
 span`
 </code></pre>
 </div>
@@ -18944,12 +19340,12 @@ span`
 <a href="#example-671">Example 671</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">&lt;a<span class="space"> </span>href=&quot;foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">&lt;a<span class="space"> </span>href=&quot;foo
 bar&quot;&gt;
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;foo
 bar&quot;&gt;&lt;/p&gt;
 </code></pre>
 </div>
@@ -18990,7 +19386,7 @@ other block element:</p>
 <a href="#example-674">Example 674</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">foo
 </code></pre>
 </div>
 <div class="column">
@@ -19016,7 +19412,7 @@ other block element:</p>
 <a href="#example-676">Example 676</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span><span class="space"> </span>
+<pre><code class="language-markdown">###<span class="space"> </span>foo
 </code></pre>
 </div>
 <div class="column">
@@ -19054,7 +19450,7 @@ removed:</p>
 <a href="#example-678">Example 678</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">foo<span class="space"> </span>
+<pre><code class="language-markdown">foo
 <span class="space"> </span>baz
 </code></pre>
 </div>
@@ -19938,4 +20334,3 @@ delimiter stack.</p>
 
 </body>
 </html>
->>>>>>> master

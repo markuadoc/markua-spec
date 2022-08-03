@@ -2670,6 +2670,10 @@ includes settings like `alt-title`, `list-figures`, `italicize-underlines`,
 `smart-punctuation`, etc.
 
 
+## Semantic Settings vs. Formatting Settings
+
+TODO
+
 
 ## Document Settings are written in Relaxed JSON
 

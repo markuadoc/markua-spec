@@ -2663,6 +2663,110 @@ of this, almost all formatting is done by global switches. These switches are
 called document settings, and they are defined once, at the beginning of the
 document. Document settings affect the formatting of the entire book or course.
 
+## Document settings are defined in MSON, which is similar to JSON
+
+Document settings are defined in one or more document settings hashes. The
+document settings hash or hashes must be at the start of a Markua document.
+Once something other than a document settings hash or a blank line is
+encountered, no more document settings hashes can be defined.
+
+The document settings hash or hashes are written in MSON, pronounced "em son",
+for Markua Spec Object Notation. MSON is inspired by
+[JSON](https://www.json.org/json-en.html) and
+[Relaxed JSON](http://www.relaxedjson.org/), but it is not as strict as JSON
+nor as relaxed as Relaxed JSON.
+
+The reason for MSON is that JSON is not pleasant to type (nor was it intended)
+
+Here's an example of some document settings specified in MSON, which shows
+essentially all the supported features of MSON as well as the preferred way to
+format it:
+
+```
+{
+  alt-title: text
+  endnote-location: book-end
+
+  // single-line comments and blank lines are supported  
+  footer {
+    ebook: [
+      chapter-title
+      page-number
+    ]
+    print: {
+      left: [ page-number chapter-title ]
+      right: [ section-title page-number ]
+    }
+  }
+  header: ["DRAFT"]
+  margin {
+    ebook: {
+      top: 1.0
+      right: 1.0
+      bottom: 0.75
+      left: 1.25
+    }
+    hardcover: {
+      top: 1.0
+      outer: 0.75
+      bottom: 0.75
+      inner: 1.5
+    }
+  }
+  units: in
+}
+```
+
+A full spec of MSON is in an appendix.
+
+*Q. Why was JSON not used?*
+
+A. JSON is a [standard](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/),
+so it is very tempting to just use JSON. However, JSON is not something which
+is intended for people to read and write manually, and Markua documents are
+exactly that.
+
+*Q. Why was Relaxed JSON not used?*
+
+A. [Relaxed JSON](http://www.relaxedjson.org/) is almost what I want here, so
+it is very tempting to just use Relaxed JSON. However, Relaxed JSON is too
+permissive about certain things which are ugly and is too coupled to JSON.
+Furthermore, in August 2022, it did not have enough traction for these issues
+to be overlooked. (If Relaxed JSON was as dominant as JSON, I almost certainly
+would have just used it.)
+
+
+
+
+
+ a format very similar to
+JSON and Relaxed JSON. However, since this is a spec, 
+
+
+ (Document
+settings hashes can be separated with single or multiple newlines, but once the
+first thing which is not a document setting or blank line is encountered, no
+more document settings hashes can be defined.)
+
+The settings are newline-separated key-value pairs (`key: value`) which contain
+information about the document and about the desired behavior of the Markua
+Processor.
+
+Document information includes things like the `title`, `subtitle`, `copyright`,
+`authors`, etc. Markua Processor behavior includes settings like `alt-title`,
+`list-figures`, `italicize-underlines`, etc.
+
+The format of a document settings hash is as follows: Every non-blank line
+in the document settings hash must contain a key, a colon `:`, and a value.
+Any whitespace at the beginning or end of the keys and values will be stripped.
+Only the first colon is important; subsequent colons on a line will just be
+part of the value.
+
+Since Markua defines a number of document settings, it is helpful to see what
+the defaults are in one list. These defaults are listed below; note that
+undefined means that the value is not set, not the literal string undefined.
+
+
 There are two types of document settings:
 
 1. Required
@@ -2731,15 +2835,6 @@ encountered, no more document settings hashes can be defined. (Document
 settings hashes can be separated with single or multiple newlines, but once the
 first thing which is not part of a document settings hash or blank line is
 encountered, no more document settings hashes can be defined.)
-
-The specific format of the document settings hashes is
-[Relaxed JSON](http://www.relaxedjson.org/). JSON is valid Relaxed JSON, and
-Relaxed JSON can be easily converted into JSON. So, either Relaxed JSON or
-JSON can be used to specify the document settings in a Markua document.
-
-JSON has a perfectly good [syntax](https://www.json.org/json-en.html), and is a
-[standard](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/),
-so it does not need to be explained here.
 
 If you are using a tool to generate your document settings, chances are the
 tool will output them in JSON.

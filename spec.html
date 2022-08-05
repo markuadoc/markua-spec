@@ -272,6 +272,11 @@ $(document).ready(function() {
 <li><a href="#textual-content"><span class="number">10.25</span>Textual content</a></li>
 </ul>
 </li>
+<li><a href="#appendix-the-mson-spec-m-">Appendix: The MSON Spec (M)</a>
+<ul>
+<li><a href="#todo-finish-the-mson-spec-">TODO: Finish the MSON Spec!</a></li>
+</ul>
+</li>
 <li><a href="#appendix-a-parsing-strategy">Appendix: A parsing strategy</a>
 <ul>
 <li><a href="#overview">Overview</a></li>
@@ -3052,7 +3057,7 @@ for Markua Spec Object Notation. MSON is inspired by
 <a href="https://www.json.org/json-en.html">JSON</a> and
 <a href="http://www.relaxedjson.org/">Relaxed JSON</a>, but it is not as strict as JSON
 nor as relaxed as Relaxed JSON.</p>
-<p>The reason for MSON is that JSON is not pleasant to type (nor was it intended)</p>
+<p>To learn more about MSON, see the <a href="#appendix-the-mson-spec-m-">MSON spec</a>.</p>
 <p>Here’s an example of some document settings specified in MSON, which shows
 essentially all the supported features of MSON as well as the preferred way to
 format it:</p>
@@ -3060,18 +3065,15 @@ format it:</p>
   alt-title: text
   endnote-location: book-end
 
-  // single-line comments and blank lines are supported  
+  # single-line comments and blank lines are supported
   footer {
-    ebook: [
-      chapter-title
-      page-number
-    ]
+    ebook: [chapter-title page-number]
     print: {
-      left: [ page-number chapter-title ]
-      right: [ section-title page-number ]
+      left: [page-number chapter-title]
+      right: [section-title page-number]
     }
   }
-  header: [&quot;DRAFT&quot;]
+  header: DRAFT
   margin {
     ebook: {
       top: 1.0
@@ -3102,37 +3104,6 @@ permissive about certain things which are ugly and is too coupled to JSON.
 Furthermore, in August 2022, it did not have enough traction for these issues
 to be overlooked. (If Relaxed JSON was as dominant as JSON, I almost certainly
 would have just used it.)</p>
-<p>a format very similar to
-JSON and Relaxed JSON. However, since this is a spec,</p>
-<p>(Document
-settings hashes can be separated with single or multiple newlines, but once the
-first thing which is not a document setting or blank line is encountered, no
-more document settings hashes can be defined.)</p>
-<p>The settings are newline-separated key-value pairs (<code>key: value</code>) which contain
-information about the document and about the desired behavior of the Markua
-Processor.</p>
-<p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
-<code>authors</code>, etc. Markua Processor behavior includes settings like <code>alt-title</code>,
-<code>list-figures</code>, <code>italicize-underlines</code>, etc.</p>
-<p>The format of a document settings hash is as follows: Every non-blank line
-in the document settings hash must contain a key, a colon <code>:</code>, and a value.
-Any whitespace at the beginning or end of the keys and values will be stripped.
-Only the first colon is important; subsequent colons on a line will just be
-part of the value.</p>
-<p>Since Markua defines a number of document settings, it is helpful to see what
-the defaults are in one list. These defaults are listed below; note that
-undefined means that the value is not set, not the literal string undefined.</p>
-<p>There are two types of document settings:</p>
-<ol>
-<li>Required</li>
-<li>Optional</li>
-</ol>
-<p>TODO - what is the naming?</p>
-<p>Document settings include both document information and switches which affect
-the Markua Processor behavior.</p>
-<p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
-<code>authors</code>, etc. Markua Processor behavior includes settings like <code>alt-title</code>,
-<code>list-figures</code>, <code>italicize-underlines</code>, etc.</p>
 <h2 id="semantic-settings-vs-formatting-settings" class="definition">
 <span class="number">4.2</span>Semantic Settings vs. Formatting Settings
 </h2>
@@ -20114,10 +20085,64 @@ be parsed as plain textual content.</p>
 </div>
 <!-- END TESTS -->
 <div class="appendices">
+<h1 id="appendix-the-mson-spec-m-" class="definition">
+Appendix: The MSON Spec (M)
+</h1>
+</div>
+<p>MSON, pronounced “em son”, for Markua Spec Object Notation, is used to define
+the document settings of a Markua document.</p>
+<p>However, MSON has broad potential applicability. Specifically, it is a good
+choice for situations where…</p>
+<ol>
+<li>People will read it.</li>
+<li>People will write it.</li>
+<li>Those people can be programmers and non-programmers.</li>
+</ol>
+<p>For these situations, YAML, TOML, JSON and even Relaxed JSON are too complex.</p>
+<p>MSON is inspired by <a href="https://www.json.org/json-en.html">JSON</a> and
+<a href="http://www.relaxedjson.org/">Relaxed JSON</a>, but it is not as strict as JSON
+nor as relaxed as Relaxed JSON. It also tries to be more readable than both.</p>
+<p>Here’s an example of some document settings specified in MSON, which shows
+essentially all the supported features of MSON as well as the preferred way to
+format it:</p>
+<pre><code>{
+  alt-title: text
+  endnote-location: book-end
+
+  # single-line comments and blank lines are supported
+  footer {
+    ebook: [chapter-title page-number]
+    print: {
+      left: [page-number chapter-title]
+      right: [section-title page-number]
+    }
+  }
+  header: DRAFT
+  margin {
+    ebook: {
+      top: 1.0
+      right: 1.0
+      bottom: 0.75
+      left: 1.25
+    }
+    hardcover: {
+      top: 1.0
+      outer: 0.75
+      bottom: 0.75
+      inner: 1.5
+    }
+  }
+  units: in
+}
+</code></pre>
+<p>A full spec of MSON is below.</p>
+<h2 id="todo-finish-the-mson-spec-" class="definition">
+TODO: Finish the MSON Spec!
+</h2>
+<p>TODO</p>
 <h1 id="appendix-a-parsing-strategy" class="definition">
 Appendix: A parsing strategy
 </h1>
-</div>
 <p>In this appendix we describe some features of the parsing strategy
 used in the CommonMark reference implementations.</p>
 <h2 id="overview" class="definition">

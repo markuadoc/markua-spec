@@ -3039,6 +3039,12 @@ Yada<span class="space"> </span>yada<span class="space"> </span>yada.
 of this, almost all formatting is done by global switches. These switches are
 called document settings, and they are defined once, at the beginning of the
 document. Document settings affect the formatting of the entire book or course.</p>
+<p>There are two types of document settings:</p>
+<ol>
+<li>Required</li>
+<li>Optional</li>
+</ol>
+<p>TODO - what is the naming?</p>
 <p>Document settings include both document information and switches which affect
 the Markua Processor behavior.</p>
 <p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
@@ -3047,7 +3053,44 @@ the Markua Processor behavior.</p>
 <h2 id="semantic-settings-vs-formatting-settings" class="definition">
 <span class="number">4.1</span>Semantic Settings vs. Formatting Settings
 </h2>
-<p>TODO</p>
+<pre><code>{
+  list-figures: combined
+  figure-number-format: sequential
+  authors: undefined
+  alt-title: text
+  contributors: undefined
+  copyright: undefined
+  default-code-language: guess
+  figure-classes: undefined
+  include-page-numbers-in-references: true
+  italicize-underlines: true
+  lang: eng
+  list-figures: combined
+  number-chapters: true
+  number-figures: sequential
+  number-sections: false
+  restart-endnote-numbering: true
+  restart-footnote-numbering: true
+  soft-breaks: source
+  strikethrough-format: dynamic
+  title: undefined
+  two-space-hack: true
+  validate: true
+  version: undefined
+  generate-community: true
+  generate-network: true
+  generate-sample: true
+  course-attempts: 1
+  course-completeness: 0
+  default-exercise-show-answers: all
+  default-quiz-attempts: 1
+  default-quiz-auto-submit: true
+  default-quiz-show-answers: incorrect
+  default-quiz-use-result: best
+  default-random-choice-order: false
+  default-random-question-order: false
+}
+</code></pre>
 <h2 id="document-settings-are-written-in-relaxed-json" class="definition">
 <span class="number">4.2</span>Document Settings are written in Relaxed JSON
 </h2>

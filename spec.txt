@@ -2663,6 +2663,13 @@ of this, almost all formatting is done by global switches. These switches are
 called document settings, and they are defined once, at the beginning of the
 document. Document settings affect the formatting of the entire book or course.
 
+There are two types of document settings:
+
+1. Required
+2. Optional
+
+TODO - what is the naming?
+
 Document settings include both document information and switches which affect
 the Markua Processor behavior.
 

@@ -2677,7 +2677,7 @@ Processor.
 
 Document information includes things like the `title`, `subtitle`, `copyright`,
 `authors`, etc. Markua Processor behavior includes settings like `alt-title`,
-`list-figures`, `italicize-underlines`, `smart-punctuation`, etc.
+`list-figures`, `italicize-underlines`, etc.
 
 The format of a document settings hash is as follows: Every non-blank line
 in the document settings hash must contain a key, a colon `:`, and a value.
@@ -2708,7 +2708,6 @@ undefined means that the value is not set, not the literal string undefined.
   number-sections: false
   restart-endnote-numbering: true
   restart-footnote-numbering: true
-  smart-punctuation: true
   soft-breaks: source
   strikethrough-format: dynamic
   title: undefined

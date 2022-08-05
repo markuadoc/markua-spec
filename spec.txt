@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.17'
-date: '2022-07-19'
+version: '0.30.18'
+date: '2022-08-05'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2882,13 +2882,6 @@ at the end of a chapter.
 `restart-footnote-numbering`
 : `true` or `false`. Default `true`. Whether the footnote numbering is restarted
 at the end of a chapter.
-
-`smart-punctuation`
-: `true` or `false`. Default `true`. If `smart` is `true`, use smart
-punctuation. Straight double and single quotes will be rendered as curly
-quotes, depending on their position, `--` will be rendered as an en-dash,
-`---` will be rendered as an em-dash and `...` will be rendered as ellipses.
-If `smart` is `false`, do not use smart punctuation.
 
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. This setting determines the

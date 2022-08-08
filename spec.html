@@ -175,8 +175,9 @@ $(document).ready(function() {
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key: value pairs or in JSON (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.2</span>Multiple document settings hashes are permitted (M)</a></li>
-<li><a href="#the-standard-document-settings-m-"><span class="number">4.3</span>The standard document settings (M)</a></li>
+<li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.3</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.4</span>Custom document settings are encouraged (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -3058,48 +3059,8 @@ or end of the keys and values will be stripped.</li>
 which all Markua Processors must support. In the spec, these settings are
 defined in a flat list of <code>key: value</code> pairs, but they can also be specified
 using JSON.</p>
-<h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.2</span>Multiple document settings hashes are permitted (M)
-</h2>
-<p>A Markua document can define multiple document settings hashes.</p>
-<p>There must be at least one blank line between the end of the settings block and
-the start of any other document content other than another document settings
-hash.</p>
-<p>The reason that more than one document settings hash is permitted is that a
-Markua Processor may also get settings from elsewhere, like a web interface.
-The most straightforward thing to do in such a case is to just add another
-document settings hash at the beginning of the file, and then let the Markua
-Processor sort out any conflicts.</p>
-<p>In the case of a conflict between settings defined in a document and settings
-defined, say, in a web interface, the last setting definition must win.
-However, a Markua Processor may override settings whose values are unsupported
-or illegal. Also, a Markua processor should provide a warning if there are
-multiple definitions of a document setting.</p>
-<p>Here’s an example of a Markua document which could be generated if there is a
-settings block produced by a web interface, and then a settings block manually
-added at the start of a book:</p>
-<pre><code>{
-alt-title: all
-figure-classes: equation, figure, image, listing
-figure-number-format: chapter
-list-figures: groups
-soft-breaks: space
-}
-{
-italicize-underlines: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-</code></pre>
-<p>Thankfully, this would only be seen by a Markua Processor, since it’s ugly.
-The author would just see the second, manually-defined, settings block, and
-the first one would have been created from the values stored in a database.</p>
-<p>Finally, Markua Processors can also add their own document settings, just as
-Markua Processors can understand their own extension attributes.</p>
 <h2 id="the-standard-document-settings-m-" class="definition">
-<span class="number">4.3</span>The standard document settings (M)
+<span class="number">4.2</span>The standard document settings (M)
 </h2>
 <p>The Markua Spec only defines the settings which all Markua Processors <strong>MUST</strong>
 support. It is expected that Markua Processors will define their own
@@ -3295,6 +3256,90 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
+<h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
+<span class="number">4.3</span>Multiple document settings hashes are permitted (M)
+</h2>
+<p>A Markua document can define multiple document settings hashes.</p>
+<p>There must be at least one blank line between the end of the settings block and
+the start of any other document content other than another document settings
+hash.</p>
+<p>The reason that more than one document settings hash is permitted is that a
+Markua Processor may also get settings from elsewhere, like a web interface.
+The most straightforward thing to do in such a case is to just add another
+document settings hash at the beginning of the file, and then let the Markua
+Processor sort out any conflicts.</p>
+<p>In the case of a conflict between settings defined in a document and settings
+defined, say, in a web interface, the last setting definition must win.
+However, a Markua Processor may override settings whose values are unsupported
+or illegal. Also, a Markua processor should provide a warning if there are
+multiple definitions of a document setting.</p>
+<p>Here’s an example of a Markua document which could be generated if there is a
+settings block produced by a web interface, and then a settings block manually
+added at the start of a book:</p>
+<pre><code>{
+  alt-title: all
+  figure-classes: equation, figure, image, listing
+  figure-number-format: chapter
+  list-figures: groups
+  number-chapters: true
+  soft-breaks: space
+  two-space-hack: false
+}
+
+{
+  italicize-underlines: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+</code></pre>
+<p>Now, most tools will not output their settings as key-value pairs, but will
+instead output them as JSON. JSON is easy to output and to parse, since there
+are good JSON libraries for almost all popular programming languages.</p>
+<p>So, here’s the same example, but with the automatically-generated set of
+document settings specified as JSON:</p>
+<pre><code>{
+  &quot;alt-title&quot;: &quot;all&quot;,
+  &quot;figure-classes&quot;: [
+    &quot;equation&quot;,
+    &quot;figure&quot;,
+    &quot;image&quot;,
+    &quot;listing&quot;
+  ],
+  &quot;figure-number-format&quot;: &quot;chapter&quot;,
+  &quot;list-figures&quot;: &quot;groups&quot;,
+  &quot;number-chapters&quot;: true,
+  &quot;soft-breaks&quot;: &quot;space&quot;,
+  &quot;two-space-hack&quot;: false
+}
+
+{
+  italicize-underlines: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+</code></pre>
+<p>Regardless of how the automatically-generated document settings are output,
+the author will typically only see the manually-defined document settings
+block. So, the formatting of the automatically-generated document settings
+doesn’t really matter, and JSON is the pragmatic choice.</p>
+<h2 id="custom-document-settings-are-encouraged-m-" class="definition">
+<span class="number">4.4</span>Custom document settings are encouraged (M)
+</h2>
+<p>Finally, Markua Processors can also add their own document settings, just as
+Markua Processors can understand their own extension attributes.</p>
+<p>For these custom document settings, JSON is ideal, since JSON supports nested
+objects, arrays, and all the data types which are needed.</p>
+<p>It is expected that Markua Processors such as Leanpub will add a bunch of their
+own custom document settings, typically in JSON, in order to control the
+formatting of all parts of a Markua document. This is encouraged.</p>
+<p>It is deliberate that these document settings are not being formally-specified:
+doing so would actually serve to limit innovation. There are many ways to
+format a document, and Markua should not seek to define the one true way to do
+so.</p>
 </div>
 <div class="extension">
 <h1 id="resources-m-" class="definition">

@@ -2673,7 +2673,7 @@ no more document settings hashes can be defined.)
 
 
 
-## Document settings are specified in simple key: value pairs or in JSON (M)
+## Document settings are specified in simple key-value pairs or in JSON (M)
 
 There are two ways to specify a document settings hash:
 

@@ -5,22 +5,14 @@ is written by Peter Armstrong,
 is based on the CommonMark Spec by John MacFarlane,
 and is licensed under the Creative Commons license CC-BY-SA 4.0.*
 
-**This spec is currently UNIMPLEMENTED, and is subject to change!**
+This spec currently has a BETA implementation on Leanpub, and is subject to change.
 
-If you are a Leanpub author, **DO NOT READ THIS**.
+If you are a Leanpub author, only read this if you have **opted into the Markua 0.30 Beta**.
 
-Instead, you should be reading the [Markua Manual](https://leanpub.com/markua/read),
-not this document!
+If you have not opted into the Markua 0.30 Beta, then you should be reading
+the [Markua Manual](https://leanpub.com/markua/read), not this document!
 
-The Markua Manual documents the version of Markua 0.1 which is used on Leanpub.
-
-This document is a bunch of forward-looking statements which guide the ongoing
-development of Markua 0.29 on Leanpub. We have **not yet shipped the beta** of
-Markua 0.29, so at the moment, this document is just for interest and feedback,
-not actual use by authors.
-
-This document is also subject to change: I make mistakes, and as we implement
-this specification on Leanpub, I'm realizing just how many!
+The Markua Manual documents the version of Markua 0.10 which is used on Leanpub.
 
 * * *
 

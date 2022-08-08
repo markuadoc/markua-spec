@@ -2809,7 +2809,7 @@ format it:
     # meaning is understood by the Markua Processor to insert the chapter title
     # and the page number respectively. Arrays are comma-separated, since
     # making them space-separated would result in too many false-positives
-    # which would require quoted strings to avoid.
+    # which would require quoted strings to avoid...
 
     ebook: [chapter-title, page-number]
 
@@ -2820,7 +2820,8 @@ format it:
   }
 
   # The value of header is an array containing a keyword and a string.
-  # Since arrays are space-separated, 
+  # Since arrays are comma-separated, you only need to quote strings if they
+  # contain a comma...
   header: [title, Copyright 2022]
 
   margin: {

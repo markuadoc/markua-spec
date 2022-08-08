@@ -2689,6 +2689,11 @@ of the Markua Processor and the format of the output.
 
 The document settings hash or hashes are written in JSON or MSON.
 
+MSON, pronounced "em son", stands for Markua Spec Object Notation. MSON is
+inspired by [JSON](https://www.json.org/json-en.html) and
+[Relaxed JSON](http://www.relaxedjson.org/), but it is not as strict as JSON
+nor as relaxed as Relaxed JSON.
+
 The idea is that tools like Leanpub can just output the settings which a user
 defined via a UI in JSON, but authors can manually write their settings in
 MSON since it is more pleasant to write. The Markua Processor then uses the
@@ -2698,76 +2703,30 @@ The settings output by tools such as Leanpub are output as a document settings
 hash **BEFORE** any manuscript content, and **later values override earlier
 values**.
 
-MSON, pronounced "em son", stands for Markua Spec Object Notation. MSON is
-inspired by [JSON](https://www.json.org/json-en.html) and
-[Relaxed JSON](http://www.relaxedjson.org/), but it is not as strict as JSON
-nor as relaxed as Relaxed JSON.
+**To repeat, most books will have all of their settings just defined in a UI
+somewhere, and the tool will output JSON since it is simpler to do.**
 
-To learn more about MSON, see the [MSON spec](#appendix-the-mson-spec-m-).
+For the authors who do use MSON for some settings for their books or courses,
+most of these authors will only use MSON to define settings which are
+top-level, non-nested settings. These settings are typically about the
+meaning of the formatting, controlling settings like `alt-title` and
+`soft-breaks
 
-Here's an example of some document settings specified in MSON, which shows
-essentially all the supported features of MSON as well as the preferred way to
-format it:
+For most books, the document settings that get specified manually in MSON will
+be a simple flat list of `key: value` pairs.
 
-```
 {
   alt-title: text
-  endnote-location: book-end
-
-  # single-line comments and blank lines are supported
-  footer {
-    ebook: [chapter-title page-number]
-    print: {
-      left: [page-number chapter-title]
-      right: [section-title page-number]
-    }
-  }
-  header: DRAFT
-  margin {
-    ebook: {
-      top: 1.0
-      right: 1.0
-      bottom: 0.75
-      left: 1.25
-    }
-    hardcover: {
-      top: 1.0
-      outer: 0.75
-      bottom: 0.75
-      inner: 1.5
-    }
-  }
-  units: in
+  soft-breaks: source
+  two-space-hack: true
 }
-```
 
-A full spec of MSON is in an appendix.
+Earlier in the Markua beta, this is how all settings were defined, so this also
+helps preserve backward compatibility with earlier Markua versions.
 
-*Q. Why was JSON not used?*
-
-A. JSON is a [standard](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/),
-so it is very tempting to just use JSON. However, JSON is not something which
-is intended for people to read and write manually, and Markua documents are
-exactly that.
-
-*Q. Why was Relaxed JSON not used?*
-
-A. [Relaxed JSON](http://www.relaxedjson.org/) is almost what I want here, so
-it is very tempting to just use Relaxed JSON. However, Relaxed JSON is too
-permissive about certain things which are ugly and is too coupled to JSON.
-Furthermore, in August 2022, it did not have enough traction for these issues
-to be overlooked. (If Relaxed JSON was as dominant as JSON, I almost certainly
-would have just used it.)
-
-
-## The most important settings are all top-level and flat
-
-The most important settings are all top-level and flat, meaning they do not use
-any nested objects or arrays, nor are they contained in them. This way, authors
-who are not very technical can have an even better chance of typing them
-correctly.
-
-These are the default values of these settings:
+Here's the list of the settings which were defined as a flat list earlier in
+the Markua beta, and which still work unchanged today. (The meaning of these
+settings is discussed later.)
 
 ```
 {
@@ -2808,6 +2767,110 @@ These are the default values of these settings:
   version: undefined
 }
 ```
+
+Now, some highly-technical authors may wish to define their entire set of
+document settings for their book or course in a document settings hash which
+they write manually.
+
+This has a number of benefits:
+
+1. All the settings are in one place, instead of scattered throughout the
+   various parts of a user interface.
+2. The document settings can be versioned.
+3. If you have a set of document settings you like, you can paste it into
+   another project as a starting point.
+
+Importantly, since the settings are explicitly part of the manuscript, they are
+thus versioned along with manuscript. So, checking out an old version of the
+manuscript also by default restores the formatting to what was used at the
+time. This is something which has both benefits and drawbacks.
+
+Anyway, if all the settings for an entire book or course are being specified
+manually in a document settings hash which is written by the author, then using
+a simple flat list of `key: value` pairs would get old, fast.
+
+So, this is why nested structures are needed.
+
+Here's an example of some document settings specified in MSON, which shows
+essentially all the supported features of MSON as well as the preferred way to
+format it:
+
+```
+{
+  alt-title: text
+  endnote-location: book-end
+
+  # Comments and blank lines are supported.
+
+  # The value of footer is an object with keys and values.
+  footer: {
+
+    # The value of ebook below is an array containing two keywords whose
+    # meaning is understood by the Markua Processor to insert the chapter title
+    # and the page number respectively. Arrays are comma-separated, since
+    # making them space-separated would result in too many false-positives
+    # which would require quoted strings to avoid.
+
+    ebook: [chapter-title, page-number]
+
+    print: {
+      left: [page-number, chapter-title]
+      right: [section-title, page-number]
+    }
+  }
+
+  # The value of header is an array containing a keyword and a string.
+  # Since arrays are space-separated, 
+  header: [title, Copyright 2022]
+
+  margin: {
+    ebook: {
+      top: 1.0
+      right: 1.0
+      bottom: 0.75
+      left: 1.25
+    }
+    hardcover: {
+      top: 1.0
+      outer: 0.75
+      bottom: 0.75
+      inner: 1.5
+    }
+  }
+  units: in
+}
+```
+
+To learn more about MSON, see the [MSON spec](#appendix-the-mson-spec-m-) in an
+appendix.
+
+*Q. Why was JSON not used?*
+
+A. JSON is a [standard](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/),
+so it is very tempting to just use JSON. However, JSON is not something which
+is intended for people to read and write manually, and Markua documents are
+exactly that.
+
+*Q. Why was Relaxed JSON not used?*
+
+A. [Relaxed JSON](http://www.relaxedjson.org/) is almost what I want here, so
+it is very tempting to just use Relaxed JSON. However, Relaxed JSON is too
+permissive about certain things which are ugly and is too coupled to JSON.
+Furthermore, in August 2022, it did not have enough traction for these issues
+to be overlooked. (If Relaxed JSON was as dominant as JSON, I almost certainly
+would have just used it.)
+
+
+## The most important settings are all top-level and flat
+
+The most important settings are all top-level and flat, meaning they do not use
+any nested objects or arrays, nor are they contained in them. This way, authors
+who are not very technical can have an even better chance of typing them
+correctly.
+
+These are the default values of these settings:
+
+
 
 ## Overriding Settings
 

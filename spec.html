@@ -174,10 +174,9 @@ $(document).ready(function() {
 </li>
 <li><a href="#document-settings-m-"><span class="number">4</span>Document settings (M)</a>
 <ul>
-<li><a href="#document-settings-which-apply-to-books-and-courses-m-"><span class="number">4.1</span>Document settings which apply to books and courses (M)</a></li>
-<li><a href="#document-settings-which-apply-to-books-only-m-"><span class="number">4.2</span>Document settings which apply to books only (M)</a></li>
-<li><a href="#document-settings-which-apply-to-courses-only-m-"><span class="number">4.3</span>Document settings which apply to courses only (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key: value pairs or in JSON (M)</a></li>
+<li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.3</span>Multiple document settings hashes are permitted (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -3041,32 +3040,39 @@ document. Document settings affect the formatting of the entire book or course.<
 document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash or a blank line is
 encountered, no more document settings hashes can be defined. (Document
-settings hashes can be separated with single or multiple newlines, but once the
-first thing which is not a document setting or blank line is encountered, no
-more document settings hashes can be defined.)</p>
-<p>The settings are newline-separated key-value pairs (<code>key: value</code>) which contain
-information about the document and about the desired behavior of the Markua
-Processor.</p>
-<p>Document information includes things like the <code>title</code>, <code>subtitle</code>, <code>copyright</code>,
-<code>authors</code>, etc. Markua Processor behavior includes settings like <code>alt-title</code>,
-<code>list-figures</code>, <code>italicize-underlines</code>, etc.</p>
-<p>The format of a document settings hash is as follows: Every non-blank line
-in the document settings hash must contain a key, a colon <code>:</code>, and a value.
-Any whitespace at the beginning or end of the keys and values will be stripped.
-Only the first colon is important; subsequent colons on a line will just be
-part of the value.</p>
+settings hashes can be separated with single or multiple newlines, but once
+something other than a document settings hash or blank line is encountered,
+no more document settings hashes can be defined.)</p>
+<h2 id="document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-" class="definition">
+<span class="number">4.1</span>Document settings are specified in simple key: value pairs or in JSON (M)
+</h2>
+<p>There are two ways to specify a document settings hash:</p>
+<ol>
+<li>As a newline-separated flat list of key-value pairs (<code>key: value</code>).
+With this format, every non-blank line in the document settings hash must
+contain a key, a colon <code>:</code>, and a value. Any whitespace at the beginning
+or end of the keys and values will be stripped.</li>
+<li>As <a href="https://www.json.org/json-en.html">JSON</a>.</li>
+</ol>
+<p>The Markua Spec only defines a short list of the standard document settings
+which all Markua Processors must support. In the spec, these settings are
+defined in a flat list of <code>key: value</code> pairs, but they can also be specified
+using JSON.</p>
+<h2 id="the-standard-document-settings-m-" class="definition">
+<span class="number">4.2</span>The standard document settings (M)
+</h2>
+<p>The Markua Spec only defines the settings which all Markua Processors <strong>MUST</strong>
+support. It is expected that Markua Processors will define their own
+implementation-specific settings somehow, either as document settings which
+are in a flat list, as JSON, or both.</p>
 <p>Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
 undefined means that the value is not set, not the literal string undefined.</p>
 <pre><code>{
-  list-figures: combined
-  figure-number-format: sequential
-  authors: undefined
   alt-title: text
-  contributors: undefined
-  copyright: undefined
   default-code-language: guess
   figure-classes: undefined
+  figure-number-format: sequential
   include-page-numbers-in-references: true
   italicize-underlines: true
   lang: eng
@@ -3077,36 +3083,14 @@ undefined means that the value is not set, not the literal string undefined.</p>
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   soft-breaks: source
-  strikethrough-format: dynamic
-  title: undefined
   two-space-hack: true
-  validate: true
-  version: undefined
-  generate-community: true
-  generate-network: true
-  generate-sample: true
-  course-attempts: 1
-  course-completeness: 0
-  default-exercise-show-answers: all
-  default-quiz-attempts: 1
-  default-quiz-auto-submit: true
-  default-quiz-show-answers: incorrect
-  default-quiz-use-result: best
-  default-random-choice-order: false
-  default-random-question-order: false
 }
 </code></pre>
 <p>What these settings all mean is explained in the rest of this section.</p>
-<h2 id="document-settings-which-apply-to-books-and-courses-m-" class="definition">
-<span class="number">4.1</span>Document settings which apply to books and courses (M)
-</h2>
-<p>The following settings apply to books and courses.</p>
 <p>Note that the behavior of resources which are treated as figures is controlled
 by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <code>list-figures</code> and
 <code>number-figures</code>. These need to be considered together: the behavior of these
 settings are tightly coupled.</p>
-<p><code>authors</code>
-: The authors of the Markua document. The default is undefined.</p>
 <p><code>alt-title</code>
 : <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
@@ -3132,11 +3116,6 @@ not define support for external text-based resources, there is no conflict here.
 text-based resource where no figure title is provided. (This is how Markdown
 behaves.)</li>
 </ul>
-<p><code>contributors</code>
-: Any contributors to the Markua document who are not authors. The default is
-undefined.</p>
-<p><code>copyright</code>
-: The owner of the copyright. The default is undefined.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3265,15 +3244,6 @@ break in normal Markdown. (Whether the “two space hack” is enabled in a
 Markua document is determined by the value of the <code>two-space-hack</code>
 setting, discussed below.)</li>
 </ul>
-<p><code>strikethrough-format</code>
-: <code>dynamic</code>, <code>horizontal</code> or <code>diagonal</code>. Default <code>dynamic</code>. This determines
-the format of the strikethrough line, when used with math resources. A
-<code>horizontal</code> value means to make a horizontal line; a <code>diagonal</code> value means
-to make a diagonal line, and a <code>dynamic</code> value (the default) means to make a
-horizontal line when the equation is about a line of text high, and a diagonal
-line when the equation is meaningfully taller.</p>
-<p><code>title</code>
-: The title of the Markua document.</p>
 <p><code>two-space-hack</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>, for compatibility with Markdown. If
 <code>true</code>, adding two spaces at the end of a line forces a hard line break.
@@ -3285,91 +3255,8 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
-<p><code>validate</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. If <code>validate</code> is <code>true</code>, UTF-8 characters
-in the Markua document are validated, replacing illegal sequences with U+FFFD.
-If <code>validate</code> is <code>false</code>, the UTF-8 characters in the Markua document are not
-validated.</p>
-<p><code>version</code>
-: The version of the Markua document. This is primarily intended for use when
-producing analytics for courses. (This is not related to the version of the
-Markua specification being used; it is the version of the book or course.)</p>
-<h2 id="document-settings-which-apply-to-books-only-m-" class="definition">
-<span class="number">4.2</span>Document settings which apply to books only (M)
-</h2>
-<p>The following settings are defined by Markua, but only make sense in the
-context of a book. So, a Markua Processor which is not generating a book can
-ignore them.</p>
-<p>Note that while the idea of a sample book is pretty universal, the idea of a
-community or network edition could be argued to be somewhat Leanpub-specific.
-However, these are in the Markua spec instead of being left as extension
-attributes, since they are essentially different levels of sample or subset
-books, and I am convinced that this has a general use outside of Leanpub.</p>
-<p><code>generate-community</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-community</code> is
-<code>true</code>, then a community edition book or course is generated, which is composed
-of the content which is included in the community edition with
-<code>{community: true}</code> directives. If <code>generate-community</code> is <code>false</code>, then a
-community edition book or course is not generated, regardless of whether there
-are any <code>{community: true}</code> directives.</p>
-<p><code>generate-network</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-network</code> is
-<code>true</code>, then a network edition book or course is generated, which is composed
-of the content which is included in the network edition with
-<code>{network: true}</code> directives. If <code>generate-network</code> is <code>false</code>, then a
-network edition book or course is not generated, regardless of whether there
-are any <code>{network: true}</code> directives.</p>
-<p><code>generate-sample</code>
-: <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>generate-sample</code> is
-<code>true</code>, then a sample book or course is generated, which is composed of the
-content which is included in the sample with <code>{sample: true}</code> directives.
-If <code>generate-sample</code> is <code>false</code>, then a sample book or course is not generated,
-regardless of whether there are any <code>{sample: true}</code> directives.</p>
-<h2 id="document-settings-which-apply-to-courses-only-m-" class="definition">
-<span class="number">4.3</span>Document settings which apply to courses only (M)
-</h2>
-<p>The following settings are defined by Markua, but only make sense in the context
-of a course. So, a Markua Processor which is not generating a course can ignore
-them.</p>
-<p><code>course-attempts</code>
-: The number of allowed attempts on the course itself. The default is <code>1</code>.</p>
-<p><code>course-completeness</code>
-: How “done” the course itself is. Expressed as a percentage, in decimal value.
-The default is <code>0</code>. A value of <code>100</code> or <code>100.0</code> is the maximum. A Markua
-Processor may do something smart when a course which is 100% complete changes
-the <code>id</code> values of a quiz or quizzes, since this will affect current students.</p>
-<p><code>default-exercise-show-answers</code>
-: This can be <code>all</code> (the default), <code>incorrect</code> or <code>none</code>. It affects how answers
-are shown after an exercise is completed, say in an online course.</p>
-<p><code>default-quiz-attempts</code>
-: The default number of allowed attempts on a quiz. The default is <code>1</code>. Note
-that for quizzes, a value of <code>0</code> means the quiz cannot be taken (yet). A value
-of <code>-1</code> means the quiz has an unlimited number of attempts. Setting either of
-these as the value of <code>default-quiz-attempts</code> is a legitimate value, and has
-the effect of changing the default value for all quizzes. Again, an exercise
-always has an unlimited number of attempts, so there is no corresponding
-<code>default-exercise-attempts</code> value.</p>
-<p><code>default-quiz-auto-submit</code>
-: <code>true</code> or <code>false</code>. The default is <code>true</code>. If true, an incomplete quiz is
-submitted when the <code>time-limit</code> is expired. If false, it is not. Either way, an
-incomplete quiz counts as an attempt.</p>
-<p><code>default-quiz-show-answers</code>
-: This can be <code>all</code>, <code>incorrect</code> (the default) or <code>none</code>. It affects how answers
-are shown after a quiz is completed, say in an online course.</p>
-<p><code>default-quiz-use-result</code>
-: <code>best</code> or <code>latest</code>. The default is <code>best</code>. Whether the best result on the quiz
-is used, or the latest one.</p>
-<p><code>default-random-choice-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
-multiple choice questions. If <code>true</code>, the choices in the multiple choice
-question are randomly arranged; if <code>false</code>, they are presented in the order
-written.</p>
-<p><code>default-random-question-order</code>
-: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
-the quiz or exercise. If <code>true</code>, the questions are randomly arranged; if
-<code>false</code>, they are presented in the order written.</p>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.3</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3391,8 +3278,6 @@ added at the start of a book:</p>
 <pre><code>{
 soft-breaks: space
 alt-title: all
-title: Markua Spec
-authors: Peter Armstrong and John MacFarlane
 list-figures: groups
 figure-number-format: chapter
 figure-classes: equation, figure, image, listing
@@ -6512,7 +6397,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6951,7 +6836,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6975,7 +6860,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16491,7 +16376,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

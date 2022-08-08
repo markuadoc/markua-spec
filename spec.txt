@@ -2667,24 +2667,35 @@ Document settings are defined in one or more document settings hashes. The
 document settings hash or hashes must be at the start of a Markua document.
 Once something other than a document settings hash or a blank line is
 encountered, no more document settings hashes can be defined. (Document
-settings hashes can be separated with single or multiple newlines, but once the
-first thing which is not a document setting or blank line is encountered, no
-more document settings hashes can be defined.)
+settings hashes can be separated with single or multiple newlines, but once
+something other than a document settings hash or blank line is encountered,
+no more document settings hashes can be defined.)
 
-The settings are newline-separated key-value pairs (`key: value`) which contain
-information about the document and about the desired behavior of the Markua
-Processor.
+
+
+## Document settings are specified in simple key: value pairs or in JSON (M)
+
+There are two ways to specify a document settings hash:
+
+1. As a newline-separated flat list of key-value pairs (`key: value`).
+   With this format, every non-blank line in the document settings hash must
+   contain a key, a colon `:`, and a value. Any whitespace at the beginning
+   or end of the keys and values will be stripped.
+2. As [JSON](https://www.json.org/json-en.html).
+
+The Markua Spec only defines a short list of the standard document settings
+which all Markua Processors must support. In the spec, these settings are
+defined in a flat list of `key: value` pairs, but they can also be specified
+using JSON.
+
+
+
+## The standard document settings (M)
 
 The Markua Spec only defines the settings which all Markua Processors **MUST**
 support. It is expected that Markua Processors will define their own
 implementation-specific settings somehow, either as document settings which
-are in a flat list, as JSON, or bath.
-
-The format of a document settings hash is as follows: Every non-blank line
-in the document settings hash must contain a key, a colon `:`, and a value.
-Any whitespace at the beginning or end of the keys and values will be stripped.
-Only the first colon is important; subsequent colons on a line will just be
-part of the value.
+are in a flat list, as JSON, or both.
 
 Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below; note that
@@ -2889,6 +2900,8 @@ newline) in the output. This is what the values mean:
   is `break`. However, even in this case, authors may wish for the two space
   hack to still function as it does in Markdown, in order to support existing
   Markdown text or in cases where there are multiple authors of a manuscript.
+
+
 
 ## Multiple document settings hashes are permitted (M)
 

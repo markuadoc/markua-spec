@@ -2919,8 +2919,7 @@ Processor sort out any conflicts.
 In the case of a conflict between settings defined in a document and settings
 defined, say, in a web interface, the last setting definition must win.
 However, a Markua Processor may override settings whose values are unsupported
-or illegal. Also, a Markua processor should provide a warning if there are
-multiple definitions of a document setting.
+or illegal.
 
 Here's an example of a Markua document which could be generated if there is a
 settings block produced by a web interface, and then a settings block manually

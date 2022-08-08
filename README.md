@@ -5,7 +5,7 @@ is written by Peter Armstrong,
 is based on the CommonMark Spec by John MacFarlane,
 and is licensed under the Creative Commons license CC-BY-SA 4.0.*
 
-This spec currently has a BETA implementation on Leanpub, and is subject to change.
+**This spec currently has a beta implementation on Leanpub, and is subject to change.**
 
 If you are a Leanpub author, only read this if you have **opted into the Markua 0.30 Beta**.
 

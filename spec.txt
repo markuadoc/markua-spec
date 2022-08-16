@@ -2780,6 +2780,12 @@ figures are listed, either grouped by their class or together in one big list,
 is controlled by the `list-figures` setting. Note that the numbering of figures
 is controlled by the `number-figures` and `figure-number-format` settings.
 
+`figure-number-format`
+: `sequential` or `chapter`. The format of figure numbers. The default is
+`sequential`, which is to number figures as 1, 2, 3, etc. The choice of
+`chapter` means to number figures sequentially within their chapter, e.g.
+1.1, 1.2, 2.1, 3.1, 3.2, etc.
+
 `include-page-numbers-in-references`
 : `true` or `false`. The default value is `true`. When a smart crosslink to a
 figure reference is inserted with `#f`, this setting determines how the

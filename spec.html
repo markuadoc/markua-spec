@@ -3142,6 +3142,11 @@ of their <code>class</code> attribute. An example of this setting is:
 figures are listed, either grouped by their class or together in one big list,
 is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
 is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
+<p><code>figure-number-format</code>
+: <code>sequential</code> or <code>chapter</code>. The format of figure numbers. The default is
+<code>sequential</code>, which is to number figures as 1, 2, 3, etc. The choice of
+<code>chapter</code> means to number figures sequentially within their chapter, e.g.
+1.1, 1.2, 2.1, 3.1, 3.2, etc.</p>
 <p><code>include-page-numbers-in-references</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. When a smart crosslink to a
 figure reference is inserted with <code>#f</code>, this setting determines how the

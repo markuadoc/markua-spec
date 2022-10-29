@@ -522,9 +522,19 @@ TODO
 
 ## Markua 0.30 vs. Leanpub Flavoured Markdown (M)
 
-If you are writing a new book or course on Leanpub, you should absolutely choose
-Markua over LFM. If you are familiar with LFM, the following list of the top 10
-differences between Markua and LFM may be useful:
+If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
+curious about the main differences between Markua 0.30 and LFM.
+
+First, to emphasize the most obvious point: **If you are writing a new book or
+course on Leanpub, you should absolutely choose Markua over LFM.** For new
+books, you should choose Markua 0.30. For new courses, you should choose Markua
+0.10 for now, since we do not support Markua 0.30 for courses yet.
+
+**There is no good reason to start any new project using LFM.** The only reason
+we continue to support LFM on Leanpub is for updates to legacy books.
+
+There are many differences between Markua 0.30 and LFM. This list highlights 10
+of the more important ones...
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
    attribute list on an atx or Setext heading.

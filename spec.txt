@@ -480,16 +480,47 @@ This is also true if you want to create courses. Leanpub's Markua 0.30
 implementation does not support courses yet. (Also, LFM has never supported
 courses.)
 
+</div>
+
+
+
+<div class="extension">
+
+## Markua 0.30 vs. Markua 0.10 (M)
+
+If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.
+
+If you are writing a new course on Leanpub, you're stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don't support courses yet.
+
 Leanpub's Markua 0.10 support is fully documented in its own [user
 manual](https://leanpub.com/markua/read). Everything documented in that
-manual should work as described, and our Markua 0.10 version will continue to be
-supported for years to come.
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.
 
-Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
-Markua support is not based on CommonMark. Markua and CommonMark were both
-launched in 2014, within a few months of each other. Leanpub's Markua
-implementation was based on its Ruby-based implementation of LFM, which dates
-back to 2011.
+Leanpub's Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the [user manual](https://leanpub.com/markua/read), NOT
+this spec.
+
+</div>
+
+
+<div class="extension">
+
+## Migrating a Markua 0.10 Book to Markua 0.30 (M)
+
+TODO
+
+</div>
+
+
+
+<div class="extension">
+
+## Markua 0.30 vs. Leanpub Flavoured Markdown (M)
 
 If you are writing a new book or course on Leanpub, you should absolutely choose
 Markua over LFM. If you are familiar with LFM, the following list of the top 10

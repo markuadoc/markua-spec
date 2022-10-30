@@ -787,10 +787,19 @@ global <a href="#document-settings-m-">document settings</a>. These document set
 allow you to customize the behavior of an entire Markua document via global
 switches. This way, Markua 0.30 functions like Markdown (but extended) by
 default, but it can be changed in sweeping ways via these global settings.</p>
-<p>If you are migrating a large Markua 0.10 document to Markua 0.30, you will almost
-certainly want to change your document settings to be as compatible with Markua
-0.10 as possible. The list of document settings values which accomplishes this is
-shown <a href="#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10">here</a>.</p>
+<p>If you are updating a large Markua 0.10 document to Markua 0.30, you will
+probably want to start by changing your document settings to be as compatible
+with Markua 0.10 as possible. This way, your book will still look good, but you
+will be able to take advantage of the new Markua 0.30 features like index
+entries which are not supported in Markua 0.10. You can then decide if you want
+to change any of these document settings back to their defaults, or to some
+other value. There’s no right answer here; it’s entirely personal preference.</p>
+<p>The list of document settings values which is closest to how Markua 0.10
+functions is shown <a href="#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10">here</a>.
+To be clear: you only use this list once, at the start of your first file
+in your Markua manuscript. (This is the <strong>first file listed in <code>Book.txt</code></strong>,
+NOT in the <code>Book.txt</code> file itself, and not at the top of every manuscript
+file.)</p>
 </div>
 <div class="extension">
 <h2 id="origin-and-structure-of-this-document-m-" class="definition">
@@ -3314,6 +3323,10 @@ as compatible with Markua 0.10 as possible. (You may also choose these settings
 for a new document, if you agree with the Markua 0.10 approach, of course!)</p>
 <p>So, here is the list of document settings which is the most compatible with
 Markua 0.10.</p>
+<p>To repeat: you only use this list once, at the start of your first file
+in your Markua manuscript. (This is the <strong>first file listed in <code>Book.txt</code></strong>,
+NOT in the <code>Book.txt</code> file itself, and not at the top of every manuscript
+file.)</p>
 <p>{
 alt-title: all
 }</p>

@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.19 (2022-08-08)</div>
+<div class="version">Version 0.30.20 (2022-10-30)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -179,7 +179,7 @@ $(document).ready(function() {
 <ul>
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
-<li><a href="#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10"><span class="number">4.3</span>The choices for document settings which are most compatible with Markua 0.10</a></li>
+<li><a href="#the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-"><span class="number">4.3</span>The document settings values which are closest to Leanpub’s Markua 0.10 defaults (M)</a></li>
 <li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
 <li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
 </ul>
@@ -686,19 +686,28 @@ the rest of the spec!
 <p>There are three ways to write in plain text on Leanpub. These are their
 user manuals:</p>
 <ol>
-<li><a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM)</a>
-(LFM was launched in 2011. It is now obsolete, and is on long-term support.)</li>
-<li><a href="https://leanpub.com/markua/read">Markua 0.10</a> (this is the default for
-books and courses on Leanpub)</li>
-<li><a href="https://leanpub.com/markua030/read">Markua 0.30 Beta</a> (the user manual for
-Markua 0.30 is not yet stable, so for now you’re better off reading this!)</li>
+<li><a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM)</a> - LFM was
+launched in 2011, and evolved until 2013. It is now obsolete, and is on
+long-term support.</li>
+<li><a href="https://leanpub.com/markua/read">Markua 0.10</a> - Markua 0.10 was launched in
+2014, and evolved until 2021. It is currently the only way to write courses
+on Leanpub.</li>
+<li><a href="https://leanpub.com/markua030/read">Markua 0.30 Beta</a> - The Markua 0.30
+beta wast launched on Leanpub in 2021. The user manual for Markua 0.30 is
+not yet stable, so for now you’re better off reading this! (TODO: FIX)</li>
 </ol>
-<p>Not all features in the Markua spec are supported in the Markua 0.30 beta. If
-you want a stable experience and user manual, you currently need to use
-Leanpub’s Markua 0.10 support (which is the default choice for new books).
-This is also true if you want to create courses. Leanpub’s Markua 0.30
-implementation does not support courses yet. (Also, LFM has never supported
-courses.)</p>
+<p>Not all features in the Markua spec are supported in the Markua 0.30 beta.
+However, the Markua 0.30 beta is good enough that it is the default choice for
+new Leanpub books!</p>
+<p>You can still choose to use Leanpub’s Markua 0.10 support, of course. This is
+also true if you want to create courses. Leanpub’s Markua 0.30 implementation
+does not support courses yet.</p>
+<p>You can also choose to use LFM, but unless you’re dealing with a legacy Leanpub
+book, there’s no good reason to do so. You’re much better off using the
+Markua 0.30 beta than LFM.</p>
+<p>Markua 0.30 is compared to LFM and Markua 0.10 in the next sections below.
+These sections are primarily here for the benefit of Leanpub authors, but also
+to show the origin of how Markua 0.30 evolved.</p>
 </div>
 <div class="extension">
 <h2 id="markua-0-30-vs-leanpub-flavoured-markdown-m-" class="definition">
@@ -781,8 +790,7 @@ this spec.</p>
 am now. I cared less about compatibility with Markdown defaults, and more about
 trying to fix what I thought were mistakes.</p>
 <p>This was youthful hubris, which Markua 0.30 corrects.</p>
-<p>What Markua 0.30 does is functions like Markdown by default, but also provides
-the ability to override behavior using
+<p>What Markua 0.30 does is provides the ability to override behavior using
 global <a href="#document-settings-m-">document settings</a>. These document settings
 allow you to customize the behavior of an entire Markua document via global
 switches. This way, Markua 0.30 functions like Markdown (but extended) by
@@ -791,12 +799,13 @@ default, but it can be changed in sweeping ways via these global settings.</p>
 probably want to start by changing your document settings to be as compatible
 with Markua 0.10 as possible. This way, your book will still look good, but you
 will be able to take advantage of the new Markua 0.30 features like index
-entries which are not supported in Markua 0.10. You can then decide if you want
-to change any of these document settings back to their defaults, or to some
-other value. There’s no right answer here; it’s entirely personal preference.</p>
+entries, which are not supported in Markua 0.10. You can then decide if you
+want to change any of these document settings back to their defaults, or to
+some other value. (All the values are explained in the document settings
+section.) There’s no right answer here; it’s entirely personal preference.</p>
 <p>The list of document settings values which is closest to how Markua 0.10
-functions is shown <a href="#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10">here</a>.
-To be clear: you only use this list once, at the start of your first file
+functions is <a href="#the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-">shown here</a>.
+To be clear: you only define this list once, at the start of your first file
 in your Markua manuscript. (This is the <strong>first file listed in <code>Book.txt</code></strong>,
 not in the <code>Book.txt</code> file itself, and not at the top of every manuscript
 file.)</p>
@@ -3313,23 +3322,24 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
-<p>{#markua010settings}</p>
-<h2 id="the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10" class="definition">
-<span class="number">4.3</span>The choices for document settings which are most compatible with Markua 0.10
+<h2 id="the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-" class="definition">
+<span class="number">4.3</span>The document settings values which are closest to Leanpub’s Markua 0.10 defaults (M)
 </h2>
-<p>If you are migrating a large Markua 0.10 document to Markua 0.30, you will almost
-certainly want to change a few of the  settings, so that your book or course is
-as compatible with Markua 0.10 as possible. (You may also choose these settings
-for a new document, if you agree with the Markua 0.10 approach, of course!)</p>
+<p>If you are migrating a large Markua 0.10 document to Markua 0.30, you will
+probably want to define a few document settings to be different than their
+default values, so that your book or course is as compatible with Markua 0.10
+as possible. (You may also choose these settings for a new document, if you
+agree with the Markua 0.10 approach, of course!)</p>
 <p>So, here is the list of document settings which is the most compatible with
 Markua 0.10.</p>
-<p>To repeat: you only use this list once, at the start of your first file
-in your Markua manuscript. (This is the <strong>first file listed in <code>Book.txt</code></strong>,
-not in the <code>Book.txt</code> file itself, and not at the top of every manuscript
-file.)</p>
-<p>{
-alt-title: all
-}</p>
+<p>Note that you only define this list <strong>once</strong>, at the start of your <strong>first
+file</strong> in your Markua manuscript. (This is the <strong>first file listed
+in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top of
+every manuscript file.)</p>
+<pre><code>{
+    alt-title: all
+}
+</code></pre>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
 <span class="number">4.4</span>Multiple document settings hashes are permitted (M)
 </h2>

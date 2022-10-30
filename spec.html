@@ -146,9 +146,9 @@ $(document).ready(function() {
 <li><a href="#how-to-write-a-novel-in-markua-m-"><span class="number">1.5</span>How to write a novel in Markua (M)</a></li>
 <li><a href="#how-to-write-almost-any-book-in-markua-m-"><span class="number">1.6</span>How to write almost any book in Markua (M)</a></li>
 <li><a href="#for-leanpub-authors-m-"><span class="number">1.7</span>For Leanpub authors (M)</a></li>
-<li><a href="#markua-0-30-vs-markua-0-10-m-"><span class="number">1.8</span>Markua 0.30 vs. Markua 0.10 (M)</a></li>
-<li><a href="#migrating-a-markua-0-10-book-to-markua-0-30-m-"><span class="number">1.9</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)</a></li>
-<li><a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-"><span class="number">1.10</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)</a></li>
+<li><a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-"><span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)</a></li>
+<li><a href="#markua-0-30-vs-markua-0-10-m-"><span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)</a></li>
+<li><a href="#migrating-a-markua-0-10-book-to-markua-0-30-m-"><span class="number">1.10</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)</a></li>
 <li><a href="#origin-and-structure-of-this-document-m-"><span class="number">1.11</span>Origin and structure of this document (M)</a></li>
 <li><a href="#about-the-html-output-m-"><span class="number">1.12</span>About the HTML output (M)</a></li>
 <li><a href="#why-the-name-markua-m-"><span class="number">1.13</span>Why the name “Markua”? (M)</a></li>
@@ -179,8 +179,9 @@ $(document).ready(function() {
 <ul>
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.3</span>Multiple document settings hashes are permitted (M)</a></li>
-<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.4</span>Custom document settings are encouraged (M)</a></li>
+<li><a href="#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10"><span class="number">4.3</span>The choices for document settings which are most compatible with Markua 0.10</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -700,32 +701,8 @@ implementation does not support courses yet. (Also, LFM has never supported
 courses.)</p>
 </div>
 <div class="extension">
-<h2 id="markua-0-30-vs-markua-0-10-m-" class="definition">
-<span class="number">1.8</span>Markua 0.30 vs. Markua 0.10 (M)
-</h2>
-<p>If you are writing a new book on Leanpub, you should absolutely choose
-Markua 0.30 over Markua 0.10.</p>
-<p>If you are writing a new course on Leanpub, you’re stuck with Markua 0.10
-for a while longer: our Markua 0.30 support don’t support courses yet.</p>
-<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
-manual</a>. Everything documented in that
-manual should work as described for Markua 0.10 books and courses, and our
-Markua 0.10 version will continue to be supported for years to come.</p>
-<p>Leanpub’s Markua 0.10 support is based on a private fork of an open source
-Ruby library. It is not based on CommonMark or Pandoc. So, there are a
-number of quirks to our Markua 0.10 support. If you are using Markua 0.10
-on Leanpub, consult the <a href="https://leanpub.com/markua/read">user manual</a>, NOT
-this spec.</p>
-</div>
-<div class="extension">
-<h2 id="migrating-a-markua-0-10-book-to-markua-0-30-m-" class="definition">
-<span class="number">1.9</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)
-</h2>
-<p>TODO</p>
-</div>
-<div class="extension">
 <h2 id="markua-0-30-vs-leanpub-flavoured-markdown-m-" class="definition">
-<span class="number">1.10</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)
+<span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)
 </h2>
 <p>If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
 curious about the main differences between Markua 0.30 and LFM.</p>
@@ -777,6 +754,43 @@ approaches, or could just support parsing single files or input streams.)</li>
 <li>Most importantly, a number of features (courses, index entries, smart
 crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 </ol>
+</div>
+<div class="extension">
+<h2 id="markua-0-30-vs-markua-0-10-m-" class="definition">
+<span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)
+</h2>
+<p>If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.</p>
+<p>If you are writing a new course on Leanpub, you’re stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don’t support courses yet.</p>
+<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
+manual</a>. Everything documented in that
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.</p>
+<p>Leanpub’s Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the <a href="https://leanpub.com/markua/read">user manual</a>, NOT
+this spec.</p>
+</div>
+<div class="extension">
+<h2 id="migrating-a-markua-0-10-book-to-markua-0-30-m-" class="definition">
+<span class="number">1.10</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)
+</h2>
+<p>When I defined how Markua 0.10 worked, I was a number of years younger than I
+am now. I cared less about compatibility with Markdown defaults, and more about
+trying to fix what I thought were mistakes.</p>
+<p>This was youthful hubris, which Markua 0.30 corrects.</p>
+<p>What Markua 0.30 does is functions like Markdown by default, but also provides
+the ability to override behavior using
+global <a href="#document-settings-m-">document settings</a>. These document settings
+allow you to customize the behavior of an entire Markua document via global
+switches. This way, Markua 0.30 functions like Markdown (but extended) by
+default, but it can be changed in sweeping ways via these global settings.</p>
+<p>If you are migrating a large Markua 0.10 document to Markua 0.30, you will almost
+certainly want to change your document settings to be as compatible with Markua
+0.10 as possible. The list of document settings values which accomplishes this is
+shown <a href="#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10">here</a>.</p>
 </div>
 <div class="extension">
 <h2 id="origin-and-structure-of-this-document-m-" class="definition">
@@ -3250,7 +3264,7 @@ at the end of a chapter.</p>
 at the end of a chapter.</p>
 <p><code>soft-breaks</code>
 : <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
-behaviour of single newlines (i.e. a newline which is not followed by another
+behavior of single newlines (i.e. a newline which is not followed by another
 newline) in the output. This is what the values mean:</p>
 <ul>
 <li><code>source</code>: Single newlines inside paragraphs in the Markua source produce
@@ -3290,8 +3304,21 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
+<p>{#markua010settings}</p>
+<h2 id="the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10" class="definition">
+<span class="number">4.3</span>The choices for document settings which are most compatible with Markua 0.10
+</h2>
+<p>If you are migrating a large Markua 0.10 document to Markua 0.30, you will almost
+certainly want to change a few of the  settings, so that your book or course is
+as compatible with Markua 0.10 as possible. (You may also choose these settings
+for a new document, if you agree with the Markua 0.10 approach, of course!)</p>
+<p>So, here is the list of document settings which is the most compatible with
+Markua 0.10.</p>
+<p>{
+alt-title: all
+}</p>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.3</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3360,7 +3387,7 @@ the author will typically only see the manually-defined document settings
 block. So, the formatting of the automatically-generated document settings
 doesn’t really matter, and JSON is the pragmatic choice.</p>
 <h2 id="custom-document-settings-are-encouraged-m-" class="definition">
-<span class="number">4.4</span>Custom document settings are encouraged (M)
+<span class="number">4.5</span>Custom document settings are encouraged (M)
 </h2>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>

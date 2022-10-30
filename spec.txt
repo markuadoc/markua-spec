@@ -486,40 +486,6 @@ courses.)
 
 <div class="extension">
 
-## Markua 0.30 vs. Markua 0.10 (M)
-
-If you are writing a new book on Leanpub, you should absolutely choose
-Markua 0.30 over Markua 0.10.
-
-If you are writing a new course on Leanpub, you're stuck with Markua 0.10
-for a while longer: our Markua 0.30 support don't support courses yet.
-
-Leanpub's Markua 0.10 support is fully documented in its own [user
-manual](https://leanpub.com/markua/read). Everything documented in that
-manual should work as described for Markua 0.10 books and courses, and our
-Markua 0.10 version will continue to be supported for years to come.
-
-Leanpub's Markua 0.10 support is based on a private fork of an open source
-Ruby library. It is not based on CommonMark or Pandoc. So, there are a
-number of quirks to our Markua 0.10 support. If you are using Markua 0.10
-on Leanpub, consult the [user manual](https://leanpub.com/markua/read), NOT
-this spec.
-
-</div>
-
-
-<div class="extension">
-
-## Migrating a Markua 0.10 Book to Markua 0.30 (M)
-
-TODO
-
-</div>
-
-
-
-<div class="extension">
-
 ## Markua 0.30 vs. Leanpub Flavoured Markdown (M)
 
 If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
@@ -574,6 +540,57 @@ of the more important ones...
    approaches, or could just support parsing single files or input streams.)
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
+
+</div>
+
+
+
+<div class="extension">
+
+## Markua 0.30 vs. Markua 0.10 (M)
+
+If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.
+
+If you are writing a new course on Leanpub, you're stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don't support courses yet.
+
+Leanpub's Markua 0.10 support is fully documented in its own [user
+manual](https://leanpub.com/markua/read). Everything documented in that
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.
+
+Leanpub's Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the [user manual](https://leanpub.com/markua/read), NOT
+this spec.
+
+</div>
+
+
+
+<div class="extension">
+
+## Migrating a Markua 0.10 Book to Markua 0.30 (M)
+
+When I defined how Markua 0.10 worked, I was a number of years younger than I
+am now. I cared less about compatibility with Markdown defaults, and more about
+trying to fix what I thought were mistakes.
+
+This was youthful hubris, which Markua 0.30 corrects.
+
+What Markua 0.30 does is functions like Markdown by default, but also provides
+the ability to override behavior using
+global [document settings](#document-settings-m-). These document settings
+allow you to customize the behavior of an entire Markua document via global
+switches. This way, Markua 0.30 functions like Markdown (but extended) by
+default, but it can be changed in sweeping ways via these global settings.
+
+If you are migrating a large Markua 0.10 document to Markua 0.30, you will almost
+certainly want to change your document settings to be as compatible with Markua
+0.10 as possible. The list of document settings values which accomplishes this is
+shown [here](#the-choices-for-document-settings-which-are-most-compatible-with-markua-0-10).
 
 </div>
 
@@ -2906,7 +2923,7 @@ at the end of a chapter.
 
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. This setting determines the
-behaviour of single newlines (i.e. a newline which is not followed by another
+behavior of single newlines (i.e. a newline which is not followed by another
 newline) in the output. This is what the values mean:
 
   * `source`: Single newlines inside paragraphs in the Markua source produce
@@ -2946,6 +2963,23 @@ newline) in the output. This is what the values mean:
   is `break`. However, even in this case, authors may wish for the two space
   hack to still function as it does in Markdown, in order to support existing
   Markdown text or in cases where there are multiple authors of a manuscript.
+
+
+
+{#markua010settings}
+## The choices for document settings which are most compatible with Markua 0.10
+
+If you are migrating a large Markua 0.10 document to Markua 0.30, you will almost
+certainly want to change a few of the  settings, so that your book or course is
+as compatible with Markua 0.10 as possible. (You may also choose these settings
+for a new document, if you agree with the Markua 0.10 approach, of course!)
+
+So, here is the list of document settings which is the most compatible with
+Markua 0.10.
+
+{
+    alt-title: all
+}
 
 
 

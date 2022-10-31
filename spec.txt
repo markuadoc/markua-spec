@@ -599,20 +599,42 @@ switches. This way, Markua 0.30 functions like Markdown (but extended) by
 default, but it can be changed in sweeping ways via these global settings.
 
 If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by changing your document settings to be as compatible
-with Markua 0.10 as possible. This way, your book will still look good, but you
-will be able to take advantage of the new Markua 0.30 features like index
-entries, which are not supported in Markua 0.10. You can then decide if you
-want to change any of these document settings back to their defaults, or to
-some other value. (All the values are explained in the document settings
-section.) There's no right answer here; it's entirely personal preference.
+probably want to start by changing two of your document settings to be as
+compatible with Markua 0.10 as possible:
 
-The list of document settings values which is closest to how Markua 0.10
-functions is [shown here](#the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-).
-To be clear: you only define this list once, at the start of your first file
-in your Markua manuscript. (This is the **first file listed in `Book.txt`**,
-not in the `Book.txt` file itself, and not at the top of every manuscript
-file.)
+```
+{
+    alt-title: all
+    soft-breaks: break
+}
+```
+
+Note that you only define this list **once**, at the start of your **first
+file** in your Markua manuscript. (This is the **first file listed
+in `Book.txt`**, not in the `Book.txt` file itself, and not at the top of
+every manuscript file.)
+
+Next, you will want to do a find-replace to update all `caption:` attributes
+to be `title:`, since the `caption` attribute was renamed to `title` in
+Markua 0.30 for consistency.
+
+Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any `caption` attributes, but instead relied on the
+`alt-title` behavior. This behavior relied on a non-standard interpretation
+of Markdown, and it prevents you from using good alt-text for accessibility.
+So, as you update your document, consider updating this to `text` and using
+`title` attributes or the `"quoted title"` syntax instead.
+
+Also, in terms of the `soft-breaks` attribute, the `break` value is very
+much against the default behavior of Markdown. (I still hate the two space
+hack, however, so there is a `two-space-hack` document setting which lets
+you adjust its behavior.)
+
+The big point that regardless of whether you are upgrading a large Markua 0.10
+document or starting a new one, I strongly recommend that you review all of
+the [document settings](#document-settings-m-) to learn what choices are
+available, and decide which make sense for you. There's no one true right
+answer here; it's entirely personal preference.
 
 </div>
 
@@ -2986,32 +3008,6 @@ newline) in the output. This is what the values mean:
   hack to still function as it does in Markdown, in order to support existing
   Markdown text or in cases where there are multiple authors of a manuscript.
 
-
-
-## The document settings values which are closest to Leanpub's Markua 0.10 defaults (M)
-
-If you are migrating a large Markua 0.10 document to Markua 0.30, you will
-probably want to define a few document settings to be different than their
-default values, so that your book or course is as compatible with Markua 0.10
-as possible. (You may also choose these settings for a new document, if you
-agree with the Markua 0.10 approach, of course!)
-
-So, here is the list of document settings which is the most compatible with
-Markua 0.10.
-
-Note that you only define this list **once**, at the start of your **first
-file** in your Markua manuscript. (This is the **first file listed
-in `Book.txt`**, not in the `Book.txt` file itself, and not at the top of
-every manuscript file.)
-
-```
-{
-    alt-title: all
-    soft-breaks: break
-}
-```
-
-Besides this, you will also want to find replace all `caption:` to be `title:`.
 
 
 ## Multiple document settings hashes are permitted (M)

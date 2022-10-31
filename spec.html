@@ -179,9 +179,8 @@ $(document).ready(function() {
 <ul>
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
-<li><a href="#the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-"><span class="number">4.3</span>The document settings values which are closest to Leanpub’s Markua 0.10 defaults (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
-<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.3</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.4</span>Custom document settings are encouraged (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -796,19 +795,35 @@ allow you to customize the behavior of an entire Markua document via global
 switches. This way, Markua 0.30 functions like Markdown (but extended) by
 default, but it can be changed in sweeping ways via these global settings.</p>
 <p>If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by changing your document settings to be as compatible
-with Markua 0.10 as possible. This way, your book will still look good, but you
-will be able to take advantage of the new Markua 0.30 features like index
-entries, which are not supported in Markua 0.10. You can then decide if you
-want to change any of these document settings back to their defaults, or to
-some other value. (All the values are explained in the document settings
-section.) There’s no right answer here; it’s entirely personal preference.</p>
-<p>The list of document settings values which is closest to how Markua 0.10
-functions is <a href="#the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-">shown here</a>.
-To be clear: you only define this list once, at the start of your first file
-in your Markua manuscript. (This is the <strong>first file listed in <code>Book.txt</code></strong>,
-not in the <code>Book.txt</code> file itself, and not at the top of every manuscript
-file.)</p>
+probably want to start by changing two of your document settings to be as
+compatible with Markua 0.10 as possible:</p>
+<pre><code>{
+    alt-title: all
+    soft-breaks: break
+}
+</code></pre>
+<p>Note that you only define this list <strong>once</strong>, at the start of your <strong>first
+file</strong> in your Markua manuscript. (This is the <strong>first file listed
+in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top of
+every manuscript file.)</p>
+<p>Next, you will want to do a find-replace to update all <code>caption:</code> attributes
+to be <code>title:</code>, since the <code>caption</code> attribute was renamed to <code>title</code> in
+Markua 0.30 for consistency.</p>
+<p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any <code>caption</code> attributes, but instead relied on the
+<code>alt-title</code> behavior. This behavior relied on a non-standard interpretation
+of Markdown, and it prevents you from using good alt-text for accessibility.
+So, as you update your document, consider updating this to <code>text</code> and using
+<code>title</code> attributes or the <code>&quot;quoted title&quot;</code> syntax instead.</p>
+<p>Also, in terms of the <code>soft-breaks</code> attribute, the <code>break</code> value is very
+much against the default behavior of Markdown. (I still hate the two space
+hack, however, so there is a <code>two-space-hack</code> document setting which lets
+you adjust its behavior.)</p>
+<p>The big point that regardless of whether you are upgrading a large Markua 0.10
+document or starting a new one, I strongly recommend that you review all of
+the <a href="#document-settings-m-">document settings</a> to learn what choices are
+available, and decide which make sense for you. There’s no one true right
+answer here; it’s entirely personal preference.</p>
 </div>
 <div class="extension">
 <h2 id="origin-and-structure-of-this-document-m-" class="definition">
@@ -3322,28 +3337,8 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
-<h2 id="the-document-settings-values-which-are-closest-to-leanpub-s-markua-0-10-defaults-m-" class="definition">
-<span class="number">4.3</span>The document settings values which are closest to Leanpub’s Markua 0.10 defaults (M)
-</h2>
-<p>If you are migrating a large Markua 0.10 document to Markua 0.30, you will
-probably want to define a few document settings to be different than their
-default values, so that your book or course is as compatible with Markua 0.10
-as possible. (You may also choose these settings for a new document, if you
-agree with the Markua 0.10 approach, of course!)</p>
-<p>So, here is the list of document settings which is the most compatible with
-Markua 0.10.</p>
-<p>Note that you only define this list <strong>once</strong>, at the start of your <strong>first
-file</strong> in your Markua manuscript. (This is the <strong>first file listed
-in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top of
-every manuscript file.)</p>
-<pre><code>{
-    alt-title: all
-    soft-breaks: break
-}
-</code></pre>
-<p>Besides this, you will also want to find replace all <code>caption:</code> to be <code>title:</code>.</p>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.3</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3412,7 +3407,7 @@ the author will typically only see the manually-defined document settings
 block. So, the formatting of the automatically-generated document settings
 doesn’t really matter, and JSON is the pragmatic choice.</p>
 <h2 id="custom-document-settings-are-encouraged-m-" class="definition">
-<span class="number">4.5</span>Custom document settings are encouraged (M)
+<span class="number">4.4</span>Custom document settings are encouraged (M)
 </h2>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>

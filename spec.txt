@@ -3007,8 +3007,11 @@ every manuscript file.)
 ```
 {
     alt-title: all
+    soft-breaks: break
 }
 ```
+
+Besides this, you will also want to find replace all `caption:` to be `title:`.
 
 
 ## Multiple document settings hashes are permitted (M)

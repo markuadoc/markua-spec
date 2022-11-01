@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.19 (2022-08-08)</div>
+<div class="version">Version 0.30.20 (2022-11-01)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -146,12 +146,15 @@ $(document).ready(function() {
 <li><a href="#how-to-write-a-novel-in-markua-m-"><span class="number">1.5</span>How to write a novel in Markua (M)</a></li>
 <li><a href="#how-to-write-almost-any-book-in-markua-m-"><span class="number">1.6</span>How to write almost any book in Markua (M)</a></li>
 <li><a href="#for-leanpub-authors-m-"><span class="number">1.7</span>For Leanpub authors (M)</a></li>
-<li><a href="#origin-and-structure-of-this-document-m-"><span class="number">1.8</span>Origin and structure of this document (M)</a></li>
-<li><a href="#about-the-html-output-m-"><span class="number">1.9</span>About the HTML output (M)</a></li>
-<li><a href="#why-the-name-markua-m-"><span class="number">1.10</span>Why the name “Markua”? (M)</a></li>
-<li><a href="#what-is-markdown-"><span class="number">1.11</span>What is Markdown?</a></li>
-<li><a href="#why-is-a-spec-needed-"><span class="number">1.12</span>Why is a spec needed?</a></li>
-<li><a href="#about-this-document"><span class="number">1.13</span>About this document</a></li>
+<li><a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-"><span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)</a></li>
+<li><a href="#markua-0-30-vs-markua-0-10-m-"><span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)</a></li>
+<li><a href="#migrating-a-markua-0-10-book-to-markua-0-30-m-"><span class="number">1.10</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)</a></li>
+<li><a href="#origin-and-structure-of-this-document-m-"><span class="number">1.11</span>Origin and structure of this document (M)</a></li>
+<li><a href="#about-the-html-output-m-"><span class="number">1.12</span>About the HTML output (M)</a></li>
+<li><a href="#why-the-name-markua-m-"><span class="number">1.13</span>Why the name “Markua”? (M)</a></li>
+<li><a href="#what-is-markdown-"><span class="number">1.14</span>What is Markdown?</a></li>
+<li><a href="#why-is-a-spec-needed-"><span class="number">1.15</span>Why is a spec needed?</a></li>
+<li><a href="#about-this-document"><span class="number">1.16</span>About this document</a></li>
 </ul>
 </li>
 <li><a href="#preliminaries"><span class="number">2</span>Preliminaries</a>
@@ -682,31 +685,43 @@ the rest of the spec!
 <p>There are three ways to write in plain text on Leanpub. These are their
 user manuals:</p>
 <ol>
-<li><a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM)</a>
-(LFM was launched in 2011. It is now obsolete, and is on long-term support.)</li>
-<li><a href="https://leanpub.com/markua/read">Markua 0.10</a> (this is the default for
-books and courses on Leanpub)</li>
-<li><a href="https://leanpub.com/markua030/read">Markua 0.30 Beta</a> (the user manual for
-Markua 0.30 is not yet stable, so for now you’re better off reading this!)</li>
+<li><a href="https://leanpub.com/lfm/read">Leanpub Flavoured Markdown (LFM)</a> - LFM was
+launched in 2011, and evolved until 2013. It is now obsolete, and is on
+long-term support.</li>
+<li><a href="https://leanpub.com/markua/read">Markua 0.10</a> - Markua 0.10 was launched in
+2014, and evolved until 2021. It is currently the only way to write courses
+on Leanpub.</li>
+<li><a href="https://leanpub.com/markua030/read">Markua 0.30 Beta</a> - The Markua 0.30
+beta wast launched on Leanpub in 2021. The user manual for Markua 0.30 is
+not yet stable, so for now you’re better off reading this! (TODO: FIX)</li>
 </ol>
-<p>Not all features in the Markua spec are supported in the Markua 0.30 beta. If
-you want a stable experience and user manual, you currently need to use
-Leanpub’s Markua 0.10 support (which is the default choice for new books).
-This is also true if you want to create courses. Leanpub’s Markua 0.30
-implementation does not support courses yet. (Also, LFM has never supported
-courses.)</p>
-<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
-manual</a>. Everything documented in that
-manual should work as described, and our Markua 0.10 version will continue to be
-supported for years to come.</p>
-<p>Even though the Markua Spec is based on the CommonMark Spec, Leanpub’s current
-Markua support is not based on CommonMark. Markua and CommonMark were both
-launched in 2014, within a few months of each other. Leanpub’s Markua
-implementation was based on its Ruby-based implementation of LFM, which dates
-back to 2011.</p>
-<p>If you are writing a new book or course on Leanpub, you should absolutely choose
-Markua over LFM. If you are familiar with LFM, the following list of the top 10
-differences between Markua and LFM may be useful:</p>
+<p>Not all features in the Markua spec are supported in the Markua 0.30 beta.
+However, the Markua 0.30 beta is good enough that it is the default choice for
+new Leanpub books!</p>
+<p>You can still choose to use Leanpub’s Markua 0.10 support, of course. This is
+also true if you want to create courses. Leanpub’s Markua 0.30 implementation
+does not support courses yet.</p>
+<p>You can also choose to use LFM, but unless you’re dealing with a legacy Leanpub
+book, there’s no good reason to do so. You’re much better off using the
+Markua 0.30 beta than LFM.</p>
+<p>Markua 0.30 is compared to LFM and Markua 0.10 in the next sections below.
+These sections are primarily here for the benefit of Leanpub authors, but also
+to show the origin of how Markua 0.30 evolved.</p>
+</div>
+<div class="extension">
+<h2 id="markua-0-30-vs-leanpub-flavoured-markdown-m-" class="definition">
+<span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)
+</h2>
+<p>If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
+curious about the main differences between Markua 0.30 and LFM.</p>
+<p>First, to emphasize the most obvious point: <strong>If you are writing a new book or
+course on Leanpub, you should absolutely choose Markua over LFM.</strong> For new
+books, you should choose Markua 0.30. For new courses, you should choose Markua
+0.10 for now, since we do not support Markua 0.30 for courses yet.</p>
+<p><strong>There is no good reason to start any new project using LFM.</strong> The only reason
+we continue to support LFM on Leanpub is for updates to legacy books.</p>
+<p>There are many differences between Markua 0.30 and LFM. This list highlights 10
+of the more important ones…</p>
 <ol>
 <li>In LFM, parts are created with <code>-# Part</code>. In Markua, parts are created an
 attribute list on an atx or Setext heading.</li>
@@ -749,8 +764,89 @@ crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 </ol>
 </div>
 <div class="extension">
+<h2 id="markua-0-30-vs-markua-0-10-m-" class="definition">
+<span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)
+</h2>
+<p>If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.</p>
+<p>If you are writing a new course on Leanpub, you’re stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don’t support courses yet.</p>
+<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
+manual</a>. Everything documented in that
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.</p>
+<p>Leanpub’s Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the <a href="https://leanpub.com/markua/read">user manual</a>, NOT
+this spec.</p>
+</div>
+<div class="extension">
+<h2 id="migrating-a-markua-0-10-book-to-markua-0-30-m-" class="definition">
+<span class="number">1.10</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)
+</h2>
+<p>When I defined how Markua 0.10 worked, I was a number of years younger than I
+am now. I cared less about compatibility with Markdown defaults, and more about
+trying to fix what I thought were mistakes.</p>
+<p>This was youthful hubris, which Markua 0.30 corrects.</p>
+<p>What Markua 0.30 does is provides the ability to override behavior using
+global <a href="#document-settings-m-">document settings</a>. These document settings
+allow you to customize the behavior of an entire Markua document via global
+switches. This way, Markua 0.30 functions like Markdown (but extended) by
+default, but it can be changed in sweeping ways via these global settings.</p>
+<p>If you are updating a large Markua 0.10 document to Markua 0.30, you will
+probably want to start by changing two of your document settings to be as
+compatible with Markua 0.10 as possible:</p>
+<pre><code>{
+    alt-title: all
+    soft-breaks: break
+}
+</code></pre>
+<p>Note that you only define this list <strong>once</strong>, at the start of your <strong>first
+file</strong> in your Markua manuscript. (This is the <strong>first file listed
+in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top of
+every manuscript file.)</p>
+<p>Next, you will want to do a find-replace to update all <code>caption:</code> attributes
+to be <code>title:</code>, since the <code>caption</code> attribute was renamed to <code>title</code> in
+Markua 0.30 for consistency.</p>
+<p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any <code>caption</code> attributes, but instead relied on the
+<code>alt-title</code> behavior. This behavior relied on a non-standard interpretation
+of Markdown, and it prevents you from using good alt-text for accessibility.
+So, as you update your document, consider updating this to <code>text</code> and using
+<code>title</code> attributes or the <code>&quot;quoted title&quot;</code> syntax instead.</p>
+<p>To be clear, with <code>alt-title: all</code>, you can do this:</p>
+<pre><code>![A Figure Caption](someimage.png)
+</code></pre>
+<p>Youthful, exuberant me thought this was a great thing, since it is terse.
+However, wiser, older me realizes it was a mistake:</p>
+<p>Specifically, what it also does is forces the alt text to be displayed as the
+figure caption, which means that the alt text is not as good for people with
+visual disabilities as it should be. Alt text is supposed to be descriptive.</p>
+<p>So, the way to improve this is to do the following:</p>
+<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>This is less terse, but better.</p>
+<p>Once you have done this, you can change the <code>alt-title</code> document setting to
+be <code>text</code> (the default) or <code>none</code>. See
+the <a href="#the-standard-document-settings-m-">standard document settings</a> section
+to learn more.</p>
+<p>Speaking of youthful exuberance, in terms of the <code>soft-breaks</code> attribute, the
+<code>break</code> value is very much against the default behavior of Markdown. Consult
+the <a href="#the-standard-document-settings-m-">standard document settings</a> section
+to learn more.</p>
+<p>(By the way, I still hate the two space hack. So, there is also
+a <code>two-space-hack</code> document setting which lets you adjust its behavior.)</p>
+<p>Anyway, the big point that regardless of whether you are upgrading a large
+Markua 0.10 document to Markua 0.30 or starting a new Markua 0.30 document, I
+strongly recommend that you review all of
+the <a href="#document-settings-m-">document settings</a> to learn what choices are
+available, and decide which make sense for you. There’s no one true right
+answer here; it’s entirely personal preference.</p>
+</div>
+<div class="extension">
 <h2 id="origin-and-structure-of-this-document-m-" class="definition">
-<span class="number">1.8</span>Origin and structure of this document (M)
+<span class="number">1.11</span>Origin and structure of this document (M)
 </h2>
 <p>This is the Markua Spec, written by
 <a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
@@ -831,7 +927,7 @@ not make sense for books and courses.)</li>
 </div>
 <div class="extension">
 <h2 id="about-the-html-output-m-" class="definition">
-<span class="number">1.9</span>About the HTML output (M)
+<span class="number">1.12</span>About the HTML output (M)
 </h2>
 <p>The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.</p>
@@ -876,7 +972,7 @@ top of the example.</p>
 </div>
 <div class="extension">
 <h2 id="why-the-name-markua-m-" class="definition">
-<span class="number">1.10</span>Why the name “Markua”? (M)
+<span class="number">1.13</span>Why the name “Markua”? (M)
 </h2>
 <p>When I set out to specify Markua, I realized I needed a name. I wanted a name
 that conveyed the love that I have for Markdown while not implying endorsement
@@ -892,7 +988,7 @@ Markua and the Markua logo is a registered trademark of Ruboss Technology
 Corporation, the company which created, owns and operates Leanpub.</p>
 </div>
 <h2 id="what-is-markdown-" class="definition">
-<span class="number">1.11</span>What is Markdown?
+<span class="number">1.14</span>What is Markdown?
 </h2>
 <p>Markdown is a plain text format for writing structured documents,
 based on conventions for indicating formatting in email
@@ -978,7 +1074,7 @@ to worry about indentation.  But the Markdown version is much easier
 to read.  The nesting of list items is apparent to the eye in the
 source, not just in the processed document.</p>
 <h2 id="why-is-a-spec-needed-" class="definition">
-<span class="number">1.12</span>Why is a spec needed?
+<span class="number">1.15</span>Why is a spec needed?
 </h2>
 <p>John Gruber’s <a href="http://daringfireball.net/projects/markdown/syntax">canonical description of Markdown’s
 syntax</a>
@@ -1117,7 +1213,7 @@ renders differently on another (say, converting to docbook using
 pandoc).  To make matters worse, because nothing in Markdown counts
 as a “syntax error,” the divergence often isn’t discovered right away.</p>
 <h2 id="about-this-document" class="definition">
-<span class="number">1.13</span>About this document
+<span class="number">1.16</span>About this document
 </h2>
 <p>This document attempts to specify Markdown syntax unambiguously.
 It contains many examples with side-by-side Markdown and
@@ -3220,7 +3316,7 @@ at the end of a chapter.</p>
 at the end of a chapter.</p>
 <p><code>soft-breaks</code>
 : <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
-behaviour of single newlines (i.e. a newline which is not followed by another
+behavior of single newlines (i.e. a newline which is not followed by another
 newline) in the output. This is what the values mean:</p>
 <ul>
 <li><code>source</code>: Single newlines inside paragraphs in the Markua source produce
@@ -6445,7 +6541,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -6884,7 +6980,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -6908,7 +7004,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -16424,7 +16520,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

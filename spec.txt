@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.19'
-date: '2022-08-08'
+version: '0.30.20'
+date: '2022-11-01'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -466,34 +466,53 @@ the rest of the spec!
 There are three ways to write in plain text on Leanpub. These are their
 user manuals:
 
-1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read)
-   (LFM was launched in 2011. It is now obsolete, and is on long-term support.)
-2. [Markua 0.10](https://leanpub.com/markua/read) (this is the default for
-   books and courses on Leanpub)
-3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) (the user manual for
-   Markua 0.30 is not yet stable, so for now you're better off reading this!)
+1. [Leanpub Flavoured Markdown (LFM)](https://leanpub.com/lfm/read) - LFM was
+   launched in 2011, and evolved until 2013. It is now obsolete, and is on
+   long-term support.
+2. [Markua 0.10](https://leanpub.com/markua/read) - Markua 0.10 was launched in
+   2014, and evolved until 2021. It is currently the only way to write courses
+   on Leanpub.
+3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) - The Markua 0.30
+   beta wast launched on Leanpub in 2021. The user manual for Markua 0.30 is
+   not yet stable, so for now you're better off reading this! (TODO: FIX)
 
-Not all features in the Markua spec are supported in the Markua 0.30 beta. If
-you want a stable experience and user manual, you currently need to use
-Leanpub's Markua 0.10 support (which is the default choice for new books).
-This is also true if you want to create courses. Leanpub's Markua 0.30
-implementation does not support courses yet. (Also, LFM has never supported
-courses.)
+Not all features in the Markua spec are supported in the Markua 0.30 beta.
+However, the Markua 0.30 beta is good enough that it is the default choice for
+new Leanpub books!
 
-Leanpub's Markua 0.10 support is fully documented in its own [user
-manual](https://leanpub.com/markua/read). Everything documented in that
-manual should work as described, and our Markua 0.10 version will continue to be
-supported for years to come.
+You can still choose to use Leanpub's Markua 0.10 support, of course. This is
+also true if you want to create courses. Leanpub's Markua 0.30 implementation
+does not support courses yet.
 
-Even though the Markua Spec is based on the CommonMark Spec, Leanpub's current
-Markua support is not based on CommonMark. Markua and CommonMark were both
-launched in 2014, within a few months of each other. Leanpub's Markua
-implementation was based on its Ruby-based implementation of LFM, which dates
-back to 2011.
+You can also choose to use LFM, but unless you're dealing with a legacy Leanpub
+book, there's no good reason to do so. You're much better off using the
+Markua 0.30 beta than LFM.
 
-If you are writing a new book or course on Leanpub, you should absolutely choose
-Markua over LFM. If you are familiar with LFM, the following list of the top 10
-differences between Markua and LFM may be useful:
+Markua 0.30 is compared to LFM and Markua 0.10 in the next sections below.
+These sections are primarily here for the benefit of Leanpub authors, but also
+to show the origin of how Markua 0.30 evolved.
+
+</div>
+
+
+
+<div class="extension">
+
+## Markua 0.30 vs. Leanpub Flavoured Markdown (M)
+
+If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
+curious about the main differences between Markua 0.30 and LFM.
+
+First, to emphasize the most obvious point: **If you are writing a new book or
+course on Leanpub, you should absolutely choose Markua over LFM.** For new
+books, you should choose Markua 0.30. For new courses, you should choose Markua
+0.10 for now, since we do not support Markua 0.30 for courses yet.
+
+**There is no good reason to start any new project using LFM.** The only reason
+we continue to support LFM on Leanpub is for updates to legacy books.
+
+There are many differences between Markua 0.30 and LFM. This list highlights 10
+of the more important ones...
 
 1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
    attribute list on an atx or Setext heading.
@@ -533,6 +552,119 @@ differences between Markua and LFM may be useful:
    approaches, or could just support parsing single files or input streams.)
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
+
+</div>
+
+
+
+<div class="extension">
+
+## Markua 0.30 vs. Markua 0.10 (M)
+
+If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.
+
+If you are writing a new course on Leanpub, you're stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don't support courses yet.
+
+Leanpub's Markua 0.10 support is fully documented in its own [user
+manual](https://leanpub.com/markua/read). Everything documented in that
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.
+
+Leanpub's Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the [user manual](https://leanpub.com/markua/read), NOT
+this spec.
+
+</div>
+
+
+
+<div class="extension">
+
+## Migrating a Markua 0.10 Book to Markua 0.30 (M)
+
+When I defined how Markua 0.10 worked, I was a number of years younger than I
+am now. I cared less about compatibility with Markdown defaults, and more about
+trying to fix what I thought were mistakes.
+
+This was youthful hubris, which Markua 0.30 corrects.
+
+What Markua 0.30 does is provides the ability to override behavior using
+global [document settings](#document-settings-m-). These document settings
+allow you to customize the behavior of an entire Markua document via global
+switches. This way, Markua 0.30 functions like Markdown (but extended) by
+default, but it can be changed in sweeping ways via these global settings.
+
+If you are updating a large Markua 0.10 document to Markua 0.30, you will
+probably want to start by changing two of your document settings to be as
+compatible with Markua 0.10 as possible:
+
+```
+{
+    alt-title: all
+    soft-breaks: break
+}
+```
+
+Note that you only define this list **once**, at the start of your **first
+file** in your Markua manuscript. (This is the **first file listed
+in `Book.txt`**, not in the `Book.txt` file itself, and not at the top of
+every manuscript file.)
+
+Next, you will want to do a find-replace to update all `caption:` attributes
+to be `title:`, since the `caption` attribute was renamed to `title` in
+Markua 0.30 for consistency.
+
+Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any `caption` attributes, but instead relied on the
+`alt-title` behavior. This behavior relied on a non-standard interpretation
+of Markdown, and it prevents you from using good alt-text for accessibility.
+So, as you update your document, consider updating this to `text` and using
+`title` attributes or the `"quoted title"` syntax instead.
+
+To be clear, with `alt-title: all`, you can do this:
+
+```
+![A Figure Caption](someimage.png)
+```
+
+Youthful, exuberant me thought this was a great thing, since it is terse.
+However, wiser, older me realizes it was a mistake:
+
+Specifically, what it also does is forces the alt text to be displayed as the
+figure caption, which means that the alt text is not as good for people with
+visual disabilities as it should be. Alt text is supposed to be descriptive.
+
+So, the way to improve this is to do the following:
+
+```
+![some descriptive alt text](someimage.png "A Figure Caption")
+```
+
+This is less terse, but better.
+
+Once you have done this, you can change the `alt-title` document setting to
+be `text` (the default) or `none`. See
+the [standard document settings](#the-standard-document-settings-m-) section
+to learn more.
+
+Speaking of youthful exuberance, in terms of the `soft-breaks` attribute, the
+`break` value is very much against the default behavior of Markdown. Consult
+the [standard document settings](#the-standard-document-settings-m-) section
+to learn more.
+
+(By the way, I still hate the two space hack. So, there is also
+a `two-space-hack` document setting which lets you adjust its behavior.)
+
+Anyway, the big point that regardless of whether you are upgrading a large
+Markua 0.10 document to Markua 0.30 or starting a new Markua 0.30 document, I
+strongly recommend that you review all of
+the [document settings](#document-settings-m-) to learn what choices are
+available, and decide which make sense for you. There's no one true right
+answer here; it's entirely personal preference.
 
 </div>
 
@@ -2865,7 +2997,7 @@ at the end of a chapter.
 
 `soft-breaks`
 : `break`, `space` or `source`. Default `source`. This setting determines the
-behaviour of single newlines (i.e. a newline which is not followed by another
+behavior of single newlines (i.e. a newline which is not followed by another
 newline) in the output. This is what the values mean:
 
   * `source`: Single newlines inside paragraphs in the Markua source produce

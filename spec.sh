@@ -30,3 +30,5 @@ else
     docker rm $containerName
 fi
 echo "spec generated as spec.html in the path $outputPath"
+
+open spec.html

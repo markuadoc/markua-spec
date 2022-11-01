@@ -625,13 +625,43 @@ of Markdown, and it prevents you from using good alt-text for accessibility.
 So, as you update your document, consider updating this to `text` and using
 `title` attributes or the `"quoted title"` syntax instead.
 
-Also, in terms of the `soft-breaks` attribute, the `break` value is very
-much against the default behavior of Markdown. (I still hate the two space
-hack, however, so there is a `two-space-hack` document setting which lets
-you adjust its behavior.)
+To be clear, with `alt-title: all`, you can do this:
 
-The big point that regardless of whether you are upgrading a large Markua 0.10
-document or starting a new one, I strongly recommend that you review all of
+```
+![A Figure Caption](someimage.png)
+```
+
+Youthful, exuberant me thought this was a great thing, since it is terse.
+However, wiser, older me realizes it was a mistake:
+
+Specifically, what it also does is forces the alt text to be displayed as the
+figure caption, which means that the alt text is not as good for people with
+visual disabilities as it should be. Alt text is supposed to be descriptive.
+
+So, the way to improve this is to do the following:
+
+```
+![some descriptive alt text](someimage.png "A Figure Caption")
+```
+
+This is less terse, but better.
+
+Once you have done this, you can change the `alt-title` document setting to
+be `text` (the default) or `none`. See
+the [standard document settings](#the-standard-document-settings-m-) section
+to learn more.
+
+Speaking of youthful exuberance, in terms of the `soft-breaks` attribute, the
+`break` value is very much against the default behavior of Markdown. Consult
+the [standard document settings](#the-standard-document-settings-m-) section
+to learn more.
+
+(By the way, I still hate the two space hack. So, there is also
+a `two-space-hack` document setting which lets you adjust its behavior.)
+
+Anyway, the big point that regardless of whether you are upgrading a large
+Markua 0.10 document to Markua 0.30 or starting a new Markua 0.30 document, I
+strongly recommend that you review all of
 the [document settings](#document-settings-m-) to learn what choices are
 available, and decide which make sense for you. There's no one true right
 answer here; it's entirely personal preference.

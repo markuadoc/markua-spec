@@ -815,12 +815,31 @@ are you did not use any <code>caption</code> attributes, but instead relied on t
 of Markdown, and it prevents you from using good alt-text for accessibility.
 So, as you update your document, consider updating this to <code>text</code> and using
 <code>title</code> attributes or the <code>&quot;quoted title&quot;</code> syntax instead.</p>
-<p>Also, in terms of the <code>soft-breaks</code> attribute, the <code>break</code> value is very
-much against the default behavior of Markdown. (I still hate the two space
-hack, however, so there is a <code>two-space-hack</code> document setting which lets
-you adjust its behavior.)</p>
-<p>The big point that regardless of whether you are upgrading a large Markua 0.10
-document or starting a new one, I strongly recommend that you review all of
+<p>To be clear, with <code>alt-title: all</code>, you can do this:</p>
+<pre><code>![A Figure Caption](someimage.png)
+</code></pre>
+<p>Youthful, exuberant me thought this was a great thing, since it is terse.
+However, wiser, older me realizes it was a mistake:</p>
+<p>Specifically, what it also does is forces the alt text to be displayed as the
+figure caption, which means that the alt text is not as good for people with
+visual disabilities as it should be. Alt text is supposed to be descriptive.</p>
+<p>So, the way to improve this is to do the following:</p>
+<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>This is less terse, but better.</p>
+<p>Once you have done this, you can change the <code>alt-title</code> document setting to
+be <code>text</code> (the default) or <code>none</code>. See
+the <a href="#the-standard-document-settings-m-">standard document settings</a> section
+to learn more.</p>
+<p>Speaking of youthful exuberance, in terms of the <code>soft-breaks</code> attribute, the
+<code>break</code> value is very much against the default behavior of Markdown. Consult
+the <a href="#the-standard-document-settings-m-">standard document settings</a> section
+to learn more.</p>
+<p>(By the way, I still hate the two space hack. So, there is also
+a <code>two-space-hack</code> document setting which lets you adjust its behavior.)</p>
+<p>Anyway, the big point that regardless of whether you are upgrading a large
+Markua 0.10 document to Markua 0.30 or starting a new Markua 0.30 document, I
+strongly recommend that you review all of
 the <a href="#document-settings-m-">document settings</a> to learn what choices are
 available, and decide which make sense for you. There’s no one true right
 answer here; it’s entirely personal preference.</p>

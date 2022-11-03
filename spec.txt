@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.20'
-date: '2022-11-01'
+version: '0.30.21'
+date: '2022-11-02'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -592,51 +592,128 @@ trying to fix what I thought were mistakes.
 
 This was youthful hubris, which Markua 0.30 corrects.
 
-What Markua 0.30 does is provides the ability to override behavior using
-global [document settings](#document-settings-m-). These document settings
-allow you to customize the behavior of an entire Markua document via global
-switches. This way, Markua 0.30 functions like Markdown (but extended) by
-default, but it can be changed in sweeping ways via these global settings.
+What Markua 0.30 does is functions like Markdown (minus inline HTML, and
+then extended) by default, but also provides the ability to override
+behavior using global [document settings](#document-settings-m-). These
+document settings allow you to customize the behavior of an entire Markua
+document via global switches. This way, the behavior of a Markua 0.30
+document can be changed in sweeping ways via these global settings.
 
 If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by changing two of your document settings to be as
-compatible with Markua 0.10 as possible:
+probably want to start by making these five changes, in order:
+
+1. Define the recommended document settings for upgrading from Markua 0.10.
+2. Check the output and decide on the appropriate `soft-breaks` and
+   `two-space-hack` settings.
+3. Rename all `caption` attributes to `title`.
+4. Check the output and decide on the appropriate `alt-title` setting.
+5. Review the other document settings and override the defaults as needed.
+
+These are all described below.
+
+### Define the recommended document settings for upgrading from Markua 0.10
+
+When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
+defining two of your document settings to be as compatible with Markua 0.10 as
+possible.
+
+So, add this text at the top of your Markua document, followed by a blank line:
 
 ```
 {
     alt-title: all
     soft-breaks: break
+    two-space-hack: false
 }
 ```
 
-Note that you only define this list **once**, at the start of your **first
-file** in your Markua manuscript. (This is the **first file listed
-in `Book.txt`**, not in the `Book.txt` file itself, and not at the top of
-every manuscript file.)
+To be clear, there needs to be a blank line between the document settings and
+the manuscript content. For example:
 
-Next, you will want to do a find-replace to update all `caption:` attributes
-to be `title:`, since the `caption` attribute was renamed to `title` in
-Markua 0.30 for consistency.
+```
+{
+    alt-title: all
+    soft-breaks: break
+    two-space-hack: false
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+```
+
+Note that you only define this list of document settings **once**, at the start
+of your **first file** in your Markua manuscript. (This is the **first file
+listed in `Book.txt`**, not in the `Book.txt` file itself, and not at the top
+of every manuscript file.)
+
+All three of these document settings are discussed below.
+
+### Check the output and decide on the appropriate `soft-breaks` and `two-space-hack` settings
+
+In terms of the `soft-breaks` attribute, we specify the value to be `break`
+since this matches the default behavior of Markua 0.10.
+
+The `break` attribute means to insert a forced linebreak when a single newline
+is encountered in the manuscript. While this makes some intuitive sense, it is
+very much against the default behavior of Markdown.
+
+The other two values of `soft-breaks` are `source` (which is to output a single
+newline only in HTML source, which functions like a space in all display
+formats) and `space` (which is to output a single space for single newlines).
+The default of `soft-breaks` in Markua 0.30 is `source`, for Markdown
+compatibility.
+
+If you are happy with the default, just delete the `soft-breaks` document
+setting or explicitly set it to `source`. If you care about the HTML soure code
+and prefer a space, then use `space`.
+
+If you do use `space` or `source` for the `soft-breaks` attribute, consider
+changing the value of the `two-space-hack` document setting to true.
+The `two-space-hack` is not needed if `soft-breaks` is `break`, but it is
+potentially useful in the other two cases. The idea here is that two spaces
+at the end of a line before a single newline makes the single newline
+function like a hard break. This is a very questionable requirement, since
+it is invisible formatting and since some editors strip trailing whitespace.
+However, it is the default behavior of Markdown, and if `soft-breaks` is not
+`break`, it is potentially needed.
+
+Consult the
+[standard document settings](#the-standard-document-settings-m-) section
+to learn more.
+
+### Rename all `caption` attributes to `title`
+
+Next, you will want to do a find-replace in your Markua manuscript to update
+all `caption:` attributes to be `title:`, since the `caption` attribute was
+renamed to `title` in Markua 0.30 for consistency.
 
 Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
 are you did not use any `caption` attributes, but instead relied on the
-`alt-title` behavior. This behavior relied on a non-standard interpretation
-of Markdown, and it prevents you from using good alt-text for accessibility.
-So, as you update your document, consider updating this to `text` and using
-`title` attributes or the `"quoted title"` syntax instead.
+`alt-title` behavior. This is discussed next.
 
-To be clear, with `alt-title: all`, you can do this:
+### Check the output and decide on the appropriate `alt-title` setting
+
+In Markua 0.10, the alt text for an image (or other resource) was used as the
+value of the resource title. This is a very non-standard interpretation of
+Markdown, and it prevents you from using good alt-text for accessibility.
+
+When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
+`alt-title: all`, so that you can do this:
 
 ```
 ![A Figure Caption](someimage.png)
 ```
 
-Youthful, exuberant me thought this was a great thing, since it is terse.
-However, wiser, older me realizes it was a mistake:
+Otherwise, your Markua 0.10 captions will all disappear.
 
-Specifically, what it also does is forces the alt text to be displayed as the
-figure caption, which means that the alt text is not as good for people with
-visual disabilities as it should be. Alt text is supposed to be descriptive.
+Youthful, exuberant me thought that using alt text as figure captions was a
+good idea, since it is terse. However, wiser, older me realizes it was a
+mistake. The reason is subtle: by using the alt text also as the figure
+caption, this means that the alt text is not as good for people with visual
+disabilities as it should be. Alt text is supposed to be descriptive, whereas
+good figure captions are terse (and often witty). These are different
+requirements, so they should have different text.
 
 So, the way to improve this is to do the following:
 
@@ -644,27 +721,32 @@ So, the way to improve this is to do the following:
 ![some descriptive alt text](someimage.png "A Figure Caption")
 ```
 
-This is less terse, but better.
+This is less terse, but much better.
 
-Once you have done this, you can change the `alt-title` document setting to
-be `text` (the default) or `none`. See
-the [standard document settings](#the-standard-document-settings-m-) section
-to learn more.
+Now, you can use that syntax even with `alt-title: all`, since the explictly
+defined title will take precedence over the alt text.
 
-Speaking of youthful exuberance, in terms of the `soft-breaks` attribute, the
-`break` value is very much against the default behavior of Markdown. Consult
-the [standard document settings](#the-standard-document-settings-m-) section
-to learn more.
+So, you can leave `alt-title: all` as you update your document, and once you
+have made these changes throughout your Markua document, you can try
+changing the `alt-title` document setting to be `text` or `none`.
 
-(By the way, I still hate the two space hack. So, there is also
-a `two-space-hack` document setting which lets you adjust its behavior.)
+(Or, you can just delete the `alt-title` document setting for it to default
+to `text`.) See the [standard document settings](#the-standard-document-settings-m-)
+section to learn more about these choices.
 
-Anyway, the big point that regardless of whether you are upgrading a large
-Markua 0.10 document to Markua 0.30 or starting a new Markua 0.30 document, I
-strongly recommend that you review all of
+### Review the other document settings and override the defaults as needed
+
+Besides the specifics of the `alt-title`, `two-space-hack` and `soft-breaks`
+document settings, the big point is that regardless of whether you are
+upgrading a large Markua 0.10 document to Markua 0.30 or starting a new
+Markua 0.30 document, you can make sweeping changes to how a Markua 0.30
+document functions with a little bit of metadata at the top.
+
+I strongly recommend that you review all of
 the [document settings](#document-settings-m-) to learn what choices are
 available, and decide which make sense for you. There's no one true right
-answer here; it's entirely personal preference.
+answer here; it's entirely based on personal preference and whether you are
+starting a new book or upgrading an existing one.
 
 </div>
 

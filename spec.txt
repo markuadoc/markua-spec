@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
-version: '0.30.21'
-date: '2022-11-02'
+version: '0.30.22'
+date: '2022-12-29'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -514,8 +514,9 @@ we continue to support LFM on Leanpub is for updates to legacy books.
 There are many differences between Markua 0.30 and LFM. This list highlights 10
 of the more important ones...
 
-1. In LFM, parts are created with `-# Part`. In Markua, parts are created an
-   attribute list on an atx or Setext heading.
+1. In LFM, parts are created with `-# Part`. In Markua, parts are created with
+   a `{class: part}` attribute list above an atx (`# Foo`) or Setext (using
+   `===`) chapter heading.
 2. In LFM, there is a special syntax for inserting code samples:
    `<<[Optional Title](code/some_code_file.rb)`. In Markua, however, code
    is just a resource, and the LFM syntax is not supported.

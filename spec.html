@@ -723,8 +723,9 @@ we continue to support LFM on Leanpub is for updates to legacy books.</p>
 <p>There are many differences between Markua 0.30 and LFM. This list highlights 10
 of the more important ones…</p>
 <ol>
-<li>In LFM, parts are created with <code>-# Part</code>. In Markua, parts are created an
-attribute list on an atx or Setext heading.</li>
+<li>In LFM, parts are created with <code>-# Part</code>. In Markua, parts are created with
+a <code>{class: part}</code> attribute list above an atx (<code># Foo</code>) or Setext (using
+<code>===</code>) chapter heading.</li>
 <li>In LFM, there is a special syntax for inserting code samples:
 <code>&lt;&lt;[Optional Title](code/some_code_file.rb)</code>. In Markua, however, code
 is just a resource, and the LFM syntax is not supported.</li>

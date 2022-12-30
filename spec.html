@@ -146,9 +146,9 @@ $(document).ready(function() {
 <li><a href="#how-to-write-a-novel-in-markua-m-"><span class="number">1.5</span>How to write a novel in Markua (M)</a></li>
 <li><a href="#how-to-write-almost-any-book-in-markua-m-"><span class="number">1.6</span>How to write almost any book in Markua (M)</a></li>
 <li><a href="#for-leanpub-authors-m-"><span class="number">1.7</span>For Leanpub authors (M)</a></li>
-<li><a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-"><span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)</a></li>
-<li><a href="#markua-0-30-vs-markua-0-10-m-"><span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)</a></li>
-<li><a href="#migrating-a-leanpub-flavoured-markdown-lfm-book-to-markua-0-30-m-"><span class="number">1.10</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)</a></li>
+<li><a href="#markua-0-30-vs-leanpub-flavoured-markdown-lfm-m-"><span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (LFM) (M)</a></li>
+<li><a href="#migrating-a-leanpub-flavoured-markdown-lfm-book-to-markua-0-30-m-"><span class="number">1.9</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)</a></li>
+<li><a href="#markua-0-30-vs-markua-0-10-m-"><span class="number">1.10</span>Markua 0.30 vs. Markua 0.10 (M)</a></li>
 <li><a href="#migrating-a-markua-0-10-book-to-markua-0-30-m-"><span class="number">1.11</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)</a></li>
 <li><a href="#origin-and-structure-of-this-document-m-"><span class="number">1.12</span>Origin and structure of this document (M)</a></li>
 <li><a href="#about-the-html-output-m-"><span class="number">1.13</span>About the HTML output (M)</a></li>
@@ -710,8 +710,8 @@ These sections are primarily here for the benefit of Leanpub authors, but also
 to show the origin of how Markua 0.30 evolved.</p>
 </div>
 <div class="extension">
-<h2 id="markua-0-30-vs-leanpub-flavoured-markdown-m-" class="definition">
-<span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)
+<h2 id="markua-0-30-vs-leanpub-flavoured-markdown-lfm-m-" class="definition">
+<span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (LFM) (M)
 </h2>
 <p>If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
 curious about the main differences between Markua 0.30 and LFM.</p>
@@ -766,26 +766,8 @@ crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 </ol>
 </div>
 <div class="extension">
-<h2 id="markua-0-30-vs-markua-0-10-m-" class="definition">
-<span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)
-</h2>
-<p>If you are writing a new book on Leanpub, you should absolutely choose
-Markua 0.30 over Markua 0.10.</p>
-<p>If you are writing a new course on Leanpub, you’re stuck with Markua 0.10
-for a while longer: our Markua 0.30 support don’t support courses yet.</p>
-<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
-manual</a>. Everything documented in that
-manual should work as described for Markua 0.10 books and courses, and our
-Markua 0.10 version will continue to be supported for years to come.</p>
-<p>Leanpub’s Markua 0.10 support is based on a private fork of an open source
-Ruby library. It is not based on CommonMark or Pandoc. So, there are a
-number of quirks to our Markua 0.10 support. If you are using Markua 0.10
-on Leanpub, consult the <a href="https://leanpub.com/markua/read">user manual</a>, NOT
-this spec.</p>
-</div>
-<div class="extension">
 <h2 id="migrating-a-leanpub-flavoured-markdown-lfm-book-to-markua-0-30-m-" class="definition">
-<span class="number">1.10</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
+<span class="number">1.9</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
 </h2>
 <p>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 is actually
 not too painful, due to the document settings feature of Markua 0.30.</p>
@@ -798,7 +780,7 @@ not too painful, due to the document settings feature of Markua 0.30.</p>
 </ol>
 <p>These are all described below.</p>
 <h3 id="add-the-appropriate-document-settings-to-make-markua-0-30-function-like-lfm" class="definition">
-<span class="number">1.10.1</span>Add the appropriate document settings to make Markua 0.30 function like LFM
+<span class="number">1.9.1</span>Add the appropriate document settings to make Markua 0.30 function like LFM
 </h3>
 <p>When upgrading a LFM document to Markua 0.30, you wil want to start by
 defining three of your document settings to be as compatible with LFM as
@@ -828,7 +810,7 @@ listed in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file 
 of every manuscript file.)</p>
 <p>All three of these document settings are discussed below.</p>
 <h3 id="move-the-images-folder-inside-a-resources-folder" class="definition">
-<span class="number">1.10.2</span>Move the images folder inside a resources folder
+<span class="number">1.9.2</span>Move the images folder inside a resources folder
 </h3>
 <p>In LFM, images live here:</p>
 <pre><code>manuscript/images/some_image.png
@@ -840,7 +822,7 @@ folder inside the resources folder:</p>
 <p>This way, your image paths will be unchanged (as they will both start
 with <code>images/</code>).</p>
 <h3 id="convert-the-part-syntax-if-you-use-parts" class="definition">
-<span class="number">1.10.3</span>Convert the part syntax, if you use parts
+<span class="number">1.9.3</span>Convert the part syntax, if you use parts
 </h3>
 <p>In LFM, parts are defined like this:</p>
 <pre><code>-# Some Part Title
@@ -850,7 +832,7 @@ with <code>images/</code>).</p>
 # Some Part Title
 </code></pre>
 <h3 id="generate-the-book-look-at-the-output-and-make-any-other-changes-needed" class="definition">
-<span class="number">1.10.4</span>Generate the book, look at the output, and make any other changes needed
+<span class="number">1.9.4</span>Generate the book, look at the output, and make any other changes needed
 </h3>
 <p>The above list of changes are the main ones, but there are
 <a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-">other differences</a>
@@ -859,6 +841,24 @@ between LFM and Markua 0.30.</p>
 Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
 and the <a href="https://leanpub.com/lfm/read">LFM manual</a> to learn more about how to
 make any other changes needed to finish the migration.</p>
+</div>
+<div class="extension">
+<h2 id="markua-0-30-vs-markua-0-10-m-" class="definition">
+<span class="number">1.10</span>Markua 0.30 vs. Markua 0.10 (M)
+</h2>
+<p>If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.</p>
+<p>If you are writing a new course on Leanpub, you’re stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don’t support courses yet.</p>
+<p>Leanpub’s Markua 0.10 support is fully documented in its own <a href="https://leanpub.com/markua/read">user
+manual</a>. Everything documented in that
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.</p>
+<p>Leanpub’s Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the <a href="https://leanpub.com/markua/read">user manual</a>, NOT
+this spec.</p>
 </div>
 <div class="extension">
 <h2 id="migrating-a-markua-0-10-book-to-markua-0-30-m-" class="definition">
@@ -1814,7 +1814,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>

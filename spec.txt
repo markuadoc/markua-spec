@@ -498,7 +498,7 @@ to show the origin of how Markua 0.30 evolved.
 
 <div class="extension">
 
-## Markua 0.30 vs. Leanpub Flavoured Markdown (M)
+## Markua 0.30 vs. Leanpub Flavoured Markdown (LFM) (M)
 
 If you have used Leanpub Flavoured Markdown (LFM) in the past, you may be
 curious about the main differences between Markua 0.30 and LFM.
@@ -553,31 +553,6 @@ of the more important ones...
    approaches, or could just support parsing single files or input streams.)
 10. Most importantly, a number of features (courses, index entries, smart
     crosslinks, etc.) exist in Markua and do not exist in LFM.
-
-</div>
-
-
-
-<div class="extension">
-
-## Markua 0.30 vs. Markua 0.10 (M)
-
-If you are writing a new book on Leanpub, you should absolutely choose
-Markua 0.30 over Markua 0.10.
-
-If you are writing a new course on Leanpub, you're stuck with Markua 0.10
-for a while longer: our Markua 0.30 support don't support courses yet.
-
-Leanpub's Markua 0.10 support is fully documented in its own [user
-manual](https://leanpub.com/markua/read). Everything documented in that
-manual should work as described for Markua 0.10 books and courses, and our
-Markua 0.10 version will continue to be supported for years to come.
-
-Leanpub's Markua 0.10 support is based on a private fork of an open source
-Ruby library. It is not based on CommonMark or Pandoc. So, there are a
-number of quirks to our Markua 0.10 support. If you are using Markua 0.10
-on Leanpub, consult the [user manual](https://leanpub.com/markua/read), NOT
-this spec.
 
 </div>
 
@@ -673,8 +648,8 @@ To convert this to Markua 0.30, you do this:
 ### Generate the book, look at the output, and make any other changes needed
 
 The above list of changes are the main ones, but there are
-[other differences](#markua-0-30-vs-leanpub-flavoured-markdown-m-)
-between LFM and Markua 0.30.
+[other differences](#markua-0-30-vs-leanpub-flavoured-markdown-lfm-m-) between
+LFM and Markua 0.30.
 
 However, at this point, the best thing to do is to just generate the book using
 Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
@@ -682,6 +657,33 @@ and the [LFM manual](https://leanpub.com/lfm/read) to learn more about how to
 make any other changes needed to finish the migration.
 
 </div>
+
+
+
+<div class="extension">
+
+## Markua 0.30 vs. Markua 0.10 (M)
+
+If you are writing a new book on Leanpub, you should absolutely choose
+Markua 0.30 over Markua 0.10.
+
+If you are writing a new course on Leanpub, you're stuck with Markua 0.10
+for a while longer: our Markua 0.30 support don't support courses yet.
+
+Leanpub's Markua 0.10 support is fully documented in its own [user
+manual](https://leanpub.com/markua/read). Everything documented in that
+manual should work as described for Markua 0.10 books and courses, and our
+Markua 0.10 version will continue to be supported for years to come.
+
+Leanpub's Markua 0.10 support is based on a private fork of an open source
+Ruby library. It is not based on CommonMark or Pandoc. So, there are a
+number of quirks to our Markua 0.10 support. If you are using Markua 0.10
+on Leanpub, consult the [user manual](https://leanpub.com/markua/read), NOT
+this spec.
+
+</div>
+
+
 
 <div class="extension">
 

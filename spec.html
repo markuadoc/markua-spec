@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.22 (2022-12-29)</div>
+<div class="version">Version 0.30.22 (2022-12-30)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. This document specifies Markua 0.30, which is currently in beta on <a href="https://leanpub.com">Leanpub</a>.<br/><br/><hr/><br/></span>
 </div>
@@ -148,13 +148,14 @@ $(document).ready(function() {
 <li><a href="#for-leanpub-authors-m-"><span class="number">1.7</span>For Leanpub authors (M)</a></li>
 <li><a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-"><span class="number">1.8</span>Markua 0.30 vs. Leanpub Flavoured Markdown (M)</a></li>
 <li><a href="#markua-0-30-vs-markua-0-10-m-"><span class="number">1.9</span>Markua 0.30 vs. Markua 0.10 (M)</a></li>
-<li><a href="#migrating-a-markua-0-10-book-to-markua-0-30-m-"><span class="number">1.10</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)</a></li>
-<li><a href="#origin-and-structure-of-this-document-m-"><span class="number">1.11</span>Origin and structure of this document (M)</a></li>
-<li><a href="#about-the-html-output-m-"><span class="number">1.12</span>About the HTML output (M)</a></li>
-<li><a href="#why-the-name-markua-m-"><span class="number">1.13</span>Why the name “Markua”? (M)</a></li>
-<li><a href="#what-is-markdown-"><span class="number">1.14</span>What is Markdown?</a></li>
-<li><a href="#why-is-a-spec-needed-"><span class="number">1.15</span>Why is a spec needed?</a></li>
-<li><a href="#about-this-document"><span class="number">1.16</span>About this document</a></li>
+<li><a href="#migrating-a-leanpub-flavoured-markdown-lfm-book-to-markua-0-30-m-"><span class="number">1.10</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)</a></li>
+<li><a href="#migrating-a-markua-0-10-book-to-markua-0-30-m-"><span class="number">1.11</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)</a></li>
+<li><a href="#origin-and-structure-of-this-document-m-"><span class="number">1.12</span>Origin and structure of this document (M)</a></li>
+<li><a href="#about-the-html-output-m-"><span class="number">1.13</span>About the HTML output (M)</a></li>
+<li><a href="#why-the-name-markua-m-"><span class="number">1.14</span>Why the name “Markua”? (M)</a></li>
+<li><a href="#what-is-markdown-"><span class="number">1.15</span>What is Markdown?</a></li>
+<li><a href="#why-is-a-spec-needed-"><span class="number">1.16</span>Why is a spec needed?</a></li>
+<li><a href="#about-this-document"><span class="number">1.17</span>About this document</a></li>
 </ul>
 </li>
 <li><a href="#preliminaries"><span class="number">2</span>Preliminaries</a>
@@ -783,8 +784,85 @@ on Leanpub, consult the <a href="https://leanpub.com/markua/read">user manual</a
 this spec.</p>
 </div>
 <div class="extension">
+<h2 id="migrating-a-leanpub-flavoured-markdown-lfm-book-to-markua-0-30-m-" class="definition">
+<span class="number">1.10</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
+</h2>
+<p>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 is actually
+not too painful, due to the document settings feature of Markua 0.30.</p>
+<p>Here are the steps you do:</p>
+<ol>
+<li>Add the appropriate document settings to make Markua 0.30 function like LFM.</li>
+<li>Move the images folder inside a resources folder.</li>
+<li>Convert the part syntax, if you use parts.</li>
+<li>Generate the book, look at the output, and make any other changes needed.</li>
+</ol>
+<p>These are all described below.</p>
+<h3 id="add-the-appropriate-document-settings-to-make-markua-0-30-function-like-lfm" class="definition">
+<span class="number">1.10.1</span>Add the appropriate document settings to make Markua 0.30 function like LFM
+</h3>
+<p>When upgrading a LFM document to Markua 0.30, you wil want to start by
+defining three of your document settings to be as compatible with LFM as
+possible.</p>
+<p>So, add this text at the top of your Markua document, followed by a blank line:</p>
+<pre><code>{
+    alt-title: all
+    soft-breaks: space
+    two-space-hack: true
+}
+</code></pre>
+<p>To be clear, there needs to be a blank line between the document settings and
+the manuscript content. For example:</p>
+<pre><code>{
+    alt-title: all
+    soft-breaks: space
+    two-space-hack: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+</code></pre>
+<p>Note that you only define this list of document settings <strong>once</strong>, at the start
+of your <strong>first file</strong> in your Markua manuscript. (This is the <strong>first file
+listed in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top
+of every manuscript file.)</p>
+<p>All three of these document settings are discussed below.</p>
+<h3 id="move-the-images-folder-inside-a-resources-folder" class="definition">
+<span class="number">1.10.2</span>Move the images folder inside a resources folder
+</h3>
+<p>In LFM, images live here:</p>
+<pre><code>manuscript/images/some_image.png
+</code></pre>
+<p>To convert this to Markua 0.30, the simplest thing to do is just move the images
+folder inside the resources folder:</p>
+<pre><code>manuscript/resources/images/some_image.png
+</code></pre>
+<p>This way, your image paths will be unchanged (as they will both start
+with <code>images/</code>).</p>
+<h3 id="convert-the-part-syntax-if-you-use-parts" class="definition">
+<span class="number">1.10.3</span>Convert the part syntax, if you use parts
+</h3>
+<p>In LFM, parts are defined like this:</p>
+<pre><code>-# Some Part Title
+</code></pre>
+<p>To convert this to Markua 0.30, you do this:</p>
+<pre><code>{class: part}
+# Some Part Title
+</code></pre>
+<h3 id="generate-the-book-look-at-the-output-and-make-any-other-changes-needed" class="definition">
+<span class="number">1.10.4</span>Generate the book, look at the output, and make any other changes needed
+</h3>
+<p>The above list of changes are the main ones, but there are
+<a href="#markua-0-30-vs-leanpub-flavoured-markdown-m-">other differences</a>
+between LFM and Markua 0.30.</p>
+<p>However, at this point, the best thing to do is to just generate the book using
+Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
+and the <a href="https://leanpub.com/lfm/read">LFM manual</a> to learn more about how to
+make any other changes needed to finish the migration.</p>
+</div>
+<div class="extension">
 <h2 id="migrating-a-markua-0-10-book-to-markua-0-30-m-" class="definition">
-<span class="number">1.10</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)
+<span class="number">1.11</span>Migrating a Markua 0.10 Book to Markua 0.30 (M)
 </h2>
 <p>When I defined how Markua 0.10 worked, I was a number of years younger than I
 am now. I cared less about compatibility with Markdown defaults, and more about
@@ -808,10 +886,10 @@ probably want to start by making these five changes, in order:</p>
 </ol>
 <p>These are all described below.</p>
 <h3 id="define-the-recommended-document-settings-for-upgrading-from-markua-0-10" class="definition">
-<span class="number">1.10.1</span>Define the recommended document settings for upgrading from Markua 0.10
+<span class="number">1.11.1</span>Define the recommended document settings for upgrading from Markua 0.10
 </h3>
 <p>When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
-defining two of your document settings to be as compatible with Markua 0.10 as
+defining three of your document settings to be as compatible with Markua 0.10 as
 possible.</p>
 <p>So, add this text at the top of your Markua document, followed by a blank line:</p>
 <pre><code>{
@@ -838,7 +916,7 @@ listed in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file 
 of every manuscript file.)</p>
 <p>All three of these document settings are discussed below.</p>
 <h3 id="check-the-output-and-decide-on-the-appropriate-and-settings" class="definition">
-<span class="number">1.10.2</span>Check the output and decide on the appropriate <code>soft-breaks</code> and <code>two-space-hack</code> settings
+<span class="number">1.11.2</span>Check the output and decide on the appropriate <code>soft-breaks</code> and <code>two-space-hack</code> settings
 </h3>
 <p>In terms of the <code>soft-breaks</code> attribute, we specify the value to be <code>break</code>
 since this matches the default behavior of Markua 0.10.</p>
@@ -866,7 +944,7 @@ However, it is the default behavior of Markdown, and if <code>soft-breaks</code>
 <a href="#the-standard-document-settings-m-">standard document settings</a> section
 to learn more.</p>
 <h3 id="rename-all-attributes-to" class="definition">
-<span class="number">1.10.3</span>Rename all <code>caption</code> attributes to <code>title</code>
+<span class="number">1.11.3</span>Rename all <code>caption</code> attributes to <code>title</code>
 </h3>
 <p>Next, you will want to do a find-replace in your Markua manuscript to update
 all <code>caption:</code> attributes to be <code>title:</code>, since the <code>caption</code> attribute was
@@ -875,7 +953,7 @@ renamed to <code>title</code> in Markua 0.30 for consistency.</p>
 are you did not use any <code>caption</code> attributes, but instead relied on the
 <code>alt-title</code> behavior. This is discussed next.</p>
 <h3 id="check-the-output-and-decide-on-the-appropriate-setting" class="definition">
-<span class="number">1.10.4</span>Check the output and decide on the appropriate <code>alt-title</code> setting
+<span class="number">1.11.4</span>Check the output and decide on the appropriate <code>alt-title</code> setting
 </h3>
 <p>In Markua 0.10, the alt text for an image (or other resource) was used as the
 value of the resource title. This is a very non-standard interpretation of
@@ -905,7 +983,7 @@ changing the <code>alt-title</code> document setting to be <code>text</code> or 
 to <code>text</code>.) See the <a href="#the-standard-document-settings-m-">standard document settings</a>
 section to learn more about these choices.</p>
 <h3 id="review-the-other-document-settings-and-override-the-defaults-as-needed" class="definition">
-<span class="number">1.10.5</span>Review the other document settings and override the defaults as needed
+<span class="number">1.11.5</span>Review the other document settings and override the defaults as needed
 </h3>
 <p>Besides the specifics of the <code>alt-title</code>, <code>two-space-hack</code> and <code>soft-breaks</code>
 document settings, the big point is that regardless of whether you are
@@ -920,7 +998,7 @@ starting a new book or upgrading an existing one.</p>
 </div>
 <div class="extension">
 <h2 id="origin-and-structure-of-this-document-m-" class="definition">
-<span class="number">1.11</span>Origin and structure of this document (M)
+<span class="number">1.12</span>Origin and structure of this document (M)
 </h2>
 <p>This is the Markua Spec, written by
 <a href="https://twitter.com/peterarmstrong">Peter Armstrong</a>.</p>
@@ -1001,7 +1079,7 @@ not make sense for books and courses.)</li>
 </div>
 <div class="extension">
 <h2 id="about-the-html-output-m-" class="definition">
-<span class="number">1.12</span>About the HTML output (M)
+<span class="number">1.13</span>About the HTML output (M)
 </h2>
 <p>The HTML mapping defined in this specification is NOT a complete specification
 of the HTML documents produced by Markua Processors.</p>
@@ -1046,7 +1124,7 @@ top of the example.</p>
 </div>
 <div class="extension">
 <h2 id="why-the-name-markua-m-" class="definition">
-<span class="number">1.13</span>Why the name “Markua”? (M)
+<span class="number">1.14</span>Why the name “Markua”? (M)
 </h2>
 <p>When I set out to specify Markua, I realized I needed a name. I wanted a name
 that conveyed the love that I have for Markdown while not implying endorsement
@@ -1062,7 +1140,7 @@ Markua and the Markua logo is a registered trademark of Ruboss Technology
 Corporation, the company which created, owns and operates Leanpub.</p>
 </div>
 <h2 id="what-is-markdown-" class="definition">
-<span class="number">1.14</span>What is Markdown?
+<span class="number">1.15</span>What is Markdown?
 </h2>
 <p>Markdown is a plain text format for writing structured documents,
 based on conventions for indicating formatting in email
@@ -1148,7 +1226,7 @@ to worry about indentation.  But the Markdown version is much easier
 to read.  The nesting of list items is apparent to the eye in the
 source, not just in the processed document.</p>
 <h2 id="why-is-a-spec-needed-" class="definition">
-<span class="number">1.15</span>Why is a spec needed?
+<span class="number">1.16</span>Why is a spec needed?
 </h2>
 <p>John Gruber’s <a href="http://daringfireball.net/projects/markdown/syntax">canonical description of Markdown’s
 syntax</a>
@@ -1287,7 +1365,7 @@ renders differently on another (say, converting to docbook using
 pandoc).  To make matters worse, because nothing in Markdown counts
 as a “syntax error,” the divergence often isn’t discovered right away.</p>
 <h2 id="about-this-document" class="definition">
-<span class="number">1.16</span>About this document
+<span class="number">1.17</span>About this document
 </h2>
 <p>This document attempts to specify Markdown syntax unambiguously.
 It contains many examples with side-by-side Markdown and

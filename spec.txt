@@ -2,7 +2,7 @@
 title: Markua Spec
 author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
 version: '0.30.22'
-date: '2022-12-29'
+date: '2022-12-30'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -585,6 +585,106 @@ this spec.
 
 <div class="extension">
 
+## Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
+
+Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 is actually
+not too painful, due to the document settings feature of Markua 0.30.
+
+Here are the steps you do:
+
+1. Add the appropriate document settings to make Markua 0.30 function like LFM.
+2. Move the images folder inside a resources folder.
+3. Convert the part syntax, if you use parts.
+4. Generate the book, look at the output, and make any other changes needed.
+
+These are all described below.
+
+### Add the appropriate document settings to make Markua 0.30 function like LFM
+
+When upgrading a LFM document to Markua 0.30, you wil want to start by
+defining three of your document settings to be as compatible with LFM as
+possible.
+
+So, add this text at the top of your Markua document, followed by a blank line:
+
+```
+{
+    alt-title: all
+    soft-breaks: space
+    two-space-hack: true
+}
+```
+
+To be clear, there needs to be a blank line between the document settings and
+the manuscript content. For example:
+
+```
+{
+    alt-title: all
+    soft-breaks: space
+    two-space-hack: true
+}
+
+# Chapter One
+
+Lorem ipsum dolor...
+```
+
+Note that you only define this list of document settings **once**, at the start
+of your **first file** in your Markua manuscript. (This is the **first file
+listed in `Book.txt`**, not in the `Book.txt` file itself, and not at the top
+of every manuscript file.)
+
+All three of these document settings are discussed below.
+
+### Move the images folder inside a resources folder
+
+In LFM, images live here:
+
+```
+manuscript/images/some_image.png
+```
+
+To convert this to Markua 0.30, the simplest thing to do is just move the images
+folder inside the resources folder:
+
+```
+manuscript/resources/images/some_image.png
+```
+
+This way, your image paths will be unchanged (as they will both start
+with `images/`).
+
+### Convert the part syntax, if you use parts
+
+In LFM, parts are defined like this:
+
+```
+-# Some Part Title
+```
+
+To convert this to Markua 0.30, you do this:
+
+```
+{class: part}
+# Some Part Title
+```
+
+### Generate the book, look at the output, and make any other changes needed
+
+The above list of changes are the main ones, but there are
+[other differences](#markua-0-30-vs-leanpub-flavoured-markdown-m-)
+between LFM and Markua 0.30.
+
+However, at this point, the best thing to do is to just generate the book using
+Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
+and the [LFM manual](https://leanpub.com/lfm/read) to learn more about how to
+make any other changes needed to finish the migration.
+
+</div>
+
+<div class="extension">
+
 ## Migrating a Markua 0.10 Book to Markua 0.30 (M)
 
 When I defined how Markua 0.10 worked, I was a number of years younger than I
@@ -615,7 +715,7 @@ These are all described below.
 ### Define the recommended document settings for upgrading from Markua 0.10
 
 When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
-defining two of your document settings to be as compatible with Markua 0.10 as
+defining three of your document settings to be as compatible with Markua 0.10 as
 possible.
 
 So, add this text at the top of your Markua document, followed by a blank line:

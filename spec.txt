@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
-author: '*This formal specification of Markua was developed at Leanpub, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. The default version is Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). This document specifies Markua 0.30, which is currently in beta on [Leanpub](https://leanpub.com).<br/><br/><hr/><br/>'
+author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
 version: '0.30.22'
-date: '2022-12-30'
+date: '2023-02-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -473,8 +473,9 @@ user manuals:
    2014, and evolved until 2021. It is currently the only way to write courses
    on Leanpub.
 3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) - The Markua 0.30
-   beta wast launched on Leanpub in 2021. The user manual for Markua 0.30 is
-   not yet stable, so for now you're better off reading this! (TODO: FIX)
+   beta was launched on Leanpub in 2021. Currently, Markua 0.30 is the default
+   for new books on Leanpub. The user manual for Markua 0.30 is not yet stable,
+   so for now you're better off reading this spec! (TODO: FIX)
 
 Not all features in the Markua spec are supported in the Markua 0.30 beta.
 However, the Markua 0.30 beta is good enough that it is the default choice for

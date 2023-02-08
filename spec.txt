@@ -815,16 +815,17 @@ value of the resource title. This is a very non-standard interpretation of
 Markdown, and it prevents you from using good alt-text for accessibility.
 
 When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
-`alt-title: all`, so that you can do this:
+to leave the default value of `alt-title: all`, so that you can do this:
 
 ```
 ![A Figure Caption](someimage.png)
 ```
 
-Otherwise, your Markua 0.10 captions will all disappear.
+Otherwise, if you set `alt-title` to `text` or `none`, your captions will
+disappear from all your images.
 
-It is a debatable point whether using alt text as figure captions is a good
-idea.
+Now, it is a debatable point whether using alt text as figure captions is a
+good idea.
 
 The main argument in favour of it is terseness: it is the most terse syntax,
 and the easiest to remember.

@@ -612,9 +612,9 @@ discussed next.
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behavior of the Markua Processor. For example, you can set the
-`alt-title` setting to `all` to make images use the alt text as the figure
-title instead of as alt text:
+affect the behavior of the Markua Processor. For example, the default value of
+the `alt-title` setting is `all`, to make images use the alt text as the figure
+title instead of as alt text, if no figure title is present:
 
 ```
 {
@@ -970,12 +970,13 @@ are you did not use any <code>caption</code> attributes, but instead relied on t
 value of the resource title. This is a very non-standard interpretation of
 Markdown, and it prevents you from using good alt-text for accessibility.</p>
 <p>When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
-<code>alt-title: all</code>, so that you can do this:</p>
+to leave the default value of <code>alt-title: all</code>, so that you can do this:</p>
 <pre><code>![A Figure Caption](someimage.png)
 </code></pre>
-<p>Otherwise, your Markua 0.10 captions will all disappear.</p>
-<p>It is a debatable point whether using alt text as figure captions is a good
-idea.</p>
+<p>Otherwise, if you set <code>alt-title</code> to <code>text</code> or <code>none</code>, your captions will
+disappear from all your images.</p>
+<p>Now, it is a debatable point whether using alt text as figure captions is a
+good idea.</p>
 <p>The main argument in favour of it is terseness: it is the most terse syntax,
 and the easiest to remember.</p>
 <p>A second argument in favour of it is aesthetics, since the alternative syntax

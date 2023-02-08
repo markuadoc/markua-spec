@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.22 (2023-02-06)</div>
+<div class="version">Version 0.30.23 (2023-02-08)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -629,9 +629,11 @@ This is an apple with a figure title but no alt text:
 ```
 
 This gets you the terseness of inserting images as figures in LFM, in a general
-way. Note that if the `alt-title` document setting is set to `text` (the
-default) this behavior only happens for text-based resources like code samples.
-If the `alt-title` is set to `none`, it never happens.
+way. Note that if the `alt-title` document setting is set to `text`, this
+behavior only happens for text-based resources like code samples.
+If the `alt-title` is set to `none`, it never happens. The default value of
+the `alt-title` attribute is `all`, not `text` or `none`, for better
+compatibility with Markua 0.10 and Leanpub Flavoured Markdown.
 
 The generalization of the Markdown image syntax into resources, and the addition
 of document settings, are two more of Markua's additions to Markdown. These are
@@ -784,7 +786,7 @@ not too painful, due to the document settings feature of Markua 0.30.</p>
 <span class="number">1.9.1</span>Add the appropriate document settings to make Markua 0.30 function like LFM
 </h3>
 <p>When upgrading a LFM document to Markua 0.30, you wil want to start by
-defining three of your document settings to be as compatible with LFM as
+defining two of your document settings to be as compatible with LFM as
 possible.</p>
 <p>So, add this text at the top of your Markua document, followed by a blank line:</p>
 <pre><code>{
@@ -793,10 +795,14 @@ possible.</p>
     two-space-hack: true
 }
 </code></pre>
+<p>Note that the default value of the <code>alt-title</code> attribute is <code>all</code>, not <code>text</code>
+or <code>none</code>, for better compatibility with Markua 0.10 and Leanpub Flavoured
+Markdown. So while <code>alt-title</code> should be <code>all</code> when migrating an LFM or a
+Markua 0.10 document to Markua 0.30, you don’t need to set it explicitly:
+you can just let it default to <code>all</code>.</p>
 <p>To be clear, there needs to be a blank line between the document settings and
 the manuscript content. For example:</p>
 <pre><code>{
-    alt-title: all
     soft-breaks: space
     two-space-hack: true
 }
@@ -899,10 +905,14 @@ possible.</p>
     two-space-hack: false
 }
 </code></pre>
+<p>Note that the default value of the <code>alt-title</code> attribute is <code>all</code>, not <code>text</code>
+or <code>none</code>, for better compatibility with Markua 0.10 and Leanpub Flavoured
+Markdown. So while <code>alt-title</code> should be <code>all</code> when migrating an LFM or a
+Markua 0.10 document to Markua 0.30, you don’t need to set it explicitly:
+you can just let it default to <code>all</code>.</p>
 <p>To be clear, there needs to be a blank line between the document settings and
 the manuscript content. For example:</p>
 <pre><code>{
-    alt-title: all
     soft-breaks: break
     two-space-hack: false
 }
@@ -964,24 +974,40 @@ Markdown, and it prevents you from using good alt-text for accessibility.</p>
 <pre><code>![A Figure Caption](someimage.png)
 </code></pre>
 <p>Otherwise, your Markua 0.10 captions will all disappear.</p>
-<p>Youthful, exuberant me thought that using alt text as figure captions was a
-good idea, since it is terse. However, wiser, older me realizes it was a
-mistake. The reason is subtle: by using the alt text also as the figure
-caption, this means that the alt text is not as good for people with visual
-disabilities as it should be. Alt text is supposed to be descriptive, whereas
-good figure captions are terse (and often witty). These are different
-requirements, so they should have different text.</p>
-<p>So, the way to improve this is to do the following:</p>
+<p>It is a debatable point whether using alt text as figure captions is a good
+idea.</p>
+<p>The main argument in favour of it is terseness: it is the most terse syntax,
+and the easiest to remember.</p>
+<p>A second argument in favour of it is aesthetics, since the alternative syntax
+looks like this:</p>
+<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
+<p>Now, the actual reason is to have different alt text, of course. This is the
+main argument against the alt text as figure caption idea.</p>
+<p>The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.</p>
+<p>You would assume that this argument is a slam dunk. But, it’s actually not.
+For example, Markua documents can be used to generate print books. There is
+no alt text in print books. So, for a well-written print book, the text itself
+may presumably be descriptive enough that alt text is not needed.</p>
+<p>This connects to the more general argument that alt text is HTML-specific, and
+only applies to HTML and EPUB, not PDF.</p>
+<p>Anyway, assuming you are in the “alt text is for descriptions, not figure
+captions” camp, the way to improve this is to do the following:</p>
 <pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
 </code></pre>
-<p>This is less terse, but much better.</p>
+<p>This is less terse, but arguably much better.</p>
 <p>Now, you can use that syntax even with <code>alt-title: all</code>, since the explictly
-defined title will take precedence over the alt text.</p>
+defined title will take precedence over the alt text title.</p>
 <p>So, you can leave <code>alt-title: all</code> as you update your document, and once you
 have made these changes throughout your Markua document, you can try
 changing the <code>alt-title</code> document setting to be <code>text</code> or <code>none</code>.</p>
 <p>(Or, you can just delete the <code>alt-title</code> document setting for it to default
-to <code>text</code>.) See the <a href="#the-standard-document-settings-m-">standard document settings</a>
+to <code>all</code>.) See the <a href="#the-standard-document-settings-m-">standard document settings</a>
 section to learn more about these choices.</p>
 <h3 id="review-the-other-document-settings-and-override-the-defaults-as-needed" class="definition">
 <span class="number">1.11.5</span>Review the other document settings and override the defaults as needed
@@ -3318,7 +3344,7 @@ are in a flat list, as JSON, or both.</p>
 <p>Since Markua defines a number of document settings, it is helpful to see what
 the defaults are in one list. These defaults are listed below.</p>
 <pre><code>{
-  alt-title: text
+  alt-title: all
   default-code-language: guess
   figure-classes: all
   figure-number-format: sequential
@@ -3341,30 +3367,62 @@ by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <
 <code>number-figures</code>. These need to be considered together: the behavior of these
 settings are tightly coupled.</p>
 <p><code>alt-title</code>
-: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>text</code>. This setting controls whether,
-in the cases where there is no figure title explicitly set, the alt text on a
-resource is removed and used as the figure title instead. If alt text
-is used as the figure title, it is NOT also provided as alt text, since it would
-be very annoying to hear the same text spoken twice (once as the alt text and
-once as the figure title) when using a screen reader. This is what the values
-mean:</p>
+: <code>all</code>, <code>text</code> or <code>none</code>. <strong>The default is <code>all</code>, NOT <code>text</code>.</strong>
+This setting controls whether, in the cases where there is no figure title
+explicitly set, the alt text on a resource is removed and used as the figure
+title instead. If alt text is used as the figure title, it is NOT also provided
+as alt text, since it would be very annoying to hear the same text spoken twice
+(once as the alt text and once as the figure title) when using a screen reader.
+This is what the values mean:</p>
 <ul>
 <li><code>all</code>: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
-choice is closest to the behavior of LFM and of Markua version 0.10.)</li>
+choice is the default, since it is the closest to the behavior of LFM and of
+Markua version 0.10. So, regardless of whether you like the choice, there are 12
+years worth of books on Leanpub which would be punished by a different default.)</li>
 <li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
 an external code sample), remove the alt text and use it as the figure title
 instead. However, if the resource is not purely text-based, such as an image or
 a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. This is arguably the most sensible choice, and it
-is the default since it strikes a balance between preserving compatibility with
-Markdown for non-text-based resources like images, while still providing a
-sensible default for text-based resources like code samples. Since Markdown does
-not define support for external text-based resources, there is no conflict here.</li>
+no figure title is provided. This is arguably the most sensible choice, as it
+strikes a balance between preserving compatibility with Markdown for
+non-text-based resources like images, while still providing a sensible default
+for text-based resources like code samples. Since Markdown does not define
+support for external text-based resources, there is no conflict here.</li>
 <li><code>none</code>: never remove the alt text to use it as the figure title, even for a
 text-based resource where no figure title is provided. (This is how Markdown
 behaves.)</li>
 </ul>
+<p>It is a debatable point whether using alt text as figure captions is a good
+idea. The main argument in favour of it is terseness: it is the most terse
+syntax, and the easiest to remember. A second argument in favour of it is
+aesthetics, since the alternative syntax looks like this:</p>
+<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
+<p>Now, the actual reason is to have different alt text, of course. This is the
+main argument against the alt text as figure caption idea.</p>
+<p>The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.</p>
+<p>You would assume that this argument is a slam dunk. But, it’s actually not.
+For example, Markua documents can be used to generate print books. There is
+no alt text in print books. So, for a well-written print book, the text itself
+may presumably be descriptive enough that alt text is not needed.</p>
+<p>This connects to the more general argument that alt text is HTML-specific, and
+only applies to HTML and EPUB, not PDF.</p>
+<p>So, the conclusion is that the best syntax when inserting an image is to do the
+following:</p>
+<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>Now, you can use that syntax even with <code>alt-title: all</code>, since the explictly
+defined title will take precedence over the alt text.</p>
+<p>The default of <code>alt-title</code> is <code>all</code> since there are 12 years of books on
+Leanpub which do this:</p>
+<pre><code>![A Figure Caption](someimage.png)
+</code></pre>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -7851,8 +7909,8 @@ attribute list.</p>
 ![optional alt text](resource_path_or_url &quot;Optional Figure Title&quot;)
 </code></pre>
 <p>Note that there is some flexibility in the title attribute. If the <code>alt-title</code>
-document setting is <code>text</code> (the default) or <code>all</code>, then the alt text can be used
-as the title as well. (If the <code>alt-title</code> is <code>none</code>, then it cannot.)</p>
+document setting is <code>text</code> or <code>all</code> (the default) , then the alt text can be
+used as the title as well. (If the <code>alt-title</code> is <code>none</code>, then it cannot.)</p>
 <p>So, assuming a value of <code>text</code> or <code>all</code> for a document setting, this also works:</p>
 <pre><code>![Canadian Census Data](census.tbl)
 </code></pre>

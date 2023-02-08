@@ -388,9 +388,9 @@ discussed next.
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behavior of the Markua Processor. For example, you can set the
-`alt-title` setting to `all` to make images use the alt text as the figure
-title instead of as alt text:
+affect the behavior of the Markua Processor. For example, the default value of
+the `alt-title` setting is `all`, to make images use the alt text as the figure
+title instead of as alt text, if no figure title is present:
 
 ```
 {

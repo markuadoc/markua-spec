@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.30.22'
-date: '2023-02-06'
+version: '0.30.23'
+date: '2023-02-08'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -405,9 +405,11 @@ This is an apple with a figure title but no alt text:
 ```
 
 This gets you the terseness of inserting images as figures in LFM, in a general
-way. Note that if the `alt-title` document setting is set to `text` (the
-default) this behavior only happens for text-based resources like code samples.
-If the `alt-title` is set to `none`, it never happens.
+way. Note that if the `alt-title` document setting is set to `text`, this
+behavior only happens for text-based resources like code samples.
+If the `alt-title` is set to `none`, it never happens. The default value of
+the `alt-title` attribute is `all`, not `text` or `none`, for better
+compatibility with Markua 0.10 and Leanpub Flavoured Markdown.
 
 The generalization of the Markdown image syntax into resources, and the addition
 of document settings, are two more of Markua's additions to Markdown. These are
@@ -578,7 +580,7 @@ These are all described below.
 ### Add the appropriate document settings to make Markua 0.30 function like LFM
 
 When upgrading a LFM document to Markua 0.30, you wil want to start by
-defining three of your document settings to be as compatible with LFM as
+defining two of your document settings to be as compatible with LFM as
 possible.
 
 So, add this text at the top of your Markua document, followed by a blank line:
@@ -591,12 +593,17 @@ So, add this text at the top of your Markua document, followed by a blank line:
 }
 ```
 
+Note that the default value of the `alt-title` attribute is `all`, not `text`
+or `none`, for better compatibility with Markua 0.10 and Leanpub Flavoured
+Markdown. So while `alt-title` should be `all` when migrating an LFM or a
+Markua 0.10 document to Markua 0.30, you don't need to set it explicitly:
+you can just let it default to `all`.
+
 To be clear, there needs to be a blank line between the document settings and
 the manuscript content. For example:
 
 ```
 {
-    alt-title: all
     soft-breaks: space
     two-space-hack: true
 }
@@ -731,12 +738,17 @@ So, add this text at the top of your Markua document, followed by a blank line:
 }
 ```
 
+Note that the default value of the `alt-title` attribute is `all`, not `text`
+or `none`, for better compatibility with Markua 0.10 and Leanpub Flavoured
+Markdown. So while `alt-title` should be `all` when migrating an LFM or a
+Markua 0.10 document to Markua 0.30, you don't need to set it explicitly:
+you can just let it default to `all`.
+
 To be clear, there needs to be a blank line between the document settings and
 the manuscript content. For example:
 
 ```
 {
-    alt-title: all
     soft-breaks: break
     two-space-hack: false
 }
@@ -811,31 +823,56 @@ When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
 
 Otherwise, your Markua 0.10 captions will all disappear.
 
-Youthful, exuberant me thought that using alt text as figure captions was a
-good idea, since it is terse. However, wiser, older me realizes it was a
-mistake. The reason is subtle: by using the alt text also as the figure
-caption, this means that the alt text is not as good for people with visual
-disabilities as it should be. Alt text is supposed to be descriptive, whereas
-good figure captions are terse (and often witty). These are different
-requirements, so they should have different text.
+It is a debatable point whether using alt text as figure captions is a good
+idea.
 
-So, the way to improve this is to do the following:
+The main argument in favour of it is terseness: it is the most terse syntax,
+and the easiest to remember.
+
+A second argument in favour of it is aesthetics, since the alternative syntax
+looks like this:
+
+```
+![](someimage.png "A Figure Caption")
+```
+
+With this syntax, you have the `[]` for what looks like no real reason.
+
+Now, the actual reason is to have different alt text, of course. This is the
+main argument against the alt text as figure caption idea.
+
+The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.
+
+You would assume that this argument is a slam dunk. But, it's actually not.
+For example, Markua documents can be used to generate print books. There is
+no alt text in print books. So, for a well-written print book, the text itself
+may presumably be descriptive enough that alt text is not needed.
+
+This connects to the more general argument that alt text is HTML-specific, and
+only applies to HTML and EPUB, not PDF.
+
+Anyway, assuming you are in the "alt text is for descriptions, not figure
+captions" camp, the way to improve this is to do the following:
 
 ```
 ![some descriptive alt text](someimage.png "A Figure Caption")
 ```
 
-This is less terse, but much better.
+This is less terse, but arguably much better.
 
 Now, you can use that syntax even with `alt-title: all`, since the explictly
-defined title will take precedence over the alt text.
+defined title will take precedence over the alt text title.
 
 So, you can leave `alt-title: all` as you update your document, and once you
 have made these changes throughout your Markua document, you can try
 changing the `alt-title` document setting to be `text` or `none`.
 
 (Or, you can just delete the `alt-title` document setting for it to default
-to `text`.) See the [standard document settings](#the-standard-document-settings-m-)
+to `all`.) See the [standard document settings](#the-standard-document-settings-m-)
 section to learn more about these choices.
 
 ### Review the other document settings and override the defaults as needed
@@ -3020,7 +3057,7 @@ the defaults are in one list. These defaults are listed below.
 
 ```
 {
-  alt-title: text
+  alt-title: all
   default-code-language: guess
   figure-classes: all
   figure-number-format: sequential
@@ -3046,29 +3083,76 @@ by four related settings: `alt-title`, `figure-classes`, `list-figures` and
 settings are tightly coupled.
 
 `alt-title`
-: `all`, `text` or `none`. The default is `text`. This setting controls whether,
-in the cases where there is no figure title explicitly set, the alt text on a
-resource is removed and used as the figure title instead. If alt text
-is used as the figure title, it is NOT also provided as alt text, since it would
-be very annoying to hear the same text spoken twice (once as the alt text and
-once as the figure title) when using a screen reader. This is what the values
-mean:
+: `all`, `text` or `none`. **The default is `all`, NOT `text`.**
+This setting controls whether, in the cases where there is no figure title
+explicitly set, the alt text on a resource is removed and used as the figure
+title instead. If alt text is used as the figure title, it is NOT also provided
+as alt text, since it would be very annoying to hear the same text spoken twice
+(once as the alt text and once as the figure title) when using a screen reader.
+This is what the values mean:
 
 * `all`: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
-choice is closest to the behavior of LFM and of Markua version 0.10.)
+choice is the default, since it is the closest to the behavior of LFM and of
+Markua version 0.10. So, regardless of whether you like the choice, there are 12
+years worth of books on Leanpub which would be punished by a different default.)
 * `text`: if no title is provided for a given **text-based** resource (such as
 an external code sample), remove the alt text and use it as the figure title
 instead. However, if the resource is not purely text-based, such as an image or
 a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. This is arguably the most sensible choice, and it
-is the default since it strikes a balance between preserving compatibility with
-Markdown for non-text-based resources like images, while still providing a
-sensible default for text-based resources like code samples. Since Markdown does
-not define support for external text-based resources, there is no conflict here.
+no figure title is provided. This is arguably the most sensible choice, as it
+strikes a balance between preserving compatibility with Markdown for
+non-text-based resources like images, while still providing a sensible default
+for text-based resources like code samples. Since Markdown does not define
+support for external text-based resources, there is no conflict here.
 * `none`: never remove the alt text to use it as the figure title, even for a
 text-based resource where no figure title is provided. (This is how Markdown
 behaves.)
+
+It is a debatable point whether using alt text as figure captions is a good
+idea. The main argument in favour of it is terseness: it is the most terse
+syntax, and the easiest to remember. A second argument in favour of it is
+aesthetics, since the alternative syntax looks like this:
+
+```
+![](someimage.png "A Figure Caption")
+```
+
+With this syntax, you have the `[]` for what looks like no real reason.
+
+Now, the actual reason is to have different alt text, of course. This is the
+main argument against the alt text as figure caption idea.
+
+The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.
+
+You would assume that this argument is a slam dunk. But, it's actually not.
+For example, Markua documents can be used to generate print books. There is
+no alt text in print books. So, for a well-written print book, the text itself
+may presumably be descriptive enough that alt text is not needed.
+
+This connects to the more general argument that alt text is HTML-specific, and
+only applies to HTML and EPUB, not PDF.
+
+So, the conclusion is that the best syntax when inserting an image is to do the
+following:
+
+```
+![some descriptive alt text](someimage.png "A Figure Caption")
+```
+
+Now, you can use that syntax even with `alt-title: all`, since the explictly
+defined title will take precedence over the alt text.
+
+The default of `alt-title` is `all` since there are 12 years of books on
+Leanpub which do this:
+
+```
+![A Figure Caption](someimage.png)
+```
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -7076,8 +7160,8 @@ Recall that the resource syntax is as follows:
 ```
 
 Note that there is some flexibility in the title attribute. If the `alt-title`
-document setting is `text` (the default) or `all`, then the alt text can be used
-as the title as well. (If the `alt-title` is `none`, then it cannot.)
+document setting is `text` or `all` (the default) , then the alt text can be
+used as the title as well. (If the `alt-title` is `none`, then it cannot.)
 
 So, assuming a value of `text` or `all` for a document setting, this also works:
 

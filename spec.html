@@ -790,7 +790,6 @@ defining two of your document settings to be as compatible with LFM as
 possible.</p>
 <p>So, add this text at the top of your Markua document, followed by a blank line:</p>
 <pre><code>{
-    alt-title: all
     soft-breaks: space
     two-space-hack: true
 }
@@ -882,36 +881,36 @@ document settings allow you to customize the behavior of an entire Markua
 document via global switches. This way, the behavior of a Markua 0.30
 document can be changed in sweeping ways via these global settings.</p>
 <p>If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by making these five changes, in order:</p>
+probably want to start by doing these three steps:</p>
 <ol>
-<li>Define the recommended document settings for upgrading from Markua 0.10.</li>
-<li>Check the output and decide on the appropriate <code>soft-breaks</code> and
-<code>two-space-hack</code> settings.</li>
-<li>Rename all <code>caption</code> attributes to <code>title</code>.</li>
-<li>Check the output and decide on the appropriate <code>alt-title</code> setting.</li>
-<li>Review the other document settings and override the defaults as needed.</li>
+<li>Rename all <code>caption</code> attributes to <code>title</code></li>
+<li>Preview the book</li>
+<li>Update any document settings</li>
 </ol>
 <p>These are all described below.</p>
-<h3 id="define-the-recommended-document-settings-for-upgrading-from-markua-0-10" class="definition">
-<span class="number">1.11.1</span>Define the recommended document settings for upgrading from Markua 0.10
+<h3 id="rename-all-attributes-to" class="definition">
+<span class="number">1.11.1</span>Rename all <code>caption</code> attributes to <code>title</code>
 </h3>
-<p>When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
-defining three of your document settings to be as compatible with Markua 0.10 as
-possible.</p>
-<p>So, add this text at the top of your Markua document, followed by a blank line:</p>
-<pre><code>{
-    alt-title: all
-    soft-breaks: break
-    two-space-hack: false
-}
-</code></pre>
-<p>Note that the default value of the <code>alt-title</code> attribute is <code>all</code>, not <code>text</code>
-or <code>none</code>, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while <code>alt-title</code> should be <code>all</code> when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don’t need to set it explicitly:
-you can just let it default to <code>all</code>.</p>
-<p>To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:</p>
+<p>First, you will want to do a find-replace in your Markua manuscript to update
+all <code>caption:</code> attributes to be <code>title:</code>, since the <code>caption</code> attribute was
+renamed to <code>title</code> in Markua 0.30 for consistency.</p>
+<p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any <code>caption</code> attributes, but instead relied on the
+<code>alt-title</code> behavior. This is discussed later.</p>
+<h3 id="preview-the-book" class="definition">
+<span class="number">1.11.2</span>Preview the book
+</h3>
+<p>Before making any more changes, you should preview your book to see what it
+looks like unchanged.</p>
+<h3 id="update-any-document-settings" class="definition">
+<span class="number">1.11.3</span>Update any document settings
+</h3>
+<p>After previewing the book, you will want to review the PDF output and decide on
+the appropriate values of the document settings.</p>
+<p>If you want maximum compatibility with Markua 0.10, you will want to override
+the <code>soft-breaks</code> and <code>two-space-hack</code> settings. You can do this on Leanpub in
+the Settings &gt; Generation Settings section of the author app, or you can set
+the document settings at the top of the first manuscript file like this:</p>
 <pre><code>{
     soft-breaks: break
     two-space-hack: false
@@ -921,13 +920,13 @@ the manuscript content. For example:</p>
 
 Lorem ipsum dolor...
 </code></pre>
+<p>Make sure you add a blank line below the document settings, and also make sure
+you put the curly braces on lines by themselves!</p>
 <p>Note that you only define this list of document settings <strong>once</strong>, at the start
-of your <strong>first file</strong> in your Markua manuscript. (This is the <strong>first file
-listed in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top
-of every manuscript file.)</p>
-<p>All three of these document settings are discussed below.</p>
+of your <strong>first file</strong> in your Markua manuscript.</p>
+<p>Both of these document settings are discussed below.</p>
 <h3 id="check-the-output-and-decide-on-the-appropriate-and-settings" class="definition">
-<span class="number">1.11.2</span>Check the output and decide on the appropriate <code>soft-breaks</code> and <code>two-space-hack</code> settings
+<span class="number">1.11.4</span>Check the output and decide on the appropriate <code>soft-breaks</code> and <code>two-space-hack</code> settings
 </h3>
 <p>In terms of the <code>soft-breaks</code> attribute, we specify the value to be <code>break</code>
 since this matches the default behavior of Markua 0.10.</p>
@@ -954,17 +953,8 @@ However, it is the default behavior of Markdown, and if <code>soft-breaks</code>
 <p>Consult the
 <a href="#the-standard-document-settings-m-">standard document settings</a> section
 to learn more.</p>
-<h3 id="rename-all-attributes-to" class="definition">
-<span class="number">1.11.3</span>Rename all <code>caption</code> attributes to <code>title</code>
-</h3>
-<p>Next, you will want to do a find-replace in your Markua manuscript to update
-all <code>caption:</code> attributes to be <code>title:</code>, since the <code>caption</code> attribute was
-renamed to <code>title</code> in Markua 0.30 for consistency.</p>
-<p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
-are you did not use any <code>caption</code> attributes, but instead relied on the
-<code>alt-title</code> behavior. This is discussed next.</p>
 <h3 id="check-the-output-and-decide-on-the-appropriate-setting" class="definition">
-<span class="number">1.11.4</span>Check the output and decide on the appropriate <code>alt-title</code> setting
+<span class="number">1.11.5</span>Check the output and decide on the appropriate <code>alt-title</code> setting
 </h3>
 <p>In Markua 0.10, the alt text for an image (or other resource) was used as the
 value of the resource title. This is a very non-standard interpretation of
@@ -1011,7 +1001,7 @@ changing the <code>alt-title</code> document setting to be <code>text</code> or 
 to <code>all</code>.) See the <a href="#the-standard-document-settings-m-">standard document settings</a>
 section to learn more about these choices.</p>
 <h3 id="review-the-other-document-settings-and-override-the-defaults-as-needed" class="definition">
-<span class="number">1.11.5</span>Review the other document settings and override the defaults as needed
+<span class="number">1.11.6</span>Review the other document settings and override the defaults as needed
 </h3>
 <p>Besides the specifics of the <code>alt-title</code>, <code>two-space-hack</code> and <code>soft-breaks</code>
 document settings, the big point is that regardless of whether you are
@@ -1842,7 +1832,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>
@@ -3527,9 +3517,11 @@ at the end of a chapter.</p>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the footnote numbering is restarted
 at the end of a chapter.</p>
 <p><code>soft-breaks</code>
-: <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
-behavior of single newlines (i.e. a newline which is not followed by another
-newline) in the output. This is what the values mean:</p>
+: <code>break</code>, <code>space</code> or <code>source</code>. The default is <code>source</code>, for compatibility with
+Markdown. <strong>If you want the behavior of Markua 0.10, you need to choose
+<code>break</code>.</strong> This setting determines the behavior of single newlines (i.e. a
+newline which is not followed by another newline) in the output. This is what
+the values mean:</p>
 <ul>
 <li><code>source</code>: Single newlines inside paragraphs in the Markua source produce
 single newlines in the HTML source. This will pretend to break the line
@@ -3540,9 +3532,8 @@ equivalent to a single space. So, this type of line break only is a line
 break in the HTML source and not in any other output format–hence the
 name <code>source</code>. To be clear: for non-HTML output formats such as LaTeX or
 PDF, a value of <code>source</code> has the same effect as <code>space</code>, discussed next.
-The <code>source</code> option is arguably the worst option, but it is the default
-because Markua must be compatible with Markdown by default, even in the
-rare situations where it considers a Markdown decision to be suboptimal.</li>
+The <code>source</code> option is the default for compatibility with Markdown by
+default. If you want the behavior of Markua 0.10, choose <code>break</code>.</li>
 <li><code>space</code>: Single newlines inside paragraphs in the Markua document produce
 single spaces in the HTML output. This functions identically to single
 newlines when rendered as HTML. For non-HTML-based output formats like
@@ -3551,15 +3542,16 @@ LaTex or PDF, a single space is rendered for a single newline.</li>
 break tags in the HTML output and line breaks in non-HTML output like
 LaTeX or PDF. The reason this value is called <code>break</code> is to indicate that
 when you hit a newline to get a line break, you get a real line break.
-If <code>soft-breaks</code> has the value of <code>break</code>, all single newlines function
+The <code>break</code> option gives you the behavior of Markua 0.10. If
+<code>soft-breaks</code> has the value of <code>break</code>, all single newlines function
 as though they were using the “two space hack” to produce a hard line
 break in normal Markdown. (Whether the “two space hack” is enabled in a
 Markua document is determined by the value of the <code>two-space-hack</code>
 setting, discussed below.)</li>
 </ul>
 <p><code>two-space-hack</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>, for compatibility with Markdown. If
-<code>true</code>, adding two spaces at the end of a line forces a hard line break.
+: <code>true</code> or <code>false</code>. The default is <code>true</code>, for compatibility with Markdown.
+If <code>true</code>, adding two spaces at the end of a line forces a hard line break.
 If <code>false</code>, spaces at the end of a line are ignored, and the single newline
 is treated as a single newline would be without those spaces, which is
 determined by the value of the <code>soft-breaks</code> setting. Since Markua allows
@@ -7391,7 +7383,7 @@ bbb&lt;/p&gt;
 <h2 id="blank-lines" class="definition">
 <span class="number">7.11</span>Blank lines
 </h2>
-<p><a href="#blank-line">Blank lines</a> between block-level elements are ignored,
+<p><a href="#blank-lines">Blank lines</a> between block-level elements are ignored,
 except for the role they play in determining whether a <a href="#list">list</a>
 is <a href="#tight">tight</a> or <a href="#loose">loose</a>.</p>
 <p>Blank lines at the beginning and end of the document are also ignored.</p>

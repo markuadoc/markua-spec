@@ -587,7 +587,6 @@ So, add this text at the top of your Markua document, followed by a blank line:
 
 ```
 {
-    alt-title: all
     soft-breaks: space
     two-space-hack: true
 }
@@ -711,41 +710,38 @@ document via global switches. This way, the behavior of a Markua 0.30
 document can be changed in sweeping ways via these global settings.
 
 If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by making these five changes, in order:
+probably want to start by doing these three steps:
 
-1. Define the recommended document settings for upgrading from Markua 0.10.
-2. Check the output and decide on the appropriate `soft-breaks` and
-   `two-space-hack` settings.
-3. Rename all `caption` attributes to `title`.
-4. Check the output and decide on the appropriate `alt-title` setting.
-5. Review the other document settings and override the defaults as needed.
+1. Rename all `caption` attributes to `title`
+2. Preview the book
+3. Update any document settings
 
 These are all described below.
 
-### Define the recommended document settings for upgrading from Markua 0.10
+### Rename all `caption` attributes to `title`
 
-When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
-defining three of your document settings to be as compatible with Markua 0.10 as
-possible.
+First, you will want to do a find-replace in your Markua manuscript to update
+all `caption:` attributes to be `title:`, since the `caption` attribute was
+renamed to `title` in Markua 0.30 for consistency.
 
-So, add this text at the top of your Markua document, followed by a blank line:
+Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any `caption` attributes, but instead relied on the
+`alt-title` behavior. This is discussed later.
 
-```
-{
-    alt-title: all
-    soft-breaks: break
-    two-space-hack: false
-}
-```
+### Preview the book
 
-Note that the default value of the `alt-title` attribute is `all`, not `text`
-or `none`, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while `alt-title` should be `all` when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don't need to set it explicitly:
-you can just let it default to `all`.
+Before making any more changes, you should preview your book to see what it
+looks like unchanged.
 
-To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:
+### Update any document settings
+
+After previewing the book, you will want to review the PDF output and decide on
+the appropriate values of the document settings.
+
+If you want maximum compatibility with Markua 0.10, you will want to override
+the `soft-breaks` and `two-space-hack` settings. You can do this on Leanpub in
+the Settings > Generation Settings section of the author app, or you can set
+the document settings at the top of the first manuscript file like this:
 
 ```
 {
@@ -758,12 +754,13 @@ the manuscript content. For example:
 Lorem ipsum dolor...
 ```
 
-Note that you only define this list of document settings **once**, at the start
-of your **first file** in your Markua manuscript. (This is the **first file
-listed in `Book.txt`**, not in the `Book.txt` file itself, and not at the top
-of every manuscript file.)
+Make sure you add a blank line below the document settings, and also make sure
+you put the curly braces on lines by themselves!
 
-All three of these document settings are discussed below.
+Note that you only define this list of document settings **once**, at the start
+of your **first file** in your Markua manuscript.
+
+Both of these document settings are discussed below.
 
 ### Check the output and decide on the appropriate `soft-breaks` and `two-space-hack` settings
 
@@ -797,16 +794,6 @@ However, it is the default behavior of Markdown, and if `soft-breaks` is not
 Consult the
 [standard document settings](#the-standard-document-settings-m-) section
 to learn more.
-
-### Rename all `caption` attributes to `title`
-
-Next, you will want to do a find-replace in your Markua manuscript to update
-all `caption:` attributes to be `title:`, since the `caption` attribute was
-renamed to `title` in Markua 0.30 for consistency.
-
-Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
-are you did not use any `caption` attributes, but instead relied on the
-`alt-title` behavior. This is discussed next.
 
 ### Check the output and decide on the appropriate `alt-title` setting
 
@@ -3267,9 +3254,11 @@ at the end of a chapter.
 at the end of a chapter.
 
 `soft-breaks`
-: `break`, `space` or `source`. Default `source`. This setting determines the
-behavior of single newlines (i.e. a newline which is not followed by another
-newline) in the output. This is what the values mean:
+: `break`, `space` or `source`. The default is `source`, for compatibility with
+Markdown. **If you want the behavior of Markua 0.10, you need to choose
+`break`.** This setting determines the behavior of single newlines (i.e. a
+newline which is not followed by another newline) in the output. This is what
+the values mean:
 
   * `source`: Single newlines inside paragraphs in the Markua source produce
     single newlines in the HTML source. This will pretend to break the line
@@ -3280,9 +3269,8 @@ newline) in the output. This is what the values mean:
     break in the HTML source and not in any other output format--hence the
     name `source`. To be clear: for non-HTML output formats such as LaTeX or
     PDF, a value of `source` has the same effect as `space`, discussed next.
-    The `source` option is arguably the worst option, but it is the default
-    because Markua must be compatible with Markdown by default, even in the
-    rare situations where it considers a Markdown decision to be suboptimal.
+    The `source` option is the default for compatibility with Markdown by
+    default. If you want the behavior of Markua 0.10, choose `break`.
   * `space`: Single newlines inside paragraphs in the Markua document produce
     single spaces in the HTML output. This functions identically to single
     newlines when rendered as HTML. For non-HTML-based output formats like
@@ -3291,15 +3279,16 @@ newline) in the output. This is what the values mean:
     break tags in the HTML output and line breaks in non-HTML output like
     LaTeX or PDF. The reason this value is called `break` is to indicate that
     when you hit a newline to get a line break, you get a real line break.
-    If `soft-breaks` has the value of `break`, all single newlines function
+    The `break` option gives you the behavior of Markua 0.10. If
+    `soft-breaks` has the value of `break`, all single newlines function
     as though they were using the "two space hack" to produce a hard line
     break in normal Markdown. (Whether the "two space hack" is enabled in a
     Markua document is determined by the value of the `two-space-hack`
     setting, discussed below.)
 
 `two-space-hack`
-: `true` or `false`. Default `true`, for compatibility with Markdown. If
-  `true`, adding two spaces at the end of a line forces a hard line break.
+: `true` or `false`. The default is `true`, for compatibility with Markdown.
+  If `true`, adding two spaces at the end of a line forces a hard line break.
   If `false`, spaces at the end of a line are ignored, and the single newline
   is treated as a single newline would be without those spaces, which is
   determined by the value of the `soft-breaks` setting. Since Markua allows

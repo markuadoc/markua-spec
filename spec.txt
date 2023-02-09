@@ -739,9 +739,14 @@ After previewing the book, you will want to review the PDF output and decide on
 the appropriate values of the document settings.
 
 If you want maximum compatibility with Markua 0.10, you will want to override
-the `soft-breaks` and `two-space-hack` settings. You can do this on Leanpub in
-the Settings > Generation Settings section of the author app, or you can set
-the document settings at the top of the first manuscript file like this:
+the `soft-breaks` and `two-space-hack` settings as follows:
+
+1. Set the `soft-breaks` setting to `break`
+2. Set the `two-space-hack` setting to `false`
+
+You can do this on Leanpub in the Settings > Generation Settings section of the
+author app, or you can set the document settings at the top of the first
+manuscript file like this:
 
 ```
 {

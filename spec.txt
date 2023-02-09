@@ -579,27 +579,46 @@ These are all described below.
 
 ### Add the appropriate document settings to make Markua 0.30 function like LFM
 
-When upgrading a LFM document to Markua 0.30, you wil want to start by
-defining two of your document settings to be as compatible with LFM as
-possible.
+If you want maximum compatibility with LFM, you will want to override
+the `soft-breaks` and `two-space-hack` settings as follows:
 
-So, add this text at the top of your Markua document, followed by a blank line:
+1. Set the `soft-breaks` setting to `space`
+2. Set the `two-space-hack` setting to `true`
+
+You can do this on Leanpub in the Settings > Generation Settings section of the
+author app, or you can set the document settings at the top of the first
+manuscript file like this:
 
 ```
 {
     soft-breaks: space
     two-space-hack: true
 }
+
+# Chapter One
+
+Lorem ipsum dolor...
 ```
 
-Note that the default value of the `alt-title` attribute is `all`, not `text`
-or `none`, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while `alt-title` should be `all` when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don't need to set it explicitly:
-you can just let it default to `all`.
+!PA
 
-To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:
+Make sure you add a blank line below the document settings, and also make sure
+you put the curly braces on lines by themselves!
+
+Note that you only define this list of document settings **once**, at the start
+of your **first file** in your Markua manuscript.
+
+Both of these document settings are discussed in the 
+[standard document settings](#the-standard-document-settings-m-) section
+below.
+
+
+
+
+
+
+So, add this text at the top of your Markua document. To be clear, there needs
+to be a blank line between the document settings and the manuscript content. For example:
 
 ```
 {
@@ -765,40 +784,9 @@ you put the curly braces on lines by themselves!
 Note that you only define this list of document settings **once**, at the start
 of your **first file** in your Markua manuscript.
 
-Both of these document settings are discussed below.
-
-### Check the output and decide on the appropriate `soft-breaks` and `two-space-hack` settings
-
-In terms of the `soft-breaks` attribute, we specify the value to be `break`
-since this matches the default behavior of Markua 0.10.
-
-The `break` attribute means to insert a forced linebreak when a single newline
-is encountered in the manuscript. While this makes some intuitive sense, it is
-very much against the default behavior of Markdown.
-
-The other two values of `soft-breaks` are `source` (which is to output a single
-newline only in HTML source, which functions like a space in all display
-formats) and `space` (which is to output a single space for single newlines).
-The default of `soft-breaks` in Markua 0.30 is `source`, for Markdown
-compatibility.
-
-If you are happy with the default, just delete the `soft-breaks` document
-setting or explicitly set it to `source`. If you care about the HTML soure code
-and prefer a space, then use `space`.
-
-If you do use `space` or `source` for the `soft-breaks` attribute, consider
-changing the value of the `two-space-hack` document setting to true.
-The `two-space-hack` is not needed if `soft-breaks` is `break`, but it is
-potentially useful in the other two cases. The idea here is that two spaces
-at the end of a line before a single newline makes the single newline
-function like a hard break. This is a very questionable requirement, since
-it is invisible formatting and since some editors strip trailing whitespace.
-However, it is the default behavior of Markdown, and if `soft-breaks` is not
-`break`, it is potentially needed.
-
-Consult the
+Both of these document settings are discussed in the 
 [standard document settings](#the-standard-document-settings-m-) section
-to learn more.
+below.
 
 ### Check the output and decide on the appropriate `alt-title` setting
 
@@ -3063,7 +3051,7 @@ the defaults are in one list. These defaults are listed below.
   number-sections: false
   restart-endnote-numbering: true
   restart-footnote-numbering: true
-  soft-breaks: source
+  soft-breaks: space
   two-space-hack: true
 }
 ```
@@ -3259,41 +3247,41 @@ at the end of a chapter.
 at the end of a chapter.
 
 `soft-breaks`
-: `break`, `space` or `source`. The default is `source`, for compatibility with
+: `break` or `space`. The default is `space`, for compatibility with
 Markdown. **If you want the behavior of Markua 0.10, you need to choose
 `break`.** This setting determines the behavior of single newlines (i.e. a
 newline which is not followed by another newline) in the output. This is what
 the values mean:
 
-  * `source`: Single newlines inside paragraphs in the Markua source produce
-    single newlines in the HTML source. This will pretend to break the line
-    while actually functioning like a single space in the output: all it
-    actually does is break the line in the HTML source. It does *not* break the
-    line when the HTML is rendered, since in HTML a single newline is
-    equivalent to a single space. So, this type of line break only is a line
-    break in the HTML source and not in any other output format--hence the
-    name `source`. To be clear: for non-HTML output formats such as LaTeX or
-    PDF, a value of `source` has the same effect as `space`, discussed next.
-    The `source` option is the default for compatibility with Markdown by
-    default. If you want the behavior of Markua 0.10, choose `break`.
-  * `space`: Single newlines inside paragraphs in the Markua document produce
-    single spaces in the HTML output. This functions identically to single
-    newlines when rendered as HTML. For non-HTML-based output formats like
-    LaTex or PDF, a single space is rendered for a single newline.
+  * `space`: Single newlines inside paragraphs in the Markua source produce
+    output which functions like a single space. In output such as PDF, a single
+    space must be what is output. In output such as HTML, a single newline
+    is output, since in HTML output, a single newline is equivalent to a single
+    space in terms of the effect on presentation. So, this type of line break
+    only is a line break in the HTML source, and in all output presentation it
+    functions like a space--hence the name `space`. The `space` option is the
+    default for compatibility with Markdown by default. If you want the
+    behavior of Markua 0.10, choose `break`.
   * `break`: Single newlines inside paragraphs in the Markua document produce
     break tags in the HTML output and line breaks in non-HTML output like
     LaTeX or PDF. The reason this value is called `break` is to indicate that
     when you hit a newline to get a line break, you get a real line break.
-    The `break` option gives you the behavior of Markua 0.10. If
-    `soft-breaks` has the value of `break`, all single newlines function
-    as though they were using the "two space hack" to produce a hard line
-    break in normal Markdown. (Whether the "two space hack" is enabled in a
-    Markua document is determined by the value of the `two-space-hack`
-    setting, discussed below.)
+    To be clear: the `break` attribute means to insert a forced linebreak
+    **whenever a single newline is encountered in the manuscript, regardless
+    of whether there are two spaces at the end of the line**. While this makes
+    some intuitive sense, it is very much against the default behavior of
+    Markdown.  The `break` option gives you the behavior of Markua 0.10,
+    in which all single newlines function as though they were using the
+    "two space hack" to produce a hard line break in normal Markdown. (Whether
+    the "two space hack" is enabled in a Markua document is determined by the
+    value of the `two-space-hack` setting, discussed below.)
 
 `two-space-hack`
 : `true` or `false`. The default is `true`, for compatibility with Markdown.
   If `true`, adding two spaces at the end of a line forces a hard line break.
+  If you use this setting, ensure that your text editor does not strip
+  trailing whitespace! This is probably the best choice if `soft-breaks` is
+  set to `space`, or if you want maximum compatibility with Markdown.
   If `false`, spaces at the end of a line are ignored, and the single newline
   is treated as a single newline would be without those spaces, which is
   determined by the value of the `soft-breaks` setting. Since Markua allows
@@ -10352,7 +10340,7 @@ after
 
 Note that single line breaks within the definitions (the `<dd>` not `<dt>`)
 are handled the same way as single line breaks within paragraphs, and are
-subject to the `soft-breaks` document setting which defaults to `source` for
+subject to the `soft-breaks` document setting which defaults to `space` for
 compatibility with Markdown.
 
 ```````````````````````````````` example

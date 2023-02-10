@@ -566,77 +566,15 @@ of the more important ones...
 ## Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
 
 Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 is actually
-not too painful, due to the document settings feature of Markua 0.30.
+really easy.
 
 Here are the steps you do:
 
-1. Add the appropriate document settings to make Markua 0.30 function like LFM.
-2. Move the images folder inside a resources folder.
-3. Convert the part syntax, if you use parts.
-4. Generate the book, look at the output, and make any other changes needed.
+1. Move the images folder inside a resources folder.
+2. Convert the part syntax, if you use parts.
+3. Generate the book, look at the output, and make any other changes needed.
 
 These are all described below.
-
-### Add the appropriate document settings to make Markua 0.30 function like LFM
-
-If you want maximum compatibility with LFM, you will want to override
-the `soft-breaks` and `two-space-hack` settings as follows:
-
-1. Set the `soft-breaks` setting to `space`
-2. Set the `two-space-hack` setting to `true`
-
-You can do this on Leanpub in the Settings > Generation Settings section of the
-author app, or you can set the document settings at the top of the first
-manuscript file like this:
-
-```
-{
-    soft-breaks: space
-    two-space-hack: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-```
-
-!PA
-
-Make sure you add a blank line below the document settings, and also make sure
-you put the curly braces on lines by themselves!
-
-Note that you only define this list of document settings **once**, at the start
-of your **first file** in your Markua manuscript.
-
-Both of these document settings are discussed in the 
-[standard document settings](#the-standard-document-settings-m-) section
-below.
-
-
-
-
-
-
-So, add this text at the top of your Markua document. To be clear, there needs
-to be a blank line between the document settings and the manuscript content. For example:
-
-```
-{
-    soft-breaks: space
-    two-space-hack: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-```
-
-Note that you only define this list of document settings **once**, at the start
-of your **first file** in your Markua manuscript. (This is the **first file
-listed in `Book.txt`**, not in the `Book.txt` file itself, and not at the top
-of every manuscript file.)
-
-All three of these document settings are discussed below.
 
 ### Move the images folder inside a resources folder
 
@@ -681,6 +619,12 @@ However, at this point, the best thing to do is to just generate the book using
 Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
 and the [LFM manual](https://leanpub.com/lfm/read) to learn more about how to
 make any other changes needed to finish the migration.
+
+One thing that Markua 0.30 defines which is not done in LFM is the concept of
+document settings, which are a set of global switches which customize the
+output of your book. You will want to review the
+[standard document settings](#the-standard-document-settings-m-) section below
+to learn more.
 
 </div>
 
@@ -763,9 +707,13 @@ the `soft-breaks` and `two-space-hack` settings as follows:
 1. Set the `soft-breaks` setting to `break`
 2. Set the `two-space-hack` setting to `false`
 
-You can do this on Leanpub in the Settings > Generation Settings section of the
-author app, or you can set the document settings at the top of the first
-manuscript file like this:
+Note that both of these settings are against the default behavior of Markdown,
+so unless you are already relying on that behaviour in Markua 0.10, you should
+consider leaving them at their default values.
+
+You can change these settings on Leanpub in the Settings > Generation Settings
+section of the author app, or you can set the document settings at the top of
+the first manuscript file like this:
 
 ```
 {
@@ -784,81 +732,7 @@ you put the curly braces on lines by themselves!
 Note that you only define this list of document settings **once**, at the start
 of your **first file** in your Markua manuscript.
 
-Both of these document settings are discussed in the 
-[standard document settings](#the-standard-document-settings-m-) section
-below.
-
-### Check the output and decide on the appropriate `alt-title` setting
-
-In Markua 0.10, the alt text for an image (or other resource) was used as the
-value of the resource title. This is a very non-standard interpretation of
-Markdown, and it prevents you from using good alt-text for accessibility.
-
-When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
-to leave the default value of `alt-title: all`, so that you can do this:
-
-```
-![A Figure Caption](someimage.png)
-```
-
-Otherwise, if you set `alt-title` to `text` or `none`, your captions will
-disappear from all your images.
-
-Now, it is a debatable point whether using alt text as figure captions is a
-good idea.
-
-The main argument in favour of it is terseness: it is the most terse syntax,
-and the easiest to remember.
-
-A second argument in favour of it is aesthetics, since the alternative syntax
-looks like this:
-
-```
-![](someimage.png "A Figure Caption")
-```
-
-With this syntax, you have the `[]` for what looks like no real reason.
-
-Now, the actual reason is to have different alt text, of course. This is the
-main argument against the alt text as figure caption idea.
-
-The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.
-
-You would assume that this argument is a slam dunk. But, it's actually not.
-For example, Markua documents can be used to generate print books. There is
-no alt text in print books. So, for a well-written print book, the text itself
-may presumably be descriptive enough that alt text is not needed.
-
-This connects to the more general argument that alt text is HTML-specific, and
-only applies to HTML and EPUB, not PDF.
-
-Anyway, assuming you are in the "alt text is for descriptions, not figure
-captions" camp, the way to improve this is to do the following:
-
-```
-![some descriptive alt text](someimage.png "A Figure Caption")
-```
-
-This is less terse, but arguably much better.
-
-Now, you can use that syntax even with `alt-title: all`, since the explictly
-defined title will take precedence over the alt text title.
-
-So, you can leave `alt-title: all` as you update your document, and once you
-have made these changes throughout your Markua document, you can try
-changing the `alt-title` document setting to be `text` or `none`.
-
-(Or, you can just delete the `alt-title` document setting for it to default
-to `all`.) See the [standard document settings](#the-standard-document-settings-m-)
-section to learn more about these choices.
-
-### Review the other document settings and override the defaults as needed
-
-Besides the specifics of the `alt-title`, `two-space-hack` and `soft-breaks`
+Besides the specifics of the `soft-breaks` and the `two-space-hack`
 document settings, the big point is that regardless of whether you are
 upgrading a large Markua 0.10 document to Markua 0.30 or starting a new
 Markua 0.30 document, you can make sweeping changes to how a Markua 0.30
@@ -3091,9 +2965,13 @@ text-based resource where no figure title is provided. (This is how Markdown
 behaves.)
 
 It is a debatable point whether using alt text as figure captions is a good
-idea. The main argument in favour of it is terseness: it is the most terse
-syntax, and the easiest to remember. A second argument in favour of it is
-aesthetics, since the alternative syntax looks like this:
+idea.
+
+The main argument in favour of it is terseness: it is the most terse
+syntax, and the easiest to remember.
+
+A second argument in favour of it is aesthetics, since the alternative syntax
+looks like this:
 
 ```
 ![](someimage.png "A Figure Caption")
@@ -3113,23 +2991,25 @@ they should have different text.
 You would assume that this argument is a slam dunk. But, it's actually not.
 For example, Markua documents can be used to generate print books. There is
 no alt text in print books. So, for a well-written print book, the text itself
-may presumably be descriptive enough that alt text is not needed.
+may presumably be descriptive enough that alt text is not needed. This connects
+to the more general argument that alt text is HTML-specific, and only applies
+to HTML and EPUB, not PDF.
 
-This connects to the more general argument that alt text is HTML-specific, and
-only applies to HTML and EPUB, not PDF.
-
-So, the conclusion is that the best syntax when inserting an image is to do the
-following:
+However, even considering this counterargument, the conclusion I've come to is
+that the default behavior of Markdown is best, and alt text should be used for
+descriptions, not figure captions. If you're in this camp, the way to use alt
+text, and the best syntax when inserting an image, is to do the following:
 
 ```
 ![some descriptive alt text](someimage.png "A Figure Caption")
 ```
 
-Now, you can use that syntax even with `alt-title: all`, since the explictly
-defined title will take precedence over the alt text.
+You can use that syntax even with `alt-title: all`, since the explictly defined
+title will take precedence over the alt text.
 
-The default of `alt-title` is `all` since there are 12 years of books on
-Leanpub which do this:
+However, even though this syntax is best and using the alt text as the figure
+caption is slightly frowned upon, the default of `alt-title` is `all`, since
+there are 12 years of books on Leanpub which do this:
 
 ```
 ![A Figure Caption](someimage.png)

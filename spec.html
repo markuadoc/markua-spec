@@ -3763,7 +3763,7 @@ in a list of errors and warnings.</p>
 <span class="number">5.2</span>Common resource attributes (M)
 </h2>
 <p>The supported attributes vary based on the type of resource, but <strong>all</strong>
-resources support the <code>type</code>, <code>format</code>, <code>class</code> and <code>title</code> attributes.</p>
+resources support the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes.</p>
 <p>As you recall, resources vary in four ways:</p>
 <ol>
 <li>Type</li>
@@ -3780,8 +3780,10 @@ later section below.</p>
 : All attribute lists, including those for resources, support a <code>class</code>
 attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
-figures by classes. Resources with titles are treated as figures; this is
-discussed extensively later.</p>
+figures by classes. <strong>Note that there is no need to set a <code>class</code> of <code>figure</code>
+on a resource. That would be too verbose and error-prone. Instead, all
+resources with titles are treated as figures.</strong>. This is discussed extensively
+later.</p>
 <p><code>format</code>
 : This is the resource format. Different resource types have different legal
 values for format. Specific resource types and formats are discussed throughout
@@ -3795,7 +3797,18 @@ being specified.</p>
 <h2 id="resource-titles-make-figures-m-" class="definition">
 <span class="number">5.3</span>Resource titles make figures (M)
 </h2>
-<p>A resource with a <code>title</code> is a figure.</p>
+<p>All resources with <code>title</code> attributes are figures.</p>
+<p>This is true regardless of whether the title is specified in quotes, in an
+alt-title, or in an attribute list. In all cases, the resource is a figure.</p>
+<p>To be clear, if <code>alt-title</code> is <code>all</code> (the default), the following three image
+resources are all figures:</p>
+<pre><code>![](mac.jpg &quot;The Original Mac&quot;)
+
+![The Original Mac](mac.jpg)
+
+{title: &quot;The Original Mac&quot;}
+![](mac.jpg)
+</code></pre>
 <p>The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it
 chooses. For example, a Markua Processor can position all titles above or below

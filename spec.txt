@@ -3557,7 +3557,7 @@ in a list of errors and warnings.
 ## Common resource attributes (M)
 
 The supported attributes vary based on the type of resource, but **all**
-resources support the `type`, `format`, `class` and `title` attributes.
+resources support the `class`, `format`, `title` and `type` attributes.
 
 As you recall, resources vary in four ways:
 
@@ -3577,8 +3577,10 @@ These are the attributes that resources all share:
 : All attribute lists, including those for resources, support a `class`
 attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
-figures by classes. Resources with titles are treated as figures; this is
-discussed extensively later.
+figures by classes. **Note that there is no need to set a `class` of `figure`
+on a resource. That would be too verbose and error-prone. Instead, all
+resources with titles are treated as figures.**. This is discussed extensively
+later.
 
 `format`
 : This is the resource format. Different resource types have different legal
@@ -3597,7 +3599,22 @@ being specified.
 
 ## Resource titles make figures (M)
 
-A resource with a `title` is a figure.
+All resources with `title` attributes are figures.
+
+This is true regardless of whether the title is specified in quotes, in an
+alt-title, or in an attribute list. In all cases, the resource is a figure.
+
+To be clear, if `alt-title` is `all` (the default), the following three image
+resources are all figures, and should look identical:
+
+~~~
+![](mac.jpg "The Original Mac")
+
+![The Original Mac](mac.jpg)
+
+{title: "The Original Mac"}
+![](mac.jpg)
+~~~
 
 The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it

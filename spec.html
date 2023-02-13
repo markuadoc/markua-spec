@@ -180,8 +180,9 @@ $(document).ready(function() {
 <ul>
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.3</span>Multiple document settings hashes are permitted (M)</a></li>
-<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.4</span>Custom document settings are encouraged (M)</a></li>
+<li><a href="#the-alt-title-setting-m-"><span class="number">4.3</span>The alt-title setting (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -299,7 +300,8 @@ itself.</p>
 <p>You could hit a key on your magical typewriter to create an ebook from your
 manuscript with one click.</p>
 <p>All ebook formats would be created, and they’d all look good. You’d have PDF for
-computers, and EPUB for everywhere else. The book would look great on phones.</p>
+computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
+great on phones.</p>
 <p>With your magical typewriter, you could publish your book before it was even
 done, and get feedback from readers all over the world. You could automatically
 share book updates with them. You would press one key on your magical typewriter
@@ -337,8 +339,8 @@ concepts of its own.</p>
 ebook format. The computer programs which do this transformation are called
 Markua Processors. These programs understand both Markua syntax and how to
 generate the various output formats. An example Markua Processor is Leanpub:
-Leanpub can output PDF, EPUB and HTML from the same Markua document, and can
-even output print-ready PDFs and InDesign files from them as well.</p>
+Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
+and can even output print-ready PDFs and InDesign files from them as well.</p>
 <p>Markua has been developed with extensive real-world testing and feedback.
 Markua has been used by Leanpub authors for years, both to create books and
 online courses.</p>
@@ -603,47 +605,43 @@ You can also set the alt text and/or the figure title in an attribute list:
 Attribute lists are one of Markua's additions to Markdown, and are discussed
 later in this specification.
 
-If you wish, you can configure a Markua Processor to convert alt text into a
-figure title if no separate figure title is provided. (A figure title is
-just as accessible as alt text, so this is fine.) Document settings are
-discussed next.
+Finally, you can set the figure title using the alt text, if the `alt-title`
+document setting is set to `all`:
+
+![The Original Mac](mac.jpg)
+
+The default value of `alt-title` is `all`, which means that all resources
+can have their title specified in the alt text. There is also a value of
+`text`, which means that only text-based resources like code can have their
+title specified in the alt text. Finally, there is a value of `none`, which
+means that no resources can have their title specified in the alt text. The
+`alt-title` attribute is discussed
+[in great detail here](#the-alt-title-setting-m-).
 
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behavior of the Markua Processor. For example, the default value of
-the `alt-title` setting is `all`, to make images use the alt text as the figure
-title instead of as alt text, if no figure title is present:
+affect the behavior of the Markua Processor. For example, if you want single
+newlines to insert a forced line break in the PDF, EPUB and HTML output formats
+(instead of the single space that results by default), set the `soft-breaks`
+document setting to `break` instead of the default of `space`:
 
 ```
 {
-alt-title: all
+soft-breaks: break
 }
 
 # Chapter One
 
-This is an apple with a figure title but no alt text:
-
-![The Original McIntosh, a red apple](mac.jpg)
+This will be on a line
+and this will be on the next line.
 ```
-
-This gets you the terseness of inserting images as figures in LFM, in a general
-way. Note that if the `alt-title` document setting is set to `text`, this
-behavior only happens for text-based resources like code samples.
-If the `alt-title` is set to `none`, it never happens. The default value of
-the `alt-title` attribute is `all`, not `text` or `none`, for better
-compatibility with Markua 0.10 and Leanpub Flavoured Markdown.
-
-The generalization of the Markdown image syntax into resources, and the addition
-of document settings, are two more of Markua's additions to Markdown. These are
-also both discussed later in this specification.
-
-One important type of resource in Markua is code samples, which is discussed
-next.
 
 # Code Samples
 
-The image syntax is the inspiration for the syntax for external code samples:
+The generalization of the Markdown image syntax into resources is one of
+Markua's most important additions to Markdown. For example, the image syntax
+is the inspiration for the syntax for external code samples:
 
 ![](hello.rb &quot;Hello World in Ruby&quot;)
 
@@ -772,51 +770,16 @@ crosslinks, etc.) exist in Markua and do not exist in LFM.</li>
 <span class="number">1.9</span>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
 </h2>
 <p>Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 is actually
-not too painful, due to the document settings feature of Markua 0.30.</p>
+really easy.</p>
 <p>Here are the steps you do:</p>
 <ol>
-<li>Add the appropriate document settings to make Markua 0.30 function like LFM.</li>
 <li>Move the images folder inside a resources folder.</li>
 <li>Convert the part syntax, if you use parts.</li>
 <li>Generate the book, look at the output, and make any other changes needed.</li>
 </ol>
 <p>These are all described below.</p>
-<h3 id="add-the-appropriate-document-settings-to-make-markua-0-30-function-like-lfm" class="definition">
-<span class="number">1.9.1</span>Add the appropriate document settings to make Markua 0.30 function like LFM
-</h3>
-<p>When upgrading a LFM document to Markua 0.30, you wil want to start by
-defining two of your document settings to be as compatible with LFM as
-possible.</p>
-<p>So, add this text at the top of your Markua document, followed by a blank line:</p>
-<pre><code>{
-    alt-title: all
-    soft-breaks: space
-    two-space-hack: true
-}
-</code></pre>
-<p>Note that the default value of the <code>alt-title</code> attribute is <code>all</code>, not <code>text</code>
-or <code>none</code>, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while <code>alt-title</code> should be <code>all</code> when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don’t need to set it explicitly:
-you can just let it default to <code>all</code>.</p>
-<p>To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:</p>
-<pre><code>{
-    soft-breaks: space
-    two-space-hack: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-</code></pre>
-<p>Note that you only define this list of document settings <strong>once</strong>, at the start
-of your <strong>first file</strong> in your Markua manuscript. (This is the <strong>first file
-listed in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top
-of every manuscript file.)</p>
-<p>All three of these document settings are discussed below.</p>
 <h3 id="move-the-images-folder-inside-a-resources-folder" class="definition">
-<span class="number">1.9.2</span>Move the images folder inside a resources folder
+<span class="number">1.9.1</span>Move the images folder inside a resources folder
 </h3>
 <p>In LFM, images live here:</p>
 <pre><code>manuscript/images/some_image.png
@@ -828,7 +791,7 @@ folder inside the resources folder:</p>
 <p>This way, your image paths will be unchanged (as they will both start
 with <code>images/</code>).</p>
 <h3 id="convert-the-part-syntax-if-you-use-parts" class="definition">
-<span class="number">1.9.3</span>Convert the part syntax, if you use parts
+<span class="number">1.9.2</span>Convert the part syntax, if you use parts
 </h3>
 <p>In LFM, parts are defined like this:</p>
 <pre><code>-# Some Part Title
@@ -838,7 +801,7 @@ with <code>images/</code>).</p>
 # Some Part Title
 </code></pre>
 <h3 id="generate-the-book-look-at-the-output-and-make-any-other-changes-needed" class="definition">
-<span class="number">1.9.4</span>Generate the book, look at the output, and make any other changes needed
+<span class="number">1.9.3</span>Generate the book, look at the output, and make any other changes needed
 </h3>
 <p>The above list of changes are the main ones, but there are
 <a href="#markua-0-30-vs-leanpub-flavoured-markdown-lfm-m-">other differences</a> between
@@ -847,6 +810,11 @@ LFM and Markua 0.30.</p>
 Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
 and the <a href="https://leanpub.com/lfm/read">LFM manual</a> to learn more about how to
 make any other changes needed to finish the migration.</p>
+<p>One thing that Markua 0.30 defines which is not done in LFM is the concept of
+document settings, which are a set of global switches which customize the
+output of your book. You will want to review the
+<a href="#the-standard-document-settings-m-">standard document settings</a> section below
+to learn more.</p>
 </div>
 <div class="extension">
 <h2 id="markua-0-30-vs-markua-0-10-m-" class="definition">
@@ -881,36 +849,45 @@ document settings allow you to customize the behavior of an entire Markua
 document via global switches. This way, the behavior of a Markua 0.30
 document can be changed in sweeping ways via these global settings.</p>
 <p>If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by making these five changes, in order:</p>
+probably want to start by doing these three steps:</p>
 <ol>
-<li>Define the recommended document settings for upgrading from Markua 0.10.</li>
-<li>Check the output and decide on the appropriate <code>soft-breaks</code> and
-<code>two-space-hack</code> settings.</li>
-<li>Rename all <code>caption</code> attributes to <code>title</code>.</li>
-<li>Check the output and decide on the appropriate <code>alt-title</code> setting.</li>
-<li>Review the other document settings and override the defaults as needed.</li>
+<li>Rename all <code>caption</code> attributes to <code>title</code></li>
+<li>Preview the book</li>
+<li>Update any document settings</li>
 </ol>
 <p>These are all described below.</p>
-<h3 id="define-the-recommended-document-settings-for-upgrading-from-markua-0-10" class="definition">
-<span class="number">1.11.1</span>Define the recommended document settings for upgrading from Markua 0.10
+<h3 id="rename-all-attributes-to" class="definition">
+<span class="number">1.11.1</span>Rename all <code>caption</code> attributes to <code>title</code>
 </h3>
-<p>When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
-defining three of your document settings to be as compatible with Markua 0.10 as
-possible.</p>
-<p>So, add this text at the top of your Markua document, followed by a blank line:</p>
-<pre><code>{
-    alt-title: all
-    soft-breaks: break
-    two-space-hack: false
-}
-</code></pre>
-<p>Note that the default value of the <code>alt-title</code> attribute is <code>all</code>, not <code>text</code>
-or <code>none</code>, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while <code>alt-title</code> should be <code>all</code> when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don’t need to set it explicitly:
-you can just let it default to <code>all</code>.</p>
-<p>To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:</p>
+<p>First, you will want to do a find-replace in your Markua manuscript to update
+all <code>caption:</code> attributes to be <code>title:</code>, since the <code>caption</code> attribute was
+renamed to <code>title</code> in Markua 0.30 for consistency.</p>
+<p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any <code>caption</code> attributes, but instead relied on the
+<code>alt-title</code> behavior. The <code>alt-title</code> attribute is discussed
+<a href="#the-alt-title-setting-m-">in great detail here</a>.</p>
+<h3 id="preview-the-book" class="definition">
+<span class="number">1.11.2</span>Preview the book
+</h3>
+<p>Before making any more changes, you should preview your book to see what it
+looks like unchanged.</p>
+<h3 id="update-any-document-settings" class="definition">
+<span class="number">1.11.3</span>Update any document settings
+</h3>
+<p>After previewing the book, you will want to review the PDF output and decide on
+the appropriate values of the document settings.</p>
+<p>If you want maximum compatibility with Markua 0.10, you will want to override
+the <code>soft-breaks</code> and <code>two-space-hack</code> settings as follows:</p>
+<ol>
+<li>Set the <code>soft-breaks</code> setting to <code>break</code></li>
+<li>Set the <code>two-space-hack</code> setting to <code>false</code></li>
+</ol>
+<p>Note that both of these settings are against the default behavior of Markdown,
+so unless you are already relying on that behaviour in Markua 0.10, you should
+consider leaving them at their default values.</p>
+<p>You can change these settings on Leanpub in the Settings &gt; Generation Settings
+section of the author app, or you can set the document settings at the top of
+the first manuscript file like this:</p>
 <pre><code>{
     soft-breaks: break
     two-space-hack: false
@@ -920,99 +897,11 @@ the manuscript content. For example:</p>
 
 Lorem ipsum dolor...
 </code></pre>
+<p>Make sure you add a blank line below the document settings, and also make sure
+you put the curly braces on lines by themselves!</p>
 <p>Note that you only define this list of document settings <strong>once</strong>, at the start
-of your <strong>first file</strong> in your Markua manuscript. (This is the <strong>first file
-listed in <code>Book.txt</code></strong>, not in the <code>Book.txt</code> file itself, and not at the top
-of every manuscript file.)</p>
-<p>All three of these document settings are discussed below.</p>
-<h3 id="check-the-output-and-decide-on-the-appropriate-and-settings" class="definition">
-<span class="number">1.11.2</span>Check the output and decide on the appropriate <code>soft-breaks</code> and <code>two-space-hack</code> settings
-</h3>
-<p>In terms of the <code>soft-breaks</code> attribute, we specify the value to be <code>break</code>
-since this matches the default behavior of Markua 0.10.</p>
-<p>The <code>break</code> attribute means to insert a forced linebreak when a single newline
-is encountered in the manuscript. While this makes some intuitive sense, it is
-very much against the default behavior of Markdown.</p>
-<p>The other two values of <code>soft-breaks</code> are <code>source</code> (which is to output a single
-newline only in HTML source, which functions like a space in all display
-formats) and <code>space</code> (which is to output a single space for single newlines).
-The default of <code>soft-breaks</code> in Markua 0.30 is <code>source</code>, for Markdown
-compatibility.</p>
-<p>If you are happy with the default, just delete the <code>soft-breaks</code> document
-setting or explicitly set it to <code>source</code>. If you care about the HTML soure code
-and prefer a space, then use <code>space</code>.</p>
-<p>If you do use <code>space</code> or <code>source</code> for the <code>soft-breaks</code> attribute, consider
-changing the value of the <code>two-space-hack</code> document setting to true.
-The <code>two-space-hack</code> is not needed if <code>soft-breaks</code> is <code>break</code>, but it is
-potentially useful in the other two cases. The idea here is that two spaces
-at the end of a line before a single newline makes the single newline
-function like a hard break. This is a very questionable requirement, since
-it is invisible formatting and since some editors strip trailing whitespace.
-However, it is the default behavior of Markdown, and if <code>soft-breaks</code> is not
-<code>break</code>, it is potentially needed.</p>
-<p>Consult the
-<a href="#the-standard-document-settings-m-">standard document settings</a> section
-to learn more.</p>
-<h3 id="rename-all-attributes-to" class="definition">
-<span class="number">1.11.3</span>Rename all <code>caption</code> attributes to <code>title</code>
-</h3>
-<p>Next, you will want to do a find-replace in your Markua manuscript to update
-all <code>caption:</code> attributes to be <code>title:</code>, since the <code>caption</code> attribute was
-renamed to <code>title</code> in Markua 0.30 for consistency.</p>
-<p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
-are you did not use any <code>caption</code> attributes, but instead relied on the
-<code>alt-title</code> behavior. This is discussed next.</p>
-<h3 id="check-the-output-and-decide-on-the-appropriate-setting" class="definition">
-<span class="number">1.11.4</span>Check the output and decide on the appropriate <code>alt-title</code> setting
-</h3>
-<p>In Markua 0.10, the alt text for an image (or other resource) was used as the
-value of the resource title. This is a very non-standard interpretation of
-Markdown, and it prevents you from using good alt-text for accessibility.</p>
-<p>When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
-to leave the default value of <code>alt-title: all</code>, so that you can do this:</p>
-<pre><code>![A Figure Caption](someimage.png)
-</code></pre>
-<p>Otherwise, if you set <code>alt-title</code> to <code>text</code> or <code>none</code>, your captions will
-disappear from all your images.</p>
-<p>Now, it is a debatable point whether using alt text as figure captions is a
-good idea.</p>
-<p>The main argument in favour of it is terseness: it is the most terse syntax,
-and the easiest to remember.</p>
-<p>A second argument in favour of it is aesthetics, since the alternative syntax
-looks like this:</p>
-<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
-</code></pre>
-<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
-<p>Now, the actual reason is to have different alt text, of course. This is the
-main argument against the alt text as figure caption idea.</p>
-<p>The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.</p>
-<p>You would assume that this argument is a slam dunk. But, it’s actually not.
-For example, Markua documents can be used to generate print books. There is
-no alt text in print books. So, for a well-written print book, the text itself
-may presumably be descriptive enough that alt text is not needed.</p>
-<p>This connects to the more general argument that alt text is HTML-specific, and
-only applies to HTML and EPUB, not PDF.</p>
-<p>Anyway, assuming you are in the “alt text is for descriptions, not figure
-captions” camp, the way to improve this is to do the following:</p>
-<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
-</code></pre>
-<p>This is less terse, but arguably much better.</p>
-<p>Now, you can use that syntax even with <code>alt-title: all</code>, since the explictly
-defined title will take precedence over the alt text title.</p>
-<p>So, you can leave <code>alt-title: all</code> as you update your document, and once you
-have made these changes throughout your Markua document, you can try
-changing the <code>alt-title</code> document setting to be <code>text</code> or <code>none</code>.</p>
-<p>(Or, you can just delete the <code>alt-title</code> document setting for it to default
-to <code>all</code>.) See the <a href="#the-standard-document-settings-m-">standard document settings</a>
-section to learn more about these choices.</p>
-<h3 id="review-the-other-document-settings-and-override-the-defaults-as-needed" class="definition">
-<span class="number">1.11.5</span>Review the other document settings and override the defaults as needed
-</h3>
-<p>Besides the specifics of the <code>alt-title</code>, <code>two-space-hack</code> and <code>soft-breaks</code>
+of your <strong>first file</strong> in your Markua manuscript.</p>
+<p>Besides the specifics of the <code>soft-breaks</code> and the <code>two-space-hack</code>
 document settings, the big point is that regardless of whether you are
 upgrading a large Markua 0.10 document to Markua 0.30 or starting a new
 Markua 0.30 document, you can make sweeping changes to how a Markua 0.30
@@ -2652,9 +2541,9 @@ value for the attribute defined of Markua.</p>
 <p><code>full</code>
 : <code>true</code> or <code>false</code>. The default is <code>true</code>. If <code>true</code>, include this heading and
 its content (including nested sections, subsections, etc.) in the full book or
-course, including the PDF and EPUB versions and the web version that is being
-generated. If <code>false</code>, omit it. Setting this to <code>false</code> is an easy way to
-“comment out” a section of your book or course.</p>
+course, including the PDF, EPUB and/or MOBI versions and the web version that
+is being generated. If <code>false</code>, omit it. Setting this to <code>false</code> is an easy way
+to “comment out” a section of your book or course.</p>
 <p><code>sample</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, include the content
 under this heading (including nested sections, subsections, etc.) in the sample
@@ -2668,7 +2557,7 @@ to produce a representative Table of Contents. In a case such as this where
 <code>sample</code> is <code>false</code>, the Markua Processor may output special content inside the
 chapter, section or subsection to indicate that the content itself is being
 omitted from the sample. This attribute applies to both the book version
-(PDF and EPUB) and the web version of the sample book or course.</p>
+(PDF, EPUB and/or MOBI) and the web version of the sample book or course.</p>
 <p>Note that specifying either of these attributes in a nested section overrides any
 value inherited from its ancestors, or from the default. This way, you can
 include a chapter in the sample, except for a specific section of the chapter.</p>
@@ -3357,7 +3246,7 @@ the defaults are in one list. These defaults are listed below.</p>
   number-sections: false
   restart-endnote-numbering: true
   restart-footnote-numbering: true
-  soft-breaks: source
+  soft-breaks: space
   two-space-hack: true
 }
 </code></pre>
@@ -3367,62 +3256,11 @@ by four related settings: <code>alt-title</code>, <code>figure-classes</code>, <
 <code>number-figures</code>. These need to be considered together: the behavior of these
 settings are tightly coupled.</p>
 <p><code>alt-title</code>
-: <code>all</code>, <code>text</code> or <code>none</code>. <strong>The default is <code>all</code>, NOT <code>text</code>.</strong>
-This setting controls whether, in the cases where there is no figure title
-explicitly set, the alt text on a resource is removed and used as the figure
-title instead. If alt text is used as the figure title, it is NOT also provided
-as alt text, since it would be very annoying to hear the same text spoken twice
-(once as the alt text and once as the figure title) when using a screen reader.
-This is what the values mean:</p>
-<ul>
-<li><code>all</code>: if no title is provided for a given resource, regardless of the
-resource type, remove the alt text and use it as the figure title instead. (This
-choice is the default, since it is the closest to the behavior of LFM and of
-Markua version 0.10. So, regardless of whether you like the choice, there are 12
-years worth of books on Leanpub which would be punished by a different default.)</li>
-<li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
-an external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. This is arguably the most sensible choice, as it
-strikes a balance between preserving compatibility with Markdown for
-non-text-based resources like images, while still providing a sensible default
-for text-based resources like code samples. Since Markdown does not define
-support for external text-based resources, there is no conflict here.</li>
-<li><code>none</code>: never remove the alt text to use it as the figure title, even for a
-text-based resource where no figure title is provided. (This is how Markdown
-behaves.)</li>
-</ul>
-<p>It is a debatable point whether using alt text as figure captions is a good
-idea. The main argument in favour of it is terseness: it is the most terse
-syntax, and the easiest to remember. A second argument in favour of it is
-aesthetics, since the alternative syntax looks like this:</p>
-<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
-</code></pre>
-<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
-<p>Now, the actual reason is to have different alt text, of course. This is the
-main argument against the alt text as figure caption idea.</p>
-<p>The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.</p>
-<p>You would assume that this argument is a slam dunk. But, it’s actually not.
-For example, Markua documents can be used to generate print books. There is
-no alt text in print books. So, for a well-written print book, the text itself
-may presumably be descriptive enough that alt text is not needed.</p>
-<p>This connects to the more general argument that alt text is HTML-specific, and
-only applies to HTML and EPUB, not PDF.</p>
-<p>So, the conclusion is that the best syntax when inserting an image is to do the
-following:</p>
-<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
-</code></pre>
-<p>Now, you can use that syntax even with <code>alt-title: all</code>, since the explictly
-defined title will take precedence over the alt text.</p>
-<p>The default of <code>alt-title</code> is <code>all</code> since there are 12 years of books on
-Leanpub which do this:</p>
-<pre><code>![A Figure Caption](someimage.png)
-</code></pre>
+: <code>all</code>, <code>text</code> or <code>none</code>. The default is <code>all</code>, for compatibility with Markua
+0.10 and Leanpub Flavoured Markdown by default. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used as the figure title instead. This setting is so
+important it is discussed in its own <a href="#the-alt-title-setting">section</a> below.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3460,8 +3298,8 @@ figure reference is inserted with <code>#f</code>, this setting determines how t
 reference is displayed. If true (the default), the text includes the page
 number (e.g. “Figure 8.2: Anatomy of a Squirrel on page 42”) when inserted in
 a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of a Squirrel”. This
-setting has no effect on EPUB, which never include page numbers in their
-references (since the text is resizable).</p>
+setting has no effect on EPUB and MOBI, which never include page numbers in
+their references (since the text is resizable).</p>
 <p><code>italicize-underlines</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
@@ -3526,39 +3364,41 @@ at the end of a chapter.</p>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the footnote numbering is restarted
 at the end of a chapter.</p>
 <p><code>soft-breaks</code>
-: <code>break</code>, <code>space</code> or <code>source</code>. Default <code>source</code>. This setting determines the
-behavior of single newlines (i.e. a newline which is not followed by another
-newline) in the output. This is what the values mean:</p>
+: <code>break</code> or <code>space</code>. The default is <code>space</code>, for compatibility with
+Markdown. <strong>If you want the behavior of Markua 0.10, you need to choose
+<code>break</code>.</strong> This setting determines the behavior of single newlines (i.e. a
+newline which is not followed by another newline) in the output. This is what
+the values mean:</p>
 <ul>
-<li><code>source</code>: Single newlines inside paragraphs in the Markua source produce
-single newlines in the HTML source. This will pretend to break the line
-while actually functioning like a single space in the output: all it
-actually does is break the line in the HTML source. It does <em>not</em> break the
-line when the HTML is rendered, since in HTML a single newline is
-equivalent to a single space. So, this type of line break only is a line
-break in the HTML source and not in any other output format–hence the
-name <code>source</code>. To be clear: for non-HTML output formats such as LaTeX or
-PDF, a value of <code>source</code> has the same effect as <code>space</code>, discussed next.
-The <code>source</code> option is arguably the worst option, but it is the default
-because Markua must be compatible with Markdown by default, even in the
-rare situations where it considers a Markdown decision to be suboptimal.</li>
-<li><code>space</code>: Single newlines inside paragraphs in the Markua document produce
-single spaces in the HTML output. This functions identically to single
-newlines when rendered as HTML. For non-HTML-based output formats like
-LaTex or PDF, a single space is rendered for a single newline.</li>
+<li><code>space</code>: Single newlines inside paragraphs in the Markua source produce
+output which functions like a single space. In output such as PDF, a single
+space must be what is output. In output such as HTML, a single newline
+is output, since in HTML output, a single newline is equivalent to a single
+space in terms of the effect on presentation. So, this type of line break
+only is a line break in the HTML source, and in all output presentation it
+functions like a space–hence the name <code>space</code>. The <code>space</code> option is the
+default for compatibility with Markdown by default. If you want the
+behavior of Markua 0.10, choose <code>break</code>.</li>
 <li><code>break</code>: Single newlines inside paragraphs in the Markua document produce
 break tags in the HTML output and line breaks in non-HTML output like
 LaTeX or PDF. The reason this value is called <code>break</code> is to indicate that
 when you hit a newline to get a line break, you get a real line break.
-If <code>soft-breaks</code> has the value of <code>break</code>, all single newlines function
-as though they were using the “two space hack” to produce a hard line
-break in normal Markdown. (Whether the “two space hack” is enabled in a
-Markua document is determined by the value of the <code>two-space-hack</code>
-setting, discussed below.)</li>
+To be clear: the <code>break</code> attribute means to insert a forced linebreak
+<strong>whenever a single newline is encountered in the manuscript, regardless
+of whether there are two spaces at the end of the line</strong>. While this makes
+some intuitive sense, it is very much against the default behavior of
+Markdown.  The <code>break</code> option gives you the behavior of Markua 0.10,
+in which all single newlines function as though they were using the
+“two space hack” to produce a hard line break in normal Markdown. (Whether
+the “two space hack” is enabled in a Markua document is determined by the
+value of the <code>two-space-hack</code> setting, discussed below.)</li>
 </ul>
 <p><code>two-space-hack</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>, for compatibility with Markdown. If
-<code>true</code>, adding two spaces at the end of a line forces a hard line break.
+: <code>true</code> or <code>false</code>. The default is <code>true</code>, for compatibility with Markdown.
+If <code>true</code>, adding two spaces at the end of a line forces a hard line break.
+If you use this setting, ensure that your text editor does not strip
+trailing whitespace! This is probably the best choice if <code>soft-breaks</code> is
+set to <code>space</code>, or if you want maximum compatibility with Markdown.
 If <code>false</code>, spaces at the end of a line are ignored, and the single newline
 is treated as a single newline would be without those spaces, which is
 determined by the value of the <code>soft-breaks</code> setting. Since Markua allows
@@ -3567,8 +3407,78 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
+<h2 id="the-alt-title-setting-m-" class="definition">
+<span class="number">4.3</span>The alt-title setting (M)
+</h2>
+<p>Using the alt text as the figure title is the most terse syntax, and may make
+sense if no alt text is needed. For example, use cases include:</p>
+<ul>
+<li>Code samples and other text-based resources. Since these resources are
+themselves text, it makes no sense to have different alt text.</li>
+<li>Images, if the only output target is a format like print-ready PDF where
+no alt text is needed.</li>
+</ul>
+<p>If alt text is used as the figure title, it is NOT also provided as alt text,
+since it would be very annoying to hear the same text spoken twice (once as the
+alt text and once as the figure title) when using a screen reader.</p>
+<p>The default value of <code>alt-title</code> is <code>all</code>, for compatibility with Markua 0.10
+and Leanpub Flavoured Markdown.</p>
+<p>These are the three choices, and what their values mean:</p>
+<ul>
+<li><code>all</code>: if no title is provided for a given resource, regardless of the
+resource type, remove the alt text and use it as the figure title instead. (This
+choice is the default, since it is the closest to the behavior of LFM and of
+Markua version 0.10. So, regardless of whether you like the choice, there are 12
+years worth of books on Leanpub which would be broken by a different default.)</li>
+<li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
+an external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. This is arguably the most sensible choice, as it
+strikes a balance between preserving compatibility with Markdown for
+non-text-based resources like images, while still providing a sensible default
+for text-based resources like code samples. Since Markdown does not define
+support for external text-based resources, there is no conflict here.</li>
+<li><code>none</code>: never remove the alt text to use it as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)</li>
+</ul>
+<p>It is a debatable point whether using alt text as figure captions is a good
+idea.</p>
+<p>The main argument in favour of it is terseness: it is the most terse
+syntax, and the easiest to remember.</p>
+<p>A second argument is that in some cases such as external code samples and other
+text-based resources, there is no conceivable use for alt text, so the way to
+add a title with the least syntax is to use the spot for the alt text.</p>
+<p>A third argument in favour of it is aesthetics, since the alternative syntax
+in which a title is provided without any alt text looks like this:</p>
+<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
+<p>Now, the actual reason is to have different alt text, of course. This is the
+main argument against the “alt text as figure caption” idea.</p>
+<p>The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.</p>
+<p>This is a very good argument, but as shown above, there are good
+counterarguments as well. So, the behavior of the alt text is determined by the
+<code>alt-title</code> document setting, and the default value is <code>all</code> (not <code>text</code> or
+<code>none</code>) for compatibility with over a decade of Leanpub books which do this:</p>
+<pre><code>![A Figure Caption](someimage.png)
+</code></pre>
+<p>However, even though the default value of <code>alt-title</code> is <code>all</code>, the conclusion
+I’ve come to is that the default behavior of Markdown is best for image
+resources, and alt text should be used for descriptions, not figure captions,
+in the case of images. If you’re in this camp, the way to use alt
+text, and the best syntax when inserting an image, is to do the following:</p>
+<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>Finally, please note that <strong>you can use that syntax even with <code>alt-title: all</code></strong>,
+since the explictly-defined title will take precedence over the alt text.</p>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.3</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3637,7 +3547,7 @@ the author will typically only see the manually-defined document settings
 block. So, the formatting of the automatically-generated document settings
 doesn’t really matter, and JSON is the pragmatic choice.</p>
 <h2 id="custom-document-settings-are-encouraged-m-" class="definition">
-<span class="number">4.4</span>Custom document settings are encouraged (M)
+<span class="number">4.5</span>Custom document settings are encouraged (M)
 </h2>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>
@@ -3693,8 +3603,8 @@ following things:</p>
 <ol>
 <li>Attributes and attribute list support</li>
 <li>Behavior as a figure or a span based on the presence of title</li>
-<li>Support for a title to be provided from alt text based on the <code>alt-title</code>
-document setting.</li>
+<li>Support for a title to be provided, either in the attribute list, in quotes
+or from alt text based on the <code>alt-title</code> document setting.</li>
 </ol>
 <h2 id="resource-attributes-m-" class="definition">
 <span class="number">5.1</span>Resource attributes (M)
@@ -3763,7 +3673,7 @@ in a list of errors and warnings.</p>
 <span class="number">5.2</span>Common resource attributes (M)
 </h2>
 <p>The supported attributes vary based on the type of resource, but <strong>all</strong>
-resources support the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes.</p>
+resources support the <code>type</code>, <code>format</code>, <code>class</code> and <code>title</code> attributes.</p>
 <p>As you recall, resources vary in four ways:</p>
 <ol>
 <li>Type</li>
@@ -3780,10 +3690,8 @@ later section below.</p>
 : All attribute lists, including those for resources, support a <code>class</code>
 attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
-figures by classes. <strong>Note that there is no need to set a <code>class</code> of <code>figure</code>
-on a resource. That would be too verbose and error-prone. Instead, all
-resources with titles are treated as figures.</strong>. This is discussed extensively
-later.</p>
+figures by classes. Resources with titles are treated as figures; this is
+discussed extensively later.</p>
 <p><code>format</code>
 : This is the resource format. Different resource types have different legal
 values for format. Specific resource types and formats are discussed throughout
@@ -3797,18 +3705,7 @@ being specified.</p>
 <h2 id="resource-titles-make-figures-m-" class="definition">
 <span class="number">5.3</span>Resource titles make figures (M)
 </h2>
-<p>All resources with <code>title</code> attributes are figures.</p>
-<p>This is true regardless of whether the title is specified in quotes, in an
-alt-title, or in an attribute list. In all cases, the resource is a figure.</p>
-<p>To be clear, if <code>alt-title</code> is <code>all</code> (the default), the following three image
-resources are all figures, and should look identical:</p>
-<pre><code>![](mac.jpg &quot;The Original Mac&quot;)
-
-![The Original Mac](mac.jpg)
-
-{title: &quot;The Original Mac&quot;}
-![](mac.jpg)
-</code></pre>
+<p>A resource with a <code>title</code> is a figure.</p>
 <p>The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it
 chooses. For example, a Markua Processor can position all titles above or below
@@ -3835,7 +3732,8 @@ should also be a crosslink to the title inserted near the figure itself.</li>
 <li>In quotes after the filename or URL of a local or web resource:
 <code>![](resource_path_or_url &quot;Optional Figure Title&quot;)</code></li>
 <li>In the alt text, assuming an appropriate value of the <code>alt-title</code> document
-setting (described below)</li>
+setting. The <code>alt-title</code> attribute is discussed
+<a href="#the-alt-title-setting">in great detail here</a>.</li>
 </ol>
 <p>Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:</p>
@@ -7923,7 +7821,9 @@ attribute list.</p>
 </code></pre>
 <p>Note that there is some flexibility in the title attribute. If the <code>alt-title</code>
 document setting is <code>text</code> or <code>all</code> (the default) , then the alt text can be
-used as the title as well. (If the <code>alt-title</code> is <code>none</code>, then it cannot.)</p>
+used as the title as well. If the <code>alt-title</code> is <code>none</code>, then it cannot.
+The <code>alt-title</code> attribute is discussed
+<a href="#the-alt-title-setting">in great detail here</a>.</p>
 <p>So, assuming a value of <code>text</code> or <code>all</code> for a document setting, this also works:</p>
 <pre><code>![Canadian Census Data](census.tbl)
 </code></pre>
@@ -10806,9 +10706,10 @@ the delimiter is <code>)</code>. Specifying the delimiter in the attribute list 
 the inferred delimiter, but conflicting delimiters are bad style. Note that the
 delimiter does not need to be produced for all output formats. Specifically,
 HTML only supports using <code>.</code> for a list delimiter, so <code>)</code> is not supported in
-HTML. And since EPUB is based on HTML, EPUB should not be expected to support
-customizable delimiters. However, PDF and LaTeX are not subject to these
-limitations, and should support both <code>.</code> and <code>)</code> as list delimiters.</p>
+HTML. And since EPUB is based on HTML, and since MOBI is typically produced from
+EPUB, neither EPUB nor MOBI should be expected to support customizable
+delimiters. However, PDF and LaTeX are not subject to these limitations, and
+should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <p>The use of these attributes are shown in the following examples.</p>
 <h3 id="lists-with-attributes-good-style" class="definition">
 <span class="number">8.5.2</span>Lists with Attributes: Good Style
@@ -11743,7 +11644,7 @@ after
 </div>
 <p>Note that single line breaks within the definitions (the <code>&lt;dd&gt;</code> not <code>&lt;dt&gt;</code>)
 are handled the same way as single line breaks within paragraphs, and are
-subject to the <code>soft-breaks</code> document setting which defaults to <code>source</code> for
+subject to the <code>soft-breaks</code> document setting which defaults to <code>space</code> for
 compatibility with Markdown.</p>
 <div class="example" id="example-350">
 <div class="examplenum">
@@ -17369,7 +17270,7 @@ writers:</p>
 and <code>number-figures</code> document settings.</p>
 <p>Whether page numbers are output in smart crosslinks in a PDF is determined by
 the <code>include-page-numbers-in-references</code> document setting, which defaults to
-<code>true</code>.  EPUB does not support outputting page numbers in references,
+<code>true</code>.  EPUB and MOBI do not support outputting page numbers in references,
 because they have resizable text (and thus the page numbers vary).</p>
 <p>In your writing, it’s often desirable to refer to these figures from elsewhere
 in your book. When creating such a reference, it’s helpful to be able to
@@ -17388,11 +17289,11 @@ reference the title and number of the chapter, section or figure.</p>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB. In PDF, if
-<code>include-page-numbers-in-references</code> is true (the default), it is
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF,
+if <code>include-page-numbers-in-references</code> is true (the default), it is
 “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2:
-Anatomy of a Squirrel” (just like EPUB).</li>
+Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
 </ul>
 <p>Note that for a book which is in English:</p>
 <ul>
@@ -17439,11 +17340,11 @@ document setting is false.</li>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB. In PDF, if
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if
 <code>include-page-numbers-in-references</code> is true (the default), it is
 “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy
-of a Squirrel” (just like EPUB).</li>
+of a Squirrel” (just like EPUB and MOBI).</li>
 </ul>
 <p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
 words used to name things.</p>

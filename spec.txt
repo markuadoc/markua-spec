@@ -380,8 +380,8 @@ You can also set the alt text and/or the figure title in an attribute list:
 Attribute lists are one of Markua's additions to Markdown, and are discussed
 later in this specification.
 
-Finally, you can set the figure title using the alt text, if the `alt-title`
-document setting is set to `all`:
+Finally, you can set an image figure title using the alt text, if the
+`alt-title` document setting is set to `all`:
 
 ![The Original Mac](mac.jpg)
 
@@ -390,8 +390,8 @@ can have their title specified in the alt text. There is also a value of
 `text`, which means that only text-based resources like code can have their
 title specified in the alt text. Finally, there is a value of `none`, which
 means that no resources can have their title specified in the alt text. The
-`alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting-m-).
+`alt-title` document setting is discussed
+[in great detail here](#the-alt-title-document-setting-m-).
 
 # Document Settings
 
@@ -685,8 +685,8 @@ renamed to `title` in Markua 0.30 for consistency.
 
 Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
 are you did not use any `caption` attributes, but instead relied on the
-`alt-title` behavior. The `alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting-m-).
+`alt-title` behavior. The `alt-title` document setting is discussed
+[in great detail here](#the-alt-title-document-setting-m-).
 
 ### Preview the book
 
@@ -2939,7 +2939,7 @@ settings are tightly coupled.
 0.10 and Leanpub Flavoured Markdown by default. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
 resource is removed and used as the figure title instead. This setting is so
-important it is discussed in its own [section](#the-alt-title-setting-m-)
+important it is discussed in its own [section](#the-alt-title-document-setting-m-)
 below.
 
 `default-code-language`
@@ -3099,7 +3099,7 @@ the values mean:
   Markdown text or in cases where there are multiple authors of a manuscript.
 
 
-## The alt-title setting (M)
+## The alt-title document setting (M)
 
 Using the alt text as the figure title is the most terse syntax, and may make
 sense if no alt text is needed. For example, use cases include:
@@ -3503,8 +3503,8 @@ The title of a resource used as a figure can be specified in three ways:
 2. In quotes after the filename or URL of a local or web resource:
    `![](resource_path_or_url "Optional Figure Title")`
 3. In the alt text, assuming an appropriate value of the `alt-title` document
-   setting. The `alt-title` attribute is discussed
-   [in great detail here](#the-alt-title-setting-m-).
+   setting. The `alt-title` document setting is discussed
+   [in great detail here](#the-alt-title-document-setting-m-).
 
 Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:
@@ -7039,8 +7039,8 @@ Recall that the resource syntax is as follows:
 Note that there is some flexibility in the title attribute. If the `alt-title`
 document setting is `text` or `all` (the default) , then the alt text can be
 used as the title as well. If the `alt-title` is `none`, then it cannot.
-The `alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting-m-).
+The `alt-title` document setting is discussed
+[in great detail here](#the-alt-title-document-setting-m-).
 
 So, assuming a value of `text` or `all` for a document setting, this also works:
 

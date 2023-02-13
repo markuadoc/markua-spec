@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.23 (2023-02-13)</div>
+<div class="version">Version 0.30.24 (2023-02-13)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -299,8 +299,7 @@ itself.</p>
 <p>You could hit a key on your magical typewriter to create an ebook from your
 manuscript with one click.</p>
 <p>All ebook formats would be created, and they’d all look good. You’d have PDF for
-computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
-great on phones.</p>
+computers, and EPUB for everywhere else. The book would look great on phones.</p>
 <p>With your magical typewriter, you could publish your book before it was even
 done, and get feedback from readers all over the world. You could automatically
 share book updates with them. You would press one key on your magical typewriter
@@ -338,8 +337,8 @@ concepts of its own.</p>
 ebook format. The computer programs which do this transformation are called
 Markua Processors. These programs understand both Markua syntax and how to
 generate the various output formats. An example Markua Processor is Leanpub:
-Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
-and can even output print-ready PDFs and InDesign files from them as well.</p>
+Leanpub can output PDF, EPUB and HTML from the same Markua document, and can
+even output print-ready PDFs and InDesign files from them as well.</p>
 <p>Markua has been developed with extensive real-world testing and feedback.
 Markua has been used by Leanpub authors for years, both to create books and
 online courses.</p>
@@ -2653,9 +2652,9 @@ value for the attribute defined of Markua.</p>
 <p><code>full</code>
 : <code>true</code> or <code>false</code>. The default is <code>true</code>. If <code>true</code>, include this heading and
 its content (including nested sections, subsections, etc.) in the full book or
-course, including the PDF, EPUB and/or MOBI versions and the web version that
-is being generated. If <code>false</code>, omit it. Setting this to <code>false</code> is an easy way
-to “comment out” a section of your book or course.</p>
+course, including the PDF and EPUB versions and the web version that is being
+generated. If <code>false</code>, omit it. Setting this to <code>false</code> is an easy way to
+“comment out” a section of your book or course.</p>
 <p><code>sample</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, include the content
 under this heading (including nested sections, subsections, etc.) in the sample
@@ -2669,7 +2668,7 @@ to produce a representative Table of Contents. In a case such as this where
 <code>sample</code> is <code>false</code>, the Markua Processor may output special content inside the
 chapter, section or subsection to indicate that the content itself is being
 omitted from the sample. This attribute applies to both the book version
-(PDF, EPUB and/or MOBI) and the web version of the sample book or course.</p>
+(PDF and EPUB) and the web version of the sample book or course.</p>
 <p>Note that specifying either of these attributes in a nested section overrides any
 value inherited from its ancestors, or from the default. This way, you can
 include a chapter in the sample, except for a specific section of the chapter.</p>
@@ -3461,8 +3460,8 @@ figure reference is inserted with <code>#f</code>, this setting determines how t
 reference is displayed. If true (the default), the text includes the page
 number (e.g. “Figure 8.2: Anatomy of a Squirrel on page 42”) when inserted in
 a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of a Squirrel”. This
-setting has no effect on EPUB and MOBI, which never include page numbers in
-their references (since the text is resizable).</p>
+setting has no effect on EPUB, which never include page numbers in their
+references (since the text is resizable).</p>
 <p><code>italicize-underlines</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
@@ -10794,10 +10793,9 @@ the delimiter is <code>)</code>. Specifying the delimiter in the attribute list 
 the inferred delimiter, but conflicting delimiters are bad style. Note that the
 delimiter does not need to be produced for all output formats. Specifically,
 HTML only supports using <code>.</code> for a list delimiter, so <code>)</code> is not supported in
-HTML. And since EPUB is based on HTML, and since MOBI is typically produced from
-EPUB, neither EPUB nor MOBI should be expected to support customizable
-delimiters. However, PDF and LaTeX are not subject to these limitations, and
-should support both <code>.</code> and <code>)</code> as list delimiters.</p>
+HTML. And since EPUB is based on HTML, EPUB should not be expected to support
+customizable delimiters. However, PDF and LaTeX are not subject to these
+limitations, and should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <p>The use of these attributes are shown in the following examples.</p>
 <h3 id="lists-with-attributes-good-style" class="definition">
 <span class="number">8.5.2</span>Lists with Attributes: Good Style
@@ -17358,7 +17356,7 @@ writers:</p>
 and <code>number-figures</code> document settings.</p>
 <p>Whether page numbers are output in smart crosslinks in a PDF is determined by
 the <code>include-page-numbers-in-references</code> document setting, which defaults to
-<code>true</code>.  EPUB and MOBI do not support outputting page numbers in references,
+<code>true</code>.  EPUB does not support outputting page numbers in references,
 because they have resizable text (and thus the page numbers vary).</p>
 <p>In your writing, it’s often desirable to refer to these figures from elsewhere
 in your book. When creating such a reference, it’s helpful to be able to
@@ -17377,11 +17375,11 @@ reference the title and number of the chapter, section or figure.</p>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF,
-if <code>include-page-numbers-in-references</code> is true (the default), it is
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB. In PDF, if
+<code>include-page-numbers-in-references</code> is true (the default), it is
 “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2:
-Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
+Anatomy of a Squirrel” (just like EPUB).</li>
 </ul>
 <p>Note that for a book which is in English:</p>
 <ul>
@@ -17428,11 +17426,11 @@ document setting is false.</li>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB. In PDF, if
 <code>include-page-numbers-in-references</code> is true (the default), it is
 “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy
-of a Squirrel” (just like EPUB and MOBI).</li>
+of a Squirrel” (just like EPUB).</li>
 </ul>
 <p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
 words used to name things.</p>

@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.24 (2023-02-13)</div>
+<div class="version">Version 0.30.25 (2023-02-13)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -181,8 +181,9 @@ $(document).ready(function() {
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
 <li><a href="#the-alt-title-document-setting-m-"><span class="number">4.3</span>The alt-title document setting (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
-<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
+<li><a href="#the-alt-title-document-setting-m-"><span class="number">4.4</span>The alt-title document setting (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.5</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.6</span>Custom document settings are encouraged (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -300,8 +301,7 @@ itself.</p>
 <p>You could hit a key on your magical typewriter to create an ebook from your
 manuscript with one click.</p>
 <p>All ebook formats would be created, and they’d all look good. You’d have PDF for
-computers, MOBI for Kindle, and EPUB for everywhere else. The book would look
-great on phones.</p>
+computers, and EPUB for everywhere else. The book would look great on phones.</p>
 <p>With your magical typewriter, you could publish your book before it was even
 done, and get feedback from readers all over the world. You could automatically
 share book updates with them. You would press one key on your magical typewriter
@@ -339,8 +339,8 @@ concepts of its own.</p>
 ebook format. The computer programs which do this transformation are called
 Markua Processors. These programs understand both Markua syntax and how to
 generate the various output formats. An example Markua Processor is Leanpub:
-Leanpub can output PDF, EPUB, MOBI and HTML from the same Markua document,
-and can even output print-ready PDFs and InDesign files from them as well.</p>
+Leanpub can output PDF, EPUB and HTML from the same Markua document, and can
+even output print-ready PDFs and InDesign files from them as well.</p>
 <p>Markua has been developed with extensive real-world testing and feedback.
 Markua has been used by Leanpub authors for years, both to create books and
 online courses.</p>
@@ -2541,9 +2541,9 @@ value for the attribute defined of Markua.</p>
 <p><code>full</code>
 : <code>true</code> or <code>false</code>. The default is <code>true</code>. If <code>true</code>, include this heading and
 its content (including nested sections, subsections, etc.) in the full book or
-course, including the PDF, EPUB and/or MOBI versions and the web version that
-is being generated. If <code>false</code>, omit it. Setting this to <code>false</code> is an easy way
-to “comment out” a section of your book or course.</p>
+course, including the PDF and EPUB versions and the web version that is being
+generated. If <code>false</code>, omit it. Setting this to <code>false</code> is an easy way to
+“comment out” a section of your book or course.</p>
 <p><code>sample</code>
 : <code>true</code> or <code>false</code>. The default is <code>false</code>. If <code>true</code>, include the content
 under this heading (including nested sections, subsections, etc.) in the sample
@@ -2557,7 +2557,7 @@ to produce a representative Table of Contents. In a case such as this where
 <code>sample</code> is <code>false</code>, the Markua Processor may output special content inside the
 chapter, section or subsection to indicate that the content itself is being
 omitted from the sample. This attribute applies to both the book version
-(PDF, EPUB and/or MOBI) and the web version of the sample book or course.</p>
+(PDF and EPUB) and the web version of the sample book or course.</p>
 <p>Note that specifying either of these attributes in a nested section overrides any
 value inherited from its ancestors, or from the default. This way, you can
 include a chapter in the sample, except for a specific section of the chapter.</p>
@@ -3299,8 +3299,8 @@ figure reference is inserted with <code>#f</code>, this setting determines how t
 reference is displayed. If true (the default), the text includes the page
 number (e.g. “Figure 8.2: Anatomy of a Squirrel on page 42”) when inserted in
 a PDF; if false, it does not (e.g. “Figure 8.2: Anatomy of a Squirrel”. This
-setting has no effect on EPUB and MOBI, which never include page numbers in
-their references (since the text is resizable).</p>
+setting has no effect on EPUB, which never includes page numbers in references
+(since the text is resizable).</p>
 <p><code>italicize-underlines</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. If <code>italicize-underlines</code> is
 <code>true</code>, then <code>_this_</code> and <code>*this*</code> are both italic. If <code>italicize-underlines</code> is
@@ -3478,8 +3478,103 @@ text, and the best syntax when inserting an image, is to do the following:</p>
 </code></pre>
 <p>Finally, please note that <strong>you can use that syntax even with <code>alt-title: all</code></strong>,
 since the explictly-defined title will take precedence over the alt text.</p>
+<h2 id="the-alt-title-document-setting-m-" class="definition">
+<span class="number">4.4</span>The alt-title document setting (M)
+</h2>
+<p>Using the alt text as the figure title is the most terse syntax, and may make
+sense if no alt text is needed. For example, use cases include:</p>
+<ul>
+<li>Code samples and other text-based resources. Since these resources are
+themselves text, it makes no sense to have different alt text.</li>
+<li>Images, if the only output target is a format like print-ready PDF where
+no alt text is needed.</li>
+</ul>
+<p>If alt text is used as the figure title, it is NOT also provided as alt text,
+since it would be very annoying to hear the same text spoken twice (once as the
+alt text and once as the figure title) when using a screen reader.</p>
+<p>The default value of <code>alt-title</code> is <code>all</code>, for compatibility with Markua 0.10
+and Leanpub Flavoured Markdown.</p>
+<p>These are the three choices, and what their values mean:</p>
+<ul>
+<li><code>all</code>: if no title is provided for a given resource, regardless of the
+resource type, remove the alt text and use it as the figure title instead. (This
+choice is the default, since it is the closest to the behavior of LFM and of
+Markua version 0.10. So, regardless of whether you like the choice, there are 12
+years worth of books on Leanpub which would be broken by a different default.)</li>
+<li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
+an external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. This is arguably the most sensible choice, as it
+strikes a balance between preserving compatibility with Markdown for
+non-text-based resources like images, while still providing a sensible default
+for text-based resources like code samples. Since Markdown does not define
+support for external text-based resources, there is no conflict here.</li>
+<li><code>none</code>: never remove the alt text to use it as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)</li>
+</ul>
+<p>It is a debatable point whether using alt text as figure captions is a good
+idea.</p>
+<p>The main argument in favour of it is terseness: it is the most terse
+syntax, and the easiest to remember.</p>
+<p>A second argument is that in some cases such as external code samples and other
+text-based resources, there is no conceivable use for alt text, so the way to
+add a title with the least syntax is to use the spot for the alt text.</p>
+<p>A third argument in favour of it is aesthetics, since the alternative syntax
+in which a title is provided without any alt text looks like this:</p>
+<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
+<p>Now, the actual reason is to have different alt text, of course. This is the
+main argument against the “alt text as figure caption” idea.</p>
+<p>The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.</p>
+<p>This is a very good argument, but as shown above, there are good
+counterarguments as well. So, the behavior of the alt text is determined by the
+<code>alt-title</code> document setting, and the default value is <code>all</code> (not <code>text</code> or
+<code>none</code>) for compatibility with over a decade of Leanpub books which do this:</p>
+<pre><code>![A Figure Caption](someimage.png)
+</code></pre>
+<p>However, even though the default value of <code>alt-title</code> is <code>all</code>, the conclusion
+I’ve come to is that the default behavior of Markdown is best for image
+resources, and alt text should be used for descriptions, not figure captions,
+in the case of images. If you’re in this camp, the way to use alt
+text, and the best syntax when inserting an image, is to do the following:</p>
+<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
+</code></pre>
+<p>Finally, please note that <strong>you can use that syntax even with <code>alt-title: all</code></strong>,
+since the explictly-defined title will take precedence over the alt text.</p>
+<p>To be clear, the <code>alt-title</code> document setting <strong>NEVER</strong> makes a figure caption
+be used as the alt text; it makes alt text be used as a figure caption
+<strong>IF AND ONLY IF</strong> no title attribute is provided, either in quotes or in the
+attribute list:</p>
+<pre><code>In these examples, the value of the alt-title document setting DOES NOT MATTER.
+
+![This is always alt text, since a title is provided](someimage.png &quot;A Figure Caption&quot;)
+
+{title: &quot;A Figure Caption&quot;}
+![This is always alt text, if a caption is provided](someimage.png)
+
+{title: &quot;This is ALWAYS a Figure Caption, Regardless of alt-title&quot;}
+![](someimage.png)
+
+![](someimage.png &quot;This is ALWAYS a Figure Caption, Regardless of alt-title&quot;)
+</code></pre>
+<p>Again, to be clear, the <strong>ONLY</strong> thing that the <code>alt-title</code> document setting
+affects is <strong>WHETHER</strong> the alt text is used as the figure caption instead of as
+alt text <strong>IF THERE IS NO title ATTRIBUTE PROVIDED AS THE FIGURE CAPTION</strong>:</p>
+<pre><code>In these examples, the value of the alt-title document setting DOES MATTER.
+
+![No title, so this will be the figure caption if alt-title is all](someimage.png)
+
+![This will NOT be the figure caption if alt-title is text or none](someimage.png)
+</code></pre>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.5</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3548,7 +3643,7 @@ the author will typically only see the manually-defined document settings
 block. So, the formatting of the automatically-generated document settings
 doesn’t really matter, and JSON is the pragmatic choice.</p>
 <h2 id="custom-document-settings-are-encouraged-m-" class="definition">
-<span class="number">4.5</span>Custom document settings are encouraged (M)
+<span class="number">4.6</span>Custom document settings are encouraged (M)
 </h2>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>
@@ -3674,7 +3769,7 @@ in a list of errors and warnings.</p>
 <span class="number">5.2</span>Common resource attributes (M)
 </h2>
 <p>The supported attributes vary based on the type of resource, but <strong>all</strong>
-resources support the <code>type</code>, <code>format</code>, <code>class</code> and <code>title</code> attributes.</p>
+resources support the <code>class</code>, <code>format</code>, <code>title</code> and <code>type</code> attributes.</p>
 <p>As you recall, resources vary in four ways:</p>
 <ol>
 <li>Type</li>
@@ -3691,8 +3786,10 @@ later section below.</p>
 : All attribute lists, including those for resources, support a <code>class</code>
 attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
-figures by classes. Resources with titles are treated as figures; this is
-discussed extensively later.</p>
+figures by classes. <strong>Note that there is no need to set a <code>class</code> of <code>figure</code>
+on a resource. That would be too verbose and error-prone. Instead, all
+resources with titles are treated as figures.</strong>. This is discussed extensively
+later.</p>
 <p><code>format</code>
 : This is the resource format. Different resource types have different legal
 values for format. Specific resource types and formats are discussed throughout
@@ -3706,7 +3803,19 @@ being specified.</p>
 <h2 id="resource-titles-make-figures-m-" class="definition">
 <span class="number">5.3</span>Resource titles make figures (M)
 </h2>
-<p>A resource with a <code>title</code> is a figure.</p>
+<p>All resources with <code>title</code> attributes are figures.</p>
+<p>This is true regardless of whether the title is specified in quotes, in an
+attribute list, or in the alt text (with the appropriate value of the
+<code>alt-title</code> document setting). In all cases, the resource is a figure.</p>
+<p>To be clear, if <code>alt-title</code> is <code>all</code> (the default), the following three image
+resources are all figures, and should look identical:</p>
+<pre><code>![](mac.jpg &quot;The Original Mac&quot;)
+
+![The Original Mac](mac.jpg)
+
+{title: &quot;The Original Mac&quot;}
+![](mac.jpg)
+</code></pre>
 <p>The title is text which is shown near the figure, typically above or below it.
 A Markua Processor can choose where to position titles based on any criteria it
 chooses. For example, a Markua Processor can position all titles above or below
@@ -10707,10 +10816,9 @@ the delimiter is <code>)</code>. Specifying the delimiter in the attribute list 
 the inferred delimiter, but conflicting delimiters are bad style. Note that the
 delimiter does not need to be produced for all output formats. Specifically,
 HTML only supports using <code>.</code> for a list delimiter, so <code>)</code> is not supported in
-HTML. And since EPUB is based on HTML, and since MOBI is typically produced from
-EPUB, neither EPUB nor MOBI should be expected to support customizable
-delimiters. However, PDF and LaTeX are not subject to these limitations, and
-should support both <code>.</code> and <code>)</code> as list delimiters.</p>
+HTML. And since EPUB is based on HTML, EPUB should not be expected to support
+customizable delimiters. However, PDF and LaTeX are not subject to these
+limitations, and should support both <code>.</code> and <code>)</code> as list delimiters.</p>
 <p>The use of these attributes are shown in the following examples.</p>
 <h3 id="lists-with-attributes-good-style" class="definition">
 <span class="number">8.5.2</span>Lists with Attributes: Good Style
@@ -17271,7 +17379,7 @@ writers:</p>
 and <code>number-figures</code> document settings.</p>
 <p>Whether page numbers are output in smart crosslinks in a PDF is determined by
 the <code>include-page-numbers-in-references</code> document setting, which defaults to
-<code>true</code>.  EPUB and MOBI do not support outputting page numbers in references,
+<code>true</code>.  EPUB does not support outputting page numbers in references,
 because they have resizable text (and thus the page numbers vary).</p>
 <p>In your writing, it’s often desirable to refer to these figures from elsewhere
 in your book. When creating such a reference, it’s helpful to be able to
@@ -17290,11 +17398,11 @@ reference the title and number of the chapter, section or figure.</p>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF,
-if <code>include-page-numbers-in-references</code> is true (the default), it is
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB. In PDF, if
+<code>include-page-numbers-in-references</code> is true (the default), it is
 “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2:
-Anatomy of a Squirrel” (just like EPUB and MOBI).</li>
+Anatomy of a Squirrel” (just like EPUB).</li>
 </ul>
 <p>Note that for a book which is in English:</p>
 <ul>
@@ -17341,11 +17449,11 @@ document setting is false.</li>
 <li><code>#n</code> is “8.2”</li>
 <li><code>#d</code> is “Figure”</li>
 <li><code>#s</code> is “Figure 8.2”</li>
-<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB and MOBI. In PDF, if
+<li><code>#f</code> is “Figure 8.2: Anatomy of a Squirrel” in EPUB. In PDF, if
 <code>include-page-numbers-in-references</code> is true (the default), it is
 “Figure 8.2: Anatomy of a Squirrel on page 42”. In PDF, if
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy
-of a Squirrel” (just like EPUB and MOBI).</li>
+of a Squirrel” (just like EPUB).</li>
 </ul>
 <p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
 words used to name things.</p>

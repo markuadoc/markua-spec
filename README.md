@@ -51,6 +51,8 @@ Leanpub Flavoured Markdown (LFM) is being specified on the `lfm` branch.
 
 # Building the Spec
 
+To build before deploying to markua.com, run `./build.sh`.
+
 To build the spec you will need docker installed. You can check with 
 ```docker -v``` 
 if you dont have docker you can download it from https://www.docker.com/products/docker-desktop

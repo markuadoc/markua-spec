@@ -3101,29 +3101,24 @@ the values mean:
 
 ## The alt-title document setting (M)
 
-Using the alt text as the figure title is the most terse syntax, and may make
-sense if no alt text is needed. For example, use cases include:
+As discussed above, the `alt-title` is one of the document settings that a
+Markua document can have. (Document settings are set at the beginning of a
+Markua document, or via a user interface such as a web page.)
 
-* Code samples and other text-based resources. Since these resources are
-  themselves text, it makes no sense to have different alt text.
-* Images, if the only output target is a format like print-ready PDF where
-  no alt text is needed.
+The `alt-title` document setting controls whether, in the cases where there is
+no figure title explicitly set, the alt text on a resource is used as the
+figure title instead of as alt text.
 
-If alt text is used as the figure title, it is NOT also provided as alt text,
-since it would be very annoying to hear the same text spoken twice (once as the
-alt text and once as the figure title) when using a screen reader.
-
-The default value of `alt-title` is `all`, for compatibility with Markua 0.10
-and Leanpub Flavoured Markdown.
-
-These are the three choices, and what their values mean:
+The `alt-title` document setting can have the value of `all`, `text` or `none`.
+The default is `all`, for compatibility with Markua 0.10 and Leanpub Flavoured
+Markdown by default. These are the three choices, and what their values mean:
 
 * `all`: if no title is provided for a given resource, regardless of the
 resource type, remove the alt text and use it as the figure title instead. (This
 choice is the default, since it is the closest to the behavior of LFM and of
 Markua version 0.10. So, regardless of whether you like the choice, there are 12
 years worth of books on Leanpub which would be broken by a different default.)
-* `text`: if no title is provided for a given **text-based** resource (such as
+* `text`: if no title is provided for a given text-based resource (such as
 an external code sample), remove the alt text and use it as the figure title
 instead. However, if the resource is not purely text-based, such as an image or
 a video, do not remove the alt text to use it as the figure title, even if
@@ -3136,10 +3131,20 @@ support for external text-based resources, there is no conflict here.
 text-based resource where no figure title is provided. (This is how Markdown
 behaves.)
 
-It is a debatable point whether using alt text as figure captions is a good
-idea.
+Using the alt text as the figure title is the most terse syntax, and may make
+sense if no alt text is needed. For example, valid use cases include:
 
-The main argument in favour of it is terseness: it is the most terse
+* Code samples and other text-based resources. Since these resources are
+  themselves text, it makes no sense to have different alt text.
+* Images, if the only output target is a format like print-ready PDF where
+  no alt text is needed.
+
+If alt text is used as the figure title, it is NOT also provided as alt text,
+since it would be very annoying to hear the same text spoken twice (once as the
+alt text and once as the figure title) when using a screen reader.
+
+Now, it is a debatable point whether using alt text as figure captions is a
+good idea. The main argument in favour of it is terseness: it is the most terse
 syntax, and the easiest to remember.
 
 A second argument is that in some cases such as external code samples and other
@@ -3155,25 +3160,36 @@ in which a title is provided without any alt text looks like this:
 
 With this syntax, you have the `[]` for what looks like no real reason.
 
-Now, the actual reason is to have different alt text, of course. This is the
-main argument against the "alt text as figure caption" idea.
+Now, the main argument against using alt text as figure captions is very
+straightforward: you are supposed to actually provide alt text, and the alt
+text should be different from the figure caption.
 
-The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.
+Alt text is supposed to be supposed to be descriptive (say to provide a literal
+description of an image for people with visual disabilities, or who are
+listening to the book as an audiobook), whereas good figure captions are terse
+(and often witty). These are different requirements, so they should have
+different text.
 
-This is a very good argument, but as shown above, there are good
+With this argument in mind, if it looks like a bit of an error to have empty
+square brackets, that's a good thing: according to this argument, you should
+always provide alt text, and it should be different from the figure caption.
+Having missing alt text look like a bit of a mistake is actually correct.
+
+Now, this is a very good argument, but as shown above, there are good
 counterarguments as well. So, the behavior of the alt text is determined by the
 `alt-title` document setting, and the default value is `all` (not `text` or
-`none`) for compatibility with over a decade of Leanpub books which do this:
+`none`). The reason why the default is `all` is simple: there are over a decade
+of Leanpub books which do this, since they were written in Leanpub Flavoured
+Markdown or Markua 0.10:
 
 ```
 ![A Figure Caption](someimage.png)
 ```
 
-However, even though the default value of `alt-title` is `all`, the conclusion
+Despite what one's opinion of what the correct value of `alt-title` should be,
+the default value of `alt-title` is an acknowledgment of Markua's history.
+
+So, even though the default value of `alt-title` is `all`, the conclusion
 I've come to is that the default behavior of Markdown is best for image
 resources, and alt text should be used for descriptions, not figure captions,
 in the case of images. If you're in this camp, the way to use alt
@@ -3183,17 +3199,19 @@ text, and the best syntax when inserting an image, is to do the following:
 ![some descriptive alt text](someimage.png "A Figure Caption")
 ```
 
-Finally, please note that **you can use that syntax even with `alt-title: all`**,
+Note that you can use that syntax even with the default `alt-title: all`,
 since the explictly-defined title will take precedence over the alt text.
+The `alt-title` document setting only defines what to do when there is no
+title set.
 
-To be clear, the `alt-title` document setting **NEVER** makes a figure caption
-be used as the alt text; it makes alt text be used as a figure caption
-**IF AND ONLY IF** no title attribute is provided, either in quotes or in the
-attribute list:
+To be clear, the `alt-title` document setting never makes a figure caption
+be used as the alt text, and it makes alt text be used as a figure caption
+if and only if no title attribute is provided, either in quotes or in the
+attribute list.
+
+In these examples, the value of the `alt-title` document setting does not matter:
 
 ```
-In these examples, the value of the alt-title document setting DOES NOT MATTER.
-
 ![This is always alt text, since a title is provided](someimage.png "A Figure Caption")
 
 {title: "A Figure Caption"}
@@ -3205,13 +3223,13 @@ In these examples, the value of the alt-title document setting DOES NOT MATTER.
 ![](someimage.png "This is ALWAYS a Figure Caption, Regardless of alt-title")
 ```
 
-Again, to be clear, the **ONLY** thing that the `alt-title` document setting
-affects is **WHETHER** the alt text is used as the figure caption instead of as
-alt text **IF THERE IS NO title ATTRIBUTE PROVIDED AS THE FIGURE CAPTION**:
+Again, to be clear, the only thing that the `alt-title` document setting
+affects is whether the alt text is used as the figure caption instead of as alt
+text if there is no title attribute provided as the figure caption.
+
+In these examples, the value of the `alt-title` document setting does matter:
 
 ```
-In these examples, the value of the alt-title document setting DOES MATTER.
-
 ![No title, so this will be the figure caption if alt-title is all](someimage.png)
 
 ![This will NOT be the figure caption if alt-title is text or none](someimage.png)

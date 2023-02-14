@@ -3185,6 +3185,31 @@ text, and the best syntax when inserting an image, is to do the following:
 Finally, please note that **you can use that syntax even with `alt-title: all`**,
 since the explictly-defined title will take precedence over the alt text.
 
+To be clear, the `alt-title` document setting **NEVER** makes a figure caption
+be used as the alt text; it makes alt text be used as a figure caption:
+
+```
+![this is always alt text, if a caption is provided](someimage.png "A Figure Caption")
+
+{title: "A Figure Caption"}
+![this is always alt text, if a caption is provided](someimage.png)
+
+{title: "This is ALWAYS a Figure Caption, Regardless of alt-title"}
+![](someimage.png)
+
+![](someimage.png "This is ALWAYS a Figure Caption, Regardless of alt-title")
+```
+
+The **ONLY** thing that the `alt-title` document setting affects is **WHETHER**
+the alt text is used as the figure caption **IF THERE IS NO title ATTRIBUTE
+PROVIDED AS THE FIGURE CAPTION**:
+
+```
+![No title is provided, so this alt text will be the figure caption if alt-title is all](someimage.png)
+
+![No title is provided, so this alt text will NOT be the figure caption if alt-title is text or none](someimage.png)
+```
+
 ## Multiple document settings hashes are permitted (M)
 
 A Markua document can define multiple document settings hashes.

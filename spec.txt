@@ -1,7 +1,7 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.30.24'
+version: '0.30.25'
 date: '2023-02-13'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
@@ -389,7 +389,7 @@ can have their title specified in the alt text. There is also a value of
 `text`, which means that only text-based resources like code can have their
 title specified in the alt text. Finally, there is a value of `none`, which
 means that no resources can have their title specified in the alt text. The
-`alt-title` attribute is discussed
+`alt-title` document setting is discussed
 [in great detail here](#the-alt-title-document-setting-m-).
 
 # Document Settings
@@ -684,7 +684,7 @@ renamed to `title` in Markua 0.30 for consistency.
 
 Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
 are you did not use any `caption` attributes, but instead relied on the
-`alt-title` behavior. The `alt-title` attribute is discussed
+`alt-title` behavior. The `alt-title` document setting is discussed
 [in great detail here](#the-alt-title-document-setting-m-).
 
 ### Preview the book
@@ -3519,7 +3519,7 @@ The title of a resource used as a figure can be specified in three ways:
 2. In quotes after the filename or URL of a local or web resource:
    `![](resource_path_or_url "Optional Figure Title")`
 3. In the alt text, assuming an appropriate value of the `alt-title` document
-   setting. The `alt-title` attribute is discussed
+   setting. The `alt-title` document setting is discussed
    [in great detail here](#the-alt-title-document-setting-m-).
 
 Since inline resources do not use the bracket syntax, any titles must be added
@@ -7055,7 +7055,7 @@ Recall that the resource syntax is as follows:
 Note that there is some flexibility in the title attribute. If the `alt-title`
 document setting is `text` or `all` (the default) , then the alt text can be
 used as the title as well. If the `alt-title` is `none`, then it cannot.
-The `alt-title` attribute is discussed
+The `alt-title` document setting is discussed
 [in great detail here](#the-alt-title-document-setting-m-).
 
 So, assuming a value of `text` or `all` for a document setting, this also works:

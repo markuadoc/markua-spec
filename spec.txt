@@ -3519,7 +3519,8 @@ The title of a resource used as a figure can be specified in three ways:
 2. In quotes after the filename or URL of a local or web resource:
    `![](resource_path_or_url "Optional Figure Title")`
 3. In the alt text, assuming an appropriate value of the `alt-title` document
-   setting (described below)
+   setting. The `alt-title` attribute is discussed
+   [in great detail here](#the-alt-title-setting).   
 
 Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:
@@ -7053,7 +7054,9 @@ Recall that the resource syntax is as follows:
 
 Note that there is some flexibility in the title attribute. If the `alt-title`
 document setting is `text` or `all` (the default) , then the alt text can be
-used as the title as well. (If the `alt-title` is `none`, then it cannot.)
+used as the title as well. If the `alt-title` is `none`, then it cannot.
+The `alt-title` attribute is discussed
+[in great detail here](#the-alt-title-setting).
 
 So, assuming a value of `text` or `all` for a document setting, this also works:
 
@@ -10248,7 +10251,7 @@ after
 
 Note that single line breaks within the definitions (the `<dd>` not `<dt>`)
 are handled the same way as single line breaks within paragraphs, and are
-subject to the `soft-breaks` document setting which defaults to `source` for
+subject to the `soft-breaks` document setting which defaults to `space` for
 compatibility with Markdown.
 
 ```````````````````````````````` example

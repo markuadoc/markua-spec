@@ -1,7 +1,7 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.30.24'
+version: '0.30.25'
 date: '2023-02-13'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
@@ -379,47 +379,43 @@ You can also set the alt text and/or the figure title in an attribute list:
 Attribute lists are one of Markua's additions to Markdown, and are discussed
 later in this specification.
 
-If you wish, you can configure a Markua Processor to convert alt text into a
-figure title if no separate figure title is provided. (A figure title is
-just as accessible as alt text, so this is fine.) Document settings are
-discussed next.
+Finally, you can set the figure title using the alt text, if the `alt-title`
+document setting is set to `all`:
+
+![The Original Mac](mac.jpg)
+
+The default value of `alt-title` is `all`, which means that all resources
+can have their title specified in the alt text. There is also a value of
+`text`, which means that only text-based resources like code can have their
+title specified in the alt text. Finally, there is a value of `none`, which
+means that no resources can have their title specified in the alt text. The
+`alt-title` document setting is discussed
+[in great detail here](#the-alt-title-document-setting-m-).
 
 # Document Settings
 
 Various document settings can be specified at the start of a Markua document to
-affect the behavior of the Markua Processor. For example, the default value of
-the `alt-title` setting is `all`, to make images use the alt text as the figure
-title instead of as alt text, if no figure title is present:
+affect the behavior of the Markua Processor. For example, if you want single
+newlines to insert a forced line break in the PDF, EPUB and HTML output formats
+(instead of the single space that results by default), set the `soft-breaks`
+document setting to `break` instead of the default of `space`:
 
 ```
 {
-alt-title: all
+soft-breaks: break
 }
 
 # Chapter One
 
-This is an apple with a figure title but no alt text:
-
-![The Original McIntosh, a red apple](mac.jpg)
+This will be on a line
+and this will be on the next line.
 ```
-
-This gets you the terseness of inserting images as figures in LFM, in a general
-way. Note that if the `alt-title` document setting is set to `text`, this
-behavior only happens for text-based resources like code samples.
-If the `alt-title` is set to `none`, it never happens. The default value of
-the `alt-title` attribute is `all`, not `text` or `none`, for better
-compatibility with Markua 0.10 and Leanpub Flavoured Markdown.
-
-The generalization of the Markdown image syntax into resources, and the addition
-of document settings, are two more of Markua's additions to Markdown. These are
-also both discussed later in this specification.
-
-One important type of resource in Markua is code samples, which is discussed
-next.
 
 # Code Samples
 
-The image syntax is the inspiration for the syntax for external code samples:
+The generalization of the Markdown image syntax into resources is one of
+Markua's most important additions to Markdown. For example, the image syntax
+is the inspiration for the syntax for external code samples:
 
 ![](hello.rb "Hello World in Ruby")
 
@@ -565,59 +561,15 @@ of the more important ones...
 ## Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 (M)
 
 Migrating a Leanpub Flavoured Markdown (LFM) Book to Markua 0.30 is actually
-not too painful, due to the document settings feature of Markua 0.30.
+really easy.
 
 Here are the steps you do:
 
-1. Add the appropriate document settings to make Markua 0.30 function like LFM.
-2. Move the images folder inside a resources folder.
-3. Convert the part syntax, if you use parts.
-4. Generate the book, look at the output, and make any other changes needed.
+1. Move the images folder inside a resources folder.
+2. Convert the part syntax, if you use parts.
+3. Generate the book, look at the output, and make any other changes needed.
 
 These are all described below.
-
-### Add the appropriate document settings to make Markua 0.30 function like LFM
-
-When upgrading a LFM document to Markua 0.30, you wil want to start by
-defining two of your document settings to be as compatible with LFM as
-possible.
-
-So, add this text at the top of your Markua document, followed by a blank line:
-
-```
-{
-    alt-title: all
-    soft-breaks: space
-    two-space-hack: true
-}
-```
-
-Note that the default value of the `alt-title` attribute is `all`, not `text`
-or `none`, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while `alt-title` should be `all` when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don't need to set it explicitly:
-you can just let it default to `all`.
-
-To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:
-
-```
-{
-    soft-breaks: space
-    two-space-hack: true
-}
-
-# Chapter One
-
-Lorem ipsum dolor...
-```
-
-Note that you only define this list of document settings **once**, at the start
-of your **first file** in your Markua manuscript. (This is the **first file
-listed in `Book.txt`**, not in the `Book.txt` file itself, and not at the top
-of every manuscript file.)
-
-All three of these document settings are discussed below.
 
 ### Move the images folder inside a resources folder
 
@@ -662,6 +614,12 @@ However, at this point, the best thing to do is to just generate the book using
 Markua 0.30 instead of LFM, and see what is produced. Then, consult that list
 and the [LFM manual](https://leanpub.com/lfm/read) to learn more about how to
 make any other changes needed to finish the migration.
+
+One thing that Markua 0.30 defines which is not done in LFM is the concept of
+document settings, which are a set of global switches which customize the
+output of your book. You will want to review the
+[standard document settings](#the-standard-document-settings-m-) section below
+to learn more.
 
 </div>
 
@@ -710,41 +668,48 @@ document via global switches. This way, the behavior of a Markua 0.30
 document can be changed in sweeping ways via these global settings.
 
 If you are updating a large Markua 0.10 document to Markua 0.30, you will
-probably want to start by making these five changes, in order:
+probably want to start by doing these three steps:
 
-1. Define the recommended document settings for upgrading from Markua 0.10.
-2. Check the output and decide on the appropriate `soft-breaks` and
-   `two-space-hack` settings.
-3. Rename all `caption` attributes to `title`.
-4. Check the output and decide on the appropriate `alt-title` setting.
-5. Review the other document settings and override the defaults as needed.
+1. Rename all `caption` attributes to `title`
+2. Preview the book
+3. Update any document settings
 
 These are all described below.
 
-### Define the recommended document settings for upgrading from Markua 0.10
+### Rename all `caption` attributes to `title`
 
-When upgrading a Markua 0.10 document to Markua 0.30, you wil want to start by
-defining three of your document settings to be as compatible with Markua 0.10 as
-possible.
+First, you will want to do a find-replace in your Markua manuscript to update
+all `caption:` attributes to be `title:`, since the `caption` attribute was
+renamed to `title` in Markua 0.30 for consistency.
 
-So, add this text at the top of your Markua document, followed by a blank line:
+Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
+are you did not use any `caption` attributes, but instead relied on the
+`alt-title` behavior. The `alt-title` document setting is discussed
+[in great detail here](#the-alt-title-document-setting-m-).
 
-```
-{
-    alt-title: all
-    soft-breaks: break
-    two-space-hack: false
-}
-```
+### Preview the book
 
-Note that the default value of the `alt-title` attribute is `all`, not `text`
-or `none`, for better compatibility with Markua 0.10 and Leanpub Flavoured
-Markdown. So while `alt-title` should be `all` when migrating an LFM or a
-Markua 0.10 document to Markua 0.30, you don't need to set it explicitly:
-you can just let it default to `all`.
+Before making any more changes, you should preview your book to see what it
+looks like unchanged.
 
-To be clear, there needs to be a blank line between the document settings and
-the manuscript content. For example:
+### Update any document settings
+
+After previewing the book, you will want to review the PDF output and decide on
+the appropriate values of the document settings.
+
+If you want maximum compatibility with Markua 0.10, you will want to override
+the `soft-breaks` and `two-space-hack` settings as follows:
+
+1. Set the `soft-breaks` setting to `break`
+2. Set the `two-space-hack` setting to `false`
+
+Note that both of these settings are against the default behavior of Markdown,
+so unless you are already relying on that behaviour in Markua 0.10, you should
+consider leaving them at their default values.
+
+You can change these settings on Leanpub in the Settings > Generation Settings
+section of the author app, or you can set the document settings at the top of
+the first manuscript file like this:
 
 ```
 {
@@ -757,127 +722,13 @@ the manuscript content. For example:
 Lorem ipsum dolor...
 ```
 
+Make sure you add a blank line below the document settings, and also make sure
+you put the curly braces on lines by themselves!
+
 Note that you only define this list of document settings **once**, at the start
-of your **first file** in your Markua manuscript. (This is the **first file
-listed in `Book.txt`**, not in the `Book.txt` file itself, and not at the top
-of every manuscript file.)
+of your **first file** in your Markua manuscript.
 
-All three of these document settings are discussed below.
-
-### Check the output and decide on the appropriate `soft-breaks` and `two-space-hack` settings
-
-In terms of the `soft-breaks` attribute, we specify the value to be `break`
-since this matches the default behavior of Markua 0.10.
-
-The `break` attribute means to insert a forced linebreak when a single newline
-is encountered in the manuscript. While this makes some intuitive sense, it is
-very much against the default behavior of Markdown.
-
-The other two values of `soft-breaks` are `source` (which is to output a single
-newline only in HTML source, which functions like a space in all display
-formats) and `space` (which is to output a single space for single newlines).
-The default of `soft-breaks` in Markua 0.30 is `source`, for Markdown
-compatibility.
-
-If you are happy with the default, just delete the `soft-breaks` document
-setting or explicitly set it to `source`. If you care about the HTML soure code
-and prefer a space, then use `space`.
-
-If you do use `space` or `source` for the `soft-breaks` attribute, consider
-changing the value of the `two-space-hack` document setting to true.
-The `two-space-hack` is not needed if `soft-breaks` is `break`, but it is
-potentially useful in the other two cases. The idea here is that two spaces
-at the end of a line before a single newline makes the single newline
-function like a hard break. This is a very questionable requirement, since
-it is invisible formatting and since some editors strip trailing whitespace.
-However, it is the default behavior of Markdown, and if `soft-breaks` is not
-`break`, it is potentially needed.
-
-Consult the
-[standard document settings](#the-standard-document-settings-m-) section
-to learn more.
-
-### Rename all `caption` attributes to `title`
-
-Next, you will want to do a find-replace in your Markua manuscript to update
-all `caption:` attributes to be `title:`, since the `caption` attribute was
-renamed to `title` in Markua 0.30 for consistency.
-
-Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
-are you did not use any `caption` attributes, but instead relied on the
-`alt-title` behavior. This is discussed next.
-
-### Check the output and decide on the appropriate `alt-title` setting
-
-In Markua 0.10, the alt text for an image (or other resource) was used as the
-value of the resource title. This is a very non-standard interpretation of
-Markdown, and it prevents you from using good alt-text for accessibility.
-
-When upgrading a Markua 0.10 document to Markua 0.30, you definitely want
-to leave the default value of `alt-title: all`, so that you can do this:
-
-```
-![A Figure Caption](someimage.png)
-```
-
-Otherwise, if you set `alt-title` to `text` or `none`, your captions will
-disappear from all your images.
-
-Now, it is a debatable point whether using alt text as figure captions is a
-good idea.
-
-The main argument in favour of it is terseness: it is the most terse syntax,
-and the easiest to remember.
-
-A second argument in favour of it is aesthetics, since the alternative syntax
-looks like this:
-
-```
-![](someimage.png "A Figure Caption")
-```
-
-With this syntax, you have the `[]` for what looks like no real reason.
-
-Now, the actual reason is to have different alt text, of course. This is the
-main argument against the alt text as figure caption idea.
-
-The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.
-
-You would assume that this argument is a slam dunk. But, it's actually not.
-For example, Markua documents can be used to generate print books. There is
-no alt text in print books. So, for a well-written print book, the text itself
-may presumably be descriptive enough that alt text is not needed.
-
-This connects to the more general argument that alt text is HTML-specific, and
-only applies to HTML and EPUB, not PDF.
-
-Anyway, assuming you are in the "alt text is for descriptions, not figure
-captions" camp, the way to improve this is to do the following:
-
-```
-![some descriptive alt text](someimage.png "A Figure Caption")
-```
-
-This is less terse, but arguably much better.
-
-Now, you can use that syntax even with `alt-title: all`, since the explictly
-defined title will take precedence over the alt text title.
-
-So, you can leave `alt-title: all` as you update your document, and once you
-have made these changes throughout your Markua document, you can try
-changing the `alt-title` document setting to be `text` or `none`.
-
-(Or, you can just delete the `alt-title` document setting for it to default
-to `all`.) See the [standard document settings](#the-standard-document-settings-m-)
-section to learn more about these choices.
-
-### Review the other document settings and override the defaults as needed
-
-Besides the specifics of the `alt-title`, `two-space-hack` and `soft-breaks`
+Besides the specifics of the `soft-breaks` and the `two-space-hack`
 document settings, the big point is that regardless of whether you are
 upgrading a large Markua 0.10 document to Markua 0.30 or starting a new
 Markua 0.30 document, you can make sweeping changes to how a Markua 0.30
@@ -3070,7 +2921,7 @@ the defaults are in one list. These defaults are listed below.
   number-sections: false
   restart-endnote-numbering: true
   restart-footnote-numbering: true
-  soft-breaks: source
+  soft-breaks: space
   two-space-hack: true
 }
 ```
@@ -3083,76 +2934,11 @@ by four related settings: `alt-title`, `figure-classes`, `list-figures` and
 settings are tightly coupled.
 
 `alt-title`
-: `all`, `text` or `none`. **The default is `all`, NOT `text`.**
-This setting controls whether, in the cases where there is no figure title
-explicitly set, the alt text on a resource is removed and used as the figure
-title instead. If alt text is used as the figure title, it is NOT also provided
-as alt text, since it would be very annoying to hear the same text spoken twice
-(once as the alt text and once as the figure title) when using a screen reader.
-This is what the values mean:
-
-* `all`: if no title is provided for a given resource, regardless of the
-resource type, remove the alt text and use it as the figure title instead. (This
-choice is the default, since it is the closest to the behavior of LFM and of
-Markua version 0.10. So, regardless of whether you like the choice, there are 12
-years worth of books on Leanpub which would be punished by a different default.)
-* `text`: if no title is provided for a given **text-based** resource (such as
-an external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. This is arguably the most sensible choice, as it
-strikes a balance between preserving compatibility with Markdown for
-non-text-based resources like images, while still providing a sensible default
-for text-based resources like code samples. Since Markdown does not define
-support for external text-based resources, there is no conflict here.
-* `none`: never remove the alt text to use it as the figure title, even for a
-text-based resource where no figure title is provided. (This is how Markdown
-behaves.)
-
-It is a debatable point whether using alt text as figure captions is a good
-idea. The main argument in favour of it is terseness: it is the most terse
-syntax, and the easiest to remember. A second argument in favour of it is
-aesthetics, since the alternative syntax looks like this:
-
-```
-![](someimage.png "A Figure Caption")
-```
-
-With this syntax, you have the `[]` for what looks like no real reason.
-
-Now, the actual reason is to have different alt text, of course. This is the
-main argument against the alt text as figure caption idea.
-
-The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.
-
-You would assume that this argument is a slam dunk. But, it's actually not.
-For example, Markua documents can be used to generate print books. There is
-no alt text in print books. So, for a well-written print book, the text itself
-may presumably be descriptive enough that alt text is not needed.
-
-This connects to the more general argument that alt text is HTML-specific, and
-only applies to HTML and EPUB, not PDF.
-
-So, the conclusion is that the best syntax when inserting an image is to do the
-following:
-
-```
-![some descriptive alt text](someimage.png "A Figure Caption")
-```
-
-Now, you can use that syntax even with `alt-title: all`, since the explictly
-defined title will take precedence over the alt text.
-
-The default of `alt-title` is `all` since there are 12 years of books on
-Leanpub which do this:
-
-```
-![A Figure Caption](someimage.png)
-```
+: `all`, `text` or `none`. The default is `all`, for compatibility with Markua
+0.10 and Leanpub Flavoured Markdown by default. This setting controls whether,
+in the cases where there is no figure title explicitly set, the alt text on a
+resource is removed and used as the figure title instead. This setting is so
+important it is discussed in its own [section](#the-alt-title-document-setting-m-) below.
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -3194,8 +2980,8 @@ figure reference is inserted with `#f`, this setting determines how the
 reference is displayed. If true (the default), the text includes the page
 number (e.g. "Figure 8.2: Anatomy of a Squirrel on page 42") when inserted in
 a PDF; if false, it does not (e.g. "Figure 8.2: Anatomy of a Squirrel". This
-setting has no effect on EPUB, which never include page numbers in their
-references (since the text is resizable).
+setting has no effect on EPUB, which never includes page numbers in references
+(since the text is resizable).
 
 `italicize-underlines`
 : `true` or `false`. The default value is `true`. If `italicize-underlines` is
@@ -3266,39 +3052,41 @@ at the end of a chapter.
 at the end of a chapter.
 
 `soft-breaks`
-: `break`, `space` or `source`. Default `source`. This setting determines the
-behavior of single newlines (i.e. a newline which is not followed by another
-newline) in the output. This is what the values mean:
+: `break` or `space`. The default is `space`, for compatibility with
+Markdown. **If you want the behavior of Markua 0.10, you need to choose
+`break`.** This setting determines the behavior of single newlines (i.e. a
+newline which is not followed by another newline) in the output. This is what
+the values mean:
 
-  * `source`: Single newlines inside paragraphs in the Markua source produce
-    single newlines in the HTML source. This will pretend to break the line
-    while actually functioning like a single space in the output: all it
-    actually does is break the line in the HTML source. It does *not* break the
-    line when the HTML is rendered, since in HTML a single newline is
-    equivalent to a single space. So, this type of line break only is a line
-    break in the HTML source and not in any other output format--hence the
-    name `source`. To be clear: for non-HTML output formats such as LaTeX or
-    PDF, a value of `source` has the same effect as `space`, discussed next.
-    The `source` option is arguably the worst option, but it is the default
-    because Markua must be compatible with Markdown by default, even in the
-    rare situations where it considers a Markdown decision to be suboptimal.
-  * `space`: Single newlines inside paragraphs in the Markua document produce
-    single spaces in the HTML output. This functions identically to single
-    newlines when rendered as HTML. For non-HTML-based output formats like
-    LaTex or PDF, a single space is rendered for a single newline.
+  * `space`: Single newlines inside paragraphs in the Markua source produce
+    output which functions like a single space. In output such as PDF, a single
+    space must be what is output. In output such as HTML, a single newline
+    is output, since in HTML output, a single newline is equivalent to a single
+    space in terms of the effect on presentation. So, this type of line break
+    only is a line break in the HTML source, and in all output presentation it
+    functions like a space--hence the name `space`. The `space` option is the
+    default for compatibility with Markdown by default. If you want the
+    behavior of Markua 0.10, choose `break`.
   * `break`: Single newlines inside paragraphs in the Markua document produce
     break tags in the HTML output and line breaks in non-HTML output like
     LaTeX or PDF. The reason this value is called `break` is to indicate that
     when you hit a newline to get a line break, you get a real line break.
-    If `soft-breaks` has the value of `break`, all single newlines function
-    as though they were using the "two space hack" to produce a hard line
-    break in normal Markdown. (Whether the "two space hack" is enabled in a
-    Markua document is determined by the value of the `two-space-hack`
-    setting, discussed below.)
+    To be clear: the `break` attribute means to insert a forced linebreak
+    **whenever a single newline is encountered in the manuscript, regardless
+    of whether there are two spaces at the end of the line**. While this makes
+    some intuitive sense, it is very much against the default behavior of
+    Markdown.  The `break` option gives you the behavior of Markua 0.10,
+    in which all single newlines function as though they were using the
+    "two space hack" to produce a hard line break in normal Markdown. (Whether
+    the "two space hack" is enabled in a Markua document is determined by the
+    value of the `two-space-hack` setting, discussed below.)
 
 `two-space-hack`
-: `true` or `false`. Default `true`, for compatibility with Markdown. If
-  `true`, adding two spaces at the end of a line forces a hard line break.
+: `true` or `false`. The default is `true`, for compatibility with Markdown.
+  If `true`, adding two spaces at the end of a line forces a hard line break.
+  If you use this setting, ensure that your text editor does not strip
+  trailing whitespace! This is probably the best choice if `soft-breaks` is
+  set to `space`, or if you want maximum compatibility with Markdown.
   If `false`, spaces at the end of a line are ignored, and the single newline
   is treated as a single newline would be without those spaces, which is
   determined by the value of the `soft-breaks` setting. Since Markua allows
@@ -3309,6 +3097,124 @@ newline) in the output. This is what the values mean:
   Markdown text or in cases where there are multiple authors of a manuscript.
 
 
+
+## The alt-title document setting (M)
+
+Using the alt text as the figure title is the most terse syntax, and may make
+sense if no alt text is needed. For example, use cases include:
+
+* Code samples and other text-based resources. Since these resources are
+  themselves text, it makes no sense to have different alt text.
+* Images, if the only output target is a format like print-ready PDF where
+  no alt text is needed.
+
+If alt text is used as the figure title, it is NOT also provided as alt text,
+since it would be very annoying to hear the same text spoken twice (once as the
+alt text and once as the figure title) when using a screen reader.
+
+The default value of `alt-title` is `all`, for compatibility with Markua 0.10
+and Leanpub Flavoured Markdown.
+
+These are the three choices, and what their values mean:
+
+* `all`: if no title is provided for a given resource, regardless of the
+resource type, remove the alt text and use it as the figure title instead. (This
+choice is the default, since it is the closest to the behavior of LFM and of
+Markua version 0.10. So, regardless of whether you like the choice, there are 12
+years worth of books on Leanpub which would be broken by a different default.)
+* `text`: if no title is provided for a given **text-based** resource (such as
+an external code sample), remove the alt text and use it as the figure title
+instead. However, if the resource is not purely text-based, such as an image or
+a video, do not remove the alt text to use it as the figure title, even if
+no figure title is provided. This is arguably the most sensible choice, as it
+strikes a balance between preserving compatibility with Markdown for
+non-text-based resources like images, while still providing a sensible default
+for text-based resources like code samples. Since Markdown does not define
+support for external text-based resources, there is no conflict here.
+* `none`: never remove the alt text to use it as the figure title, even for a
+text-based resource where no figure title is provided. (This is how Markdown
+behaves.)
+
+It is a debatable point whether using alt text as figure captions is a good
+idea.
+
+The main argument in favour of it is terseness: it is the most terse
+syntax, and the easiest to remember.
+
+A second argument is that in some cases such as external code samples and other
+text-based resources, there is no conceivable use for alt text, so the way to
+add a title with the least syntax is to use the spot for the alt text.
+
+A third argument in favour of it is aesthetics, since the alternative syntax
+in which a title is provided without any alt text looks like this:
+
+```
+![](someimage.png "A Figure Caption")
+```
+
+With this syntax, you have the `[]` for what looks like no real reason.
+
+Now, the actual reason is to have different alt text, of course. This is the
+main argument against the "alt text as figure caption" idea.
+
+The reason is subtle: by using the alt text also as the figure caption, this
+means that the alt text is not as good for people with visual disabilities as
+it should be. Alt text is supposed to be descriptive, whereas good figure
+captions are terse (and often witty). These are different requirements, so
+they should have different text.
+
+This is a very good argument, but as shown above, there are good
+counterarguments as well. So, the behavior of the alt text is determined by the
+`alt-title` document setting, and the default value is `all` (not `text` or
+`none`) for compatibility with over a decade of Leanpub books which do this:
+
+```
+![A Figure Caption](someimage.png)
+```
+
+However, even though the default value of `alt-title` is `all`, the conclusion
+I've come to is that the default behavior of Markdown is best for image
+resources, and alt text should be used for descriptions, not figure captions,
+in the case of images. If you're in this camp, the way to use alt
+text, and the best syntax when inserting an image, is to do the following:
+
+```
+![some descriptive alt text](someimage.png "A Figure Caption")
+```
+
+Finally, please note that **you can use that syntax even with `alt-title: all`**,
+since the explictly-defined title will take precedence over the alt text.
+
+To be clear, the `alt-title` document setting **NEVER** makes a figure caption
+be used as the alt text; it makes alt text be used as a figure caption
+**IF AND ONLY IF** no title attribute is provided, either in quotes or in the
+attribute list:
+
+```
+In these examples, the value of the alt-title document setting DOES NOT MATTER.
+
+![This is always alt text, since a title is provided](someimage.png "A Figure Caption")
+
+{title: "A Figure Caption"}
+![This is always alt text, if a caption is provided](someimage.png)
+
+{title: "This is ALWAYS a Figure Caption, Regardless of alt-title"}
+![](someimage.png)
+
+![](someimage.png "This is ALWAYS a Figure Caption, Regardless of alt-title")
+```
+
+Again, to be clear, the **ONLY** thing that the `alt-title` document setting
+affects is **WHETHER** the alt text is used as the figure caption instead of as
+alt text **IF THERE IS NO title ATTRIBUTE PROVIDED AS THE FIGURE CAPTION**:
+
+```
+In these examples, the value of the alt-title document setting DOES MATTER.
+
+![No title, so this will be the figure caption if alt-title is all](someimage.png)
+
+![This will NOT be the figure caption if alt-title is text or none](someimage.png)
+```
 
 ## Multiple document settings hashes are permitted (M)
 
@@ -3459,8 +3365,8 @@ following things:
 
 1. Attributes and attribute list support
 2. Behavior as a figure or a span based on the presence of title
-3. Support for a title to be provided from alt text based on the `alt-title`
-   document setting.
+3. Support for a title to be provided, either in the attribute list, in quotes
+   or from alt text based on the `alt-title` document setting.
 
 
 
@@ -3602,7 +3508,8 @@ being specified.
 All resources with `title` attributes are figures.
 
 This is true regardless of whether the title is specified in quotes, in an
-alt-title, or in an attribute list. In all cases, the resource is a figure.
+attribute list, or in the alt text (with the appropriate value of the
+`alt-title` document setting). In all cases, the resource is a figure.
 
 To be clear, if `alt-title` is `all` (the default), the following three image
 resources are all figures, and should look identical:
@@ -3644,7 +3551,8 @@ The title of a resource used as a figure can be specified in three ways:
 2. In quotes after the filename or URL of a local or web resource:
    `![](resource_path_or_url "Optional Figure Title")`
 3. In the alt text, assuming an appropriate value of the `alt-title` document
-   setting (described below)
+   setting. The `alt-title` document setting is discussed
+   [in great detail here](#the-alt-title-document-setting-m-).
 
 Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:
@@ -7178,7 +7086,9 @@ Recall that the resource syntax is as follows:
 
 Note that there is some flexibility in the title attribute. If the `alt-title`
 document setting is `text` or `all` (the default) , then the alt text can be
-used as the title as well. (If the `alt-title` is `none`, then it cannot.)
+used as the title as well. If the `alt-title` is `none`, then it cannot.
+The `alt-title` document setting is discussed
+[in great detail here](#the-alt-title-document-setting-m-).
 
 So, assuming a value of `text` or `all` for a document setting, this also works:
 
@@ -10373,7 +10283,7 @@ after
 
 Note that single line breaks within the definitions (the `<dd>` not `<dt>`)
 are handled the same way as single line breaks within paragraphs, and are
-subject to the `soft-breaks` document setting which defaults to `source` for
+subject to the `soft-breaks` document setting which defaults to `space` for
 compatibility with Markdown.
 
 ```````````````````````````````` example

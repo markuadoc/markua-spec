@@ -3508,7 +3508,8 @@ being specified.
 All resources with `title` attributes are figures.
 
 This is true regardless of whether the title is specified in quotes, in an
-alt-title, or in an attribute list. In all cases, the resource is a figure.
+attribute list, or in the alt text (with the appropriate value of the
+`alt-title` document setting). In all cases, the resource is a figure.
 
 To be clear, if `alt-title` is `all` (the default), the following three image
 resources are all figures, and should look identical:

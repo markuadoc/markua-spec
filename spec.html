@@ -181,9 +181,8 @@ $(document).ready(function() {
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
 <li><a href="#the-alt-title-document-setting-m-"><span class="number">4.3</span>The alt-title document setting (M)</a></li>
-<li><a href="#the-alt-title-document-setting-m-"><span class="number">4.4</span>The alt-title document setting (M)</a></li>
-<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.5</span>Multiple document settings hashes are permitted (M)</a></li>
-<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.6</span>Custom document settings are encouraged (M)</a></li>
+<li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
+<li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
 </ul>
 </li>
 <li><a href="#resources-m-"><span class="number">5</span>Resources (M)</a>
@@ -3478,76 +3477,6 @@ text, and the best syntax when inserting an image, is to do the following:</p>
 </code></pre>
 <p>Finally, please note that <strong>you can use that syntax even with <code>alt-title: all</code></strong>,
 since the explictly-defined title will take precedence over the alt text.</p>
-<h2 id="the-alt-title-document-setting-m-" class="definition">
-<span class="number">4.4</span>The alt-title document setting (M)
-</h2>
-<p>Using the alt text as the figure title is the most terse syntax, and may make
-sense if no alt text is needed. For example, use cases include:</p>
-<ul>
-<li>Code samples and other text-based resources. Since these resources are
-themselves text, it makes no sense to have different alt text.</li>
-<li>Images, if the only output target is a format like print-ready PDF where
-no alt text is needed.</li>
-</ul>
-<p>If alt text is used as the figure title, it is NOT also provided as alt text,
-since it would be very annoying to hear the same text spoken twice (once as the
-alt text and once as the figure title) when using a screen reader.</p>
-<p>The default value of <code>alt-title</code> is <code>all</code>, for compatibility with Markua 0.10
-and Leanpub Flavoured Markdown.</p>
-<p>These are the three choices, and what their values mean:</p>
-<ul>
-<li><code>all</code>: if no title is provided for a given resource, regardless of the
-resource type, remove the alt text and use it as the figure title instead. (This
-choice is the default, since it is the closest to the behavior of LFM and of
-Markua version 0.10. So, regardless of whether you like the choice, there are 12
-years worth of books on Leanpub which would be broken by a different default.)</li>
-<li><code>text</code>: if no title is provided for a given <strong>text-based</strong> resource (such as
-an external code sample), remove the alt text and use it as the figure title
-instead. However, if the resource is not purely text-based, such as an image or
-a video, do not remove the alt text to use it as the figure title, even if
-no figure title is provided. This is arguably the most sensible choice, as it
-strikes a balance between preserving compatibility with Markdown for
-non-text-based resources like images, while still providing a sensible default
-for text-based resources like code samples. Since Markdown does not define
-support for external text-based resources, there is no conflict here.</li>
-<li><code>none</code>: never remove the alt text to use it as the figure title, even for a
-text-based resource where no figure title is provided. (This is how Markdown
-behaves.)</li>
-</ul>
-<p>It is a debatable point whether using alt text as figure captions is a good
-idea.</p>
-<p>The main argument in favour of it is terseness: it is the most terse
-syntax, and the easiest to remember.</p>
-<p>A second argument is that in some cases such as external code samples and other
-text-based resources, there is no conceivable use for alt text, so the way to
-add a title with the least syntax is to use the spot for the alt text.</p>
-<p>A third argument in favour of it is aesthetics, since the alternative syntax
-in which a title is provided without any alt text looks like this:</p>
-<pre><code>![](someimage.png &quot;A Figure Caption&quot;)
-</code></pre>
-<p>With this syntax, you have the <code>[]</code> for what looks like no real reason.</p>
-<p>Now, the actual reason is to have different alt text, of course. This is the
-main argument against the “alt text as figure caption” idea.</p>
-<p>The reason is subtle: by using the alt text also as the figure caption, this
-means that the alt text is not as good for people with visual disabilities as
-it should be. Alt text is supposed to be descriptive, whereas good figure
-captions are terse (and often witty). These are different requirements, so
-they should have different text.</p>
-<p>This is a very good argument, but as shown above, there are good
-counterarguments as well. So, the behavior of the alt text is determined by the
-<code>alt-title</code> document setting, and the default value is <code>all</code> (not <code>text</code> or
-<code>none</code>) for compatibility with over a decade of Leanpub books which do this:</p>
-<pre><code>![A Figure Caption](someimage.png)
-</code></pre>
-<p>However, even though the default value of <code>alt-title</code> is <code>all</code>, the conclusion
-I’ve come to is that the default behavior of Markdown is best for image
-resources, and alt text should be used for descriptions, not figure captions,
-in the case of images. If you’re in this camp, the way to use alt
-text, and the best syntax when inserting an image, is to do the following:</p>
-<pre><code>![some descriptive alt text](someimage.png &quot;A Figure Caption&quot;)
-</code></pre>
-<p>Finally, please note that <strong>you can use that syntax even with <code>alt-title: all</code></strong>,
-since the explictly-defined title will take precedence over the alt text.</p>
 <p>To be clear, the <code>alt-title</code> document setting <strong>NEVER</strong> makes a figure caption
 be used as the alt text; it makes alt text be used as a figure caption
 <strong>IF AND ONLY IF</strong> no title attribute is provided, either in quotes or in the
@@ -3574,7 +3503,7 @@ alt text <strong>IF THERE IS NO title ATTRIBUTE PROVIDED AS THE FIGURE CAPTION</
 ![This will NOT be the figure caption if alt-title is text or none](someimage.png)
 </code></pre>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
-<span class="number">4.5</span>Multiple document settings hashes are permitted (M)
+<span class="number">4.4</span>Multiple document settings hashes are permitted (M)
 </h2>
 <p>A Markua document can define multiple document settings hashes.</p>
 <p>There must be at least one blank line between the end of the settings block and
@@ -3643,7 +3572,7 @@ the author will typically only see the manually-defined document settings
 block. So, the formatting of the automatically-generated document settings
 doesn’t really matter, and JSON is the pragmatic choice.</p>
 <h2 id="custom-document-settings-are-encouraged-m-" class="definition">
-<span class="number">4.6</span>Custom document settings are encouraged (M)
+<span class="number">4.5</span>Custom document settings are encouraged (M)
 </h2>
 <p>Finally, Markua Processors can also add their own document settings, just as
 Markua Processors can understand their own extension attributes.</p>

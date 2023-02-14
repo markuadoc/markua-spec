@@ -3476,6 +3476,31 @@ text, and the best syntax when inserting an image, is to do the following:</p>
 </code></pre>
 <p>Finally, please note that <strong>you can use that syntax even with <code>alt-title: all</code></strong>,
 since the explictly-defined title will take precedence over the alt text.</p>
+<p>To be clear, the <code>alt-title</code> document setting <strong>NEVER</strong> makes a figure caption
+be used as the alt text; it makes alt text be used as a figure caption
+<strong>IF AND ONLY IF</strong> no title attribute is provided, either in quotes or in the
+attribute list:</p>
+<pre><code>In these examples, the value of the alt-title document setting DOES NOT MATTER.
+
+![This is always alt text, since a title is provided](someimage.png &quot;A Figure Caption&quot;)
+
+{title: &quot;A Figure Caption&quot;}
+![This is always alt text, if a caption is provided](someimage.png)
+
+{title: &quot;This is ALWAYS a Figure Caption, Regardless of alt-title&quot;}
+![](someimage.png)
+
+![](someimage.png &quot;This is ALWAYS a Figure Caption, Regardless of alt-title&quot;)
+</code></pre>
+<p>Again, to be clear, the <strong>ONLY</strong> thing that the <code>alt-title</code> document setting
+affects is <strong>WHETHER</strong> the alt text is used as the figure caption instead of as
+alt text <strong>IF THERE IS NO title ATTRIBUTE PROVIDED AS THE FIGURE CAPTION</strong>:</p>
+<pre><code>In these examples, the value of the alt-title document setting DOES MATTER.
+
+![No title, so this will be the figure caption if alt-title is all](someimage.png)
+
+![This will NOT be the figure caption if alt-title is text or none](someimage.png)
+</code></pre>
 <h2 id="multiple-document-settings-hashes-are-permitted-m-" class="definition">
 <span class="number">4.4</span>Multiple document settings hashes are permitted (M)
 </h2>

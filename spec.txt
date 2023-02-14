@@ -390,7 +390,7 @@ can have their title specified in the alt text. There is also a value of
 title specified in the alt text. Finally, there is a value of `none`, which
 means that no resources can have their title specified in the alt text. The
 `alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting-m-).
+[in great detail here](#the-alt-title-document-setting-m-).
 
 # Document Settings
 
@@ -685,7 +685,7 @@ renamed to `title` in Markua 0.30 for consistency.
 Now, if you're like most Leanpub authors who wrote in Markua 0.10, chances
 are you did not use any `caption` attributes, but instead relied on the
 `alt-title` behavior. The `alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting-m-).
+[in great detail here](#the-alt-title-document-setting-m-).
 
 ### Preview the book
 
@@ -2938,7 +2938,7 @@ settings are tightly coupled.
 0.10 and Leanpub Flavoured Markdown by default. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
 resource is removed and used as the figure title instead. This setting is so
-important it is discussed in its own [section](#the-alt-title-setting) below.
+important it is discussed in its own [section](#the-alt-title-document-setting-m-) below.
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -3098,7 +3098,7 @@ the values mean:
 
 
 
-## The alt-title setting (M)
+## The alt-title document setting (M)
 
 Using the alt text as the figure title is the most terse syntax, and may make
 sense if no alt text is needed. For example, use cases include:
@@ -3520,7 +3520,7 @@ The title of a resource used as a figure can be specified in three ways:
    `![](resource_path_or_url "Optional Figure Title")`
 3. In the alt text, assuming an appropriate value of the `alt-title` document
    setting. The `alt-title` attribute is discussed
-   [in great detail here](#the-alt-title-setting).   
+   [in great detail here](#the-alt-title-document-setting-m-).
 
 Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:
@@ -7056,7 +7056,7 @@ Note that there is some flexibility in the title attribute. If the `alt-title`
 document setting is `text` or `all` (the default) , then the alt text can be
 used as the title as well. If the `alt-title` is `none`, then it cannot.
 The `alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting).
+[in great detail here](#the-alt-title-document-setting-m-).
 
 So, assuming a value of `text` or `all` for a document setting, this also works:
 

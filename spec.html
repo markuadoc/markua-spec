@@ -180,7 +180,7 @@ $(document).ready(function() {
 <ul>
 <li><a href="#document-settings-are-specified-in-simple-key-value-pairs-or-in-json-m-"><span class="number">4.1</span>Document settings are specified in simple key-value pairs or in JSON (M)</a></li>
 <li><a href="#the-standard-document-settings-m-"><span class="number">4.2</span>The standard document settings (M)</a></li>
-<li><a href="#the-alt-title-setting-m-"><span class="number">4.3</span>The alt-title setting (M)</a></li>
+<li><a href="#the-alt-title-document-setting-m-"><span class="number">4.3</span>The alt-title document setting (M)</a></li>
 <li><a href="#multiple-document-settings-hashes-are-permitted-m-"><span class="number">4.4</span>Multiple document settings hashes are permitted (M)</a></li>
 <li><a href="#custom-document-settings-are-encouraged-m-"><span class="number">4.5</span>Custom document settings are encouraged (M)</a></li>
 </ul>
@@ -615,7 +615,7 @@ can have their title specified in the alt text. There is also a value of
 title specified in the alt text. Finally, there is a value of `none`, which
 means that no resources can have their title specified in the alt text. The
 `alt-title` attribute is discussed
-[in great detail here](#the-alt-title-setting-m-).
+[in great detail here](#the-alt-title-document-setting-m--m-).
 
 # Document Settings
 
@@ -864,7 +864,7 @@ renamed to <code>title</code> in Markua 0.30 for consistency.</p>
 <p>Now, if you’re like most Leanpub authors who wrote in Markua 0.10, chances
 are you did not use any <code>caption</code> attributes, but instead relied on the
 <code>alt-title</code> behavior. The <code>alt-title</code> attribute is discussed
-<a href="#the-alt-title-setting-m-">in great detail here</a>.</p>
+<a href="#the-alt-title-document-setting-m--m-">in great detail here</a>.</p>
 <h3 id="preview-the-book" class="definition">
 <span class="number">1.11.2</span>Preview the book
 </h3>
@@ -3259,7 +3259,7 @@ settings are tightly coupled.</p>
 0.10 and Leanpub Flavoured Markdown by default. This setting controls whether,
 in the cases where there is no figure title explicitly set, the alt text on a
 resource is removed and used as the figure title instead. This setting is so
-important it is discussed in its own <a href="#the-alt-title-setting">section</a> below.</p>
+important it is discussed in its own <a href="#the-alt-title-document-setting-m-">section</a> below.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3406,8 +3406,8 @@ setting, the <code>two-space-hack</code> is not needed if the <code>soft-breaks<
 is <code>break</code>. However, even in this case, authors may wish for the two space
 hack to still function as it does in Markdown, in order to support existing
 Markdown text or in cases where there are multiple authors of a manuscript.</p>
-<h2 id="the-alt-title-setting-m-" class="definition">
-<span class="number">4.3</span>The alt-title setting (M)
+<h2 id="the-alt-title-document-setting-m-" class="definition">
+<span class="number">4.3</span>The alt-title document setting (M)
 </h2>
 <p>Using the alt text as the figure title is the most terse syntax, and may make
 sense if no alt text is needed. For example, use cases include:</p>
@@ -3744,7 +3744,8 @@ should also be a crosslink to the title inserted near the figure itself.</li>
 <li>In quotes after the filename or URL of a local or web resource:
 <code>![](resource_path_or_url &quot;Optional Figure Title&quot;)</code></li>
 <li>In the alt text, assuming an appropriate value of the <code>alt-title</code> document
-setting (described below)</li>
+setting. The <code>alt-title</code> attribute is discussed
+<a href="#the-alt-title-document-setting-m-">in great detail here</a>.</li>
 </ol>
 <p>Since inline resources do not use the bracket syntax, any titles must be added
 in the attribute list:</p>
@@ -6674,7 +6675,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -7113,7 +7114,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definitions">link reference definitions</a>
+<p>Several <a href="#link-reference-definition">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -7137,7 +7138,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
+<p><a href="#link-reference-definition">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -7832,7 +7833,9 @@ attribute list.</p>
 </code></pre>
 <p>Note that there is some flexibility in the title attribute. If the <code>alt-title</code>
 document setting is <code>text</code> or <code>all</code> (the default) , then the alt text can be
-used as the title as well. (If the <code>alt-title</code> is <code>none</code>, then it cannot.)</p>
+used as the title as well. If the <code>alt-title</code> is <code>none</code>, then it cannot.
+The <code>alt-title</code> attribute is discussed
+<a href="#the-alt-title-document-setting-m-">in great detail here</a>.</p>
 <p>So, assuming a value of <code>text</code> or <code>all</code> for a document setting, this also works:</p>
 <pre><code>![Canadian Census Data](census.tbl)
 </code></pre>
@@ -11652,7 +11655,7 @@ after
 </div>
 <p>Note that single line breaks within the definitions (the <code>&lt;dd&gt;</code> not <code>&lt;dt&gt;</code>)
 are handled the same way as single line breaks within paragraphs, and are
-subject to the <code>soft-breaks</code> document setting which defaults to <code>source</code> for
+subject to the <code>soft-breaks</code> document setting which defaults to <code>space</code> for
 compatibility with Markdown.</p>
 <div class="example" id="example-350">
 <div class="examplenum">
@@ -16652,7 +16655,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-585">
 <div class="examplenum">

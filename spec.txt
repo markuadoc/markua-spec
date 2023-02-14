@@ -3098,6 +3098,7 @@ the values mean:
   Markdown text or in cases where there are multiple authors of a manuscript.
 
 
+
 ## The alt-title document setting (M)
 
 Using the alt text as the figure title is the most terse syntax, and may make

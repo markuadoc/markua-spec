@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.26 (2023-02-14)</div>
+<div class="version">Version 0.30.27 (2023-02-21)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3235,7 +3235,6 @@ the defaults are in one list. These defaults are listed below.</p>
   alt-title: all
   default-code-language: guess
   figure-classes: all
-  figure-number-format: sequential
   include-page-numbers-in-references: true
   italicize-underlines: true
   lang: eng
@@ -3286,12 +3285,7 @@ of their <code>class</code> attribute. An example of this setting is:
 <code>figure-classes: equation, figure, image, listing</code>. Note that whether the
 figures are listed, either grouped by their class or together in one big list,
 is controlled by the <code>list-figures</code> setting. Note that the numbering of figures
-is controlled by the <code>number-figures</code> and <code>figure-number-format</code> settings.</p>
-<p><code>figure-number-format</code>
-: <code>sequential</code> or <code>chapter</code>. The format of figure numbers. The default is
-<code>sequential</code>, which is to number figures as 1, 2, 3, etc. The choice of
-<code>chapter</code> means to number figures sequentially within their chapter, e.g.
-1.1, 1.2, 2.1, 3.1, 3.2, etc.</p>
+is controlled by the <code>number-figures</code> setting.</p>
 <p><code>include-page-numbers-in-references</code>
 : <code>true</code> or <code>false</code>. The default value is <code>true</code>. When a smart crosslink to a
 figure reference is inserted with <code>#f</code>, this setting determines how the
@@ -3341,7 +3335,7 @@ List of Lemmas, List of Theorems, etc.</li>
 </ol>
 </li>
 </ul>
-<p>The combination of <code>list-figures: groups</code> and <code>figure-number-format: chapter</code>
+<p>The combination of <code>list-figures: groups</code> and <code>number-figures: chapter</code>
 produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
 Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
 document settings for books like computer programming books.</p>
@@ -3538,9 +3532,9 @@ added at the start of a book:</p>
 <pre><code>{
   alt-title: all
   figure-classes: equation, figure, image, listing
-  figure-number-format: chapter
   list-figures: groups
   number-chapters: true
+  number-figures: chapter
   soft-breaks: space
   two-space-hack: false
 }
@@ -3566,9 +3560,9 @@ document settings specified as JSON:</p>
     &quot;image&quot;,
     &quot;listing&quot;
   ],
-  &quot;figure-number-format&quot;: &quot;chapter&quot;,
   &quot;list-figures&quot;: &quot;groups&quot;,
   &quot;number-chapters&quot;: true,
+  &quot;number-figures&quot;: chapter,
   &quot;soft-breaks&quot;: &quot;space&quot;,
   &quot;two-space-hack&quot;: false
 }

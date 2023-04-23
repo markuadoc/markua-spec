@@ -9822,7 +9822,52 @@ numbered lists are:
 * The sixth level nested list is numbered using Roman numerals followed by a
   right parenthesis (`i)`, `ii)`, `iii)`, `iv)`, ...)
 
-  ### Nested Lists with Attributes
+```````````````````````````````` example
+before
+
+1. lorem
+   1. foo
+      1. apple
+         1. Gala
+         2. Spartan
+         3. McIntosh
+      2. orange
+      3. banana
+   2. bar
+   3. baz
+2. ipsum
+3. dolor
+
+after
+.
+<p>before</p>
+<ol>
+<li>lorem
+<ol type="a">
+<li>foo
+<ol type="i">
+<li>apple
+<ol>
+<li>Gala</li>
+<li>Spartan</li>
+<li>McIntosh</li>
+</ol>
+</li>
+<li>orange</li>
+<li>banana</li>
+</ol>
+</li>
+<li>bar</li>
+<li>baz</li>
+</ol>
+</li>
+<li>ipsum</li>
+<li>dolor</li>
+</ol>
+<p>after</p>
+````````````````````````````````
+
+### Nested Lists with Attributes
 
 Everything which has been said about attribute lists on lists applies to nested
 lists as well. This example shows a nested list of the form 1, a, i, * (the

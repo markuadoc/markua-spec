@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.27 (2023-02-21)</div>
+<div class="version">Version 0.30.28 (2023-04-23)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -11086,9 +11086,44 @@ after
 </code></pre>
 </div>
 </div>
-<h3 id="nested-lists-with-attributes" class="definition">
-<span class="number">8.5.3</span>Nested Lists with Attributes
+<h3 id="nested-lists-without-attributes" class="definition">
+<span class="number">8.5.3</span>Nested Lists without Attributes
 </h3>
+<p>By default, nested lists which do not have attributes function as though they
+have a <code>type</code> attribute whose value is determined by the context in which the
+list is found.</p>
+<p>By default, in order, the delimiter chosen from outermost to innermost nested
+numbered lists are:</p>
+<p><code>1., a., i., 1), a), i)</code></p>
+<ul>
+<li>
+<p>The first level numbered list is numbered using Arabic numerals followed by a
+period (<code>1.</code>, <code>2.</code>, <code>3.</code>, <code>4.</code>, …)</p>
+</li>
+<li>
+<p>The second level nested list is numbered using lowercase letters followed by a
+period (<code>a.</code>, <code>b.</code>, <code>c.</code>, <code>d.</code>, …)</p>
+</li>
+<li>
+<p>The third level nested list is numbered using Roman numerals followed by a
+period (<code>i.</code>, <code>ii.</code>, <code>iii.</code>, <code>iv.</code>, …)</p>
+</li>
+<li>
+<p>The fourth level numbered list is numbered using Arabic numerals followed by a
+right parenthesis (<code>1)</code>, <code>2)</code>, <code>3)</code>, <code>4)</code>, …)</p>
+</li>
+<li>
+<p>The fifth level nested list is numbered using lowercase letters followed by a
+right parenthesis (<code>a)</code>, <code>b)</code>, <code>c)</code>, <code>d)</code>, …)</p>
+</li>
+<li>
+<p>The sixth level nested list is numbered using Roman numerals followed by a
+right parenthesis (<code>i)</code>, <code>ii)</code>, <code>iii)</code>, <code>iv)</code>, …)</p>
+<h3 id="nested-lists-with-attributes" class="definition">
+<span class="number">8.5.4</span>Nested Lists with Attributes
+</h3>
+</li>
+</ul>
 <p>Everything which has been said about attribute lists on lists applies to nested
 lists as well. This example shows a nested list of the form 1, a, i, * (the
 final nested list is an unordered list, not an ordered list):</p>
@@ -11165,7 +11200,7 @@ after
 after
 </code></pre>
 <h3 id="lists-with-attributes-lazy-style" class="definition">
-<span class="number">8.5.4</span>Lists with Attributes: Lazy Style
+<span class="number">8.5.5</span>Lists with Attributes: Lazy Style
 </h3>
 <p>It is acceptable to just use the number of the first label, and rely on list
 behavior.</p>
@@ -11303,7 +11338,7 @@ after
 </div>
 </div>
 <h3 id="lists-with-attributes-redundant-style" class="definition">
-<span class="number">8.5.5</span>Lists with Attributes: Redundant Style
+<span class="number">8.5.6</span>Lists with Attributes: Redundant Style
 </h3>
 <p>This list will be numbered 1, 2, 3. This is just the default behavior made
 explicit:</p>
@@ -11334,7 +11369,7 @@ after
 </div>
 </div>
 <h3 id="lists-with-attributes-bad-style" class="definition">
-<span class="number">8.5.6</span>Lists with Attributes: Bad Style
+<span class="number">8.5.7</span>Lists with Attributes: Bad Style
 </h3>
 <p>This list will be numbered a, b, c, and will have the delimiter of <code>.</code>.
 The reason that this is bad style is that the specified delimiter and the

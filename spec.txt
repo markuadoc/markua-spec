@@ -9531,13 +9531,12 @@ is no naming conflict.
 : The type of the list delimiter to use, in output formats which allow custom
 list delimiters. Valid choices are `"."` or `")"`. The default value is inferred
 by the delimiter used: if you use periods `.` to delimit the list, then the
-delimiter is `.`; if you use closing parentheses `)` to delimit the list, then
-the delimiter is `)`. Specifying the delimiter in the attribute list overrides
-the inferred delimiter, but conflicting delimiters are bad style. Note that the
-delimiter does not need to be produced for all output formats. Specifically,
-HTML only supports using `.` for a list delimiter, so `)` is not supported in
-HTML. And since EPUB is based on HTML, EPUB should not be expected to support
-customizable delimiters. However, PDF and LaTeX are not subject to these
+delimiter is `.`; if you use closing parenthesis `)` to delimit the list, then
+the delimiter is `)`. Note that the use of a closing parenthesis as a delimiter
+is not supported in all output formats. Specifically, HTML only supports using
+`.` for a list delimiter, so `)` is not supported in HTML. And since EPUB is
+based on HTML, EPUB should not be expected to support the use of a right
+parenthesis for a delimiter. However, PDF and LaTeX are not subject to these
 limitations, and should support both `.` and `)` as list delimiters.
 
 The use of these attributes are shown in the following examples.
@@ -9866,6 +9865,32 @@ after
 </ol>
 <p>after</p>
 ````````````````````````````````
+
+This nested list will be rendered somewhat like this:
+
+~~~
+before
+
+1. lorem
+   a. foo
+        i. apple
+           1) Gala
+           2) Spartan
+           3) McIntosh
+       ii. orange
+      iii. banana
+   b. bar
+   c. baz
+2. ipsum
+3. dolor
+
+after
+~~~
+
+Note that as discussed earlier in section 8.5.1, Supported Attributes for
+Lists, the support of the right parenthesis for a delimiter varies based on
+the output format. In cases where it is not supported, a period will be used
+instead.
 
 ### Nested Lists with Attributes
 

@@ -2981,7 +2981,7 @@ setting has no effect on EPUB, which never includes page numbers in references
 : `true` or `false`. The default value is `true`. If `italicize-underlines` is
 `true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
 `false`, then `_this_` is underlined while `*this*` is italic. This is discussed
-[here](#underline-markua-extension-).
+[here](#underline-m-).
 
 `lang`
 : The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character

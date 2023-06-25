@@ -10852,7 +10852,7 @@ word (such as, say, example) just to avoid any ambiguity would be worse.
 Also note that nothing in this section defines what a Markua Processor must *do*
 with the given class of blurb, in terms of formatting. Leanpub, for example, uses
 it to add an appropriate icon from
-[Font Awesome](https://fortawesome.github.io/Font-Awesome/)
+[Font Awesome](https://fontawesome.com/search?m=free&o=r)
 at the left of the blurb, but other Markua Processors are free to do something
 different.
 

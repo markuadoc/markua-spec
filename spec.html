@@ -2996,7 +2996,7 @@ more back matter content
 {quiz-answers}
 </code></pre>
 <p>The following the insertion directives which can <strong>only</strong> occur in the front
-matter, which is everything before the <code>{mainmatter}</code> directive:</p>
+matter, which is everything <strong>before</strong> the <code>{mainmatter}</code> directive:</p>
 <ul>
 <li><code>{half-title}</code></li>
 <li><code>{series-title}</code></li>
@@ -3010,6 +3010,12 @@ matter, which is everything before the <code>{mainmatter}</code> directive:</p>
 </ul>
 <p>To be clear, these directives <strong>will not work</strong> if they are inserted <strong>after</strong>
 the <code>{mainmatter}</code> directive.</p>
+<p>Also, note that there is no more <code>{frontmatter}</code> directive in Markua. It
+existed in Markua 0.10, but it is redundant: front matter is just the stuff
+which is comes before a <code>{mainmatter}</code> directive. (You should remove it when
+migrating a Markua 0.10 document to the version of Markua specified here, but
+if you forget, don’t worry: Leanpub will ignore the <code>{frontmatter}</code> directive,
+and other Markua processors should do so as well.)</p>
 <p>Note that a Markua Processor can be smart about certain things, if it wants to.
 For example, it can choose to not number the pages before the Table of Contents,
 but to number the pages after the Table of Contents. Then, the author can use

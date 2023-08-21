@@ -2925,9 +2925,7 @@ the defaults are in one list. These defaults are listed below.
   italicize-underlines: true
   lang: eng
   list-figures: combined
-  number-chapters: true
   number-figures: sequential
-  number-sections: false
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   soft-breaks: space
@@ -3032,9 +3030,6 @@ produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
 Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
 document settings for books like computer programming books.
 
-`number-chapters`
-: `true` or `false`. Default `true`. Whether the chapters are numbered.
-
 `number-figures`
 : `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
 is `chapter` or `sequential`, then resources are numbered when they are inserted
@@ -3042,10 +3037,6 @@ as figures. If the value is `sequential`, you get numbering like `Figure 1`,
 `Figure 2`, `Figure 3`, etc. If the value is `chapter`, you get numbering like
 `Figure 1.1`, `Figure 1.2`, `Figure 4.1`, etc. If the value is `none`, figures
 are not numbered.
-
-`number-sections`
-: `true` or `false`. Default `false`. Whether the sections (and sub-sections)
-are numbered.
 
 `restart-endnote-numbering`
 : `true` or `false`. Default `true`. Whether the endnote numbering is restarted
@@ -3266,7 +3257,6 @@ added at the start of a book:
   alt-title: all
   figure-classes: equation, figure, image, listing
   list-figures: groups
-  number-chapters: true
   number-figures: chapter
   soft-breaks: space
   two-space-hack: false
@@ -3298,7 +3288,6 @@ document settings specified as JSON:
     "listing"
   ],
   "list-figures": "groups",
-  "number-chapters": true,
   "number-figures": chapter,
   "soft-breaks": "space",
   "two-space-hack": false
@@ -14767,8 +14756,8 @@ writers:
 1. A name which is often short and useful to reference.
 2. A number, if numbering is turned on.
 
-Whether the numbers exist is determined by the `number-chapters`, `number-parts`
-and `number-figures` document settings.
+For figures, whether the numbers exist is determined by the `number-figures`
+document settings. For chapters and sections, TODO.
 
 Whether page numbers are output in smart crosslinks in a PDF is determined by
 the `include-page-numbers-in-references` document setting, which defaults to

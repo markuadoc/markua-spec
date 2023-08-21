@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.30 (2023-06-25)</div>
+<div class="version">Version 0.30.32 (2023-08-21)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3247,9 +3247,7 @@ the defaults are in one list. These defaults are listed below.</p>
   italicize-underlines: true
   lang: eng
   list-figures: combined
-  number-chapters: true
   number-figures: sequential
-  number-sections: false
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   soft-breaks: space
@@ -3347,8 +3345,6 @@ List of Lemmas, List of Theorems, etc.</li>
 produces figures like Listing 1.1, Listing 1.2, Listing 4.1 and Image 1.1,
 Image 1.2, Image 2.1, Image 2.2, Image 4.1, etc. This is a good combination of
 document settings for books like computer programming books.</p>
-<p><code>number-chapters</code>
-: <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the chapters are numbered.</p>
 <p><code>number-figures</code>
 : <code>chapter</code>, <code>none</code>, or <code>sequential</code>. The default is <code>sequential</code>. If the value
 is <code>chapter</code> or <code>sequential</code>, then resources are numbered when they are inserted
@@ -3356,9 +3352,6 @@ as figures. If the value is <code>sequential</code>, you get numbering like <cod
 <code>Figure 2</code>, <code>Figure 3</code>, etc. If the value is <code>chapter</code>, you get numbering like
 <code>Figure 1.1</code>, <code>Figure 1.2</code>, <code>Figure 4.1</code>, etc. If the value is <code>none</code>, figures
 are not numbered.</p>
-<p><code>number-sections</code>
-: <code>true</code> or <code>false</code>. Default <code>false</code>. Whether the sections (and sub-sections)
-are numbered.</p>
 <p><code>restart-endnote-numbering</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the endnote numbering is restarted
 at the end of a chapter.</p>
@@ -3541,7 +3534,6 @@ added at the start of a book:</p>
   alt-title: all
   figure-classes: equation, figure, image, listing
   list-figures: groups
-  number-chapters: true
   number-figures: chapter
   soft-breaks: space
   two-space-hack: false
@@ -3569,7 +3561,6 @@ document settings specified as JSON:</p>
     &quot;listing&quot;
   ],
   &quot;list-figures&quot;: &quot;groups&quot;,
-  &quot;number-chapters&quot;: true,
   &quot;number-figures&quot;: chapter,
   &quot;soft-breaks&quot;: &quot;space&quot;,
   &quot;two-space-hack&quot;: false
@@ -17416,8 +17407,8 @@ writers:</p>
 <li>A name which is often short and useful to reference.</li>
 <li>A number, if numbering is turned on.</li>
 </ol>
-<p>Whether the numbers exist is determined by the <code>number-chapters</code>, <code>number-parts</code>
-and <code>number-figures</code> document settings.</p>
+<p>For figures, whether the numbers exist is determined by the <code>number-figures</code>
+document settings. For chapters and sections, TODO.</p>
 <p>Whether page numbers are output in smart crosslinks in a PDF is determined by
 the <code>include-page-numbers-in-references</code> document setting, which defaults to
 <code>true</code>.  EPUB does not support outputting page numbers in references,

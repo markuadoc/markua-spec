@@ -2683,8 +2683,8 @@ more back matter content
 {quiz-answers}
 ~~~
 
-The following the insertion directives which can occur in the front matter,
-which is everything before the `{mainmatter}` directive:
+The following the insertion directives which can **only** occur in the front
+matter, which is everything before the `{mainmatter}` directive:
 
 * `{half-title}`
 * `{series-title}`
@@ -2695,6 +2695,9 @@ which is everything before the `{mainmatter}` directive:
 * `{toc}` (for the Table of Contents)
 * `{figures}` (for the List of Figures)
 * `{tables}` (for the List of Tables)
+
+To be clear, these directives **will not work** if they are inserted **after**
+the `{mainmatter}` directive.
 
 Note that a Markua Processor can be smart about certain things, if it wants to.
 For example, it can choose to not number the pages before the Table of Contents,

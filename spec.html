@@ -2995,8 +2995,8 @@ more back matter content
 
 {quiz-answers}
 </code></pre>
-<p>The following the insertion directives which can occur in the front matter,
-which is everything before the <code>{mainmatter}</code> directive:</p>
+<p>The following the insertion directives which can <strong>only</strong> occur in the front
+matter, which is everything before the <code>{mainmatter}</code> directive:</p>
 <ul>
 <li><code>{half-title}</code></li>
 <li><code>{series-title}</code></li>
@@ -3008,6 +3008,8 @@ which is everything before the <code>{mainmatter}</code> directive:</p>
 <li><code>{figures}</code> (for the List of Figures)</li>
 <li><code>{tables}</code> (for the List of Tables)</li>
 </ul>
+<p>To be clear, these directives <strong>will not work</strong> if they are inserted <strong>after</strong>
+the <code>{mainmatter}</code> directive.</p>
 <p>Note that a Markua Processor can be smart about certain things, if it wants to.
 For example, it can choose to not number the pages before the Table of Contents,
 but to number the pages after the Table of Contents. Then, the author can use

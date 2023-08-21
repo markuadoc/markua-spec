@@ -2684,7 +2684,7 @@ more back matter content
 ~~~
 
 The following the insertion directives which can **only** occur in the front
-matter, which is everything before the `{mainmatter}` directive:
+matter, which is everything **before** the `{mainmatter}` directive:
 
 * `{half-title}`
 * `{series-title}`
@@ -2698,6 +2698,13 @@ matter, which is everything before the `{mainmatter}` directive:
 
 To be clear, these directives **will not work** if they are inserted **after**
 the `{mainmatter}` directive.
+
+Also, note that there is no more `{frontmatter}` directive in Markua. It
+existed in Markua 0.10, but it is redundant: front matter is just the stuff
+which is comes before a `{mainmatter}` directive. (You should remove it when
+migrating a Markua 0.10 document to the version of Markua specified here, but
+if you forget, don't worry: Leanpub will ignore the `{frontmatter}` directive,
+and other Markua processors should do so as well.)
 
 Note that a Markua Processor can be smart about certain things, if it wants to.
 For example, it can choose to not number the pages before the Table of Contents,

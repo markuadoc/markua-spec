@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.32 (2023-08-21)</div>
+<div class="version">Version 0.30.33 (2023-08-27)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3241,6 +3241,7 @@ are in a flat list, as JSON, or both.</p>
 the defaults are in one list. These defaults are listed below.</p>
 <pre><code>{
   alt-title: all
+  chapter-number-format: name
   default-code-language: guess
   figure-classes: all
   include-page-numbers-in-references: true
@@ -3248,9 +3249,14 @@ the defaults are in one list. These defaults are listed below.</p>
   lang: eng
   list-figures: combined
   number-figures: sequential
+  part-number-format: name
   restart-endnote-numbering: true
   restart-footnote-numbering: true
+  section-number-format: name
   soft-breaks: space
+  toc-chapter-number-format: name
+  toc-part-number-format: name
+  toc-section-number-format: name
   two-space-hack: true
 }
 </code></pre>
@@ -3266,6 +3272,13 @@ in the cases where there is no figure title explicitly set, the alt text on a
 resource is removed and used as the figure title instead. This setting is so
 important it is discussed in its own <a href="#the-alt-title-document-setting-m-">section</a>
 below.</p>
+<p><code>chapter-number-format</code>
+: <code>category_number_name</code> (e.g. Chapter 1: The Chapter Name), <code>category_number</code>
+(e.g. Chapter 1), <code>number_name</code> (e.g. 1 The Chapter Name), <code>number</code> (e.g. 1)
+or <code>name</code>  (e.g. The Chapter Name). The default is <code>name</code>. This determines the
+format of the chapter heading in the body of the book. The format of the
+chapter heading in the table of contents is set by the related
+<code>toc-chapter-number-format</code> setting.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.
@@ -3352,12 +3365,25 @@ as figures. If the value is <code>sequential</code>, you get numbering like <cod
 <code>Figure 2</code>, <code>Figure 3</code>, etc. If the value is <code>chapter</code>, you get numbering like
 <code>Figure 1.1</code>, <code>Figure 1.2</code>, <code>Figure 4.1</code>, etc. If the value is <code>none</code>, figures
 are not numbered.</p>
+<p><code>part-number-format</code>
+: <code>category_number_name</code> (e.g. Part 1: The Part Name), <code>category_number</code>
+(e.g. Part 1), <code>number_name</code> (e.g. 1 The Part Name), <code>number</code> (e.g. 1)
+or <code>name</code>  (e.g. The Part Name). The default is <code>name</code>. This determines the
+format of the part heading in the body of the book. The format of the
+part heading in the table of contents is set by the related
+<code>toc-part-number-format</code> setting.</p>
 <p><code>restart-endnote-numbering</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the endnote numbering is restarted
 at the end of a chapter.</p>
 <p><code>restart-footnote-numbering</code>
 : <code>true</code> or <code>false</code>. Default <code>true</code>. Whether the footnote numbering is restarted
 at the end of a chapter.</p>
+<p><code>section-number-format</code>
+: <code>number_name</code> (e.g. 1.1 The Section Name), <code>number</code> (e.g. 1.1) or <code>name</code>
+(e.g. The Section Name). The default is <code>name</code>. This determines the format of
+the section heading in the body of the book. The format of the section heading
+in the table of contents is set by the related <code>toc-section-number-format</code>
+setting.</p>
 <p><code>soft-breaks</code>
 : <code>break</code> or <code>space</code>. The default is <code>space</code>, for compatibility with
 Markdown. <strong>If you want the behavior of Markua 0.10, you need to choose
@@ -3388,6 +3414,26 @@ in which all single newlines function as though they were using the
 the “two space hack” is enabled in a Markua document is determined by the
 value of the <code>two-space-hack</code> setting, discussed below.)</li>
 </ul>
+<p><code>toc-chapter-number-format</code>
+: <code>category_number_name</code> (e.g. Chapter 1: The Chapter Name), <code>category_number</code>
+(e.g. Chapter 1), <code>number_name</code> (e.g. 1. The Chapter Name), <code>number</code> (e.g. 1)
+or <code>name</code>  (e.g. The Chapter Name). The default is <code>name</code>. This determines the
+format of the chapter heading in the table of contents of the book. The format
+of the chapter heading in the body is set by the related
+<code>chapter-number-format</code> setting.</p>
+<p><code>toc-part-number-format</code>
+: <code>category_number_name</code> (e.g. Part I: The Part Name), <code>category_number</code>
+(e.g. Part 1), <code>number_name</code> (e.g. I. The Part Name), <code>number</code> (e.g. I)
+or <code>name</code>  (e.g. The Part Name). The default is <code>name</code>. This determines the
+format of the part heading in the body of the book. The format of the
+part heading in the table of contents is set by the related
+<code>toc-part-number-format</code> setting.</p>
+<p><code>toc-section-number-format</code>
+: <code>number_name</code> (e.g. 1.1 The Section Name), <code>number</code> (e.g. 1.1) or <code>name</code>
+(e.g. The Section Name). The default is <code>name</code>. This determines the format of
+the section heading in the body of the book. The format of the section heading
+in the table of contents is set by the related <code>toc-section-number-format</code>
+setting.</p>
 <p><code>two-space-hack</code>
 : <code>true</code> or <code>false</code>. The default is <code>true</code>, for compatibility with Markdown.
 If <code>true</code>, adding two spaces at the end of a line forces a hard line break.

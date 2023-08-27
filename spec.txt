@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.30.32'
-date: '2023-08-21'
+version: '0.30.33'
+date: '2023-08-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2919,6 +2919,7 @@ the defaults are in one list. These defaults are listed below.
 ```
 {
   alt-title: all
+  chapter-number-format: name
   default-code-language: guess
   figure-classes: all
   include-page-numbers-in-references: true
@@ -2926,9 +2927,14 @@ the defaults are in one list. These defaults are listed below.
   lang: eng
   list-figures: combined
   number-figures: sequential
+  part-number-format: name
   restart-endnote-numbering: true
   restart-footnote-numbering: true
+  section-number-format: name
   soft-breaks: space
+  toc-chapter-number-format: name
+  toc-part-number-format: name
+  toc-section-number-format: name
   two-space-hack: true
 }
 ```
@@ -2947,6 +2953,14 @@ in the cases where there is no figure title explicitly set, the alt text on a
 resource is removed and used as the figure title instead. This setting is so
 important it is discussed in its own [section](#the-alt-title-document-setting-m-)
 below.
+
+`chapter-number-format`
+: `category_number_name` (e.g. Chapter 1: The Chapter Name), `category_number`
+(e.g. Chapter 1), `number_name` (e.g. 1 The Chapter Name), `number` (e.g. 1)
+or `name`  (e.g. The Chapter Name). The default is `name`. This determines the
+format of the chapter heading in the body of the book. The format of the
+chapter heading in the table of contents is set by the related
+`toc-chapter-number-format` setting.
 
 `default-code-language`
 : The default language that code which is a local resource, web resource or
@@ -3038,6 +3052,14 @@ as figures. If the value is `sequential`, you get numbering like `Figure 1`,
 `Figure 1.1`, `Figure 1.2`, `Figure 4.1`, etc. If the value is `none`, figures
 are not numbered.
 
+`part-number-format`
+: `category_number_name` (e.g. Part 1: The Part Name), `category_number`
+(e.g. Part 1), `number_name` (e.g. 1 The Part Name), `number` (e.g. 1)
+or `name`  (e.g. The Part Name). The default is `name`. This determines the
+format of the part heading in the body of the book. The format of the
+part heading in the table of contents is set by the related
+`toc-part-number-format` setting.
+
 `restart-endnote-numbering`
 : `true` or `false`. Default `true`. Whether the endnote numbering is restarted
 at the end of a chapter.
@@ -3045,6 +3067,13 @@ at the end of a chapter.
 `restart-footnote-numbering`
 : `true` or `false`. Default `true`. Whether the footnote numbering is restarted
 at the end of a chapter.
+
+`section-number-format`
+: `number_name` (e.g. 1.1 The Section Name), `number` (e.g. 1.1) or `name`
+(e.g. The Section Name). The default is `name`. This determines the format of
+the section heading in the body of the book. The format of the section heading
+in the table of contents is set by the related `toc-section-number-format`
+setting.
 
 `soft-breaks`
 : `break` or `space`. The default is `space`, for compatibility with
@@ -3075,6 +3104,29 @@ the values mean:
     "two space hack" to produce a hard line break in normal Markdown. (Whether
     the "two space hack" is enabled in a Markua document is determined by the
     value of the `two-space-hack` setting, discussed below.)
+
+`toc-chapter-number-format`
+: `category_number_name` (e.g. Chapter 1: The Chapter Name), `category_number`
+(e.g. Chapter 1), `number_name` (e.g. 1. The Chapter Name), `number` (e.g. 1)
+or `name`  (e.g. The Chapter Name). The default is `name`. This determines the
+format of the chapter heading in the table of contents of the book. The format
+of the chapter heading in the body is set by the related
+`chapter-number-format` setting.
+
+`toc-part-number-format`
+: `category_number_name` (e.g. Part I: The Part Name), `category_number`
+(e.g. Part 1), `number_name` (e.g. I. The Part Name), `number` (e.g. I)
+or `name`  (e.g. The Part Name). The default is `name`. This determines the
+format of the part heading in the body of the book. The format of the
+part heading in the table of contents is set by the related
+`toc-part-number-format` setting.
+
+`toc-section-number-format`
+: `number_name` (e.g. 1.1 The Section Name), `number` (e.g. 1.1) or `name`
+(e.g. The Section Name). The default is `name`. This determines the format of
+the section heading in the body of the book. The format of the section heading
+in the table of contents is set by the related `toc-section-number-format`
+setting.
 
 `two-space-hack`
 : `true` or `false`. The default is `true`, for compatibility with Markdown.

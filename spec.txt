@@ -412,7 +412,7 @@ and this will be on the next line.
 ```
 
 This `soft-breaks` setting is so important it is discussed in its own
-[section](#the-soft-breaks-document-setting-m-) below.
+section below.
 
 # Code Samples
 
@@ -3080,8 +3080,13 @@ setting.
 
 `soft-breaks`
 : `break` or `space`. The default is `space`, for compatibility with
-Markdown. This setting is so important it is discussed in its own
-[section](#the-soft-breaks-document-setting-m-) below.
+Markdown. This setting determines the behavior of single newlines (i.e. a
+newline which is not followed by another newline) in the output. With `space`,
+single newlines in the source essentially produce a single space in the output
+(like Markdown and Leanpub Flavoured Markdown). With `break`, single newlines
+inside paragraphs in the Markua document essentially produce newlines in the
+output (like Markua 0.10). This setting is so important it is discussed in its
+own [section](#the-soft-breaks-document-setting-m-) below.
 
 `toc-chapter-number-format`
 : `category_number_name` (e.g. Chapter 1: The Chapter Name), `category_number`

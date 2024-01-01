@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.33 (2023-08-27)</div>
+<div class="version">Version 0.30.34 (2024-01-01)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3942,6 +3942,9 @@ end
 <h2 id="resource-figure-numbering-m-" class="definition">
 <span class="number">5.4</span>Resource figure numbering (M)
 </h2>
+<p><strong>NOTE FOR LEANPUB AUTHORS: The <code>numbered</code> attribute is not implemented in
+Leanpub yet. We plan to add this in January 2024, after which point this
+note will be removed.</strong></p>
 <p>When a resource has a title, it is a figure.</p>
 <p>By default, figures are numbered. This numbering is controlled by the
 <code>number-figures</code> document setting.</p>
@@ -3982,9 +3985,6 @@ number.</li>
 is not a full-fledged figure which is listed in a list of figures and can be
 easily referred to with smart crosslinks, but it’s also not not-a-figure: it
 is laid out like a figure, and can have a caption, etc.</p>
-<p><strong>NOTE FOR LEANPUB AUTHORS: The <code>numbered</code> attribute is not implemented in
-Leanpub yet. We plan to add this in January 2024, after which point this
-note will be removed.</strong></p>
 <h2 id="resource-alt-text-m-" class="definition">
 <span class="number">5.5</span>Resource alt text (M)
 </h2>

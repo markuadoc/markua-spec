@@ -3575,7 +3575,7 @@ attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
 figures by classes. **Note that there is no need to set a `class` of `figure`
 on a resource. That would be too verbose and error-prone. Instead, all
-resources with titles are treated as figures.**. This is discussed extensively
+resources with titles are treated as figures.** This is discussed extensively
 later.
 
 `format`
@@ -3774,6 +3774,63 @@ end
 ```
 
 A resource with an undefined class has no title and is not a figure.
+
+## Resource figure numbering (M)
+
+When a resource has a title, it is a figure.
+
+By default, figures are numbered. This numbering is controlled by the
+`number-figures` document setting.
+
+`number-figures`
+: `chapter`, `none`, or `sequential`. The default is `sequential`. If the value
+is `chapter` or `sequential`, then resources are numbered when they are inserted
+as figures. If the value is `sequential`, you get numbering like `Figure 1`,
+`Figure 2`, `Figure 3`, etc. If the value is `chapter`, you get numbering like
+`Figure 1.1`, `Figure 1.2`, `Figure 4.1`, etc. If the value is `none`, figures
+are not numbered.
+
+If a resource does not have a title, it is not a figure, and it is not
+numbered.
+
+If you do not want to number any of your figures, you can use the `none`
+setting of the `number-figures` document setting to have none of them
+numbered.
+
+However, sometimes you may wish to number most of your figures, but not all of
+them. In other words, you may wish to give a resource a title (making it a
+figure), but not have that resource be numbered like a figure.
+
+To do this, you can use the `numbered: false` attribute.
+
+`numbered`
+: `true` or `false`. The default is `true`. This controls whether a particular
+resource is numbered. Note that if `number-figures` is `none` then no resources
+are numbered. The `numbered` attribute does not override this setting.
+
+In other words, the `numbered: false` can force a figure to not be numbered (if
+figures are being numbered), but `numbered: true` cannot force a figure to be
+numbered if figures are not being numbered.
+
+There is no reason to ever explicitly set `numbered: true`, since this is the
+default. The `numbered` attribute only exists so that it can be overridden to
+`false`, to explicitly turn off figure numbering for a particular figure.
+
+Finally, if `numbered` is `false` on a figure, then there are the following
+consequences:
+
+1. The figure will not show up in any list of figures, if there is one.
+2. You cannot make certain kinds of smart crosslinks to it, since it has no
+   number.
+
+A resource without a number but with a title exists in a kind of limbo: it
+is not a full-fledged figure which is listed in a list of figures and can be
+easily referred to with smart crosslinks, but it's also not not-a-figure: it
+is laid out like a figure, and can have a caption, etc.
+
+**NOTE FOR LEANPUB AUTHORS: The `numbered` attribute is not implemented in
+Leanpub yet. We plan to add this in January 2024, after which point this
+note will be removed.**
 
 ## Resource alt text (M)
 

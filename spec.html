@@ -191,11 +191,12 @@ $(document).ready(function() {
 <li><a href="#resource-attributes-m-"><span class="number">5.1</span>Resource attributes (M)</a></li>
 <li><a href="#common-resource-attributes-m-"><span class="number">5.2</span>Common resource attributes (M)</a></li>
 <li><a href="#resource-titles-make-figures-m-"><span class="number">5.3</span>Resource titles make figures (M)</a></li>
-<li><a href="#resource-alt-text-m-"><span class="number">5.4</span>Resource alt text (M)</a></li>
-<li><a href="#resource-types-m-"><span class="number">5.5</span>Resource types (M)</a></li>
-<li><a href="#resource-formats-m-"><span class="number">5.6</span>Resource formats (M)</a></li>
-<li><a href="#resource-classes-m-"><span class="number">5.7</span>Resource classes (M)</a></li>
-<li><a href="#resource-locations-m-"><span class="number">5.8</span>Resource locations (M)</a></li>
+<li><a href="#resource-figure-numbering-m-"><span class="number">5.4</span>Resource figure numbering (M)</a></li>
+<li><a href="#resource-alt-text-m-"><span class="number">5.5</span>Resource alt text (M)</a></li>
+<li><a href="#resource-types-m-"><span class="number">5.6</span>Resource types (M)</a></li>
+<li><a href="#resource-formats-m-"><span class="number">5.7</span>Resource formats (M)</a></li>
+<li><a href="#resource-classes-m-"><span class="number">5.8</span>Resource classes (M)</a></li>
+<li><a href="#resource-locations-m-"><span class="number">5.9</span>Resource locations (M)</a></li>
 </ul>
 </li>
 <li><a href="#blocks-and-inlines"><span class="number">6</span>Blocks and inlines</a>
@@ -1733,7 +1734,7 @@ raw HTML:</p>
 </div>
 </div>
 <p>But they work in all other contexts, including URLs and link titles,
-link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-block">fenced code blocks</a>:</p>
+link references, and <a href="#info-string">info strings</a> in <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
 <div class="example" id="example-22">
 <div class="examplenum">
 <a href="#example-22">Example 22</a>
@@ -3791,7 +3792,7 @@ attribute. When used on a resource, this is the class of the resource. This can
 be used for styling, and it can also be used by Markua Processors which group
 figures by classes. <strong>Note that there is no need to set a <code>class</code> of <code>figure</code>
 on a resource. That would be too verbose and error-prone. Instead, all
-resources with titles are treated as figures.</strong>. This is discussed extensively
+resources with titles are treated as figures.</strong> This is discussed extensively
 later.</p>
 <p><code>format</code>
 : This is the resource format. Different resource types have different legal
@@ -3938,8 +3939,54 @@ else
 end
 </code></pre>
 <p>A resource with an undefined class has no title and is not a figure.</p>
+<h2 id="resource-figure-numbering-m-" class="definition">
+<span class="number">5.4</span>Resource figure numbering (M)
+</h2>
+<p>When a resource has a title, it is a figure.</p>
+<p>By default, figures are numbered. This numbering is controlled by the
+<code>number-figures</code> document setting.</p>
+<p><code>number-figures</code>
+: <code>chapter</code>, <code>none</code>, or <code>sequential</code>. The default is <code>sequential</code>. If the value
+is <code>chapter</code> or <code>sequential</code>, then resources are numbered when they are inserted
+as figures. If the value is <code>sequential</code>, you get numbering like <code>Figure 1</code>,
+<code>Figure 2</code>, <code>Figure 3</code>, etc. If the value is <code>chapter</code>, you get numbering like
+<code>Figure 1.1</code>, <code>Figure 1.2</code>, <code>Figure 4.1</code>, etc. If the value is <code>none</code>, figures
+are not numbered.</p>
+<p>If a resource does not have a title, it is not a figure, and it is not
+numbered.</p>
+<p>If you do not want to number any of your figures, you can use the <code>none</code>
+setting of the <code>number-figures</code> document setting to have none of them
+numbered.</p>
+<p>However, sometimes you may wish to number most of your figures, but not all of
+them. In other words, you may wish to give a resource a title (making it a
+figure), but not have that resource be numbered like a figure.</p>
+<p>To do this, you can use the <code>numbered: false</code> attribute.</p>
+<p><code>numbered</code>
+: <code>true</code> or <code>false</code>. The default is <code>true</code>. This controls whether a particular
+resource is numbered. Note that if <code>number-figures</code> is <code>none</code> then no resources
+are numbered. The <code>numbered</code> attribute does not override this setting.</p>
+<p>In other words, the <code>numbered: false</code> can force a figure to not be numbered (if
+figures are being numbered), but <code>numbered: true</code> cannot force a figure to be
+numbered if figures are not being numbered.</p>
+<p>There is no reason to ever explicitly set <code>numbered: true</code>, since this is the
+default. The <code>numbered</code> attribute only exists so that it can be overridden to
+<code>false</code>, to explicitly turn off figure numbering for a particular figure.</p>
+<p>Finally, if <code>numbered</code> is <code>false</code> on a figure, then there are the following
+consequences:</p>
+<ol>
+<li>The figure will not show up in any list of figures, if there is one.</li>
+<li>You cannot make certain kinds of smart crosslinks to it, since it has no
+number.</li>
+</ol>
+<p>A resource without a number but with a title exists in a kind of limbo: it
+is not a full-fledged figure which is listed in a list of figures and can be
+easily referred to with smart crosslinks, but it’s also not not-a-figure: it
+is laid out like a figure, and can have a caption, etc.</p>
+<p><strong>NOTE FOR LEANPUB AUTHORS: The <code>numbered</code> attribute is not implemented in
+Leanpub yet. We plan to add this in January 2024, after which point this
+note will be removed.</strong></p>
 <h2 id="resource-alt-text-m-" class="definition">
-<span class="number">5.4</span>Resource alt text (M)
+<span class="number">5.5</span>Resource alt text (M)
 </h2>
 <p>A resource can have alt text. The resource location does not matter: local, web
 and inline resources all support alt text.</p>
@@ -3979,7 +4026,7 @@ are some examples of resources with both alt text and a figure title:</p>
 ```
 </code></pre>
 <h2 id="resource-types-m-" class="definition">
-<span class="number">5.5</span>Resource types (M)
+<span class="number">5.6</span>Resource types (M)
 </h2>
 <p>The type of a resource can be specified by the <code>type</code> attribute, or inferred
 from the format of the resource.</p>
@@ -4008,7 +4055,7 @@ instead, they are parsed according to the rules that govern the parsing of
 resources.</p>
 <p>All of these types of resources are discussed later.</p>
 <h2 id="resource-formats-m-" class="definition">
-<span class="number">5.6</span>Resource formats (M)
+<span class="number">5.7</span>Resource formats (M)
 </h2>
 <p>The <strong>Format</strong> is the format of the resource. It can be specified with the
 <code>type</code> attribute, or inferred from the file extension (discussed below).
@@ -4044,7 +4091,7 @@ been inferred by the Markua Processor based on the file extension of the
 resource. This is done by specifying a type and/or format in the attribute list
 of the resource.</p>
 <h2 id="resource-classes-m-" class="definition">
-<span class="number">5.7</span>Resource classes (M)
+<span class="number">5.8</span>Resource classes (M)
 </h2>
 <p>As shown above, when a resource is inserted with a title, it is treated as a
 figure. Figures can show up in one of the lists of figures which can be
@@ -4054,7 +4101,7 @@ in groups (if the <code>list-figures</code> document setting is <code>groups</co
 to group by the <code>type</code> of the resource. However, the <code>class</code> attribute
 can be used to override which list the resource appears in.</p>
 <h2 id="resource-locations-m-" class="definition">
-<span class="number">5.8</span>Resource locations (M)
+<span class="number">5.9</span>Resource locations (M)
 </h2>
 <p>The <strong>Location</strong> is the location of the resource, when encountered by the
 Markua Processor. There is no attribute for this; it is inferred from the
@@ -4077,7 +4124,7 @@ Markua document is being written.</p>
 <p>Inline Resource
 : The resource is defined right in the body of a Markua document.</p>
 <h3 id="local-resources" class="definition">
-<span class="number">5.8.1</span>Local resources
+<span class="number">5.9.1</span>Local resources
 </h3>
 <p>If local resources are used, all local resources must be stored inside a
 <code>resources</code> directory, or one of its subdirectories. The <code>resources</code> directory
@@ -4119,13 +4166,13 @@ directory (e.g. as <code>images/foo.png</code>), then the zip file containing an
 should contain a <code>resources</code> directory which contains an <code>images</code> subdirectory
 with the images.</p>
 <h3 id="web-resources" class="definition">
-<span class="number">5.8.2</span>Web resources
+<span class="number">5.9.2</span>Web resources
 </h3>
 <p>If web resources are supported, both <code>http:</code> and <code>https:</code> resources should be
 supported.</p>
 <p>Web resources are identified by the absolute URL of the resource on the internet.</p>
 <h3 id="inline-resources" class="definition">
-<span class="number">5.8.3</span>Inline resources
+<span class="number">5.9.3</span>Inline resources
 </h3>
 <p>Certain types of resources can be inserted inline in a Markua document:</p>
 <ul>
@@ -6776,7 +6823,7 @@ No further character may occur.</p>
 <p>A <a href="#link-reference-definition">link reference definition</a>
 does not correspond to a structural element of a document.  Instead, it
 defines a label which can be used in <a href="#reference-link">reference links</a>
-and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definition">Link
+and reference-style <a href="#images">images</a> elsewhere in the document.  <a href="#link-reference-definitions">Link
 reference definitions</a> can come either before or after the links that use
 them.</p>
 <div class="example" id="example-170">
@@ -7215,7 +7262,7 @@ bar
 </code></pre>
 </div>
 </div>
-<p>Several <a href="#link-reference-definition">link reference definitions</a>
+<p>Several <a href="#link-reference-definitions">link reference definitions</a>
 can occur one after another, without intervening blank lines.</p>
 <div class="example" id="example-195">
 <div class="examplenum">
@@ -7239,7 +7286,7 @@ can occur one after another, without intervening blank lines.</p>
 </code></pre>
 </div>
 </div>
-<p><a href="#link-reference-definition">Link reference definitions</a> can occur
+<p><a href="#link-reference-definitions">Link reference definitions</a> can occur
 inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:</p>
@@ -7414,7 +7461,7 @@ bbb&lt;/p&gt;
 <h2 id="blank-lines" class="definition">
 <span class="number">7.11</span>Blank lines
 </h2>
-<p><a href="#blank-lines">Blank lines</a> between block-level elements are ignored,
+<p><a href="#blank-line">Blank lines</a> between block-level elements are ignored,
 except for the role they play in determining whether a <a href="#list">list</a>
 is <a href="#tight">tight</a> or <a href="#loose">loose</a>.</p>
 <p>Blank lines at the beginning and end of the document are also ignored.</p>
@@ -16852,7 +16899,7 @@ links, it is harmless to allow space between the link text and
 link label; but once shortcut references are introduced, it is
 too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
-<p>When there are multiple matching <a href="#link-reference-definition">link reference definitions</a>,
+<p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
 <div class="example" id="example-586">
 <div class="examplenum">

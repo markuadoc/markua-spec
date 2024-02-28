@@ -2626,6 +2626,10 @@ language. All document settings have default values; the default value of the
 
 Document settings are discussed [here](#document-settings-m-).
 
+For a example of the lang document setting in action, see the section “A
+detailed example” below.
+
+
 ### The `lang` directive
 
 The `lang` directive sets a new default language. This will be the default

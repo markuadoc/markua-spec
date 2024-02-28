@@ -475,8 +475,7 @@ user manuals:
 3. [Markua 0.30 Beta](https://leanpub.com/markua030/read) - The Markua 0.30
    beta was launched on Leanpub in 2021. Currently, Markua 0.30 is the default
    for new books on Leanpub. The user manual for Markua 0.30 is not yet stable,
-   so for now you're much better off reading this spec! (TODO: Update this
-   message once we have a proper Markua 0.30 user manual.)
+   so for now you're much better off reading this spec!
 
 Not all features in the Markua spec are supported in the Markua 0.30 beta.
 However, the Markua 0.30 beta is good enough that it is the default choice for

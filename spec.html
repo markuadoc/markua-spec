@@ -114,9 +114,9 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.30.34 (2024-01-01)</div>
+<div class="version">Version 0.30.35 (2024-02-28)</div>
 <div class="authors">
-    <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
+    <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
 <div class="license">
 <a rel="license"
@@ -698,7 +698,8 @@ on Leanpub.</li>
 <li><a href="https://leanpub.com/markua030/read">Markua 0.30 Beta</a> - The Markua 0.30
 beta was launched on Leanpub in 2021. Currently, Markua 0.30 is the default
 for new books on Leanpub. The user manual for Markua 0.30 is not yet stable,
-so for now you’re better off reading this spec! (TODO: FIX)</li>
+so for now you’re better off reading this spec! (TODO: Update this message
+once we have a proper Markua 0.30 user manual.)</li>
 </ol>
 <p>Not all features in the Markua spec are supported in the Markua 0.30 beta.
 However, the Markua 0.30 beta is good enough that it is the default choice for
@@ -929,7 +930,7 @@ Flavored Markdown (GFM) extensions from the <a href="https://github.github.com/g
 Spec</a>.</p>
 <p>Like the CommonMark Spec and the GFM Spec, the Markua Spec is licensed under
 the Creative Commons license
-<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
 <p>This document has two types of intended readers:</p>
 <ol>
 <li>authors with advanced questions about Markua syntax</li>
@@ -1066,7 +1067,7 @@ Corporation, the company which created, owns and operates Leanpub.</p>
 based on conventions for indicating formatting in email
 and usenet posts.  It was developed by John Gruber (with
 help from Aaron Swartz) and released in 2004 in the form of a
-<a href="http://daringfireball.net/projects/markdown/syntax">syntax description</a>
+<a href="https://daringfireball.net/projects/markdown/syntax">syntax description</a>
 and a Perl script (<code>Markdown.pl</code>) for converting Markdown to
 HTML.  In the next decade, dozens of implementations were
 developed in many languages.  Some extended the original
@@ -1085,10 +1086,10 @@ to make it as readable as possible. The idea is that a
 Markdown-formatted document should be publishable as-is, as
 plain text, without looking like it’s been marked up with tags
 or formatting instructions.
-(<a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a>)</p>
+(<a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a>)</p>
 </blockquote>
 <p>The point can be illustrated by comparing a sample of
-<a href="http://www.methods.co.nz/asciidoc/">AsciiDoc</a> with
+<a href="https://asciidoc.org/">AsciiDoc</a> with
 an equivalent sample of Markdown.  Here is a sample of
 AsciiDoc from the AsciiDoc manual:</p>
 <pre><code>1. List item one.
@@ -1148,7 +1149,7 @@ source, not just in the processed document.</p>
 <h2 id="why-is-a-spec-needed-" class="definition">
 <span class="number">1.16</span>Why is a spec needed?
 </h2>
-<p>John Gruber’s <a href="http://daringfireball.net/projects/markdown/syntax">canonical description of Markdown’s
+<p>John Gruber’s <a href="https://daringfireball.net/projects/markdown/syntax">canonical description of Markdown’s
 syntax</a>
 does not specify the syntax unambiguously.  Here are some examples of
 questions it does not answer:</p>
@@ -1338,9 +1339,9 @@ following line feed.</p>
 <p>A line containing no characters, or a line containing only spaces
 (<code>U+0020</code>) or tabs (<code>U+0009</code>), is called a <a id="blank-line" href="#blank-line" class="definition">blank line</a>.</p>
 <p>The following definitions of character classes will be used in this spec:</p>
-<p>A <a id="unicode-whitespace-character" href="#unicode-whitespace-character" class="definition">Unicode whitespace character</a> is
-any code point in the Unicode <code>Zs</code> general category, or a tab (<code>U+0009</code>),
-line feed (<code>U+000A</code>), form feed (<code>U+000C</code>), or carriage return (<code>U+000D</code>).</p>
+<p>A <a id="unicode-whitespace-character" href="#unicode-whitespace-character" class="definition">Unicode whitespace character</a> is a character in the Unicode <code>Zs</code> general
+category, or a tab (<code>U+0009</code>), line feed (<code>U+000A</code>), form feed (<code>U+000C</code>), or
+carriage return (<code>U+000D</code>).</p>
 <p><a id="unicode-whitespace" href="#unicode-whitespace" class="definition">Unicode whitespace</a> is a sequence of one or more
 <a href="#unicode-whitespace-character">Unicode whitespace characters</a>.</p>
 <p>A <a id="tab" href="#tab" class="definition">tab</a> is <code>U+0009</code>.</p>
@@ -1353,9 +1354,8 @@ is <code>!</code>, <code>&quot;</code>, <code>#</code>, <code>$</code>, <code>%<
 <code>:</code>, <code>;</code>, <code>&lt;</code>, <code>=</code>, <code>&gt;</code>, <code>?</code>, <code>@</code> (U+003A–0040),
 <code>[</code>, <code>\</code>, <code>]</code>, <code>^</code>, <code>_</code>, <code>`</code> (U+005B–0060),
 <code>{</code>, <code>|</code>, <code>}</code>, or <code>~</code> (U+007B–007E).</p>
-<p>A <a id="unicode-punctuation-character" href="#unicode-punctuation-character" class="definition">Unicode punctuation character</a> is an <a href="#ascii-punctuation-character">ASCII
-punctuation character</a> or anything in
-the general Unicode categories  <code>Pc</code>, <code>Pd</code>, <code>Pe</code>, <code>Pf</code>, <code>Pi</code>, <code>Po</code>, or <code>Ps</code>.</p>
+<p>A <a id="unicode-punctuation-character" href="#unicode-punctuation-character" class="definition">Unicode punctuation character</a> is a character in the Unicode <code>P</code>
+(puncuation) or <code>S</code> (symbol) general categories.</p>
 <h2 id="tabs" class="definition">
 <span class="number">2.2</span>Tabs
 </h2>
@@ -1712,11 +1712,11 @@ raw HTML:</p>
 <a href="#example-20">Example 20</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">&lt;http://example.com?find=\*&gt;
+<pre><code class="language-markdown">&lt;https://example.com?find=\*&gt;
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://example.com?find=%5C*&quot;&gt;http://example.com?find=\*&lt;/a&gt;&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://example.com?find=%5C*&quot;&gt;https://example.com?find=\*&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
@@ -2084,10 +2084,10 @@ bar&lt;/p&gt;
 <span class="number">2.6</span>Emoji (M)
 </h2>
 <p>In 2015, emoji fully arrived. The 2015 Oxford Dictionaries Word of the Year
-<a href="http://blog.oxforddictionaries.com/2015/11/word-of-the-year-2015-emoji/">was</a>,
-in fact, the Face with Tears of Joy emoji. You may think of it as a smiling face
-with tears of joy, but you can also can think of it as <code>&amp;#x1F602;</code>, which is the
-HTML entity reference to its Unicode code point (in hexadecimal).</p>
+was, in fact, the Face with Tears of Joy emoji. You may think of it as a
+smiling face with tears of joy, but you can also can think of it as
+<code>&amp;#x1F602;</code>, which is the HTML entity reference to its Unicode character (in
+hexadecimal).</p>
 <p>However, Unicode characters aren’t the only way to do emoji. Another popular
 syntax for emoji is <code>:emoji_name:</code> – that is a colon (<code>:</code>), followed by the
 underscore-separated name of the emoji, followed by a colon.</p>
@@ -2095,7 +2095,7 @@ underscore-separated name of the emoji, followed by a colon.</p>
 the <code>:emoji_name:</code> syntax.</p>
 <p>Which emoji are supported is up to the Markua Processor.</p>
 <p>One recommended list of emoji names is at
-<a href="http://www.webpagefx.com/tools/emoji-cheat-sheet/">http://www.webpagefx.com/tools/emoji-cheat-sheet/</a>.</p>
+<a href="https://www.webfx.com/tools/emoji-cheat-sheet/">https://www.webfx.com/tools/emoji-cheat-sheet/</a>.</p>
 <p>The preferred thing to do when a Markua Processor recognizes an emoji is to
 replace it with the Unicode code point HTML entity reference, assuming that
 those are also handled correctly:</p>
@@ -3943,7 +3943,7 @@ end
 <span class="number">5.4</span>Resource figure numbering (M)
 </h2>
 <p><strong>NOTE FOR LEANPUB AUTHORS: The <code>numbered</code> attribute is not implemented in
-Leanpub yet. We plan to add this in January 2024, after which point this
+Leanpub yet. We plan to add this in 2024, after which point this
 note will be removed.</strong></p>
 <p>When a resource has a title, it is a figure.</p>
 <p>By default, figures are numbered. This numbering is controlled by the
@@ -6399,15 +6399,15 @@ including the significance of file extensions. The only differences is that the
 files are on the web.</p>
 <p>This will be a type of code and a format of <code>guess</code> since the file extension is
 not specified:</p>
-<pre><code>![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
+<pre><code>![](https://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
 </code></pre>
 <p>That is equivalent to:</p>
 <pre><code>{format: guess}
-![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
+![](https://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
 </code></pre>
 <p>If you don’t want to take chances you can do this:</p>
 <pre><code>{format: ruby}
-![](http://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
+![](https://markua.com/hello.rb &quot;Hello World in Ruby&quot;)
 </code></pre>
 <h3 id="inline-code-resources" class="definition">
 <span class="number">7.6.4</span>Inline Code Resources
@@ -6673,34 +6673,34 @@ files are on the web.</p>
 `poem`:
 
 {type: verbatim, class: poem}
-![](http://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
+![](https://markua.com/sonnet130.txt &quot;Sonnet 130&quot;)
 
 Here's a Shakespearean sonnet, which has a class of `poem` and will default to
 the `{type: verbatim}` because of the `.text` extension:
 
 {class: poem}
-![](http://markua.com/sonnet130.text &quot;Sonnet 130&quot;)
+![](https://markua.com/sonnet130.text &quot;Sonnet 130&quot;)
 
 Here's a Shakespearean sonnet, which has no class specified and which will
 default to the `{type: verbatim}` because of the `.text` extension:
 
-![](http://markua.com/sonnet130.text &quot;Sonnet 130&quot;)
+![](https://markua.com/sonnet130.text &quot;Sonnet 130&quot;)
 
 Here's some legal boilerplate, which has no class specified and which will
 default to the `{type: verbatim}` because of the `.text` extension:
 
-![](http://markua.com/tos.text &quot;Terms and Conditions&quot;)
+![](https://markua.com/tos.text &quot;Terms and Conditions&quot;)
 
 Here's an E. E. Cummings poem:
 
 {type: verbatim, class: poem, monospaced: true}
-![](http://markua.com/iwillbe.txt &quot;I Will Be&quot;)
+![](https://markua.com/iwillbe.txt &quot;I Will Be&quot;)
 
 Here's an E. E. Cummings poem which has no class specified and which will
 default to the `{type: verbatim}` because of the `.text` extension:
 
 {monospaced: true}
-![](http://markua.com/iwillbe.text &quot;I Will Be&quot;)
+![](https://markua.com/iwillbe.text &quot;I Will Be&quot;)
 </code></pre>
 <h3 id="inline-verbatim-resources" class="definition">
 <span class="number">7.7.3</span>Inline Verbatim resources
@@ -7920,7 +7920,7 @@ resource location, the identical example results:</p>
 <a href="#example-216">Example 216</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">![](http://markua.com/census.tbl<span class="space"> </span>&quot;Canadian<span class="space"> </span>Census<span class="space"> </span>Data&quot;)
+<pre><code class="language-markdown">![](https://markua.com/census.tbl<span class="space"> </span>&quot;Canadian<span class="space"> </span>Census<span class="space"> </span>Data&quot;)
 </code></pre>
 </div>
 <div class="column">
@@ -8672,7 +8672,7 @@ in some browsers.)</p>
 blocks <em>Bs</em> starting with a character other than a space or tab, and <em>M</em> is
 a list marker of width <em>W</em> followed by 1 ≤ <em>N</em> ≤ 4 spaces of indentation,
 then the result of prepending <em>M</em> and the following spaces to the first line
-of Ls*, and indenting subsequent lines of <em>Ls</em> by <em>W + N</em> spaces, is a
+of <em>Ls</em>, and indenting subsequent lines of <em>Ls</em> by <em>W + N</em> spaces, is a
 list item with <em>Bs</em> as its contents.  The type of the list item
 (bullet or ordered) is determined by the type of its list marker.
 If the list item is ordered, then it is also assigned a start
@@ -10131,10 +10131,10 @@ then</p>
 <p>Since it is well established Markdown practice to allow lists to
 interrupt paragraphs inside list items, the <a href="#principle-of-uniformity">principle of
 uniformity</a> requires us to allow this outside list items as
-well.  (<a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>
+well.  (<a href="https://docutils.sourceforge.net/rst.html">reStructuredText</a>
 takes a different approach, requiring blank lines before lists
 even inside other list items.)</p>
-<p>In order to solve of unwanted lists in paragraphs with
+<p>In order to solve the problem of unwanted lists in paragraphs with
 hard-wrapped numerals, we allow only lists starting with <code>1</code> to
 interrupt paragraphs.  Thus,</p>
 <div class="example" id="example-294">
@@ -13696,11 +13696,11 @@ Thus, this is code:</p>
 <a href="#example-388">Example 388</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">`&lt;http://foo.bar.`baz&gt;`
+<pre><code class="language-markdown">`&lt;https://foo.bar.`baz&gt;`
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;code&gt;&amp;lt;http://foo.bar.&lt;/code&gt;baz&amp;gt;`&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;&lt;code&gt;&amp;lt;https://foo.bar.&lt;/code&gt;baz&amp;gt;`&lt;/p&gt;
 </code></pre>
 </div>
 </div>
@@ -13710,11 +13710,11 @@ Thus, this is code:</p>
 <a href="#example-389">Example 389</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">&lt;http://foo.bar.`baz&gt;`
+<pre><code class="language-markdown">&lt;https://foo.bar.`baz&gt;`
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://foo.bar.%60baz&quot;&gt;http://foo.bar.`baz&lt;/a&gt;`&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://foo.bar.%60baz&quot;&gt;https://foo.bar.`baz&lt;/a&gt;`&lt;/p&gt;
 </code></pre>
 </div>
 </div>
@@ -13764,7 +13764,7 @@ closing backtick strings to be equal in length:</p>
 <h2 id="emphasis-and-strong-emphasis" class="definition">
 <span class="number">10.2</span>Emphasis and strong emphasis
 </h2>
-<p>John Gruber’s original <a href="http://daringfireball.net/projects/markdown/syntax#em">Markdown syntax
+<p>John Gruber’s original <a href="https://daringfireball.net/projects/markdown/syntax#em">Markdown syntax
 description</a> says:</p>
 <blockquote>
 <p>Markdown treats asterisks (<code>*</code>) and underscores (<code>_</code>) as indicators of
@@ -13851,7 +13851,7 @@ a _ b
 <p>(The idea of distinguishing left-flanking and right-flanking
 delimiter runs based on the character before and the character
 after comes from Roopesh Chander’s
-<a href="http://www.vfmd.org/vfmd-spec/specification/#procedure-for-identifying-emphasis-tags">vfmd</a>.
+<a href="https://web.archive.org/web/20220608143320/http://www.vfmd.org/vfmd-spec/specification/#procedure-for-identifying-emphasis-tags">vfmd</a>.
 vfmd uses the terminology “emphasis indicator string” instead of “delimiter
 run,” and its rules for distinguishing left- and right-flanking runs
 are a bit more complex than the ones given here.)</p>
@@ -14030,10 +14030,30 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </code></pre>
 </div>
 </div>
-<p>Intraword emphasis with <code>*</code> is permitted:</p>
+<p>Unicode symbols count as punctuation, too:</p>
 <div class="example" id="example-397">
 <div class="examplenum">
 <a href="#example-397">Example 397</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">*$*alpha.
+
+*£*bravo.
+
+*€*charlie.
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;*$*alpha.&lt;/p&gt;
+&lt;p&gt;*£*bravo.&lt;/p&gt;
+&lt;p&gt;*€*charlie.&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Intraword emphasis with <code>*</code> is permitted:</p>
+<div class="example" id="example-398">
+<div class="examplenum">
+<a href="#example-398">Example 398</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo*bar*
@@ -14044,9 +14064,9 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-398">
+<div class="example" id="example-399">
 <div class="examplenum">
-<a href="#example-398">Example 398</a>
+<a href="#example-399">Example 399</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">5*6*78
@@ -14058,9 +14078,9 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </div>
 </div>
 <p>Rule 2:</p>
-<div class="example" id="example-399">
+<div class="example" id="example-400">
 <div class="examplenum">
-<a href="#example-399">Example 399</a>
+<a href="#example-400">Example 400</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo<span class="space"> </span>bar_
@@ -14073,9 +14093,9 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </div>
 <p>This is not emphasis, because the opening <code>_</code> is followed by
 whitespace:</p>
-<div class="example" id="example-400">
+<div class="example" id="example-401">
 <div class="examplenum">
-<a href="#example-400">Example 400</a>
+<a href="#example-401">Example 401</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_<span class="space"> </span>foo<span class="space"> </span>bar_
@@ -14088,9 +14108,9 @@ whitespace:</p>
 </div>
 <p>This is not emphasis, because the opening <code>_</code> is preceded
 by an alphanumeric and followed by punctuation:</p>
-<div class="example" id="example-401">
+<div class="example" id="example-402">
 <div class="examplenum">
-<a href="#example-401">Example 401</a>
+<a href="#example-402">Example 402</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">a_&quot;foo&quot;_
@@ -14102,9 +14122,9 @@ by an alphanumeric and followed by punctuation:</p>
 </div>
 </div>
 <p>Emphasis with <code>_</code> is not allowed inside words:</p>
-<div class="example" id="example-402">
+<div class="example" id="example-403">
 <div class="examplenum">
-<a href="#example-402">Example 402</a>
+<a href="#example-403">Example 403</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo_bar_
@@ -14115,9 +14135,9 @@ by an alphanumeric and followed by punctuation:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-403">
+<div class="example" id="example-404">
 <div class="examplenum">
-<a href="#example-403">Example 403</a>
+<a href="#example-404">Example 404</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">5_6_78
@@ -14128,9 +14148,9 @@ by an alphanumeric and followed by punctuation:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-404">
+<div class="example" id="example-405">
 <div class="examplenum">
-<a href="#example-404">Example 404</a>
+<a href="#example-405">Example 405</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">пристаням_стремятся_
@@ -14143,9 +14163,9 @@ by an alphanumeric and followed by punctuation:</p>
 </div>
 <p>Here <code>_</code> does not generate emphasis, because the first delimiter run
 is right-flanking and the second left-flanking:</p>
-<div class="example" id="example-405">
+<div class="example" id="example-406">
 <div class="examplenum">
-<a href="#example-405">Example 405</a>
+<a href="#example-406">Example 406</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">aa_&quot;bb&quot;_cc
@@ -14159,9 +14179,9 @@ is right-flanking and the second left-flanking:</p>
 <p>This is emphasis, even though the opening delimiter is
 both left- and right-flanking, because it is preceded by
 punctuation:</p>
-<div class="example" id="example-406">
+<div class="example" id="example-407">
 <div class="examplenum">
-<a href="#example-406">Example 406</a>
+<a href="#example-407">Example 407</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo-_(bar)_
@@ -14175,9 +14195,9 @@ punctuation:</p>
 <p>Rule 3:</p>
 <p>This is not emphasis, because the closing delimiter does
 not match the opening delimiter:</p>
-<div class="example" id="example-407">
+<div class="example" id="example-408">
 <div class="examplenum">
-<a href="#example-407">Example 407</a>
+<a href="#example-408">Example 408</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo*
@@ -14190,9 +14210,9 @@ not match the opening delimiter:</p>
 </div>
 <p>This is not emphasis, because the closing <code>*</code> is preceded by
 whitespace:</p>
-<div class="example" id="example-408">
+<div class="example" id="example-409">
 <div class="examplenum">
-<a href="#example-408">Example 408</a>
+<a href="#example-409">Example 409</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>bar<span class="space"> </span>*
@@ -14204,9 +14224,9 @@ whitespace:</p>
 </div>
 </div>
 <p>A line ending also counts as whitespace:</p>
-<div class="example" id="example-409">
+<div class="example" id="example-410">
 <div class="examplenum">
-<a href="#example-409">Example 409</a>
+<a href="#example-410">Example 410</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>bar
@@ -14222,9 +14242,9 @@ whitespace:</p>
 <p>This is not emphasis, because the second <code>*</code> is
 preceded by punctuation and followed by an alphanumeric
 (hence it is not part of a <a href="#right-flanking-delimiter-run">right-flanking delimiter run</a>:</p>
-<div class="example" id="example-410">
+<div class="example" id="example-411">
 <div class="examplenum">
-<a href="#example-410">Example 410</a>
+<a href="#example-411">Example 411</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*(*foo)
@@ -14237,9 +14257,9 @@ preceded by punctuation and followed by an alphanumeric
 </div>
 <p>The point of this restriction is more easily appreciated
 with this example:</p>
-<div class="example" id="example-411">
+<div class="example" id="example-412">
 <div class="examplenum">
-<a href="#example-411">Example 411</a>
+<a href="#example-412">Example 412</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*(*foo*)*
@@ -14251,9 +14271,9 @@ with this example:</p>
 </div>
 </div>
 <p>Intraword emphasis with <code>*</code> is allowed:</p>
-<div class="example" id="example-412">
+<div class="example" id="example-413">
 <div class="examplenum">
-<a href="#example-412">Example 412</a>
+<a href="#example-413">Example 413</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo*bar
@@ -14267,9 +14287,9 @@ with this example:</p>
 <p>Rule 4:</p>
 <p>This is not emphasis, because the closing <code>_</code> is preceded by
 whitespace:</p>
-<div class="example" id="example-413">
+<div class="example" id="example-414">
 <div class="examplenum">
-<a href="#example-413">Example 413</a>
+<a href="#example-414">Example 414</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo<span class="space"> </span>bar<span class="space"> </span>_
@@ -14282,9 +14302,9 @@ whitespace:</p>
 </div>
 <p>This is not emphasis, because the second <code>_</code> is
 preceded by punctuation and followed by an alphanumeric:</p>
-<div class="example" id="example-414">
+<div class="example" id="example-415">
 <div class="examplenum">
-<a href="#example-414">Example 414</a>
+<a href="#example-415">Example 415</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_(_foo)
@@ -14296,9 +14316,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 </div>
 </div>
 <p>This is emphasis within emphasis:</p>
-<div class="example" id="example-415">
+<div class="example" id="example-416">
 <div class="examplenum">
-<a href="#example-415">Example 415</a>
+<a href="#example-416">Example 416</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_(_foo_)_
@@ -14310,9 +14330,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 </div>
 </div>
 <p>Intraword emphasis is disallowed for <code>_</code>:</p>
-<div class="example" id="example-416">
+<div class="example" id="example-417">
 <div class="examplenum">
-<a href="#example-416">Example 416</a>
+<a href="#example-417">Example 417</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo_bar
@@ -14323,9 +14343,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-417">
+<div class="example" id="example-418">
 <div class="examplenum">
-<a href="#example-417">Example 417</a>
+<a href="#example-418">Example 418</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_пристаням_стремятся
@@ -14336,9 +14356,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-418">
+<div class="example" id="example-419">
 <div class="examplenum">
-<a href="#example-418">Example 418</a>
+<a href="#example-419">Example 419</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo_bar_baz_
@@ -14352,9 +14372,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 <p>This is emphasis, even though the closing delimiter is
 both left- and right-flanking, because it is followed by
 punctuation:</p>
-<div class="example" id="example-419">
+<div class="example" id="example-420">
 <div class="examplenum">
-<a href="#example-419">Example 419</a>
+<a href="#example-420">Example 420</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_(bar)_.
@@ -14366,9 +14386,9 @@ punctuation:</p>
 </div>
 </div>
 <p>Rule 5:</p>
-<div class="example" id="example-420">
+<div class="example" id="example-421">
 <div class="examplenum">
-<a href="#example-420">Example 420</a>
+<a href="#example-421">Example 421</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>bar**
@@ -14381,9 +14401,9 @@ punctuation:</p>
 </div>
 <p>This is not strong emphasis, because the opening delimiter is
 followed by whitespace:</p>
-<div class="example" id="example-421">
+<div class="example" id="example-422">
 <div class="examplenum">
-<a href="#example-421">Example 421</a>
+<a href="#example-422">Example 422</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**<span class="space"> </span>foo<span class="space"> </span>bar**
@@ -14397,9 +14417,9 @@ followed by whitespace:</p>
 <p>This is not strong emphasis, because the opening <code>**</code> is preceded
 by an alphanumeric and followed by punctuation, and hence
 not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run</a>:</p>
-<div class="example" id="example-422">
+<div class="example" id="example-423">
 <div class="examplenum">
-<a href="#example-422">Example 422</a>
+<a href="#example-423">Example 423</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">a**&quot;foo&quot;**
@@ -14411,9 +14431,9 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </div>
 </div>
 <p>Intraword strong emphasis with <code>**</code> is permitted:</p>
-<div class="example" id="example-423">
+<div class="example" id="example-424">
 <div class="examplenum">
-<a href="#example-423">Example 423</a>
+<a href="#example-424">Example 424</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo**bar**
@@ -14425,9 +14445,9 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </div>
 </div>
 <p>Rule 6:</p>
-<div class="example" id="example-424">
+<div class="example" id="example-425">
 <div class="examplenum">
-<a href="#example-424">Example 424</a>
+<a href="#example-425">Example 425</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo<span class="space"> </span>bar__
@@ -14440,9 +14460,9 @@ not part of a <a href="#left-flanking-delimiter-run">left-flanking delimiter run
 </div>
 <p>This is not strong emphasis, because the opening delimiter is
 followed by whitespace:</p>
-<div class="example" id="example-425">
+<div class="example" id="example-426">
 <div class="examplenum">
-<a href="#example-425">Example 425</a>
+<a href="#example-426">Example 426</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__<span class="space"> </span>foo<span class="space"> </span>bar__
@@ -14454,9 +14474,9 @@ followed by whitespace:</p>
 </div>
 </div>
 <p>A line ending counts as whitespace:</p>
-<div class="example" id="example-426">
+<div class="example" id="example-427">
 <div class="examplenum">
-<a href="#example-426">Example 426</a>
+<a href="#example-427">Example 427</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__
@@ -14471,9 +14491,9 @@ foo<span class="space"> </span>bar__&lt;/p&gt;
 </div>
 <p>This is not strong emphasis, because the opening <code>__</code> is preceded
 by an alphanumeric and followed by punctuation:</p>
-<div class="example" id="example-427">
+<div class="example" id="example-428">
 <div class="examplenum">
-<a href="#example-427">Example 427</a>
+<a href="#example-428">Example 428</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">a__&quot;foo&quot;__
@@ -14485,9 +14505,9 @@ by an alphanumeric and followed by punctuation:</p>
 </div>
 </div>
 <p>Intraword strong emphasis is forbidden with <code>__</code>:</p>
-<div class="example" id="example-428">
+<div class="example" id="example-429">
 <div class="examplenum">
-<a href="#example-428">Example 428</a>
+<a href="#example-429">Example 429</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo__bar__
@@ -14498,9 +14518,9 @@ by an alphanumeric and followed by punctuation:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-429">
+<div class="example" id="example-430">
 <div class="examplenum">
-<a href="#example-429">Example 429</a>
+<a href="#example-430">Example 430</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">5__6__78
@@ -14511,9 +14531,9 @@ by an alphanumeric and followed by punctuation:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-430">
+<div class="example" id="example-431">
 <div class="examplenum">
-<a href="#example-430">Example 430</a>
+<a href="#example-431">Example 431</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">пристаням__стремятся__
@@ -14524,9 +14544,9 @@ by an alphanumeric and followed by punctuation:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-431">
+<div class="example" id="example-432">
 <div class="examplenum">
-<a href="#example-431">Example 431</a>
+<a href="#example-432">Example 432</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo,<span class="space"> </span>__bar__,<span class="space"> </span>baz__
@@ -14540,9 +14560,9 @@ by an alphanumeric and followed by punctuation:</p>
 <p>This is strong emphasis, even though the opening delimiter is
 both left- and right-flanking, because it is preceded by
 punctuation:</p>
-<div class="example" id="example-432">
+<div class="example" id="example-433">
 <div class="examplenum">
-<a href="#example-432">Example 432</a>
+<a href="#example-433">Example 433</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo-__(bar)__
@@ -14556,9 +14576,9 @@ punctuation:</p>
 <p>Rule 7:</p>
 <p>This is not strong emphasis, because the closing delimiter is preceded
 by whitespace:</p>
-<div class="example" id="example-433">
+<div class="example" id="example-434">
 <div class="examplenum">
-<a href="#example-433">Example 433</a>
+<a href="#example-434">Example 434</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>bar<span class="space"> </span>**
@@ -14573,9 +14593,9 @@ by whitespace:</p>
 Rule 11.)</p>
 <p>This is not strong emphasis, because the second <code>**</code> is
 preceded by punctuation and followed by an alphanumeric:</p>
-<div class="example" id="example-434">
+<div class="example" id="example-435">
 <div class="examplenum">
-<a href="#example-434">Example 434</a>
+<a href="#example-435">Example 435</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**(**foo)
@@ -14588,9 +14608,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 </div>
 <p>The point of this restriction is more easily appreciated
 with these examples:</p>
-<div class="example" id="example-435">
+<div class="example" id="example-436">
 <div class="examplenum">
-<a href="#example-435">Example 435</a>
+<a href="#example-436">Example 436</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*(**foo**)*
@@ -14601,9 +14621,9 @@ with these examples:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-436">
+<div class="example" id="example-437">
 <div class="examplenum">
-<a href="#example-436">Example 436</a>
+<a href="#example-437">Example 437</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**Gomphocarpus<span class="space"> </span>(*Gomphocarpus<span class="space"> </span>physocarpus*,<span class="space"> </span>syn.
@@ -14616,9 +14636,9 @@ with these examples:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-437">
+<div class="example" id="example-438">
 <div class="examplenum">
-<a href="#example-437">Example 437</a>
+<a href="#example-438">Example 438</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>&quot;*bar*&quot;<span class="space"> </span>foo**
@@ -14630,9 +14650,9 @@ with these examples:</p>
 </div>
 </div>
 <p>Intraword emphasis:</p>
-<div class="example" id="example-438">
+<div class="example" id="example-439">
 <div class="examplenum">
-<a href="#example-438">Example 438</a>
+<a href="#example-439">Example 439</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo**bar
@@ -14646,9 +14666,9 @@ with these examples:</p>
 <p>Rule 8:</p>
 <p>This is not strong emphasis, because the closing delimiter is
 preceded by whitespace:</p>
-<div class="example" id="example-439">
+<div class="example" id="example-440">
 <div class="examplenum">
-<a href="#example-439">Example 439</a>
+<a href="#example-440">Example 440</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo<span class="space"> </span>bar<span class="space"> </span>__
@@ -14661,9 +14681,9 @@ preceded by whitespace:</p>
 </div>
 <p>This is not strong emphasis, because the second <code>__</code> is
 preceded by punctuation and followed by an alphanumeric:</p>
-<div class="example" id="example-440">
+<div class="example" id="example-441">
 <div class="examplenum">
-<a href="#example-440">Example 440</a>
+<a href="#example-441">Example 441</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__(__foo)
@@ -14676,9 +14696,9 @@ preceded by punctuation and followed by an alphanumeric:</p>
 </div>
 <p>The point of this restriction is more easily appreciated
 with this example:</p>
-<div class="example" id="example-441">
+<div class="example" id="example-442">
 <div class="examplenum">
-<a href="#example-441">Example 441</a>
+<a href="#example-442">Example 442</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_(__foo__)_
@@ -14690,9 +14710,9 @@ with this example:</p>
 </div>
 </div>
 <p>Intraword strong emphasis is forbidden with <code>__</code>:</p>
-<div class="example" id="example-442">
+<div class="example" id="example-443">
 <div class="examplenum">
-<a href="#example-442">Example 442</a>
+<a href="#example-443">Example 443</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo__bar
@@ -14703,9 +14723,9 @@ with this example:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-443">
+<div class="example" id="example-444">
 <div class="examplenum">
-<a href="#example-443">Example 443</a>
+<a href="#example-444">Example 444</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__пристаням__стремятся
@@ -14716,9 +14736,9 @@ with this example:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-444">
+<div class="example" id="example-445">
 <div class="examplenum">
-<a href="#example-444">Example 444</a>
+<a href="#example-445">Example 445</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo__bar__baz__
@@ -14732,9 +14752,9 @@ with this example:</p>
 <p>This is strong emphasis, even though the closing delimiter is
 both left- and right-flanking, because it is followed by
 punctuation:</p>
-<div class="example" id="example-445">
+<div class="example" id="example-446">
 <div class="examplenum">
-<a href="#example-445">Example 445</a>
+<a href="#example-446">Example 446</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__(bar)__.
@@ -14748,9 +14768,9 @@ punctuation:</p>
 <p>Rule 9:</p>
 <p>Any nonempty sequence of inline elements can be the contents of an
 emphasized span.</p>
-<div class="example" id="example-446">
+<div class="example" id="example-447">
 <div class="examplenum">
-<a href="#example-446">Example 446</a>
+<a href="#example-447">Example 447</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>[bar](/url)*
@@ -14761,9 +14781,9 @@ emphasized span.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-447">
+<div class="example" id="example-448">
 <div class="examplenum">
-<a href="#example-447">Example 447</a>
+<a href="#example-448">Example 448</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo
@@ -14778,9 +14798,9 @@ bar&lt;/em&gt;&lt;/p&gt;
 </div>
 <p>In particular, emphasis and strong emphasis can be nested
 inside emphasis:</p>
-<div class="example" id="example-448">
+<div class="example" id="example-449">
 <div class="examplenum">
-<a href="#example-448">Example 448</a>
+<a href="#example-449">Example 449</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo<span class="space"> </span>__bar__<span class="space"> </span>baz_
@@ -14791,9 +14811,9 @@ inside emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-449">
+<div class="example" id="example-450">
 <div class="examplenum">
-<a href="#example-449">Example 449</a>
+<a href="#example-450">Example 450</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo<span class="space"> </span>_bar_<span class="space"> </span>baz_
@@ -14804,9 +14824,9 @@ inside emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-450">
+<div class="example" id="example-451">
 <div class="examplenum">
-<a href="#example-450">Example 450</a>
+<a href="#example-451">Example 451</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo_<span class="space"> </span>bar_
@@ -14817,9 +14837,9 @@ inside emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-451">
+<div class="example" id="example-452">
 <div class="examplenum">
-<a href="#example-451">Example 451</a>
+<a href="#example-452">Example 452</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>*bar**
@@ -14830,9 +14850,9 @@ inside emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-452">
+<div class="example" id="example-453">
 <div class="examplenum">
-<a href="#example-452">Example 452</a>
+<a href="#example-453">Example 453</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>**bar**<span class="space"> </span>baz*
@@ -14843,9 +14863,9 @@ inside emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-453">
+<div class="example" id="example-454">
 <div class="examplenum">
-<a href="#example-453">Example 453</a>
+<a href="#example-454">Example 454</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo**bar**baz*
@@ -14867,9 +14887,9 @@ closing delimiters is a multiple of 3 unless
 both lengths are multiples of 3.</p>
 <p>For the same reason, we don’t get two consecutive
 emphasis sections in this example:</p>
-<div class="example" id="example-454">
+<div class="example" id="example-455">
 <div class="examplenum">
-<a href="#example-454">Example 454</a>
+<a href="#example-455">Example 455</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo**bar*
@@ -14884,9 +14904,9 @@ emphasis sections in this example:</p>
 cases are all strong emphasis nested inside
 emphasis, even when the interior whitespace is
 omitted:</p>
-<div class="example" id="example-455">
+<div class="example" id="example-456">
 <div class="examplenum">
-<a href="#example-455">Example 455</a>
+<a href="#example-456">Example 456</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">***foo**<span class="space"> </span>bar*
@@ -14897,9 +14917,9 @@ omitted:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-456">
+<div class="example" id="example-457">
 <div class="examplenum">
-<a href="#example-456">Example 456</a>
+<a href="#example-457">Example 457</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>**bar***
@@ -14910,9 +14930,9 @@ omitted:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-457">
+<div class="example" id="example-458">
 <div class="examplenum">
-<a href="#example-457">Example 457</a>
+<a href="#example-458">Example 458</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo**bar***
@@ -14926,9 +14946,9 @@ omitted:</p>
 <p>When the lengths of the interior closing and opening
 delimiter runs are <em>both</em> multiples of 3, though,
 they can match to create emphasis:</p>
-<div class="example" id="example-458">
+<div class="example" id="example-459">
 <div class="examplenum">
-<a href="#example-458">Example 458</a>
+<a href="#example-459">Example 459</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo***bar***baz
@@ -14939,9 +14959,9 @@ they can match to create emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-459">
+<div class="example" id="example-460">
 <div class="examplenum">
-<a href="#example-459">Example 459</a>
+<a href="#example-460">Example 460</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo******bar*********baz
@@ -14953,9 +14973,9 @@ they can match to create emphasis:</p>
 </div>
 </div>
 <p>Indefinite levels of nesting are possible:</p>
-<div class="example" id="example-460">
+<div class="example" id="example-461">
 <div class="examplenum">
-<a href="#example-460">Example 460</a>
+<a href="#example-461">Example 461</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>**bar<span class="space"> </span>*baz*<span class="space"> </span>bim**<span class="space"> </span>bop*
@@ -14966,9 +14986,9 @@ they can match to create emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-461">
+<div class="example" id="example-462">
 <div class="examplenum">
-<a href="#example-461">Example 461</a>
+<a href="#example-462">Example 462</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>[*bar*](/url)*
@@ -14980,9 +15000,9 @@ they can match to create emphasis:</p>
 </div>
 </div>
 <p>There can be no empty emphasis or strong emphasis:</p>
-<div class="example" id="example-462">
+<div class="example" id="example-463">
 <div class="examplenum">
-<a href="#example-462">Example 462</a>
+<a href="#example-463">Example 463</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>an<span class="space"> </span>empty<span class="space"> </span>emphasis
@@ -14993,9 +15013,9 @@ they can match to create emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-463">
+<div class="example" id="example-464">
 <div class="examplenum">
-<a href="#example-463">Example 463</a>
+<a href="#example-464">Example 464</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">****<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>an<span class="space"> </span>empty<span class="space"> </span>strong<span class="space"> </span>emphasis
@@ -15009,9 +15029,9 @@ they can match to create emphasis:</p>
 <p>Rule 10:</p>
 <p>Any nonempty sequence of inline elements can be the contents of an
 strongly emphasized span.</p>
-<div class="example" id="example-464">
+<div class="example" id="example-465">
 <div class="examplenum">
-<a href="#example-464">Example 464</a>
+<a href="#example-465">Example 465</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>[bar](/url)**
@@ -15022,9 +15042,9 @@ strongly emphasized span.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-465">
+<div class="example" id="example-466">
 <div class="examplenum">
-<a href="#example-465">Example 465</a>
+<a href="#example-466">Example 466</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo
@@ -15039,9 +15059,9 @@ bar&lt;/strong&gt;&lt;/p&gt;
 </div>
 <p>In particular, emphasis and strong emphasis can be nested
 inside strong emphasis:</p>
-<div class="example" id="example-466">
+<div class="example" id="example-467">
 <div class="examplenum">
-<a href="#example-466">Example 466</a>
+<a href="#example-467">Example 467</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo<span class="space"> </span>_bar_<span class="space"> </span>baz__
@@ -15052,9 +15072,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-467">
+<div class="example" id="example-468">
 <div class="examplenum">
-<a href="#example-467">Example 467</a>
+<a href="#example-468">Example 468</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo<span class="space"> </span>__bar__<span class="space"> </span>baz__
@@ -15065,9 +15085,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-468">
+<div class="example" id="example-469">
 <div class="examplenum">
-<a href="#example-468">Example 468</a>
+<a href="#example-469">Example 469</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">____foo__<span class="space"> </span>bar__
@@ -15078,9 +15098,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-469">
+<div class="example" id="example-470">
 <div class="examplenum">
-<a href="#example-469">Example 469</a>
+<a href="#example-470">Example 470</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>**bar****
@@ -15091,9 +15111,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-470">
+<div class="example" id="example-471">
 <div class="examplenum">
-<a href="#example-470">Example 470</a>
+<a href="#example-471">Example 471</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>*bar*<span class="space"> </span>baz**
@@ -15104,9 +15124,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-471">
+<div class="example" id="example-472">
 <div class="examplenum">
-<a href="#example-471">Example 471</a>
+<a href="#example-472">Example 472</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo*bar*baz**
@@ -15117,9 +15137,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-472">
+<div class="example" id="example-473">
 <div class="examplenum">
-<a href="#example-472">Example 472</a>
+<a href="#example-473">Example 473</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">***foo*<span class="space"> </span>bar**
@@ -15130,9 +15150,9 @@ inside strong emphasis:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-473">
+<div class="example" id="example-474">
 <div class="examplenum">
-<a href="#example-473">Example 473</a>
+<a href="#example-474">Example 474</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>*bar***
@@ -15144,9 +15164,9 @@ inside strong emphasis:</p>
 </div>
 </div>
 <p>Indefinite levels of nesting are possible:</p>
-<div class="example" id="example-474">
+<div class="example" id="example-475">
 <div class="examplenum">
-<a href="#example-474">Example 474</a>
+<a href="#example-475">Example 475</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>*bar<span class="space"> </span>**baz**
@@ -15159,9 +15179,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-475">
+<div class="example" id="example-476">
 <div class="examplenum">
-<a href="#example-475">Example 475</a>
+<a href="#example-476">Example 476</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>[*bar*](/url)**
@@ -15173,9 +15193,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </div>
 </div>
 <p>There can be no empty emphasis or strong emphasis:</p>
-<div class="example" id="example-476">
+<div class="example" id="example-477">
 <div class="examplenum">
-<a href="#example-476">Example 476</a>
+<a href="#example-477">Example 477</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>an<span class="space"> </span>empty<span class="space"> </span>emphasis
@@ -15186,9 +15206,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-477">
+<div class="example" id="example-478">
 <div class="examplenum">
-<a href="#example-477">Example 477</a>
+<a href="#example-478">Example 478</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">____<span class="space"> </span>is<span class="space"> </span>not<span class="space"> </span>an<span class="space"> </span>empty<span class="space"> </span>strong<span class="space"> </span>emphasis
@@ -15200,9 +15220,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </div>
 </div>
 <p>Rule 11:</p>
-<div class="example" id="example-478">
+<div class="example" id="example-479">
 <div class="examplenum">
-<a href="#example-478">Example 478</a>
+<a href="#example-479">Example 479</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>***
@@ -15213,9 +15233,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-479">
+<div class="example" id="example-480">
 <div class="examplenum">
-<a href="#example-479">Example 479</a>
+<a href="#example-480">Example 480</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>*\**
@@ -15226,9 +15246,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-480">
+<div class="example" id="example-481">
 <div class="examplenum">
-<a href="#example-480">Example 480</a>
+<a href="#example-481">Example 481</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>*_*
@@ -15239,9 +15259,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-481">
+<div class="example" id="example-482">
 <div class="examplenum">
-<a href="#example-481">Example 481</a>
+<a href="#example-482">Example 482</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>*****
@@ -15252,9 +15272,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-482">
+<div class="example" id="example-483">
 <div class="examplenum">
-<a href="#example-482">Example 482</a>
+<a href="#example-483">Example 483</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>**\***
@@ -15265,9 +15285,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-483">
+<div class="example" id="example-484">
 <div class="examplenum">
-<a href="#example-483">Example 483</a>
+<a href="#example-484">Example 484</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>**_**
@@ -15281,9 +15301,9 @@ bim&lt;/em&gt;<span class="space"> </span>bop&lt;/strong&gt;&lt;/p&gt;
 <p>Note that when delimiters do not match evenly, Rule 11 determines
 that the excess literal <code>*</code> characters will appear outside of the
 emphasis, rather than inside it:</p>
-<div class="example" id="example-484">
+<div class="example" id="example-485">
 <div class="examplenum">
-<a href="#example-484">Example 484</a>
+<a href="#example-485">Example 485</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo*
@@ -15294,9 +15314,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-485">
+<div class="example" id="example-486">
 <div class="examplenum">
-<a href="#example-485">Example 485</a>
+<a href="#example-486">Example 486</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo**
@@ -15307,9 +15327,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-486">
+<div class="example" id="example-487">
 <div class="examplenum">
-<a href="#example-486">Example 486</a>
+<a href="#example-487">Example 487</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">***foo**
@@ -15320,9 +15340,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-487">
+<div class="example" id="example-488">
 <div class="examplenum">
-<a href="#example-487">Example 487</a>
+<a href="#example-488">Example 488</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">****foo*
@@ -15333,9 +15353,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-488">
+<div class="example" id="example-489">
 <div class="examplenum">
-<a href="#example-488">Example 488</a>
+<a href="#example-489">Example 489</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo***
@@ -15346,9 +15366,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-489">
+<div class="example" id="example-490">
 <div class="examplenum">
-<a href="#example-489">Example 489</a>
+<a href="#example-490">Example 490</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo****
@@ -15360,9 +15380,9 @@ emphasis, rather than inside it:</p>
 </div>
 </div>
 <p>Rule 12:</p>
-<div class="example" id="example-490">
+<div class="example" id="example-491">
 <div class="examplenum">
-<a href="#example-490">Example 490</a>
+<a href="#example-491">Example 491</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>___
@@ -15373,9 +15393,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-491">
+<div class="example" id="example-492">
 <div class="examplenum">
-<a href="#example-491">Example 491</a>
+<a href="#example-492">Example 492</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>_\__
@@ -15386,9 +15406,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-492">
+<div class="example" id="example-493">
 <div class="examplenum">
-<a href="#example-492">Example 492</a>
+<a href="#example-493">Example 493</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>_*_
@@ -15399,9 +15419,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-493">
+<div class="example" id="example-494">
 <div class="examplenum">
-<a href="#example-493">Example 493</a>
+<a href="#example-494">Example 494</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>_____
@@ -15412,9 +15432,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-494">
+<div class="example" id="example-495">
 <div class="examplenum">
-<a href="#example-494">Example 494</a>
+<a href="#example-495">Example 495</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>__\___
@@ -15425,9 +15445,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-495">
+<div class="example" id="example-496">
 <div class="examplenum">
-<a href="#example-495">Example 495</a>
+<a href="#example-496">Example 496</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>__*__
@@ -15438,9 +15458,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-496">
+<div class="example" id="example-497">
 <div class="examplenum">
-<a href="#example-496">Example 496</a>
+<a href="#example-497">Example 497</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo_
@@ -15454,9 +15474,9 @@ emphasis, rather than inside it:</p>
 <p>Note that when delimiters do not match evenly, Rule 12 determines
 that the excess literal <code>_</code> characters will appear outside of the
 emphasis, rather than inside it:</p>
-<div class="example" id="example-497">
+<div class="example" id="example-498">
 <div class="examplenum">
-<a href="#example-497">Example 497</a>
+<a href="#example-498">Example 498</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo__
@@ -15467,9 +15487,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-498">
+<div class="example" id="example-499">
 <div class="examplenum">
-<a href="#example-498">Example 498</a>
+<a href="#example-499">Example 499</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">___foo__
@@ -15480,9 +15500,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-499">
+<div class="example" id="example-500">
 <div class="examplenum">
-<a href="#example-499">Example 499</a>
+<a href="#example-500">Example 500</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">____foo_
@@ -15493,9 +15513,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-500">
+<div class="example" id="example-501">
 <div class="examplenum">
-<a href="#example-500">Example 500</a>
+<a href="#example-501">Example 501</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo___
@@ -15506,9 +15526,9 @@ emphasis, rather than inside it:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-501">
+<div class="example" id="example-502">
 <div class="examplenum">
-<a href="#example-501">Example 501</a>
+<a href="#example-502">Example 502</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo____
@@ -15521,9 +15541,9 @@ emphasis, rather than inside it:</p>
 </div>
 <p>Rule 13 implies that if you want emphasis nested directly inside
 emphasis, you must use different delimiters:</p>
-<div class="example" id="example-502">
+<div class="example" id="example-503">
 <div class="examplenum">
-<a href="#example-502">Example 502</a>
+<a href="#example-503">Example 503</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo**
@@ -15534,9 +15554,9 @@ emphasis, you must use different delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-503">
+<div class="example" id="example-504">
 <div class="examplenum">
-<a href="#example-503">Example 503</a>
+<a href="#example-504">Example 504</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*_foo_*
@@ -15547,9 +15567,9 @@ emphasis, you must use different delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-504">
+<div class="example" id="example-505">
 <div class="examplenum">
-<a href="#example-504">Example 504</a>
+<a href="#example-505">Example 505</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__foo__
@@ -15560,9 +15580,9 @@ emphasis, you must use different delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-505">
+<div class="example" id="example-506">
 <div class="examplenum">
-<a href="#example-505">Example 505</a>
+<a href="#example-506">Example 506</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_*foo*_
@@ -15575,9 +15595,9 @@ emphasis, you must use different delimiters:</p>
 </div>
 <p>However, strong emphasis within strong emphasis is possible without
 switching delimiters:</p>
-<div class="example" id="example-506">
+<div class="example" id="example-507">
 <div class="examplenum">
-<a href="#example-506">Example 506</a>
+<a href="#example-507">Example 507</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">****foo****
@@ -15588,9 +15608,9 @@ switching delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-507">
+<div class="example" id="example-508">
 <div class="examplenum">
-<a href="#example-507">Example 507</a>
+<a href="#example-508">Example 508</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">____foo____
@@ -15603,9 +15623,9 @@ switching delimiters:</p>
 </div>
 <p>Rule 13 can be applied to arbitrarily long sequences of
 delimiters:</p>
-<div class="example" id="example-508">
+<div class="example" id="example-509">
 <div class="examplenum">
-<a href="#example-508">Example 508</a>
+<a href="#example-509">Example 509</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">******foo******
@@ -15617,9 +15637,9 @@ delimiters:</p>
 </div>
 </div>
 <p>Rule 14:</p>
-<div class="example" id="example-509">
+<div class="example" id="example-510">
 <div class="examplenum">
-<a href="#example-509">Example 509</a>
+<a href="#example-510">Example 510</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">***foo***
@@ -15630,9 +15650,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-510">
+<div class="example" id="example-511">
 <div class="examplenum">
-<a href="#example-510">Example 510</a>
+<a href="#example-511">Example 511</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_____foo_____
@@ -15644,9 +15664,9 @@ delimiters:</p>
 </div>
 </div>
 <p>Rule 15:</p>
-<div class="example" id="example-511">
+<div class="example" id="example-512">
 <div class="examplenum">
-<a href="#example-511">Example 511</a>
+<a href="#example-512">Example 512</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>_bar*<span class="space"> </span>baz_
@@ -15657,9 +15677,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-512">
+<div class="example" id="example-513">
 <div class="examplenum">
-<a href="#example-512">Example 512</a>
+<a href="#example-513">Example 513</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>__bar<span class="space"> </span>*baz<span class="space"> </span>bim__<span class="space"> </span>bam*
@@ -15671,9 +15691,9 @@ delimiters:</p>
 </div>
 </div>
 <p>Rule 16:</p>
-<div class="example" id="example-513">
+<div class="example" id="example-514">
 <div class="examplenum">
-<a href="#example-513">Example 513</a>
+<a href="#example-514">Example 514</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**foo<span class="space"> </span>**bar<span class="space"> </span>baz**
@@ -15684,9 +15704,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-514">
+<div class="example" id="example-515">
 <div class="examplenum">
-<a href="#example-514">Example 514</a>
+<a href="#example-515">Example 515</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>*bar<span class="space"> </span>baz*
@@ -15698,9 +15718,9 @@ delimiters:</p>
 </div>
 </div>
 <p>Rule 17:</p>
-<div class="example" id="example-515">
+<div class="example" id="example-516">
 <div class="examplenum">
-<a href="#example-515">Example 515</a>
+<a href="#example-516">Example 516</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*[bar*](/url)
@@ -15711,9 +15731,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-516">
+<div class="example" id="example-517">
 <div class="examplenum">
-<a href="#example-516">Example 516</a>
+<a href="#example-517">Example 517</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_foo<span class="space"> </span>[bar_](/url)
@@ -15724,9 +15744,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-517">
+<div class="example" id="example-518">
 <div class="examplenum">
-<a href="#example-517">Example 517</a>
+<a href="#example-518">Example 518</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*&lt;img<span class="space"> </span>src=&quot;foo&quot;<span class="space"> </span>title=&quot;*&quot;/&gt;
@@ -15737,9 +15757,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-518">
+<div class="example" id="example-519">
 <div class="examplenum">
-<a href="#example-518">Example 518</a>
+<a href="#example-519">Example 519</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">**&lt;a<span class="space"> </span>href=&quot;**&quot;&gt;
@@ -15750,9 +15770,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-519">
+<div class="example" id="example-520">
 <div class="examplenum">
-<a href="#example-519">Example 519</a>
+<a href="#example-520">Example 520</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">__&lt;a<span class="space"> </span>href=&quot;__&quot;&gt;
@@ -15763,9 +15783,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-520">
+<div class="example" id="example-521">
 <div class="examplenum">
-<a href="#example-520">Example 520</a>
+<a href="#example-521">Example 521</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*a<span class="space"> </span>`*`*
@@ -15776,9 +15796,9 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-521">
+<div class="example" id="example-522">
 <div class="examplenum">
-<a href="#example-521">Example 521</a>
+<a href="#example-522">Example 522</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">_a<span class="space"> </span>`_`_
@@ -15789,29 +15809,29 @@ delimiters:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-522">
-<div class="examplenum">
-<a href="#example-522">Example 522</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">**a&lt;http://foo.bar/?q=**&gt;
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;**a&lt;a<span class="space"> </span>href=&quot;http://foo.bar/?q=**&quot;&gt;http://foo.bar/?q=**&lt;/a&gt;&lt;/p&gt;
-</code></pre>
-</div>
-</div>
 <div class="example" id="example-523">
 <div class="examplenum">
 <a href="#example-523">Example 523</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">__a&lt;http://foo.bar/?q=__&gt;
+<pre><code class="language-markdown">**a&lt;https://foo.bar/?q=**&gt;
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;__a&lt;a<span class="space"> </span>href=&quot;http://foo.bar/?q=__&quot;&gt;http://foo.bar/?q=__&lt;/a&gt;&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;**a&lt;a<span class="space"> </span>href=&quot;https://foo.bar/?q=**&quot;&gt;https://foo.bar/?q=**&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-524">
+<div class="examplenum">
+<a href="#example-524">Example 524</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">__a&lt;https://foo.bar/?q=__&gt;
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;__a&lt;a<span class="space"> </span>href=&quot;https://foo.bar/?q=__&quot;&gt;https://foo.bar/?q=__&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
@@ -15903,9 +15923,9 @@ above.  The link’s title consists of the link title, excluding its
 enclosing delimiters, with backslash-escapes in effect as described
 above.</p>
 <p>Here is a simple inline link:</p>
-<div class="example" id="example-524">
+<div class="example" id="example-525">
 <div class="examplenum">
-<a href="#example-524">Example 524</a>
+<a href="#example-525">Example 525</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/uri<span class="space"> </span>&quot;title&quot;)
@@ -15918,9 +15938,9 @@ above.</p>
 </div>
 <p>The title, the link text and even
 the destination may be omitted:</p>
-<div class="example" id="example-525">
+<div class="example" id="example-526">
 <div class="examplenum">
-<a href="#example-525">Example 525</a>
+<a href="#example-526">Example 526</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/uri)
@@ -15931,9 +15951,9 @@ the destination may be omitted:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-526">
+<div class="example" id="example-527">
 <div class="examplenum">
-<a href="#example-526">Example 526</a>
+<a href="#example-527">Example 527</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[](./target.md)
@@ -15944,25 +15964,12 @@ the destination may be omitted:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-527">
-<div class="examplenum">
-<a href="#example-527">Example 527</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">[link]()
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
-</code></pre>
-</div>
-</div>
 <div class="example" id="example-528">
 <div class="examplenum">
 <a href="#example-528">Example 528</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">[link](&lt;&gt;)
+<pre><code class="language-markdown">[link]()
 </code></pre>
 </div>
 <div class="column">
@@ -15975,6 +15982,19 @@ the destination may be omitted:</p>
 <a href="#example-529">Example 529</a>
 </div>
 <div class="column">
+<pre><code class="language-markdown">[link](&lt;&gt;)
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-530">
+<div class="examplenum">
+<a href="#example-530">Example 530</a>
+</div>
+<div class="column">
 <pre><code class="language-markdown">[]()
 </code></pre>
 </div>
@@ -15985,9 +16005,9 @@ the destination may be omitted:</p>
 </div>
 <p>The destination can only contain spaces if it is
 enclosed in pointy brackets:</p>
-<div class="example" id="example-530">
+<div class="example" id="example-531">
 <div class="examplenum">
-<a href="#example-530">Example 530</a>
+<a href="#example-531">Example 531</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/my<span class="space"> </span>uri)
@@ -15998,9 +16018,9 @@ enclosed in pointy brackets:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-531">
+<div class="example" id="example-532">
 <div class="examplenum">
-<a href="#example-531">Example 531</a>
+<a href="#example-532">Example 532</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](&lt;/my<span class="space"> </span>uri&gt;)
@@ -16013,9 +16033,9 @@ enclosed in pointy brackets:</p>
 </div>
 <p>The destination cannot contain line endings,
 even if enclosed in pointy brackets:</p>
-<div class="example" id="example-532">
+<div class="example" id="example-533">
 <div class="examplenum">
-<a href="#example-532">Example 532</a>
+<a href="#example-533">Example 533</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo
@@ -16028,9 +16048,9 @@ bar)&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-533">
+<div class="example" id="example-534">
 <div class="examplenum">
-<a href="#example-533">Example 533</a>
+<a href="#example-534">Example 534</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](&lt;foo
@@ -16045,9 +16065,9 @@ bar&gt;)&lt;/p&gt;
 </div>
 <p>The destination can contain <code>)</code> if it is enclosed
 in pointy brackets:</p>
-<div class="example" id="example-534">
+<div class="example" id="example-535">
 <div class="examplenum">
-<a href="#example-534">Example 534</a>
+<a href="#example-535">Example 535</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[a](&lt;b)c&gt;)
@@ -16059,9 +16079,9 @@ in pointy brackets:</p>
 </div>
 </div>
 <p>Pointy brackets that enclose links must be unescaped:</p>
-<div class="example" id="example-535">
+<div class="example" id="example-536">
 <div class="examplenum">
-<a href="#example-535">Example 535</a>
+<a href="#example-536">Example 536</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](&lt;foo\&gt;)
@@ -16074,9 +16094,9 @@ in pointy brackets:</p>
 </div>
 <p>These are not links, because the opening pointy bracket
 is not matched properly:</p>
-<div class="example" id="example-536">
+<div class="example" id="example-537">
 <div class="examplenum">
-<a href="#example-536">Example 536</a>
+<a href="#example-537">Example 537</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[a](&lt;b)c
@@ -16092,9 +16112,9 @@ is not matched properly:</p>
 </div>
 </div>
 <p>Parentheses inside the link destination may be escaped:</p>
-<div class="example" id="example-537">
+<div class="example" id="example-538">
 <div class="examplenum">
-<a href="#example-537">Example 537</a>
+<a href="#example-538">Example 538</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](\(foo\))
@@ -16107,9 +16127,9 @@ is not matched properly:</p>
 </div>
 <p>Any number of parentheses are allowed without escaping, as long as they are
 balanced:</p>
-<div class="example" id="example-538">
+<div class="example" id="example-539">
 <div class="examplenum">
-<a href="#example-538">Example 538</a>
+<a href="#example-539">Example 539</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo(and(bar)))
@@ -16122,9 +16142,9 @@ balanced:</p>
 </div>
 <p>However, if you have unbalanced parentheses, you need to escape or use the
 <code>&lt;...&gt;</code> form:</p>
-<div class="example" id="example-539">
+<div class="example" id="example-540">
 <div class="examplenum">
-<a href="#example-539">Example 539</a>
+<a href="#example-540">Example 540</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo(and(bar))
@@ -16135,9 +16155,9 @@ balanced:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-540">
+<div class="example" id="example-541">
 <div class="examplenum">
-<a href="#example-540">Example 540</a>
+<a href="#example-541">Example 541</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo\(and\(bar\))
@@ -16148,9 +16168,9 @@ balanced:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-541">
+<div class="example" id="example-542">
 <div class="examplenum">
-<a href="#example-541">Example 541</a>
+<a href="#example-542">Example 542</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](&lt;foo(and(bar)&gt;)
@@ -16163,9 +16183,9 @@ balanced:</p>
 </div>
 <p>Parentheses and other symbols can also be escaped, as usual
 in Markdown:</p>
-<div class="example" id="example-542">
+<div class="example" id="example-543">
 <div class="examplenum">
-<a href="#example-542">Example 542</a>
+<a href="#example-543">Example 543</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo\)\:)
@@ -16177,30 +16197,30 @@ in Markdown:</p>
 </div>
 </div>
 <p>A link can contain fragment identifiers and queries:</p>
-<div class="example" id="example-543">
+<div class="example" id="example-544">
 <div class="examplenum">
-<a href="#example-543">Example 543</a>
+<a href="#example-544">Example 544</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](#fragment)
 
-[link](http://example.com#fragment)
+[link](https://example.com#fragment)
 
-[link](http://example.com?foo=3#frag)
+[link](https://example.com?foo=3#frag)
 </code></pre>
 </div>
 <div class="column">
 <pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;#fragment&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://example.com#fragment&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://example.com?foo=3#frag&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://example.com#fragment&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://example.com?foo=3#frag&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
 <p>Note that a backslash before a non-escapable character is
 just a backslash:</p>
-<div class="example" id="example-544">
+<div class="example" id="example-545">
 <div class="examplenum">
-<a href="#example-544">Example 544</a>
+<a href="#example-545">Example 545</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo\bar)
@@ -16219,9 +16239,9 @@ be optionally URL-escaped when written as HTML, but this spec
 does not enforce any particular policy for rendering URLs in
 HTML or other formats.  Renderers may make different decisions
 about how to escape or normalize URLs in the output.</p>
-<div class="example" id="example-545">
+<div class="example" id="example-546">
 <div class="examplenum">
-<a href="#example-545">Example 545</a>
+<a href="#example-546">Example 546</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](foo%20b&amp;auml;)
@@ -16235,9 +16255,9 @@ about how to escape or normalize URLs in the output.</p>
 <p>Note that, because titles can often be parsed as destinations,
 if you try to omit the destination and keep the title, you’ll
 get unexpected results:</p>
-<div class="example" id="example-546">
+<div class="example" id="example-547">
 <div class="examplenum">
-<a href="#example-546">Example 546</a>
+<a href="#example-547">Example 547</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](&quot;title&quot;)
@@ -16249,9 +16269,9 @@ get unexpected results:</p>
 </div>
 </div>
 <p>Titles may be in single quotes, double quotes, or parentheses:</p>
-<div class="example" id="example-547">
+<div class="example" id="example-548">
 <div class="examplenum">
-<a href="#example-547">Example 547</a>
+<a href="#example-548">Example 548</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/url<span class="space"> </span>&quot;title&quot;)
@@ -16268,9 +16288,9 @@ get unexpected results:</p>
 </div>
 <p>Backslash escapes and entity and numeric character references
 may be used in titles:</p>
-<div class="example" id="example-548">
+<div class="example" id="example-549">
 <div class="examplenum">
-<a href="#example-548">Example 548</a>
+<a href="#example-549">Example 549</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/url<span class="space"> </span>&quot;title<span class="space"> </span>\&quot;&amp;quot;&quot;)
@@ -16284,9 +16304,9 @@ may be used in titles:</p>
 <p>Titles must be separated from the link using spaces, tabs, and up to one line
 ending.
 Other <a href="#unicode-whitespace">Unicode whitespace</a> like non-breaking space doesn’t work.</p>
-<div class="example" id="example-549">
+<div class="example" id="example-550">
 <div class="examplenum">
-<a href="#example-549">Example 549</a>
+<a href="#example-550">Example 550</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/url &quot;title&quot;)
@@ -16298,9 +16318,9 @@ Other <a href="#unicode-whitespace">Unicode whitespace</a> like non-breaking spa
 </div>
 </div>
 <p>Nested balanced quotes are not allowed without escaping:</p>
-<div class="example" id="example-550">
+<div class="example" id="example-551">
 <div class="examplenum">
-<a href="#example-550">Example 550</a>
+<a href="#example-551">Example 551</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/url<span class="space"> </span>&quot;title<span class="space"> </span>&quot;and&quot;<span class="space"> </span>title&quot;)
@@ -16312,9 +16332,9 @@ Other <a href="#unicode-whitespace">Unicode whitespace</a> like non-breaking spa
 </div>
 </div>
 <p>But it is easy to work around this by using a different quote type:</p>
-<div class="example" id="example-551">
+<div class="example" id="example-552">
 <div class="examplenum">
-<a href="#example-551">Example 551</a>
+<a href="#example-552">Example 552</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](/url<span class="space"> </span>'title<span class="space"> </span>&quot;and&quot;<span class="space"> </span>title')
@@ -16341,9 +16361,9 @@ It seems preferable to adopt a simple, rational rule that works
 the same way in inline links and link reference definitions.)</p>
 <p>Spaces, tabs, and up to one line ending is allowed around the destination and
 title:</p>
-<div class="example" id="example-552">
+<div class="example" id="example-553">
 <div class="examplenum">
-<a href="#example-552">Example 552</a>
+<a href="#example-553">Example 553</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link](<span class="space"> </span><span class="space"> </span><span class="space"> </span>/uri
@@ -16357,9 +16377,9 @@ title:</p>
 </div>
 <p>But it is not allowed between the link text and the
 following parenthesis:</p>
-<div class="example" id="example-553">
+<div class="example" id="example-554">
 <div class="examplenum">
-<a href="#example-553">Example 553</a>
+<a href="#example-554">Example 554</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link]<span class="space"> </span>(/uri)
@@ -16372,9 +16392,9 @@ following parenthesis:</p>
 </div>
 <p>The link text may contain balanced brackets, but not unbalanced ones,
 unless they are escaped:</p>
-<div class="example" id="example-554">
+<div class="example" id="example-555">
 <div class="examplenum">
-<a href="#example-554">Example 554</a>
+<a href="#example-555">Example 555</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>[foo<span class="space"> </span>[bar]]](/uri)
@@ -16385,9 +16405,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-555">
+<div class="example" id="example-556">
 <div class="examplenum">
-<a href="#example-555">Example 555</a>
+<a href="#example-556">Example 556</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link]<span class="space"> </span>bar](/uri)
@@ -16398,9 +16418,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-556">
+<div class="example" id="example-557">
 <div class="examplenum">
-<a href="#example-556">Example 556</a>
+<a href="#example-557">Example 557</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>[bar](/uri)
@@ -16411,9 +16431,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-557">
+<div class="example" id="example-558">
 <div class="examplenum">
-<a href="#example-557">Example 557</a>
+<a href="#example-558">Example 558</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>\[bar](/uri)
@@ -16425,9 +16445,9 @@ unless they are escaped:</p>
 </div>
 </div>
 <p>The link text may contain inline content:</p>
-<div class="example" id="example-558">
+<div class="example" id="example-559">
 <div class="examplenum">
-<a href="#example-558">Example 558</a>
+<a href="#example-559">Example 559</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>*foo<span class="space"> </span>**bar**<span class="space"> </span>`#`*](/uri)
@@ -16438,9 +16458,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-559">
+<div class="example" id="example-560">
 <div class="examplenum">
-<a href="#example-559">Example 559</a>
+<a href="#example-560">Example 560</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[![moon](moon.jpg)](/uri)
@@ -16452,9 +16472,9 @@ unless they are escaped:</p>
 </div>
 </div>
 <p>However, links may not contain other links, at any level of nesting.</p>
-<div class="example" id="example-560">
+<div class="example" id="example-561">
 <div class="examplenum">
-<a href="#example-560">Example 560</a>
+<a href="#example-561">Example 561</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>[bar](/uri)](/uri)
@@ -16465,9 +16485,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-561">
+<div class="example" id="example-562">
 <div class="examplenum">
-<a href="#example-561">Example 561</a>
+<a href="#example-562">Example 562</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>*[bar<span class="space"> </span>[baz](/uri)](/uri)*](/uri)
@@ -16478,9 +16498,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-562">
+<div class="example" id="example-563">
 <div class="examplenum">
-<a href="#example-562">Example 562</a>
+<a href="#example-563">Example 563</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![[[foo](uri1)](uri2)](uri3)
@@ -16493,9 +16513,9 @@ unless they are escaped:</p>
 </div>
 <p>These cases illustrate the precedence of link text grouping over
 emphasis grouping:</p>
-<div class="example" id="example-563">
+<div class="example" id="example-564">
 <div class="examplenum">
-<a href="#example-563">Example 563</a>
+<a href="#example-564">Example 564</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*[foo*](/uri)
@@ -16506,9 +16526,9 @@ emphasis grouping:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-564">
+<div class="example" id="example-565">
 <div class="examplenum">
-<a href="#example-564">Example 564</a>
+<a href="#example-565">Example 565</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>*bar](baz*)
@@ -16521,9 +16541,9 @@ emphasis grouping:</p>
 </div>
 <p>Note that brackets that <em>aren’t</em> part of links do not take
 precedence:</p>
-<div class="example" id="example-565">
+<div class="example" id="example-566">
 <div class="examplenum">
-<a href="#example-565">Example 565</a>
+<a href="#example-566">Example 566</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span>[bar*<span class="space"> </span>baz]
@@ -16536,9 +16556,9 @@ precedence:</p>
 </div>
 <p>These cases illustrate the precedence of HTML tags, code spans,
 and autolinks over link grouping:</p>
-<div class="example" id="example-566">
+<div class="example" id="example-567">
 <div class="examplenum">
-<a href="#example-566">Example 566</a>
+<a href="#example-567">Example 567</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>&lt;bar<span class="space"> </span>attr=&quot;](baz)&quot;&gt;
@@ -16549,9 +16569,9 @@ and autolinks over link grouping:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-567">
+<div class="example" id="example-568">
 <div class="examplenum">
-<a href="#example-567">Example 567</a>
+<a href="#example-568">Example 568</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo`](/uri)`
@@ -16562,16 +16582,16 @@ and autolinks over link grouping:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-568">
+<div class="example" id="example-569">
 <div class="examplenum">
-<a href="#example-568">Example 568</a>
+<a href="#example-569">Example 569</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">[foo&lt;http://example.com/?search=](uri)&gt;
+<pre><code class="language-markdown">[foo&lt;https://example.com/?search=](uri)&gt;
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;[foo&lt;a<span class="space"> </span>href=&quot;http://example.com/?search=%5D(uri)&quot;&gt;http://example.com/?search=](uri)&lt;/a&gt;&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;[foo&lt;a<span class="space"> </span>href=&quot;https://example.com/?search=%5D(uri)&quot;&gt;https://example.com/?search=](uri)&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
@@ -16600,9 +16620,9 @@ document is used.  (It is desirable in such cases to emit a warning.)</p>
 <p>The link’s URI and title are provided by the matching <a href="#link-reference-definition">link
 reference definition</a>.</p>
 <p>Here is a simple example:</p>
-<div class="example" id="example-569">
+<div class="example" id="example-570">
 <div class="examplenum">
-<a href="#example-569">Example 569</a>
+<a href="#example-570">Example 570</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][bar]
@@ -16619,9 +16639,9 @@ reference definition</a>.</p>
 <a href="#inline-link">inline links</a>.  Thus:</p>
 <p>The link text may contain balanced brackets, but not unbalanced ones,
 unless they are escaped:</p>
-<div class="example" id="example-570">
+<div class="example" id="example-571">
 <div class="examplenum">
-<a href="#example-570">Example 570</a>
+<a href="#example-571">Example 571</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>[foo<span class="space"> </span>[bar]]][ref]
@@ -16634,9 +16654,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-571">
+<div class="example" id="example-572">
 <div class="examplenum">
-<a href="#example-571">Example 571</a>
+<a href="#example-572">Example 572</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>\[bar][ref]
@@ -16650,9 +16670,9 @@ unless they are escaped:</p>
 </div>
 </div>
 <p>The link text may contain inline content:</p>
-<div class="example" id="example-572">
+<div class="example" id="example-573">
 <div class="examplenum">
-<a href="#example-572">Example 572</a>
+<a href="#example-573">Example 573</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[link<span class="space"> </span>*foo<span class="space"> </span>**bar**<span class="space"> </span>`#`*][ref]
@@ -16665,9 +16685,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-573">
+<div class="example" id="example-574">
 <div class="examplenum">
-<a href="#example-573">Example 573</a>
+<a href="#example-574">Example 574</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[![moon](moon.jpg)][ref]
@@ -16681,9 +16701,9 @@ unless they are escaped:</p>
 </div>
 </div>
 <p>However, links may not contain other links, at any level of nesting.</p>
-<div class="example" id="example-574">
+<div class="example" id="example-575">
 <div class="examplenum">
-<a href="#example-574">Example 574</a>
+<a href="#example-575">Example 575</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>[bar](/uri)][ref]
@@ -16696,9 +16716,9 @@ unless they are escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-575">
+<div class="example" id="example-576">
 <div class="examplenum">
-<a href="#example-575">Example 575</a>
+<a href="#example-576">Example 576</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>*bar<span class="space"> </span>[baz][ref]*][ref]
@@ -16715,9 +16735,9 @@ unless they are escaped:</p>
 instead of one <a href="#full-reference-link">full reference link</a>.)</p>
 <p>The following cases illustrate the precedence of link text grouping over
 emphasis grouping:</p>
-<div class="example" id="example-576">
+<div class="example" id="example-577">
 <div class="examplenum">
-<a href="#example-576">Example 576</a>
+<a href="#example-577">Example 577</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*[foo*][ref]
@@ -16730,9 +16750,9 @@ emphasis grouping:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-577">
+<div class="example" id="example-578">
 <div class="examplenum">
-<a href="#example-577">Example 577</a>
+<a href="#example-578">Example 578</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>*bar][ref]*
@@ -16747,9 +16767,9 @@ emphasis grouping:</p>
 </div>
 <p>These cases illustrate the precedence of HTML tags, code spans,
 and autolinks over link grouping:</p>
-<div class="example" id="example-578">
+<div class="example" id="example-579">
 <div class="examplenum">
-<a href="#example-578">Example 578</a>
+<a href="#example-579">Example 579</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo<span class="space"> </span>&lt;bar<span class="space"> </span>attr=&quot;][ref]&quot;&gt;
@@ -16762,9 +16782,9 @@ and autolinks over link grouping:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-579">
+<div class="example" id="example-580">
 <div class="examplenum">
-<a href="#example-579">Example 579</a>
+<a href="#example-580">Example 580</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo`][ref]`
@@ -16777,25 +16797,25 @@ and autolinks over link grouping:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-580">
+<div class="example" id="example-581">
 <div class="examplenum">
-<a href="#example-580">Example 580</a>
+<a href="#example-581">Example 581</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">[foo&lt;http://example.com/?search=][ref]&gt;
+<pre><code class="language-markdown">[foo&lt;https://example.com/?search=][ref]&gt;
 
 [ref]:<span class="space"> </span>/uri
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;[foo&lt;a<span class="space"> </span>href=&quot;http://example.com/?search=%5D%5Bref%5D&quot;&gt;http://example.com/?search=][ref]&lt;/a&gt;&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;[foo&lt;a<span class="space"> </span>href=&quot;https://example.com/?search=%5D%5Bref%5D&quot;&gt;https://example.com/?search=][ref]&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
 <p>Matching is case-insensitive:</p>
-<div class="example" id="example-581">
+<div class="example" id="example-582">
 <div class="examplenum">
-<a href="#example-581">Example 581</a>
+<a href="#example-582">Example 582</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][BaR]
@@ -16809,9 +16829,9 @@ and autolinks over link grouping:</p>
 </div>
 </div>
 <p>Unicode case fold is used:</p>
-<div class="example" id="example-582">
+<div class="example" id="example-583">
 <div class="examplenum">
-<a href="#example-582">Example 582</a>
+<a href="#example-583">Example 583</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[ẞ]
@@ -16826,9 +16846,9 @@ and autolinks over link grouping:</p>
 </div>
 <p>Consecutive internal spaces, tabs, and line endings are treated as one space for
 purposes of determining matching:</p>
-<div class="example" id="example-583">
+<div class="example" id="example-584">
 <div class="examplenum">
-<a href="#example-583">Example 583</a>
+<a href="#example-584">Example 584</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[Foo
@@ -16844,9 +16864,9 @@ purposes of determining matching:</p>
 </div>
 <p>No spaces, tabs, or line endings are allowed between the <a href="#link-text">link text</a> and the
 <a href="#link-label">link label</a>:</p>
-<div class="example" id="example-584">
+<div class="example" id="example-585">
 <div class="examplenum">
-<a href="#example-584">Example 584</a>
+<a href="#example-585">Example 585</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]<span class="space"> </span>[bar]
@@ -16859,9 +16879,9 @@ purposes of determining matching:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-585">
+<div class="example" id="example-586">
 <div class="examplenum">
-<a href="#example-585">Example 585</a>
+<a href="#example-586">Example 586</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]
@@ -16901,9 +16921,9 @@ too dangerous to allow this, as it frequently leads to
 unintended results.)</p>
 <p>When there are multiple matching <a href="#link-reference-definitions">link reference definitions</a>,
 the first is used:</p>
-<div class="example" id="example-586">
+<div class="example" id="example-587">
 <div class="examplenum">
-<a href="#example-586">Example 586</a>
+<a href="#example-587">Example 587</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]:<span class="space"> </span>/url1
@@ -16921,9 +16941,9 @@ the first is used:</p>
 <p>Note that matching is performed on normalized strings, not parsed
 inline content.  So the following does not match, even though the
 labels define equivalent inline content:</p>
-<div class="example" id="example-587">
+<div class="example" id="example-588">
 <div class="examplenum">
-<a href="#example-587">Example 587</a>
+<a href="#example-588">Example 588</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[bar][foo\!]
@@ -16938,9 +16958,9 @@ labels define equivalent inline content:</p>
 </div>
 <p><a href="#link-label">Link labels</a> cannot contain brackets, unless they are
 backslash-escaped:</p>
-<div class="example" id="example-588">
+<div class="example" id="example-589">
 <div class="examplenum">
-<a href="#example-588">Example 588</a>
+<a href="#example-589">Example 589</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][ref[]
@@ -16954,9 +16974,9 @@ backslash-escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-589">
+<div class="example" id="example-590">
 <div class="examplenum">
-<a href="#example-589">Example 589</a>
+<a href="#example-590">Example 590</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][ref[bar]]
@@ -16970,9 +16990,9 @@ backslash-escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-590">
+<div class="example" id="example-591">
 <div class="examplenum">
-<a href="#example-590">Example 590</a>
+<a href="#example-591">Example 591</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[[[foo]]]
@@ -16986,9 +17006,9 @@ backslash-escaped:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-591">
+<div class="example" id="example-592">
 <div class="examplenum">
-<a href="#example-591">Example 591</a>
+<a href="#example-592">Example 592</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][ref\[]
@@ -17002,9 +17022,9 @@ backslash-escaped:</p>
 </div>
 </div>
 <p>Note that in this example <code>]</code> is not backslash-escaped:</p>
-<div class="example" id="example-592">
+<div class="example" id="example-593">
 <div class="examplenum">
-<a href="#example-592">Example 592</a>
+<a href="#example-593">Example 593</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[bar\\]:<span class="space"> </span>/uri
@@ -17019,9 +17039,9 @@ backslash-escaped:</p>
 </div>
 <p>A <a href="#link-label">link label</a> must contain at least one character that is not a space, tab, or
 line ending:</p>
-<div class="example" id="example-593">
+<div class="example" id="example-594">
 <div class="examplenum">
-<a href="#example-593">Example 593</a>
+<a href="#example-594">Example 594</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[]
@@ -17035,9 +17055,9 @@ line ending:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-594">
+<div class="example" id="example-595">
 <div class="examplenum">
-<a href="#example-594">Example 594</a>
+<a href="#example-595">Example 595</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[
@@ -17059,13 +17079,13 @@ line ending:</p>
 consists of a <a href="#link-label">link label</a> that <a href="#matches">matches</a> a
 <a href="#link-reference-definition">link reference definition</a> elsewhere in the
 document, followed by the string <code>[]</code>.
-The contents of the first link label are parsed as inlines,
+The contents of the link label are parsed as inlines,
 which are used as the link’s text.  The link’s URI and title are
 provided by the matching reference link definition.  Thus,
 <code>[foo][]</code> is equivalent to <code>[foo][foo]</code>.</p>
-<div class="example" id="example-595">
+<div class="example" id="example-596">
 <div class="examplenum">
-<a href="#example-595">Example 595</a>
+<a href="#example-596">Example 596</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][]
@@ -17078,9 +17098,9 @@ provided by the matching reference link definition.  Thus,
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-596">
+<div class="example" id="example-597">
 <div class="examplenum">
-<a href="#example-596">Example 596</a>
+<a href="#example-597">Example 597</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[*foo*<span class="space"> </span>bar][]
@@ -17094,9 +17114,9 @@ provided by the matching reference link definition.  Thus,
 </div>
 </div>
 <p>The link labels are case-insensitive:</p>
-<div class="example" id="example-597">
+<div class="example" id="example-598">
 <div class="examplenum">
-<a href="#example-597">Example 597</a>
+<a href="#example-598">Example 598</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[Foo][]
@@ -17111,9 +17131,9 @@ provided by the matching reference link definition.  Thus,
 </div>
 <p>As with full reference links, spaces, tabs, or line endings are not
 allowed between the two sets of brackets:</p>
-<div class="example" id="example-598">
+<div class="example" id="example-599">
 <div class="examplenum">
-<a href="#example-598">Example 598</a>
+<a href="#example-599">Example 599</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]<span class="space"> </span>
@@ -17132,13 +17152,13 @@ allowed between the two sets of brackets:</p>
 consists of a <a href="#link-label">link label</a> that <a href="#matches">matches</a> a
 <a href="#link-reference-definition">link reference definition</a> elsewhere in the
 document and is not followed by <code>[]</code> or a link label.
-The contents of the first link label are parsed as inlines,
+The contents of the link label are parsed as inlines,
 which are used as the link’s text.  The link’s URI and title
 are provided by the matching link reference definition.
 Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
-<div class="example" id="example-599">
+<div class="example" id="example-600">
 <div class="examplenum">
-<a href="#example-599">Example 599</a>
+<a href="#example-600">Example 600</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]
@@ -17151,9 +17171,9 @@ Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-600">
+<div class="example" id="example-601">
 <div class="examplenum">
-<a href="#example-600">Example 600</a>
+<a href="#example-601">Example 601</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[*foo*<span class="space"> </span>bar]
@@ -17166,9 +17186,9 @@ Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-601">
+<div class="example" id="example-602">
 <div class="examplenum">
-<a href="#example-601">Example 601</a>
+<a href="#example-602">Example 602</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[[*foo*<span class="space"> </span>bar]]
@@ -17181,9 +17201,9 @@ Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-602">
+<div class="example" id="example-603">
 <div class="examplenum">
-<a href="#example-602">Example 602</a>
+<a href="#example-603">Example 603</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[[bar<span class="space"> </span>[foo]
@@ -17197,9 +17217,9 @@ Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
 </div>
 </div>
 <p>The link labels are case-insensitive:</p>
-<div class="example" id="example-603">
+<div class="example" id="example-604">
 <div class="examplenum">
-<a href="#example-603">Example 603</a>
+<a href="#example-604">Example 604</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[Foo]
@@ -17213,9 +17233,9 @@ Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
 </div>
 </div>
 <p>A space after the link text should be preserved:</p>
-<div class="example" id="example-604">
+<div class="example" id="example-605">
 <div class="examplenum">
-<a href="#example-604">Example 604</a>
+<a href="#example-605">Example 605</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]<span class="space"> </span>bar
@@ -17230,9 +17250,9 @@ Thus, <code>[foo]</code> is equivalent to <code>[foo][]</code>.</p>
 </div>
 <p>If you just want bracketed text, you can backslash-escape the
 opening bracket to avoid links:</p>
-<div class="example" id="example-605">
+<div class="example" id="example-606">
 <div class="examplenum">
-<a href="#example-605">Example 605</a>
+<a href="#example-606">Example 606</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">\[foo]
@@ -17247,9 +17267,9 @@ opening bracket to avoid links:</p>
 </div>
 <p>Note that this is a link, because a link label ends with the first
 following closing bracket:</p>
-<div class="example" id="example-606">
+<div class="example" id="example-607">
 <div class="examplenum">
-<a href="#example-606">Example 606</a>
+<a href="#example-607">Example 607</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo*]:<span class="space"> </span>/url
@@ -17264,9 +17284,9 @@ following closing bracket:</p>
 </div>
 <p>Full and compact references take precedence over shortcut
 references:</p>
-<div class="example" id="example-607">
+<div class="example" id="example-608">
 <div class="examplenum">
-<a href="#example-607">Example 607</a>
+<a href="#example-608">Example 608</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][bar]
@@ -17280,9 +17300,9 @@ references:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-608">
+<div class="example" id="example-609">
 <div class="examplenum">
-<a href="#example-608">Example 608</a>
+<a href="#example-609">Example 609</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][]
@@ -17296,9 +17316,9 @@ references:</p>
 </div>
 </div>
 <p>Inline links also take precedence:</p>
-<div class="example" id="example-609">
+<div class="example" id="example-610">
 <div class="examplenum">
-<a href="#example-609">Example 609</a>
+<a href="#example-610">Example 610</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo]()
@@ -17311,9 +17331,9 @@ references:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-610">
+<div class="example" id="example-611">
 <div class="examplenum">
-<a href="#example-610">Example 610</a>
+<a href="#example-611">Example 611</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo](not<span class="space"> </span>a<span class="space"> </span>link)
@@ -17328,9 +17348,9 @@ references:</p>
 </div>
 <p>In the following case <code>[bar][baz]</code> is parsed as a reference,
 <code>[foo]</code> as normal text:</p>
-<div class="example" id="example-611">
+<div class="example" id="example-612">
 <div class="examplenum">
-<a href="#example-611">Example 611</a>
+<a href="#example-612">Example 612</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][bar][baz]
@@ -17345,9 +17365,9 @@ references:</p>
 </div>
 <p>Here, though, <code>[foo][bar]</code> is parsed as a reference, since
 <code>[bar]</code> is defined:</p>
-<div class="example" id="example-612">
+<div class="example" id="example-613">
 <div class="examplenum">
-<a href="#example-612">Example 612</a>
+<a href="#example-613">Example 613</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][bar][baz]
@@ -17363,9 +17383,9 @@ references:</p>
 </div>
 <p>Here <code>[foo]</code> is not parsed as a shortcut reference, because it
 is followed by a link label (even though <code>[bar]</code> is not defined):</p>
-<div class="example" id="example-613">
+<div class="example" id="example-614">
 <div class="examplenum">
-<a href="#example-613">Example 613</a>
+<a href="#example-614">Example 614</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">[foo][bar][baz]
@@ -17466,9 +17486,9 @@ To do this, you use the <code>#</code> character and the id in a link:</p>
 <p>This syntax is intended to be reminiscent of HTML anchor tags.</p>
 <p>Note that order of definition and use does not matter: crosslinks will work
 regardless of whether the <code>id</code> is defined before or after the use of it.</p>
-<div class="example" id="example-614">
+<div class="example" id="example-615">
 <div class="examplenum">
-<a href="#example-614">Example 614</a>
+<a href="#example-615">Example 615</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{id:<span class="space"> </span>id1}
@@ -17650,9 +17670,9 @@ image description starts with <code>![</code> rather than <code>[</code>, and
 An image description has inline elements
 as its contents.  When an image is rendered to HTML,
 this is standardly used as the image’s <code>alt</code> attribute.</p>
-<div class="example" id="example-615">
+<div class="example" id="example-616">
 <div class="examplenum">
-<a href="#example-615">Example 615</a>
+<a href="#example-616">Example 616</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](/url<span class="space"> </span>&quot;title&quot;)
@@ -17663,9 +17683,9 @@ this is standardly used as the image’s <code>alt</code> attribute.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-616">
+<div class="example" id="example-617">
 <div class="examplenum">
-<a href="#example-616">Example 616</a>
+<a href="#example-617">Example 617</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>*bar*]
@@ -17678,9 +17698,9 @@ this is standardly used as the image’s <code>alt</code> attribute.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-617">
+<div class="example" id="example-618">
 <div class="examplenum">
-<a href="#example-617">Example 617</a>
+<a href="#example-618">Example 618</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>![bar](/url)](/url2)
@@ -17691,9 +17711,9 @@ this is standardly used as the image’s <code>alt</code> attribute.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-618">
+<div class="example" id="example-619">
 <div class="examplenum">
-<a href="#example-618">Example 618</a>
+<a href="#example-619">Example 619</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>[bar](/url)](/url2)
@@ -17709,9 +17729,9 @@ recommended that in rendering to HTML, only the plain string content
 of the <a href="#image-description">image description</a> be used.  Note that in
 the above example, the alt attribute’s value is <code>foo bar</code>, not <code>foo [bar](/url)</code> or <code>foo &lt;a href=&quot;/url&quot;&gt;bar&lt;/a&gt;</code>.  Only the plain string
 content is rendered, without formatting.</p>
-<div class="example" id="example-619">
+<div class="example" id="example-620">
 <div class="examplenum">
-<a href="#example-619">Example 619</a>
+<a href="#example-620">Example 620</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>*bar*][]
@@ -17724,9 +17744,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-620">
+<div class="example" id="example-621">
 <div class="examplenum">
-<a href="#example-620">Example 620</a>
+<a href="#example-621">Example 621</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo<span class="space"> </span>*bar*][foobar]
@@ -17739,9 +17759,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-621">
+<div class="example" id="example-622">
 <div class="examplenum">
-<a href="#example-621">Example 621</a>
+<a href="#example-622">Example 622</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](train.jpg)
@@ -17752,9 +17772,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-622">
+<div class="example" id="example-623">
 <div class="examplenum">
-<a href="#example-622">Example 622</a>
+<a href="#example-623">Example 623</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">My<span class="space"> </span>![foo<span class="space"> </span>bar](/path/to/train.jpg<span class="space"> </span><span class="space"> </span>&quot;title&quot;<span class="space"> </span><span class="space"> </span><span class="space"> </span>)
@@ -17765,9 +17785,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-623">
+<div class="example" id="example-624">
 <div class="examplenum">
-<a href="#example-623">Example 623</a>
+<a href="#example-624">Example 624</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](&lt;url&gt;)
@@ -17778,9 +17798,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-624">
+<div class="example" id="example-625">
 <div class="examplenum">
-<a href="#example-624">Example 624</a>
+<a href="#example-625">Example 625</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![](/url)
@@ -17792,9 +17812,9 @@ content is rendered, without formatting.</p>
 </div>
 </div>
 <p>Reference-style:</p>
-<div class="example" id="example-625">
+<div class="example" id="example-626">
 <div class="examplenum">
-<a href="#example-625">Example 625</a>
+<a href="#example-626">Example 626</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo][bar]
@@ -17807,9 +17827,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-626">
+<div class="example" id="example-627">
 <div class="examplenum">
-<a href="#example-626">Example 626</a>
+<a href="#example-627">Example 627</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo][bar]
@@ -17823,9 +17843,9 @@ content is rendered, without formatting.</p>
 </div>
 </div>
 <p>Collapsed:</p>
-<div class="example" id="example-627">
+<div class="example" id="example-628">
 <div class="examplenum">
-<a href="#example-627">Example 627</a>
+<a href="#example-628">Example 628</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo][]
@@ -17838,9 +17858,9 @@ content is rendered, without formatting.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-628">
+<div class="example" id="example-629">
 <div class="examplenum">
-<a href="#example-628">Example 628</a>
+<a href="#example-629">Example 629</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![*foo*<span class="space"> </span>bar][]
@@ -17854,9 +17874,9 @@ content is rendered, without formatting.</p>
 </div>
 </div>
 <p>The labels are case-insensitive:</p>
-<div class="example" id="example-629">
+<div class="example" id="example-630">
 <div class="examplenum">
-<a href="#example-629">Example 629</a>
+<a href="#example-630">Example 630</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![Foo][]
@@ -17871,9 +17891,9 @@ content is rendered, without formatting.</p>
 </div>
 <p>As with reference links, spaces, tabs, and line endings, are not allowed
 between the two sets of brackets:</p>
-<div class="example" id="example-630">
+<div class="example" id="example-631">
 <div class="examplenum">
-<a href="#example-630">Example 630</a>
+<a href="#example-631">Example 631</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo]<span class="space"> </span>
@@ -17889,9 +17909,9 @@ between the two sets of brackets:</p>
 </div>
 </div>
 <p>Shortcut:</p>
-<div class="example" id="example-631">
+<div class="example" id="example-632">
 <div class="examplenum">
-<a href="#example-631">Example 631</a>
+<a href="#example-632">Example 632</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo]
@@ -17904,9 +17924,9 @@ between the two sets of brackets:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-632">
+<div class="example" id="example-633">
 <div class="examplenum">
-<a href="#example-632">Example 632</a>
+<a href="#example-633">Example 633</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![*foo*<span class="space"> </span>bar]
@@ -17920,9 +17940,9 @@ between the two sets of brackets:</p>
 </div>
 </div>
 <p>Note that link labels cannot contain unescaped brackets:</p>
-<div class="example" id="example-633">
+<div class="example" id="example-634">
 <div class="examplenum">
-<a href="#example-633">Example 633</a>
+<a href="#example-634">Example 634</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![[foo]]
@@ -17937,9 +17957,9 @@ between the two sets of brackets:</p>
 </div>
 </div>
 <p>The link labels are case-insensitive:</p>
-<div class="example" id="example-634">
+<div class="example" id="example-635">
 <div class="examplenum">
-<a href="#example-634">Example 634</a>
+<a href="#example-635">Example 635</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![Foo]
@@ -17954,9 +17974,9 @@ between the two sets of brackets:</p>
 </div>
 <p>If you just want a literal <code>!</code> followed by bracketed text, you can
 backslash-escape the opening <code>[</code>:</p>
-<div class="example" id="example-635">
+<div class="example" id="example-636">
 <div class="examplenum">
-<a href="#example-635">Example 635</a>
+<a href="#example-636">Example 636</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">!\[foo]
@@ -17971,9 +17991,9 @@ backslash-escape the opening <code>[</code>:</p>
 </div>
 <p>If you want a link after a literal <code>!</code>, backslash-escape the
 <code>!</code>:</p>
-<div class="example" id="example-636">
+<div class="example" id="example-637">
 <div class="examplenum">
-<a href="#example-636">Example 636</a>
+<a href="#example-637">Example 637</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">\![foo]
@@ -18079,9 +18099,9 @@ Processor should scale the image proportionally if possible (again, respecting
 margins). If both <code>width</code> and <code>height</code> are specified, the Markua Processor
 should scale the image accordingly, ignoring the aspect ratio. (So, it’s almost
 always a bad idea to specify both <code>width</code> and <code>height</code>.)</p>
-<div class="example" id="example-637">
+<div class="example" id="example-638">
 <div class="examplenum">
-<a href="#example-637">Example 637</a>
+<a href="#example-638">Example 638</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](pie.jpg)
@@ -18100,9 +18120,9 @@ always a bad idea to specify both <code>width</code> and <code>height</code>.)</
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-638">
+<div class="example" id="example-639">
 <div class="examplenum">
-<a href="#example-638">Example 638</a>
+<a href="#example-639">Example 639</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">![foo](pie.jpg<span class="space"> </span>&quot;bar&quot;)
@@ -18369,9 +18389,9 @@ over how it handles the location of video resources and their display.</p>
 <h3 id="local-video" class="definition">
 <span class="number">10.10.2</span>Local Video
 </h3>
-<div class="example" id="example-639">
+<div class="example" id="example-640">
 <div class="examplenum">
-<a href="#example-639">Example 639</a>
+<a href="#example-640">Example 640</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.
@@ -18394,14 +18414,14 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 <h3 id="web-video" class="definition">
 <span class="number">10.10.3</span>Web Video
 </h3>
-<div class="example" id="example-640">
+<div class="example" id="example-641">
 <div class="examplenum">
-<a href="#example-640">Example 640</a>
+<a href="#example-641">Example 641</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.
 
-{type:<span class="space"> </span>video,<span class="space"> </span>poster:<span class="space"> </span>http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
+{type:<span class="space"> </span>video,<span class="space"> </span>poster:<span class="space"> </span>https://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg}
 ![](https://www.youtube.com/watch?t=105&amp;v=VOCYL-FNbr0<span class="space"> </span>&quot;Introducing<span class="space"> </span>Markua&quot;)
 
 Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>figure.
@@ -18411,7 +18431,7 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 <pre><code class="language-html">&lt;p&gt;Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.&lt;/p&gt;
 &lt;div<span class="space"> </span>class=&quot;figure&quot;&gt;
 &lt;video<span class="space"> </span>src=&quot;https://www.youtube.com/watch?t=105&amp;v=VOCYL-FNbr0&quot;
-poster=&quot;http://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg&quot;/&gt;
+poster=&quot;https://img.youtube.com/vi/VOCYL-FNbr0/mqdefault.jpg&quot;/&gt;
 &lt;p<span class="space"> </span>class=&quot;title&quot;&gt;Introducing<span class="space"> </span>Markua&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>figure.&lt;/p&gt;
@@ -18464,15 +18484,15 @@ ADA compliance. For example, what Leanpub does with an <code>iframe</code> resou
 <p>In the following sections, please note that while the examples are shown with
 an HTML mapping, please note that a Markua Processor has complete flexibility
 over how it handles the location of video resources and their display.</p>
-<div class="example" id="example-641">
+<div class="example" id="example-642">
 <div class="examplenum">
-<a href="#example-641">Example 641</a>
+<a href="#example-642">Example 642</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>before<span class="space"> </span>the<span class="space"> </span>figure.
 
-{type:<span class="space"> </span>iframe,<span class="space"> </span>poster:<span class="space"> </span>http://markua.com/Markua.png,<span class="space"> </span>width:<span class="space"> </span>300,<span class="space"> </span>height:<span class="space"> </span>200}
-![](http://markua.com/Markua.pdf<span class="space"> </span>&quot;Introducing<span class="space"> </span>Markua&quot;)
+{type:<span class="space"> </span>iframe,<span class="space"> </span>poster:<span class="space"> </span>https://markua.com/Markua.png,<span class="space"> </span>width:<span class="space"> </span>300,<span class="space"> </span>height:<span class="space"> </span>200}
+![](https://markua.com/Markua.pdf<span class="space"> </span>&quot;Introducing<span class="space"> </span>Markua&quot;)
 
 Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span class="space"> </span>after<span class="space"> </span>the<span class="space"> </span>figure.
 </code></pre>
@@ -18483,7 +18503,7 @@ Here's<span class="space"> </span>a<span class="space"> </span>paragraph<span cl
 &lt;iframe<span class="space"> </span>title=&quot;Introducing<span class="space"> </span>Markua&quot;
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>width=&quot;300&quot;
 <span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>height=&quot;200&quot;
-<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>src=&quot;http://markua.com/Markua.pdf&quot;&gt;
+<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>src=&quot;https://markua.com/Markua.pdf&quot;&gt;
 &lt;p<span class="space"> </span>class=&quot;title&quot;&gt;Introducing<span class="space"> </span>Markua&lt;/p&gt;
 &lt;/iframe&gt;
 &lt;/div&gt;
@@ -18554,9 +18574,9 @@ over how it handles the location of video resources and their display.</p>
 <h3 id="local-audio" class="definition">
 <span class="number">10.12.2</span>Local Audio
 </h3>
-<div class="example" id="example-642">
+<div class="example" id="example-643">
 <div class="examplenum">
-<a href="#example-642">Example 642</a>
+<a href="#example-643">Example 643</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">The<span class="space"> </span>full<span class="space"> </span>version<span class="space"> </span>of<span class="space"> </span>the<span class="space"> </span>talk<span class="space"> </span>is<span class="space"> </span>here:
@@ -18576,20 +18596,20 @@ over how it handles the location of video resources and their display.</p>
 <h3 id="web-audio" class="definition">
 <span class="number">10.12.3</span>Web Audio
 </h3>
-<div class="example" id="example-643">
+<div class="example" id="example-644">
 <div class="examplenum">
-<a href="#example-643">Example 643</a>
+<a href="#example-644">Example 644</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">The<span class="space"> </span>full<span class="space"> </span>version<span class="space"> </span>of<span class="space"> </span>the<span class="space"> </span>talk<span class="space"> </span>is<span class="space"> </span>here:
 
-![](http://markua.com/talk.mp3<span class="space"> </span>&quot;Full<span class="space"> </span>Talk&quot;)
+![](https://markua.com/talk.mp3<span class="space"> </span>&quot;Full<span class="space"> </span>Talk&quot;)
 </code></pre>
 </div>
 <div class="column">
 <pre><code class="language-html">&lt;p&gt;The<span class="space"> </span>full<span class="space"> </span>version<span class="space"> </span>of<span class="space"> </span>the<span class="space"> </span>talk<span class="space"> </span>is<span class="space"> </span>here:&lt;/p&gt;
 &lt;div<span class="space"> </span>class=&quot;figure&quot;&gt;
-&lt;audio<span class="space"> </span>src=&quot;http://markua.com/talk.mp3&quot;/&gt;
+&lt;audio<span class="space"> </span>src=&quot;https://markua.com/talk.mp3&quot;/&gt;
 &lt;p<span class="space"> </span>class=&quot;title&quot;&gt;Full<span class="space"> </span>Talk&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
@@ -18684,7 +18704,7 @@ of file extensions. The only difference is that the files are on the web.</p>
 <pre><code>Here's a paragraph before the figure.
 
 {format: latexmath}
-![too large to fit in the alt text](http://markua.com/fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
+![too large to fit in the alt text](https://markua.com/fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
 
 Here's a paragraph after the figure.
 </code></pre>
@@ -18692,7 +18712,7 @@ Here's a paragraph after the figure.
 <pre><code>Here's a paragraph before the figure.
 
 {format: latexmath, alt: &quot;too large to fit in the alt text&quot;}
-![](http://markua.com/fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
+![](https://markua.com/fermat-proof.tex &quot;Proof of Fermat's Last Theorem&quot;)
 
 Here's a paragraph after the figure.
 </code></pre>
@@ -18731,7 +18751,7 @@ inside a sentence.
 <h5 id="asciimath-span" class="definition">
 <span class="number">10.13.6.1.2</span>AsciiMath span
 </h5>
-<p><a href="http://asciimath.org/">AsciiMath</a> is a way of producing simple MathML equations,
+<p><a href="https://asciimath.org/">AsciiMath</a> is a way of producing simple MathML equations,
 using about 1% of the typing. It’s more terse than LaTeX math.</p>
 <p>There is syntactic sugar for AsciiMath which is inserted as a span, using the <code>@</code>
 character after the closing backtick:</p>
@@ -18827,7 +18847,7 @@ abs(sum_(i=1)^n a_i b_i) &lt;= (sum_(i=1)^n a_i^2)^(1/2) (sum_(i=1)^n b_i^2)^(1/
 Here's a paragraph after the figure.
 </code></pre>
 <p>If you wonder why I’m a fan of AsciiMath: I actually got that right on the first
-try at the <a href="http://asciimath.org/">AsciiMath website</a>.</p>
+try at the <a href="https://asciimath.org/">AsciiMath website</a>.</p>
 <p>Note that when you are writing about AsciiMath and want to display the AsciiMath
 text, what you are really doing is creating a code resource. This is essentially
 identical to what was shown earlier in writing about SVG images. It’s also shown
@@ -18913,9 +18933,9 @@ of 2–32 characters beginning with an ASCII letter and followed
 by any combination of ASCII letters, digits, or the symbols plus
 (“+”), period (“.”), or hyphen (“-”).</p>
 <p>Here are some valid autolinks:</p>
-<div class="example" id="example-644">
+<div class="example" id="example-645">
 <div class="examplenum">
-<a href="#example-644">Example 644</a>
+<a href="#example-645">Example 645</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;http://foo.bar.baz&gt;
@@ -18926,22 +18946,22 @@ by any combination of ASCII letters, digits, or the symbols plus
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-645">
-<div class="examplenum">
-<a href="#example-645">Example 645</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">&lt;http://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean&gt;
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://foo.bar.baz/test?q=hello&amp;amp;id=22&amp;amp;boolean&quot;&gt;http://foo.bar.baz/test?q=hello&amp;amp;id=22&amp;amp;boolean&lt;/a&gt;&lt;/p&gt;
-</code></pre>
-</div>
-</div>
 <div class="example" id="example-646">
 <div class="examplenum">
 <a href="#example-646">Example 646</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">&lt;https://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean&gt;
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://foo.bar.baz/test?q=hello&amp;amp;id=22&amp;amp;boolean&quot;&gt;https://foo.bar.baz/test?q=hello&amp;amp;id=22&amp;amp;boolean&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-647">
+<div class="examplenum">
+<a href="#example-647">Example 647</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;irc://foo.bar:2233/baz&gt;
@@ -18953,9 +18973,9 @@ by any combination of ASCII letters, digits, or the symbols plus
 </div>
 </div>
 <p>Uppercase is also fine:</p>
-<div class="example" id="example-647">
+<div class="example" id="example-648">
 <div class="examplenum">
-<a href="#example-647">Example 647</a>
+<a href="#example-648">Example 648</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;MAILTO:FOO@BAR.BAZ&gt;
@@ -18970,9 +18990,9 @@ by any combination of ASCII letters, digits, or the symbols plus
 purposes of this spec are not valid URIs, because their
 schemes are not registered or because of other problems
 with their syntax:</p>
-<div class="example" id="example-648">
+<div class="example" id="example-649">
 <div class="examplenum">
-<a href="#example-648">Example 648</a>
+<a href="#example-649">Example 649</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;a+b+c:d&gt;
@@ -18983,9 +19003,9 @@ with their syntax:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-649">
+<div class="example" id="example-650">
 <div class="examplenum">
-<a href="#example-649">Example 649</a>
+<a href="#example-650">Example 650</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;made-up-scheme://foo,bar&gt;
@@ -18996,22 +19016,22 @@ with their syntax:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-650">
-<div class="examplenum">
-<a href="#example-650">Example 650</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">&lt;http://../&gt;
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://../&quot;&gt;http://../&lt;/a&gt;&lt;/p&gt;
-</code></pre>
-</div>
-</div>
 <div class="example" id="example-651">
 <div class="examplenum">
 <a href="#example-651">Example 651</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">&lt;https://../&gt;
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://../&quot;&gt;https://../&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-652">
+<div class="examplenum">
+<a href="#example-652">Example 652</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;localhost:5001/foo&gt;
@@ -19023,30 +19043,30 @@ with their syntax:</p>
 </div>
 </div>
 <p>Spaces are not allowed in autolinks:</p>
-<div class="example" id="example-652">
-<div class="examplenum">
-<a href="#example-652">Example 652</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">&lt;http://foo.bar/baz<span class="space"> </span>bim&gt;
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;&amp;lt;http://foo.bar/baz<span class="space"> </span>bim&amp;gt;&lt;/p&gt;
-</code></pre>
-</div>
-</div>
-<p>Backslash-escapes do not work inside autolinks:</p>
 <div class="example" id="example-653">
 <div class="examplenum">
 <a href="#example-653">Example 653</a>
 </div>
 <div class="column">
-<pre><code class="language-markdown">&lt;http://example.com/\[\&gt;
+<pre><code class="language-markdown">&lt;https://foo.bar/baz<span class="space"> </span>bim&gt;
 </code></pre>
 </div>
 <div class="column">
-<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;http://example.com/%5C%5B%5C&quot;&gt;http://example.com/\[\&lt;/a&gt;&lt;/p&gt;
+<pre><code class="language-html">&lt;p&gt;&amp;lt;https://foo.bar/baz<span class="space"> </span>bim&amp;gt;&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<p>Backslash-escapes do not work inside autolinks:</p>
+<div class="example" id="example-654">
+<div class="examplenum">
+<a href="#example-654">Example 654</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">&lt;https://example.com/\[\&gt;
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;&lt;a<span class="space"> </span>href=&quot;https://example.com/%5C%5B%5C&quot;&gt;https://example.com/\[\&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
@@ -19062,9 +19082,9 @@ spec</a>:</p>
 (?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 </code></pre>
 <p>Examples of email autolinks:</p>
-<div class="example" id="example-654">
+<div class="example" id="example-655">
 <div class="examplenum">
-<a href="#example-654">Example 654</a>
+<a href="#example-655">Example 655</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo@bar.example.com&gt;
@@ -19075,9 +19095,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-655">
+<div class="example" id="example-656">
 <div class="examplenum">
-<a href="#example-655">Example 655</a>
+<a href="#example-656">Example 656</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo+special@Bar.baz-bar0.com&gt;
@@ -19089,9 +19109,9 @@ spec</a>:</p>
 </div>
 </div>
 <p>Backslash-escapes do not work inside email autolinks:</p>
-<div class="example" id="example-656">
+<div class="example" id="example-657">
 <div class="examplenum">
-<a href="#example-656">Example 656</a>
+<a href="#example-657">Example 657</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo\+@bar.example.com&gt;
@@ -19103,9 +19123,9 @@ spec</a>:</p>
 </div>
 </div>
 <p>These are not autolinks:</p>
-<div class="example" id="example-657">
+<div class="example" id="example-658">
 <div class="examplenum">
-<a href="#example-657">Example 657</a>
+<a href="#example-658">Example 658</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;&gt;
@@ -19116,22 +19136,22 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-658">
-<div class="examplenum">
-<a href="#example-658">Example 658</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">&lt;<span class="space"> </span>http://foo.bar<span class="space"> </span>&gt;
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;&amp;lt;<span class="space"> </span>http://foo.bar<span class="space"> </span>&amp;gt;&lt;/p&gt;
-</code></pre>
-</div>
-</div>
 <div class="example" id="example-659">
 <div class="examplenum">
 <a href="#example-659">Example 659</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">&lt;<span class="space"> </span>https://foo.bar<span class="space"> </span>&gt;
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;&amp;lt;<span class="space"> </span>https://foo.bar<span class="space"> </span>&amp;gt;&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-660">
+<div class="examplenum">
+<a href="#example-660">Example 660</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;m:abc&gt;
@@ -19142,9 +19162,9 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-660">
+<div class="example" id="example-661">
 <div class="examplenum">
-<a href="#example-660">Example 660</a>
+<a href="#example-661">Example 661</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;foo.bar.baz&gt;
@@ -19155,22 +19175,22 @@ spec</a>:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-661">
-<div class="examplenum">
-<a href="#example-661">Example 661</a>
-</div>
-<div class="column">
-<pre><code class="language-markdown">http://example.com
-</code></pre>
-</div>
-<div class="column">
-<pre><code class="language-html">&lt;p&gt;http://example.com&lt;/p&gt;
-</code></pre>
-</div>
-</div>
 <div class="example" id="example-662">
 <div class="examplenum">
 <a href="#example-662">Example 662</a>
+</div>
+<div class="column">
+<pre><code class="language-markdown">https://example.com
+</code></pre>
+</div>
+<div class="column">
+<pre><code class="language-html">&lt;p&gt;https://example.com&lt;/p&gt;
+</code></pre>
+</div>
+</div>
+<div class="example" id="example-663">
+<div class="examplenum">
+<a href="#example-663">Example 663</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo@bar.example.com
@@ -19197,9 +19217,9 @@ removed from the output.</p>
 by two or more spaces and does not occur at the end of a block
 is parsed as a <a id="hard-line-break" href="#hard-line-break" class="definition">hard line break</a> (rendered
 in HTML as a <code>&lt;br /&gt;</code> tag):</p>
-<div class="example" id="example-663">
+<div class="example" id="example-664">
 <div class="examplenum">
-<a href="#example-663">Example 663</a>
+<a href="#example-664">Example 664</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
@@ -19214,9 +19234,9 @@ baz&lt;/p&gt;
 </div>
 <p>For a more visible alternative, a backslash before the
 <a href="#line-ending">line ending</a> may be used instead of two or more spaces:</p>
-<div class="example" id="example-664">
+<div class="example" id="example-665">
 <div class="examplenum">
-<a href="#example-664">Example 664</a>
+<a href="#example-665">Example 665</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo\
@@ -19230,9 +19250,9 @@ baz&lt;/p&gt;
 </div>
 </div>
 <p>More than two spaces can be used:</p>
-<div class="example" id="example-665">
+<div class="example" id="example-666">
 <div class="examplenum">
-<a href="#example-665">Example 665</a>
+<a href="#example-666">Example 666</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>
@@ -19246,9 +19266,9 @@ baz&lt;/p&gt;
 </div>
 </div>
 <p>Leading spaces at the beginning of the next line are ignored:</p>
-<div class="example" id="example-666">
+<div class="example" id="example-667">
 <div class="examplenum">
-<a href="#example-666">Example 666</a>
+<a href="#example-667">Example 667</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
@@ -19261,9 +19281,9 @@ bar&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-667">
+<div class="example" id="example-668">
 <div class="examplenum">
-<a href="#example-667">Example 667</a>
+<a href="#example-668">Example 668</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo\
@@ -19278,9 +19298,9 @@ bar&lt;/p&gt;
 </div>
 <p>Hard line breaks can occur inside emphasis, links, and other constructs
 that allow inline content:</p>
-<div class="example" id="example-668">
+<div class="example" id="example-669">
 <div class="examplenum">
-<a href="#example-668">Example 668</a>
+<a href="#example-669">Example 669</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo<span class="space"> </span><span class="space"> </span>
@@ -19293,9 +19313,9 @@ bar&lt;/em&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-669">
+<div class="example" id="example-670">
 <div class="examplenum">
-<a href="#example-669">Example 669</a>
+<a href="#example-670">Example 670</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">*foo\
@@ -19309,9 +19329,9 @@ bar&lt;/em&gt;&lt;/p&gt;
 </div>
 </div>
 <p>Hard line breaks do not occur inside code spans</p>
-<div class="example" id="example-670">
+<div class="example" id="example-671">
 <div class="examplenum">
-<a href="#example-670">Example 670</a>
+<a href="#example-671">Example 671</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">`code<span class="space"> </span><span class="space"> </span>
@@ -19323,9 +19343,9 @@ span`
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-671">
+<div class="example" id="example-672">
 <div class="examplenum">
-<a href="#example-671">Example 671</a>
+<a href="#example-672">Example 672</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">`code\
@@ -19338,9 +19358,9 @@ span`
 </div>
 </div>
 <p>or HTML tags:</p>
-<div class="example" id="example-672">
+<div class="example" id="example-673">
 <div class="examplenum">
-<a href="#example-672">Example 672</a>
+<a href="#example-673">Example 673</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;a<span class="space"> </span>href=&quot;foo<span class="space"> </span><span class="space"> </span>
@@ -19353,9 +19373,9 @@ bar&quot;&gt;&lt;/p&gt;
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-673">
+<div class="example" id="example-674">
 <div class="examplenum">
-<a href="#example-673">Example 673</a>
+<a href="#example-674">Example 674</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">&lt;a<span class="space"> </span>href=&quot;foo\
@@ -19371,9 +19391,9 @@ bar&quot;&gt;&lt;/p&gt;
 <p>Hard line breaks are for separating inline content within a block.
 Neither syntax for hard line breaks works at the end of a paragraph or
 other block element:</p>
-<div class="example" id="example-674">
+<div class="example" id="example-675">
 <div class="examplenum">
-<a href="#example-674">Example 674</a>
+<a href="#example-675">Example 675</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo\
@@ -19384,9 +19404,9 @@ other block element:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-675">
+<div class="example" id="example-676">
 <div class="examplenum">
-<a href="#example-675">Example 675</a>
+<a href="#example-676">Example 676</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span><span class="space"> </span>
@@ -19397,9 +19417,9 @@ other block element:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-676">
+<div class="example" id="example-677">
 <div class="examplenum">
-<a href="#example-676">Example 676</a>
+<a href="#example-677">Example 677</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo\
@@ -19410,9 +19430,9 @@ other block element:</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-677">
+<div class="example" id="example-678">
 <div class="examplenum">
-<a href="#example-677">Example 677</a>
+<a href="#example-678">Example 678</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">###<span class="space"> </span>foo<span class="space"> </span><span class="space"> </span>
@@ -19431,9 +19451,9 @@ preceded by two or more spaces or a backslash is parsed as a
 <a id="softbreak" href="#softbreak" class="definition">softbreak</a>.  (A soft line break may be rendered in HTML either as a
 <a href="#line-ending">line ending</a> or as a space. The result will be the same in
 browsers. In the examples here, a <a href="#line-ending">line ending</a> will be used.)</p>
-<div class="example" id="example-678">
+<div class="example" id="example-679">
 <div class="examplenum">
-<a href="#example-678">Example 678</a>
+<a href="#example-679">Example 679</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo
@@ -19448,9 +19468,9 @@ baz&lt;/p&gt;
 </div>
 <p>Spaces at the end of the line and beginning of the next line are
 removed:</p>
-<div class="example" id="example-679">
+<div class="example" id="example-680">
 <div class="examplenum">
-<a href="#example-679">Example 679</a>
+<a href="#example-680">Example 680</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">foo<span class="space"> </span>
@@ -19631,9 +19651,9 @@ this is much less of an issue for them!</p>
 issue. While underline does have legitimate uses, they are more niche than
 italic.)</p>
 <p>So, by default, <code>italicize-underlines</code> is <code>true</code>:</p>
-<div class="example" id="example-680">
+<div class="example" id="example-681">
 <div class="examplenum">
-<a href="#example-680">Example 680</a>
+<a href="#example-681">Example 681</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">#<span class="space"> </span>Chapter<span class="space"> </span>One
@@ -19658,9 +19678,9 @@ stuff
 </div>
 <p>This can be made explicit by setting the <code>italicize-underlines</code> document setting
 to <code>true</code>:</p>
-<div class="example" id="example-681">
+<div class="example" id="example-682">
 <div class="examplenum">
-<a href="#example-681">Example 681</a>
+<a href="#example-682">Example 682</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19688,9 +19708,9 @@ stuff
 </div>
 </div>
 <p>Set the <code>italicize-underlines</code> document setting to <code>false</code> to produce underline:</p>
-<div class="example" id="example-682">
+<div class="example" id="example-683">
 <div class="examplenum">
-<a href="#example-682">Example 682</a>
+<a href="#example-683">Example 683</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19718,9 +19738,9 @@ stuff
 </div>
 </div>
 <p>To produce text which is underlined as well as other bolded and/or italicized, you combine the underscores for underlining with the asterisks for bold and italics:</p>
-<div class="example" id="example-683">
+<div class="example" id="example-684">
 <div class="examplenum">
-<a href="#example-683">Example 683</a>
+<a href="#example-684">Example 684</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">{
@@ -19756,9 +19776,9 @@ stuff
 <span class="number">10.21</span>Superscript and subscript (M)
 </h2>
 <p>To produce superscript like the 3 in 5^3^ = 125, surround it with carets like <code>5^3^ = 125</code>.</p>
-<div class="example" id="example-684">
+<div class="example" id="example-685">
 <div class="examplenum">
-<a href="#example-684">Example 684</a>
+<a href="#example-685">Example 685</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Superscript:<span class="space"> </span>5^3^<span class="space"> </span>=<span class="space"> </span>125
@@ -19770,9 +19790,9 @@ stuff
 </div>
 </div>
 <p>To produce subscript like the 2 in H~2~O, surround it with single tildes like <code>H~2~O</code>.</p>
-<div class="example" id="example-685">
+<div class="example" id="example-686">
 <div class="examplenum">
-<a href="#example-685">Example 685</a>
+<a href="#example-686">Example 686</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Subscript:<span class="space"> </span>H~2~O
@@ -19791,9 +19811,9 @@ stuff
 <p>Markua enables the <code>strikethrough</code> extension, where an additional emphasis type is
 available.</p>
 <p>Strikethrough text is any text wrapped in two tildes (<code>~</code>).</p>
-<div class="example" id="example-686">
+<div class="example" id="example-687">
 <div class="examplenum">
-<a href="#example-686">Example 686</a>
+<a href="#example-687">Example 687</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">~~Hi~~<span class="space"> </span>Hello,<span class="space"> </span>world!
@@ -19806,9 +19826,9 @@ available.</p>
 </div>
 <p>As with regular emphasis delimiters, a new paragraph will cause strikethrough
 parsing to cease:</p>
-<div class="example" id="example-687">
+<div class="example" id="example-688">
 <div class="examplenum">
-<a href="#example-687">Example 687</a>
+<a href="#example-688">Example 688</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">This<span class="space"> </span>~~has<span class="space"> </span>a
@@ -19958,9 +19978,9 @@ a <code>{class: continued-para}</code></p>
 </h2>
 <p>Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.</p>
-<div class="example" id="example-688">
+<div class="example" id="example-689">
 <div class="examplenum">
-<a href="#example-688">Example 688</a>
+<a href="#example-689">Example 689</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">hello<span class="space"> </span>$.;'there
@@ -19971,9 +19991,9 @@ be parsed as plain textual content.</p>
 </code></pre>
 </div>
 </div>
-<div class="example" id="example-689">
+<div class="example" id="example-690">
 <div class="examplenum">
-<a href="#example-689">Example 689</a>
+<a href="#example-690">Example 690</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Foo<span class="space"> </span>χρῆν
@@ -19985,9 +20005,9 @@ be parsed as plain textual content.</p>
 </div>
 </div>
 <p>Internal spaces are preserved verbatim:</p>
-<div class="example" id="example-690">
+<div class="example" id="example-691">
 <div class="examplenum">
-<a href="#example-690">Example 690</a>
+<a href="#example-691">Example 691</a>
 </div>
 <div class="column">
 <pre><code class="language-markdown">Multiple<span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span>spaces
@@ -20228,7 +20248,7 @@ delimiter from the stack, and return a literal text node <code>]</code>.</p>
 </li>
 <li>
 <p>If we find one and it’s active, then we parse ahead to see if
-we have an inline link/image, reference link/image, compact reference
+we have an inline link/image, reference link/image, collapsed reference
 link/image, or shortcut reference link/image.</p>
 <ul>
 <li>

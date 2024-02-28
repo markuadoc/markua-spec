@@ -14528,7 +14528,7 @@ A [collapsed reference link](@)
 consists of a [link label] that [matches] a
 [link reference definition] elsewhere in the
 document, followed by the string `[]`.
-The contents of the first link label are parsed as inlines,
+The contents of the link label are parsed as inlines,
 which are used as the link's text.  The link's URI and title are
 provided by the matching reference link definition.  Thus,
 `[foo][]` is equivalent to `[foo][foo]`.
@@ -14581,7 +14581,7 @@ A [shortcut reference link](@)
 consists of a [link label] that [matches] a
 [link reference definition] elsewhere in the
 document and is not followed by `[]` or a link label.
-The contents of the first link label are parsed as inlines,
+The contents of the link label are parsed as inlines,
 which are used as the link's text.  The link's URI and title
 are provided by the matching link reference definition.
 Thus, `[foo]` is equivalent to `[foo][]`.
@@ -17551,7 +17551,7 @@ through the stack for an opening `[` or `![` delimiter.
   delimiter from the stack, and return a literal text node `]`.
 
 - If we find one and it's active, then we parse ahead to see if
-  we have an inline link/image, reference link/image, compact reference
+  we have an inline link/image, reference link/image, collapsed reference
   link/image, or shortcut reference link/image.
 
   + If we don't, then we remove the opening delimiter from the

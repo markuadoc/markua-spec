@@ -2979,19 +2979,23 @@ attribute and directive.</p>
 Note that there was a document settings block at the beginning of this Markua
 document. It set the default language to `eng`. Since that is the default of
 the `lang` document setting, that was redundant.
+{lang-jpn}
+古池や蛙飛び込む水の音
 
+春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
+{lang-eng}
 This is still in English. Now we will use the `lang` directive to switch the
 default language to Japanese, so that we can output some Haiku
 by 松尾芭蕉{lang: jpn} (Matsuo Bashō). (Note that this was a use of the `lang`
 attribute on a span).
 
-{lang: jpn}
+{lang-jpn}
 
 古池や蛙飛び込む水の音
 
 春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
 
-{lang: eng}
+{lang-eng}
 
 Now we are back in English, since we used the `lang` directive again to switch
 the default back to English.
@@ -3010,17 +3014,17 @@ Now we are still in English, since the above was a `lang` attribute, not a
 Finally, we'll use the `lang` directive again, to switch to Traditional Chinese
 and then to Arabic for some more poetry.
 
-{lang: zh-Hant}
+{lang-zh-Hant}
 
 花間一壺酒，獨酌無相親。
 舉杯邀明月，對影成三人。
 
-{lang: ara}
+{lang-ara}
 
 أَلا كُلُّ شَيْءٍ ما خَلا اللهَ باطِلُ
 وَكُلُّ نَعِيمٍ لا مَحالَةَ زائِلُ
 
-{lang: eng}
+{lang-eng}
 
 And with those poems by 李白{lang: zh-Hant} (Li Bai) and
 by الْمُتَنَبِّي {lang: ara} (Al-Mutanabbi), we can get back to the spec!

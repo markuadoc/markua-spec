@@ -2626,7 +2626,7 @@ language. All document settings have default values; the default value of the
 
 Document settings are discussed [here](#document-settings-m-).
 
-For a example of the lang document setting in action, see the section “A
+For a example of the `lang` document setting in action, see the section “A
 detailed example” below.
 
 
@@ -2635,7 +2635,7 @@ detailed example” below.
 The `lang` directive sets a new default language. This will be the default
 language until another `lang` directive is encountered.
 
-Remember that to add a directive you need a **blank line above and below** it.
+Remember that to add a directive you need a **blank line above and below it**.
 This example shows how to use the `lang` directive to temporarily switch the
 default language of a Markua document:
 

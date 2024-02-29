@@ -2569,14 +2569,14 @@ For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
 
-### The lang directive
+### The lang-* directives
 
-The `lang` directive is important enough that it is discussed in the next
-section, which also discusses the `lang` attributie and document setting.
+The `lang-*` directives are important enough that they are discussed in the
+next section, which also discusses the `lang` attributie and document setting.
 
 
 
-## The lang document setting, directive and attribute (M)
+## The lang document setting, lang attribute and lang directives (M)
 
 When generating books, knowing the language being used is very important.
 This enables a Markua Processor to do two things:
@@ -2600,19 +2600,24 @@ Anyway, there are three ways for an author to indicate what language is being
 used at any given time:
 
 1. The `lang` **document setting**, which sets the default language.
-2. The `lang` **directive**, which sets a new default language. This will be
-   the default language until another `lang` directive is encountered.
-3. The `lang` **attribute**, which overrides the default language (set either
-   by a document setting or directive) for a particular span or block.
+2. The `lang` **attribute**, which temporarily overrides the default language
+   for a particular span or block.
+3. The `lang-*` **directives**, which set a new default language. This will be
+   the default language until another `lang-*` directive is encountered.
+   (There is no directive called `lang-*` itself; what this refers to is a
+   family of directives like lang-eng, lang-jpn, lang-zh-Hant, etc.)
 
-In all three cases, the value of `lang` is the
-[IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
-language code of the language that the Markua document is written in.
+In all three cases, the value being set is the language code of the
+language that the Markua document is written in. This language code is found in
+[IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3), with two exceptions:
+
+1. Traditional Chinese is `zh-Hant`.
+2. Simplified Chinese is `zh-Hans`.
 
 Since English is the default language of a Markua document, all Markua
-Processors must support the `eng` value of the `lang` directive. Support for
-all other language codes is optional. If the language code given as the value
-of a `lang` directive is not supported or is unrecognized, it must be
+Processors must support the `eng` value. Support for all other language codes
+(or `lang-*` directives) is optional. If the language code given as the value
+of a `lang-*` directive is not supported or is unrecognized, it must be
 interpreted as `eng` and switch the font accordingly and switch the direction
 to left-to-right.
 
@@ -2630,7 +2635,41 @@ For a example of the `lang` document setting in action, see the section “A
 detailed example” below.
 
 
-### The `lang` directive
+
+### The `lang` attribute
+
+A `lang` attribute can be applied to a particular block or span.
+
+After that block or span concludes, the lang immediately reverts to the default
+language.
+
+~~~
+Here is some English text.
+
+{lang: jpn}
+古池や蛙飛び込む水の音
+
+{lang: jpn}
+春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
+
+This is some paragraph text which defaults to English, and it
+contains [古池や蛙飛び込む水の音]{lang: jpn} a span which is in Japanese.
+
+This is some paragraph text which still defaults to English.
+~~~
+
+This example used attribute lists on two paragraphs and on a span.
+
+The default language of the document stayed as `eng` throughout, even though
+two paragraphs and one span had their language set to Japanese.
+
+Having to specify the `lang` attribute list on every single paragraph which did
+not use the default language would get annoying very quickly! This is why the
+`lang-*` directives exist.
+
+
+
+### The `lang-*` directives
 
 The `lang` directive sets a new default language. This will be the default
 language until another `lang` directive is encountered.
@@ -2659,39 +2698,6 @@ Here is some more English text.
 For another example of the `lang` directive, see the section "A detailed
 example" below.
 
-### The `lang` attribute
-
-A `lang` attribute can be applied to a particular block or span.
-
-After that block or span concludes, the lang immediately reverts to the default
-language.
-
-~~~
-Here is some English text.
-
-{lang: jpn}
-古池や蛙飛び込む水の音
-
-{lang: jpn}
-春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
-
-This is some paragraph text which defaults to English, and it
-contains [古池や蛙飛び込む水の音]{lang: jpn} a span which is in Japanese.
-
-This is some paragraph text which still defaults to English.
-~~~
-
-This example used attribute lists on two paragraphs and on a span. Note that no
-directives were used in this example, because **directives need blank lines
-above and below them**.
-
-So, since no directives were used, the default language of the document stayed
-as `eng` throughout, even though two paragraphs and one span had their language
-set to Japanese.
-
-You will see why directives exist: having to specify the `lang` attribute list
-on every single paragraph which did not use the default language would get very
-annoying very quickly!
 
 ### A detailed example
 

@@ -173,7 +173,7 @@ $(document).ready(function() {
 <li><a href="#how-headers-define-document-structure-m-"><span class="number">3.1</span>How headers define document structure (M)</a></li>
 <li><a href="#attribute-lists-m-"><span class="number">3.2</span>Attribute lists (M)</a></li>
 <li><a href="#directives-m-"><span class="number">3.3</span>Directives (M)</a></li>
-<li><a href="#the-lang-document-setting-directive-and-attribute-m-"><span class="number">3.4</span>The lang document setting, directive and attribute (M)</a></li>
+<li><a href="#the-lang-document-setting-lang-attribute-and-lang-directives-m-"><span class="number">3.4</span>The lang document setting, lang attribute and lang directives (M)</a></li>
 <li><a href="#paragraph-continuations-m-"><span class="number">3.5</span>Paragraph continuations (M)</a></li>
 <li><a href="#concatenating-manuscript-files-inserts-blank-lines-between-them-m-"><span class="number">3.6</span>Concatenating manuscript files inserts blank lines between them (M)</a></li>
 </ul>
@@ -2678,29 +2678,25 @@ version of Markua without needing to specify anything special.</p>
 <span class="number">3.3</span>Directives (M)
 </h2>
 <p>Directives are switches which affect the behavior of a Markua Processor.</p>
-<p>A directive is surrounded in curly braces, and must have a blank line above
-and below it.</p>
-<p>Directives can either have a value, or not have a value.</p>
-<p>Here’s the syntax for an imaginary directive <code>foo</code> which does not take a value:</p>
+<p>The syntax for directives is <code>{simple}</code>. A directive is surrounded in curly
+braces, and should have a blank line above and below it.</p>
+<p>Directives do not have a value. Instead, their presence is all that is
+required. Here’s the syntax for an imaginary directive <code>foo</code>:</p>
 <pre><code>some content
 
 {foo}
 
 some content
 </code></pre>
-<p>Here’s the syntax for an imaginary directive <code>bar</code> which does take a value:</p>
+<p>To be clear: a directive does <strong>NOT</strong> contain <code>{key: value}</code> pairs. That is an
+attribute list, not a directive.</p>
+<p>The absence of key-value pairs is what makes a directive a directive. It is a
+keyword by itself, enclosed in curly braces on a line by itself. So, the
+following is also a directive, albeit a poorly-formatted one:</p>
 <pre><code>some content
-
-{bar: baz}
-
+{foo}
 some content
 </code></pre>
-<p>Almost all directives do not take a value: they function as simple switches.
-(For these directives, you can think of them as being equivalent to having the
-value <code>true</code>. However, since these directives cannot take a value, you cannot
-provide the value <code>false</code> to them.)</p>
-<p>The directive which takes a value is the <code>lang</code> directive, which is discussed
-below in its own section.</p>
 <p>The specific directives are discussed next.</p>
 <h3 id="the-pagebreak-directive" class="definition">
 <span class="number">3.3.1</span>The pagebreak directive
@@ -2861,13 +2857,15 @@ regardless of the presence or position of the <code>quiz-answers</code> directiv
 <p>For example, in Leanpub’s online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.</p>
-<h3 id="the-lang-directive" class="definition">
-<span class="number">3.3.4</span>The lang directive
+<h3 id="the-lang-directives" class="definition">
+<span class="number">3.3.4</span>The lang-* directives
 </h3>
-<p>The <code>lang</code> directive is important enough that it is discussed in the next
-section, which also discusses the <code>lang</code> attributie and document setting.</p>
-<h2 id="the-lang-document-setting-directive-and-attribute-m-" class="definition">
-<span class="number">3.4</span>The lang document setting, directive and attribute (M)
+<p>There is one more set of directives, the <code>lang-*</code> directives. These all start
+with <code>lang-</code>.</p>
+<p>The <code>lang-*</code> directives are important enough that they are discussed in the
+next section, which also discusses the <code>lang</code> attributie and document setting.</p>
+<h2 id="the-lang-document-setting-lang-attribute-and-lang-directives-m-" class="definition">
+<span class="number">3.4</span>The lang document setting, lang attribute and lang directives (M)
 </h2>
 <p>When generating books, knowing the language being used is very important.
 This enables a Markua Processor to do two things:</p>
@@ -2889,18 +2887,24 @@ themes reusable, so that they can use one theme for all their books.</p>
 used at any given time:</p>
 <ol>
 <li>The <code>lang</code> <strong>document setting</strong>, which sets the default language.</li>
-<li>The <code>lang</code> <strong>directive</strong>, which sets a new default language. This will be
-the default language until another <code>lang</code> directive is encountered.</li>
-<li>The <code>lang</code> <strong>attribute</strong>, which overrides the default language (set either
-by a document setting or directive) for a particular span or block.</li>
+<li>The <code>lang</code> <strong>attribute</strong>, which temporarily overrides the default language
+for a particular span or block.</li>
+<li>The <code>lang-*</code> <strong>directives</strong>, which set a new default language. This will be
+the default language until another <code>lang-*</code> directive is encountered.
+(There is no directive called <code>lang-*</code> itself; what this refers to is a
+family of directives like lang-eng, lang-jpn, lang-zh-Hant, etc.)</li>
 </ol>
-<p>In all three cases, the value of <code>lang</code> is the
-<a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a> three character
-language code of the language that the Markua document is written in.</p>
+<p>In all three cases, the value being set is the language code of the
+language that the Markua document is written in. This language code is found in
+<a href="https://en.wikipedia.org/wiki/ISO_639-3">IS0 639-3</a>, with two exceptions:</p>
+<ol>
+<li>Traditional Chinese is <code>zh-Hant</code>.</li>
+<li>Simplified Chinese is <code>zh-Hans</code>.</li>
+</ol>
 <p>Since English is the default language of a Markua document, all Markua
-Processors must support the <code>eng</code> value of the <code>lang</code> directive. Support for
-all other language codes is optional. If the language code given as the value
-of a <code>lang</code> directive is not supported or is unrecognized, it must be
+Processors must support the <code>eng</code> value. Support for all other language codes
+(or <code>lang-*</code> directives) is optional. If the language code given as the value
+of a <code>lang-*</code> directive is not supported or is unrecognized, it must be
 interpreted as <code>eng</code> and switch the font accordingly and switch the direction
 to left-to-right.</p>
 <h3 id="the-document-setting" class="definition">
@@ -2912,33 +2916,8 @@ language. All document settings have default values; the default value of the
 <p>Document settings are discussed <a href="#document-settings-m-">here</a>.</p>
 <p>For a example of the <code>lang</code> document setting in action, see the section “A
 detailed example” below.</p>
-<h3 id="the-directive" class="definition">
-<span class="number">3.4.2</span>The <code>lang</code> directive
-</h3>
-<p>The <code>lang</code> directive sets a new default language. This will be the default
-language until another <code>lang</code> directive is encountered.</p>
-<p>Remember that to add a directive you need a <strong>blank line above and below it</strong>.
-This example shows how to use the <code>lang</code> directive to temporarily switch the
-default language of a Markua document:</p>
-<pre><code>Here is some English text.
-
-The Markua Processor knows it is in English since there is no document settings
-block, so the default document setting for `lang` is `eng`.
-
-{lang: jpn}
-
-古池や蛙飛び込む水の音
-
-春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
-
-{lang: eng}
-
-Here is some more English text.
-</code></pre>
-<p>For another example of the <code>lang</code> directive, see the section “A detailed
-example” below.</p>
 <h3 id="the-attribute" class="definition">
-<span class="number">3.4.3</span>The <code>lang</code> attribute
+<span class="number">3.4.2</span>The <code>lang</code> attribute
 </h3>
 <p>A <code>lang</code> attribute can be applied to a particular block or span.</p>
 <p>After that block or span concludes, the lang immediately reverts to the default
@@ -2956,20 +2935,44 @@ contains [古池や蛙飛び込む水の音]{lang: jpn} a span which is in Japan
 
 This is some paragraph text which still defaults to English.
 </code></pre>
-<p>This example used attribute lists on two paragraphs and on a span. Note that no
-directives were used in this example, because <strong>directives need blank lines
-above and below them</strong>.</p>
-<p>So, since no directives were used, the default language of the document stayed
-as <code>eng</code> throughout, even though two paragraphs and one span had their language
-set to Japanese.</p>
-<p>You will see why directives exist: having to specify the <code>lang</code> attribute list
-on every single paragraph which did not use the default language would get very
-annoying very quickly!</p>
+<p>This example used attribute lists on two paragraphs and on a span.</p>
+<p>The default language of the document stayed as <code>eng</code> throughout, even though
+two paragraphs and one span had their language set to Japanese.</p>
+<p>Having to specify the <code>lang</code> attribute list on every single paragraph which did
+not use the default language would get annoying very quickly! This is why the
+<code>lang-*</code> directives exist.</p>
+<h3 id="the-directives" class="definition">
+<span class="number">3.4.3</span>The <code>lang-*</code> directives
+</h3>
+<p><strong>NOTE FOR LEANPUB AUTHORS: The <code>lang-*</code> directives are not yet supported on
+Leanpub. We will add support for them sometime in Q1 2024, and remove this
+note (TODO) when this is done.</strong></p>
+<p>The <code>lang-*</code> directives set a new default language. This will be the default
+language until another <code>lang-*</code> directive is encountered.</p>
+<p>This example shows how to use the <code>lang-*</code> directives to temporarily switch the
+default language of a Markua document:</p>
+<pre><code>Here is some English text.
+
+The Markua Processor knows it is in English since there is no document settings
+block, so the default document setting for `lang` is `eng`.
+
+{lang-jpn}
+
+古池や蛙飛び込む水の音
+
+春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
+
+{lang-eng}
+
+Here is some more English text.
+</code></pre>
+<p>For another example of the <code>lang-*</code> directives, see the section “A detailed
+example” below.</p>
 <h3 id="a-detailed-example" class="definition">
 <span class="number">3.4.4</span>A detailed example
 </h3>
 <p>The following example shows a number of uses of the <code>lang</code> document setting,
-attribute and directive.</p>
+the <code>lang</code> attribute, and the <code>lang-*</code> directives.</p>
 <pre><code>{
   lang: eng
 }
@@ -2979,13 +2982,9 @@ attribute and directive.</p>
 Note that there was a document settings block at the beginning of this Markua
 document. It set the default language to `eng`. Since that is the default of
 the `lang` document setting, that was redundant.
-{lang-jpn}
-古池や蛙飛び込む水の音
 
-春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
-{lang-eng}
-This is still in English. Now we will use the `lang` directive to switch the
-default language to Japanese, so that we can output some Haiku
+This is still in English. Now we will use the `lang-jpn` directive to switch
+the default language to Japanese, so that we can output some Haiku
 by 松尾芭蕉{lang: jpn} (Matsuo Bashō). (Note that this was a use of the `lang`
 attribute on a span).
 
@@ -2997,7 +2996,7 @@ attribute on a span).
 
 {lang-eng}
 
-Now we are back in English, since we used the `lang` directive again to switch
+Now we are back in English, since we used the `lang-eng` directive again to switch
 the default back to English.
 
 Directives are the correct way to switch the default language for an extended
@@ -3009,10 +3008,10 @@ span; here's how to use it on a block:
 夏草や兵どもが夢の跡
 
 Now we are still in English, since the above was a `lang` attribute, not a
-`lang` directive (as there was no blank line below it).
+`lang-*` directive.
 
-Finally, we'll use the `lang` directive again, to switch to Traditional Chinese
-and then to Arabic for some more poetry.
+Finally, we'll use the `lang-*` directives again, to switch to Traditional
+Chinese and then to Arabic for some more poetry.
 
 {lang-zh-Hant}
 

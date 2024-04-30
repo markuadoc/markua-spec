@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.30.35'
-date: '2024-02-28'
+version: '0.31.36'
+date: '2024-04-30'
 license: '[CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -2201,6 +2201,13 @@ value of it is that specified by the nearest ancestor heading. If no such
 attribute is present at a top-level heading, the default is given by the default
 value for the attribute defined of Markua.
 
+`cascade`
+: `true` or `false`. The default is `true`. If `true`, the values of `sample`
+and `full` cascade to the children of the given part, chapter, section,
+sub-section, etc. If `false`, they do not. Typically you will want `cascade`
+to be true in all cases except for parts. Since `cascade` is so coupled with
+`full` and `sample`, this is discussed below.
+
 `full`
 : `true` or `false`. The default is `true`. If `true`, include this heading and
 its content (including nested sections, subsections, etc.) in the full book or
@@ -2227,7 +2234,7 @@ Note that specifying either of these attributes in a nested section overrides an
 value inherited from its ancestors, or from the default. This way, you can
 include a chapter in the sample, except for a specific section of the chapter.
 
-Example:
+This example shows the use of `sample` and `full`:
 
 ~~~
 {sample: true}
@@ -2260,6 +2267,53 @@ What you read was just a sample. Why not buy the full book?
 
 This has the default values, so it is included in the book or course, but is
 excluded from the sample.
+~~~
+
+The next example shows the behaviour of `sample`, with and without `cascade`:
+
+~~~
+{class: part, sample: true}
+# Part One
+
+This introductory text will be included in the sample.
+
+# Chapter One
+
+This chapter is also included in the sample since it is contained in a part
+which is in the sample, and since cascade is true by default.
+
+## Section One
+
+This is included in the sample since it is contained in a chapter which is.
+
+{class: part, sample: true, cascade: true}
+# Part Two
+
+This introductory text will be included in the sample.
+
+# Chapter One
+
+This chapter is also included in the sample since it is contained in a part
+which is in the sample, and since cascade is explicitly set to true.
+
+## Section One
+
+This is included in the sample since it is contained in a chapter which is.
+
+{class: part, sample: true, cascade: false}
+# Part Three
+
+This introductory text will also be included in the sample.
+
+# Chapter One
+
+This chapter is NOT included in the sample since the default is false and since
+the part which contains it has cascade: false.
+
+## Section One
+
+This section is NOT included in the sample since it is not contained in a
+chapter which is.
 ~~~
 
 To be clear: ALL conditional inclusion attributes **ONLY** have meaning when used

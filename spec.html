@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.36 (2024-04-30)</div>
+<div class="version">Version 0.31.38 (2024-09-18)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -2530,10 +2530,9 @@ say if it’s too long.</p>
 <span class="number">3.2.6</span>class Attributes
 </h3>
 <p>One of the attributes which is supported in every attribute list is the <code>class</code>
-attribute. This allows a Markua Processor to do smart things about formatting.</p>
-<p>For example, if a chapter has a <code>{class: bibliography}</code> added to it, then
-the Markua Processor can then use this information to change the indentation
-of paragraphs within it to be hanging paragraphs.</p>
+attribute. This allows a Markua Processor to do smart things about formatting.
+However, this attribute is kind of an escape hatch, and should not be
+overused since it allows for nonstandard formatting.</p>
 <h3 id="conditional-inclusion-attributes-on-headings" class="definition">
 <span class="number">3.2.7</span>Conditional Inclusion Attributes on Headings
 </h3>
@@ -2914,6 +2913,42 @@ material book for the course.</p>
 with <code>lang-</code>.</p>
 <p>The <code>lang-*</code> directives are important enough that they are discussed in the
 next section, which also discusses the <code>lang</code> attributie and document setting.</p>
+<h3 id="the-hanging-indent-directives" class="definition">
+<span class="number">3.3.5</span>The hanging indent directives
+</h3>
+<p>Scholarly works sometimes need bibliographical entries to be formatted with
+hanging indents. So, this is part of the Markua spec. It makes sense for this
+to be done with directives, since this way there is a standard, portable way
+that they are defined.</p>
+<p>To use it, you use the directives <code>{begin-hanging-paragraphs}</code> to start using
+hanging paragraphs, and <code>{end-hanging-paragraphs}</code> to end it. Like all
+directives, these must be on lines by themselves, with blank lines above and
+below them. Here’s a quick example:</p>
+<pre><code>This is a normal paragraph.
+
+{begin-hanging-paragraphs}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tel\
+lus. Donec pretium posuere tellus.
+
+Aliquam erat volutpat. Nunc eleifend leo vitae magna.
+
+Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor \
+sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis b\
+landit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lac\
+us.
+
+Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor \
+sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis b\
+landit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lac\
+us.
+
+{end-hanging-paragraphs}
+
+This is a normal paragraph again.
+
+This is a normal paragraph.
+</code></pre>
 <h2 id="the-lang-document-setting-lang-attribute-and-lang-directives-m-" class="definition">
 <span class="number">3.4</span>The lang document setting, lang attribute and lang directives (M)
 </h2>

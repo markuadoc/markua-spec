@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.38 (2024-09-18)</div>
+<div class="version">Version 0.31.39 (2025-02-28)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3475,6 +3475,7 @@ the defaults are in one list. These defaults are listed below.</p>
   alt-title: all
   chapter-number-format: name
   default-code-language: guess
+  default-table-column-spacing: 6pt
   figure-classes: all
   include-page-numbers-in-references: true
   italicize-underlines: true
@@ -3528,6 +3529,10 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
+<p><code>default-table-column-spacing</code>
+: The default amount of space between table columns. The default is 6 pt.
+This can be overridden by the <code>column-spacing</code> attribute on individual table
+resources.</p>
 <p><code>figure-classes</code>
 : this is a comma-separated list of the figure classes which are included in the
 list(s) of figures near the beginning of the book or course. The default is
@@ -8037,6 +8042,11 @@ external file. The <code>rows</code> and <code>columns</code> attributes let you
 The <code>columns</code> attribute can take a comma-separated list of values or ranges,
 such as <code>2, 4, 7..9</code>, which would ensure that columns 2, 4, 7, 8 and 9 were
 shown.</p>
+<p><code>column-spacing</code>
+: The amount of space between table columns. The default is set by the
+<code>default-table-column-spacing</code> document setting, which defaults to 6pt.
+Some tables may need to have wider or narrower spacing than the document
+setting, so this attribute is provided to override that value.</p>
 <p><code>column-widths</code>
 : The column widths are a whitespace-separated list of numbers (integers and/or
 floats) and/or * symbols, from left to right, as a percentage of the total table

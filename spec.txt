@@ -3181,6 +3181,8 @@ the defaults are in one list. These defaults are listed below.
   alt-title: all
   chapter-number-format: name
   default-code-language: guess
+  default-random-choice-order: false
+  default-random-question-order: false
   default-table-column-spacing: 6pt
   figure-classes: all
   include-page-numbers-in-references: true

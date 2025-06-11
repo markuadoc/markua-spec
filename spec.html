@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.39 (2025-02-28)</div>
+<div class="version">Version 0.31.40 (2025-06-11)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3475,6 +3475,8 @@ the defaults are in one list. These defaults are listed below.</p>
   alt-title: all
   chapter-number-format: name
   default-code-language: guess
+  default-random-choice-order: false
+  default-random-question-order: false
   default-table-column-spacing: 6pt
   figure-classes: all
   include-page-numbers-in-references: true
@@ -3529,6 +3531,15 @@ inserted with tildes. The default language for inline resources delimited by
 three tildes is always <code>text</code>, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.</p>
+<p><code>default-random-choice-order</code>
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
+multiple choice questions in all quizzes and exercises in the course.
+If <code>true</code>, the choices in the multiple choice question are randomly arranged;
+if <code>false</code>, they are presented in the order written.</p>
+<p><code>default-random-question-order</code>
+: <code>true</code> or <code>false</code>. The default is <code>false</code>. This sets the default behavior of
+all quizzes and exercises in the course. If <code>true</code>, the questions are randomly
+arranged; if <code>false</code>, they are presented in the order written.</p>
 <p><code>default-table-column-spacing</code>
 : The default amount of space between table columns. The default is 6 pt.
 This can be overridden by the <code>column-spacing</code> attribute on individual table

@@ -3474,6 +3474,7 @@ the defaults are in one list. These defaults are listed below.</p>
 <pre><code>{
   alt-title: all
   chapter-number-format: name
+  code-block-name: figure
   default-code-language: guess
   default-random-choice-order: false
   default-random-question-order: false
@@ -3514,6 +3515,13 @@ or <code>name</code>  (e.g. The Chapter Name). The default is <code>name</code>.
 format of the chapter heading in the body of the book. The format of the
 chapter heading in the table of contents is set by the related
 <code>toc-chapter-number-format</code> setting.</p>
+<p><code>code-block-name</code>
+: <code>figure</code> or <code>listing</code>. The default is <code>figure</code>, for backward compatibility.
+This is what code blocks (code samples which are not inline) get referred to
+as in crosslinks and lists of figures. The reason that this is standardized
+on two choices, instead of just an arbitrary string, is to make things more
+consistent for readers, and easier to implement for builders of Markua
+Processors.</p>
 <p><code>default-code-language</code>
 : The default language that code which is a local resource, web resource or
 inline resource inserted as a <strong>block</strong> with three backticks is interpreted as.

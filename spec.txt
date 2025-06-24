@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.31.41'
-date: '2025-06-12'
+version: '0.31.42'
+date: '2025-06-23'
 license: '[CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -3196,6 +3196,7 @@ the defaults are in one list. These defaults are listed below.
   restart-footnote-numbering: true
   section-number-format: name
   soft-breaks: space
+  table-name: figure
   toc-chapter-number-format: name
   toc-part-number-format: name
   toc-section-number-format: name
@@ -3372,6 +3373,13 @@ single newlines in the source essentially produce a single space in the output
 inside paragraphs in the Markua document essentially produce newlines in the
 output (like Markua 0.10). This setting is so important it is discussed in its
 own [section](#the-soft-breaks-document-setting-m-) below.
+
+`table-name`
+: `figure` or `table`. The default is `figure`, for backward compatibility.
+This is what tables get referred to as in crosslinks and lists of figures.
+The reason that this is standardized on two choices, instead of just an
+arbitrary string, is to make things more consistent for readers, and easier to
+implement for builders of Markua Processors.
 
 `toc-chapter-number-format`
 : `category_number_name` (e.g. Chapter 1: The Chapter Name), `category_number`
@@ -15338,8 +15346,9 @@ So, for a "Figure 8.2: Anatomy of a Squirrel" on page 42, these are:
   `include-page-numbers-in-references` is false, it is "Figure 8.2: Anatomy
   of a Squirrel" (just like EPUB).
 
-The `code-sample-names`, `figure-names` and `table-names` settings control the
-words used to name things.
+Note that the `code-block-name`, and `table-name` settings affect the words
+used to name code listings and tables: they can be referred to as figure, or
+as listing or table, respectively.
 
 The only way to reference the title and numbers is in crosslinks. There's no
 syntax to do so without creating a crosslink--a crosslink is more helpful,

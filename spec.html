@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.41 (2025-06-12)</div>
+<div class="version">Version 0.31.42 (2025-06-23)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -3490,6 +3490,7 @@ the defaults are in one list. These defaults are listed below.</p>
   restart-footnote-numbering: true
   section-number-format: name
   soft-breaks: space
+  table-name: figure
   toc-chapter-number-format: name
   toc-part-number-format: name
   toc-section-number-format: name
@@ -3649,6 +3650,12 @@ single newlines in the source essentially produce a single space in the output
 inside paragraphs in the Markua document essentially produce newlines in the
 output (like Markua 0.10). This setting is so important it is discussed in its
 own <a href="#the-soft-breaks-document-setting-m-">section</a> below.</p>
+<p><code>table-name</code>
+: <code>figure</code> or <code>table</code>. The default is <code>figure</code>, for backward compatibility.
+This is what tables get referred to as in crosslinks and lists of figures.
+The reason that this is standardized on two choices, instead of just an
+arbitrary string, is to make things more consistent for readers, and easier to
+implement for builders of Markua Processors.</p>
 <p><code>toc-chapter-number-format</code>
 : <code>category_number_name</code> (e.g. Chapter 1: The Chapter Name), <code>category_number</code>
 (e.g. Chapter 1), <code>number_name</code> (e.g. 1. The Chapter Name), <code>number</code> (e.g. 1)
@@ -17926,8 +17933,9 @@ document setting is false.</li>
 <code>include-page-numbers-in-references</code> is false, it is “Figure 8.2: Anatomy
 of a Squirrel” (just like EPUB).</li>
 </ul>
-<p>The <code>code-sample-names</code>, <code>figure-names</code> and <code>table-names</code> settings control the
-words used to name things.</p>
+<p>Note that the <code>code-block-name</code>, and <code>table-name</code> settings affect the words
+used to name code listings and tables: they can be referred to as figure, or
+as listing or table, respectively.</p>
 <p>The only way to reference the title and numbers is in crosslinks. There’s no
 syntax to do so without creating a crosslink–a crosslink is more helpful,
 since it is clickable, and adding another syntax simply to be less helpful to

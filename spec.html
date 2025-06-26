@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.43 (2025-06-26)</div>
+<div class="version">Version 0.31.44 (2025-06-26)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -2695,8 +2695,31 @@ This<span class="space"> </span>span<span class="space"> </span>contains<span cl
 </div>
 <p>Note, however, that you cannot start a normal span with a caret (<code>^</code>): this
 creates a <code>[^footnote]</code> instead. (Footnotes are discussed below.)</p>
+<h3 id="accompanying-video-and-youtube-attributes-on-headings" class="definition">
+<span class="number">3.2.9</span>Accompanying video and youtube attributes on headings
+</h3>
+<p>Headings, such as for chapters and sections, may have attributes used to
+identify associated video resources. This is particularly useful in Markua
+courses, which often want to designate a particular video as the video for
+that lesson, and have it placed in a more prominent way than if it was just
+inserted in the text as a resource.</p>
+<p><code>video</code>
+: If present, the full URL of a video file on the internet, such as
+<code>https://www.youtube.com/watch?v=ozO0kOnqmyA</code> for YouTube videos. You can also
+link to resources hosted on places such as Amazon S3, etc., and you can link to
+video resources which require authentication.</p>
+<p><code>youtube</code>
+: If present, the part of a YouTube URL, such as <code>ozO0kOnqmyA</code>, which
+uniquely identifies a YouTube video. The video may be public or unlisted.
+This is a convenience since YouTube is so popular.</p>
+<p>An example of a youtube attribute used on a heading is as follows:</p>
+<pre><code>{youtube:&quot;ozO0kOnqmyA&quot;}
+# Lean Publishing
+
+This chapter discusses Lean Publishing, which is discussed in this 2013 video.
+</code></pre>
 <h3 id="extension-attributes" class="definition">
-<span class="number">3.2.9</span>Extension attributes
+<span class="number">3.2.10</span>Extension attributes
 </h3>
 <p>Markua Processors may encounter attributes which they do not understand.</p>
 <p>Whenever this happens, these attributes must be filtered from the output. A

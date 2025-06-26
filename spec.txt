@@ -1,7 +1,7 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.31.43'
+version: '0.31.44'
 date: '2025-06-26'
 license: '[CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)'
 ...
@@ -2358,6 +2358,36 @@ This span contains [古池や蛙飛び込む水の音]{lang: jpn} Japanese text.
 
 Note, however, that you cannot start a normal span with a caret (`^`): this
 creates a `[^footnote]` instead. (Footnotes are discussed below.)
+
+
+
+### Accompanying video and youtube attributes on headings
+
+Headings, such as for chapters and sections, may have attributes used to
+identify associated video resources. This is particularly useful in Markua
+courses, which often want to designate a particular video as the video for
+that lesson, and have it placed in a more prominent way than if it was just
+inserted in the text as a resource.
+
+`video`
+: If present, the full URL of a video file on the internet, such as
+`https://www.youtube.com/watch?v=ozO0kOnqmyA` for YouTube videos. You can also
+link to resources hosted on places such as Amazon S3, etc., and you can link to
+video resources which require authentication.
+
+`youtube`
+: If present, the part of a YouTube URL, such as `ozO0kOnqmyA`, which
+uniquely identifies a YouTube video. The video may be public or unlisted.
+This is a convenience since YouTube is so popular.
+
+An example of a youtube attribute used on a heading is as follows:
+
+```
+{youtube:"ozO0kOnqmyA"}
+# Lean Publishing
+
+This chapter discusses Lean Publishing, which is discussed in this 2013 video.
+```
 
 
 

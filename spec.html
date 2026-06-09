@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.45 (2025-12-17)</div>
+<div class="version">Version 0.31.46 (2026-06-09)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -20172,28 +20172,77 @@ Markua books.</p>
 <p>Index entries can either be attached to block or span elements using the same
 attribute list syntax. In fact, index entries can just be added as part of a
 larger attribute list.</p>
+<h3 id="how-to-insert-an-index-entry" class="definition">
+<span class="number">10.23.1</span>How to Insert an Index Entry
+</h3>
+<p>To insert an index entry, you need to <strong>attach it</strong> to a block or span element.</p>
+<p><strong>You MUST attach an index entry to something, e.g. <code>a word{i: &quot;an index entry&quot;}</code>.
+You cannot just add a bunch of index entries one after the other. Examples of
+how to properly attach index entries to block or span elements are shown below.</strong></p>
+<p>To attach an index entry to a word, just add the index entry after the word:</p>
+<pre><code>I just came to say hello{i: &quot;hello&quot;}, hello, hello, hello
+</code></pre>
+<p>Attaching an index entry to a word is the normal way that index entries are
+inserted.</p>
+<p>You can even do this inside a heading:</p>
+<pre><code># Why Hello{i: &quot;hello&quot;} World is a Good First Program
+
+The index entry is inside the chapter heading, which is fine.
+</code></pre>
+<p>To attach an index entry to a span element, just add the index entry after the
+span element:</p>
+<pre><code>The first program that a programmer writes in a language is usually
+*Hello World*{i: &quot;Hello World&quot;}
+</code></pre>
+<p>To attach an index entry to the start of a block, put it on its own line above
+a block:</p>
+<pre><code>{i: &quot;hello&quot;}
+I just came to say hello, hello, hello, hello
+</code></pre>
+<h3 id="index-entry-format" class="definition">
+<span class="number">10.23.2</span>Index Entry Format
+</h3>
 <p>The actual syntax of what the value of an index entry looks like is <a href="https://en.wikibooks.org/wiki/LaTeX/Indexing">inspired
 by LaTeX</a>.</p>
 <p>The key of an index entry is <code>i</code>, for index.</p>
 <p>In its simplest form, an index entry is simply <code>{i: &quot;hello&quot;}</code>. Like any
 attribute list, you don’t need a space between the colon and the quote–you can
-also do <code>{i:&quot;hello&quot;}</code>.</p>
+also do <code>{i:&quot;hello&quot;}</code>.
+ 
+If an index entry has no punctuation, spaces or formatting then it does not need
+quotes. For example, <code>hello{i: hello}</code> is a valid index entry. However, it is a best
+practice to <strong>always surround the index entry with quotes</strong>, to prevent bugs.
+So, <code>hello{i: &quot;hello&quot;}</code> is a better index entry.</p>
+<p><em>(Again, the index entry must always be attached to something, which is why these
+examples show it attached to the word hello.)</em></p>
+<p>Index entries can have commas and other punctuation (except colons) in their
+definition:</p>
+<pre><code>My wife read some book about a whale by Herman Melville{i: &quot;Melville, Herman&quot;}.
+</code></pre>
+<p>Multiple index entries can exist in a block, or even a sentence:</p>
+<pre><code>Supposedly the great-great-great-granduncle of the musician Moby{i: &quot;Moby&quot;} was
+Herman Melville{i: &quot;Melville, Herman&quot;}, the author of a book about a
+whale{i: &quot;Moby-Dick; or, The Whale&quot;}.
+</code></pre>
+<p>Note that adding index entries is best left until the author is done writing the
+book. At that time, ids like {#myid} can be converted to {id: #myid, i: “blah”}
+if index entries are being added where ids already are.</p>
 <p>These are the various formats of an index entry:</p>
-<pre><code>{i: hello}
-{i: &quot;hello&quot;}
-{i: &quot;Armstrong, Peter&quot;}
-{i: &quot;Yahoo\!&quot;}
-{i: &quot;*hello*&quot;}
-{i: &quot;**hello**&quot;}
-{i: &quot;hello!Peter&quot;}
-{i: &quot;hello!*Peter*&quot;}
-{i: &quot;hello!**Peter**&quot;}
-{i: &quot;Peter|see{i:'hello'}&quot;}
-{i: &quot;Jen|seealso{i:'Jenny'}&quot;}
+<pre><code>hello{i: hello}
+hello{i: &quot;hello&quot;}
+Peter Armstrong{i: &quot;Armstrong, Peter&quot;}
+Yahoo!{i: &quot;Yahoo\!&quot;}
+hello{i: &quot;*hello*&quot;}
+hello{i: &quot;**hello**&quot;}
+hello{i: &quot;hello!Peter&quot;}
+hello{i: &quot;hello!*Peter*&quot;}
+hello{i: &quot;hello!**Peter**&quot;}
+hello{i: &quot;Peter|see{i:'hello'}&quot;}
+hello{i: &quot;Jen|seealso{i:'Jenny'}&quot;}
 </code></pre>
 <p>Here’s what they do:</p>
 <p><code>{i: hello}</code>
-: Adds an index entry for <code>hello</code>. If an index entry has no punctuation or
+: Adds an index entry for <code>hello</code>. If an index entry has no punctuation, spaces or
 formatting then it does not need quotes.</p>
 <p><code>{i: &quot;hello&quot;}</code>
 : Adds an index entry for <code>hello</code>. Quotes are always fine to use, even when not
@@ -20204,9 +20253,9 @@ Their function is to allow things like exclamation marks and other punctuation
 to be added without fear, in case you don’t feel like learning which punctuation
 is safe.</p>
 <p><code>{i: &quot;Yahoo\!&quot;}</code>
-: Adds an index entry for <code>Yahoo!</code>. Note that the exclamation mark must be
-backslash-escaped because <code>!</code> is a delimiter otherwise. The <code>|</code>, <code>{</code>, <code>}</code> and
-<code>\</code> characters also must be backslash-escaped.</p>
+: Adds an index entry for <code>Yahoo!</code>. Note that the exclamation mark in the index
+entry itself must be backslash-escaped because <code>!</code> is a delimiter otherwise.
+The <code>|</code>, <code>{</code>, <code>}</code> and <code>\</code> characters also must be backslash-escaped.</p>
 <p><code>{i: &quot;*hello*&quot;}</code>
 : Adds an index entry for <code>hello</code>, with <code>hello</code> in italics.</p>
 <p><code>{i: &quot;**hello**&quot;}</code>
@@ -20232,38 +20281,16 @@ be combined with a sub-entry (the ! syntax).</p>
 <p>Index entries are case sensitive. For example, <code>{i: &quot;mark&quot;}</code> and <code>{i: &quot;Mark&quot;}</code>
 are distinct entries. (The first is for a result or a smudge, the second is a
 person’s name.)</p>
-<p>To attach an index entry to the start of a block, put it on its own line above
-a block:</p>
-<pre><code>{i: &quot;hello&quot;}
-I just came to say hello, hello, hello, hello
-</code></pre>
-<p>To attach an index entry to a word, just add the index entry after the word:</p>
-<pre><code>I just came to say hello{i: &quot;hello&quot;}, hello, hello, hello
-</code></pre>
-<p>To attach an index entry to a span element, just add the index entry after the
-span element:</p>
-<pre><code>The first program that a programmer writes in a language is usually
-*Hello World*{i: &quot;Hello World&quot;}
-</code></pre>
-<p>Index entries can have commas and other punctuation (except colons) in their
-definition:</p>
-<pre><code>My wife read some book about a whale by Herman Melville{i: &quot;Melville, Herman&quot;}.
-</code></pre>
-<p>Multiple index entries can exist in a block, or even a sentence:</p>
-<pre><code>Supposedly the great-great-great-granduncle of the musician Moby{i: &quot;Moby&quot;} was
-Herman Melville{i: &quot;Melville, Herman&quot;}, the author of a book about a
-whale{i: &quot;Moby-Dick; or, The Whale&quot;}.
-</code></pre>
-<p>Note that adding index entries is best left until the author is done writing the
-book. At that time, ids like {#myid} can be converted to {id: #myid, i: “blah”}
-if index entries are being added where ids already are.</p>
-<p>Markua does not specify the HTML output of index entries, to maximize
-implementation flexibility.</p>
-<p>Finally, please note that if you use an exclamation mark (!) symbol in an
-index entry, you must backslash-escape it. Otherwise, it would be intepreted
+<p><strong>Important note:</strong> if you use an <strong>exclamation mark (!)</strong> symbol in an
+index entry, you must <strong>backslash-escape</strong> it. Otherwise, it would be intepreted
 as an attempt at creating a sub-entry. (This actually got me, when I tried to
 reference <em>Hello! Flex 4</em>, one of my books. To do this, I would have to write
 the entry as <code>{i: &quot;*Hello\! Flex 4*}</code> not as <code>{i: &quot;*Hello! Flex 4*}</code>.</p>
+<h3 id="index-output-format" class="definition">
+<span class="number">10.23.3</span>Index Output Format
+</h3>
+<p>Markua does not specify the format of the HTML output of the actual index itself,
+to maximize implementation flexibility.</p>
 </div>
 <div class="extension">
 <h2 id="syntactic-sugar-list-m-" class="definition">

@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.31.46'
-date: '2026-06-09'
+version: '0.31.47'
+date: '2026-06-17'
 license: '[CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -3224,6 +3224,7 @@ the defaults are in one list. These defaults are listed below.
   default-random-question-order: false
   default-table-column-spacing: 6pt
   figure-classes: all
+  include-exercises-in-book: false
   include-page-numbers-in-references: true
   italicize-underlines: true
   lang: eng
@@ -3316,6 +3317,14 @@ of their `class` attribute. An example of this setting is:
 figures are listed, either grouped by their class or together in one big list,
 is controlled by the `list-figures` setting. Note that the numbering of figures
 is controlled by the `number-figures` setting.
+
+`include-exercises-in-book`
+: `true` or `false`. The default value is `false`. Quizzes and exercises are
+intrinsically course content, so by default they are dropped from book outputs
+(PDF, EPUB, etc.) and kept only in course outputs. If you are writing a workbook,
+study guide or instructor manual and want quizzes and exercises to appear in the
+book output as well, set this to `true`. This setting is discussed in the
+[section on sharing content between books and courses](#sharing-content-between-books-and-courses-m-).
 
 `include-page-numbers-in-references`
 : `true` or `false`. The default value is `true`. When a smart crosslink to a
@@ -12398,6 +12407,118 @@ book or course again. However, fixing the consequences of a quiz being
 administered to hundreds--or thousands, or tens of thousands--of people with an
 incorrect number of questions, or with questions incorrectly used as alternates
 for each other, would be much more difficult.
+
+</div>
+
+
+
+<div class="extension">
+
+# Sharing content between books and courses (M)
+
+As discussed in the chapter on quizzes and exercises, a single Markua document
+can be generated both as a book and as a course. Most of the prose is shared
+between the two, but quite often a particular section belongs to only one of
+them. For example, a course might contain a "watch the video, then answer the
+quiz" introduction that makes no sense in the printed book, while the book might
+contain a "since you can't click anything on paper, here is the full transcript"
+passage that is redundant in the course.
+
+Markua provides three constructs for this: two block-level (`{book}` and
+`{course}`), and one inline (the `only` span attribute). It also has an implicit
+rule that quizzes and exercises are course-only by default.
+
+Whenever this section refers to the "target", it means whether the Markua
+Processor is currently generating a book (the PDF, EPUB and equivalent web
+outputs) or a course. The same source document produces both; these constructs
+simply let you gate content on which one is being generated.
+
+## The book and course blocks (M)
+
+The `{book}` and `{course}` block syntaxes are similar to the syntaxes for
+asides and blurbs:
+
+1. By wrapping the content in `{book}` ... `{/book}`, for content which should
+   be included only in book outputs.
+2. By wrapping the content in `{course}` ... `{/course}`, for content which
+   should be included only in course outputs.
+
+When the target is a book, the content inside a `{book}` block is included
+exactly as if the `{book}` and `{/book}` wrapper were not there, and any
+`{course}` blocks are dropped entirely. When the target is a course, the
+reverse happens: `{course}` blocks are unwrapped and `{book}` blocks are
+dropped.
+
+A `{book}` or `{course}` block can contain any Markua content, including
+multiple paragraphs, headings, figures, asides, quizzes and so on.
+
+Here is an example which uses both:
+
+~~~
+This paragraph is shared, so it appears in both the book and the course.
+
+{book}
+Since you are reading this on paper, here is the full transcript of the video.
+{/book}
+
+{course}
+Watch the video above, then complete the quiz that follows.
+{/course}
+
+This closing paragraph is also shared.
+~~~
+
+When this document is generated as a book, the reader sees the shared paragraph,
+the transcript paragraph, and the closing paragraph. When it is generated as a
+course, the reader sees the shared paragraph, the "watch the video" paragraph,
+and the closing paragraph.
+
+## The only span attribute (M)
+
+For inline content which is too small to justify a block, you can instead add an
+`only` attribute to a [span](#span-attribute-lists). The value is the target
+that the span should be included for: either `book` or `course`.
+
+~~~
+The next release ships [in print on June 1st]{only: book}[as twelve video
+lessons]{only: course}.
+~~~
+
+When the target is a book, a span with `only: book` is kept (with the `only`
+attribute removed, so downstream output never sees it) and a span with
+`only: course` is dropped. When the target is a course, the reverse happens.
+
+The value may also be a comma-separated list, for the rare case where you want
+to be explicit that a span belongs to more than one target:
+
+~~~
+This applies [to both formats]{only: book, course}.
+~~~
+
+There is deliberately no `only: all` value: the absence of an `only` attribute
+already means "include everywhere", so `only: book, course` is only ever needed
+when you want to be explicit.
+
+## Quizzes and exercises are course-only by default (M)
+
+Quizzes and exercises (discussed [earlier](#quizzes-and-exercises-m-)) are
+intrinsically course content. Because of this, a `{quiz}` or `{exercise}` block
+is treated as though it were wrapped in a `{course}` block: it is included in
+course outputs and dropped from book outputs by default. You do not need to wrap
+your quizzes and exercises in `{course}` blocks to get this behavior; it is
+implicit.
+
+Sometimes, though, you do want quizzes and exercises in the book output: for
+example, when producing a workbook, a study guide, or an instructor manual. In
+that case, set the `include-exercises-in-book` document setting to `true`:
+
+~~~
+{include-exercises-in-book: true}
+~~~
+
+With this setting, `{quiz}` and `{exercise}` blocks are kept in book outputs as
+well as course outputs. This document setting is also listed in the
+[section on standard document settings](#the-standard-document-settings-m-).
 
 </div>
 

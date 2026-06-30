@@ -1,8 +1,8 @@
 ---
 title: Markua Spec
 author: '*This formal specification of Markua was developed at [Leanpub](https://leanpub.com), is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.*<br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in [The Markua Manual](https://leanpub.com/markua/read). (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/>'
-version: '0.31.47'
-date: '2026-06-17'
+version: '0.31.48'
+date: '2026-06-30'
 license: '[CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -6015,6 +6015,13 @@ The default value of the format attribute for code is complex:
 
 Note that the default format can be overridden by specifying it via an attribute
 list, or after the three backticks in syntactic sugar.
+
+There are two formats which, when specified after the three backticks, produce a
+resource of `type` `image` rather than `type` `code`: the `svg` and `mermaid`
+formats. A fenced code block of `` ```svg `` or `` ```mermaid `` is rendered as
+an image by default. To show the source as code instead, override the type with
+`{type: code}`. This is discussed in the Inline SVG images and Mermaid diagrams
+sections.
 
 ### Supported Attributes for Code
 
@@ -15778,6 +15785,19 @@ choose them by default:
 `svgz`
 : SVG image (zipped) - `.svgz`
 
+`mermaid`
+: Mermaid diagram - `.mmd` or `.mermaid`
+
+Two of these formats are special: `svg` and `mermaid`. Unlike a binary image
+format such as PNG or JPEG, an SVG image and a Mermaid diagram are each just
+text, so they can be contained inline in the text of a Markua document. And,
+unlike any other format that can appear after a code fence (such as `ruby` or
+`xml`, which produce a resource of `type` `code`), `svg` and `mermaid` each
+default to a `type` of `image` rather than `code`. In other words, a fenced
+code block of `` ```svg `` or `` ```mermaid `` is rendered as an image by
+default, rather than displayed as source. This is discussed in the Inline SVG
+images and Mermaid diagrams sections below.
+
 Markua uses the image syntax for all resource types. Markua also reinterprets
 images as being a resource. This is important for the following reason:
 
@@ -15932,7 +15952,19 @@ To add an inline SVG image, you create a fenced code block, and then you
 indicate that instead of code, you are inserting a resource of type image
 and of format SVG.
 
-There are two ways to do this.  Here's the verbose way:
+The most natural way is to put `svg` directly after the opening code fence.
+Because the `svg` format defaults to a `type` of `image`, this is rendered as
+an image, not displayed as the XML source of the SVG image:
+
+~~~
+```svg
+<svg width="20" height="20">
+  <circle cx="10" cy="10" r="9" fill="blue"/>
+</svg>
+```
+~~~
+
+You can also be verbose and specify both the `type` and the `format`:
 
 ~~~
 {type: image, format: svg}
@@ -15943,7 +15975,7 @@ There are two ways to do this.  Here's the verbose way:
 ```
 ~~~
 
-Here's the syntactic sugar way:
+There is also a syntactic sugar way, using a `!` after the opening code fence:
 
 ~~~
 ```!
@@ -15961,14 +15993,14 @@ Inline SVG images support all the normal image resource attributes:
 
 ~~~
 {alt: "a blue circle", title: "Earth From Space (Simplified)"}
-```!
+```svg
 <svg width="20" height="20">
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
 ```
 ~~~
 
-You can use them with the verbose way as well:
+You can use them with any of the ways above:
 
 ~~~
 {type: image, format: svg, alt: "foo", title: "bar"}
@@ -15985,21 +16017,12 @@ you are really doing is creating a code resource. This is discussed below.
 ### Writing about SVG
 
 If you want to write about the SVG format, and show the actual SVG source
-(instead of the image produced), it needs to be of a `format` of `code`, not
-`image`.
+(instead of the image produced), you need a `type` of `code` rather than the
+default `type` of `image`.
 
-Now, you can just be lazy and not provide `format` or `type` attributes at all,
-since guessing when neither is present always produces a type of `code`.
-
-~~~
-```
-<svg width="20" height="20">
-  <circle cx="10" cy="10" r="9" fill="blue"/>
-</svg>
-```
-~~~
-
-However, you can also just specify both, either this way...
+Since the `svg` format defaults to a `type` of `image`, a bare `` ```svg ``
+renders as an image. To show the source instead, override the type with
+`{type: code}`, just as you would for a Mermaid diagram:
 
 ~~~
 {type: code}
@@ -16010,7 +16033,7 @@ However, you can also just specify both, either this way...
 ```
 ~~~
 
-...or this way:
+This is the same as specifying both attributes:
 
 ~~~
 {type: code, format: svg}
@@ -16021,11 +16044,11 @@ However, you can also just specify both, either this way...
 ```
 ~~~
 
-...or this way:
+Alternatively, you can be lazy and not provide `format` or `type` attributes at
+all, since guessing when neither is present always produces a type of `code`:
 
 ~~~
-
-```svg
+```
 <svg width="20" height="20">
   <circle cx="10" cy="10" r="9" fill="blue"/>
 </svg>
@@ -16061,6 +16084,115 @@ Heck, you can even use tildes to do that:
 </svg>
 ~~~
 ```
+
+</div>
+
+
+
+<div class="extension">
+
+## Mermaid diagrams (M)
+
+[Mermaid](https://mermaid.js.org) is a text-based syntax for describing
+diagrams, such as flowcharts, sequence diagrams and Gantt charts. Like an SVG
+image, a Mermaid diagram is just text, so it can be contained inline in the text
+of a Markua document. (This is not true for binary resources like PNG or JPEG
+images, which can only be local or web resources.)
+
+A Mermaid diagram is an image resource whose `format` is `mermaid`. By default,
+a resource with a `format` of `mermaid` has a `type` of `image`: the Markua
+Processor renders the Mermaid source into a diagram, rather than displaying the
+source as code.
+
+In this respect, `mermaid` behaves just like the `svg` format. These are the
+only two formats that, when placed after a code fence, produce a resource of
+`type` `image` by default. For every other format (such as `ruby` or `xml`), a
+bare fenced code block produces a resource of `type` `code`, and the format is
+only used to select syntax highlighting. For `svg` and `mermaid`, the default
+`type` is `image`.
+
+There are several equivalent ways to insert a Mermaid diagram.
+
+Here's the verbose way, specifying both the `type` and the `format`:
+
+~~~
+{type: image, format: mermaid}
+```
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
+
+Since a `format` of `mermaid` implies a `type` of `image`, you can omit the
+`type` and just specify the `format`:
+
+~~~
+{format: mermaid}
+```
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
+
+The most natural way, however, is to put `mermaid` directly after the opening
+code fence, exactly as you would in other Markdown tools. Because the `mermaid`
+format defaults to a `type` of `image`, this renders as a diagram:
+
+~~~
+```mermaid
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
+
+This is equivalent to explicitly specifying the `type`:
+
+~~~
+{type: image}
+```mermaid
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
+
+Mermaid diagrams support all the normal image resource attributes, such as
+`alt`, `title`, `width`, `height`, `align` and `float`:
+
+~~~
+{alt: "a sequence diagram", title: "The Go Order", width: 60%}
+```mermaid
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
+
+### Writing about Mermaid
+
+If you want to write about the Mermaid format, and show the actual Mermaid
+source (instead of the diagram produced), you need a `type` of `code` rather
+than the default `type` of `image`.
+
+You do this by overriding the `type` in an attribute list:
+
+~~~
+{type: code}
+```mermaid
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
+
+This displays the Mermaid source as a code resource (using `mermaid` for syntax
+highlighting), rather than rendering it as a diagram. This is the same as
+specifying both attributes:
+
+~~~
+{type: code, format: mermaid}
+```
+sequenceDiagram
+    Starbuck->>Apollo: You have a go.
+```
+~~~
 
 </div>
 

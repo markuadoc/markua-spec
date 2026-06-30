@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.48 (2026-06-30)</div>
+<div class="version">Version 0.31.49 (2026-06-30)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -13040,10 +13040,6 @@ present. A value of <code>0</code> means the quiz cannot be taken (yet). A value
 means the quiz has an unlimited number of attempts. Since an exercise does not
 count toward the mark on a course, an exercise always has an unlimited number
 of attempts.</p>
-<p><code>auto-submit</code>
-: <code>true</code> or <code>false</code>. The default is <code>true</code>. If true, an incomplete quiz is
-submitted when the <code>time-limit</code> is expired. If false, it is not. Either way, an
-incomplete quiz counts as an attempt.</p>
 <p><code>case-sensitive</code>
 : <code>true</code> or <code>false</code>. The default is <code>true</code>. This sets the default behavior of
 fill in the blank questions. If <code>true</code>, the fill in the blank question answers
@@ -13123,7 +13119,9 @@ value of that attribute. Document settings are discussed later.</p>
 <p><code>time-limit</code>
 : The time limit to finish the quiz, once started. The format is <code>XdYhZm</code>. For
 example, 3 days, 6 hours and 45 minutes is expressed as <code>3d6h45m</code>; 7 days is
-expressed as <code>7d</code>. The default is <code>7d</code>.</p>
+expressed as <code>7d</code>. The default is <code>7d</code>. If there is a <code>time-limit</code>, the quiz
+is automatically submitted when it expires. An incomplete quiz always counts
+as an attempt.</p>
 <p><code>use-result</code>
 : <code>best</code> or <code>latest</code>. Whether the best result on the quiz is used, or the latest
 one. The default is the value of <code>default-quiz-use-result</code> on the course.</p>

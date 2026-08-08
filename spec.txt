@@ -3234,6 +3234,7 @@ the defaults are in one list. These defaults are listed below.
   restart-endnote-numbering: true
   restart-footnote-numbering: true
   section-number-format: name
+  show-blank-answers: false
   soft-breaks: space
   table-name: figure
   toc-chapter-number-format: name
@@ -3410,6 +3411,13 @@ at the end of a chapter.
 the section heading in the body of the book. The format of the section heading
 in the table of contents is set by the related `toc-section-number-format`
 setting.
+
+`show-blank-answers`
+: `true` or `false`. The default value is `false`. If `false`, the `answer`
+attribute of a [blank](#blanks-m-) is consumed and does not appear in the
+output. If `true`, every answer is rendered inside its blank, so that one
+manuscript can produce both the student edition and the answer key or
+teacher's edition of a workbook. This is discussed [here](#blanks-m-).
 
 `soft-breaks`
 : `break` or `space`. The default is `space`, for compatibility with
@@ -4547,9 +4555,23 @@ Foo
 More than three characters may be used:
 
 ```````````````````````````````` example
-_____________________________________
+*************************************
 .
 <hr />
+````````````````````````````````
+
+
+Note that in CommonMark, a long line of underscores is also a thematic break.
+In Markua it is not: a line consisting of four or more underscores is a
+[block blank](#blanks-m-) instead--a full-width ruled line for the reader to
+write on--since that is what such a line looks like. A line of exactly three
+underscores (`___`), as in the first example above, is still a thematic
+break, for Markdown compatibility:
+
+```````````````````````````````` example
+_____________________________________
+.
+<hr class="blank" />
 ````````````````````````````````
 
 
@@ -13781,8 +13803,13 @@ __ is not an empty emphasis
 ```````````````````````````````` example
 ____ is not an empty strong emphasis
 .
-<p>____ is not an empty strong emphasis</p>
+<p><span class="blank">____</span> is not an empty strong emphasis</p>
 ````````````````````````````````
+
+
+(In CommonMark, the `____` in the previous example would render as four
+literal underscores. In Markua, an isolated run of four or more underscores
+is a [blank](#blanks-m-). Either way, it is not emphasis.)
 
 
 
@@ -13903,8 +13930,13 @@ foo _*_
 ```````````````````````````````` example
 foo _____
 .
-<p>foo _____</p>
+<p>foo <span class="blank">_____</span></p>
 ````````````````````````````````
+
+
+(As above, in CommonMark the `_____` would render as five literal
+underscores; in Markua, an isolated run of four or more underscores is a
+[blank](#blanks-m-).)
 
 
 ```````````````````````````````` example
@@ -17639,6 +17671,270 @@ stuff
 <p>This is <u><strong>bolded and underlined</strong></u>.</p>
 <p>This is <u><strong><em>bolded and italicized and underlined</em></strong></u>.</p>
 <p>stuff</p>
+````````````````````````````````
+
+</div>
+
+
+
+<div class="extension">
+
+## Blanks (M)
+
+Workbooks, study guides and exercise handouts are full of fill-in-the-blank
+lines: a short blank in the middle of a sentence for a missing word, or a
+full-width ruled line for a reader to write a longer answer on.
+
+Markdown has no syntax for this, so authors resort to hacks: runs of literal
+underscores (which render in most fonts as a broken, gappy line), tables with
+empty cells, or non-breaking spaces sandwiched between underline markers.
+These all look wrong, and none of them can do the one genuinely useful thing
+a blank could do: remember its answer.
+
+So Markua defines a blank element, using the obvious syntax: a run of
+underscores that looks exactly like a blank.
+
+### Inline blanks
+
+A [blank](@) is a run of four or more consecutive unescaped underscore (`_`)
+characters which is not immediately preceded or followed by a word character
+(a letter or a digit) or by an underscore:
+
+```````````````````````````````` example
+The capital of France is ____.
+.
+<p>The capital of France is <span class="blank">____</span>.</p>
+````````````````````````````````
+
+
+A blank MUST NOT be rendered as literal underscore characters. Instead, a
+blank MUST be rendered as one continuous horizontal rule at the text
+baseline--in print, the classic fill-in-the-blank line.
+
+The width of a blank SHOULD be proportional to the length of the run, with
+each underscore corresponding to approximately one character width. To make a
+blank wider, type more underscores:
+
+```````````````````````````````` example
+Short: ____ or long: ________________.
+.
+<p>Short: <span class="blank">____</span> or long: <span class="blank">________________</span>.</p>
+````````````````````````````````
+
+
+Note that the underscores are preserved in the HTML output as the content of
+the span. This is deliberate: it preserves the length of the run for the
+stylesheet to use, and it degrades gracefully--unstyled HTML shows the run of
+underscores, which is exactly what plain Markdown would have shown. However, a
+Markua Processor SHOULD expose a blank to assistive technology as a blank to
+be filled in, not as a string of underscore characters to be read aloud.
+
+A blank is atomic: it MUST NOT be broken across lines. If you want a blank
+wider than the space remaining on a line, use a block blank instead (below).
+
+Only isolated runs become blanks. A run of four or more underscores directly
+attached to a word--like `____foo____`--continues to behave according to the
+[emphasis rules](#emphasis-and-strong-emphasis), and runs of one, two or
+three underscores are unchanged everywhere. In practice, the blank syntax
+claims only sequences which, in CommonMark, can never pair as emphasis
+delimiters anyway, and which would therefore have rendered as useless literal
+underscores:
+
+```````````````````````````````` example
+_one_ __two__ ___three___ but ____.
+.
+<p><em>one</em> <strong>two</strong> <em><strong>three</strong></em> but <span class="blank">____</span>.</p>
+````````````````````````````````
+
+
+Blanks are also orthogonal to the `italicize-underlines` document setting:
+they work identically whether it is `true` or `false`, since a blank is never
+treated as an emphasis (or underline) delimiter in the first place:
+
+```````````````````````````````` example
+{
+italicize-underlines: false
+}
+
+# Chapter One
+
+Fill in the _important_ word: ____.
+.
+<h1>Chapter One</h1>
+<p>Fill in the <u>important</u> word: <span class="blank">____</span>.</p>
+````````````````````````````````
+
+
+(This matters because before blanks existed, the only way to fake a
+fill-in-the-blank line in Leanpub was to set `italicize-underlines: false`
+and sandwich non-breaking spaces between underscores--changing the meaning of
+`_emphasis_` throughout the entire book in order to buy one blank line.
+Blanks make that hack unnecessary.)
+
+To produce actual literal underscores, backslash-escape the first one. The
+escaped underscore is ordinary text, and since a run adjacent to an
+underscore does not form a blank, the rest of the run is ordinary text too:
+
+```````````````````````````````` example
+\_____
+.
+<p>_____</p>
+````````````````````````````````
+
+
+### Blanks with answers
+
+A blank can remember its answer. Attach the answer with the standard span
+[attribute list](#attribute-lists-m-) syntax, the same mechanism used by
+[index entries](#index-entries-m-): add the attribute list immediately after
+the run of underscores.
+
+~~~
+The powerhouse of the cell is the ____{answer: "mitochondria"}.
+~~~
+
+The answer value is a text string; like any attribute value, it should be
+quoted if it contains punctuation or spaces (and it is a best practice to
+always quote it).
+
+By default, the answer does not appear anywhere in the output--not even as
+metadata. Like the `only` span attribute, the `answer` attribute is consumed
+by the Markua Processor, so a reader viewing the HTML source of a web version
+cannot cheat by reading the answers out of the markup:
+
+```````````````````````````````` example
+The powerhouse of the cell is the ____{answer: "mitochondria"}.
+.
+<p>The powerhouse of the cell is the <span class="blank">____</span>.</p>
+````````````````````````````````
+
+
+Setting the `show-blank-answers` document setting to `true` renders every
+answer inside its blank:
+
+```````````````````````````````` example
+{
+show-blank-answers: true
+}
+
+# Chapter One
+
+The powerhouse of the cell is the ____{answer: "mitochondria"}.
+.
+<h1>Chapter One</h1>
+<p>The powerhouse of the cell is the <span class="blank filled">mitochondria</span>.</p>
+````````````````````````````````
+
+
+This means one manuscript can produce both the student edition and the answer
+key or teacher's edition of a workbook. When answers are shown, the blank
+SHOULD still be rendered as a blank--the answer sitting on a rule--rather
+than as ordinary text, so it remains obvious which words are the answers.
+
+Note that since the width of a blank comes from the number of underscores and
+not from the answer, the width of a blank does not leak the length of its
+answer--unless you choose to size each blank to fit its answer, of course.
+
+Finally, note that a blank is typographic: ink on paper. If you want a blank
+which is automatically graded--accepting several answer values, regular
+expressions, and awarding points--that is a
+[fill in the blank question](#fill-in-the-blank-questions-m-) in a quiz or
+exercise, which is a different, more powerful thing. However, since a blank
+is a real element with a known answer, a Markua Processor generating an
+interactive format MAY render a blank as an input field.
+
+### Block blanks
+
+A line consisting solely of a run of four or more underscores (with up to
+three spaces of indentation, optionally followed by spaces or tabs) is a
+[block blank](@): a full-width ruled line for the reader to write on.
+
+```````````````````````````````` example
+Describe your approach:
+
+________
+.
+<p>Describe your approach:</p>
+<hr class="blank" />
+````````````````````````````````
+
+
+The number of underscores in a block blank does not matter beyond the minimum
+of four: a block blank is always the full width of the text column, a rule
+from margin to margin.
+
+This is a place where Markua deliberately diverges from CommonMark, which
+treats any line of three or more underscores as a
+[thematic break](#thematic-breaks). In Markua, only a line of exactly three
+underscores (`___`) is a thematic break; four or more make a block blank. A
+line of underscores looks exactly like a blank line to write on, which is why
+authors keep trying to use it as one; Markua makes it mean what it looks
+like. Use `---` or `***` for thematic breaks, which is what almost everyone
+does anyway. The spaced form (`_ _ _`) also remains a thematic break at any
+length, since a blank must be one solid run:
+
+```````````````````````````````` example
+___
+
+____
+
+_ _ _ _ _
+.
+<hr />
+<hr class="blank" />
+<hr />
+````````````````````````````````
+
+
+Like a thematic break, a block blank can interrupt a paragraph:
+
+```````````````````````````````` example
+Name:
+____
+.
+<p>Name:</p>
+<hr class="blank" />
+````````````````````````````````
+
+
+(If you want a short inline blank after the label instead, put it on the same
+line: `Name: ____`.)
+
+For longer answers, use the `lines` attribute to produce multiple ruled
+lines:
+
+```````````````````````````````` example
+{lines: 3}
+________
+.
+<hr class="blank" />
+<hr class="blank" />
+<hr class="blank" />
+````````````````````````````````
+
+
+The spacing between the lines is left to the implementation, but SHOULD be
+generous enough to handwrite on--these lines exist for pens, not cursors.
+
+A block blank takes an `answer` attribute too, in a block attribute list on
+the line above it. It behaves the same way as on an inline blank: consumed by
+default, rendered when `show-blank-answers` is `true`:
+
+```````````````````````````````` example
+{
+show-blank-answers: true
+}
+
+# Chapter One
+
+Why did the test fail?
+
+{answer: "Because the cache key omitted the locale."}
+________
+.
+<h1>Chapter One</h1>
+<p>Why did the test fail?</p>
+<div class="blank filled">Because the cache key omitted the locale.</div>
 ````````````````````````````````
 
 </div>

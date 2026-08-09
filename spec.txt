@@ -3237,6 +3237,7 @@ the defaults are in one list. These defaults are listed below.
   show-blank-answers: false
   soft-breaks: space
   table-name: figure
+  thematic-break-style: rule
   toc-chapter-number-format: name
   toc-part-number-format: name
   toc-section-number-format: name
@@ -3435,6 +3436,16 @@ This is what tables get referred to as in crosslinks and lists of figures.
 The reason that this is standardized on two choices, instead of just an
 arbitrary string, is to make things more consistent for readers, and easier to
 implement for builders of Markua Processors.
+
+`thematic-break-style`
+: `rule`, `asterism`, `space` or `full-width-line`. The default is `rule`.
+This setting controls how thematic breaks are rendered: as a conventional
+horizontal rule (`rule`), as a centered scene break ornament (`asterism`),
+as blank vertical space (`space`), or as a full-width ruled line for the
+reader to write an answer on (`full-width-line`), which is the writing line
+found in workbooks and study guides. Parsing is unaffected: this is purely
+a rendering choice. This is discussed in the
+[section on thematic breaks](#thematic-breaks).
 
 `toc-chapter-number-format`
 : `category_number_name` (e.g. Chapter 1: The Chapter Name), `category_number`
@@ -4555,23 +4566,9 @@ Foo
 More than three characters may be used:
 
 ```````````````````````````````` example
-*************************************
-.
-<hr />
-````````````````````````````````
-
-
-Note that in CommonMark, a long line of underscores is also a thematic break.
-In Markua it is not: a line consisting of four or more underscores is a
-[block blank](#blanks-m-) instead--a full-width ruled line for the reader to
-write on--since that is what such a line looks like. A line of exactly three
-underscores (`___`), as in the first example above, is still a thematic
-break, for Markdown compatibility:
-
-```````````````````````````````` example
 _____________________________________
 .
-<hr class="blank" />
+<hr />
 ````````````````````````````````
 
 
@@ -4709,6 +4706,64 @@ If you want a thematic break in a list item, use a different bullet:
 </li>
 </ul>
 ````````````````````````````````
+
+
+How a thematic break is rendered is a different question from how it is
+parsed, and it is a question authors genuinely care about: a novelist may
+want a scene break rendered as blank vertical space or as a centered
+asterism, while a workbook author may want a full-width ruled line for the
+reader to write an answer on. In Markua, this choice is the
+`thematic-break-style` document setting. Its value is one of the following:
+
+`rule`
+: The default: a conventional horizontal rule, used as a separator.
+
+`asterism`
+: A centered scene break ornament: traditionally three stars (⁂), often
+rendered as three spaced asterisks.
+
+`space`
+: Blank vertical space, the way scene breaks are most commonly typeset in
+novels.
+
+`full-width-line`
+: A rule from margin to margin, with generous vertical space around it, for
+the reader to write on. This is the writing line found in workbooks and
+study guides--these lines exist for pens, not cursors. (For a short blank
+inside a sentence, see [blanks](#blanks-m-).)
+
+With the default `rule`, the HTML output is a plain `<hr />`, as in all of
+the examples above. With any other value, the value is emitted as the class
+of the `hr` element, and the actual appearance is up to the stylesheet or
+Markua Processor:
+
+```````````````````````````````` example
+{
+thematic-break-style: full-width-line
+}
+
+# Chapter One
+
+List three examples of irony:
+
+---
+---
+---
+.
+<h1>Chapter One</h1>
+<p>List three examples of irony:</p>
+<hr class="full-width-line" />
+<hr class="full-width-line" />
+<hr class="full-width-line" />
+````````````````````````````````
+
+
+Note that since a thematic break is parsed exactly as it is in CommonMark,
+this feature involves no divergence from CommonMark at all: it is purely a
+rendering choice, made the same way Markua makes other rendering choices,
+with a document setting. Like any document setting, `thematic-break-style`
+applies to the whole document. This setting is also listed in the
+[section on standard document settings](#the-standard-document-settings-m-).
 
 
 ## ATX headings
@@ -17691,10 +17746,15 @@ empty cells, or non-breaking spaces sandwiched between underline markers.
 These all look wrong, and none of them can do the one genuinely useful thing
 a blank could do: remember its answer.
 
-So Markua defines a blank element, using the obvious syntax: a run of
-underscores that looks exactly like a blank.
+Markua addresses the second need--the full-width ruled line--with no new
+syntax at all: a rule from margin to margin is just one way of *rendering* a
+thematic break, so it is handled by setting the `thematic-break-style`
+document setting to `full-width-line`, as discussed in the
+[section on thematic breaks](#thematic-breaks).
 
-### Inline blanks
+For the first need--the blank in the middle of a sentence--Markua defines a
+blank element, using the obvious syntax: a run of underscores that looks
+exactly like a blank.
 
 A [blank](@) is a run of four or more consecutive unescaped underscore (`_`)
 characters which is not immediately preceded or followed by a word character
@@ -17730,7 +17790,16 @@ Markua Processor SHOULD expose a blank to assistive technology as a blank to
 be filled in, not as a string of underscore characters to be read aloud.
 
 A blank is atomic: it MUST NOT be broken across lines. If you want a blank
-wider than the space remaining on a line, use a block blank instead (below).
+wider than the space remaining on a line, what you actually want is a
+full-width writing line: set the `thematic-break-style` document setting to
+`full-width-line` and use thematic breaks.
+
+Relatedly, a blank is an inline element, so a line consisting of nothing but
+underscores is not a blank at all: it is a
+[thematic break](#thematic-breaks), exactly as in CommonMark, since block
+parsing happens first. In a workbook this is a feature, not a gotcha: with
+`thematic-break-style: full-width-line`, an author who instinctively types a
+line of underscores to make a line to write on gets exactly that.
 
 Only isolated runs become blanks. A run of four or more underscores directly
 attached to a word--like `____foo____`--continues to behave according to the
@@ -17842,100 +17911,6 @@ expressions, and awarding points--that is a
 exercise, which is a different, more powerful thing. However, since a blank
 is a real element with a known answer, a Markua Processor generating an
 interactive format MAY render a blank as an input field.
-
-### Block blanks
-
-A line consisting solely of a run of four or more underscores (with up to
-three spaces of indentation, optionally followed by spaces or tabs) is a
-[block blank](@): a full-width ruled line for the reader to write on.
-
-```````````````````````````````` example
-Describe your approach:
-
-________
-.
-<p>Describe your approach:</p>
-<hr class="blank" />
-````````````````````````````````
-
-
-The number of underscores in a block blank does not matter beyond the minimum
-of four: a block blank is always the full width of the text column, a rule
-from margin to margin.
-
-This is a place where Markua deliberately diverges from CommonMark, which
-treats any line of three or more underscores as a
-[thematic break](#thematic-breaks). In Markua, only a line of exactly three
-underscores (`___`) is a thematic break; four or more make a block blank. A
-line of underscores looks exactly like a blank line to write on, which is why
-authors keep trying to use it as one; Markua makes it mean what it looks
-like. Use `---` or `***` for thematic breaks, which is what almost everyone
-does anyway. The spaced form (`_ _ _`) also remains a thematic break at any
-length, since a blank must be one solid run:
-
-```````````````````````````````` example
-___
-
-____
-
-_ _ _ _ _
-.
-<hr />
-<hr class="blank" />
-<hr />
-````````````````````````````````
-
-
-Like a thematic break, a block blank can interrupt a paragraph:
-
-```````````````````````````````` example
-Name:
-____
-.
-<p>Name:</p>
-<hr class="blank" />
-````````````````````````````````
-
-
-(If you want a short inline blank after the label instead, put it on the same
-line: `Name: ____`.)
-
-For longer answers, use the `lines` attribute to produce multiple ruled
-lines:
-
-```````````````````````````````` example
-{lines: 3}
-________
-.
-<hr class="blank" />
-<hr class="blank" />
-<hr class="blank" />
-````````````````````````````````
-
-
-The spacing between the lines is left to the implementation, but SHOULD be
-generous enough to handwrite on--these lines exist for pens, not cursors.
-
-A block blank takes an `answer` attribute too, in a block attribute list on
-the line above it. It behaves the same way as on an inline blank: consumed by
-default, rendered when `show-blank-answers` is `true`:
-
-```````````````````````````````` example
-{
-show-blank-answers: true
-}
-
-# Chapter One
-
-Why did the test fail?
-
-{answer: "Because the cache key omitted the locale."}
-________
-.
-<h1>Chapter One</h1>
-<p>Why did the test fail?</p>
-<div class="blank filled">Because the cache key omitted the locale.</div>
-````````````````````````````````
 
 </div>
 

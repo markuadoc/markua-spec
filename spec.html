@@ -114,7 +114,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class="title">Markua Spec</h1>
-<div class="version">Version 0.31.49 (2026-06-30)</div>
+<div class="version">Version 0.31.50 (2026-08-11)</div>
 <div class="authors">
     <span class="author"><em>This formal specification of Markua was developed at <a href="https://leanpub.com">Leanpub</a>, is written by Peter Armstrong, is based on the CommonMark Spec (version 0.31.2) by John MacFarlane, and is licensed under the Creative Commons license CC-BY-SA 4.0.</em><br/><br/><hr/><br/>NOTE: If you are a Leanpub author, there are two different versions of Markua used on Leanpub. <strong>The default version of Markua for books on Leanpub is Markua 0.30, which is documented in this specification, and which is currently in beta on Leanpub.</strong> The default version of Markua for courses on Leanpub is still Markua 0.10, which is documented in <a href="https://leanpub.com/markua/read">The Markua Manual</a>. (You can still use Markua 0.10 and Leanpub Flavoured Markdown for books on Leanpub, of course.)<br/><br/><hr/><br/></span>
 </div>
@@ -20124,23 +20124,31 @@ If you wish to refer to a parenthetical piece of text from multiple places in a
 Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 <a href="#crosslinks">crosslink</a>.</p>
-<h3 id="footnote-and-endnote-support-is-required-for-paragraphs-only" class="definition">
-<span class="number">11.20.4</span>Footnote and endnote support is required for paragraphs only
+<h3 id="footnote-and-endnote-support-is-required-for-paragraphs-and-headings" class="definition">
+<span class="number">11.20.4</span>Footnote and endnote support is required for paragraphs and headings
 </h3>
 <p>A Markua Processor must support footnote and endnote references inserted in
-normal paragraph content. However, that’s it.</p>
-<p>However, sometimes authors want to get creative with their footnotes and
-endnotes. Sometimes they want to add them in headings, or in footnotes or
-endnotes themselves. This latter style has been used on rare occasions, most
-notably by David Foster Wallace.</p>
-<p>However, supporting inserting footnotes and endnotes in places other than normal
-paragraph content puts a hugely increased burden on implementors of Markua
-Processors. As such, there is no requirement for a Markua Processor to support
-inserting a footnote or endnote anywhere other than in normal paragraph content.</p>
+normal paragraph content and in headings. However, that’s it.</p>
+<p>When a footnote or endnote is referenced in a heading, the note marker is
+output on the heading itself. However, the note marker and the note content
+must be omitted anywhere the heading text is reused: in any table of contents,
+running headers, PDF bookmarks, and in any automatically generated heading id.
+(In other words, the automatically generated id of <code>## Great advice[^advice]</code>
+is <code>great-advice</code>, exactly as if the footnote reference was not present.)</p>
+<p>However, sometimes authors want to get even more creative with their footnotes
+and endnotes. Sometimes they want to add them in footnotes or endnotes
+themselves. This style has been used on rare occasions, most notably by David
+Foster Wallace.</p>
+<p>However, supporting inserting footnotes and endnotes in places other than
+normal paragraph content and headings puts a hugely increased burden on
+implementors of Markua Processors. As such, there is no requirement for a
+Markua Processor to support inserting a footnote or endnote anywhere other
+than in normal paragraph content and headings.</p>
 <p>Authors should <strong>not</strong> assume that a particular Markua Processor supports
 inserting a footnote or endnote anywhere other than in normal paragraph content
-unless its documentation specifically states that it does. For example, Leanpub
-only supports inserting footnotes or endnotes in normal paragraph content.</p>
+and headings unless its documentation specifically states that it does. For
+example, Leanpub supports inserting footnotes and endnotes in normal paragraph
+content and headings, but not inside footnotes or endnotes themselves.</p>
 </div>
 <div class="extension">
 <h2 id="underline-m-" class="definition">

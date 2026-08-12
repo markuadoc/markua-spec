@@ -17477,34 +17477,34 @@ Markua document, the best approach is to put it in a section (or sub-section,
 sub-sub-section, etc.) or aside and refer to it from multiple places using a
 [crosslink](#crosslinks).
 
-### Footnote and endnote support is required for paragraphs only
+### Footnote and endnote support is required for paragraphs and headings
 
 A Markua Processor must support footnote and endnote references inserted in
-normal paragraph content. However, that's it.
+normal paragraph content and in headings. However, that's it.
 
-However, sometimes authors want to get creative with their footnotes and
-endnotes. Sometimes they want to add them in headings, or in footnotes or
-endnotes themselves. This latter style has been used on rare occasions, most
-notably by David Foster Wallace.
+When a footnote or endnote is referenced in a heading, the note marker is
+output on the heading itself. However, the note marker and the note content
+must be omitted anywhere the heading text is reused: in any table of contents,
+running headers, PDF bookmarks, and in any automatically generated heading id.
+(In other words, the automatically generated id of `## Great advice[^advice]`
+is `great-advice`, exactly as if the footnote reference was not present.)
 
-However, supporting inserting footnotes and endnotes in places other than normal
-paragraph content puts a hugely increased burden on implementors of Markua
-Processors. As such, there is no requirement for a Markua Processor to support
-inserting a footnote or endnote anywhere other than in normal paragraph content.
+However, sometimes authors want to get even more creative with their footnotes
+and endnotes. Sometimes they want to add them in footnotes or endnotes
+themselves. This style has been used on rare occasions, most notably by David
+Foster Wallace.
 
-That said, a Markua Processor may support inserting footnote and endnote
-references in headings. A Markua Processor which does so should output the note
-marker on the heading itself, but should omit the note marker and the note
-content anywhere the heading text is reused: in any table of contents, running
-headers, PDF bookmarks, and in any automatically generated heading id. (In other
-words, the automatically generated id of `## Great advice[^advice]` is
-`great-advice`, exactly as if the footnote reference was not present.)
+However, supporting inserting footnotes and endnotes in places other than
+normal paragraph content and headings puts a hugely increased burden on
+implementors of Markua Processors. As such, there is no requirement for a
+Markua Processor to support inserting a footnote or endnote anywhere other
+than in normal paragraph content and headings.
 
 Authors should **not** assume that a particular Markua Processor supports
 inserting a footnote or endnote anywhere other than in normal paragraph content
-unless its documentation specifically states that it does. For example, Leanpub
-supports inserting footnotes and endnotes in headings, as well as in normal
-paragraph content.
+and headings unless its documentation specifically states that it does. For
+example, Leanpub supports inserting footnotes and endnotes in normal paragraph
+content and headings, but not inside footnotes or endnotes themselves.
 
 </div>
 

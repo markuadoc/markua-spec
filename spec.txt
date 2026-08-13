@@ -17804,10 +17804,10 @@ line of underscores to make a line to write on gets exactly that.
 Only isolated runs become blanks. A run of four or more underscores directly
 attached to a word--like `____foo____`--continues to behave according to the
 [emphasis rules](#emphasis-and-strong-emphasis), and runs of one, two or
-three underscores are unchanged everywhere. In practice, the blank syntax
-claims only sequences which, in CommonMark, can never pair as emphasis
-delimiters anyway, and which would therefore have rendered as useless literal
-underscores:
+three underscores are unchanged everywhere. An isolated run usually rendered
+as useless literal underscores in CommonMark; in the rare arrangements where
+a punctuation-flanked run could have paired with surrounding emphasis, the
+blank interpretation deliberately wins:
 
 ```````````````````````````````` example
 _one_ __two__ ___three___ but ____.

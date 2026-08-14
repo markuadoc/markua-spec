@@ -32,10 +32,11 @@ now carries both this proposal and its application to spec.txt.
    classifiable from its characters alone, whatever the whitespace around
    it. The blank lines remain required style, warnable when missing, but a
    formatting mistake never changes what a line means.
-3. **Directive keywords are kept distinct from attribute keys** — there is
-   no `pause` attribute, and attribute keys may not be `default` or begin
-   with `default-` — so every mistake has exactly one plausible reading and
-   gets flagged: an unknown directive keyword warns, a jammed directive
+3. **Directive keywords are kept distinct from attribute keys as a design
+   practice** — there is no `pause` attribute, and no attribute is named
+   `default`. Nothing is formally reserved: shape does the classifying on
+   its own, and every mistake still has exactly one plausible reading and
+   gets flagged — an unknown directive keyword warns, a jammed directive
    still parses as a directive, and a floated attribute list is an error
    with a suggested fix.
 4. **There is exactly one toggle keyword: `default`.** Each `key: value`
@@ -95,7 +96,7 @@ except as the document settings block at the start of the document.
 
 ## Error handling: what gets flagged
 
-Shape does most of the work; the reserved vocabulary does the rest:
+Shape does the work — nothing needs to be reserved:
 
 | What the processor sees | What it does |
 |---|---|
@@ -106,11 +107,13 @@ Shape does most of the work; the reserved vocabulary does the rest:
 | An attribute list floated with blank lines (`{lang: jpn}` detached from its block) | **Error**, with the fix suggested: attach it, or write `{default lang: jpn}`. (Exception: the settings block at the start of the document) |
 | Attached attribute list with unknown keys | Silently filtered — the existing extension-attributes behavior, unchanged |
 
-**Adopted as a hard rule:** attribute keys may not be `default` or begin
-with `default-`. This reservation makes the toggle's flagging guaranteed
-rather than conventional, at no cost — a `default` key has no meaning
-attached to a block or span anyway. (Applied in the Attribute Keys section
-of the spec.)
+**Reversed after the bareword syntax landed: nothing is reserved.** Under
+the earlier colon spellings the reservation was load-bearing; with the
+leading bareword, shape alone classifies (`{default: foo}` is an attribute
+list, `{default lang: jpn}` is a directive), so the reservation guarded
+nothing mechanical. Naming an attribute `default` or `default-something` is
+legal but unwise, and the spec now says exactly that — an advisory note in
+the Attribute Keys section, not an error.
 
 ## Concrete changes
 
@@ -215,8 +218,8 @@ subset, is an open question below.
   `{backmatter}`, the insertion directives, `{begin-hanging-paragraphs}` /
   `{end-hanging-paragraphs}`.
 * The Attribute Keys character rules (lowercase letters, hyphens,
-  underscores — no digits, per the PR #33 revert). The one addition is the
-  `default-` prefix reservation described above.
+  underscores — no digits, per the PR #33 revert). The only addition is an
+  advisory note that `default`-flavored attribute names are unwise.
 * From PR #33's audio section: the `audio` attribute (delivery directions),
   the `audio-emphasis` attribute and `default-audio-emphasis` setting, named
   voices, and the format-invisibility rule.
@@ -234,7 +237,8 @@ subset, is an open question below.
    silent filtering applies to *attached* lists only; floating unknowns warn.
    (This resolves the existing internal contradiction between these three
    passages.)
-4. **Attribute Keys** — add the reserved `default-` prefix rule, if adopted.
+4. **Attribute Keys** — the reservation was ultimately dropped; an advisory
+   note that `default`-flavored attribute names are unwise replaces it.
 5. **The lang section** — replace `lang-*` with `{default lang: xxx}`;
    rename/alias the setting; fix the `zh-Hant` example.
 6. **The audio narration section (PR #33)** — collapse the pause directives
@@ -271,12 +275,13 @@ the applied spec text now says, with the reasoning for each.
    books may be using it, and the alias costs one line of processor
    behavior. Drop it only if Leanpub confirms the setting was never honored
    in production.
-4. **The `default-` reservation is a hard rule, not a convention.** The
-   entire error-detection design rests on it: one future extension
-   attribute named `default-anything` would silently break the warning
-   behavior of every toggle. A convention that must never be violated is a
-   rule. It costs nothing today — no existing attribute key begins with
-   `default-`.
+4. **The `default-` reservation: answered "hard rule", then dropped.**
+   Under the colon spellings (`{default-lang: jpn}`), the reservation was
+   load-bearing — the error-detection design rested on it — and the answer
+   was a hard rule. The final bareword syntax classifies by shape alone, so
+   the reservation guards nothing mechanical, and it is dropped: naming an
+   attribute `default` or `default-something` is legal but unwise, and the
+   spec carries an advisory note saying so rather than an error.
 5. **All `default-*` settings may be restated mid-document, not an
    enumerated subset.** One rule, no list to maintain: anything named
    `default-*` is by construction "the value used when nothing more

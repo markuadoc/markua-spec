@@ -2147,12 +2147,10 @@ hyphens (`-`) and underscores (`_`). Uppercase letters are not permitted in
 attribute keys: a Markua Processor must treat uppercase letters in attribute
 keys as an error.
 
-Additionally, attribute keys must not be `default` or begin with `default-`.
-That vocabulary is reserved for document settings and for the `default`
-directive which restates them, discussed in the
-[directives](#directives-m-) section. Reserving it is what lets a Markua
-Processor recognize a misplaced directive and warn about it, instead of
-silently treating it as an attribute.
+(A note on taste rather than a rule: naming an attribute `default`, or
+`default-something`, is legal but unwise — those names collide in the
+reader's mind with the `default` directive and the `default-*` document
+settings, discussed in the [directives](#directives-m-) section.)
 
 If a key is duplicated in an attribute list, the first key value is used and
 subsequent ones are ignored. A Markua Processor should add a warning in its
@@ -2550,10 +2548,12 @@ Processor can flag it:
   at the start of the document, which is exactly such a list, in that one
   position.
 
-To keep the two vocabularies legible, directive keywords are also not reused
-as attribute keys: there is no `pause` attribute, and attribute keys must
-not be `default` or begin with `default-` (as specified in the section on
-attribute keys).
+To keep the two vocabularies legible, this specification does not reuse
+directive keywords as attribute keys: there is no `pause` attribute, and no
+attribute is named `default`. This is a design practice, not a grammar rule
+— the leading bareword does the classifying on its own — but an author who
+names an extension attribute `default` or `default-something` is choosing
+confusion for no gain.
 
 Since `lang` is an attribute key, note what this design avoids: if
 `{lang: jpn}` itself were the toggle, a missing or an extra blank line would

@@ -539,7 +539,7 @@ of the more important ones...
 7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua,
    and neither is a `{dir}` attribute in general: any given language is either a
    left-to-right or a right-to-left language, so specifying the language with
-   the `lang` document setting and the `{lang: ___}` directive is sufficient.
+   the `default-lang` document setting and the `lang` attribute is sufficient.
 8. LFM used Sample.txt to define the sample content. Markua moves the definition
    of what constitutes sample content into a `{sample: true}` attribute on
    parts, chapters and sections. So, in Markua, inclusion in the sample is at
@@ -2078,8 +2078,9 @@ An attribute list can be inserted into a Markua document in one of three ways:
 2. Immediately after a span element (e.g. a word, italicized phrase, etc.) in
    normal paragraphs and in similarly-simple contexts, with **no spaces**
    separating it from the span element.
-3. On a line by itself, with one blank line above and below it. In this format,
-   the attribute list contains [directives](#directives).
+3. On a line by itself, with a blank line above and below it. An attribute
+   list in this position is a [directive](#directives-m-), discussed in its
+   own section below.
 
 One common use of attributes is to add `id` attributes to headings:
 
@@ -2143,6 +2144,12 @@ The keys of attributes must consist exclusively of lowercase letters,
 hyphens (`-`) and underscores (`_`). Uppercase letters are not permitted in
 attribute keys: a Markua Processor must treat uppercase letters in attribute
 keys as an error.
+
+Additionally, attribute keys must not begin with `default-`. That prefix is
+reserved for document settings and for the directives which restate them,
+discussed in the [directives](#directives-m-) section. Reserving the prefix
+is what lets a Markua Processor recognize a misplaced directive and warn
+about it, instead of silently treating it as an attribute.
 
 If a key is duplicated in an attribute list, the first key value is used and
 subsequent ones are ignored. A Markua Processor should add a warning in its
@@ -2401,8 +2408,10 @@ which it permits for each element, and filter everything else.
 
 Because of this, Markua attribute lists can contain any number of extension
 attributes. An extension attribute is an attribute which is not defined in the
-Markua specification. This is true whether the attributes are inserted in an
-attribute list attached to a span, block or even in free-floating directives.
+Markua specification. This applies to attribute lists which are attached to a
+span or a block. It deliberately does not apply to directives: an unrecognized
+directive keyword produces a warning, and is never silently filtered, as
+discussed in the [directives](#directives-m-) section.
 
 Because of the fact that all unrecognized attributes are filtered, it is
 possible for a Markua Processor to add extension attributes that only it
@@ -2429,34 +2438,84 @@ version of Markua without needing to specify anything special.
 
 ## Directives (M)
 
-Directives are switches which affect the behavior of a Markua Processor.
+Directives are instructions to a Markua Processor. A directive is an
+attribute list inserted the third way: on a line by itself, with a blank line
+above and below it. An attribute list which is attached to a span or a block
+configures that span or block; a directive is attached to nothing, so it
+speaks to the document itself.
 
-The syntax for directives is `{simple}`. A directive is surrounded in curly
-braces, and should have a blank line above and below it.
+There are two kinds of directive. They sit in the same position; they differ
+in what they do, and in how long it lasts.
 
-Directives do not have a value. Instead, their presence is all that is
-required. Here's the syntax for an imaginary directive `foo`:
-
-~~~
-some content
-
-{foo}
-
-some content
-~~~
-
-To be clear: a directive does **NOT** contain `{key: value}` pairs. That is an
-attribute list, not a directive.
-
-The absence of key-value pairs is what makes a directive a directive. It is a
-keyword by itself, enclosed in curly braces on a line by itself. So, the
-following is also a directive, albeit a poorly-formatted one:
+The first kind is an **action**, which happens once, at the point where the
+directive appears. An action is a keyword, optionally with a value:
 
 ~~~
 some content
-{foo}
-some content
+
+{pagebreak}
+
+some more content
+
+{pause: long}
+
+still more content
 ~~~
+
+The second kind is a **toggle**, which changes a default from that point
+forward, until the next toggle of the same setting. A toggle is written as
+the `default-*` document setting it restates:
+
+~~~
+{default-lang: jpn}
+
+Any amount of content, all defaulting to Japanese — whole chapters,
+if the author wishes.
+
+{default-lang: eng}
+~~~
+
+Any document setting whose name begins with `default-` may be restated as a
+directive in this way. Document settings are discussed
+[here](#document-settings-m-).
+
+A directive contains at most one key-value pair. A multi-pair attribute list
+on a line by itself is only valid as the document settings block at the start
+of the document; anywhere else, it is an error.
+
+### Directive keywords are not attribute keys
+
+Directive keywords are deliberately distinct from attribute keys, and
+attribute keys must not begin with `default-` (as specified in the section on
+attribute keys). This is what makes mistakes detectable.
+
+Since `lang` is an attribute key, the directive which changes the default
+language is `default-lang`, not `lang`. If the two spellings were the same,
+then a missing or an extra blank line would silently turn "this paragraph is
+in Japanese" into "the rest of the book is in Japanese" — and a Markua
+Processor could never warn about it, since both readings would be valid.
+Because the vocabularies are distinct, each mistake has exactly one plausible
+reading, and a Markua Processor can flag it:
+
+* A directive with an unrecognized keyword — a typo like `{pauze: long}`, or
+  an attribute list like `{lang: jpn}` accidentally separated from its block
+  by a blank line — must produce a warning. A directive is never silently
+  ignored. (Contrast this with unrecognized attributes in attached attribute
+  lists, which are silently filtered, as discussed in the section on
+  extension attributes.)
+* An attached attribute list whose key is a directive keyword — such as
+  `{pause: long}` written immediately above a paragraph — should produce a
+  warning suggesting that the author may have forgotten the blank line.
+* A bare keyword jammed up against its surrounding content cannot be a valid
+  attribute list at all, since an attribute list contains key-value pairs.
+  So the following is still parsed as a directive, albeit a poorly-formatted
+  one, and is worth a warning:
+
+  ~~~
+  some content
+  {pagebreak}
+  some content
+  ~~~
 
 The specific directives are discussed next.
 
@@ -2654,19 +2713,18 @@ For example, in Leanpub's online courses, the quiz answers are only provided
 when quizzes are completed and automatically marked, and are never output in the
 material book for the course.
 
-### The lang-* directives
+### The default-lang directive
 
-There is one more set of directives, the `lang-*` directives. These all start
-with `lang-`.
+There is one more directive to mention here: `default-lang`, the toggle which
+changes the default language of the document from the point where it appears.
 
-The `lang-*` directives are important enough that they are discussed in the
-next section, which also discusses the `lang` attributie and document setting.
+It is important enough that it is discussed in the next section, which also
+discusses the `lang` attribute and the `default-lang` document setting.
 
 ### The audio narration directives
 
-There are two more families of directives, which exist for audiobook
-narration: the pause directives (`{audio-pause}`, `{audio-pause-short}` and
-`{audio-pause-long}`) and the `audio-voice-*` directives.
+There are two more directives which exist for audiobook narration: the
+`pause` action and the `default-audio-voice` toggle.
 
 These are important enough that they are discussed in their own section on
 audio narration below, which also discusses the `audio`, `audio-emphasis` and
@@ -2713,7 +2771,7 @@ This is a normal paragraph again.
 This is a normal paragraph.
 ```
 
-## The lang document setting, lang attribute and lang directives (M)
+## The default-lang setting, lang attribute and default-lang directive (M)
 
 When generating books, knowing the language being used is very important.
 This enables a Markua Processor to do two things:
@@ -2736,13 +2794,12 @@ themes reusable, so that they can use one theme for all their books.
 Anyway, there are three ways for an author to indicate what language is being
 used at any given time:
 
-1. The `lang` **document setting**, which sets the default language.
+1. The `default-lang` **document setting**, which sets the default language.
 2. The `lang` **attribute**, which temporarily overrides the default language
    for a particular span or block.
-3. The `lang-*` **directives**, which set a new default language. This will be
-   the default language until another `lang-*` directive is encountered.
-   (There is no directive called `lang-*` itself; what this refers to is a
-   family of directives like lang-eng, lang-jpn, lang-zh-Hant, etc.)
+3. The `default-lang` **directive**, which restates the `default-lang`
+   document setting mid-document. The new default language applies from that
+   point until the next `default-lang` directive.
 
 In all three cases, the value being set is the language code of the
 language that the Markua document is written in. This language code is found in
@@ -2753,23 +2810,25 @@ language that the Markua document is written in. This language code is found in
 
 Since English is the default language of a Markua document, all Markua
 Processors must support the `eng` value. Support for all other language codes
-(or `lang-*` directives) is optional. If the language code given as the value
-of a `lang-*` directive is not supported or is unrecognized, it must be
-interpreted as `eng` and switch the font accordingly and switch the direction
-to left-to-right.
+is optional. If the language code given as the value of `default-lang` or
+`lang` is not supported or is unrecognized, it must be interpreted as `eng`
+and switch the font accordingly and switch the direction to left-to-right.
 
 
 
-### The `lang` document setting
+### The `default-lang` document setting
 
-A Markua document has a global `lang` document setting, which sets the default
-language. All document settings have default values; the default value of the
-`lang` document setting is `eng`.
+A Markua document has a global `default-lang` document setting, which sets
+the default language. All document settings have default values; the default
+value of the `default-lang` document setting is `eng`.
+
+(In earlier versions of Markua this setting was named `lang`; a Markua
+Processor should accept `lang` as an alias for `default-lang`.)
 
 Document settings are discussed [here](#document-settings-m-).
 
-For a example of the `lang` document setting in action, see the section “A
-detailed example” below.
+For an example of the `default-lang` document setting in action, see the
+section “A detailed example” below.
 
 
 
@@ -2802,75 +2861,75 @@ two paragraphs and one span had their language set to Japanese.
 
 Having to specify the `lang` attribute list on every single paragraph which did
 not use the default language would get annoying very quickly! This is why the
-`lang-*` directives exist.
+`default-lang` directive exists.
 
 
 
-### The `lang-*` directives
+### The `default-lang` directive
 
-**NOTE FOR LEANPUB AUTHORS: The `lang-*` directives are not yet supported on
-Leanpub. We will add support for them sometime in Q1 2024, and remove this
-note (TODO) when this is done.**
+**NOTE FOR LEANPUB AUTHORS: The `default-lang` directive is not yet supported
+on Leanpub. We will remove this note (TODO) when support ships.**
 
-The `lang-*` directives set a new default language. This will be the default
-language until another `lang-*` directive is encountered.
+The `default-lang` directive restates the `default-lang` document setting: it
+sets a new default language, which applies until another `default-lang`
+directive is encountered.
 
-This example shows how to use the `lang-*` directives to temporarily switch the
-default language of a Markua document:
+This example shows how to use the `default-lang` directive to temporarily
+switch the default language of a Markua document:
 
 ~~~
 Here is some English text.
 
 The Markua Processor knows it is in English since there is no document settings
-block, so the default document setting for `lang` is `eng`.
+block, so the default document setting for `default-lang` is `eng`.
 
-{lang-jpn}
+{default-lang: jpn}
 
 古池や蛙飛び込む水の音
 
 春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
 
-{lang-eng}
+{default-lang: eng}
 
 Here is some more English text.
 ~~~
 
-For another example of the `lang-*` directives, see the section "A detailed
-example" below.
+For another example of the `default-lang` directive, see the section "A
+detailed example" below.
 
 
 
 ### A detailed example
 
-The following example shows a number of uses of the `lang` document setting,
-the `lang` attribute, and the `lang-*` directives.
+The following example shows a number of uses of the `default-lang` document
+setting, the `lang` attribute, and the `default-lang` directive.
 
 ~~~
 {
-  lang: eng
+  default-lang: eng
 }
 
 # Chapter One
 
 Note that there was a document settings block at the beginning of this Markua
 document. It set the default language to `eng`. Since that is the default of
-the `lang` document setting, that was redundant.
+the `default-lang` document setting, that was redundant.
 
-This is still in English. Now we will use the `lang-jpn` directive to switch
-the default language to Japanese, so that we can output some Haiku
+This is still in English. Now we will use the `default-lang` directive to
+switch the default language to Japanese, so that we can output some Haiku
 by 松尾芭蕉{lang: jpn} (Matsuo Bashō). (Note that this was a use of the `lang`
 attribute on a span).
 
-{lang-jpn}
+{default-lang: jpn}
 
 古池や蛙飛び込む水の音
 
 春過ぎて夏来にけらし白妙の衣干すてふ天の香具山
 
-{lang-eng}
+{default-lang: eng}
 
-Now we are back in English, since we used the `lang-eng` directive again to
-switch the default back to English.
+Now we are back in English, since we used the `default-lang` directive again
+to switch the default back to English.
 
 Directives are the correct way to switch the default language for an extended
 period of time, but sometimes you may want to just switch the language for a
@@ -2880,23 +2939,23 @@ span; here's how to use it on a block:
 {lang: jpn}
 夏草や兵どもが夢の跡
 
-Now we are still in English, since the above was a `lang` attribute, not a
-`lang-*` directive.
+Now we are still in English, since the above was a `lang` attribute attached
+to the block below it, not a free-floating `default-lang` directive.
 
-Finally, we'll use the `lang-*` directives again, to switch to Traditional
-Chinese and then to Arabic for some more poetry.
+Finally, we'll use the `default-lang` directive again, to switch to
+Traditional Chinese and then to Arabic for some more poetry.
 
-{lang-zh-Hant}
+{default-lang: zh-Hant}
 
 花間一壺酒，獨酌無相親。
 舉杯邀明月，對影成三人。
 
-{lang-ara}
+{default-lang: ara}
 
 أَلا كُلُّ شَيْءٍ ما خَلا اللهَ باطِلُ
 وَكُلُّ نَعِيمٍ لا مَحالَةَ زائِلُ
 
-{lang-eng}
+{default-lang: eng}
 
 And with those poems by 李白{lang: zh-Hant} (Li Bai) and
 by الْمُتَنَبِّي {lang: ara} (Al-Mutanabbi), we can get back to the spec!
@@ -2919,8 +2978,8 @@ in diffs like any other prose change.
 
 All of the constructs in this section share one rule: **they have no visible
 effect on non-audio output**. A span with an `audio`, `audio-emphasis` or
-`audio-voice` attribute renders as its plain text; the pause and
-`audio-voice-*` directives produce nothing at all. A book with narration
+`audio-voice` attribute renders as its plain text; the `pause` and
+`default-audio-voice` directives produce nothing at all. A book with narration
 markup and the same book without it must look identical in print, EPUB and web
 output.
 
@@ -2928,36 +2987,37 @@ output.
 a proposed addition to Markua and are not yet supported on Leanpub. This note
 (TODO) will be removed when support ships.**
 
-### The pause directives
+### The `pause` directive
 
-Three directives insert a pause into the narration at the point where they
-appear. Like `{pagebreak}`, they are one-shot: they have an effect once, at
-that point, and nothing persists afterward. Like all directives, each must be
+The `pause` directive inserts a pause into the narration at the point where
+it appears. Like `{pagebreak}`, it is an action: it has an effect once, at
+that point, and nothing persists afterward. Like all directives, it must be
 on a line by itself, with blank lines above and below it.
 
-* `{audio-pause}` — a standard beat. Default duration 1.5 seconds.
-* `{audio-pause-short}` — a breath. Default duration 0.5 seconds.
-* `{audio-pause-long}` — a scene-change silence. Default duration 3 seconds.
+* `{pause}` — a standard beat. Default duration 1.5 seconds.
+* `{pause: short}` — a breath. Default duration 0.5 seconds.
+* `{pause: long}` — a scene-change silence. Default duration 3 seconds.
+* `{pause: 2s}` — an explicit duration, in seconds. The `s` suffix is
+  optional.
 
 ~~~
 The detective closed the file.
 
-{audio-pause-long}
+{pause: long}
 
 Three weeks later, the phone rang.
 ~~~
 
-The durations are controlled by the audio document settings, discussed below;
-each directive shares its name with the setting that defines its duration, so
-`{audio-pause-long}` inserts the pause whose length is `audio-pause-long`.
-In non-audio output, all three directives produce nothing — not even vertical
-space.
+The durations of the three named pauses are controlled by the audio document
+settings, discussed below: `audio-pause` for `{pause}`, `audio-pause-short`
+for `{pause: short}` and `audio-pause-long` for `{pause: long}`. In non-audio
+output, the directive produces nothing — not even vertical space.
 
-The three lengths are not arbitrary: a pause, a short pause and a long pause
-are the distinctions narration engines themselves draw (they are three of the
-documented tags of the model Leanpub's implementation targets), and they are
-the distinctions an author actually reaches for when reading their own prose
-aloud.
+The three named lengths are not arbitrary: a pause, a short pause and a long
+pause are the distinctions narration engines themselves draw (they are three
+of the documented tags of the model Leanpub's implementation targets), and
+they are the distinctions an author actually reaches for when reading their
+own prose aloud.
 
 ### The `audio` attribute
 
@@ -3009,6 +3069,9 @@ setting, which has two values:
   not a delivery direction — it does not ask for a subdued or monotone
   reading; it simply leaves the delivery unchanged.
 
+Like any `default-*` document setting, `default-audio-emphasis` can also be
+restated as a directive, changing the default from that point forward.
+
 The document setting can be overridden for a particular span or block with
 the `audio-emphasis` attribute, which takes the same two values. Since an
 attribute applies only to its own span or block, the override reverts on its
@@ -3037,13 +3100,25 @@ Emphasis in this document is not narrated — except that you must
 
 Books with dialogue, interviews or multiple narrators need more than one
 voice. Voices in Markua are **named**: the author picks a name for each voice
-(`james`, `sarah`, `interviewer`), and the name `narrator` is reserved for
-the book's default voice. What each named voice actually sounds like is
-defined in the audio document settings, discussed below.
+(`james`, `sarah`, `interviewer`), and two names are reserved:
 
-Because voice names appear inside attribute keys — in the `audio-voice-james`
-document setting and the `{audio-voice-james}` directive — they follow the
-attribute key rules: lowercase letters, hyphens and underscores only. A
+* `narrator` — the voice used as the primary narrator of the book. This is
+  the default voice.
+* `author` — the voice used as the author voice of the book. This name is
+  reserved separately so that a book can cast a stock voice as its narrator
+  while the author speaks as themselves: a female stock narrator with the
+  author's own male voice for author asides, say, or any other combination —
+  including the author's recorded or cloned voice.
+
+What each named voice actually sounds like — which stock voice, voice
+identifier or recorded voice performs it — is platform configuration, and is
+deliberately outside the scope of this specification. On Leanpub, this
+casting lives in the book's audiobook settings. (A platform may choose to
+accept in-document casting through its own custom document settings, under
+the existing rules for custom settings; this specification mandates no
+syntax for it.)
+
+A voice name should be a simple lowercase word, and matching is exact: a
 character named James speaks with the voice named `james`.
 
 There are three ways for an author to indicate which voice is speaking at any
@@ -3054,15 +3129,14 @@ language:
    voice. Its default value is `narrator`.
 2. The `audio-voice` **attribute**, which temporarily overrides the voice for
    a particular span or block.
-3. The `audio-voice-*` **directives**, which set a new default voice. This
-   will be the default voice until another `audio-voice-*` directive is
-   encountered. (There is no directive called `audio-voice-*` itself; what
-   this refers to is a family of directives like `audio-voice-james` and
-   `audio-voice-narrator`.)
+3. The `default-audio-voice` **directive**, which restates the
+   `default-audio-voice` document setting mid-document. The new default voice
+   applies from that point until the next `default-audio-voice` directive.
 
-A voice name which has not been defined in the document settings resolves to
-`narrator`, and a Markua Processor should warn — the same fallback rule as an
-unrecognized language code.
+A voice name which has no casting on the platform resolves to `narrator`, and
+a Markua Processor should warn — the same fallback rule as an unrecognized
+language code. An uncast `author` resolves to `narrator` without a warning:
+the author simply has not chosen a distinct author voice.
 
 ### The `audio-voice` attribute
 
@@ -3080,39 +3154,28 @@ paragraph reverts to the default voice on its own — there is nothing
 to reset.
 ~~~
 
-### The `audio-voice-*` directives
+### The `default-audio-voice` directive
 
-The `audio-voice-*` directives set a new default voice. This will be the
-default voice until another `audio-voice-*` directive is encountered.
-
-Note the hyphenated ending: exactly as with the `lang-*` directives, this is
-what distinguishes a sticky directive line (`{audio-voice-james}`) from an
-`audio-voice` attribute list attached to the block below it
-(`{audio-voice: james}`). The two spellings have different scoping by
-construction.
-
-Each directive shares its name with the document setting that defines its
-voice: `audio-voice-james` in the document settings says what `james` sounds
-like, and `{audio-voice-james}` in the text switches the narration to it.
+The `default-audio-voice` directive sets a new default voice, which applies
+until the next `default-audio-voice` directive:
 
 ~~~
-{audio-voice-james}
+{default-audio-voice: james}
 
 Everything from here is read in the voice named james — whole sections
 or chapters if the author wishes.
 
-{audio-voice-narrator}
+{default-audio-voice: narrator}
 
 And now we are back to the book's default narrator.
 ~~~
 
 ### The audio document settings
 
-The narration tunables live in the document settings. All of them carry an
-`audio` prefix, and the document-wide defaults which can be overridden inline
-additionally follow the spec's `default-` naming convention (like
-`default-code-language` and its siblings). Document settings are discussed
-[here](#document-settings-m-).
+The narration tunables live in the document settings. All of their names
+contain `audio`, and the document-wide defaults follow the `default-` naming
+convention, so each of them can also be restated as a directive mid-document.
+Document settings are discussed [here](#document-settings-m-).
 
 ~~~
 {
@@ -3121,9 +3184,6 @@ additionally follow the spec's `default-` naming convention (like
   audio-pause: 1.5s,
   audio-pause-short: 0.5s,
   audio-pause-long: 3s,
-  audio-voice-narrator: nova,
-  audio-voice-james: onyx,
-  audio-voice-sarah: sage,
   audio-speed: 1.0
 }
 ~~~
@@ -3132,13 +3192,11 @@ additionally follow the spec's `default-` naming convention (like
 * `default-audio-emphasis` — `all` (the default) or `none`, as discussed in
   the emphasis section above.
 * `audio-pause`, `audio-pause-short`, `audio-pause-long` — the durations of
-  the three pause directives, in seconds (the `s` suffix is optional).
-* `audio-voice-narrator`, `audio-voice-james`, `audio-voice-sarah`, … — what
-  each named voice resolves to. The value is interpreted by the Markua
-  Processor: it may be a narration engine's voice name or identifier, or a
-  label meaningful to the platform (such as an author's own cloned voice).
-  The spec constrains the naming mechanism, not the meaning of the value.
+  the three named pauses, in seconds (the `s` suffix is optional).
 * `audio-speed` — the default narration rate multiplier. Default `1.0`.
+
+Note what is *not* here: the casting of voice names onto actual voices. That
+is platform configuration, as discussed in the voices section above.
 
 The set of `audio-*` settings is open-ended: a Markua Processor which offers
 additional narration options (narration engine, expressiveness, pauses at
@@ -3149,27 +3207,29 @@ settings for them, following the existing rules for custom document settings.
 
 ~~~
 {
-  audio-pause-long: 4s,
-  audio-voice-narrator: nova,
-  audio-voice-james: onyx
+  audio-pause-long: 4s
 }
 
 # Chapter One
 
 The morning of the interview was gray and cold.
 
-{audio-pause-long}
+{pause: long}
 
 James the interviewer arrived late, coffee in hand.
 ["Let's just get started, shall we?"]{audio-voice: james} He didn't
 apologize. [Charming.]{audio: "sarcastic, drawn out"}
 
-{audio-voice-james}
+{default-audio-voice: james}
 
 What follows is his side of the story, told in his own voice, for
 the rest of this section.
 
-{audio-voice-narrator}
+{default-audio-voice: author}
+
+And this paragraph is me — the author, in my own voice.
+
+{default-audio-voice: narrator}
 
 And here the narrator takes back over.
 ~~~
@@ -3501,6 +3561,7 @@ the defaults are in one list. These defaults are listed below.
   chapter-number-format: name
   code-block-name: figure
   default-code-language: guess
+  default-lang: eng
   default-random-choice-order: false
   default-random-question-order: false
   default-table-column-spacing: 6pt
@@ -3508,7 +3569,6 @@ the defaults are in one list. These defaults are listed below.
   include-exercises-in-book: false
   include-page-numbers-in-references: true
   italicize-underlines: true
-  lang: eng
   list-figures: combined
   number-figures: sequential
   part-number-format: name
@@ -3575,6 +3635,12 @@ three tildes is always `text`, but you can override the default on individual
 resources of course. Finally, code spans do not support syntax highlighting, so
 there is no equivalent setting for the default language of code spans.
 
+`default-lang`
+: The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
+language code of the language that the Markua document is written in. The
+default is `eng`. In earlier versions of Markua this setting was named `lang`;
+a Markua Processor should accept `lang` as an alias.
+
 `default-random-choice-order`
 : `true` or `false`. The default is `false`. This sets the default behavior of
 multiple choice questions in all quizzes and exercises in the course.
@@ -3623,11 +3689,6 @@ setting has no effect on EPUB, which never includes page numbers in references
 `true`, then `_this_` and `*this*` are both italic. If `italicize-underlines` is
 `false`, then `_this_` is underlined while `*this*` is italic. This is discussed
 [here](#underline-m-).
-
-`lang`
-: The [IS0 639-3](https://en.wikipedia.org/wiki/ISO_639-3) three character
-language code of the language that the Markua document is written in. The
-default is `eng`.
 
 `list-figures`
 : `combined`, `groups` or `none`. The default value is `combined`. This setting
@@ -6429,9 +6490,9 @@ reason there are different defaults are to make things easier to type.
 Programmers refer to such niceties as "syntactic sugar".
 
 The default value of block code resources inserted with three backticks can be
-overridden from `guess` to some other value by setting by the
-`default-code-language` attribute on the entire Markua document. (This attribute
-has no effect on resources inserted with three tildes, or on code spans.)
+overridden from `guess` to some other value by the `default-code-language`
+document setting. (This setting has no effect on resources inserted with three
+tildes, or on code spans.)
 
 ### Local Code Resources
 

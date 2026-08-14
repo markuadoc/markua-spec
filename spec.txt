@@ -2139,16 +2139,10 @@ foo
 
 ### Attribute Keys
 
-The keys of attributes must consist exclusively of lowercase letters, digits,
+The keys of attributes must consist exclusively of lowercase letters,
 hyphens (`-`) and underscores (`_`). Uppercase letters are not permitted in
 attribute keys: a Markua Processor must treat uppercase letters in attribute
 keys as an error.
-
-(Digits are permitted so that keys can carry numbered slots, such as the
-`audio-voice-1` directives and document settings discussed in the section on
-audio narration. Numbering slots rather than naming them in a particular
-natural language keeps them meaningful in every language a Markua document
-might be written in.)
 
 If a key is duplicated in an attribute list, the first key value is used and
 subsequent ones are ignored. A Markua Processor should add a warning in its
@@ -3042,14 +3036,15 @@ Emphasis in this document is not narrated — except that you must
 ### Voices
 
 Books with dialogue, interviews or multiple narrators need more than one
-voice. Voices in Markua are **numbered slots** (`1`, `2`, `3`, and so on), plus
-the reserved slot `narrator` for the book's default voice. What each slot
-actually sounds like is defined in the audio document settings, discussed
-below.
+voice. Voices in Markua are **named**: the author picks a name for each voice
+(`james`, `sarah`, `interviewer`), and the name `narrator` is reserved for
+the book's default voice. What each named voice actually sounds like is
+defined in the audio document settings, discussed below.
 
-The slots are numbered rather than named in English so that they mean the same
-thing in a Markua document written in any language: `{audio-voice-2}` is as
-legible to an author writing in Japanese or Arabic as `{lang-jpn}` is.
+Because voice names appear inside attribute keys — in the `audio-voice-james`
+document setting and the `{audio-voice-james}` directive — they follow the
+attribute key rules: lowercase letters, hyphens and underscores only. A
+character named James speaks with the voice named `james`.
 
 There are three ways for an author to indicate which voice is speaking at any
 given time, and they deliberately mirror the three ways of indicating
@@ -3062,10 +3057,10 @@ language:
 3. The `audio-voice-*` **directives**, which set a new default voice. This
    will be the default voice until another `audio-voice-*` directive is
    encountered. (There is no directive called `audio-voice-*` itself; what
-   this refers to is a family of directives like `audio-voice-1`,
-   `audio-voice-2` and `audio-voice-narrator`.)
+   this refers to is a family of directives like `audio-voice-james` and
+   `audio-voice-narrator`.)
 
-A voice slot which has not been defined in the document settings resolves to
+A voice name which has not been defined in the document settings resolves to
 `narrator`, and a Markua Processor should warn — the same fallback rule as an
 unrecognized language code.
 
@@ -3076,12 +3071,13 @@ that block or span concludes, the voice immediately reverts to the default
 voice.
 
 ~~~
-The interviewer leaned in. ["But why Markua?"]{audio-voice: 1} It was a
+The interviewer leaned in. ["But why Markua?"]{audio-voice: james} It was a
 fair question.
 
-{audio-voice: 2}
-This whole paragraph is spoken by voice 2, and the next paragraph
-reverts to the default voice on its own — there is nothing to reset.
+{audio-voice: sarah}
+This whole paragraph is spoken in the voice named sarah, and the next
+paragraph reverts to the default voice on its own — there is nothing
+to reset.
 ~~~
 
 ### The `audio-voice-*` directives
@@ -3090,20 +3086,20 @@ The `audio-voice-*` directives set a new default voice. This will be the
 default voice until another `audio-voice-*` directive is encountered.
 
 Note the hyphenated ending: exactly as with the `lang-*` directives, this is
-what distinguishes a sticky directive line (`{audio-voice-1}`) from an
+what distinguishes a sticky directive line (`{audio-voice-james}`) from an
 `audio-voice` attribute list attached to the block below it
-(`{audio-voice: 1}`). The two spellings have different scoping by
+(`{audio-voice: james}`). The two spellings have different scoping by
 construction.
 
 Each directive shares its name with the document setting that defines its
-slot: `audio-voice-1` in the document settings says what voice 1 sounds like,
-and `{audio-voice-1}` in the text switches the narration to it.
+voice: `audio-voice-james` in the document settings says what `james` sounds
+like, and `{audio-voice-james}` in the text switches the narration to it.
 
 ~~~
-{audio-voice-1}
+{audio-voice-james}
 
-Everything from here is read by voice 1 — whole sections or chapters
-if the author wishes.
+Everything from here is read in the voice named james — whole sections
+or chapters if the author wishes.
 
 {audio-voice-narrator}
 
@@ -3126,23 +3122,22 @@ additionally follow the spec's `default-` naming convention (like
   audio-pause-short: 0.5s,
   audio-pause-long: 3s,
   audio-voice-narrator: nova,
-  audio-voice-1: "James (interviewer)",
-  audio-voice-2: sage,
+  audio-voice-james: onyx,
+  audio-voice-sarah: sage,
   audio-speed: 1.0
 }
 ~~~
 
-* `default-audio-voice` — the document's default voice slot. Default
-  `narrator`.
+* `default-audio-voice` — the document's default voice. Default `narrator`.
 * `default-audio-emphasis` — `all` (the default) or `none`, as discussed in
   the emphasis section above.
 * `audio-pause`, `audio-pause-short`, `audio-pause-long` — the durations of
   the three pause directives, in seconds (the `s` suffix is optional).
-* `audio-voice-narrator`, `audio-voice-1`, `audio-voice-2`, … — what each
-  voice slot resolves to. The value is interpreted by the Markua Processor:
-  it may be a narration engine's voice name or identifier, or a label
-  meaningful to the platform (such as an author's own cloned voice). The spec
-  constrains the slot mechanism, not the meaning of the value.
+* `audio-voice-narrator`, `audio-voice-james`, `audio-voice-sarah`, … — what
+  each named voice resolves to. The value is interpreted by the Markua
+  Processor: it may be a narration engine's voice name or identifier, or a
+  label meaningful to the platform (such as an author's own cloned voice).
+  The spec constrains the naming mechanism, not the meaning of the value.
 * `audio-speed` — the default narration rate multiplier. Default `1.0`.
 
 The set of `audio-*` settings is open-ended: a Markua Processor which offers
@@ -3156,7 +3151,7 @@ settings for them, following the existing rules for custom document settings.
 {
   audio-pause-long: 4s,
   audio-voice-narrator: nova,
-  audio-voice-1: "James (interviewer)"
+  audio-voice-james: onyx
 }
 
 # Chapter One
@@ -3165,11 +3160,11 @@ The morning of the interview was gray and cold.
 
 {audio-pause-long}
 
-The interviewer arrived late, coffee in hand.
-["Let's just get started, shall we?"]{audio-voice: 1} He didn't
+James the interviewer arrived late, coffee in hand.
+["Let's just get started, shall we?"]{audio-voice: james} He didn't
 apologize. [Charming.]{audio: "sarcastic, drawn out"}
 
-{audio-voice-1}
+{audio-voice-james}
 
 What follows is his side of the story, told in his own voice, for
 the rest of this section.

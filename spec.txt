@@ -2145,10 +2145,10 @@ attribute keys: a Markua Processor must treat uppercase letters in attribute
 keys as an error.
 
 (Digits are permitted so that keys can carry numbered slots, such as the
-`voice-1` directives and the `audio-voice-1` document settings discussed in the
-section on audio narration. Numbering slots rather than naming them in a
-particular natural language keeps them meaningful in every language a Markua
-document might be written in.)
+`audio-voice-1` directives and document settings discussed in the section on
+audio narration. Numbering slots rather than naming them in a particular
+natural language keeps them meaningful in every language a Markua document
+might be written in.)
 
 If a key is duplicated in an attribute list, the first key value is used and
 subsequent ones are ignored. A Markua Processor should add a warning in its
@@ -2671,12 +2671,12 @@ next section, which also discusses the `lang` attributie and document setting.
 ### The audio narration directives
 
 There are two more families of directives, which exist for audiobook
-narration: the pause directives (`{a_pause}`, `{a_short_pause}` and
-`{a_long_pause}`) and the `voice-*` directives.
+narration: the pause directives (`{audio_pause}`, `{audio_short_pause}` and
+`{audio_long_pause}`) and the `audio-voice-*` directives.
 
 These are important enough that they are discussed in their own section on
-audio narration below, which also discusses the `audio` and `voice` attributes
-and the audio document settings.
+audio narration below, which also discusses the `audio`, `audio-emphasis` and
+`audio-voice` attributes and the audio document settings.
 
 
 
@@ -2924,10 +2924,11 @@ means it is versioned with the text, portable between platforms, and visible
 in diffs like any other prose change.
 
 All of the constructs in this section share one rule: **they have no visible
-effect on non-audio output**. A span with an `audio` or `voice` attribute
-renders as its plain text; the pause and `voice-*` directives produce nothing
-at all. A book with narration markup and the same book without it must look
-identical in print, EPUB and web output.
+effect on non-audio output**. A span with an `audio`, `audio-emphasis` or
+`audio-voice` attribute renders as its plain text; the pause and
+`audio-voice-*` directives produce nothing at all. A book with narration
+markup and the same book without it must look identical in print, EPUB and web
+output.
 
 **NOTE FOR LEANPUB AUTHORS: The audio narration constructs in this section are
 a proposed addition to Markua and are not yet supported on Leanpub. This note
@@ -2940,14 +2941,14 @@ appear. Like `{pagebreak}`, they are one-shot: they have an effect once, at
 that point, and nothing persists afterward. Like all directives, each must be
 on a line by itself, with blank lines above and below it.
 
-* `{a_pause}` — a standard beat. Default duration 1.5 seconds.
-* `{a_short_pause}` — a breath. Default duration 0.5 seconds.
-* `{a_long_pause}` — a scene-change silence. Default duration 3 seconds.
+* `{audio_pause}` — a standard beat. Default duration 1.5 seconds.
+* `{audio_short_pause}` — a breath. Default duration 0.5 seconds.
+* `{audio_long_pause}` — a scene-change silence. Default duration 3 seconds.
 
 ~~~
 The detective closed the file.
 
-{a_long_pause}
+{audio_long_pause}
 
 Three weeks later, the phone rang.
 ~~~
@@ -2998,11 +2999,43 @@ visible effect.
 ### Emphasis is narration markup
 
 Markua's existing emphasis already carries narration intent, and no new syntax
-is needed for it: when narrating, `*italic text*` should be read with mild
-spoken stress and `**bold text**` with strong spoken stress, exactly as a
-human narrator treats emphasized text. An author who wants emphasized-looking
-text spoken flat can opt out per span with `[**READ THE MANUAL**]{audio: flat}`,
-or document-wide with the `audio-emphasis` document setting.
+is needed for it: when narrating, em (italic) and underlined text should be
+read with mild spoken stress and strong (bold) text with strong spoken stress,
+exactly as a human narrator treats emphasized text.
+
+Whether this happens is controlled by the `default-audio-emphasis` document
+setting, which has two values:
+
+* `all` (the default) — strong, em and underlined text is given spoken
+  stress, as described above.
+* `none` — emphasis markup has no effect on the narration: the text is read
+  exactly as it would be if the markup were not there. Note that `none` is
+  not a delivery direction — it does not ask for a subdued or monotone
+  reading; it simply leaves the delivery unchanged.
+
+The document setting can be overridden for a particular span or block with
+the `audio-emphasis` attribute, which takes the same two values. Since an
+attribute applies only to its own span or block, the override reverts on its
+own afterward; there is no third value meaning "back to the document
+default", because omitting the attribute already means exactly that.
+
+The override works in both directions. With the default setting of `all`, an
+author who wants one emphasized-looking span read as ordinary prose writes:
+
+~~~
+Consult the index of [**Markua: The Book**]{audio-emphasis: none}.
+~~~
+
+And with the setting turned off document-wide, one span can turn it back on:
+
+~~~
+{
+  default-audio-emphasis: none
+}
+
+Emphasis in this document is not narrated — except that you must
+[*never*]{audio-emphasis: all} feed a Markua Processor after midnight.
+~~~
 
 ### Voices
 
@@ -3013,82 +3046,94 @@ actually sounds like is defined in the audio document settings, discussed
 below.
 
 The slots are numbered rather than named in English so that they mean the same
-thing in a Markua document written in any language: `{voice-2}` is as legible
-to an author writing in Japanese or Arabic as `{lang-jpn}` is.
+thing in a Markua document written in any language: `{audio-voice-2}` is as
+legible to an author writing in Japanese or Arabic as `{lang-jpn}` is.
 
 There are three ways for an author to indicate which voice is speaking at any
 given time, and they deliberately mirror the three ways of indicating
 language:
 
-1. The `voice` **document setting**, which sets the default voice. Its default
-   value is `narrator`.
-2. The `voice` **attribute**, which temporarily overrides the voice for a
-   particular span or block.
-3. The `voice-*` **directives**, which set a new default voice. This will be
-   the default voice until another `voice-*` directive is encountered. (There
-   is no directive called `voice-*` itself; what this refers to is a family of
-   directives like `voice-1`, `voice-2` and `voice-narrator`.)
+1. The `default-audio-voice` **document setting**, which sets the default
+   voice. Its default value is `narrator`.
+2. The `audio-voice` **attribute**, which temporarily overrides the voice for
+   a particular span or block.
+3. The `audio-voice-*` **directives**, which set a new default voice. This
+   will be the default voice until another `audio-voice-*` directive is
+   encountered. (There is no directive called `audio-voice-*` itself; what
+   this refers to is a family of directives like `audio-voice-1`,
+   `audio-voice-2` and `audio-voice-narrator`.)
 
 A voice slot which has not been defined in the document settings resolves to
 `narrator`, and a Markua Processor should warn — the same fallback rule as an
 unrecognized language code.
 
-### The `voice` attribute
+### The `audio-voice` attribute
 
-A `voice` attribute can be applied to a particular block or span. After that
-block or span concludes, the voice immediately reverts to the default voice.
+An `audio-voice` attribute can be applied to a particular block or span. After
+that block or span concludes, the voice immediately reverts to the default
+voice.
 
 ~~~
-The interviewer leaned in. ["But why Markua?"]{voice: 1} It was a
+The interviewer leaned in. ["But why Markua?"]{audio-voice: 1} It was a
 fair question.
 
-{voice: 2}
+{audio-voice: 2}
 This whole paragraph is spoken by voice 2, and the next paragraph
 reverts to the default voice on its own — there is nothing to reset.
 ~~~
 
-### The `voice-*` directives
+### The `audio-voice-*` directives
 
-The `voice-*` directives set a new default voice. This will be the default
-voice until another `voice-*` directive is encountered.
+The `audio-voice-*` directives set a new default voice. This will be the
+default voice until another `audio-voice-*` directive is encountered.
 
-Note the hyphenated spelling: exactly as with the `lang-*` directives, this is
-what distinguishes a sticky directive line (`{voice-1}`) from a `voice`
-attribute list attached to the block below it (`{voice: 1}`). The two
-spellings have different scoping by construction.
+Note the hyphenated ending: exactly as with the `lang-*` directives, this is
+what distinguishes a sticky directive line (`{audio-voice-1}`) from an
+`audio-voice` attribute list attached to the block below it
+(`{audio-voice: 1}`). The two spellings have different scoping by
+construction.
+
+Each directive shares its name with the document setting that defines its
+slot: `audio-voice-1` in the document settings says what voice 1 sounds like,
+and `{audio-voice-1}` in the text switches the narration to it.
 
 ~~~
-{voice-1}
+{audio-voice-1}
 
 Everything from here is read by voice 1 — whole sections or chapters
 if the author wishes.
 
-{voice-narrator}
+{audio-voice-narrator}
 
 And now we are back to the book's default narrator.
 ~~~
 
 ### The audio document settings
 
-The narration tunables live in the document settings, under an `audio-`
-prefix (with the exception of `voice`, which parallels `lang`). Document
-settings are discussed [here](#document-settings-m-).
+The narration tunables live in the document settings. All of them carry an
+`audio` prefix, and the document-wide defaults which can be overridden inline
+additionally follow the spec's `default-` naming convention (like
+`default-code-language` and its siblings). Document settings are discussed
+[here](#document-settings-m-).
 
 ~~~
 {
-  voice: narrator,
+  default-audio-voice: narrator,
+  default-audio-emphasis: all,
   audio-pause: 1.5s,
   audio-pause-short: 0.5s,
   audio-pause-long: 3s,
   audio-voice-narrator: nova,
   audio-voice-1: "James (interviewer)",
   audio-voice-2: sage,
-  audio-speed: 1.0,
-  audio-emphasis: spoken
+  audio-speed: 1.0
 }
 ~~~
 
-* `voice` — the document's default voice slot. Default `narrator`.
+* `default-audio-voice` — the document's default voice slot. Default
+  `narrator`.
+* `default-audio-emphasis` — `all` (the default) or `none`, as discussed in
+  the emphasis section above.
 * `audio-pause`, `audio-pause-short`, `audio-pause-long` — the durations of
   the three pause directives, in seconds (the `s` suffix is optional).
 * `audio-voice-narrator`, `audio-voice-1`, `audio-voice-2`, … — what each
@@ -3097,8 +3142,6 @@ settings are discussed [here](#document-settings-m-).
   meaningful to the platform (such as an author's own cloned voice). The spec
   constrains the slot mechanism, not the meaning of the value.
 * `audio-speed` — the default narration rate multiplier. Default `1.0`.
-* `audio-emphasis` — `spoken` (the default; emphasis is read as spoken
-  stress, as discussed above) or `flat` (emphasis is not vocalized).
 
 The set of `audio-*` settings is open-ended: a Markua Processor which offers
 additional narration options (narration engine, expressiveness, pauses at
@@ -3118,18 +3161,18 @@ settings for them, following the existing rules for custom document settings.
 
 The morning of the interview was gray and cold.
 
-{a_long_pause}
+{audio_long_pause}
 
 The interviewer arrived late, coffee in hand.
-["Let's just get started, shall we?"]{voice: 1} He didn't
+["Let's just get started, shall we?"]{audio-voice: 1} He didn't
 apologize. [Charming.]{audio: "sarcastic, drawn out"}
 
-{voice-1}
+{audio-voice-1}
 
 What follows is his side of the story, told in his own voice, for
 the rest of this section.
 
-{voice-narrator}
+{audio-voice-narrator}
 
 And here the narrator takes back over.
 ~~~

@@ -1,8 +1,10 @@
 # Directives with Attributes
 
-**Status:** Decided and applied — the spec changes landed in PR #33 (commit
-`fd273eb`), and the formerly-open questions at the end now carry their
-answers as applied
+**Status:** Decided and applied in PR #33. The final syntax — bareword
+directives with an optional argument: `{pause long}`, `{default lang: jpn}`
+— supersedes the earlier colon spellings (`{pause: long}`,
+`{default-lang: jpn}`) and is applied throughout the spec. The
+formerly-open questions at the end carry their answers as applied
 **Date:** August 14, 2026
 **Context:** Grew out of the audio narration proposal (PR #32 → PR #33) and a
 design discussion between Peter and Claude about whether the `lang-*` /
@@ -13,23 +15,40 @@ now carries both this proposal and its application to spec.txt.
 
 ## The decision
 
-1. **A directive is defined by its position:** a single attribute list on a
-   line by itself, with a blank line above and below it. Position, not
-   lexical shape, is what classifies it.
-2. **Directives may carry attributes.** A directive is a keyword, optionally
-   with a value: `{pagebreak}`, `{pause: long}`, `{default-lang: jpn}`.
-3. **Directive keywords are kept distinct from attribute keys** as a design
-   practice — not a grammar law. Because the keyword vocabularies don't
-   overlap, a line that is not a valid directive can be recognized and
-   flagged as such, and a line that is not a valid attribute list can be
-   recognized and flagged as such. Whitespace mistakes become warnings
-   instead of silent reinterpretations.
-4. **Toggling a default is a directive named after the setting it toggles:**
-   `{default-lang: jpn}` mid-document changes the `default-lang` setting from
-   that point forward, until the next such directive. This replaces the
+1. **A directive is a bare keyword followed by an optional argument**, on a
+   line by itself with a blank line above and below it. The argument is
+   either a bare value or an ordinary comma-separated attribute list:
+
+   ~~~
+   {pagebreak}
+   {pause short}
+   {default lang: jpn}
+   {default lang: jpn, audio-voice: kenji}
+   ~~~
+
+2. **The leading bareword classifies by shape.** An attribute list is
+   exclusively `key: value` pairs, so its first token always carries a
+   colon; a directive's first token never does. Any curly-brace line is
+   classifiable from its characters alone, whatever the whitespace around
+   it. The blank lines remain required style, warnable when missing, but a
+   formatting mistake never changes what a line means.
+3. **Directive keywords are kept distinct from attribute keys** — there is
+   no `pause` attribute, and attribute keys may not be `default` or begin
+   with `default-` — so every mistake has exactly one plausible reading and
+   gets flagged: an unknown directive keyword warns, a jammed directive
+   still parses as a directive, and a floated attribute list is an error
+   with a suggested fix.
+4. **There is exactly one toggle keyword: `default`.** Each `key: value`
+   pair in its argument restates the document setting named `default-` +
+   key, from that point until that setting's next restatement:
+   `{default lang: jpn}` restates `default-lang`. The pair inside the toggle
+   is the same pair the author would attach to one block — `{lang: jpn}`
+   marks a paragraph; `{default lang: jpn}` changes the book. Several pairs
+   toggle together when the change is one event. This replaces the
    hyphenated directive families (`lang-*`, `audio-voice-*`), which were
    parameterized directives with the parameter smuggled into the keyword —
-   the workaround that existed only because directives could not take values.
+   the workaround that existed only because directives could not take
+   arguments.
 
 The unifying principle, which the spec can teach in one sentence:
 **position is scope.**
@@ -47,55 +66,64 @@ The closer you attach it, the smaller its reach.
 
 This proposal adds no new construct. Document settings, attribute lists, and
 directives remain the full inventory; directives simply gain the ability to
-carry a value. The `default-` names are a *convention within directives*, not
-a fourth thing: `{default-lang: jpn}` is a directive whose name happens to
-match the document setting it toggles — the same deliberate name-sharing the
-audio proposal already uses between voice directives and voice settings.
+carry an argument. `default` is one directive among them, not a fourth
+thing: `{default lang: jpn}` restates the `default-lang` document setting by
+name, wrapping the same `lang: jpn` pair the author would otherwise attach
+to a single block.
 
 ## Directive shapes
 
-Two shapes, one form each:
+* **Actions** — one-shot, at a point: a bare keyword with an optional bare
+  value. `{pagebreak}`, `{toc}`, `{pause}`, `{pause long}`, `{pause 2s}`.
+* **Toggles** — sticky, until the next restatement: the `default` keyword
+  with an attribute list. `{default lang: jpn}`,
+  `{default audio-voice: james}`, `{default audio-emphasis: none}`,
+  `{default lang: jpn, audio-voice: kenji}`.
 
-* **Actions** — one-shot, at a point: a bare keyword, optionally
-  parameterized. `{pagebreak}`, `{toc}`, `{pause}`, `{pause: long}`.
-* **Toggles** — sticky, until the next one: a `default-*` keyword with a
-  value. `{default-lang: jpn}`, `{default-audio-voice: james}`,
-  `{default-audio-emphasis: none}`.
+The toggle's attribute list is an ordinary one: comma-separated, values
+quoted or unquoted per the normal rules. The commas are load-bearing, not
+style — an unquoted attribute value may contain spaces, and the comma is
+what terminates it, so space-separated pairs would be ambiguous. A
+multi-pair toggle behaves exactly like the single-pair toggles in sequence:
+each pair restates its own setting, each setting reverts independently at
+its own next restatement, an unrecognized key warns while the rest apply,
+and duplicate keys follow the first-wins-with-warning attribute rule. A
+bare `{default}` with no argument is an error.
 
-A directive contains at most one key-value pair. (The multi-pair floating
-list remains reserved for the document settings block at the top of the
-document; a multi-pair list elsewhere is an error. This restriction can be
-relaxed later if a need appears.)
+A floating attribute list with no leading keyword remains invalid everywhere
+except as the document settings block at the start of the document.
 
 ## Error handling: what gets flagged
 
-The distinct-keywords practice is what makes every common mistake detectable:
+Shape does most of the work; the reserved vocabulary does the rest:
 
 | What the processor sees | What it does |
 |---|---|
-| Floating line, known directive keyword | Executes it |
-| Floating line, unknown keyword (e.g. a typo `{pauze: long}`, or a stray block attribute `{lang: jpn}`) | **Warning: unknown directive.** The floating position is never a silent discard zone |
-| Attached attribute list containing a directive-only keyword (e.g. `{pause: long}` jammed against a paragraph) | **Warning: this looks like a directive missing its blank lines** |
+| Directive shape (leading bareword), known keyword | Executes it |
+| Directive shape, unknown keyword (a typo like `{pauze short}`) | **Warning: unknown directive.** A directive is never silently ignored |
+| A `default` toggle containing a key with no matching `default-*` setting | **Warning for that pair**; the remaining pairs still apply |
+| A directive jammed against a block (`{pause long}` or `{pagebreak}` with no blank line) | Not a valid attribute list, so parsed as a directive anyway, with a formatting warning — no keyword registry needed |
+| An attribute list floated with blank lines (`{lang: jpn}` detached from its block) | **Error**, with the fix suggested: attach it, or write `{default lang: jpn}`. (Exception: the settings block at the start of the document) |
 | Attached attribute list with unknown keys | Silently filtered — the existing extension-attributes behavior, unchanged |
-| Bare keyword jammed against a block (`{pagebreak}` with no blank line) | Parsed as a directive anyway, with a formatting warning — today's leniency survives, because a bare keyword cannot be a valid attribute list |
 
-**Adopted as a hard rule:** attribute keys may not begin with `default-`.
-This one reservation makes the toggle family's flagging guaranteed rather
-than conventional, at no cost — a `default-*` key has no meaning attached to
-a block or span anyway. (Applied in the Attribute Keys section of the spec.)
+**Adopted as a hard rule:** attribute keys may not be `default` or begin
+with `default-`. This reservation makes the toggle's flagging guaranteed
+rather than conventional, at no cost — a `default` key has no meaning
+attached to a block or span anyway. (Applied in the Attribute Keys section
+of the spec.)
 
 ## Concrete changes
 
 ### Pauses: three directives collapse into one
 
-Replace `{audio-pause}`, `{audio-pause-short}` and `{audio-pause-long}` (PR
-#33's current spelling) with a single parameterized action:
+Replace `{audio-pause}`, `{audio-pause-short}` and `{audio-pause-long}` with
+a single action whose argument is a bare value:
 
 ```
 {pause}                 a standard beat        (default 1.5s)
-{pause: short}          a breath               (default 0.5s)
-{pause: long}           a scene-change silence (default 3s)
-{pause: 2s}             an explicit duration
+{pause short}           a breath               (default 0.5s)
+{pause long}            a scene-change silence (default 3s)
+{pause 2s}              an explicit duration
 ```
 
 The three named durations remain configurable via the existing
@@ -106,21 +134,21 @@ parameterized pauses): both, through one directive.
 *Decided: the keyword is `pause`, not `audio-pause` — see the answered
 questions below.*
 
-### Language: `{default-lang: jpn}` replaces the `lang-*` family
+### Language: `{default lang: jpn}` replaces the `lang-*` family
 
 ```
-{default-lang: jpn}
+{default lang: jpn}
 
 ...five or ten pages of Japanese...
 
-{default-lang: en}
+{default lang: eng}
 ```
 
-* The value sits in value position, where uppercase is legal — so
-  `{default-lang: zh-Hant}` is simply correct, dissolving the latent
+* The code sits in value position, where uppercase is legal — so
+  `{default lang: zh-Hant}` is simply correct, dissolving the latent
   `{lang-zh-Hant}` rule violation that PR #32 flagged.
 * The `lang` document setting is renamed `default-lang`, with `lang` kept as
-  a documented alias, so the directive and the setting share one name.
+  a documented alias; the toggle restates the setting by name.
 * The `lang-*` directive family is **renamed without apology** — no legacy
   alias, no deprecation note. The spec's own text (spec.txt:2811) says the
   `lang-*` directives are not yet supported on Leanpub, so no author should
@@ -130,9 +158,10 @@ questions below.*
 
 ### Voices: names in the manuscript, casting on the platform
 
-* Toggle: `{default-audio-voice: james}` … `{default-audio-voice: narrator}`.
-  The directive is literally named after the `default-audio-voice` document
-  setting it toggles — the name-sharing becomes exact.
+* Toggle: `{default audio-voice: james}` … `{default audio-voice: narrator}`,
+  restating the `default-audio-voice` document setting. A voice change that
+  coincides with a language change is one directive:
+  `{default lang: jpn, audio-voice: kenji}`.
 * The `audio-voice` attribute on spans and blocks is unchanged:
   `["But why Markua?"]{audio-voice: james}`.
 * **Casting moves out of the manuscript. Decided.** The
@@ -165,12 +194,13 @@ questions below.*
 ### The free bonus: every `default-*` setting becomes toggleable
 
 The general rule — any document setting whose name begins with `default-`
-may be restated as a directive, taking effect from that point — gives the
-rest of the family mid-document toggling with zero new mechanism:
+may be restated through the `default` toggle, taking effect from that point
+— gives the rest of the family mid-document toggling with zero new
+mechanism:
 
 ```
-{default-audio-emphasis: none}     emphasis stops being narrated from here
-{default-code-language: python}    code blocks default to Python from here
+{default audio-emphasis: none}     emphasis stops being narrated from here
+{default code-language: python}    code blocks default to Python from here
 ```
 
 Whether *all* `default-*` settings should accept this, or an enumerated
@@ -191,13 +221,12 @@ subset, is an open question below.
   the `audio-emphasis` attribute and `default-audio-emphasis` setting, named
   voices, and the format-invisibility rule.
 
-## Spec sections amended (applied in commit `fd273eb`)
+## Spec sections amended (applied in PR #33)
 
-1. **Directives (M)** — new definition: position-based (blank lines above
-   and below); directives may carry one value; the two shapes (actions,
-   `default-*` toggles); keyword-distinctness practice; the error-handling
-   table above; revise the "poorly-formatted directive" leniency clause to
-   the bare-keyword case.
+1. **Directives (M)** — new definition: bare keyword plus optional argument
+   (bare value or attribute list), on its own line with blank lines around
+   it; the two kinds (actions, the `default` toggle); shape-based
+   classification; the error-handling table above.
 2. **Attribute list format → the three insertion ways** — way 3 currently
    reads "the attribute list contains directives"; rewrite to point at the
    new Directives definition.
@@ -206,10 +235,10 @@ subset, is an open question below.
    (This resolves the existing internal contradiction between these three
    passages.)
 4. **Attribute Keys** — add the reserved `default-` prefix rule, if adopted.
-5. **The lang section** — replace `lang-*` with `{default-lang: xxx}`;
+5. **The lang section** — replace `lang-*` with `{default lang: xxx}`;
    rename/alias the setting; fix the `zh-Hant` example.
 6. **The audio narration section (PR #33)** — collapse the pause directives
-   to `{pause}`; replace `audio-voice-*` with `{default-audio-voice: name}`;
+   to `{pause}`; replace `audio-voice-*` with `{default audio-voice: name}`;
    drop the `audio-voice-<name>` voice-definition settings (casting is
    platform configuration); add the reserved `author` voice alongside
    `narrator`; delete the disambiguation prose; update the directives-list
@@ -222,14 +251,14 @@ subset, is an open question below.
 These were open when this proposal was written. The answers below are what
 the applied spec text now says, with the reasoning for each.
 
-1. **Explicit pause durations: include them.** `{pause: 2s}` costs the
-   grammar nothing (the duration sits in value position), resolves #32's
+1. **Explicit pause durations: include them.** `{pause 2s}` costs the
+   grammar nothing (the duration is the directive's argument), resolves #32's
    named-vs-parameterized question with "both", and spares an author who
    needs one ten-second silence from redefining `audio-pause-long` for the
    whole book. The named values remain the recommended spellings, since
    they stay tunable from the settings.
 2. **The pause keyword is `pause`, not `audio-pause`.** A directive is read
-   at the point of prose, where `{pause: long}` reads as the stage
+   at the point of prose, where `{pause long}` reads as the stage
    direction it is; the `audio-` grouping earns its keep in the settings
    block (`audio-pause-long`), which is written once and scanned as a
    group. And the section's format-invisibility rule already guarantees a
@@ -253,16 +282,18 @@ the applied spec text now says, with the reasoning for each.
    `default-*` is by construction "the value used when nothing more
    specific applies", which is always coherent to change mid-flow (a
    polyglot programming book genuinely wants
-   `{default-code-language: python}` at a chapter boundary). An enumerated
+   `{default code-language: python}` at a chapter boundary). An enumerated
    subset would reintroduce a registry and make the general rule not
    general.
-6. **Multi-pair floating lists stay an error.** A toggle is the thing an
-   author hunts for when debugging "why is the rest of my book Japanese?" —
-   one line, one instruction keeps toggles scannable, and the settings
-   block keeps its clean positional identity as the only multi-pair
-   floating list. This is also the forward-compatible choice: relaxing an
-   error into a multi-toggle later breaks nothing, while the reverse would
-   break existing documents.
+6. **Multi-pair toggles are allowed; bare multi-pair floating lists stay an
+   error.** (Revised from the original answer, which predated the bareword
+   syntax.) The original rule defended against a bare floating list
+   ambiguous with the settings block; with the leading `default` keyword
+   that ambiguity is gone, so
+   `{default lang: jpn, audio-voice: kenji}` — one scene switch, one
+   directive — is legal, comma-separated, with per-pair semantics. What
+   remains an error is a floating attribute list with no leading keyword,
+   anywhere except as the settings block at the top of the document.
 
 ## How we got here (the short version)
 
@@ -283,3 +314,12 @@ the applied spec text now says, with the reasoning for each.
   same thing with one sentence instead of a new concept.
 * **The synthesis:** blank lines classify; distinct keywords make mistakes
   flaggable; `default-*` names the toggles after the settings they toggle.
+* **The final form came last.** Directives began as `{keyword}` only,
+  briefly became `{pause: long}` / `{default-lang: jpn}`, and settled as
+  bareword + argument — `{pause long}`, `{default lang: jpn}` — once it was
+  clear the leading bareword makes directives recognizable by shape alone
+  (no keyword registry needed for classification) and collapses every
+  toggle into one `default` verb wrapping the attribute pair the author
+  already knows. Multi-pair toggles follow, comma-separated because
+  unquoted attribute values may contain spaces and the comma is what
+  terminates them.

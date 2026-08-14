@@ -2671,8 +2671,8 @@ next section, which also discusses the `lang` attributie and document setting.
 ### The audio narration directives
 
 There are two more families of directives, which exist for audiobook
-narration: the pause directives (`{audio_pause}`, `{audio_short_pause}` and
-`{audio_long_pause}`) and the `audio-voice-*` directives.
+narration: the pause directives (`{audio-pause}`, `{audio-pause-short}` and
+`{audio-pause-long}`) and the `audio-voice-*` directives.
 
 These are important enough that they are discussed in their own section on
 audio narration below, which also discusses the `audio`, `audio-emphasis` and
@@ -2941,19 +2941,21 @@ appear. Like `{pagebreak}`, they are one-shot: they have an effect once, at
 that point, and nothing persists afterward. Like all directives, each must be
 on a line by itself, with blank lines above and below it.
 
-* `{audio_pause}` — a standard beat. Default duration 1.5 seconds.
-* `{audio_short_pause}` — a breath. Default duration 0.5 seconds.
-* `{audio_long_pause}` — a scene-change silence. Default duration 3 seconds.
+* `{audio-pause}` — a standard beat. Default duration 1.5 seconds.
+* `{audio-pause-short}` — a breath. Default duration 0.5 seconds.
+* `{audio-pause-long}` — a scene-change silence. Default duration 3 seconds.
 
 ~~~
 The detective closed the file.
 
-{audio_long_pause}
+{audio-pause-long}
 
 Three weeks later, the phone rang.
 ~~~
 
-The durations are controlled by the audio document settings, discussed below.
+The durations are controlled by the audio document settings, discussed below;
+each directive shares its name with the setting that defines its duration, so
+`{audio-pause-long}` inserts the pause whose length is `audio-pause-long`.
 In non-audio output, all three directives produce nothing — not even vertical
 space.
 
@@ -3161,7 +3163,7 @@ settings for them, following the existing rules for custom document settings.
 
 The morning of the interview was gray and cold.
 
-{audio_long_pause}
+{audio-pause-long}
 
 The interviewer arrived late, coffee in hand.
 ["Let's just get started, shall we?"]{audio-voice: 1} He didn't

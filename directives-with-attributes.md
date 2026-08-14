@@ -1,11 +1,13 @@
 # Directives with Attributes
 
-**Status:** Proposal — agreed in discussion, not yet applied to spec.txt
+**Status:** Decided and applied — the spec changes landed in PR #33 (commit
+`fd273eb`), and the formerly-open questions at the end now carry their
+answers as applied
 **Date:** August 14, 2026
 **Context:** Grew out of the audio narration proposal (PR #32 → PR #33) and a
 design discussion between Peter and Claude about whether the `lang-*` /
-`audio-voice-*` hyphenated directive families are the right mechanism.
-Supersedes parts of PR #33 once applied.
+`audio-voice-*` hyphenated directive families are the right mechanism. PR #33
+now carries both this proposal and its application to spec.txt.
 
 ---
 
@@ -77,10 +79,10 @@ The distinct-keywords practice is what makes every common mistake detectable:
 | Attached attribute list with unknown keys | Silently filtered — the existing extension-attributes behavior, unchanged |
 | Bare keyword jammed against a block (`{pagebreak}` with no blank line) | Parsed as a directive anyway, with a formatting warning — today's leniency survives, because a bare keyword cannot be a valid attribute list |
 
-**Recommended hard rule:** attribute keys may not begin with `default-`.
+**Adopted as a hard rule:** attribute keys may not begin with `default-`.
 This one reservation makes the toggle family's flagging guaranteed rather
 than conventional, at no cost — a `default-*` key has no meaning attached to
-a block or span anyway.
+a block or span anyway. (Applied in the Attribute Keys section of the spec.)
 
 ## Concrete changes
 
@@ -101,8 +103,8 @@ The three named durations remain configurable via the existing
 The explicit-duration form resolves PR #32's open question 1 (named vs.
 parameterized pauses): both, through one directive.
 
-*Alternative if the `audio` grouping should be visible at the point of use:
-`{audio-pause: long}` — same mechanics, longer keyword.*
+*Decided: the keyword is `pause`, not `audio-pause` — see the answered
+questions below.*
 
 ### Language: `{default-lang: jpn}` replaces the `lang-*` family
 
@@ -183,12 +185,13 @@ subset, is an open question below.
   `{backmatter}`, the insertion directives, `{begin-hanging-paragraphs}` /
   `{end-hanging-paragraphs}`.
 * The Attribute Keys character rules (lowercase letters, hyphens,
-  underscores — no digits, per the PR #33 revert).
+  underscores — no digits, per the PR #33 revert). The one addition is the
+  `default-` prefix reservation described above.
 * From PR #33's audio section: the `audio` attribute (delivery directions),
   the `audio-emphasis` attribute and `default-audio-emphasis` setting, named
   voices, and the format-invisibility rule.
 
-## Spec sections to amend (when we apply this)
+## Spec sections amended (applied in commit `fd273eb`)
 
 1. **Directives (M)** — new definition: position-based (blank lines above
    and below); directives may carry one value; the two shapes (actions,
@@ -214,22 +217,52 @@ subset, is an open question below.
 7. **The standard document settings** — state the general `default-*`
    restatement rule (or the enumerated list).
 
-## Open questions
+## The open questions, answered
 
-1. Explicit pause durations (`{pause: 2s}`): include now, or named values
-   only?
-2. Pause keyword: `pause` or `audio-pause`?
-3. The `lang` document *setting*: recommended rename to `default-lang`, to
-   complete the pattern (attribute `x` marks an element; setting/directive
-   `default-x` sets the ambient default). Remaining sub-question: whether
-   `lang` stays accepted as a one-line alias — yes only if the setting is
-   honored in production today. (The `lang-*` *directives* are decided:
-   renamed without apology.)
-4. The reserved `default-` prefix in attribute keys: hard rule (recommended)
-   or convention only?
-5. Mid-document restatement: all `default-*` settings, or an enumerated
-   subset?
-6. Multi-pair floating lists: keep as an error, or define as a multi-toggle?
+These were open when this proposal was written. The answers below are what
+the applied spec text now says, with the reasoning for each.
+
+1. **Explicit pause durations: include them.** `{pause: 2s}` costs the
+   grammar nothing (the duration sits in value position), resolves #32's
+   named-vs-parameterized question with "both", and spares an author who
+   needs one ten-second silence from redefining `audio-pause-long` for the
+   whole book. The named values remain the recommended spellings, since
+   they stay tunable from the settings.
+2. **The pause keyword is `pause`, not `audio-pause`.** A directive is read
+   at the point of prose, where `{pause: long}` reads as the stage
+   direction it is; the `audio-` grouping earns its keep in the settings
+   block (`audio-pause-long`), which is written once and scanned as a
+   group. And the section's format-invisibility rule already guarantees a
+   pause cannot mean anything in visual output, so the keyword does not
+   need a prefix to say so.
+3. **`default-lang`, with `lang` accepted as an alias.** The rename
+   completes the pattern (attribute `x` marks an element; `default-x` sets
+   the ambient default). The alias stays because the spec never marked the
+   `lang` setting unsupported — unlike the `lang-*` directives — so shipped
+   books may be using it, and the alias costs one line of processor
+   behavior. Drop it only if Leanpub confirms the setting was never honored
+   in production.
+4. **The `default-` reservation is a hard rule, not a convention.** The
+   entire error-detection design rests on it: one future extension
+   attribute named `default-anything` would silently break the warning
+   behavior of every toggle. A convention that must never be violated is a
+   rule. It costs nothing today — no existing attribute key begins with
+   `default-`.
+5. **All `default-*` settings may be restated mid-document, not an
+   enumerated subset.** One rule, no list to maintain: anything named
+   `default-*` is by construction "the value used when nothing more
+   specific applies", which is always coherent to change mid-flow (a
+   polyglot programming book genuinely wants
+   `{default-code-language: python}` at a chapter boundary). An enumerated
+   subset would reintroduce a registry and make the general rule not
+   general.
+6. **Multi-pair floating lists stay an error.** A toggle is the thing an
+   author hunts for when debugging "why is the rest of my book Japanese?" —
+   one line, one instruction keeps toggles scannable, and the settings
+   block keeps its clean positional identity as the only multi-pair
+   floating list. This is also the forward-compatible choice: relaxing an
+   error into a multi-toggle later breaks nothing, while the reverse would
+   break existing documents.
 
 ## How we got here (the short version)
 

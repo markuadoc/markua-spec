@@ -539,7 +539,8 @@ of the more important ones...
 7. LFM had `{rtl}` and `{ltr}` directives. These are not supported in Markua,
    and neither is a `{dir}` attribute in general: any given language is either a
    left-to-right or a right-to-left language, so specifying the language with
-   the `default-lang` document setting and the `lang` attribute is sufficient.
+   the `default-lang` document setting or directive and the `lang` attribute is
+   sufficient.
 8. LFM used Sample.txt to define the sample content. Markua moves the definition
    of what constitutes sample content into a `{sample: true}` attribute on
    parts, chapters and sections. So, in Markua, inclusion in the sample is at

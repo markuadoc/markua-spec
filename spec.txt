@@ -2662,6 +2662,18 @@ with `lang-`.
 The `lang-*` directives are important enough that they are discussed in the
 next section, which also discusses the `lang` attributie and document setting.
 
+### The audio narration directives
+
+There are two more families of directives, which exist for audiobook
+narration: the pause directives (`{a_pause}`, `{a_short_pause}` and
+`{a_long_pause}`) and the `voice-*` directives.
+
+These are important enough that they are discussed in their own section on
+audio narration below, which also discusses the `audio` and `voice` attributes
+and the audio document settings.
+
+
+
 ### The hanging indent directives
 
 Scholarly works sometimes need bibliographical entries to be formatted with
@@ -2892,6 +2904,207 @@ by الْمُتَنَبِّي {lang: ara} (Al-Mutanabbi), we can get back to the
 
 Implementors of Markua Processers should strongly consider using this example
 as a test case!
+
+
+
+## Audio narration: pauses, delivery direction and voices (M)
+
+Audiobooks are becoming a normal output format for books, alongside PDF, EPUB
+and the web. When a book is narrated — whether by a human reading the
+manuscript or by a Markua Processor generating narration — the manuscript
+itself is the natural home for narration intent: where to pause, how a line
+should be delivered, and who is speaking. Keeping this in the Markua document
+means it is versioned with the text, portable between platforms, and visible
+in diffs like any other prose change.
+
+All of the constructs in this section share one rule: **they have no visible
+effect on non-audio output**. A span with an `audio` or `voice` attribute
+renders as its plain text; the pause and `voice-*` directives produce nothing
+at all. A book with narration markup and the same book without it must look
+identical in print, EPUB and web output.
+
+**NOTE FOR LEANPUB AUTHORS: The audio narration constructs in this section are
+a proposed addition to Markua and are not yet supported on Leanpub. This note
+(TODO) will be removed when support ships.**
+
+### The pause directives
+
+Three directives insert a pause into the narration at the point where they
+appear. Like `{pagebreak}`, they are one-shot: they have an effect once, at
+that point, and nothing persists afterward. Like all directives, each must be
+on a line by itself, with blank lines above and below it.
+
+* `{a_pause}` — a standard beat. Default duration 1.5 seconds.
+* `{a_short_pause}` — a breath. Default duration 0.5 seconds.
+* `{a_long_pause}` — a scene-change silence. Default duration 3 seconds.
+
+~~~
+The detective closed the file.
+
+{a_long_pause}
+
+Three weeks later, the phone rang.
+~~~
+
+The durations are controlled by the audio document settings, discussed below.
+In non-audio output, all three directives produce nothing — not even vertical
+space.
+
+### The `audio` attribute
+
+An `audio` attribute can be applied to a span or block to direct how its text
+should be delivered. Its value is one or more comma-separated delivery
+directions:
+
+~~~
+[Well. That went brilliantly.]{audio: "drawn out, sarcastic"}
+
+She left without a word. [Typical.]{audio: whispered}
+
+{audio: deadpan}
+This entire paragraph is read absolutely flat, and the next paragraph
+returns to normal delivery on its own.
+~~~
+
+The vocabulary of delivery directions is deliberately open ("sarcastic",
+"drawn out", "whispered", "excited", "deadpan", and so on). A Markua Processor
+generating narration maps the directions onto whatever its narration engine
+can express, and ignores directions it cannot. In non-audio output the span
+renders as its plain text and the attribute has no visible effect.
+
+### Emphasis is narration markup
+
+Markua's existing emphasis already carries narration intent, and no new syntax
+is needed for it: when narrating, `*italic text*` should be read with mild
+spoken stress and `**bold text**` with strong spoken stress, exactly as a
+human narrator treats emphasized text. An author who wants emphasized-looking
+text spoken flat can opt out per span with `[**READ THE MANUAL**]{audio: flat}`,
+or document-wide with the `audio-emphasis` document setting.
+
+### Voices
+
+Books with dialogue, interviews or multiple narrators need more than one
+voice. Voices in Markua are **named slots** (`narrator`, `one`, `two`, and so
+on); what each slot actually sounds like is defined in the audio document
+settings, discussed below.
+
+There are three ways for an author to indicate which voice is speaking at any
+given time, and they deliberately mirror the three ways of indicating
+language:
+
+1. The `voice` **document setting**, which sets the default voice. Its default
+   value is `narrator`.
+2. The `voice` **attribute**, which temporarily overrides the voice for a
+   particular span or block.
+3. The `voice-*` **directives**, which set a new default voice. This will be
+   the default voice until another `voice-*` directive is encountered. (There
+   is no directive called `voice-*` itself; what this refers to is a family of
+   directives like `voice-one`, `voice-two` and `voice-narrator`.)
+
+A voice slot which has not been defined in the document settings resolves to
+`narrator`, and a Markua Processor should warn — the same fallback rule as an
+unrecognized language code.
+
+### The `voice` attribute
+
+A `voice` attribute can be applied to a particular block or span. After that
+block or span concludes, the voice immediately reverts to the default voice.
+
+~~~
+The interviewer leaned in. ["But why Markua?"]{voice: one} It was a
+fair question.
+
+{voice: two}
+This whole paragraph is spoken by voice two, and the next paragraph
+reverts to the default voice on its own — there is nothing to reset.
+~~~
+
+### The `voice-*` directives
+
+The `voice-*` directives set a new default voice. This will be the default
+voice until another `voice-*` directive is encountered.
+
+Note the hyphenated spelling: exactly as with the `lang-*` directives, this is
+what distinguishes a sticky directive line (`{voice-one}`) from a `voice`
+attribute list attached to the block below it (`{voice: one}`). The two
+spellings have different scoping by construction.
+
+~~~
+{voice-one}
+
+Everything from here is read by voice one — whole sections or chapters
+if the author wishes.
+
+{voice-narrator}
+
+And now we are back to the book's default narrator.
+~~~
+
+### The audio document settings
+
+The narration tunables live in the document settings, under an `audio-`
+prefix (with the exception of `voice`, which parallels `lang`). Document
+settings are discussed [here](#document-settings-m-).
+
+~~~
+{
+  voice: narrator,
+  audio-pause: 1.5s,
+  audio-pause-short: 0.5s,
+  audio-pause-long: 3s,
+  audio-voice-narrator: nova,
+  audio-voice-one: "James (interviewer)",
+  audio-voice-two: sage,
+  audio-speed: 1.0,
+  audio-emphasis: spoken
+}
+~~~
+
+* `voice` — the document's default voice slot. Default `narrator`.
+* `audio-pause`, `audio-pause-short`, `audio-pause-long` — the durations of
+  the three pause directives, in seconds (the `s` suffix is optional).
+* `audio-voice-narrator`, `audio-voice-one`, `audio-voice-two`, … — what each
+  voice slot resolves to. The value is interpreted by the Markua Processor:
+  it may be a narration engine's voice name or identifier, or a label
+  meaningful to the platform (such as an author's own cloned voice). The spec
+  constrains the slot mechanism, not the meaning of the value.
+* `audio-speed` — the default narration rate multiplier. Default `1.0`.
+* `audio-emphasis` — `spoken` (the default; emphasis is read as spoken
+  stress, as discussed above) or `flat` (emphasis is not vocalized).
+
+The set of `audio-*` settings is open-ended: a Markua Processor which offers
+additional narration options (narration engine, expressiveness, pauses at
+chapter or section boundaries, and so on) may honor additional `audio-*`
+settings for them, following the existing rules for custom document settings.
+
+### A detailed example
+
+~~~
+{
+  audio-pause-long: 4s,
+  audio-voice-narrator: nova,
+  audio-voice-one: "James (interviewer)"
+}
+
+# Chapter One
+
+The morning of the interview was gray and cold.
+
+{a_long_pause}
+
+The interviewer arrived late, coffee in hand.
+["Let's just get started, shall we?"]{voice: one} He didn't
+apologize. [Charming.]{audio: "drawn out, sarcastic"}
+
+{voice-one}
+
+What follows is his side of the story, told in his own voice, for
+the rest of this section.
+
+{voice-narrator}
+
+And here the narrator takes back over.
+~~~
 
 
 

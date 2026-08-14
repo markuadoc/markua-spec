@@ -2796,10 +2796,6 @@ not use the default language would get annoying very quickly! This is why the
 
 ### The `lang-*` directives
 
-**NOTE FOR LEANPUB AUTHORS: The `lang-*` directives are not yet supported on
-Leanpub. We will add support for them sometime in Q1 2024, and remove this
-note (TODO) when this is done.**
-
 The `lang-*` directives set a new default language. This will be the default
 language until another `lang-*` directive is encountered.
 

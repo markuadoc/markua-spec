@@ -3031,9 +3031,12 @@ as the paragraphs inside it, as though its opening and closing lines were not
 there. A book with narration markup and the same book without it must look
 identical in print, EPUB and web output.
 
-**NOTE FOR LEANPUB AUTHORS: The audio narration constructs in this section are
-a proposed addition to Markua and are not yet supported on Leanpub. This note
-(TODO) will be removed when support ships.**
+**NOTE FOR LEANPUB AUTHORS: Leanpub narrates audiobooks from Markua
+manuscripts, but its implementation predates the syntax in this section. Some
+of these constructs work on Leanpub as written, some work only in an earlier
+spelling, and some are not supported yet. The section "Audio narration on
+Leanpub today", below, says which is which. This note (TODO) will be removed
+when Leanpub supports everything here as written.**
 
 ### The `pause` directive
 
@@ -3395,6 +3398,44 @@ And this paragraph is me — the author, in my own voice.
 
 And here the narrator takes back over.
 ~~~
+
+### Audio narration on Leanpub today
+
+Leanpub narrates audiobooks from Markua manuscripts, and its implementation
+predates the syntax specified in this section. Until it catches up, this is
+what a Leanpub author can write today.
+
+These work on Leanpub as written in this specification:
+
+* The `audio` attribute, on a span or on a block.
+* The `{dialogue}` block and its speaker labels, with one exception: while a
+  `{voice-james}` directive (described below) is in effect, speaker labels
+  are not recognized, and those paragraphs are narrated in that voice in
+  full.
+* Casting. Each voice name used in the manuscript is given its actual voice
+  in the book's audiobook settings, and a name which has not been cast there
+  is narrated in the narrator's voice.
+
+These work on Leanpub only in an earlier spelling:
+
+* The `pause` directive is written as one of three directives which take no
+  argument: `{a_pause}`, `{a_short_pause}` and `{a_long_pause}`. There is no
+  equivalent of an explicit duration such as `{pause 2s}`.
+* The `audio-voice` attribute is written `voice`: `[a line]{voice: james}` on
+  a span, or `{voice: james}` on the line above a block.
+* The toggle `{default audio-voice: james}` is written as the directive
+  `{voice-james}`, and `{voice-narrator}` returns to the narrator.
+
+These are not yet supported on Leanpub:
+
+* The `default-audio-emphasis` document setting and the `audio-emphasis`
+  attribute.
+* The audio document settings. Narration options are chosen in the book's
+  audiobook settings instead.
+
+The spellings which this section specifies for pauses and voices, such as
+`{pause short}`, `{audio-voice: james}` and `{default audio-voice: james}`,
+are not yet recognized on Leanpub, and currently do nothing there.
 
 
 

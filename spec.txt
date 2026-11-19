@@ -2774,7 +2774,8 @@ toggle, to switch the default voice mid-document.
 
 These are important enough that they are discussed in their own section on
 audio narration below, which also discusses the `audio`, `audio-emphasis` and
-`audio-voice` attributes and the audio document settings.
+`audio-voice` attributes, the `{dialogue}` block and the audio document
+settings.
 
 
 
@@ -3025,9 +3026,10 @@ in diffs like any other prose change.
 All of the constructs in this section share one rule: **they have no visible
 effect on non-audio output**. A span with an `audio`, `audio-emphasis` or
 `audio-voice` attribute renders as its plain text; the `pause` directive and
-the `default` toggles produce nothing at all. A book with narration
-markup and the same book without it must look identical in print, EPUB and web
-output.
+the `default` toggles produce nothing at all; and a `{dialogue}` block renders
+as the paragraphs inside it, as though its opening and closing lines were not
+there. A book with narration markup and the same book without it must look
+identical in print, EPUB and web output.
 
 **NOTE FOR LEANPUB AUTHORS: The audio narration constructs in this section are
 a proposed addition to Markua and are not yet supported on Leanpub. This note
@@ -3183,6 +3185,10 @@ language:
    the `default-audio-voice` document setting mid-document. The new default
    voice applies from that point until the next restatement.
 
+For conversations there is also a shorthand, which has no counterpart in
+language: inside a `{dialogue}` block, a paragraph is simply labeled with the
+name of its speaker. This is discussed in the section on dialogue below.
+
 A voice name which has no casting on the platform resolves to `narrator`, and
 a Markua Processor should warn — the same fallback rule as an unrecognized
 language code. An uncast `author` resolves to `narrator` without a warning:
@@ -3223,6 +3229,107 @@ And now we are back to the book's default narrator.
 When a voice change coincides with a language change, both defaults can be
 toggled in one directive, since a scene switch is one event:
 `{default lang: jpn, audio-voice: kenji}`.
+
+### Dialogue
+
+An interview, a play or a conversation between characters is a run of short
+turns in different voices. Marking every turn with an `audio-voice` attribute
+would work, but it would bury the conversation in markup. Instead, an exchange
+can be written the way a transcript is written on paper, with each turn
+labeled with the name of its speaker, and wrapped in a `{dialogue}` block:
+
+~~~
+{dialogue}
+
+James: So why did you write the book in Markua?
+
+Sarah: Because I wanted to write a book, not format one.
+
+She let that hang in the air for a moment.
+
+James: And the audiobook?
+
+Sarah: Same manuscript. I just told it who was speaking.
+
+{/dialogue}
+~~~
+
+The `{dialogue}` block syntax is similar to the syntaxes for asides and
+blurbs: the exchange is wrapped in `{dialogue}` ... `{/dialogue}`, each on a
+line by itself.
+
+Inside a `{dialogue}` block, a paragraph which begins with a voice name
+followed by a colon and a space is a **turn**, and the name is its **speaker
+label**. A turn is narrated in the voice its label names. In the example
+above, the turns labeled `James:` are narrated in the voice named `james` and
+the turns labeled `Sarah:` in the voice named `sarah`. These are the same
+named voices which the `audio-voice` attribute uses, and they are cast the
+same way.
+
+A speaker label is matched to a voice name without regard to case, so that it
+can be capitalized the way a name is capitalized in print: the label `James`
+names the voice `james`. The reserved name `narrator` can be used as a label
+too, for an author who prefers every paragraph of a script to be labeled: a
+paragraph labeled `Narrator:` is narrated in the `narrator` voice.
+
+A speaker label is plain text at the very start of its paragraph. A name
+which is emphasized, such as `**James:**`, is not a speaker label.
+
+The two kinds of output treat a turn differently, and that is the point of
+the construct:
+
+* In **non-audio output**, the `{dialogue}` and `{/dialogue}` lines produce
+  nothing, and every paragraph inside the block is an ordinary paragraph,
+  speaker label included. In print, the example above reads as an ordinary
+  interview transcript.
+* In **audio output**, the speaker label is not narrated. The voice is the
+  attribution: a listener who hears the voice named `sarah` answer does not
+  need to be told who is answering. Only the text after the label is spoken.
+
+A paragraph inside the block which does not begin with a speaker label is not
+a turn. It is narrated in the default voice, like any other paragraph. This
+is how narration between the turns is written, such as "She let that hang in
+the air for a moment" in the example above. It also means that a speaker
+label applies to its own paragraph only: a speech which runs for several
+paragraphs needs a label on each of them, or an `audio-voice` attribute on
+the later ones if a repeated label would look wrong in print.
+
+Only the name of a voice which has been cast is a speaker label. A paragraph
+which merely happens to begin with a word and a colon, such as
+`Note: the recording was made in the spring.`, is not a turn: it is narrated
+in the default voice, opening word included. A Markua Processor may warn
+about such a paragraph, since inside a `{dialogue}` block it is more likely
+to be a speaker who has not been cast than a coincidence, but it must narrate
+the paragraph in full.
+
+A speaker label yields to anything more explicit. A paragraph which has its
+own `audio-voice` attribute is narrated in that voice in full, and its
+opening words are then not a speaker label at all. An `audio-voice` attribute
+on a span inside a turn still applies to that span. An `audio` attribute
+combines with a speaker label in the obvious way, directing how the turn is
+delivered:
+
+~~~
+{audio: whispers}
+Sarah: Is it still recording?
+~~~
+
+Finally, the block itself carries meaning: everything between `{dialogue}`
+and `{/dialogue}` is **one exchange**. A Markua Processor whose narration
+engine can perform a conversation as a whole, so that each speaker reacts to
+the line before, should give it the exchange as a unit. A Markua Processor
+without such an engine narrates the turns one after another in their
+different voices, with a short pause where the speaker changes. Either way,
+the author writes the same thing.
+
+An exchange belongs to one section of a document: a `{dialogue}` block should
+not contain a heading, and `{dialogue}` blocks do not nest.
+
+Speaker labels are specified here for paragraphs inside a `{dialogue}` block.
+A Markua Processor may choose to recognize them elsewhere as well. Leanpub
+does, for any paragraph which begins with the name of a voice in the book's
+cast. An author who wants a manuscript to be narrated the same way everywhere
+should put every exchange in a `{dialogue}` block.
 
 ### The audio document settings
 

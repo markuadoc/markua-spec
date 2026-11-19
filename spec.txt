@@ -3151,6 +3151,55 @@ Emphasis in this document is not narrated — except that you must
 [*never*]{audio-emphasis: all} feed a Markua Processor after midnight.
 ~~~
 
+### Alt text is narration markup
+
+A figure, a code sample, a table or an equation cannot be read aloud as it
+stands, so a narrator needs something to say in its place. Markua already has
+exactly that: the alt text of the resource, which is the text intended to
+take the place of the resource when the resource itself cannot be seen. Here
+too, no new syntax is needed.
+
+When narrating, a Markua Processor should read the alt text of a resource in
+place of the resource:
+
+~~~
+{alt: "A bar chart: sales double from the first quarter to the last."}
+![](sales.png "Sales by Quarter")
+
+{alt: "A loop which prints the numbers from one to ten."}
+```ruby
+1.upto(10) { |i| puts i }
+```
+~~~
+
+An author who is preparing a book for narration should therefore write alt
+text not only for images, where it is good practice in any case, but for code
+samples, tables and math as well. A resource which has no alt text can only
+be announced, by its figure title if it has one, and the listener referred to
+the book for the rest.
+
+There is no separate alt text for narration: it is the same alt text which a
+screen reader uses. Alt text is discussed [here](#resource-alt-text-m-).
+
+### An audiobook is a book
+
+An audiobook is one more format of a book, alongside PDF, EPUB and the web.
+So the constructs which decide what a book contains also decide what is
+narrated:
+
+* The conditional inclusion attributes on headings apply to narration as they
+  do to every other format: a section with `full: false` is not narrated, and
+  the sample of an audiobook is made from the content with `sample: true`.
+  These attributes are discussed
+  [here](#conditional-inclusion-attributes-on-headings).
+* When content is shared between a book and a course, the target of an
+  audiobook is the book. The content of a `{book}` block or of an
+  `only: book` span is narrated, and the content of a `{course}` block or of
+  an `only: course` span is not. These constructs are discussed
+  [here](#sharing-content-between-books-and-courses-m-).
+* Quizzes and exercises are course-only by default, so they are not narrated
+  unless the `include-exercises-in-book` document setting is `true`.
+
 ### Voices
 
 Books with dialogue, interviews or multiple narrators need more than one

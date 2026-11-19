@@ -3465,6 +3465,9 @@ These work on Leanpub as written in this specification:
 * Casting. Each voice name used in the manuscript is given its actual voice
   in the book's audiobook settings, and a name which has not been cast there
   is narrated in the narrator's voice, with a warning.
+* Alt text. The alt text of a figure, a code sample, a table or an equation
+  is narrated in its place.
+* Conditional inclusion. A section with `full: false` is not narrated.
 
 These work on Leanpub only in the earlier draft's spelling:
 
@@ -3487,6 +3490,9 @@ These are not yet supported on Leanpub:
 * The audio document settings. Pause lengths and narration speed are not read
   from the manuscript: narration options are chosen in the book's audiobook
   settings instead.
+* The book as the target of narration. The content of a `{course}` block or
+  of an `only: course` span is currently narrated, and so are quizzes and
+  exercises.
 
 The spellings which this section specifies for pauses and voices, such as
 `{pause short}`, `{audio-voice: james}` and `{default audio-voice: james}`,

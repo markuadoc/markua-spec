@@ -3032,11 +3032,11 @@ there. A book with narration markup and the same book without it must look
 identical in print, EPUB and web output.
 
 **NOTE FOR LEANPUB AUTHORS: Leanpub narrates audiobooks from Markua
-manuscripts, but its implementation predates the syntax in this section. Some
-of these constructs work on Leanpub as written, some work only in an earlier
-spelling, and some are not supported yet. The section "Audio narration on
-Leanpub today", below, says which is which. This note (TODO) will be removed
-when Leanpub supports everything here as written.**
+manuscripts, but what it implements is an earlier draft of this section. Some
+of these constructs work on Leanpub as written, some work only in the earlier
+draft's spelling, and some are not supported yet. The section "Audio narration
+on Leanpub today", below, says which is which. This note (TODO) will be
+removed when Leanpub supports everything here as written.**
 
 ### The `pause` directive
 
@@ -3401,9 +3401,10 @@ And here the narrator takes back over.
 
 ### Audio narration on Leanpub today
 
-Leanpub narrates audiobooks from Markua manuscripts, and its implementation
-predates the syntax specified in this section. Until it catches up, this is
-what a Leanpub author can write today.
+Leanpub narrates audiobooks from Markua manuscripts, but what it implements
+is an earlier draft of this section, which spelled pauses and voices
+differently. Until it catches up, this is what a Leanpub author can write
+today.
 
 These work on Leanpub as written in this specification:
 
@@ -3414,13 +3415,14 @@ These work on Leanpub as written in this specification:
   full.
 * Casting. Each voice name used in the manuscript is given its actual voice
   in the book's audiobook settings, and a name which has not been cast there
-  is narrated in the narrator's voice.
+  is narrated in the narrator's voice, with a warning.
 
-These work on Leanpub only in an earlier spelling:
+These work on Leanpub only in the earlier draft's spelling:
 
 * The `pause` directive is written as one of three directives which take no
-  argument: `{a_pause}`, `{a_short_pause}` and `{a_long_pause}`. There is no
-  equivalent of an explicit duration such as `{pause 2s}`.
+  argument: `{a_pause}`, `{a_short_pause}` and `{a_long_pause}`. How long each
+  one lasts is decided by the narration engine, and there is no equivalent of
+  an explicit duration such as `{pause 2s}`.
 * The `audio-voice` attribute is written `voice`: `[a line]{voice: james}` on
   a span, or `{voice: james}` on the line above a block.
 * The toggle `{default audio-voice: james}` is written as the directive
@@ -3428,14 +3430,23 @@ These work on Leanpub only in an earlier spelling:
 
 These are not yet supported on Leanpub:
 
-* The `default-audio-emphasis` document setting and the `audio-emphasis`
-  attribute.
-* The audio document settings. Narration options are chosen in the book's
-  audiobook settings instead.
+* Spoken emphasis. Strong, em and underlined text is narrated as ordinary
+  text, so the `default-audio-emphasis` document setting and the
+  `audio-emphasis` attribute have nothing to control.
+* The reserved `author` voice. On Leanpub, `author` is a voice name like any
+  other.
+* The audio document settings. Pause lengths and narration speed are not read
+  from the manuscript: narration options are chosen in the book's audiobook
+  settings instead.
 
 The spellings which this section specifies for pauses and voices, such as
 `{pause short}`, `{audio-voice: james}` and `{default audio-voice: james}`,
-are not yet recognized on Leanpub, and currently do nothing there.
+are not yet recognized on Leanpub: they do nothing there, and they produce no
+warning.
+
+Pauses and delivery directions are performed by the narration model which
+Leanpub uses by default. With a different model chosen in the book's
+audiobook settings, they may not be.
 
 
 
